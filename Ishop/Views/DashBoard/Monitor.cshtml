@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "Monitor";
+}
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header" style="background-color: #ffffffc1">
+        <h3 class="card-title" style="color:navy">
+            <i class="fa fa-chart-area"></i>
+            DashBoard
+        </h3>
+    </div>
+
+                            <div class="col-12">
+                                <!-- /.card-header -->
+                                <div class="card-body" style="background-color: rgba(255, 255, 255, 0.84); border-radius: 14px;">
+
+                                    <div>
+                                        <p>Shifts Status Monitor</p>
+                                    </div>
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr style="color:white">
+                                                <th style="background-color: #1976D2">Shift Status</th>
+                                                <th style="background-color: #1976D2">Shift Numbers</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.A12)
+                                            {
+                                                <tr>
+                                                    <td><i class="fa fa-check text-success"></i> Open Shifts</td>
+                                                    <td style="background-color:whitesmoke"> @item.Open_Shifts</td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-clock text-success"></i> ClockedIn Shifts</td>
+                                                    <td style="background-color:whitesmoke"> @item.ClockedIn_Shifts</td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-check-double text-success"></i> Completed Shifts</td>
+                                                    <td style="background-color:whitesmoke"> @item.Completed_Shifts</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-times text-danger"></i> Cancelled Shifts</td>
+                                                    <td style="background-color:whitesmoke"> @item.Cancelled_Shifts</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><i class="fa fa-pause text-danger"></i> Pending Approval Shifts</td>
+                                                    <td style="background-color:whitesmoke"> @item.Pending_Shifts</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+
+
+                                    <hr />
+                                    <div>
+                                        <p>Shifts assigments Monitor</p>
+                                    </div>
+
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr style="color:white">
+                                                <th style="background-color: #1976D2">Staffing Agency</th>
+                                                <th style="background-color: #1976D2">Picked Up Shifts</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.A13)
+                                            {
+                                                <tr>
+                                                    <td><i class="fa fa-building text-success"></i> @item.Staffing_Agency</td>
+                                                    <td style="background-color:whitesmoke"> @item.Count</td>
+
+
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            

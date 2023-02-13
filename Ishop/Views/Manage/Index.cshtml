@@ -1,0 +1,123 @@
+﻿
+
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "My Profile";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/Andest.png" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 40%;
+        border-color: dodgerblue;
+    }
+
+    .bwe {
+        font-family: Quicksand;
+    }
+</style>
+
+
+
+<div class="card" style="background-color: #ffffffd9">
+    <br />
+    <div class="col d-flex justify-content-center">
+        <div class="col-md-6" style="border-radius: 14px;">
+            <!-- Widget: user widget style 2 -->
+            <div class="card card-widget widget-user-2" style="border-radius: 14px;">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header" style="background-color: #1976D2 ">
+                    <div class="widget-user-image">
+                        <img src="~/Images/Andest2.png" height="80" alt="User Avatar">
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h5 class="widget-user-username" style="color:white">Account Profile : @User.Identity.Name</h5>
+
+
+                </div>
+                <div class="card-body text-left">
+
+                    <div class="divider" style="color:forestgreen"></div>
+                    <i class="fa fa-heartbeat"></i> Access Level :
+                    @if (this.User.IsInRole("Admin"))
+                    {<medium style="font-family:Calibri">
+                            <i class="fa fa-user-check text-success"></i>:-Administrator
+                        </medium>}
+
+
+                    else if (this.User.IsInRole("Employee"))
+                    { <medium style="font-family:Calibri">
+                            :-Employee
+                        </medium>}
+
+                    else if (this.User.IsInRole("Facility"))
+                    { <medium style="font-family:Calibri">
+                            Facility
+                        </medium>}
+                    else
+                    { <medium style="font-family:Calibri">
+                            unknown
+                        </medium>}
+                    <div class="divider" style="color:forestgreen"></div>
+                    <medium><i class="fa fa-calendar text-success"></i> @DateTime.Now.ToString("dd-MMMM-yyyy") </medium>
+                    <div class="dropdown-divider"></div>
+
+                   
+
+                </div>
+            </div>
+        </div>
+    </div>

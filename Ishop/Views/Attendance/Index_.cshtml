@@ -1,0 +1,230 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Attendance>
+
+@{
+    ViewBag.Title = "TimeSheet";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: whitesmoke;">
+
+
+    <div class="card-header" style="background-color: #089710 ">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-user-clock"></i>
+            TimeSheet
+        </h3>
+        <div style="text-align: right; color: black ">
+            @using (Html.BeginForm("Index", "Invoices", FormMethod.Get))
+            {
+
+
+
+
+
+
+                <a style="font-family: Calibri;color:white"> Account Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Client Name" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+
+
+            }
+
+
+        </div>
+    </div>
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+    <div>
+
+
+
+
+
+
+
+
+
+        <div class="table-responsive" style="min-height: 400px">
+            <table class="table table-bordered table-hover  text-nowrap">
+
+
+                <thead>
+                    <tr style="color:navy">
+                        <th style="background-color: whitesmoke; "> Date</th>
+                        <th style="background-color: whitesmoke; ">User</th>
+                        <th style="background-color: whitesmoke; ">Device</th>
+                        <th style="background-color: whitesmoke; ">Timesheet Status </th>
+                        <th style="background-color: whitesmoke; ">Distance </th>
+
+
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-widget="expandable-table" aria-expanded="false">
+
+                            <td style="background-color:white"><i class="fa fa-calendar text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</td>
+
+                            <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.User_Account</td>
+                            <td style="background-color:white"><i class="fa fa-code-branch text-green"></i> @item.Device</td>
+                            <td style="background-color:white"><span class="float-center badge bg-success"> @item.Check_status </span> </td>
+                            <td style="background-color:white"><span class="float-center badge bg-warning"> @item.Distance meters </span></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </tr>
+
+
+                    }
+                </tbody>
+            </table>
+            @if (Model.Count() == 0)
+            {
+                <div style="text-align:center">
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box bg-gradient-black">
+                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text"> <img src="~/Images/dddd.png" height="50" /> </span>
+
+
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    <i class="fa fa-calendar text-white nav-icon"></i>   No Data Found
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                </div>
+            }
+            <div class="small-box bg-gradient-gray-dark">
+                <div>
+                    <h5 style="font-family:Quicksand">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                    , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                    </h5>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+        @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
+        <hr class='dotted' />
+    </div>
+</div>
+

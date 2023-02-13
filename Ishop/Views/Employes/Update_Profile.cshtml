@@ -1,0 +1,294 @@
+﻿@model IShop.Core.Employee
+@{
+    ViewBag.Title = "Employee Details";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/Andest.png" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 40%;
+        border-color: dodgerblue;
+    }
+
+    .bwe {
+        font-family: Quicksand;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card" style="background-color: #ffffffd9">
+
+        <div class="col d-flex justify-content-center">
+            <div class="col-md-12" style="border-radius: 14px;">
+                <!-- Widget: user widget style 2 -->
+                <div class="card card-widget widget-user-2" style="border-radius: 14px;">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header" style="background-color: #1976D2 ">
+                        <div class="widget-user-image">
+                            <img src="~/Images/vvv.png" height="80" alt="User Avatar">
+                        </div>
+                        <!-- /.widget-user-image -->
+
+                        <h5 class="widget-user-username" style="color:white">Employee Profile : @Model.Username</h5>
+
+
+                    </div>
+                    @if (TempData["Msg"] != null)
+                    {<div class="row">
+                            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @TempData["Msg"]
+                            </div>
+                        </div>
+                    }
+
+                    <script>
+                        window.setTimeout(function () {
+                            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                                $(this).remove();
+                            });
+                        }, 2000);
+                    </script>
+                    <div class="card-body text-left">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Username)</label>
+                                @Html.EditorFor(model => model.Username, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Readonly = true
+                                    }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Fullname)</label>
+                                @Html.EditorFor(model => model.Fullname, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Fullnames",
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Email)</label>
+                                @Html.EditorFor(model => model.Email, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Phone Number",
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Phone)</label>
+                                @Html.EditorFor(model => model.Phone, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Phone Number",
+                               }
+                           })
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Department)</label>
+                                @Html.DropDownList("Department", new SelectList(ViewBag.Departments, "Department", "Department"), "Select Department", new { @id = "ddlFruits", @class = "form-control " })
+                                    @Html.Hidden("Department", null, new { @id = "hfDepartment" })
+
+
+
+                                    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                                    <script type="text/javascript">
+                                        $("body").on("change", "#ddlFruits", function () {
+                                            $("#Department").val($(this).find("option:selected").text());
+                                        });
+                                    </script>
+                                </div>
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Home_Address)</label>
+                                @Html.EditorFor(model => model.Home_Address, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Home_Address",
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Employee_Address)</label>
+                                @Html.EditorFor(model => model.Employee_Address, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Employee_Address",
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Emergency_Contact)</label>
+                                @Html.EditorFor(model => model.Emergency_Contact, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Emergency_Contact",
+                               }
+                           })
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Wage)</label>
+                                @Html.EditorFor(model => model.Wage, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Wage Amount in USD $",
+                               }
+                           })
+
+                            </div>
+
+
+                            
+                           
+                            <div class="form-group col-md-2">
+                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Last_Update)</label>
+                                @Html.EditorFor(model => model.Last_Update, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Value = DateTime.Now,
+                                   @Readonly = true
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-2" style="">
+                                <p>Account Status<p>
+                                    @Html.EditorFor(model => model.Current_Access, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm ",
+
+                                            @Readonly = true
+                                   }
+                               })
+
+                            </div>
+                        </div>
+                     
+                        <div class="form-row">
+
+
+
+
+                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Notes)</label>
+                            @Html.TextAreaFor(model => model.Notes, 5, 70, htmlAttributes: new
+                       {
+                           style = "width: 100%; max-width:100%;",
+                           @placeholder = "HR Journal Notes",
+                           @autofocus = ""
+                           ,
+                           @class = "form-control form-rounded"
+
+                       })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save/Update Profile" class="btn btn-primary" />
+                            ||  <input type="reset" value="Reset" class="btn btn-danger" />
+                           
+                                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary btn" })
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+        </div>
+</div>
+</div>
+}

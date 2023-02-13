@@ -1,0 +1,214 @@
+﻿@model IShop.Core.Invoice
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+
+
+<br>
+
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9" style="border-radius: 14px;">
+        <!-- Widget: user widget style 2 -->
+        <div class="card card-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header" style="background-color: green ">
+
+                <!-- /.widget-user-image -->
+
+                <h5 style="color:white"><img src="~/Images/SHARPO_4-1024x1024.png" height="30" alt="User Avatar"> Invoice Edit  </h5>
+
+
+            </div>
+            <div class="card-body" style="background-color: #ffffffc1">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+
+                               
+                               @Readonly = true
+
+
+
+
+                           }
+                       })
+
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Status)</label>
+                            @Html.EditorFor(model => model.Status, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Value = "New",
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Due_Date)</label>
+                            @Html.EditorFor(model => model.Due_Date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Readonly = true
+
+
+                           }
+                       })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Client_Name)</label>
+                            @Html.EditorFor(model => model.Client_Name, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "Client Name"
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Amount)</label>
+                            @Html.EditorFor(model => model.Amount, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "0.00/=",
+                               @Type = "Number"
+                           }
+                       })
+                        </div>
+                    </div>
+
+                    <p style="font-family:Calibri">
+                        <i class="fa fa-comment text-yellow"></i>
+                        Additional Information
+                    </p>
+                    <div class="form-row">
+
+
+                        @Html.TextAreaFor(model => model.Additional_Notes, 4, 70, htmlAttributes: new
+                   {
+                       style = "width: 70%; max-width:70%;",
+                       @placeholder = "Additional information",
+                       @autofocus = ""
+                       ,
+                       @class = "form-control form-rounded2"
+
+                   })
+                    </div>
+
+
+
+
+
+
+                    <div style="color:red">@Html.ValidationMessageFor(x => x.Client_Name)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(x => x.Due_Date)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(x => x.Amount)</div>
+
+                    <hr />
+                    <table>
+                        <thead>
+                            <tr>
+
+                                <th><i>Actions</i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <td style="text-align:left">
+
+                            <input type="submit" value="Update" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to update this Invoice?')" />
+
+
+                            <script>
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
+                            </script>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                            <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                        </td>
+                        </tbody>
+                    </table>
+
+                }
+
+                </form>
+

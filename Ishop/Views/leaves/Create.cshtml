@@ -1,0 +1,407 @@
+﻿@model IShop.Core.leave
+
+@{
+    ViewBag.Title = "leave request";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+    .form-rounded7 {
+        border-radius: 1rem;
+        border-color: darkblue;
+    }
+
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+<div class="card" style="background-color: rgb(255, 255, 255, 0.17);">
+    <div class="card-body" style="background-color: #ffffffc1">
+
+       
+
+        <div class="col d-flex justify-content-center">
+            <div class="col-md-10 col-sm-12 col-12">
+                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                    <div class="card-outline card-navy card-body text-left" style="border-radius: 14px;">
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                        <div class="form-row">
+
+
+
+
+
+                            <div class="form-group col-md-4">
+                                <label >@Html.LabelFor(model => model.CreatedOn)</label>
+                                @Html.EditorFor(model => model.CreatedOn, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Department Name",
+                                   @Value = DateTime.Now,
+                                        ReadOnly = true
+
+
+
+
+
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>@Html.LabelFor(model => model.Employee)</label>
+                                @Html.EditorFor(model => model.Employee, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Contact Number",
+                                        @Value = User.Identity.Name,
+                                        ReadOnly = true
+
+
+
+
+                               }
+                           })
+
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label >@Html.LabelFor(model => model.Department)</label>
+                                @Html.EditorFor(model => model.Department, new
+                             {
+                                 htmlAttributes = new
+                                 {
+                                     @class = "form-control ",
+
+                                          @Value = ViewBag.Drpt,
+                                          ReadOnly = true
+
+
+
+
+                                 }
+                             })
+
+                            </div>
+                        </div>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-3">
+                                    <label>@Html.LabelFor(model => model.Emp_Mail)</label>
+                                    @Html.EditorFor(model => model.Emp_Mail, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @placeholder = "Email_Address",
+                                       @Value = "Auto Gen",
+                                       ReadOnly = true
+
+
+
+
+                                   }
+                               })
+
+
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>@Html.LabelFor(model => model.HR_Email)</label>
+                                    @Html.EditorFor(model => model.HR_Email, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @placeholder = "Email_Address",
+                                       @Value = ViewBag.hod,
+                                       ReadOnly = true
+
+
+
+
+
+                                   }
+                               })
+
+
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="card card-widget widget-user-2" style="border-radius: 24px;">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header" style="background-color: whitesmoke ">
+
+                                    <medium style="color:black"> <i class="fa fa-calendar-day"></i>  Select requests days</medium>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label>@Html.LabelFor(model => model.From_Date)</label>
+                                            @Html.EditorFor(model => model.From_Date, new
+                                       {
+                                           htmlAttributes = new
+                                           {
+                                               @class = "form-control ",
+                                               @placeholder = "Department Name",
+                                               @Type = "Date",
+
+
+
+
+
+
+                                           }
+                                       })
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>@Html.LabelFor(model => model.To_Date)</label>
+                                            @Html.EditorFor(model => model.To_Date, new
+                                       {
+                                           htmlAttributes = new
+                                           {
+                                               @class = "form-control ",
+                                               @placeholder = "Department Name",
+                                               @Type = "Date",
+
+
+
+
+
+
+                                           }
+                                       })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>
+                                                @Html.LabelFor(model => model.Type)
+                                            </label>
+                                            @{
+                                                List<SelectListItem> v = new List<SelectListItem>();
+                                                v.Add(new SelectListItem
+                                                {
+                                                    Text = "Privilege Leave (PL)",
+                                                    Value = "Privilege Leave (PL) ",
+                                                });
+                                                v.Add(new SelectListItem
+                                                {
+                                                    Text = "Casual Leave (CL) ",
+                                                    Value = "Casual Leave (CL)",
+
+                                                });
+                                                v.Add(new SelectListItem
+                                                {
+                                                    Text = "Sick Leave (SL)",
+                                                    Value = "Sick Leave (SL)",
+
+                                                });
+
+
+                                            }@Html.DropDownListFor(model => model.Type, v, "---Leave Type---", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="bwe">
+                                <i class="fa fa-comment text-yellow"></i>
+                                More info based on your leave requests
+                            </label>
+                            <div class="form-row">
+
+
+                                @Html.TextAreaFor(model => model.Message, 4, 70, htmlAttributes: new
+                           {
+                               style = "width: 70%; max-width:70%;",
+                               @placeholder = "File Description ...information on thes uploaded file",
+                               @autofocus = ""
+                               ,
+                               @class = "form-control form-rounded7"
+
+                           })
+                            </div>
+
+                            <div style="color:red">@Html.ValidationMessageFor(x => x.From_Date)</div>
+                            <div style="color:red">@Html.ValidationMessageFor(x => x.To_Date)</div>
+                            <div style="color: red">@Html.ValidationMessageFor(x => x.Message)</div>
+
+
+
+                            <hr />
+                            <table>
+                                <thead>
+                                    <tr>
+
+                                        <th><u>Actions</u></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <td style="text-align:left">
+
+                                    <input type="submit" value="Submit Request" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to submit request?')" />
+
+                                    <script>
+                                        $(function () {
+                                            $('#Create').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                                    <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                                </td>
+                                </tbody>
+                            </table>
+
+                            }
+
+                            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            @section Scripts {
+                                @Scripts.Render("~/bundles/jqueryval")
+                            }
+
+
+
+                        </div>
+                            </div>
+                        </div>
+
+</div></div>

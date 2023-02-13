@@ -1,0 +1,873 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Acc_Profile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="u" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AccessRolesSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AddPhone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Approved_Employees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Auto_Assign_Staffing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="Employee" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Cancel_Shift" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Check_F" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="u" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Check_Pending_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CheckStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Product_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sold_Quantity" Type="int" Mode="In" />
+          <Parameter Name="ReturnVal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Dash1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Delete_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DropDown" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DropDown_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DropDown_Cert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Em_Agency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Em_Agency2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Emp_Dash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Emp" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Get_Clients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Get_Facilites" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Get_FacilitesAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staffing" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmpUsername" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetFacility" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetFacilty_Acc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staffing" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetSetFacility" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetShifts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetStaffing_Acc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staffing" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Onbehalf_Facility" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PushEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Role" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="RoleGrant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="RolesAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="rolesL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SetRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="role" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Shift_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Certification" Type="nvarchar" Mode="In" />
+          <Parameter Name="Employee" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Shifts_Per_Agency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Shifts_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Sp_Agency_Profile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Agency_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Sp_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Sp_Employee_Per_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Facility_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Sp_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Tasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Tie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TiedUpUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Facility" Type="nvarchar" Mode="In" />
+          <Parameter Name="User" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="userlist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Users22" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Users23" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Users30" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Users31" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="PortalModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ZO" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Acc_Profile" ReturnType="Collection(PortalModel.Acc_Profile_Result)">
+            <Parameter Name="u" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AccessRolesSp" ReturnType="Collection(PortalModel.AccessRolesSp_Result)" />
+          <FunctionImport Name="AddPhone">
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Approved_Employees" ReturnType="Collection(PortalModel.Approved_Employees_Result)" />
+          <FunctionImport Name="Auto_Assign_Staffing">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="Employee" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Cancel_Shift">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Check_F" ReturnType="Collection(PortalModel.Check_F_Result)">
+            <Parameter Name="u" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Check_Pending_A" ReturnType="Collection(PortalModel.Check_Pending_A_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckStock">
+            <Parameter Name="Product_Name" Mode="In" Type="String" />
+            <Parameter Name="Sold_Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="ReturnVal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Dash1" ReturnType="Collection(PortalModel.Dash1_Result)" />
+          <FunctionImport Name="Delete_User">
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DropDown" ReturnType="Collection(String)" />
+          <FunctionImport Name="DropDown_All" ReturnType="Collection(String)" />
+          <FunctionImport Name="DropDown_Cert" ReturnType="Collection(String)" />
+          <FunctionImport Name="Em_Agency" ReturnType="Collection(PortalModel.Em_Agency_Result)">
+            <Parameter Name="employee" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Em_Agency2" ReturnType="Collection(PortalModel.Em_Agency2_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Emp_Dash" ReturnType="Collection(PortalModel.Emp_Dash_Result)">
+            <Parameter Name="Emp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Clients" ReturnType="Collection(String)" />
+          <FunctionImport Name="Get_Facilites" ReturnType="Collection(PortalModel.Get_Facilites_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_FacilitesAdmin" ReturnType="Collection(PortalModel.Get_FacilitesAdmin_Result)" />
+          <FunctionImport Name="GetEmp" ReturnType="Collection(PortalModel.GetEmp_Result)">
+            <Parameter Name="Staffing" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmpUsername" ReturnType="Collection(PortalModel.GetEmpUsername_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFacility" ReturnType="Collection(PortalModel.GetFacility_Result)" />
+          <FunctionImport Name="GetFacilty_Acc" ReturnType="Collection(PortalModel.GetFacilty_Acc_Result)">
+            <Parameter Name="Staffing" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSetFacility" ReturnType="Collection(PortalModel.GetSetFacility_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetShifts" ReturnType="Collection(PortalModel.GetShifts_Result)" />
+          <FunctionImport Name="GetStaffing_Acc" ReturnType="Collection(PortalModel.GetStaffing_Acc_Result)">
+            <Parameter Name="Staffing" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Onbehalf_Facility">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PushEmp" ReturnType="Collection(PortalModel.PushEmp_Result)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RoleGrant" ReturnType="Collection(PortalModel.RoleGrant_Result)" />
+          <FunctionImport Name="RolesAdd" />
+          <FunctionImport Name="rolesL" ReturnType="Collection(PortalModel.rolesL_Result)" />
+          <FunctionImport Name="SetRole">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="role" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Shift_List" ReturnType="Collection(PortalModel.Shift_List_Result)">
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Certification" Mode="In" Type="String" />
+            <Parameter Name="Employee" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Shifts_Per_Agency" ReturnType="Collection(PortalModel.Shifts_Per_Agency_Result)" />
+          <FunctionImport Name="Shifts_Status" ReturnType="Collection(PortalModel.Shifts_Status_Result)" />
+          <FunctionImport Name="Sp_Agency_Profile" ReturnType="Collection(PortalModel.Sp_Agency_Profile_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Agency_Users" ReturnType="Collection(PortalModel.Sp_Agency_Users_Result)" />
+          <FunctionImport Name="Sp_Employee" ReturnType="Collection(PortalModel.Sp_Employee_Result)" />
+          <FunctionImport Name="Sp_Employee_Per_A" ReturnType="Collection(PortalModel.Sp_Employee_Per_A_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Facility_Users" ReturnType="Collection(PortalModel.Sp_Facility_Users_Result)" />
+          <FunctionImport Name="Sp_u" ReturnType="Collection(PortalModel.Sp_u_Result)" />
+          <FunctionImport Name="Tasks" ReturnType="Collection(PortalModel.Tasks_Result)" />
+          <FunctionImport Name="Tie" ReturnType="Collection(PortalModel.Tie_Result)" />
+          <FunctionImport Name="TiedUpUsers">
+            <Parameter Name="Facility" Mode="In" Type="String" />
+            <Parameter Name="User" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="userlist" ReturnType="Collection(PortalModel.userlist_Result)" />
+          <FunctionImport Name="Users" ReturnType="Collection(PortalModel.Users_Result)" />
+          <FunctionImport Name="Users22" ReturnType="Collection(String)" />
+          <FunctionImport Name="Users23" ReturnType="Collection(String)" />
+          <FunctionImport Name="Users30" ReturnType="Collection(String)" />
+          <FunctionImport Name="Users31" ReturnType="Collection(PortalModel.Users31_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Acc_Profile_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AccessRolesSp_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="RoleId" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="Approved_Employees_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="256" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Check_F_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="F" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Check_Pending_A_Result">
+          <Property Type="Int32" Name="Pending" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Dash1_Result">
+          <Property Type="String" Name="status" Nullable="true" />
+          <Property Type="Int32" Name="Count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Em_Agency_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Agency" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Em_Agency2_Result">
+          <Property Type="String" Name="Agency" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Emp_Dash_Result">
+          <Property Type="Int32" Name="Completed_Shifts" Nullable="true" />
+          <Property Type="Int32" Name="Pending_Approval_Shifts" Nullable="true" />
+          <Property Type="Int32" Name="ClockedIn_Shifts" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Get_Facilites_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Facility" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Get_FacilitesAdmin_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Facility" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEmp_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEmpUsername_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetFacility_Result">
+          <Property Type="String" Name="Facility" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetFacilty_Acc_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Staff" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetSetFacility_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Facility" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetShifts_Result">
+          <Property Type="Int32" Name="EventId" Nullable="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Subject" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Facility_Type" Nullable="true" />
+          <Property Type="String" Name="location" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Created_by" Nullable="true" />
+          <Property Type="String" Name="Shift" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Status" Nullable="true" />
+          <Property Type="String" Name="certification" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="IsFullDay" Nullable="true" />
+          <Property Type="String" Name="Employee" Nullable="true" />
+          <Property Type="String" Name="Shift_Status" Nullable="true" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="Staffing_Agency" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetStaffing_Acc_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Staff" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="PushEmp_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Fullname" Nullable="true" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Credential" Nullable="true" />
+          <Property Type="String" Name="Employee_Address" Nullable="true" />
+          <Property Type="String" Name="Home_Address" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="String" Name="Agency" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Last_Update" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Emergency_Contact" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Wage" Nullable="true" Precision="19" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="RoleGrant_Result">
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="RoleId" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="rolesL_Result">
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="RoleId" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="Shift_List_Result">
+          <Property Type="String" Name="Sub_Type" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Posted_by" Nullable="true" />
+          <Property Type="String" Name="Picked_Up_By" Nullable="true" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Take_Date" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" />
+          <Property Type="String" Name="Facility" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Facility_Type" Nullable="true" />
+          <Property Type="String" Name="Certification" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="time" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Shifts_Per_Agency_Result">
+          <Property Type="String" Name="Staffing_Agency" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Shifts_Status_Result">
+          <Property Type="Int32" Name="Open_Shifts" Nullable="true" />
+          <Property Type="Int32" Name="Completed_Shifts" Nullable="true" />
+          <Property Type="Int32" Name="Cancelled_Shifts" Nullable="true" />
+          <Property Type="Int32" Name="Pending_Shifts" Nullable="true" />
+          <Property Type="Int32" Name="ClockedIn_Shifts" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_Agency_Profile_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" />
+          <Property Type="String" Name="Contact_Person" Nullable="true" />
+          <Property Type="String" Name="email" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Sp_Agency_Users_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_Employee_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_Employee_Per_A_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_Facility_Users_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Facility" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_u_Result">
+          <Property Type="Int32" Name="Employees" Nullable="true" />
+          <Property Type="Int32" Name="Clients" Nullable="true" />
+          <Property Type="Int32" Name="Admin" Nullable="true" />
+          <Property Type="Int32" Name="Total_Users" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Tasks_Result">
+          <Property Type="String" Name="Employee" Nullable="true" />
+          <Property Type="Int32" Name="Total_Assigned_Shifts" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Tie_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="userlist_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Emai_Confirmed" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="Users_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="Users31_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PortalModelStoreContainer" CdmEntityContainer="ZO" >
+          <FunctionImportMapping FunctionImportName="Acc_Profile" FunctionName="PortalModel.Store.Acc_Profile">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Acc_Profile_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AccessRolesSp" FunctionName="PortalModel.Store.AccessRolesSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.AccessRolesSp_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddPhone" FunctionName="PortalModel.Store.AddPhone" />
+          <FunctionImportMapping FunctionImportName="Approved_Employees" FunctionName="PortalModel.Store.Approved_Employees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Approved_Employees_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Auto_Assign_Staffing" FunctionName="PortalModel.Store.Auto_Assign_Staffing" />
+          <FunctionImportMapping FunctionImportName="Cancel_Shift" FunctionName="PortalModel.Store.Cancel_Shift" />
+          <FunctionImportMapping FunctionImportName="Check_F" FunctionName="PortalModel.Store.Check_F">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Check_F_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="F" ColumnName="F" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Check_Pending_A" FunctionName="PortalModel.Store.Check_Pending_A">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Check_Pending_A_Result">
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CheckStock" FunctionName="PortalModel.Store.CheckStock" />
+          <FunctionImportMapping FunctionImportName="Dash1" FunctionName="PortalModel.Store.Dash1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Dash1_Result">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Delete_User" FunctionName="PortalModel.Store.Delete_User" />
+          <FunctionImportMapping FunctionImportName="DropDown" FunctionName="PortalModel.Store.DropDown" />
+          <FunctionImportMapping FunctionImportName="DropDown_All" FunctionName="PortalModel.Store.DropDown_All" />
+          <FunctionImportMapping FunctionImportName="DropDown_Cert" FunctionName="PortalModel.Store.DropDown_Cert" />
+          <FunctionImportMapping FunctionImportName="Em_Agency" FunctionName="PortalModel.Store.Em_Agency">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Em_Agency_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Em_Agency2" FunctionName="PortalModel.Store.Em_Agency2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Em_Agency2_Result">
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Emp_Dash" FunctionName="PortalModel.Store.Emp_Dash">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Emp_Dash_Result">
+                <ScalarProperty Name="Completed_Shifts" ColumnName="Completed_Shifts" />
+                <ScalarProperty Name="Pending_Approval_Shifts" ColumnName="Pending_Approval_Shifts" />
+                <ScalarProperty Name="ClockedIn_Shifts" ColumnName="ClockedIn_Shifts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Clients" FunctionName="PortalModel.Store.Get_Clients" />
+          <FunctionImportMapping FunctionImportName="Get_Facilites" FunctionName="PortalModel.Store.Get_Facilites">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Get_Facilites_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Facility" ColumnName="Facility" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_FacilitesAdmin" FunctionName="PortalModel.Store.Get_FacilitesAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Get_FacilitesAdmin_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Facility" ColumnName="Facility" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmp" FunctionName="PortalModel.Store.GetEmp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.GetEmp_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmpUsername" FunctionName="PortalModel.Store.GetEmpUsername">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.GetEmpUsername_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFacility" FunctionName="PortalModel.Store.GetFacility">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.GetFacility_Result">
+                <ScalarProperty Name="Facility" ColumnName="Facility" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFacilty_Acc" FunctionName="PortalModel.Store.GetFacilty_Acc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.GetFacilty_Acc_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSetFacility" FunctionName="PortalModel.Store.GetSetFacility">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.GetSetFacility_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Facility" ColumnName="Facility" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetShifts" FunctionName="PortalModel.Store.GetShifts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.GetShifts_Result">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Facility_Type" ColumnName="Facility_Type" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Created_by" ColumnName="Created_by" />
+                <ScalarProperty Name="Shift" ColumnName="Shift" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="certification" ColumnName="certification" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Shift_Status" ColumnName="Shift Status" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Staffing_Agency" ColumnName="Staffing_Agency" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStaffing_Acc" FunctionName="PortalModel.Store.GetStaffing_Acc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.GetStaffing_Acc_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Onbehalf_Facility" FunctionName="PortalModel.Store.Onbehalf_Facility" />
+          <FunctionImportMapping FunctionImportName="PushEmp" FunctionName="PortalModel.Store.PushEmp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.PushEmp_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Credential" ColumnName="Credential" />
+                <ScalarProperty Name="Employee_Address" ColumnName="Employee_Address" />
+                <ScalarProperty Name="Home_Address" ColumnName="Home_Address" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="Last_Update" ColumnName="Last_Update" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Emergency_Contact" ColumnName="Emergency_Contact" />
+                <ScalarProperty Name="Wage" ColumnName="Wage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RoleGrant" FunctionName="PortalModel.Store.RoleGrant">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.RoleGrant_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RolesAdd" FunctionName="PortalModel.Store.RolesAdd" />
+          <FunctionImportMapping FunctionImportName="rolesL" FunctionName="PortalModel.Store.rolesL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.rolesL_Result">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SetRole" FunctionName="PortalModel.Store.SetRole" />
+          <FunctionImportMapping FunctionImportName="Shift_List" FunctionName="PortalModel.Store.Shift_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Shift_List_Result">
+                <ScalarProperty Name="Sub_Type" ColumnName="Sub_Type" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Posted_by" ColumnName="Posted by" />
+                <ScalarProperty Name="Picked_Up_By" ColumnName="Picked Up By" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Take_Date" ColumnName="Take_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Facility" ColumnName="Facility" />
+                <ScalarProperty Name="Facility_Type" ColumnName="Facility_Type" />
+                <ScalarProperty Name="Certification" ColumnName="Certification" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Shifts_Per_Agency" FunctionName="PortalModel.Store.Shifts_Per_Agency">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Shifts_Per_Agency_Result">
+                <ScalarProperty Name="Staffing_Agency" ColumnName="Staffing_Agency" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Shifts_Status" FunctionName="PortalModel.Store.Shifts_Status">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Shifts_Status_Result">
+                <ScalarProperty Name="Open_Shifts" ColumnName="Open_Shifts" />
+                <ScalarProperty Name="Completed_Shifts" ColumnName="Completed_Shifts" />
+                <ScalarProperty Name="Cancelled_Shifts" ColumnName="Cancelled_Shifts" />
+                <ScalarProperty Name="Pending_Shifts" ColumnName="Pending_Shifts" />
+                <ScalarProperty Name="ClockedIn_Shifts" ColumnName="ClockedIn_Shifts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Agency_Profile" FunctionName="PortalModel.Store.Sp_Agency_Profile">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Sp_Agency_Profile_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Contact_Person" ColumnName="Contact_Person" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Agency_Users" FunctionName="PortalModel.Store.Sp_Agency_Users">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Sp_Agency_Users_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Employee" FunctionName="PortalModel.Store.Sp_Employee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Sp_Employee_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Employee_Per_A" FunctionName="PortalModel.Store.Sp_Employee_Per_A">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Sp_Employee_Per_A_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Facility_Users" FunctionName="PortalModel.Store.Sp_Facility_Users">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Sp_Facility_Users_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Facility" ColumnName="Facility" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_u" FunctionName="PortalModel.Store.Sp_u">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Sp_u_Result">
+                <ScalarProperty Name="Employees" ColumnName="Employees" />
+                <ScalarProperty Name="Clients" ColumnName="Clients" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="Total_Users" ColumnName="Total Users" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tasks" FunctionName="PortalModel.Store.Tasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Tasks_Result">
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Total_Assigned_Shifts" ColumnName="Total Assigned Shifts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tie" FunctionName="PortalModel.Store.Tie">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Tie_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TiedUpUsers" FunctionName="PortalModel.Store.TiedUpUsers" />
+          <FunctionImportMapping FunctionImportName="userlist" FunctionName="PortalModel.Store.userlist">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.userlist_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Emai_Confirmed" ColumnName="Emai Confirmed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users" FunctionName="PortalModel.Store.Users">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Users_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users22" FunctionName="PortalModel.Store.Users22" />
+          <FunctionImportMapping FunctionImportName="Users23" FunctionName="PortalModel.Store.Users23" />
+          <FunctionImportMapping FunctionImportName="Users30" FunctionName="PortalModel.Store.Users30" />
+          <FunctionImportMapping FunctionImportName="Users31" FunctionName="PortalModel.Store.Users31">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PortalModel.Users31_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

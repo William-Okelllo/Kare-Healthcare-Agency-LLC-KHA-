@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Acc_Profile";
+}
+
+
+
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "My Profile";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/Andest.png" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 40%;
+        border-color: dodgerblue;
+    }
+
+    .bwe {
+        font-family: Quicksand;
+    }
+</style>
+
+
+
+<div class="card" style="background-color: #ffffffd9">
+    <br />
+    <div class="col d-flex justify-content-center">
+        <div class="col-md-6" style="border-radius: 14px;">
+            <!-- Widget: user widget style 2 -->
+            <div class="card card-widget widget-user-2" style="border-radius: 14px;">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header" style="background-color: navy ">
+                    <div class="widget-user-image">
+                        <img src="~/Images/SHARPO_4-1024x1024.png" height="80" alt="User Avatar">
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h5 class="widget-user-username" style="color:white">Account Profile : @User.Identity.Name</h5>
+
+
+                </div>
+                <div class="card-body text-left">
+
+
+                    @foreach (var item in ViewBag.F)
+                    {
+
+                        <a href="#" class="nav-link" style="color:midnightblue">
+                            <i class="fa fa-id-badge"></i> Account ID <span class="float-right" style="font-size: 90%">
+                                <i class="fa fa-user-md"></i>
+
+                                @item.id
+
+                            </span>
+                        </a>
+
+
+                        <a href="#" class="nav-link" style="color:midnightblue">
+                            <i class="fa fa-envelope"></i>  Email ID <span class="float-right" style="font-size: 90%">
+                                <i class="fa fa-user-md"></i>
+
+                                @item.email
+
+                            </span>
+                        </a>
+                         <a href="#" class="nav-link" style="color:midnightblue">
+                            <i class="fa fa-phone"></i> Phone Number <span class="float-right" style="font-size: 90%">
+
+
+    @if (item.PhoneNumber == null)
+    {
+                           <small><i class="fa fa-times-circle text-danger"></i> Not set</small>
+    }
+    else
+    {@item.PhoneNumber <small>@Html.ActionLink("Update My Number", "AddPhoneNumber", "Manage")</small>}
+</span>
+                        </a>
+                        <a href="#" class="nav-link" style="color:forestgreen">
+                            <i class="fa fa-shield-virus"></i>  Access level <span class="float-right" style="font-size: 90%">
+                                <i class="fa fa-user-md"></i>
+
+                                @item.Role
+
+                            </span>
+                        </a>
+                        <div style="text-align:right">
+                            @Html.ActionLink("Update Email & Phone", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-sm  btn-success btn" })
+                        </div>
+                        <hr />
+                        <p>Actions</p>
+                        <a href="#" class="nav-link" style="color:navy">
+                            <i class="fa fa-key"></i>  Change Password
+                            <span class="float-right" style="font-size: 90%">
+
+
+                                @Html.ActionLink("Change Current Password", "ChangePassword", "Manage", null, new { @class = "btn btn-sm  btn-success btn" })
+
+                            </span>
+                        </a>
+
+
+                    }
+
+
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>

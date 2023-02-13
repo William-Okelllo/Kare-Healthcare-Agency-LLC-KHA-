@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Ishop.Models.Report>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<div class="card ">
+    <div class="card-header" style="background-color: navy">
+        <h3 class="card-title" style="color:white;text-align:left">
+            <i class="fa fa-chart-bar nav-icon"></i>
+            Reports
+        </h3>
+        <div style="text-align: right; color: white ">
+
+
+
+
+
+            @Html.ActionLink("Add Report ", "Create", "Reports", null, new { @class = "btn btn-sm btn-default btn" })
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+                        <div class="card-header" style="background-color: navy; color: white "><i class="fa fa-chart-line"></i> System Reports </div>
+
+                        <div class="card-body text-left">
+
+
+                            @foreach (var item in Model)
+                            {
+                                <a href="@Url.Action("Run", "Reports", new { Path = item.Report_Path })" class="nav-link">
+                                    @item.Report_Name <span class="float-right badge bg-primary"><i class="fa fa-file-invoice"></i></span>
+                                </a>
+
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

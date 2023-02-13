@@ -1,0 +1,774 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.theme.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.reports.all.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.reports.all.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.theme.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.reportdesigner.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.reportdesigner.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.reportdesigner.theme.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.reportdesigner.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.reports.all.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.theme.compatibility.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.reports.all.min.css" rel="stylesheet" />
+    <link href="~/Content/bold-reports/material/bold.theme.min.css" rel="stylesheet" />
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!--Render the gauge item. Add these scripts only if your report contains the gauge report item.-->
+    @Scripts.Render("~/Scripts/bold-reports/common/ej2-base.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/common/ej2-data.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/common/ej2-pdf-export.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/common/ej2-svg-base.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/data-visualization/ej2-circulargauge.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/data-visualization/ej2-lineargauge.min.js")
+    <!--Renders the map item. Add this script only if your report contains the map report item.-->
+    @Scripts.Render("~/Scripts/bold-reports/data-visualization/ej2-maps.min.js")
+    <link href="~/Content/bold-reports/bold.reportdesigner.core.bootstrap.min.css" rel="stylesheet" />
+    @Scripts.Render("~/Scripts/bold-reports/common/bold.reports.common.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/common/bold.reports.widgets.min.js")
+    <!--Renders the chart item. Add this script only if your report contains the chart report item.-->
+    <script src="~/Scripts/bold-reports/data-visualization/ej.chart.min.js"></script>
+    <!-- Report Viewer component script-->
+    @Scripts.Render("~/Scripts/bold-reports/bold.report-viewer.min.js")
+
+    <style>
+        body {
+            background-image: url("/Images/shop.jpg");
+        }
+    </style>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/summernote/summernote-bs4.min.css">
+
+  
+</head>
+
+
+<title> @ViewBag.Title </title>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <a class="wrapper">
+
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="~/Images/co.gif" height="150">
+            <br />
+            <h5 style="font-style:italic;color:navy">...loading...</h5>
+        </div>
+
+
+
+        <nav class="main-header navbar navbar-expand navbar-light navbar-light">
+
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="@Url.Action("Index", "Home")" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="@Url.Action("Contact", "Home")" class="nav-link">
+                        Contact
+
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown" style="font-family:Calibri">
+                    <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
+
+                        <i class="fa fa-user text-success">
+                            @Html.Label("" + User.Identity.GetUserName()
++ "", null, htmlAttributes: new { title = "Manage" })
+                        </i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
+                        <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
+                            <i class="fas fa-user-circle text-navy nav-icon"></i> My Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+
+
+
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {@Html.AntiForgeryToken()
+    <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">
+        <i class="fa fa-user mr-2 text-success"></i>
+        SignOut
+    </a>}
+    <div class="dropdown-divider"> </div></div>
+
+
+
+
+
+
+    </nav>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+
+
+
+
+
+
+
+    <aside class="main-sidebar sidebar-light-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="@Url.Action("Index", "Home")" class="brand-link">
+            <img src="~/Images/dddd.png" height="50">
+
+        </a>
+
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:white">
+                <div class="info" style="font-family:Calibri">
+                    <a href="#" class="d-block">
+                        Current User: @Html.Label("" + User.Identity.GetUserName()
++ "", null, htmlAttributes: new { title = "Manage" })
+                    </a>
+                    <a>
+                        @if (this.User.IsInRole("Admin"))
+                        {<small style="font-family:Calibri">
+                                <i class="fa fa-user-check text-navy"></i>:-Administrator
+                            </small>}
+
+
+                        else if (this.User.IsInRole("Employee"))
+                        { <small style="font-family:Calibri">
+                                <i class="fa fa-user-md text-navy"></i> :-Employee
+                            </small>}
+
+                        else if (this.User.IsInRole("Facility"))
+                        { <small style="font-family:Calibri">
+                                <i class="fa fa-universal-access text-white"></i> :-Facility Account
+                            </small>}
+                         else if (this.User.IsInRole("Staffing_Agency"))
+                        { <small style="font-family:Calibri">
+                                <i class="fa fa-users text-white"></i> :-Staffing Agency
+                            </small>}
+                        else
+                        { <small style="font-family:Calibri">
+                                <i class="fa fa-shield-virus text-maroon"></i> :--unknown
+                            </small>}
+
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- SidebarSearch Form -->
+            <!-- Sidebar Menu -->
+            <nav class="mt-2" style="text-align:left">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+        with font-awesome or any other icon font library -->
+
+
+
+
+
+                    <li class="nav-item menu-open">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-navy">
+                            <i class="nav-icon fa fa-home"></i>
+                            <p>
+                                Home-Page
+
+                            </p>
+                        </a>
+                    </li>
+
+
+
+
+
+
+                    <li class="nav-header"><i class="fa fa-clock"></i> TimeSheet</li>
+                    <li class="nav-item">
+
+
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-shoe-prints text-green"></i>
+                            <p style="color:black">
+                                CheckIn/Out <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index_", "Attendance")" class="nav-link">
+                                        <i class="fa fa-walking text-green nav-icon"></i>
+                                        <p style="color: black">TimeSheet</p>
+                                    </a>
+                                </li>
+
+
+
+                            }
+                            @if (this.User.IsInRole("Employee"))
+                            {
+                                <li>
+                                    @if (DateTime.Now.ToString("tt") == "AM")
+                                    {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Attendance")" class="nav-link">
+                                            <i class="fa fa-sun text-warning nav-icon"></i>
+                                            <p style="color: black">CheckIn</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Attendance")" class="nav-link">
+                                            <i class="fa fa-shoe-prints text-warning nav-icon"></i>
+                                            <p style="color: black">My TimeSheet</p>
+                                        </a>
+                                    </li>
+
+
+
+                                }
+
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Attendance")" class="nav-link">
+                                            <i class="fa fa-moon text-black nav-icon"></i>
+                                            <p style="color: black">CheckOut</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Attendance")" class="nav-link">
+                                            <i class="fa fa-shoe-prints text-warning nav-icon"></i>
+                                            <p style="color: black">My TimeSheet</p>
+                                        </a>
+                                    </li>
+                                }
+                            </li>
+                        }
+
+                        </ul>
+                        </li>
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <li class="nav-header"><i class="fa fa-clock"></i> Invoices & Expenses</li>
+                            <li class="nav-item">
+
+
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-file-invoice text-green"></i>
+                                    <p style="color: green">
+                                        Invoices <i class="fas fa-angle-left right"></i>
+
+
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Invoices")" class="nav-link">
+                                            <i class="fa fa-file-invoice text-green nav-icon"></i>
+                                            <p style="color: green">New Invoice</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Invoices")" class="nav-link">
+                                            <i class="fa fa-file-invoice-dollar text-green nav-icon"></i>
+                                            <p style="color: green">Invoices list</p>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+
+
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-file-invoice text-danger"></i>
+                                    <p style="color: darkred">
+                                        Expenses <i class="fas fa-angle-left right"></i>
+
+
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Expense")" class="nav-link">
+                                            <i class="fa fa-file-invoice text-danger nav-icon"></i>
+                                            <p style="color: darkred">New Expense</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Expense")" class="nav-link">
+                                            <i class="fa fa-file-invoice-dollar text-danger nav-icon"></i>
+                                            <p style="color: darkred">Expenses list</p>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+
+                                </ul>
+                            </li>
+                        }
+                        <li class="nav-item">
+
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-clock text-green"></i>
+                                <p style="color: green">
+                                    leaves <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @if (this.User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "leaves")" class="nav-link">
+                                            <i class="fa fa-hand-holding text-navy nav-icon"></i>
+                                            <p style="color:navy">Request leave</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("leaves_Requests", "leaves")" class="nav-link">
+                                            <i class="fa fa-hand-holding text-success nav-icon"></i>
+                                            <p style="color:seagreen">Requested leaves</p>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (this.User.IsInRole("Employee"))
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "leaves")" class="nav-link">
+                                            <i class="fa fa-hand-holding text-navy nav-icon"></i>
+                                            <p style="color:navy">Request leaves</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "leaves")" class="nav-link">
+                                            <i class="fa fa-book-open text-navy nav-icon"></i>
+                                            <p style="color: navy">My leaves requests </p>
+                                        </a>
+                                    </li>
+                                }
+
+
+
+
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            @if (this.User.IsInRole("Employee"))
+                            {
+                            <li class="nav-item">
+
+
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-folder text-navy"></i>
+                                    <p style="color: navy">
+                                        My Documents<i class="fas fa-angle-left right"></i>
+
+
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Upload", "Files")" class="nav-link">
+                                            <i class="fa fa-cloud text-navy nav-icon"></i>
+                                            <p style="color:navy"> Upload Documents </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("My_Files", "Files")" class="nav-link">
+                                            <i class="fa fa-folder-open text-navy nav-icon"></i>
+                                            <p style="color: navy">My Documents </p>
+                                        </a>
+                                    </li>
+
+
+
+
+
+                                </ul>
+                            </li>
+                        }
+                            </li>
+
+
+
+
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <li class="nav-header"><i class="fa fa-users"></i> Human Resources</li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa fa-home text-black"></i>
+                                        <p style="color:black">
+                                            Department<i class="fas fa-angle-left right"></i>
+
+
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+
+
+
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Create", "Departments")" class="nav-link">
+                                                <i class="fa fa-user-plus text-black nav-icon"></i>
+                                                <p style="color: black">Add Dprt </p>
+                                            </a>
+                                        </li>
+
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index", "Departments")" class="nav-link">
+                                                <i class="fa fa-cubes text-black nav-icon"></i>
+                                                <p style="color: black">Departments </p>
+                                            </a>
+                                        </li>
+
+
+
+
+
+
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa fa-users text-black"></i>
+                                        <p style="color: black">
+                                            Employees<i class="fas fa-angle-left right"></i>
+
+
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("New_Employee", "Account")" class="nav-link">
+                                                <i class="fa fa-user-plus text-success nav-icon"></i>
+                                                <p style="color:black">New Employee</p>
+                                            </a>
+                                        </li>
+
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index", "Employes")" class="nav-link">
+                                                <i class="fa fa-users text-success nav-icon"></i>
+                                                <p style="color: black">Employees Profiles </p>
+                                            </a>
+                                        </li>
+
+
+
+
+
+
+
+                                    </ul>
+                                    </li>
+
+                                <li class="nav-header"><i class="fa fa-chart-line text-brown"></i> B.I Reports</li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Reports")" class="nav-link">
+
+                                        <i class="fa fa-chart-bar text-brown nav-icon"></i>
+                                        <p style="color: brown">
+                                            Reports
+                                        </p>
+                                    </a>
+                                </li>
+                                }
+
+
+
+
+
+                                </li>
+                                @if (this.User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-header">Admin</li>
+
+
+
+
+
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Service")" class="nav-link">
+
+                                            <i class="fa fa-cogs text-indigo nav-icon"></i>
+                                            <p style="color:brown">
+                                                Admin <i class="fas fa-angle-left right"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Rspec007", "Account")" class="nav-link">
+
+                                                    <i class="fa fa-user-plus text-success nav-icon"></i>
+                                                    <p style="color: brown">
+                                                        New Profile
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Index", "Data")" class="nav-link">
+
+                                                    <i class="fa fa-users text-success nav-icon"></i>
+                                                    <p style="color: brown">
+                                                        All  Profile
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Index", "Configuration")" class="nav-link">
+
+                                                    <i class="fa fa-cogs text-success nav-icon"></i>
+                                                    <p style="color: brown">
+                                                        Configurations
+                                                    </p>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+
+                                    </li>
+
+
+
+                                }
+
+                                <style>
+                                    @@-webkit-keyframes pulse {
+                                        0% {
+                                            -webkit-transform: scale3d(1, 1, 1);
+                                            transform: scale3d(1, 1, 1);
+                                        }
+
+                                        50% {
+                                            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+                                            transform: scale3d(1.05, 1.05, 1.05);
+                                        }
+
+                                        100% {
+                                            -webkit-transform: scale3d(1, 1, 1);
+                                            transform: scale3d(1, 1, 1);
+                                        }
+                                    }
+
+                                    @@keyframes pulse {
+                                        0% {
+                                            -webkit-transform: scale3d(1, 1, 1);
+                                            transform: scale3d(1, 1, 1);
+                                        }
+
+                                        50% {
+                                            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+                                            transform: scale3d(1.05, 1.05, 1.05);
+                                        }
+
+                                        100% {
+                                            -webkit-transform: scale3d(1, 1, 1);
+                                            transform: scale3d(1, 1, 1);
+                                        }
+                                    }
+
+                                    .pulse:hover {
+                                        -webkit-animation-name: pulse;
+                                        animation-name: pulse;
+                                    }
+
+                                    .animated {
+                                        -webkit-animation-duration: 1s;
+                                        animation-duration: 1s;
+                                        -webkit-animation-fill-mode: both;
+                                        animation-fill-mode: both;
+                                    }
+
+                                        .animated.infinite {
+                                            -webkit-animation-iteration-count: infinite;
+                                            animation-iteration-count: infinite;
+                                        }
+                                </style>
+                                <div class="pulse animated infinite">
+                                    <div class="col-md-11 col-sm-8 col-12">
+                                        <div class="info-box " style="background-color: #ffffff00; border-radius: 14px;">
+
+                                            <span class="info-box-icon  ">
+                                                <img src="~/Images/whatsapp.ico" height="50" />
+                                            </span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text" style="color:black">Support Team</span>
+                                                <span class="info-box-number">
+                                                    <a href="https://api.whatsapp.com/send?phone=+254727422197&text=Hello%20Sharpolex%20Support%20team%20am%20in%20need%20of%20your%20assistance
+                                                                     " class="btn btn-sm  btn-success btn-lg active" role="button" aria-pressed="true">WhastApp</a>
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <li class="nav-header">
+                                    Version 20.0.4
+
+                                </li>
+                                <li>
+                                    <small style="color:whitesmoke"> Powered By Sharpolex</small>
+                                </li>
+
+                                </ul>
+
+                            </nav>
+
+        </div>
+
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="background-image: url('../../Images/neww.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;">
+
+
+
+
+
+        @RenderBody()
+
+
+
+
+    </div>
+
+    @Html.Bold().ScriptManager()
+    <!-- /.content-wrapper -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>$.widget.bridge('uibutton', $.ui.button)</script>
+    <!-- Bootstrap 4 -->
+    <script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/FrontEnd/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/FrontEnd/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/FrontEnd/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/FrontEnd/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/FrontEnd/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/FrontEnd/plugins/moment/moment.min.js"></script>
+    <script src="~/FrontEnd/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/FrontEnd/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/FrontEnd/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/FrontEnd/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/FrontEnd/dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/FrontEnd/dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="~/FrontEnd/dist/js/pages/dashboard.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

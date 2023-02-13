@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Settings";
+}
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.93);">
+
+
+
+    <div class="card-header" style="background-color: #1976D2 ">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-cogs"></i>
+            Settings Config
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-5 col-sm-5 col-12">
+                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                    <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
+                        <h5>Current Set Mail Configs</h5>
+                        <small>
+                            <i class="fa fa-envelope text-primary"></i>  Portal Sender Mail :
+                            <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Email"]"><br />
+                           
+
+                        </small>
+                        <div class="divider"></div>
+                        <small>
+                            <i class="fa fa-envelope text-primary"></i> Mail Pass :
+                            <input type="text" id="Password" name="Password" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Password"]"><br />
+
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-sm-5 col-12">
+                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                    <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
+                        <h5>File Upload Types</h5>
+                        <small>
+                            <i class="fa fa-file text-primary"></i>  File Formats :
+                            <input type="text" id="Password" name="Password" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["FileType"]"><br />
+
+
+                        </small>
+                        <div class="divider"></div>
+                        <small>
+                            <i class="fa fa-database text-primary"></i> Size :
+                            <input type="text" id="Password" name="Password" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["FileSize"]"><br />
+
+
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

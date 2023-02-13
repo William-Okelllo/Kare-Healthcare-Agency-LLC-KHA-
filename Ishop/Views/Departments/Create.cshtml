@@ -1,0 +1,283 @@
+﻿@model IShop.Core.Department
+
+@{
+    ViewBag.Title = "New Department";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+<div class="card" style="background-color: rgb(36, 202, 11, 0.15);">
+    <div class="card-body" style="background-color: #ffffffc1">
+
+        <br>
+
+
+        <div class="col d-flex justify-content-center">
+            <div class="col-md-10 col-sm-12 col-12">
+                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                    <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                            <div class="form-row">
+                                
+
+
+
+
+                                <div class="form-group col-md-4">
+                                    <label style="font-family:Quicksand;">@Html.LabelFor(model => model.DprtName)</label>
+                                    @Html.EditorFor(model => model.DprtName, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Department Name",
+
+
+
+
+
+                               }
+                           })
+                                </div>
+                            </div> <div class="form-row">
+
+    <div class="form-group col-md-3">
+        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Contact)</label>
+        @Html.EditorFor(model => model.Contact, new
+   {
+       htmlAttributes = new
+       {
+           @class = "form-control ",
+           @placeholder = "Contact Number",
+
+
+
+
+
+       }
+   })
+
+
+    </div>
+    <div class="form-group col-md-3">
+        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Email_Address)</label>
+        @Html.EditorFor(model => model.Email_Address, new
+   {
+       htmlAttributes = new
+       {
+           @class = "form-control ",
+           @placeholder = "Email_Address",
+
+
+
+
+
+       }
+   })
+
+
+    </div>
+    <div class="form-group col-md-3">
+        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Manager)</label>
+        @Html.DropDownList("Manager", new SelectList(ViewBag.l, "UserName", "UserName"), "Select HOD", new { @id = "ddlFruits", @class = "form-control " })
+        @Html.Hidden("UserName", null, new { @id = "hfUserName" })
+
+
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $("body").on("change", "#ddlFruits", function () {
+                $("#UserName").val($(this).find("option:selected").text());
+            });
+        </script>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+                            <div style="color:red">@Html.ValidationMessageFor(x => x.DprtName)</div>
+                            <div style="color: red">@Html.ValidationMessageFor(x => x.Contact)</div>
+                            <div style="color: red">@Html.ValidationMessageFor(x => x.Manager)</div>
+                            <div style="color: red">@Html.ValidationMessageFor(x => x.Email_Address)</div>
+                         
+
+                            <hr />
+                            <table>
+                                <thead>
+                                    <tr>
+
+                                        <th><u>Actions</u></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <td style="text-align:left">
+
+                                    <input type="submit" value="Add Department" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to add department?')" />
+
+                                    <script>
+                                        $(function () {
+                                            $('#Create').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                                    <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                                </td>
+                                </tbody>
+                            </table>
+
+                        }
+
+                        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>

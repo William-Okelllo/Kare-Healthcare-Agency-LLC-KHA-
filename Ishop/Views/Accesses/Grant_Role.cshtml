@@ -1,0 +1,184 @@
+﻿@model IShop.Core.Access
+
+@{
+    ViewBag.Title = "Role Grant";
+}
+
+<style>
+    image {
+        height: 100px;
+        width: 100px;
+    }
+</style>
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+
+<div class="loading" align="center">
+
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+
+
+<div class="row">
+    <div class="col-12">
+
+        @if (TempData["Msg"] != null)
+        {<div class="row">
+                <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @TempData["Msg"]
+                </div>
+            </div>
+        }
+
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+        </script>
+
+
+        <div class="card" style="background-color: #ffffffd9">
+            <br />
+            <div class="col d-flex justify-content-center">
+                <div class="col-md-6" style="border-radius: 14px;">
+                    <!-- Widget: user widget style 2 -->
+                    <div class="card card-widget widget-user-2" style="border-radius: 14px;">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header" style="background-color: #1976D2 ">
+                            <div class="widget-user-image">
+                                <img src="~/Images/Andest2.png" height="80" alt="User Avatar">
+                            </div>
+                            <!-- /.widget-user-image -->
+                            <h5 class="widget-user-username" style="color:white"> Approve / Revoke Employee Account</h5>
+
+
+                        </div>
+                        <div class="card-body text-left">
+
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <form>
+                                <div class="form-row">
+
+
+
+                                    <div class="col-md-5 mb-3">
+                                        <label style="font-family:Quicksand">Employee Username  </label>
+                                        @foreach (var item in ViewBag.l2)
+                                        {
+
+
+                                            <input id="Username" name="Username" type="text" value="@item.username" class="form-control form-rounded" readonly />
+
+
+                                        }
+                                    </div>
+                                    <div class="col-md-5 mb-5">
+                                        <label style="font-family: Quicksand; color: black">Ability</label>
+
+                                        @Html.EditorFor(model => model.Role, new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control ",
+                                           @Value = "Can_Take_Shift",
+                                           @Readonly = true
+                                       }
+                                   })
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-5 mb-5">
+                                        <label style="font-family: Quicksand; color: black">Action</label>
+                                        @{
+                                            List<SelectListItem> y = new List<SelectListItem>();
+                                            y.Add(new SelectListItem
+                                            {
+                                                Text = "✔ Grant",
+                                                Value = "1",
+                                            });
+                                            y.Add(new SelectListItem
+                                            {
+                                                Text = "❌Revoke",
+                                                Value = "0",
+                                            });
+
+                                        }@Html.DropDownListFor(model => model.Status, y, "---Select action--", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <p style="color:navy">Actions</p>
+
+                                <div class="form-group col-md-6">
+                                    <input type="submit" value="Approve" class="btn btn-sm btn-primary" style="color: black" />
+
+                                    ||@if (this.User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("❌ Cancel Request", "All", "Employes", null, new { @class = "btn btn-warning btn-sm" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("❌ Cancel Request", "Index", "Employes", null, new { @class = "btn btn-warning btn-sm" })
+                                    }
+                                </div>
+
+
+
+
+                            </form>
+
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

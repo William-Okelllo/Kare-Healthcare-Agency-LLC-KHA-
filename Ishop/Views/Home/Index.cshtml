@@ -1,0 +1,298 @@
+﻿@model Ishop.Models.FileUpload
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using Microsoft.AspNet.Identity
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.93);">
+
+
+
+    <div class="card-header" style="background-color: navy ">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-home"></i>
+            HomePage
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4" style="border-radius: 24px;">
+                <!-- Widget: user widget style 2 -->
+                <div class="card card-widget widget-user-2" style="border-radius: 24px;">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div style="background-color: navy ">
+
+                        <!-- /.widget-user-image -->
+
+                        <h5 style="color:white"><img src="~/Images/SHARPO_4-1024x1024.png" height="50" alt="User Avatar"> Welcome @User.Identity.Name  </h5>
+
+
+                    </div>
+                    <div class="card-body text-left">
+
+                        <div class="divider" style="color:forestgreen"></div>
+                        <i class="fa fa-user-shield"></i> Access Level :
+                        @if (this.User.IsInRole("Admin"))
+                        {<medium style="font-family:Calibri">
+                                <i class="fa fa-user-check text-success"></i>:-Administrator
+                            </medium>}
+
+
+                        else if (this.User.IsInRole("Employee"))
+                        { <medium style="font-family:Calibri">
+                                :-Employee
+                            </medium>}
+                        else if (this.User.IsInRole("Staffing_Agency"))
+                        { <medium style="font-family:Calibri">
+                                :-Staffing Agency user
+                            </medium>}
+
+                        else if (this.User.IsInRole("Facility"))
+                        { <medium style="font-family:Calibri">
+                                Facility
+                            </medium>}
+                        else
+                        { <medium style="font-family:Calibri">
+                                unknown
+                            </medium>}
+                        <div class="divider" style="color:forestgreen"></div>
+                        <medium><i class="fa fa-calendar text-success"></i> @DateTime.Now.ToString("dd-MMMM-yyyy") </medium>
+                        <div class="dropdown-divider"></div>
+
+
+
+
+                    </div>
+                </div>
+                <!-- /.widget-user -->
+            </div>
+
+
+
+
+
+
+
+            <hr />
+            @if (this.User.IsInRole("Admin"))
+            {
+                <div class="col-xl-6">
+                    <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+                        <div class="card-header" style="background-color: navy; color: white "><i class="fa fa-spinner"></i> Operations Summary </div>
+                        <div class="card-body text-left">
+                            <h6 style="color:orange"><i class="fa fa-file-invoice text-warning"></i> Invoices Status</h6>
+                            <div style="text-align: left; color: navy ">
+                                <ul class="nav flex-column" style="color:midnightblue">
+
+
+                                    <li class="nav-item">
+                                        <i class="fa fa-calendar-day text-green"></i>
+
+
+                                        @foreach (var item in ViewBag.l2)
+                                        {
+                                            @item.M
+                                        }
+
+                                        ||
+                                        New
+
+
+                                        @foreach (var item in ViewBag.l2)
+                                        {
+                                            <span class="float-center badge bg-warning">
+                                                @item.New
+                                            </span>
+                                        }
+
+                                        ||
+                                        Paid
+
+                                        @foreach (var item in ViewBag.l2)
+                                        {<span class="float-center badge bg-success">
+                                                @item.Paid
+                                            </span>
+                                        }
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <hr />
+                            <h6 style="color: darkred"><i class="fa fa-file-invoice text-danger"></i> Expenses</h6>
+                            <div style="text-align: left; color: darkred ">
+                                Month
+
+
+                                @foreach (var item in ViewBag.l3)
+                                {
+                                    @item.M
+                                }
+
+                                Total Expense
+
+
+                                @foreach (var item in ViewBag.l3)
+                                {
+                                    <span class="float-center badge bg-danger">
+                                        @item.Expenses
+                                    </span>
+                                }
+                            </div>
+
+
+                            <div class="card-footer p-0" style="background-color:whitesmoke">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+
+        @if (this.User.IsInRole("Admin"))
+        {
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+                        <div class="card-header" style="background-color: darkslategray; color: white "><i class="fa fa-clock"></i>  Operations </div>
+                        <div class="card-body text-left">
+
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Invoices")" class="nav-link">
+                                        Invoices <span class="float-right badge bg-primary"><i class="fa fa-file-invoice"></i></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Employes")" class="nav-link">
+                                        Employees  <span class="float-right badge bg-navy"><i class="fa fa-users"></i></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("leaves_Requests", "leaves")" class="nav-link">
+                                        Requested leaves <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+                        <!-- /.widget-user -->
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        }
+    
+    @if (this.User.IsInRole("Employee"))
+    {
+        <div class="row">
+            <div class="col-xl-5" style="border-radius: 24px;">
+                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+                    <div class="card-header" style="background-color: navy; color: white "><i class="fa fa-clock"></i>  Operations </div>
+                    <div class="card-body text-left">
+
+                        <ul class="nav flex-column">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Create", "Attendance")" class="nav-link">
+                                    CheckIn/Out Office <span class="float-right badge bg-primary"><i class="fa fa-hourglass"></i></span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Attendance")" class="nav-link">
+                                    My TimeSheet  <span class="float-right badge bg-navy"><i class="fa fa-clock"></i></span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("My_Files", "Files")" class="nav-link">
+                                    My files <span class="float-right badge bg-warning"><i class="fa fa-folder-open"></i></span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+                    <!-- /.widget-user -->
+                </div>
+            </div>
+
+
+
+
+        </div>
+    }
+
+</div>

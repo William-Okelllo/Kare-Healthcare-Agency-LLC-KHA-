@@ -1,0 +1,82 @@
+﻿@using Ishop.Models;
+@{
+    ViewBag.Title = "DashBoard";
+}
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header" style="background-color: #ffffffc1">
+        <h3 class="card-title" style="color:navy">
+            <i class="fa fa-wheelchair"></i>
+            DashBoard
+        </h3>
+    </div>
+
+    <html>
+    <head>
+        <script>
+window.onload = function () {
+
+var result = @Html.Raw(ViewBag.DataPoints);
+var dataPoints =[];
+for(var i = 0; i < result.length; i++){
+	dataPoints.push({x:result[i].x, y:result[i].y});
+}
+
+var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    title: {
+        text: "ASP.NET MVC Column Chart from Database"
+    },
+    data: [
+    {
+        type: "column",
+        dataPoints: dataPoints,
+    }
+    ]
+});
+chart.render();
+
+};
+        </script>
+    </head>
+    <body>
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </body>
+</html>
+
+</div>

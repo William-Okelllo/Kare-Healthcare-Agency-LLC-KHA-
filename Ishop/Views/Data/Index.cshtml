@@ -1,0 +1,195 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<Ishop.Models.AspNetUser>
+
+
+@{
+    ViewBag.Title = "";
+}
+<style>
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: #ffffffc1">
+
+    <div class="card-header" style="background-color: #1976D2">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-users nav-icon"></i>
+            Current System Accounts
+        </h3>
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "Data", FormMethod.Get))
+            {
+
+
+
+
+
+
+                <a style="font-family: Calibri"> Account Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Account Name" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                  @Html.ActionLink("Add Profile ", "Rspec007", "Account", null, new { @class = "btn btn-sm btn-default btn" })
+            }
+        </div>
+    </div>
+            @if (TempData["Msg"] != null)
+            {<div class="row">
+                    <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        @TempData["Msg"]
+                    </div>
+                </div>
+            }
+
+            <script>
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            </script>
+
+
+
+            <div class="table-responsive" style="min-height: 200px">
+                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable">
+
+                    <thead style="font-family:Calibri">
+                        <tr style="color:white">
+                            <th style="background-color: #1976D2"> <i class="fa fa-sort"></i> User</th>
+                            <th style="background-color: #1976D2"> <i class="fa fa-sort"></i> Email</th>
+                            <th style="background-color: #1976D2">  Email-Confirmed</th>
+                            <th style="background-color: #1976D2">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td style="background-color: rgba(255, 255, 255, 0.60)">
+                                    @item.UserName
+
+                                <td style="background-color: rgba(255, 255, 255, 0.60)">
+                                    <i class="fa fa-envelope text-info"></i>   @item.Email
+                                </td>
+                                <td style="background-color: rgba(255, 255, 255, 0.60)">
+                                    @if (@item.EmailConfirmed == true)
+                                    {
+                                        <i class="fa fa-check-circle text-success"></i><medium>  Yes</medium>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-times text-danger"></i><medium>  No</medium>
+                                    }
+                                </td>
+
+
+                                <td style="background-color:ghostwhite">
+                                    <div class="btn-group dropdown">
+                                        <button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-hourglass"></i>  . Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+
+
+                                            <div class="divider"></div>
+                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this account?')) { window.location.href = '@Url.Action("Delete_User", "Data", new { id = item.Id})'; }">
+                                                <i class="fas fa-trash text-danger"></i> Delete Account
+                                            </a>
+                                            <script>
+                                                $(function () {
+                                                    $('#Delete_User').click(function () {
+                                                        if (confirm('Are you sure?')) {
+                                                            window.location.href = $(this).data('url');
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+                                </td>
+                            </tr>
+
+
+
+                        }
+
+                    </tbody>
+
+
+                </table>
+
+
+
+                <style>
+                    .ul.pagination {
+                        display: inline-block;
+                        padding: 1;
+                        margin: 1;
+                        border-radius: 0.5rem;
+                    }
+
+                    ul.pagination li {
+                        display: inline;
+                    }
+
+                        ul.pagination li a {
+                            color: black;
+                            float: left;
+                            padding: 8px 16px;
+                            text-decoration: none;
+                            transition: background-color;
+                            background-color: #ddd;
+                            border-color: white;
+                            border-radius: 0.5rem;
+                        }
+
+                            ul.pagination li a.active {
+                                background-color: dodgerblue;
+                                color: white;
+                            }
+
+                            ul.pagination li a:hover:not(.active) {
+                                background-color: dodgerblue;
+                                border-radius: 0.5rem;
+                            }
+                </style>
+                <div id="container" style="text-align:left">
+
+                    <div class="pagination" style="text-align:left">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                      , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <!-- /.card-body -->
+        </div>

@@ -1,0 +1,213 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Department>
+
+@{
+    ViewBag.Title = "Departments";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header" style="background-color: #089710">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-thin fa-history"></i>
+            Department
+        </h3>
+    </div>
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+    <div>
+
+
+
+
+
+
+
+
+
+        <div class="table-responsive" style="min-height: 400px">
+            <table class="table table-bordered table-hover  text-nowrap">
+
+
+                <thead>
+                    <tr style="color:green">
+                        <th style="background-color: whitesmoke; "> Department Name</th>
+                        <th style="background-color: whitesmoke; ">Phone Number </th>
+                        <th style="background-color: whitesmoke; ">Email Address </th>
+                        <th style="background-color: whitesmoke; ">Manager</th>
+                       
+                        <th style="background-color: whitesmoke; ">Actions</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr data-widget="expandable-table" aria-expanded="false">
+
+                        <td style="background-color:white"><i class="fa fa-home text-green"></i> @item.DprtName</td>
+                        <td style="background-color:white"><i class="fa fa-phone text-green"></i> @item.Contact</td>
+                        <td style="background-color:white"><i class="fa fa-envelope text-green"></i> @item.Email_Address</td>
+                        <td style="background-color:white"><i class="fa fa-user-shield text-green"></i> @item.Manager</td>
+                        <td style="background-color:ghostwhite">
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-building"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                    <a href="@Url.Action("Edit", "Departments", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-pen text-success"></i> Update info
+                                    </a>
+                                    
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+                        </td>
+
+
+
+
+
+
+
+                    </tr>
+
+
+                    }
+                </tbody>
+            </table>
+            @if (Model.Count() == 0)
+            {
+                <div style="text-align:center">
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box bg-gradient-black">
+                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text"> <img src="~/Images/Andest.png" height="50" /> </span>
+
+
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    <i class="fa fa-calendar text-white nav-icon"></i>   No  Data found
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                </div>
+            }
+            <div class="small-box bg-gradient-gray-dark">
+                <div>
+                    <h5 style="font-family:Quicksand">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                    , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                    </h5>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+        @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
+        <hr class='dotted' />
+    </div>
+</div>
+

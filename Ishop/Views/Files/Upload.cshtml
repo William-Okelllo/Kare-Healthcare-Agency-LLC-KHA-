@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "Upload File";
+}
+
+@model Ishop.Models.FileUpload
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 40%;
+        border-color: dodgerblue;
+    }
+
+    .bwe {
+        font-family: Quicksand
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+<div class="card-body">
+    <div class="col d-flex justify-content-center">
+        <div class="col-md-9 col-sm-9 col-12">
+            <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
+
+
+                    @if (TempData["Msg"] != null)
+                    {<div class="row">
+                            <div class="alert alert-danger col-md-6 col-md-offset-4" align="center">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @TempData["Msg"]
+                            </div>
+                        </div>
+                    }
+                    <script>
+                        window.setTimeout(function () {
+                            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                                $(this).remove();
+                            });
+                        }, 2000);
+                    </script>
+                </div>
+
+
+
+                <div class="card-body" style="background-color: #ffffffc1">
+
+                    @using (Html.BeginForm("Upload", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="form-group col-md-5">
+                                <label class="bwe">
+                                    <i class="fa fa-file-excel text-success"></i>
+                                    Select File
+                                </label>
+                                <div class="form-group col-md-12">
+                                    <input type="file" id="files" name="files" class="form-control" required="required"><br />
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group col-md-4">
+                                <label class="bwe"><i class="fa fa-folder-open text-success"></i>  File Category. </label>
+                                @{
+                                    List<SelectListItem> v = new List<SelectListItem>();
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "KRA P9A Returns",
+                                        Value = "KRA P9A Returns",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "Payslips",
+                                        Value = "Payslips",
+
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "Other Files",
+                                        Value = "Other Files",
+
+                                    });
+
+
+
+                                }@Html.DropDownListFor(model => model.Category, v, "---Select File  Category---", new { @class = "form-control" })
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label class="bwe">
+                                    <i class="fa fa-user-lock text-success"></i>
+                                    Employee Account
+                                </label>
+                                @if (this.User.IsInRole("Admin") || (this.User.IsInRole("Staffing_Agency")))
+                                {
+                                    <div>
+                                        @foreach (var item in ViewBag.l2)
+                                        {
+
+
+                                            <input id="Access" name="Access" type="text" value="@item.username" class="form-control form-rounded" readonly />
+
+
+                                        }
+                                    </div>
+
+                                }
+
+                                else
+                                {<input id="Access" name="Access" type="text" value="@User.Identity.Name" class="form-control form-rounded" readonly />}
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label style="font-family:Quicksand">Staffing Agency</label>
+
+                                @foreach (var item in ViewBag.A10)
+                                {
+
+
+                                    <input id="Agency" name="Agency" type="text" value="@item.Agency" class="form-control" readonly />
+
+
+                                }
+                            </div>
+                        </div>
+
+
+                        <hr />
+
+
+                        <label class="bwe">
+                            <i class="fa fa-comment text-yellow"></i>
+                            File Description / Information
+                        </label>
+                        <div class="form-row">
+
+
+                            @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+                       {
+                           style = "width: 70%; max-width:70%;",
+                           @placeholder = "File Description ...information on thes uploaded file",
+                           @autofocus = ""
+                           ,
+                           @class = "form-control form-rounded2"
+
+                       })
+                        </div>
+
+
+
+
+
+
+                        <br />
+                        <small> <i class="fa fa-bell text-warning"></i> Once uploaded the file will be allocated the respective Category based on your preference.</small>
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Submit File " class="btn btn-success" />  ||  <input type="reset" value="Reset " class="btn btn-danger" />
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

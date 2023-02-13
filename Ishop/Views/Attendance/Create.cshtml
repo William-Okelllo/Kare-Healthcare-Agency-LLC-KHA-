@@ -1,0 +1,378 @@
+﻿@model IShop.Core.Attendance
+
+@{
+    ViewBag.Title = "CheckIn/Out";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+<div class="loading" align="center">
+    <img src="~/Images/t.gif" height="200" />
+
+</div>
+<script type="text/javascript">
+    var modal, loading;
+    function ShowProgress() {
+        modal = document.createElement("DIV");
+        modal.className = "modal";
+        document.body.appendChild(modal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+    ShowProgress();
+</script>
+
+<!-- Keep the Page Content Here.-->
+<script type="text/javascript">
+    window.onload = function () {
+        setTimeout(function () {
+            document.body.removeChild(modal);
+            loading.style.display = "none";
+        }, 800); //Delay just used for example and must be set to 0.
+    };
+</script>
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+
+
+<br>
+
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9" style="border-radius: 14px;">
+        <!-- Widget: user widget style 2 -->
+        <div class="card card-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header" style="background-color: navy ">
+               
+                <!-- /.widget-user-image -->
+ 
+                <h5 style="color:white"><img src="~/Images/ajax-loader.gif" height="30" alt="User Avatar"> CheckIn/CheckOut  </h5>
+
+
+            </div>
+            <div class="card-body" style="background-color: #ffffffc1">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+
+                           @Value = DateTime.Now,
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    
+                    <div class="form-group col-md-3" style="display: none">
+                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Business_location)</label>
+                        @Html.EditorFor(model => model.Business_location, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+
+                           @Value = @System.Configuration.ConfigurationManager.AppSettings["Office_location"],
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+
+                    <div class="form-group col-md-2" style="display: none">
+
+                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Check_status)</label>
+
+
+                        @Html.EditorFor(model => model.Check_status, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+                           @Value = "CheckIn",
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+
+                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2" style="display: none">
+                            <small style="font-family:Quicksand;">@Html.LabelFor(model => model.latitude)</small>
+                            @Html.EditorFor(model => model.latitude, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+
+                               @Value = @System.Configuration.ConfigurationManager.AppSettings["latitude"],
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2" style="display: none">
+                            <small style="font-family:Quicksand;">@Html.LabelFor(model => model.longitude)</small>
+                            @Html.EditorFor(model => model.longitude, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+
+                               @Value = @System.Configuration.ConfigurationManager.AppSettings["longitude"],
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 mb-2">
+                            <small><i class="fa fa-location-arrow text-primary"></i> Current</small>
+                            @Html.EditorFor(model => model.user_latitude, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <small><i class="fa fa-location-arrow text-primary"></i> Current</small>
+                            @Html.EditorFor(model => model.user_longitude, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <small><i class="fa fa-user-circle"></i> User Account</small>
+                            @Html.EditorFor(model => model.User_Account, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Value=User.Identity.Name,
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+
+
+                        <script type="text/javascript">
+                            (function () {
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                                }
+                                else { x.innerHTML = "Geolocation is not supported by this browser."; }
+                            })();
+                            function showPosition(position) {
+                                var latlondata = position.coords.latitude;
+                                var latitude = position.coords.latitude;
+                                var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+                                    + latlondata + "&zoom=14&size=400x300&sensor=false";
+                                document.getElementById("user_latitude").value = latitude;
+                            }
+                            function showError(error) {
+                                if (error.code == 1) {
+                                    document.getElementById("user_latitude").value = "Geolocation Denied"
+                                    alert("Kindly allow location request")
+                                }
+                                else {
+                                    document.getElementById("user_latitude").value = "Not Internet."
+                                }
+                            }
+                        </script>
+                        <script type="text/javascript">
+                            (function () {
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                                }
+                                else { x.innerHTML = "Geolocation is not supported by this browser."; }
+                            })();
+                            function showPosition(position) {
+                                var latlondata = position.coords.longitude;
+                                var longitude = position.coords.longitude;
+                                var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+                                    + latlondata + "&zoom=14&size=400x300&sensor=false";
+                                document.getElementById("user_longitude").value = longitude;
+                            }
+                            function showError(error) {
+                                if (error.code == 1) {
+                                    document.getElementById("user_longitude").value = "Geolocation Denied"
+                                    alert("Kindly allow location request")
+                                }
+                                else {
+                                    document.getElementById("user_longitude").value = "Not Internet."
+                                }
+                            }
+                        </script>
+                    </div>
+
+
+
+                    <hr />
+
+
+
+                    <div class="card">
+                        <div class=" card-body">
+
+
+                            @if (DateTime.Now.ToString("tt") == "AM")
+                            {<input type="submit" value="CheckIn" class="btn btn-lg btn-block btn-success" style="color:white" onclick="return confirm('Are you sure you want to CheckIn?')" />
+
+
+                                <script>
+                                    $(function () {
+                                        $('#Create').click(function () {
+                                            if (confirm('Are you sure?')) {
+                                                window.location.href = $(this).data('url');
+                                            }
+                                        });
+                                    });
+                                </script>
+                            }
+                            else
+                            { <input type="submit" value="CheckOut" class="btn btn-warning btn-lg btn-block " style="color:white" onclick="return confirm('Are you sure you want to CheckOut?')" />
+
+
+                                <script>
+                                    $(function () {
+                                        $('#Create').click(function () {
+                                            if (confirm('Are you sure?')) {
+                                                window.location.href = $(this).data('url');
+                                            }
+                                        });
+                                    });
+                                </script>
+                            }
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    }
+
+                    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }
+
+
+
+                </div>
+        </div>
+    </div>
