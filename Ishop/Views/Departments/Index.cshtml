@@ -69,7 +69,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header" style="background-color: #089710">
+    <div class="card-header" style="background-color: navy">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-thin fa-history"></i>
             Department
@@ -109,13 +109,13 @@
 
 
                 <thead>
-                    <tr style="color:green">
-                        <th style="background-color: whitesmoke; "> Department Name</th>
-                        <th style="background-color: whitesmoke; ">Phone Number </th>
-                        <th style="background-color: whitesmoke; ">Email Address </th>
-                        <th style="background-color: whitesmoke; ">Manager</th>
+                    <tr style="color:white">
+                        <th style="background-color: navy; "> Department Name</th>
+                        <th style="background-color: navy; ">Phone Number </th>
+                        <th style="background-color: navy; ">Email Address </th>
+                        <th style="background-color: navy; ">Manager</th>
                        
-                        <th style="background-color: whitesmoke; ">Actions</th>
+                        <th style="background-color: navy; ">Actions</th>
 
                     </tr>
                 </thead>
@@ -125,13 +125,13 @@
                     {
                     <tr data-widget="expandable-table" aria-expanded="false">
 
-                        <td style="background-color:white"><i class="fa fa-home text-green"></i> @item.DprtName</td>
-                        <td style="background-color:white"><i class="fa fa-phone text-green"></i> @item.Contact</td>
-                        <td style="background-color:white"><i class="fa fa-envelope text-green"></i> @item.Email_Address</td>
-                        <td style="background-color:white"><i class="fa fa-user-shield text-green"></i> @item.Manager</td>
+                        <td style="background-color:white"><i class="fa fa-home text-primary"></i> <a href="@Url.Action("Edit", "Departments" , new { id = item.Id})"> @item.DprtName </a></td>
+                        <td style="background-color:white"><i class="fa fa-phone text-primary"></i> @item.Contact</td>
+                        <td style="background-color:white"><i class="fa fa-envelope text-primary"></i> @item.Email_Address</td>
+                        <td style="background-color:white"><i class="fa fa-user-shield text-primary"></i> @item.Manager</td>
                         <td style="background-color:ghostwhite">
                             <div class="btn-group dropdown">
-                                <button type="button" class="btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-building"></i>  . Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
