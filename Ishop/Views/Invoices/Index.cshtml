@@ -7,47 +7,7 @@
 }
 
 
-<style type="text/css">
-    .loading {
-        font-size: 10pt;
-        width: 200px;
-        height: 100px;
-        display: none;
-        position: fixed;
-        z-index: 999;
-    }
-</style>
 
-<div class="loading" align="center">
-    <img src="~/Images/t.gif" height="200" />
-
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
-
-<!-- Main content -->
 
 <style>
     body {
@@ -74,7 +34,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header" style="background-color: green">
+    <div class="card-header" style="background-color: #001F3F">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-thin fa-history"></i>
             Invoices Section
@@ -107,37 +67,7 @@
         </div>
     </div>
 
-    <div class="card-header" style="background-color: green">
-        <div style="text-align: center; color: white ">
-            Month
-
-
-            @foreach (var item in ViewBag.l)
-            {
-                @item.M
-            }
-
-            ||
-            New
-
-
-            @foreach (var item in ViewBag.l)
-            {
-                <span class="float-center badge bg-warning">
-                    @item.New
-                </span>
-            }
-
-            ||
-            Paid
-
-            @foreach (var item in ViewBag.l)
-            {<span class="float-center badge bg-success">
-                    @item.Paid</span>
-                    }
-
-            </div>
-    </div>
+    
 
 
 
@@ -161,43 +91,41 @@
 
 
 
-        <div>
+     
+                
 
 
 
 
+        <div class="table-responsive" style="min-height: 400px">
+            <table class="table table-bordered table-hover  text-nowrap">
+
+
+                <thead>
+                    <tr style="color:white">
+                        <th style="background-color: #001F3F; "> Post On</th>
+                        <th style="background-color: #001F3F; ">Due Date </th>
+                        <th style="background-color: #001F3F; ">Client </th>
+                        <th style="background-color: #001F3F; ">Amount </th>
+                        <th style="background-color: #001F3F; ">Status </th>
+                        <th style="background-color: #001F3F; ">Action </th>
 
 
 
+                    </tr>
+                </thead>
 
-
-            <div class="table-responsive" style="min-height: 400px">
-                <table class="table table-bordered table-hover  text-nowrap">
-
-
-                    <thead>
-                        <tr style="color:seagreen">
-                            <th style="background-color: whitesmoke; "> Post On</th>
-                            <th style="background-color: whitesmoke; ">Due Date </th>
-                            <th style="background-color: whitesmoke; ">Client </th>
-                            <th style="background-color: whitesmoke; ">Amount </th>
-                            <th style="background-color: whitesmoke; ">Status </th>
-                            <th style="background-color: whitesmoke; ">Action </th>
-
-
-
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr data-widget="expandable-table" aria-expanded="false">
 
                             <td style="background-color:white">
-                                <small> <i class="fa fa-calendar text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small></td>
+                                <small> <i class="fa fa-calendar text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small>
+                            </td>
                             <td style="background-color:white">
-                                <small><i class="fa fa-calendar-day text-danger"></i> @item.Due_Date.ToString("dd-MMMM-yyyy")</small></td>
+                                <small><i class="fa fa-calendar-day text-danger"></i> @item.Due_Date.ToString("dd-MMMM-yyyy")</small>
+                            </td>
                             <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Client_Name</td>
                             <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Amount /=</td>
                             <td style="background-color:white">
@@ -254,7 +182,7 @@
                                             <div class="dropdown-divider"></div>
                                         }
 
-                                        </div>
+                                    </div>
 
                                 </div>
 
@@ -278,54 +206,98 @@
                         </tr>
 
 
-                        }
-                    </tbody>
-                </table>
-                @if (Model.Count() == 0)
-                {
-                    <div style="text-align:center">
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div class="info-box bg-gradient-black">
-                                <span class="info-box-icon"><i class="far fa-bed"></i></span>
+                    }
+                </tbody>
+            </table>
+            @if (Model.Count() == 0)
+            {
+                <div style="text-align:center">
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box bg-gradient-black">
+                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text"> <img src="~/Images/dddd.png" height="50" /> </span>
+                            <div class="info-box-content">
+                                <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
 
 
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 0%"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        <i class="fa fa-calendar text-white nav-icon"></i>   No Invoices Found
-                                    </span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
                                 </div>
+                                <span class="progress-description">
+                                    <i class="fa fa-calendar text-white nav-icon"></i>   No Invoices Found
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                </div>
+            }
+
+
+
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-9">
+                            <div class="info-box" style="background-color: #001F3F">
+                                <span class="info-box-icon bg-primary"><i class="fa fa-calendar-day"></i></span>
+                                @foreach (var item in ViewBag.l)
+                                {
+                                    <div class="info-box-content">
+                                        <span class="info-box-text" style="color:white">Month : @item.M</span>
+                                        <span class="info-box-number" style="color:white">Upaid : @item.New</span>
+                                    </div>
+                                }
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-9">
+                            <div class="info-box" style="background-color: #001F3F">
+                                <span class="info-box-icon bg-warning"><i class="fa fa-calendar-day"></i></span>
+                                @foreach (var item in ViewBag.l)
+                                {
+                                    <div class="info-box-content">
+                                        <span class="info-box-text" style="color:white">Month : @item.M</span>
+                                        <span class="info-box-number" style="color:white">Paid : @item.Paid</span>
+                                    </div>
+                                }
                                 <!-- /.info-box-content -->
                             </div>
                             <!-- /.info-box -->
                         </div>
                     </div>
-                }
-                <div class="small-box bg-gradient-gray-dark">
-                    <div>
-                        <h5 style="font-family:Quicksand">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
-                        , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
-                        </h5>
-                    </div>
-
-
-
-
                 </div>
+            </section>
+
+
+
+
+
+
+
+
+
+
+            <div class="small-box bg-gradient-gray-dark">
+                <div>
+                    <h5 style="font-family:Quicksand">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                    , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                    </h5>
+                </div>
+
+
 
 
             </div>
 
 
-
-
-            @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
-            <hr class='dotted' />
         </div>
-    </div>
+
+
+
+
 

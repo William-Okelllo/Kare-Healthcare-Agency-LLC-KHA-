@@ -16,9 +16,7 @@ namespace Ishop.Controllers
         public ActionResult Index( FileUpload fileUpload)
         {
 
-            HREntities l = new HREntities();
-            var boo = l.Sp_u().ToList();
-            ViewBag.l = boo;
+            
 
             HREntities l2 = new HREntities();
             var boo2 = l2.sp_invoices().ToList();

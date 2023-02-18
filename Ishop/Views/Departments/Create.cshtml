@@ -29,35 +29,7 @@
     }
 </style>
 
-<div class="loading" align="center">
-    <img src="~/Images/t.gif" height="200" />
 
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
 
 <!-- Main content -->
 
@@ -135,7 +107,7 @@
 
 
                                 <div class="form-group col-md-4">
-                                    <label style="font-family:Quicksand;">@Html.LabelFor(model => model.DprtName)</label>
+                                    <label style="font-family:Quicksand;"> <i class="fa fa-building"></i>@Html.LabelFor(model => model.DprtName)</label>
                                     @Html.EditorFor(model => model.DprtName, new
                            {
                                htmlAttributes = new
@@ -153,7 +125,7 @@
                             </div> <div class="form-row">
 
     <div class="form-group col-md-3">
-        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Contact)</label>
+        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Contact) <i class="fa fa-phone"></i></label>
         @Html.EditorFor(model => model.Contact, new
    {
        htmlAttributes = new
@@ -171,7 +143,7 @@
 
     </div>
     <div class="form-group col-md-3">
-        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Email_Address)</label>
+        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Email_Address) <i class="fa fa-envelope"></i></label>
         @Html.EditorFor(model => model.Email_Address, new
    {
        htmlAttributes = new
@@ -189,7 +161,7 @@
 
     </div>
     <div class="form-group col-md-3">
-        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Manager)</label>
+        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Manager)  <i class="fa fa-user-check"></i></label>
         @Html.DropDownList("Manager", new SelectList(ViewBag.l, "UserName", "UserName"), "Select HOD", new { @id = "ddlFruits", @class = "form-control " })
         @Html.Hidden("UserName", null, new { @id = "hfUserName" })
 

@@ -6,22 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.theme.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.theme.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.reports.all.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.reports.all.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.theme.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.theme.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/bootstrap-theme/bold.reportdesigner.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.reportdesigner.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.reportdesigner.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.reportdesigner.theme.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.reportdesigner.theme.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.reports.all.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.theme.compatibility.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.reports.all.min.css" rel="stylesheet" />
-    <link href="~/Content/bold-reports/material/bold.theme.min.css" rel="stylesheet" />
+    
 
 
 
@@ -29,21 +14,7 @@
     @Scripts.Render("~/")
     @Scripts.Render("~/bundles/bootstrap")
     <!--Render the gauge item. Add these scripts only if your report contains the gauge report item.-->
-    @Scripts.Render("~/Scripts/bold-reports/common/ej2-base.min.js")
-    @Scripts.Render("~/Scripts/bold-reports/common/ej2-data.min.js")
-    @Scripts.Render("~/Scripts/bold-reports/common/ej2-pdf-export.min.js")
-    @Scripts.Render("~/Scripts/bold-reports/common/ej2-svg-base.min.js")
-    @Scripts.Render("~/Scripts/bold-reports/data-visualization/ej2-circulargauge.min.js")
-    @Scripts.Render("~/Scripts/bold-reports/data-visualization/ej2-lineargauge.min.js")
-    <!--Renders the map item. Add this script only if your report contains the map report item.-->
-    @Scripts.Render("~/Scripts/bold-reports/data-visualization/ej2-maps.min.js")
-    <link href="~/Content/bold-reports/bold.reportdesigner.core.bootstrap.min.css" rel="stylesheet" />
-    @Scripts.Render("~/Scripts/bold-reports/common/bold.reports.common.min.js")
-    @Scripts.Render("~/Scripts/bold-reports/common/bold.reports.widgets.min.js")
-    <!--Renders the chart item. Add this script only if your report contains the chart report item.-->
-    <script src="~/Scripts/bold-reports/data-visualization/ej.chart.min.js"></script>
-    <!-- Report Viewer component script-->
-    @Scripts.Render("~/Scripts/bold-reports/bold.report-viewer.min.js")
+    
 
     <style>
         body {
@@ -113,22 +84,30 @@
                 <li class="nav-item dropdown" style="font-family:Calibri">
                     <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
 
-                        <i class="fa fa-user text-success">
+                        <i class="fa fa-user text-navy">
                             @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                         </i>
+                        <i class="fas fa-angle-down right"></i>
                     </a>
-
+                    
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
+                        <div style="text-align:center"> <img src="~/Images/l.ico" height="60" alt="User Avatar">
+                                                        <p> <i class="fa fa-user"></i> User: @User.Identity.Name</p>
+                        </div>
+                        
                         <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
-                            <i class="fas fa-user-circle text-navy nav-icon"></i> My Profile
+                            <i class="fas fa-user-circle text-warning nav-icon"></i> My Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
+                            <i class="fa fa-user-lock text-primary nav-icon"></i> Change Password
                         </a>
                         <div class="dropdown-divider"></div>
 
 
-
-
-    </a>
+</a>
 
 
 
@@ -148,8 +127,8 @@
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {@Html.AntiForgeryToken()
     <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">
-        <i class="fa fa-user mr-2 text-success"></i>
-        SignOut
+        <i class="fa fa-sign-in-alt  text-success"></i>
+        Logout
     </a>}
     <div class="dropdown-divider"> </div></div>
 
@@ -168,10 +147,10 @@
 
 
 
-    <aside class="main-sidebar sidebar-light-primary elevation-4">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="@Url.Action("Index", "Home")" class="brand-link">
-            <img src="~/Images/dddd.png" height="50">
+            <img src="~/Images/logo7.png" height="85">
 
         </a>
 
@@ -179,20 +158,20 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:white">
                 <div class="info" style="font-family:Calibri">
-                    <a href="#" class="d-block">
+                    <a href="#" class="d-block" style="color:white">
                         Current User: @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                     </a>
                     <a>
                         @if (this.User.IsInRole("Admin"))
                         {<small style="font-family:Calibri">
-                                <i class="fa fa-user-check text-navy"></i>:-Administrator
+                                <i class="fa fa-user-check text-white"></i>:-Administrator
                             </small>}
 
 
                         else if (this.User.IsInRole("Employee"))
                         { <small style="font-family:Calibri">
-                                <i class="fa fa-user-md text-navy"></i> :-Employee
+                                <i class="fa fa-user-md text-white"></i> :-Employee
                             </small>}
 
                         else if (this.User.IsInRole("Facility"))
@@ -205,7 +184,7 @@
                             </small>}
                         else
                         { <small style="font-family:Calibri">
-                                <i class="fa fa-shield-virus text-maroon"></i> :--unknown
+                                <i class="fa fa-shield-virus text-white"></i> :--unknown
                             </small>}
 
                     </a>
@@ -225,7 +204,7 @@
 
 
                     <li class="nav-item menu-open">
-                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-navy">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-warning">
                             <i class="nav-icon fa fa-home"></i>
                             <p>
                                 Home-Page
@@ -244,8 +223,8 @@
 
 
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-shoe-prints text-green"></i>
-                            <p style="color:black">
+                            <i class="nav-icon fa fa-shoe-prints text-white"></i>
+                            <p style="color:white">
                                 CheckIn/Out <i class="fas fa-angle-left right"></i>
 
 
@@ -256,8 +235,8 @@
                             {
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index_", "Attendance")" class="nav-link">
-                                        <i class="fa fa-walking text-green nav-icon"></i>
-                                        <p style="color: black">TimeSheet</p>
+                                        <i class="fa fa-walking text-white nav-icon"></i>
+                                        <p style="color: white">TimeSheet</p>
                                     </a>
                                 </li>
 
@@ -272,13 +251,13 @@
                                     <li class="nav-item">
                                         <a href="@Url.Action("Create", "Attendance")" class="nav-link">
                                             <i class="fa fa-sun text-warning nav-icon"></i>
-                                            <p style="color: black">CheckIn</p>
+                                            <p style="color: white">CheckIn</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "Attendance")" class="nav-link">
                                             <i class="fa fa-shoe-prints text-warning nav-icon"></i>
-                                            <p style="color: black">My TimeSheet</p>
+                                            <p style="color: white">My Att TimeSheet</p>
                                         </a>
                                     </li>
 
@@ -290,14 +269,14 @@
                                 {
                                     <li class="nav-item">
                                         <a href="@Url.Action("Create", "Attendance")" class="nav-link">
-                                            <i class="fa fa-moon text-black nav-icon"></i>
-                                            <p style="color: black">CheckOut</p>
+                                            <i class="fa fa-moon text-white nav-icon"></i>
+                                            <p style="color: white">CheckOut</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "Attendance")" class="nav-link">
-                                            <i class="fa fa-shoe-prints text-warning nav-icon"></i>
-                                            <p style="color: black">My TimeSheet</p>
+                                            <i class="fa fa-shoe-prints text-white nav-icon"></i>
+                                            <p style="color: white">My Att TimeSheet</p>
                                         </a>
                                     </li>
                                 }
@@ -306,6 +285,61 @@
 
                         </ul>
                         </li>
+                        <li class="nav-item">
+
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-id-card text-white"></i>
+                                <p style="color: white">
+                                    Ticketing <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("New_Ticket", "Tickets")" class="nav-link">
+                                        <i class="fa fa-id-card text-white nav-icon"></i>
+                                        <p style="color: white">New Ticket</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Tickets")" class="nav-link">
+                                        <i class="fa fa-id-card text-white nav-icon"></i>
+                                        <p style="color: white">My Tickets</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-address-book text-white"></i>
+                                <p style="color: white">
+                                    Work Timesheet <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
+                                        <i class="fa fa-address-book text-white nav-icon"></i>
+                                        <p style="color: white">My Work-Timesheet</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
                         @if (this.User.IsInRole("Admin"))
                         {
                             <li class="nav-header"><i class="fa fa-clock"></i> Invoices & Expenses</li>
@@ -313,8 +347,8 @@
 
 
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-file-invoice text-green"></i>
-                                    <p style="color: green">
+                                    <i class="nav-icon fa fa-file-invoice text-white"></i>
+                                    <p style="color: white">
                                         Invoices <i class="fas fa-angle-left right"></i>
 
 
@@ -324,15 +358,15 @@
 
                                     <li class="nav-item">
                                         <a href="@Url.Action("Create", "Invoices")" class="nav-link">
-                                            <i class="fa fa-file-invoice text-green nav-icon"></i>
-                                            <p style="color: green">New Invoice</p>
+                                            <i class="fa fa-file-invoice text-white nav-icon"></i>
+                                            <p style="color: white">New Invoice</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "Invoices")" class="nav-link">
-                                            <i class="fa fa-file-invoice-dollar text-green nav-icon"></i>
-                                            <p style="color: green">Invoices list</p>
+                                            <i class="fa fa-file-invoice-dollar text-white nav-icon"></i>
+                                            <p style="color: white">Invoices list</p>
                                         </a>
                                     </li>
 
@@ -348,8 +382,8 @@
 
 
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-file-invoice text-danger"></i>
-                                    <p style="color: darkred">
+                                    <i class="nav-icon fa fa-file-invoice text-white"></i>
+                                    <p style="color: white">
                                         Expenses <i class="fas fa-angle-left right"></i>
 
 
@@ -359,15 +393,15 @@
 
                                     <li class="nav-item">
                                         <a href="@Url.Action("Create", "Expense")" class="nav-link">
-                                            <i class="fa fa-file-invoice text-danger nav-icon"></i>
-                                            <p style="color: darkred">New Expense</p>
+                                            <i class="fa fa-file-invoice text-white nav-icon"></i>
+                                            <p style="color: white">New Expense</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "Expense")" class="nav-link">
-                                            <i class="fa fa-file-invoice-dollar text-danger nav-icon"></i>
-                                            <p style="color: darkred">Expenses list</p>
+                                            <i class="fa fa-file-invoice-dollar text-white nav-icon"></i>
+                                            <p style="color: white">Expenses list</p>
                                         </a>
                                     </li>
 
@@ -384,8 +418,8 @@
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-clock text-green"></i>
-                                <p style="color: green">
+                                <i class="nav-icon fa fa-clock text-white"></i>
+                                <p style="color: white">
                                     leaves <i class="fas fa-angle-left right"></i>
 
 
@@ -396,14 +430,14 @@
                                 {
                                     <li class="nav-item">
                                         <a href="@Url.Action("Create", "leaves")" class="nav-link">
-                                            <i class="fa fa-hand-holding text-navy nav-icon"></i>
-                                            <p style="color:navy">Request leave</p>
+                                            <i class="fa fa-hand-holding text-white nav-icon"></i>
+                                            <p style="color: white">Request leave</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("leaves_Requests", "leaves")" class="nav-link">
-                                            <i class="fa fa-hand-holding text-success nav-icon"></i>
-                                            <p style="color:seagreen">Requested leaves</p>
+                                            <i class="fa fa-hand-holding text-white nav-icon"></i>
+                                            <p style="color: white">Requested leaves</p>
                                         </a>
                                     </li>
                                 }
@@ -412,14 +446,14 @@
                                 {
                                     <li class="nav-item">
                                         <a href="@Url.Action("Create", "leaves")" class="nav-link">
-                                            <i class="fa fa-hand-holding text-navy nav-icon"></i>
-                                            <p style="color:navy">Request leaves</p>
+                                            <i class="fa fa-hand-holding text-white nav-icon"></i>
+                                            <p style="color: white">Request leaves</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "leaves")" class="nav-link">
-                                            <i class="fa fa-book-open text-navy nav-icon"></i>
-                                            <p style="color: navy">My leaves requests </p>
+                                            <i class="fa fa-book-open text-white nav-icon"></i>
+                                            <p style="color: white">My leaves requests </p>
                                         </a>
                                     </li>
                                 }
@@ -438,8 +472,8 @@
 
 
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-folder text-navy"></i>
-                                    <p style="color: navy">
+                                    <i class="nav-icon fa fa-folder text-white"></i>
+                                    <p style="color: white">
                                         My Documents<i class="fas fa-angle-left right"></i>
 
 
@@ -448,14 +482,14 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="@Url.Action("Upload", "Files")" class="nav-link">
-                                            <i class="fa fa-cloud text-navy nav-icon"></i>
-                                            <p style="color:navy"> Upload Documents </p>
+                                            <i class="fa fa-cloud text-white nav-icon"></i>
+                                            <p style="color: white"> Upload Documents </p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("My_Files", "Files")" class="nav-link">
-                                            <i class="fa fa-folder-open text-navy nav-icon"></i>
-                                            <p style="color: navy">My Documents </p>
+                                            <i class="fa fa-folder-open text-white nav-icon"></i>
+                                            <p style="color: white">My Documents </p>
                                         </a>
                                     </li>
 
@@ -477,8 +511,8 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="nav-icon fa fa-home text-black"></i>
-                                        <p style="color:black">
+                                        <i class="nav-icon fa fa-home text-white"></i>
+                                        <p style="color: white">
                                             Department<i class="fas fa-angle-left right"></i>
 
 
@@ -491,16 +525,16 @@
 
                                         <li class="nav-item">
                                             <a href="@Url.Action("Create", "Departments")" class="nav-link">
-                                                <i class="fa fa-user-plus text-black nav-icon"></i>
-                                                <p style="color: black">Add Dprt </p>
+                                                <i class="fa fa-user-plus text-white nav-icon"></i>
+                                                <p style="color: white">Add Dprt </p>
                                             </a>
                                         </li>
 
 
                                         <li class="nav-item">
                                             <a href="@Url.Action("Index", "Departments")" class="nav-link">
-                                                <i class="fa fa-cubes text-black nav-icon"></i>
-                                                <p style="color: black">Departments </p>
+                                                <i class="fa fa-cubes text-white nav-icon"></i>
+                                                <p style="color: white">Departments </p>
                                             </a>
                                         </li>
 
@@ -514,8 +548,8 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="nav-icon fa fa-users text-black"></i>
-                                        <p style="color: black">
+                                        <i class="nav-icon fa fa-users text-white"></i>
+                                        <p style="color: white">
                                             Employees<i class="fas fa-angle-left right"></i>
 
 
@@ -525,16 +559,16 @@
 
                                         <li class="nav-item">
                                             <a href="@Url.Action("New_Employee", "Account")" class="nav-link">
-                                                <i class="fa fa-user-plus text-success nav-icon"></i>
-                                                <p style="color:black">New Employee</p>
+                                                <i class="fa fa-user-plus text-white nav-icon"></i>
+                                                <p style="color: white">New Employee</p>
                                             </a>
                                         </li>
 
 
                                         <li class="nav-item">
                                             <a href="@Url.Action("Index", "Employes")" class="nav-link">
-                                                <i class="fa fa-users text-success nav-icon"></i>
-                                                <p style="color: black">Employees Profiles </p>
+                                                <i class="fa fa-users text-white nav-icon"></i>
+                                                <p style="color: white">Employees Profiles </p>
                                             </a>
                                         </li>
 
@@ -545,168 +579,168 @@
 
 
                                     </ul>
-                                    </li>
+                                </li>
 
-                                <li class="nav-header"><i class="fa fa-chart-line text-brown"></i> B.I Reports</li>
+                                <li class="nav-header"><i class="fa fa-chart-line text-white"></i> B.I Reports</li>
 
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Reports")" class="nav-link">
 
-                                        <i class="fa fa-chart-bar text-brown nav-icon"></i>
-                                        <p style="color: brown">
+                                        <i class="fa fa-chart-bar text-white nav-icon"></i>
+                                        <p style="color: white">
                                             Reports
                                         </p>
                                     </a>
                                 </li>
-                                }
+                            }
 
 
 
+
+
+                            </li>
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <li class="nav-header">Admin</li>
+
+
+
+
+
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Service")" class="nav-link">
+
+                                        <i class="fa fa-cogs text-white nav-icon"></i>
+                                        <p style="color: white">
+                                            Admin <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Rspec007", "Account")" class="nav-link">
+
+                                                <i class="fa fa-user-plus text-white nav-icon"></i>
+                                                <p style="color: white">
+                                                    New Profile
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index", "Data")" class="nav-link">
+
+                                                <i class="fa fa-users text-white nav-icon"></i>
+                                                <p style="color: white">
+                                                    All  Profile
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index", "Configuration")" class="nav-link">
+
+                                                <i class="fa fa-cogs text-white nav-icon"></i>
+                                                <p style="color: white">
+                                                    Configurations
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
 
 
                                 </li>
-                                @if (this.User.IsInRole("Admin"))
-                                {
-                                    <li class="nav-header">Admin</li>
 
 
 
+                            }
 
+                            <style>
+                                @@-webkit-keyframes pulse {
+                                    0% {
+                                        -webkit-transform: scale3d(1, 1, 1);
+                                        transform: scale3d(1, 1, 1);
+                                    }
 
+                                    50% {
+                                        -webkit-transform: scale3d(1.05, 1.05, 1.05);
+                                        transform: scale3d(1.05, 1.05, 1.05);
+                                    }
 
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Service")" class="nav-link">
-
-                                            <i class="fa fa-cogs text-indigo nav-icon"></i>
-                                            <p style="color:brown">
-                                                Admin <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("Rspec007", "Account")" class="nav-link">
-
-                                                    <i class="fa fa-user-plus text-success nav-icon"></i>
-                                                    <p style="color: brown">
-                                                        New Profile
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("Index", "Data")" class="nav-link">
-
-                                                    <i class="fa fa-users text-success nav-icon"></i>
-                                                    <p style="color: brown">
-                                                        All  Profile
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("Index", "Configuration")" class="nav-link">
-
-                                                    <i class="fa fa-cogs text-success nav-icon"></i>
-                                                    <p style="color: brown">
-                                                        Configurations
-                                                    </p>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-
-                                    </li>
-
-
-
+                                    100% {
+                                        -webkit-transform: scale3d(1, 1, 1);
+                                        transform: scale3d(1, 1, 1);
+                                    }
                                 }
 
-                                <style>
-                                    @@-webkit-keyframes pulse {
-                                        0% {
-                                            -webkit-transform: scale3d(1, 1, 1);
-                                            transform: scale3d(1, 1, 1);
-                                        }
-
-                                        50% {
-                                            -webkit-transform: scale3d(1.05, 1.05, 1.05);
-                                            transform: scale3d(1.05, 1.05, 1.05);
-                                        }
-
-                                        100% {
-                                            -webkit-transform: scale3d(1, 1, 1);
-                                            transform: scale3d(1, 1, 1);
-                                        }
+                                @@keyframes pulse {
+                                    0% {
+                                        -webkit-transform: scale3d(1, 1, 1);
+                                        transform: scale3d(1, 1, 1);
                                     }
 
-                                    @@keyframes pulse {
-                                        0% {
-                                            -webkit-transform: scale3d(1, 1, 1);
-                                            transform: scale3d(1, 1, 1);
-                                        }
-
-                                        50% {
-                                            -webkit-transform: scale3d(1.05, 1.05, 1.05);
-                                            transform: scale3d(1.05, 1.05, 1.05);
-                                        }
-
-                                        100% {
-                                            -webkit-transform: scale3d(1, 1, 1);
-                                            transform: scale3d(1, 1, 1);
-                                        }
+                                    50% {
+                                        -webkit-transform: scale3d(1.05, 1.05, 1.05);
+                                        transform: scale3d(1.05, 1.05, 1.05);
                                     }
 
-                                    .pulse:hover {
-                                        -webkit-animation-name: pulse;
-                                        animation-name: pulse;
+                                    100% {
+                                        -webkit-transform: scale3d(1, 1, 1);
+                                        transform: scale3d(1, 1, 1);
                                     }
+                                }
 
-                                    .animated {
-                                        -webkit-animation-duration: 1s;
-                                        animation-duration: 1s;
-                                        -webkit-animation-fill-mode: both;
-                                        animation-fill-mode: both;
+                                .pulse:hover {
+                                    -webkit-animation-name: pulse;
+                                    animation-name: pulse;
+                                }
+
+                                .animated {
+                                    -webkit-animation-duration: 1s;
+                                    animation-duration: 1s;
+                                    -webkit-animation-fill-mode: both;
+                                    animation-fill-mode: both;
+                                }
+
+                                    .animated.infinite {
+                                        -webkit-animation-iteration-count: infinite;
+                                        animation-iteration-count: infinite;
                                     }
+                            </style>
+                            <div class="pulse animated infinite">
+                                <div class="col-md-11 col-sm-8 col-12">
+                                    <div class="info-box " style="background-color: #ffffff00; border-radius: 14px;">
 
-                                        .animated.infinite {
-                                            -webkit-animation-iteration-count: infinite;
-                                            animation-iteration-count: infinite;
-                                        }
-                                </style>
-                                <div class="pulse animated infinite">
-                                    <div class="col-md-11 col-sm-8 col-12">
-                                        <div class="info-box " style="background-color: #ffffff00; border-radius: 14px;">
+                                        <span class="info-box-icon  ">
+                                            <img src="~/Images/whatsapp.ico" height="50" />
+                                        </span>
 
-                                            <span class="info-box-icon  ">
-                                                <img src="~/Images/whatsapp.ico" height="50" />
-                                            </span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text" style="color:black">Support Team</span>
-                                                <span class="info-box-number">
-                                                    <a href="https://api.whatsapp.com/send?phone=+254727422197&text=Hello%20Sharpolex%20Support%20team%20am%20in%20need%20of%20your%20assistance
+                                        <div class="info-box-content">
+                                            <span class="info-box-text" style="color: white">Support Team</span>
+                                            <span class="info-box-number">
+                                                <a href="https://api.whatsapp.com/send?phone=+254727422197&text=Hello%20Sharpolex%20Support%20team%20am%20in%20need%20of%20your%20assistance
                                                                      " class="btn btn-sm  btn-success btn-lg active" role="button" aria-pressed="true">WhastApp</a>
-                                                </span>
-                                            </div>
-                                            <!-- /.info-box-content -->
+                                            </span>
                                         </div>
-                                        <!-- /.info-box -->
+                                        <!-- /.info-box-content -->
                                     </div>
+                                    <!-- /.info-box -->
                                 </div>
+                            </div>
 
 
 
 
 
-                                <li class="nav-header">
-                                    Version 20.0.4
+                            <li class="nav-header">
+                                Version 20.0.4
 
-                                </li>
-                                <li>
-                                    <small style="color:whitesmoke"> Powered By Sharpolex</small>
-                                </li>
+                            </li>
+                            <li>
+                                <small style="color:whitesmoke"> Powered By Speculate Techs</small>
+                            </li>
 
-                                </ul>
+                            </ul>
 
-                            </nav>
+                        </nav>
 
         </div>
 

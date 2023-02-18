@@ -1,0 +1,493 @@
+﻿@model IShop.Core.Ticket
+
+@{
+    ViewBag.Title = "New Ticket";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+</script>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #001F3F;color:white">
+                <i class="fa fa-id-card text-white nav-icon"></i> New Ticket
+            </div>
+            <div class="card-body">
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+
+                               @Value = DateTime.Now,
+                               @Readonly = true
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-spinner text-warning"></i> @Html.LabelFor(model => model.CONS)</label>
+                            @{
+                                List<SelectListItem> v = new List<SelectListItem>();
+                                v.Add(new SelectListItem
+                                {
+                                    Text = "EA",
+                                    Value = "EA ",
+                                });
+
+                            }@Html.DropDownListFor(model => model.CONS, v, "---CONS---", new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline) </label>
+                            @{
+                                List<SelectListItem> x = new List<SelectListItem>();
+                                x.Add(new SelectListItem
+                                {
+                                    Text = "KQ",
+                                    Value = "KQ",
+                                });
+                                x.Add(new SelectListItem
+                                {
+                                    Text = "JJ",
+                                    Value = "JJ",
+                                });
+                            }@Html.DropDownListFor(model => model.Airline, x, "---Airline---", new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
+                            @Html.EditorFor(model => model.Pax_Name, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Pax Name",
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> <i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Client)</label>
+                            @{
+                                List<SelectListItem> s = new List<SelectListItem>();
+                                s.Add(new SelectListItem
+                                {
+                                    Text = "KENYA AIRPORTS AUTHORITY ",
+                                    Value = "KENYA AIRPORTS AUTHORITY",
+                                });
+
+                            }@Html.DropDownListFor(model => model.Client, s, "---Client---", new { @class = "form-control form-control-sm" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Currency) </label>
+                            @{
+                                List<SelectListItem> m = new List<SelectListItem>();
+                                m.Add(new SelectListItem
+                                {
+                                    Text = "KSH",
+                                    Value = "KSH",
+                                });
+                                m.Add(new SelectListItem
+                                {
+                                    Text = "USD",
+                                    Value = "USD",
+                                });
+                            }@Html.DropDownListFor(model => model.Currency, m, "---Currency---", new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label> <i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Inv_Amount) </label>
+                            @Html.EditorFor(model => model.Inv_Amount, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "0.00",
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-circle-notch text-warning"></i>  @Html.LabelFor(model => model.Net_Amount)</label>
+                            @Html.EditorFor(model => model.Net_Amount, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "0.00",
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-circle-notch text-warning"></i>  @Html.LabelFor(model => model.Gross_Profit)</label>
+                            @Html.EditorFor(model => model.Gross_Profit, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "0.00",
+                               @Readonly = true,
+
+                           }
+                       })
+                        </div>
+
+
+                        <script>
+                            $(document).ready(function () {
+                                //this calculates values automatically
+                                sum();
+                                $("#Inv_Amount, #Net_Amount").on("keydown keyup", function () {
+                                    sum();
+                                });
+                            });
+                            function sum() {
+                                var num1 = document.getElementById('Inv_Amount').value;
+                                var num2 = document.getElementById('Net_Amount').value;
+                                var result = parseFloat(num1) - parseFloat(num2);
+                                if (!isNaN(result)) {
+                                    document.getElementById('Gross_Profit').value = result;
+                                }
+                            }
+                        </script>
+
+
+
+
+
+
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Incentv)</label>
+                            @Html.EditorFor(model => model.Incentv, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "0.00",
+                               @Value = 0,
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Recovery)</label>
+                            @Html.EditorFor(model => model.Recovery, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "0.00",
+                               @Value = 0,
+
+                           }
+                       })
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-calendar-day text-warning"></i> @Html.LabelFor(model => model.Departure_Date)</label>
+                            @Html.EditorFor(model => model.Departure_Date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = " Departure_Date",
+                               id = "datepicker"
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-calendar-day text-warning"></i> @Html.LabelFor(model => model.Arrival_Date)</label>
+                            @Html.EditorFor(model => model.Arrival_Date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = " Arrival_Date",
+                               id = "datepicker2"
+                           }
+                       })
+                        </div>
+                       
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-road text-warning"></i> @Html.LabelFor(model => model.Routing)</label>
+                            @{
+                                List<SelectListItem> h = new List<SelectListItem>();
+                                h.Add(new SelectListItem
+                                {
+                                    Text = "NBO - MBA - NBO ",
+                                    Value = "NBO - MBA - NBO ",
+                                });
+
+                            }@Html.DropDownListFor(model => model.Routing, h, "---Routing---", new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.USD_ACC)</label>
+                            @Html.EditorFor(model => model.USD_ACC, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "CTC",
+
+
+                           }
+                       })
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                //this calculates values automatically
+                                sum4();
+                                $("#Inv_Amount, #Net_Amount").on("keydown keyup", function () {
+                                    sum4();
+                                });
+                            });
+                            function sum4() {
+                                var num1 = document.getElementById('Inv_Amount').value;
+
+                                var result = parseFloat(num1);
+                                if (!isNaN(result)) {
+                                    document.getElementById('USD_ACC').value = result;
+                                }
+                            }
+                        </script>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.CTC)</label>
+                            @Html.EditorFor(model => model.CTC, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "CTC",
+
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Service_Provider)</label>
+                            @{
+                                List<SelectListItem> b = new List<SelectListItem>();
+                                b.Add(new SelectListItem
+                                {
+                                    Text = "BSP PREMIER ",
+                                    Value = "BSP PREMIER ",
+                                });
+                                b.Add(new SelectListItem
+                                {
+                                    Text = "JJ Portal",
+                                    Value = "JJ Portal ",
+                                });
+
+
+                            }@Html.DropDownListFor(model => model.Service_Provider, b, "---Service_Provider---", new { @class = "form-control form-control-sm" })
+                        </div>
+                    </div>
+                    <p style="font-family:Calibri">
+                        <i class="fa fa-comment text-warning"></i>
+                        Overal Remarks
+                    </p>
+                    <div class="form-row">
+
+
+                        @Html.TextAreaFor(model => model.Remarks, 4, 70, htmlAttributes: new
+                   {
+                       style = "width: 70%; max-width:70%;",
+                       @placeholder = "Overall remarks",
+                       @autofocus = ""
+                       ,
+                       @class = "form-control form-rounded2"
+
+                   })
+                    </div>
+
+
+
+
+
+
+                    <div style="color:red">@Html.ValidationMessageFor(y => y.Inv_Amount)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Airline)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Inv_Amount)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Net_Amount)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Routing)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Arrival_Date)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Departure_Date)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Pax_Name)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Client)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.CTC)</div>
+                    <div style="color: red">@Html.ValidationMessageFor(y => y.Service_Provider)</div>
+
+
+
+                    <hr />
+
+
+                    <table>
+                        <thead>
+                            <tr>
+
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <td style="text-align:left">
+
+                            <input type="submit" value="Post Ticket" class="btn btn btn-warning" style="color:white" onclick="return confirm('Are you sure you want to post this ticket?')" />
+
+
+                            <script>
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
+                            </script>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                            <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                        </td>
+                        </tbody>
+                    </table>
+
+                }
+
+                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

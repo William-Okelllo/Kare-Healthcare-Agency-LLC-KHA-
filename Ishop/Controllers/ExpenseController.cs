@@ -73,6 +73,7 @@ namespace Ishop.Controllers
             {
                 db.expenses.Add(expense);
                 db.SaveChanges();
+                TempData["msg"] = "Expense posted successfully ";
                 return RedirectToAction("Index");
             }
 
@@ -105,6 +106,7 @@ namespace Ishop.Controllers
             {
                 db.Entry(expense).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["msg"] = "Expense records updated successfully ";
                 return RedirectToAction("Index");
             }
             return View(expense);

@@ -50,6 +50,14 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,latitude,longitude,Office_location,Radius")] Office office)
         {
+            if(office.latitude ==null || office.longitude ==null || office.Radius ==null)
+            {
+                TempData["msg"] = "Kindly the missing fields.";
+                return RedirectToAction("Create");
+            }
+
+        
+
             if (ModelState.IsValid)
             {
                 
@@ -63,7 +71,7 @@ namespace Ishop.Controllers
                 webConfigApp.AppSettings.Settings["Distance_Radius"].Value = office.Radius.ToString() ;
                 webConfigApp.Save();
                 db.SaveChanges();
-
+                TempData["msg"] = "Office cordinates saved successfully";
                 return RedirectToAction("Index");
             }
 

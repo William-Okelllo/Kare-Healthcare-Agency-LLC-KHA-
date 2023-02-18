@@ -7,47 +7,6 @@
 }
 
 
-<style type="text/css">
-    .loading {
-        font-size: 10pt;
-        width: 200px;
-        height: 100px;
-        display: none;
-        position: fixed;
-        z-index: 999;
-    }
-</style>
-
-<div class="loading" align="center">
-    <img src="~/Images/t.gif" height="200" />
-
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
-
-<!-- Main content -->
 
 <style>
     body {
@@ -75,7 +34,7 @@
 <div class="card " style="background-color: whitesmoke;">
 
 
-    <div class="card-header" style="background-color: #089710 ">
+    <div class="card-header" style="background-color: #001F3F ">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-user-clock"></i>
             TimeSheet
@@ -90,8 +49,8 @@
 
 
                 <a style="font-family: Calibri;color:white"> Account Name</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Client Name" })
-                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = " Name" })
+                <button type="submit" value="search" class="btn btn-sm btn-success">
                     <i class="fas fa-search"></i>
                 </button>
 
@@ -136,12 +95,12 @@
 
 
                 <thead>
-                    <tr style="color:navy">
-                        <th style="background-color: whitesmoke; "> Date</th>
-                        <th style="background-color: whitesmoke; ">User</th>
-                        <th style="background-color: whitesmoke; ">Device</th>
-                        <th style="background-color: whitesmoke; ">Timesheet Status </th>
-                        <th style="background-color: whitesmoke; ">Distance </th>
+                    <tr style="color:white">
+                        <th style="background-color: #001F3F; "> Date</th>
+                        <th style="background-color: #001F3F; ">User</th>
+                        <th style="background-color: #001F3F; ">Device</th>
+                        <th style="background-color: #001F3F; ">Timesheet Status </th>
+                        <th style="background-color: #001F3F; ">Distance </th>
 
 
 
@@ -188,7 +147,7 @@
                             <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text"> <img src="~/Images/dddd.png" height="50" /> </span>
+                                <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
 
 
                                 <div class="progress">

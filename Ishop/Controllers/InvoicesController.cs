@@ -74,6 +74,7 @@ namespace Ishop.Controllers
             {
                 db.invoices.Add(invoice);
                 db.SaveChanges();
+                TempData["msg"] = "Invoice posted successfully ";
                 return RedirectToAction("Index");
             }
 
@@ -106,6 +107,7 @@ namespace Ishop.Controllers
             {
                 db.Entry(invoice).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(invoice);

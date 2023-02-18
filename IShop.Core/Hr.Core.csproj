@@ -63,10 +63,13 @@
     <Compile Include="Interface\Iinvoice.cs" />
     <Compile Include="Interface\Ileave.cs" />
     <Compile Include="Interface\Istaff.cs" />
+    <Compile Include="Interface\Iticket.cs" />
+    <Compile Include="Interface\Itt.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="leave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Staff.cs" />
+    <Compile Include="Ticket.cs" />
     <Compile Include="TT.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -44,7 +44,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header" style="background-color: #640606d9">
+    <div class="card-header" style="background-color: #4a0606ff">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-thin fa-history"></i>
             Expenses Section
@@ -59,7 +59,7 @@
             {
                 @item.M
             }
-            
+
             Total Expense
 
 
@@ -68,8 +68,9 @@
                 @item.Expenses
             }
         </div>
+     
 
-        </div>
+    </div>
 
 
 
@@ -106,16 +107,16 @@
 
 
             <div class="table-responsive" style="min-height: 400px">
-                <table class="table table-bordered table-hover  text-nowrap">
+                <table class="table table-bordered table-hover  ">
 
 
                     <thead>
-                        <tr style="color:seagreen">
-                            <th style="background-color: whitesmoke; "> Post On</th>
-
-                            <th style="background-color: whitesmoke; ">Amount </th>
-                            <th style="background-color: whitesmoke; ">Status </th>
-                            <th style="background-color: whitesmoke; ">Action </th>
+                        <tr style="color:white">
+                            <th style="background-color: #4a0606ff; "> Post On</th>
+                            <th style="background-color: #4a0606ff; "> Notes</th>
+                            <th style="background-color: #4a0606ff; ">Amount </th>
+                            <th style="background-color: #4a0606ff; ">Status </th>
+                            <th style="background-color: #4a0606ff; ">Action </th>
 
 
 
@@ -125,76 +126,76 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr data-widget="expandable-table" aria-expanded="false">
+                        <tr data-widget="expandable-table" aria-expanded="false">
 
-                                <td style="background-color:white">
-                                    <small> <i class="fa fa-calendar text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small>
-                                </td>
+                            <td style="background-color:white">
+                                <small> <i class="fa fa-calendar text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small>
+                            </td>
+                            <td style="background-color:white"> @item.Additional_Notes</td>
+                            <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Amount /=</td>
+                            <td style="background-color:white">
+                                @if (item.Status == "New")
+                                {<span class="float-center badge bg-green">Expense Status : @item.Status </span>}
+                            else if (item.Status == "Paid")
+                            { <span class="float-center badge bg-warning">Expense Status : @item.Status </span>}
+                        else
+                        { <span class="float-center badge bg-danger">Expense Status : @item.Status </span>}
+                            </td>
 
-                                <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Amount /=</td>
-                                <td style="background-color:white">
-                                    @if (item.Status == "New")
-                                    {<span class="float-center badge bg-green">Expense Status : @item.Status </span>}
-                                else if (item.Status == "Paid")
-                                { <span class="float-center badge bg-warning">Expense Status : @item.Status </span>}
-                            else
-                            { <span class="float-center badge bg-danger">Expense Status : @item.Status </span>}
-                                </td>
 
-
-                                <td style="background-color:ghostwhite">
-                                    <div class="btn-group dropdown">
-                                        <button type="button" class="btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-file-invoice"></i>  . Action
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                            @if (item.Status == "New")
-                                            {
-                                                <div class="dropdown-divider"></div>
-                                                <a href="@Url.Action("Update_Profile", "Employes", new { id = item.Id })" class="dropdown-item">
-                                                    <i class="fas fa-pen text-success"></i> Edit/Update Expense
-                                                </a>
-                                            }
-                                            @if (item.Status == "New" || item.Status == "Paid")
-                                            {
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" onclick="if (confirm('Are you sure you want cancel this Expense?')) { window.location.href = '@Url.Action("Cancelled", "Expense", new { id = item.Id })'; }">
-                                                    <i class="fas fa-times-circle text-danger"></i> Cancel Expense
-                                                </a>
-                                                <script>
-                                                    $(function () {
-                                                        $('#Paid').click(function () {
-                                                            if (confirm('Are you sure?')) {
-                                                                window.location.href = $(this).data('url');
-                                                            }
-                                                        });
+                            <td style="background-color:ghostwhite">
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-file-invoice"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                        @if (item.Status == "New")
+                                        {
+                                            <div class="dropdown-divider"></div>
+                                            <a href="@Url.Action("Edit", "Expense", new { id = item.Id })" class="dropdown-item">
+                                                <i class="fas fa-pen text-success"></i> Edit/Update Expense
+                                            </a>
+                                        }
+                                        @if (item.Status == "New" || item.Status == "Paid")
+                                        {
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want cancel this Expense?')) { window.location.href = '@Url.Action("Cancelled", "Expense", new { id = item.Id })'; }">
+                                                <i class="fas fa-times-circle text-danger"></i> Cancel Expense
+                                            </a>
+                                            <script>
+                                                $(function () {
+                                                    $('#Paid').click(function () {
+                                                        if (confirm('Are you sure?')) {
+                                                            window.location.href = $(this).data('url');
+                                                        }
                                                     });
-                                                </script>
-                                                <div class="dropdown-divider"></div>
-                                            }
-
-                                        </div>
+                                                });
+                                            </script>
+                                            <div class="dropdown-divider"></div>
+                                        }
 
                                     </div>
 
-
-
-
-
-
-                                </td>
-
+                                </div>
 
 
 
 
 
 
+                            </td>
 
 
 
 
-                            </tr>
+
+
+
+
+
+
+
+                        </tr>
 
 
                         }
@@ -208,7 +209,7 @@
                                 <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text"> <img src="~/Images/dddd.png" height="50" /> </span>
+                                    <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
 
 
                                     <div class="progress">

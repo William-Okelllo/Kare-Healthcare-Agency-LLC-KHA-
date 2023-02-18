@@ -82,31 +82,45 @@ namespace Ishop.Controllers
 
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.Connection = conn;
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    conn.Open();
-                    cmd.CommandText = "sp_getDrpt";
-                    cmd.Parameters.Add("@user", SqlDbType.NChar).Value = User.Identity.Name;
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        conn.Open();
+                        cmd.CommandText = "sp_getDrpt";
+                        cmd.Parameters.Add("@user", SqlDbType.NChar).Value = User.Identity.Name;
 
 
-                    ViewBag.Drpt = (string)cmd.ExecuteScalar();
+                        ViewBag.Drpt = (string)cmd.ExecuteScalar();
 
-                    conn.Close();
-                    
+                        conn.Close();
+                    }
+
+                    catch
+                    {
+                        ViewBag.Drpt = "--Acc missing Department--";
+                    }
                 }
-                using (SqlCommand cmd2 = conn.CreateCommand())
+                try
                 {
-                    cmd2.Connection = conn;
-                    cmd2.CommandType = System.Data.CommandType.StoredProcedure;
-                    conn.Open();
-                    cmd2.CommandText = "sp_getHodEmail";
-                    cmd2.Parameters.Add("@user", SqlDbType.NChar).Value = User.Identity.Name;
+                    using (SqlCommand cmd2 = conn.CreateCommand())
+                    {
+                        cmd2.Connection = conn;
+                        cmd2.CommandType = System.Data.CommandType.StoredProcedure;
+                        conn.Open();
+                        cmd2.CommandText = "sp_getHodEmail";
+                        cmd2.Parameters.Add("@user", SqlDbType.NChar).Value = User.Identity.Name;
 
 
-                    ViewBag.hod = (string)cmd2.ExecuteScalar();
+                        ViewBag.hod = (string)cmd2.ExecuteScalar();
 
-                    conn.Close();
+                        conn.Close();
 
+                    }
+                }
+                catch
+                {
+                    ViewBag.hod = "--Acc missing Department--";
                 }
             }
             return View();
@@ -119,7 +133,12 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Status,Message,Type,HR_Email,Emp_Mail")] leave leave)
         {
+            if (leave.Department == null)
+            {
+                TempData["msg"] = "Unable to post leave : No department set under user account ";
+                return RedirectToAction("Create");
 
+            }
 
             if (ModelState.IsValid)
             {
@@ -130,6 +149,7 @@ namespace Ishop.Controllers
 
                 leave.Status = "0";
                 leave.Emp_Mail = currentUser.Email;
+                TempData["msg"] = "leave request posted successfully ";
                 db.SaveChanges();
 
                 try

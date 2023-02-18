@@ -1,0 +1,304 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Ticket>
+
+@{
+    ViewBag.Title = "Tickets";
+}
+
+
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header" style="background-color: #001F3F">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-id-card"></i>
+            Tickets listing
+        </h3>
+
+
+
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "Tickets", FormMethod.Get))
+            {
+
+
+
+
+
+
+                <a style="font-family: Calibri"> PAX Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "PAX Name" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                @Html.ActionLink("New Ticket ", "New_ticket", "Tickets", null, new { @class = "btn btn-sm btn-default btn" })
+
+
+            }
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+    </script>
+
+
+
+
+
+
+
+
+
+    <div class="table-responsive" style="min-height: 400px">
+        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable">
+
+
+
+            <thead>
+                <tr style="color:white">
+                    <th style="background-color: #001F3F; "> Posted On</th>
+                    <th style="background-color: #001F3F; ">Cons </th>
+                    <th style="background-color: #001F3F; ">Airline </th>
+                    <th style="background-color: #001F3F; ">Service Provider </th>
+                    <th style="background-color: #001F3F; ">PAX Name </th>
+                    <th style="background-color: #001F3F; ">Client </th>
+                    <th style="background-color: #001F3F; ">INV Amt </th>
+                    <th style="background-color: #001F3F; ">NET Amt </th>
+                    <th style="background-color: #001F3F; ">Gross Profit </th>
+                    <th style="background-color: #001F3F; ">Date of Travel </th>
+                    <th style="background-color: #001F3F; ">Actions </th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr data-widget="expandable-table" aria-expanded="false">
+
+                        <td style="background-color:white">@item.CreatedOn.ToString("dd-MMM-yyyy")</td>
+                        <td style="background-color:white">@item.CONS</td>
+                        <td style="background-color:white"><i class="fa fa-plane text-warning"></i>  @item.Airline</td>
+                        <td style="background-color:white"><i class="fa fa-handshake text-warning"></i>  @item.Service_Provider</td>
+                        <td style="background-color:white"><i class="fa fa-user text-warning"></i>  @item.Pax_Name</td>
+                        <td style="background-color:white"> @item.Client</td>
+                        <td style="background-color:white">  @item.Inv_Amount</td>
+                        <td style="background-color:white"> @item.Net_Amount</td>
+                        <td style="background-color:whitesmoke"> @item.Gross_Profit</td>
+                        <td style="background-color:white">
+                            <small>
+                                <i class="fa fa-calendar-check text-warning"></i> @item.Departure_Date.ToString("dd-MMMM-yyyy")
+                                -- <i class="fa fa-calendar-day text-warning"></i>  @item.Arrival_Date.ToString("dd-MMMM-yyyy")
+                            </small>
+                        </td>
+                        <td style="background-color:ghostwhite">
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-file-invoice"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want mark this Invoice paid?')) { window.location.href = '@Url.Action("Paid", "Invoices", new { id = item.id })'; }">
+                                        <i class="fas fa-check-circle text-success"></i> Mark Paid
+                                    </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Paid').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Ticket_Update", "Tickets", new { id = item.id })" class="dropdown-item">
+                                        <i class="fas fa-pen text-success"></i> Edit/Update Ticket
+                                    </a>
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Delete this Ticket?')) { window.location.href = '@Url.Action("Delete_Ticket", "Tickets", new { id = item.id })'; }">
+                                        <i class="fa fa-trash text-danger"></i> Delete Ticket
+                                    </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Deny').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <div class="divider"></div>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#largeShoes">
+                                        <i class="fas fa-check-circle text-success"></i> Approve
+                                    </a>
+
+
+
+
+
+
+
+                        </td>
+
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @foreach (var item in Model)
+        {
+
+            <div class="modal fade" id="largeShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="background-color: rgba(255, 255, 255, 0.84);">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <p class="modal-title" id="modalLabelLarge"> Available Roooms</p>
+                        </div>
+                        <div class="modal-body" style="height:400px;overflow-y:scroll;background-color: rgba(255, 0, 255, 0.00);">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- /.card-header -->
+                                    <div class="card-body" style="background-color: rgba(255, 255, 255, 0.84);">
+                                        <table id="example2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr style="color:white">
+                                                    <th style="background-color:midnightblue">Room Name</th>
+                                                    <th style="background-color:forestgreen">Room Capacity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>@item.Pax_Name</td>
+                                                    <td style="background-color:whitesmoke">444 </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+
+
+
+
+            @if (Model.Count() == 0)
+            {
+                <div style="text-align:center">
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box bg-gradient-black">
+                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
+
+
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    <i class="fa fa-calendar text-white nav-icon"></i>   No Invoices Found
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                </div>
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="small-box bg-gradient-gray-dark">
+                <div>
+                    <h5 style="font-family:Quicksand">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                    , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                    </h5>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+

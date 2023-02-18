@@ -27,6 +27,7 @@ namespace Ishop
             Database.SetInitializer<StaffContext>(null);
             Database.SetInitializer<Employee_Context>(null);
             Database.SetInitializer<DepartmentContext>(null);
+            Database.SetInitializer<TicketContext>(null);
             Database.SetInitializer<AttendanceContext>(null);
             Database.SetInitializer<ExpenseContext>(null);
         }

@@ -30,7 +30,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header" style="background-color: green">
+    <div class="card-header" style="background-color: #001F3F">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-thin fa-history"></i>
             Requested leaves
@@ -71,12 +71,13 @@
 
                 <thead>
                     <tr style="color:white">
-                        <th style="background-color: green; "> Employee Name</th>
-                        <th style="background-color: green; ">Type </th>
-                        <th style="background-color: green; ">Submission Date </th>
-                        <th style="background-color: green; ">Requested Leave </th>
-                        <th style="background-color: green; ">Status </th>
-                        <th style="background-color: green; ">Action </th>
+                        <th style="background-color: #001F3F; "> Employee Name</th>
+                        
+                        <th style="background-color: #001F3F; ">Type </th>
+                        <th style="background-color: #001F3F; ">Posted On </th>
+                        <th style="background-color: #001F3F; ">Requested Leave </th>
+                        <th style="background-color: #001F3F; ">Status </th>
+                        <th style="background-color: #001F3F; ">Action </th>
 
 
 
@@ -86,16 +87,76 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr data-widget="expandable-table" aria-expanded="false">
+                    <tr data-widget="expandable-table" aria-expanded="false">
 
-                            <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Employee</td>
-                            <td style="background-color:white"><i class="fa fa-circle-notch text-green"></i> @item.Type</td>
-                            <td style="background-color:white"><i class="fa fa-calendar-day text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</td>
-                            <td style="background-color:white">
-                                <small>
-                                    <b><i class="fa fa-clock text-success"></i> From</b> @item.From_Date.ToString("dd-MMMM-yyyy") <b><i class="fa fa-clock text-warning"></i> To</b> @item.To_Date.ToString("dd-MMMM-yyyy")
-                                </small>
+                        <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Employee : <small style="color:blue"> @item.Department</small></td>
+                        <td style="background-color:white"><i class="fa fa-circle-notch text-green"></i> @item.Type</td>
+                        <td style="background-color:white"><i class="fa fa-calendar-day text-green"></i> <small>@item.CreatedOn.ToString("dd-MMMM-yyyy")</small></td>
+                        <td style="background-color:white">
+                            <small>
+                                <b><i class="fa fa-clock text-success"></i> From</b> @item.From_Date.ToString("dd-MMMM-yyyy") <b><i class="fa fa-clock text-warning"></i> To</b> @item.To_Date.ToString("dd-MMMM-yyyy")
+                            </small>
+                        </td>
+                        <td style="background-color:white">
+
+                            @if (item.Status == "0")
+                            {<small style="color:orangered"><i class="fa fa-clock"></i> awating approvals</small>}
+                            else if (item.Status == "Approved")
+                            {<small style="color:green"><i class="fa fa-check-circle"></i> Approved</small>}
+                            else
+                            {
+                                <small style="color:red"><i class="fa fa-times-circle"></i> Denied</small>
+                            }
+                        </td>
+
+
+                        @if (item.Status == "0")
+                        {
+                            <td style="background-color:ghostwhite">
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn-xs btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-user-circle" s></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to approve this request?')) { window.location.href = '@Url.Action("Approve", "leaves", new { id = item.Id })'; }">
+                                            <i class="fas fa-handshake text-success"></i> Approve Request
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Paid').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                        <div class="divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Deny this request?')) { window.location.href = '@Url.Action("Deny", "leaves", new { id = item.Id })'; }">
+                                            <i class="fa fa-times-circle text-danger"></i> Deny Request
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
                             </td>
+                        }
+
+                        else
+                        {
                             <td style="background-color:white">
 
                                 @if (item.Status == "0")
@@ -106,79 +167,19 @@
                                 {
                                     <small style="color:red"><i class="fa fa-times-circle"></i> Denied</small>
                                 }
+
+
+
                             </td>
 
-
-                            @if (item.Status == "0")
-                            {
-                                <td style="background-color:ghostwhite">
-                                    <div class="btn-group dropdown">
-                                        <button type="button" class="btn-xs btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-user-circle" s></i>  . Action
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to approve this request?')) { window.location.href = '@Url.Action("Approve", "leaves", new { id = item.Id })'; }">
-                                                <i class="fas fa-handshake text-success"></i> Approve Request
-                                            </a>
-                                            <script>
-                                                $(function () {
-                                                    $('#Paid').click(function () {
-                                                        if (confirm('Are you sure?')) {
-                                                            window.location.href = $(this).data('url');
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                            <div class="divider"></div>
-                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Deny this request?')) { window.location.href = '@Url.Action("Deny", "leaves", new { id = item.Id })'; }">
-                                                <i class="fa fa-times-circle text-danger"></i> Deny Request
-                                            </a>
-                                            <script>
-                                                $(function () {
-                                                    $('#Deny').click(function () {
-                                                        if (confirm('Are you sure?')) {
-                                                            window.location.href = $(this).data('url');
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                        </div>
-
-                                    </div>
+                        }
 
 
 
 
 
 
-                                </td>
-                            }
-
-                            else
-                            {
-                                <td style="background-color:white">
-
-                                    @if (item.Status == "0")
-                                    {<small style="color:orangered"><i class="fa fa-clock"></i> awating approvals</small>}
-                                    else if (item.Status == "Approved")
-                                    {<small style="color:green"><i class="fa fa-check-circle"></i> Approved</small>}
-                                    else
-                                    {
-                                        <small style="color:red"><i class="fa fa-times-circle"></i> Denied</small>
-                                    }
-
-
-
-                                </td>
-
-                            }
-
-
-
-
-
-
-                        </tr>
+                    </tr>
 
                         <tr class="expandable-body">
 

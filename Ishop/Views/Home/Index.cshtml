@@ -6,48 +6,7 @@
 }
 
 @using Microsoft.AspNet.Identity
-<style type="text/css">
-    .loading {
-        font-size: 10pt;
-        width: 200px;
-        height: 100px;
-        display: none;
-        position: fixed;
-        z-index: 999;
-    }
-</style>
 
-
-<div class="loading" align="center">
-    <img src="~/Images/t.gif" height="200" />
-
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
-
-<!-- Main content -->
 
 <style>
     body {
@@ -65,7 +24,7 @@
 
 
 
-    <div class="card-header" style="background-color: navy ">
+    <div class="card-header" style="background-color: #001F3F ">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-home"></i>
             HomePage
@@ -73,15 +32,18 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4" style="border-radius: 24px;">
+            <div class="col-md-5" style="border-radius: 24px;">
                 <!-- Widget: user widget style 2 -->
                 <div class="card card-widget widget-user-2" style="border-radius: 24px;">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div style="background-color: navy ">
+                    <div style="background-color: #001F3F ">
 
                         <!-- /.widget-user-image -->
 
-                        <h5 style="color:white"><img src="~/Images/SHARPO_4-1024x1024.png" height="50" alt="User Avatar"> Welcome @User.Identity.Name  </h5>
+                        <h5 style="color:white">
+                           
+                            <img src="~/Images/l.ico"  height="50" alt="User Avatar"> Welcome @User.Identity.Name
+                        </h5>
 
 
                     </div>
@@ -133,69 +95,60 @@
             <hr />
             @if (this.User.IsInRole("Admin"))
             {
-                <div class="col-xl-6">
+                <div class="col-xl-7">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: navy; color: white "><i class="fa fa-spinner"></i> Operations Summary </div>
+                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> Operations Summary </div>
                         <div class="card-body text-left">
-                            <h6 style="color:orange"><i class="fa fa-file-invoice text-warning"></i> Invoices Status</h6>
-                            <div style="text-align: left; color: navy ">
-                                <ul class="nav flex-column" style="color:midnightblue">
 
 
-                                    <li class="nav-item">
-                                        <i class="fa fa-calendar-day text-green"></i>
+                            <section class="content">
+                                <div class="container-fluid">
+                                    <h6 style="color:navy"><i class="fa fa-file-invoice text-navy"></i> Invoices Status</h6>
+                                    <div class="row">
+
+                                        <div class="col-md-6 col-sm-5 col-10">
+                                            <div class="info-box" style="background-color: #001F3F">
+
+                                                @foreach (var item in ViewBag.l2)
+                                                {
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text" style="color:white"><i class="fa fa-file-invoice"></i> Invoices Month : @item.M</span>
+                                                        <span class="info-box-number" style="color:white"><i class="fa fa-cash-register"></i> Upaid : @item.New || Paid : @item.Paid</span>
+                                                    </div>
+                                                }
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <div class="col-md-6 col-sm-5 col-10">
+                                            <div class="info-box" style="background-color: #790404">
 
 
-                                        @foreach (var item in ViewBag.l2)
-                                        {
-                                            @item.M
-                                        }
-
-                                        ||
-                                        New
-
-
-                                        @foreach (var item in ViewBag.l2)
-                                        {
-                                            <span class="float-center badge bg-warning">
-                                                @item.New
-                                            </span>
-                                        }
-
-                                        ||
-                                        Paid
-
-                                        @foreach (var item in ViewBag.l2)
-                                        {<span class="float-center badge bg-success">
-                                                @item.Paid
-                                            </span>
-                                        }
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                            <hr />
-                            <h6 style="color: darkred"><i class="fa fa-file-invoice text-danger"></i> Expenses</h6>
-                            <div style="text-align: left; color: darkred ">
-                                Month
+                                                @foreach (var item in ViewBag.l3)
+                                                {
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text" style="color:white"><i class="fa fa-file-invoice"></i> Expenses Month : @item.M</span>
+                                                        <span class="info-box-number" style="color:white"><i class="fa fa-cash-register"></i> Paid : @item.Expenses</span>
+                                                    </div>
+                                                }
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
 
-                                @foreach (var item in ViewBag.l3)
-                                {
-                                    @item.M
-                                }
-
-                                Total Expense
 
 
-                                @foreach (var item in ViewBag.l3)
-                                {
-                                    <span class="float-center badge bg-danger">
-                                        @item.Expenses
-                                    </span>
-                                }
-                            </div>
+
+
+
+
+
+
+                           
 
 
                             <div class="card-footer p-0" style="background-color:whitesmoke">
@@ -214,7 +167,7 @@
             <div class="row">
                 <div class="col-xl-5">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: darkslategray; color: white "><i class="fa fa-clock"></i>  Operations </div>
+                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-clock"></i>  Operations </div>
                         <div class="card-body text-left">
 
                             <ul class="nav flex-column">

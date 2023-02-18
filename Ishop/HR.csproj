@@ -405,6 +405,8 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\successController.cs" />
+    <Compile Include="Controllers\TicketsController.cs" />
+    <Compile Include="Controllers\TimesheetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -502,6 +504,9 @@
     <Compile Include="Models\GetStaffing_Acc_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Gettimesheet_Result.cs">
+      <DependentUpon>sp_timesheet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Get_FacilitesAdmin_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
@@ -590,6 +595,21 @@
     </Compile>
     <Compile Include="Models\sp_invoices_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_timesheet.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_timesheet.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_timesheet.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_timesheet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_timesheet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_timesheet.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_timesheet_report_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -1971,18 +1991,15 @@
     <Content Include="FrontEnd\plugins\uplot\uPlot.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\A2.jpg" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\co.gif" />
-    <Content Include="Images\dddd.png" />
-    <Content Include="Images\fff.gif" />
+    <Content Include="Images\l.ico" />
+    <Content Include="Images\logo7.png" />
+    <Content Include="Images\logo77.png" />
     <Content Include="Images\neww.jpg" />
     <Content Include="Images\s.ico" />
-    <Content Include="Images\SHARPO_4-1024x1024.png" />
-    <Content Include="Images\t.gif" />
     <Content Include="Images\uu.ico" />
     <Content Include="Images\v3.jpg" />
-    <Content Include="Images\vvv.png" />
     <Content Include="Images\whatsapp.ico" />
     <Content Include="Models\Config_.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2023,6 +2040,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>R.edmx</DependentUpon>
       <LastGenOutput>R.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_timesheet.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_timesheet.edmx</DependentUpon>
+      <LastGenOutput>sp_timesheet.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_timesheet.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_timesheet.edmx</DependentUpon>
+      <LastGenOutput>sp_timesheet.cs</LastGenOutput>
     </Content>
     <Content Include="Models\tableOffice.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2302,6 +2329,13 @@
     </EntityDeploy>
     <Content Include="Models\Userslist.edmx.diagram">
       <DependentUpon>Userslist.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\sp_timesheet.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sp_timesheet.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sp_timesheet.edmx.diagram">
+      <DependentUpon>sp_timesheet.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -3057,6 +3091,16 @@
     <Content Include="Views\Expense\Details.cshtml" />
     <Content Include="Views\Expense\Edit.cshtml" />
     <Content Include="Views\Expense\Index.cshtml" />
+    <Content Include="Views\Timesheet\Create.cshtml" />
+    <Content Include="Views\Timesheet\Delete.cshtml" />
+    <Content Include="Views\Timesheet\Details.cshtml" />
+    <Content Include="Views\Timesheet\Edit.cshtml" />
+    <Content Include="Views\Timesheet\Index.cshtml" />
+    <Content Include="Views\Tickets\New_Ticket.cshtml" />
+    <Content Include="Views\Tickets\Delete.cshtml" />
+    <Content Include="Views\Tickets\Details.cshtml" />
+    <Content Include="Views\Tickets\Ticket_Update.cshtml" />
+    <Content Include="Views\Tickets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
