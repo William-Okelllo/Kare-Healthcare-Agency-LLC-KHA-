@@ -39,7 +39,7 @@ namespace Ishop.Controllers
         }
 
         // GET: Tickets/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
@@ -50,7 +50,7 @@ namespace Ishop.Controllers
             {
                 return HttpNotFound();
             }
-            return View(ticket);
+            return PartialView("Details", ticket);
         }
 
         // GET: Tickets/Create
@@ -64,7 +64,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,CONS,Airline,Service_Provider,Pax_Name,Client,Currency,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,USD_ACC,Remarks,Ticket_status")] Ticket ticket)
+        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,CONS,Airline,Service_Provider,Pax_Name,Client,Currency,Staff,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,USD_ACC,Remarks,Ticket_status")] Ticket ticket)
         {
 
             ticket.Ticket_status = 0;
@@ -82,6 +82,8 @@ namespace Ishop.Controllers
         // GET: Tickets/Edit/5
         public ActionResult Ticket_Update(int? id)
         {
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -91,6 +93,11 @@ namespace Ishop.Controllers
             {
                 return HttpNotFound();
             }
+            if (ticket.Ticket_status ==1)
+            {
+                TempData["msg"] = "✔ Oops Ticket already approved";
+                return RedirectToAction("Index");
+            }
             return View(ticket);
         }
 
@@ -99,7 +106,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Ticket_Update([Bind(Include = "id,CreatedOn,CONS,Airline,Service_Provider,Pax_Name,Client,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,USD_ACC,Remarks,Ticket_status")] Ticket ticket)
+        public ActionResult Ticket_Update([Bind(Include = "id,CreatedOn,CONS,Airline,Service_Provider,Staff,Pax_Name,Client,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,USD_ACC,Remarks,Ticket_status")] Ticket ticket)
         {
             ticket.Ticket_status = 0;
             if (ModelState.IsValid)
@@ -163,6 +170,34 @@ namespace Ishop.Controllers
 
             
                
+
+        }
+        public ActionResult Approve_Ticket(int? id, Ticket ticket)
+        {
+            try
+            {
+                string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand sqlcmnd = new SqlCommand("sp_markticket_Approved", sqlCon);
+                sqlcmnd.CommandType = CommandType.StoredProcedure;
+                sqlcmnd.Parameters.AddWithValue("@Id", ticket.id);
+                sqlCon.Open();
+                sqlcmnd.ExecuteNonQuery();
+                sqlCon.Close();
+                TempData["msg"] = "Ticket approved successfully ";
+                return RedirectToAction("Index");
+
+
+            }
+            catch
+            {
+                TempData["msg"] = "error occured in  on approving ticket ";
+                return RedirectToAction("Index");
+            }
+
+
+
+
 
         }
 

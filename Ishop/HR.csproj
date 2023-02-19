@@ -3023,10 +3023,6 @@
     <Content Include="Views\Calender\Employees.cshtml" />
     <Content Include="Views\Data\Index.cshtml" />
     <Content Include="Views\Data\Delete_User.cshtml" />
-    <Content Include="Views\Bugs\Post_Issue.cshtml" />
-    <Content Include="Views\Bugs\Edit.cshtml" />
-    <Content Include="Views\Bugs\Index.cshtml" />
-    <Content Include="Views\Bugs\Admin_View.cshtml" />
     <Content Include="Views\Files\My_Files.cshtml" />
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\Accesses\Acc_Profile.cshtml" />

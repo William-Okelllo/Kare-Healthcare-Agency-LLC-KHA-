@@ -66,6 +66,8 @@ namespace IShop.Core
 
         public int Ticket_status { get; set; }
 
+        public string Staff { get; set; }
+
     }
 
 }

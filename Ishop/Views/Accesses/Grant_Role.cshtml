@@ -23,35 +23,7 @@
 </style>
 
 
-<div class="loading" align="center">
 
-    <img src="~/Images/t.gif" height="200" />
-
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
 
 
 
@@ -81,14 +53,15 @@
             <div class="col d-flex justify-content-center">
                 <div class="col-md-6" style="border-radius: 14px;">
                     <!-- Widget: user widget style 2 -->
-                    <div class="card card-widget widget-user-2" style="border-radius: 14px;">
+                    <div class="card card-widget widget-user-2" style="border-radius: 24px;">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header" style="background-color: #1976D2 ">
+                        <div class="widget-user-header" style="background-color: #001F3F ">
                             <div class="widget-user-image">
-                                <img src="~/Images/Andest2.png" height="80" alt="User Avatar">
+                                
+                                <img src="~/Images/l.ico" height="80" alt="User Avatar"> />
                             </div>
                             <!-- /.widget-user-image -->
-                            <h5 class="widget-user-username" style="color:white"> Approve / Revoke Employee Account</h5>
+                            <h6 class="widget-user-username" style="color:white"> Approve / Revoke Account Role</h6>
 
 
                         </div>
@@ -107,35 +80,28 @@
 
 
 
-                                    <div class="col-md-5 mb-3">
-                                        <label style="font-family:Quicksand">Employee Username  </label>
-                                        @foreach (var item in ViewBag.l2)
-                                        {
-
-
-                                            <input id="Username" name="Username" type="text" value="@item.username" class="form-control form-rounded" readonly />
-
-
-                                        }
-                                    </div>
+                                    
                                     <div class="col-md-5 mb-5">
-                                        <label style="font-family: Quicksand; color: black">Ability</label>
+                                        <label><i class="fa fa-user-shield text-warning"></i> System Roles</label>
 
-                                        @Html.EditorFor(model => model.Role, new
-                                   {
-                                       htmlAttributes = new
-                                       {
-                                           @class = "form-control ",
-                                           @Value = "Can_Take_Shift",
-                                           @Readonly = true
-                                       }
-                                   })
+                                        @{
+                                            List<SelectListItem> h = new List<SelectListItem>();
+                                            h.Add(new SelectListItem
+                                            {
+                                                Text = "Tickets_Approval",
+                                                Value = "Tickets_Approval",
+                                            });
+                                            h.Add(new SelectListItem
+                                            {
+                                                Text = "Reports View",
+                                                Value = "Reports_View",
+                                            });
+
+                                        }@Html.DropDownListFor(model => model.Role, h, "---System Role---", new { @class = "form-control " })
                                     </div>
-                                </div>
-
-                                <div class="form-row">
+                               
                                     <div class="col-md-5 mb-5">
-                                        <label style="font-family: Quicksand; color: black">Action</label>
+                                        <label><i class="fa fa-circle-notch text-warning"></i>  Action</label>
                                         @{
                                             List<SelectListItem> y = new List<SelectListItem>();
                                             y.Add(new SelectListItem
@@ -152,8 +118,9 @@
                                         }@Html.DropDownListFor(model => model.Status, y, "---Select action--", new { @class = "form-control" })
                                     </div>
                                 </div>
+                                
 
-                                <p style="color:navy">Actions</p>
+                              
 
                                 <div class="form-group col-md-6">
                                     <input type="submit" value="Approve" class="btn btn-sm btn-primary" style="color: black" />

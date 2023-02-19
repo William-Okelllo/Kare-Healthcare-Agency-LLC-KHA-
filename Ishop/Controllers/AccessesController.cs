@@ -64,9 +64,7 @@ namespace Ishop.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Grant_Role(int? id)
         {
-            ZO l2 = new ZO();
-            var boo2 = l2.GetEmpUsername(id).ToList();
-            ViewBag.l2 = boo2;
+            
 
             return View();
         }
@@ -77,31 +75,20 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Grant_Role([Bind(Include = "id,Username,Role,Status")] Access access,int? id)
+        public ActionResult Grant_Role([Bind(Include = "id,Role,Status")] Access access,string Id)
         {
-           
+            access.Username = Id;
 
-            if (access.Role == null)
+            if (access.Role == null || access.Status==null)
             {
                 TempData["msg"] = "Kindly select role ";
                 return RedirectToAction("Grant_Role");
             }
-            else if (access.Username == null)
-            {
-                TempData["msg"] = "Kindly select Username ";
-                return RedirectToAction("Grant_Role");
-            }
-            else if (access.Status == null)
-            {
-                TempData["msg"] = "Kindly select Action ";
-                return RedirectToAction("Grant_Role");
-            }
+           
 
-            if (ModelState.IsValid)
-            {
+            
                 db.Acesss.Add(access);
                 db.SaveChanges();
-
                 try
                 {
                     string cnnString = System.Configuration.ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
@@ -109,7 +96,10 @@ namespace Ishop.Controllers
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = cnn;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "RolesAdd";
+                    cmd.CommandText = "SetRole";
+                    cmd.Parameters.AddWithValue("@status", access.Status);
+                    cmd.Parameters.AddWithValue("@role", access.Role);
+                    cmd.Parameters.AddWithValue("@id", Id);
                     //add any parameters the stored procedure might require
                     cnn.Open();
 
@@ -118,14 +108,15 @@ namespace Ishop.Controllers
                 }
                 catch (SqlException sqlEx)
                 {
+                    TempData["msg2"] = "✔ error updating system roles on the user ";
+                    return RedirectToAction("Grant_Role");
                     throw sqlEx;
                    
                 }
-
-                TempData["msg2"] = "✔ Success "+ access.Username + " is now able to pickup tasks";
-                return RedirectToAction("Update_Profile", "Employes", new { id = id });
-            }
-            TempData["msg2"] = "✔ Success " + access.Username + " is now able to pickup tasks";
+                TempData["msg2"] = "✔ Success updating user account role ";
+                return RedirectToAction("Index", "Data");
+            
+            
             return View(access);
         }
         // GET: Accesses/Edit/5

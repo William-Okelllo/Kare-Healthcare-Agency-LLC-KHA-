@@ -117,7 +117,7 @@
                            {
                                @class = "form-control form-control-sm",
 
-                               @Value = DateTime.Now,
+                              
                                @Readonly = true
 
                            }
@@ -384,6 +384,7 @@
                             }@Html.DropDownListFor(model => model.Service_Provider, b, "---Service_Provider---", new { @class = "form-control form-control-sm" })
                         </div>
                     </div>
+
                     <p style="font-family:Calibri">
                         <i class="fa fa-comment text-warning"></i>
                         Overal Remarks
@@ -400,6 +401,20 @@
                        @class = "form-control form-rounded2"
 
                    })
+                        <div class="form-group col-md-2">
+
+                            @Html.EditorFor(model => model.Staff, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Value = User.Identity.Name,
+                               @Readonly = true
+
+
+                           }
+                       })
+                        </div>
                     </div>
                     <table>
                         <thead>

@@ -12,8 +12,7 @@ namespace Ishop
 
         public void Configuration(IAppBuilder app)
         {
-            Bold.Licensing.BoldLicenseProvider.RegisterLicense("+owNszOXCqS90cudN3iLcsYs0H5triG23iJd0JYba9o=");
-
+          
             ConfigureAuth(app);
             createRolesandUsers();
 
@@ -70,6 +69,13 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Tickets_Approval"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Tickets_Approval";
+                roleManager.Create(role);
+
+            }
             if (!roleManager.RoleExists("Staff"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
@@ -77,13 +83,7 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Can_Take_Shift"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Can_Take_Shift";
-                roleManager.Create(role);
-
-            }
+            
            
 
         }

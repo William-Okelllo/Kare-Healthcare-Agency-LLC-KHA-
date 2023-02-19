@@ -1,162 +1,282 @@
 ﻿@model IShop.Core.Ticket
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Ticket Details";
 }
-
-<h2>Details</h2>
-
 <div>
-    <h4>Ticket</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
+    <div class="modal-header "style="text-align:center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h7 class="modal-title"><i class="fa fa-id-card text-warning"></i> Ticket Details</h7>
+    </div>
+    <div class="modal-body" style="width: 750px;">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                    @Html.EditorFor(model => model.CreatedOn, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
+                       @Readonly = true
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CONS)
-        </dt>
+                   }
+               })
 
-        <dd>
-            @Html.DisplayFor(model => model.CONS)
-        </dd>
+                </div>
+                <div class="form-group col-md-2">
+                    <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Staff) </label>
+                    @Html.EditorFor(model => model.Staff, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Airline)
-        </dt>
+                       @Readonly = true
 
-        <dd>
-            @Html.DisplayFor(model => model.Airline)
-        </dd>
+                   }
+               })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Service_Provider)
-        </dt>
+                </div>
+                <div class="form-group col-md-2">
+                    <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.CONS) </label>
+                    @Html.EditorFor(model => model.CONS, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Pax Name",
+                       @Readonly = true,
+                   }
+               })
+                </div>
+                <div class="form-group col-md-2">
+                    <label><i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline) </label>
+                    @Html.EditorFor(model => model.Airline, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Pax Name",
+                       @Readonly = true,
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
+                    @Html.EditorFor(model => model.Pax_Name, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Pax Name",
+                       @Readonly = true,
+                   }
+               })
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Service_Provider)
-        </dd>
+            </div>
+            <hr />
+            <div class="form-row">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Pax_Name)
-        </dt>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Inv_Amount) </label>
+                    @Html.EditorFor(model => model.Inv_Amount, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Pax Name",
+                       @Readonly = true,
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Net_Amount) </label>
+                    @Html.EditorFor(model => model.Net_Amount, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Pax Name",
+                       @Readonly = true,
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Gross_Profit) </label>
+                    @Html.EditorFor(model => model.Gross_Profit, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Pax Name",
+                       @Readonly = true,
+                   }
+               })
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Pax_Name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Client)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Client)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Inv_Amount)
-        </dt>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Incentv) </label>
+                    @Html.EditorFor(model => model.Incentv, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Pax Name",
+                       @Readonly = true,
+                   }
+               })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Recovery)</label>
+                    @Html.EditorFor(model => model.Recovery, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "0.0",
+                       @Readonly = true,
 
-        <dd>
-            @Html.DisplayFor(model => model.Inv_Amount)
-        </dd>
+                   }
+               })
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Net_Amount)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Net_Amount)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gross_Profit)
-        </dt>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-calendar-day text-warning"></i> @Html.LabelFor(model => model.Departure_Date)</label>
+                    @Html.EditorFor(model => model.Departure_Date, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "0.0",
+                       @Readonly = true,
 
-        <dd>
-            @Html.DisplayFor(model => model.Gross_Profit)
-        </dd>
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-calendar-day text-warning"></i> @Html.LabelFor(model => model.Arrival_Date)</label>
+                    @Html.EditorFor(model => model.Arrival_Date, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "0.0",
+                       @Readonly = true,
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Incentv)
-        </dt>
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-road text-warning"></i> @Html.LabelFor(model => model.Routing)</label>
+                    @Html.EditorFor(model => model.Routing, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "0.0",
+                       @Readonly = true,
 
-        <dd>
-            @Html.DisplayFor(model => model.Incentv)
-        </dd>
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-calendar-day text-warning"></i> @Html.LabelFor(model => model.USD_ACC)</label>
+                    @Html.EditorFor(model => model.USD_ACC, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "0.0",
+                       @Readonly = true,
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Recovery)
-        </dt>
+                   }
+               })
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Recovery)
-        </dd>
+                <div class="form-group col-md-2">
+                    <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.CTC)</label>
+                    @Html.EditorFor(model => model.CTC, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "CTC",
+                       @Readonly = true,
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Departure_Date)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Departure_Date)
-        </dd>
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Service_Provider)</label>
+                    @Html.EditorFor(model => model.Service_Provider, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "CTC",
+                       @Readonly = true,
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Arrival_Date)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Arrival_Date)
-        </dd>
+                   }
+               })
+                </div>
+                <div class="form-group col-md-4">
+                    <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Client)</label>
+                    @Html.EditorFor(model => model.Client, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "CTC",
+                       @Readonly = true,
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Routing)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Routing)
-        </dd>
+                   }
+               })
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CTC)
-        </dt>
+            </div>
+            <label><i class="fa fa-comment text-warning"></i> @Html.LabelFor(model => model.Remarks)</label>
+            <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.CTC)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.USD_ACC)
-        </dt>
+                @Html.TextAreaFor(model => model.Remarks, 3, 70, htmlAttributes: new
+           {
+               style = "width: 100%; max-width:100%;",
+               @placeholder = "Provide your response based on the test records",
+               @autofocus = ""
+               ,
+               @class = "form-control form-rounded",
+               @ReadOnly = true
 
-        <dd>
-            @Html.DisplayFor(model => model.USD_ACC)
-        </dd>
+           })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ticket_status)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ticket_status)
-        </dd>
+            </div>
+        </div>
 
-    </dl>
+        <hr />
+        @if(Model.Ticket_status==0)
+        { <button type="button" class="btn btn-warning active"
+        onclick="location.href='@Url.Action("Approve_Ticket", "Tickets" ,new { id = Model.id })'">
+    Approve_Ticket
+</button>}
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+    
+       
+    
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

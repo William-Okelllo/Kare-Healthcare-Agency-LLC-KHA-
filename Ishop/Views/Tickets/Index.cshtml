@@ -106,15 +106,15 @@
             <thead>
                 <tr style="color:white">
                     <th style="background-color: #001F3F; "> Posted On</th>
-                    <th style="background-color: #001F3F; ">Cons </th>
+
                     <th style="background-color: #001F3F; ">Airline </th>
-                    <th style="background-color: #001F3F; ">Service Provider </th>
                     <th style="background-color: #001F3F; ">PAX Name </th>
-                    <th style="background-color: #001F3F; ">Client </th>
+
                     <th style="background-color: #001F3F; ">INV Amt </th>
                     <th style="background-color: #001F3F; ">NET Amt </th>
                     <th style="background-color: #001F3F; ">Gross Profit </th>
                     <th style="background-color: #001F3F; ">Date of Travel </th>
+                    <th style="background-color: #001F3F; ">Status </th>
                     <th style="background-color: #001F3F; ">Actions </th>
 
 
@@ -126,20 +126,26 @@
                 {
                     <tr data-widget="expandable-table" aria-expanded="false">
 
-                        <td style="background-color:white">@item.CreatedOn.ToString("dd-MMM-yyyy")</td>
-                        <td style="background-color:white">@item.CONS</td>
+                        <td style="background-color:white" href="javascript:void(0);" class="anchorDetail" data-id="@item.id">@item.CreatedOn.ToString("dd-MMM-yyyy") - <small><i class="fa fa-user-circle text-primary"></i> @item.Staff</small></td>
+
                         <td style="background-color:white"><i class="fa fa-plane text-warning"></i>  @item.Airline</td>
-                        <td style="background-color:white"><i class="fa fa-handshake text-warning"></i>  @item.Service_Provider</td>
                         <td style="background-color:white"><i class="fa fa-user text-warning"></i>  @item.Pax_Name</td>
-                        <td style="background-color:white"> @item.Client</td>
+
                         <td style="background-color:white">  @item.Inv_Amount</td>
                         <td style="background-color:white"> @item.Net_Amount</td>
                         <td style="background-color:whitesmoke"> @item.Gross_Profit</td>
+
                         <td style="background-color:white">
                             <small>
                                 <i class="fa fa-calendar-check text-warning"></i> @item.Departure_Date.ToString("dd-MMMM-yyyy")
                                 -- <i class="fa fa-calendar-day text-warning"></i>  @item.Arrival_Date.ToString("dd-MMMM-yyyy")
                             </small>
+                        </td>
+                        <td style="background-color:white">
+                            @if (item.Ticket_status == 0)
+                            {<small><i class="fa fa-pause-circle text-warning"></i> Pending Approval</small>}
+                            else
+                            {<small style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approved </small>}
                         </td>
                         <td style="background-color:ghostwhite">
                             <div class="btn-group dropdown">
@@ -148,47 +154,38 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
+                                    @if (item.Ticket_status == 0)
+                                    {<div class="divider"></div>
 
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want mark this Invoice paid?')) { window.location.href = '@Url.Action("Paid", "Invoices", new { id = item.id })'; }">
-                                        <i class="fas fa-check-circle text-success"></i> Mark Paid
-                                    </a>
-                                    <script>
-                                        $(function () {
-                                            $('#Paid').click(function () {
-                                                if (confirm('Are you sure?')) {
-                                                    window.location.href = $(this).data('url');
-                                                }
+                                        <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
+                                            <i class="fa fa-check-double text-warning"></i> Approve Ticket
+                                        </a>}
+                                    @if (item.Ticket_status == 0)
+                                    {
+                                        <div class="dropdown-divider"></div>
+                                        <a href="@Url.Action("Ticket_Update", "Tickets", new { id = item.id })" class="dropdown-item">
+                                            <i class="fas fa-pen text-success"></i> Edit/Update Ticket
+                                        </a>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Delete this Ticket?')) { window.location.href = '@Url.Action("Delete_Ticket", "Tickets", new { id = item.id })'; }">
+                                            <i class="fa fa-trash text-danger"></i> Delete Ticket
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
                                             });
-                                        });
-                                    </script>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Ticket_Update", "Tickets", new { id = item.id })" class="dropdown-item">
-                                        <i class="fas fa-pen text-success"></i> Edit/Update Ticket
-                                    </a>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Delete this Ticket?')) { window.location.href = '@Url.Action("Delete_Ticket", "Tickets", new { id = item.id })'; }">
-                                        <i class="fa fa-trash text-danger"></i> Delete Ticket
-                                    </a>
-                                    <script>
-                                        $(function () {
-                                            $('#Deny').click(function () {
-                                                if (confirm('Are you sure?')) {
-                                                    window.location.href = $(this).data('url');
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                    <div class="divider"></div>
-                                    <a class="dropdown-item" data-toggle="modal" data-target="#largeShoes">
-                                        <i class="fas fa-check-circle text-success"></i> Approve
-                                    </a>
+                                        </script>
+                                    }
 
 
 
 
 
 
-
-                        </td>
+</td>
 
 
 
@@ -196,53 +193,53 @@
                 }
             </tbody>
         </table>
+
         @foreach (var item in Model)
         {
-
-            <div class="modal fade" id="largeShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+            <div id='Details' class='modal'>
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content" style="background-color: rgba(255, 255, 255, 0.84);">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <p class="modal-title" id="modalLabelLarge"> Available Roooms</p>
-                        </div>
-                        <div class="modal-body" style="height:400px;overflow-y:scroll;background-color: rgba(255, 0, 255, 0.00);">
-                            <div class="row">
-                                <div class="col-12">
-                                    <!-- /.card-header -->
-                                    <div class="card-body" style="background-color: rgba(255, 255, 255, 0.84);">
-                                        <table id="example2" class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr style="color:white">
-                                                    <th style="background-color:midnightblue">Room Name</th>
-                                                    <th style="background-color:forestgreen">Room Capacity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td>@item.Pax_Name</td>
-                                                    <td style="background-color:whitesmoke">444 </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-content">
+                        <div id='myModalContent'></div>
                     </div>
                 </div>
             </div>
 
+
+
+
+
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+            <script src="~/Scripts/bootstrap.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>
+            <script>
+                var TeamDetailPostBackURL = '/Tickets/Details';
+                $(function () {
+                    $(".anchorDetail").click(function () {
+                        var $buttonClicked = $(this);
+                        var id = $buttonClicked.attr('data-id');
+                        $.ajax({
+                            type: "GET",
+                            url: TeamDetailPostBackURL,
+                            contentType: "application/json; charset=utf-8",
+                            data: { "Id": id },
+                            datatype: "json",
+                            success: function (data) {
+                                $('#myModalContent').html(data);
+                                $('#Details').modal('show').fade(900);
+                            },
+                            error: function () {
+                                alert("Dynamic content load failed.");
+                            }
+                        });
+                    });
+                });
+            </script>
+
+
+
+           
+
         }
-
-
-
-
-
 
             @if (Model.Count() == 0)
             {
