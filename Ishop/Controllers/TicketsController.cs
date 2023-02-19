@@ -23,18 +23,34 @@ namespace Ishop.Controllers
         // GET: Tickets
         public ActionResult Index(string searchBy, string search, int? page)
         {
-
-
-            if (!(search == null))
+            if (this.User.IsInRole("Tickets_Approval"))
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
 
+                if (!(search == null))
+                {
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+
+                }
+                else
+                {
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+
+
+                }
             }
             else
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c=>(!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+                if (!(search == null))
+                {
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Staff==User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+
+                }
+                else
+                {
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
 
+                }
             }
         }
 

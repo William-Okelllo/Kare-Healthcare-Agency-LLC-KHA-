@@ -269,11 +269,11 @@
         </div>
 
         <hr />
-        @if(Model.Ticket_status==0)
-        { <button type="button" class="btn btn-warning active"
-        onclick="location.href='@Url.Action("Approve_Ticket", "Tickets" ,new { id = Model.id })'">
-    Approve_Ticket
-</button>}
+        @if ((Model.Ticket_status == 0) && this.User.IsInRole("Tickets_Approval"))
+        {<button type="button" class="btn btn-warning active"
+                 onclick="location.href='@Url.Action("Approve_Ticket", "Tickets" ,new { id = Model.id })'">
+                Approve_Ticket
+            </button>}
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
     </div>
     

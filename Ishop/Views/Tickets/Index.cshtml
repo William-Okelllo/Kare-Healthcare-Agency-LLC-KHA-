@@ -154,7 +154,7 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                                    @if (item.Ticket_status == 0)
+                                    @if ((item.Ticket_status == 0) && this.User.IsInRole("Tickets_Approval"))
                                     {<div class="divider"></div>
 
                                         <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
