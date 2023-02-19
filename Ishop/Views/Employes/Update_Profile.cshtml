@@ -15,34 +15,6 @@
     }
 </style>
 
-<div class="loading" align="center">
-    <img src="~/Images/Andest.png" height="200" />
-
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
 
 <!-- Main content -->
 
@@ -79,9 +51,9 @@
                 <!-- Widget: user widget style 2 -->
                 <div class="card card-widget widget-user-2" style="border-radius: 14px;">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header" style="background-color: #1976D2 ">
+                    <div class="widget-user-header" style="background-color: #001F3F ">
                         <div class="widget-user-image">
-                            <img src="~/Images/vvv.png" height="80" alt="User Avatar">
+                            <img src="~/Images/l.ico" height="80" alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
 
@@ -108,7 +80,7 @@
                     <div class="card-body text-left">
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Username)</label>
+                                <label >@Html.LabelFor(model => model.Username)</label>
                                 @Html.EditorFor(model => model.Username, new
                            {
                                htmlAttributes = new
@@ -120,7 +92,7 @@
 
                             </div>
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Fullname)</label>
+                                <label>@Html.LabelFor(model => model.Fullname)</label>
                                 @Html.EditorFor(model => model.Fullname, new
                            {
                                htmlAttributes = new
@@ -132,7 +104,7 @@
 
                             </div>
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Email)</label>
+                                <label >@Html.LabelFor(model => model.Email)</label>
                                 @Html.EditorFor(model => model.Email, new
                            {
                                htmlAttributes = new
@@ -144,7 +116,7 @@
 
                             </div>
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Phone)</label>
+                                <label>@Html.LabelFor(model => model.Phone)</label>
                                 @Html.EditorFor(model => model.Phone, new
                            {
                                htmlAttributes = new
@@ -158,21 +130,21 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Department)</label>
+                                <label>@Html.LabelFor(model => model.Department)</label>
                                 @Html.DropDownList("Department", new SelectList(ViewBag.Departments, "Department", "Department"), "Select Department", new { @id = "ddlFruits", @class = "form-control " })
-                                    @Html.Hidden("Department", null, new { @id = "hfDepartment" })
+                                @Html.Hidden("Department", null, new { @id = "hfDepartment" })
 
 
 
-                                    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-                                    <script type="text/javascript">
-                                        $("body").on("change", "#ddlFruits", function () {
-                                            $("#Department").val($(this).find("option:selected").text());
-                                        });
-                                    </script>
-                                </div>
+                                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                                <script type="text/javascript">
+                                    $("body").on("change", "#ddlFruits", function () {
+                                        $("#Department").val($(this).find("option:selected").text());
+                                    });
+                                </script>
+                            </div>
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Home_Address)</label>
+                                <label>@Html.LabelFor(model => model.Home_Address)</label>
                                 @Html.EditorFor(model => model.Home_Address, new
                            {
                                htmlAttributes = new
@@ -184,7 +156,7 @@
 
                             </div>
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Employee_Address)</label>
+                                <label>@Html.LabelFor(model => model.Employee_Address)</label>
                                 @Html.EditorFor(model => model.Employee_Address, new
                            {
                                htmlAttributes = new
@@ -196,7 +168,7 @@
 
                             </div>
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Emergency_Contact)</label>
+                                <label>@Html.LabelFor(model => model.Emergency_Contact)</label>
                                 @Html.EditorFor(model => model.Emergency_Contact, new
                            {
                                htmlAttributes = new
@@ -207,11 +179,28 @@
                            })
 
                             </div>
+                            <script>
+                                $(document).ready(function () {
+                                    //this calculates values automatically
+                                    sum4();
+                                    $("#Phone").on("keydown keyup", function () {
+                                        sum4();
+                                    });
+                                });
+                                function sum4() {
+                                    var num1 = document.getElementById('Phone').value;
+
+                                    var result = parseFloat(num1);
+                                    if (!isNaN(result)) {
+                                        document.getElementById('Emergency_Contact').value = result;
+                                    }
+                                }
+                            </script>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Wage)</label>
+                                <label>@Html.LabelFor(model => model.Wage)</label>
                                 @Html.EditorFor(model => model.Wage, new
                            {
                                htmlAttributes = new
@@ -227,7 +216,7 @@
                             
                            
                             <div class="form-group col-md-2">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Last_Update)</label>
+                                <label >@Html.LabelFor(model => model.Last_Update)</label>
                                 @Html.EditorFor(model => model.Last_Update, new
                            {
                                htmlAttributes = new
@@ -259,7 +248,7 @@
 
 
 
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Notes)</label>
+                            <label>@Html.LabelFor(model => model.Notes)</label>
                             @Html.TextAreaFor(model => model.Notes, 5, 70, htmlAttributes: new
                        {
                            style = "width: 100%; max-width:100%;",

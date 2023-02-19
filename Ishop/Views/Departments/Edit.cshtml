@@ -29,37 +29,6 @@
     }
 </style>
 
-<div class="loading" align="center">
-    <img src="~/Images/t.gif" height="200" />
-
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
-
-<!-- Main content -->
 
 <style>
     body {
@@ -104,88 +73,93 @@
 <!-- /.card-header -->
 
 
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-10 col-sm-10 col-10">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #001F3F;color:white">
+                <i class="fa fa-id-card text-white nav-icon"></i> Update Department
+            </div>
+            <div class="card-body" style="background-color: #ffffffc1">
 
-<div class="card" style="background-color: rgb(36, 202, 11, 0.15);">
-    <div class="card-body" style="background-color: #ffffffc1">
+             
+              
 
-        <br>
+                        @using (Html.BeginForm())
+                        {@Html.AntiForgeryToken()
 
+                        
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
 
-        <div class="col d-flex justify-content-center">
-            <div class="col-md-10 col-sm-12 col-12">
-                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-
-                    @using (Html.BeginForm())
-                    {@Html.AntiForgeryToken()
-
-                    <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.Id)
-
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.DprtName)</label>
-                                @Html.EditorFor(model => model.DprtName, new
-                       {
-                           htmlAttributes = new
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label style="font-family:Quicksand;">@Html.LabelFor(model => model.DprtName)</label>
+                                    @Html.EditorFor(model => model.DprtName, new
                            {
-                               @class = "form-control ",
-                           }
-                       })
-                            </div>
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                               }
+                           })
+                                </div>
 
-                            <div class="form-group col-md-4">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Contact)</label>
-                                @Html.EditorFor(model => model.Contact, new
-                       {
-                           htmlAttributes = new
+                                <div class="form-group col-md-4">
+                                    <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Contact)</label>
+                                    @Html.EditorFor(model => model.Contact, new
                            {
-                               @class = "form-control ",
-                           }
-                       })
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                               }
+                           })
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Manager)</label>
+                                    @Html.DropDownList("Manager", new SelectList(ViewBag.l, "UserName", "UserName"), "Select HOD", new { @id = "ddlFruits", @class = "form-control " })
+                                    @Html.Hidden("UserName", null, new { @id = "hfUserName" })
+
+
+
+                                    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                                    <script type="text/javascript">
+                                        $("body").on("change", "#ddlFruits", function () {
+                                            $("#UserName").val($(this).find("option:selected").text());
+                                        });
+                                    </script>
+                                </div>
                             </div>
-
-                            <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Manager)</label>
-                                @Html.DropDownList("Manager", new SelectList(ViewBag.l, "UserName", "UserName"), "Select HOD", new { @id = "ddlFruits", @class = "form-control " })
-                                @Html.Hidden("UserName", null, new { @id = "hfUserName" })
-
-
-
-                                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-                                <script type="text/javascript">
-                                    $("body").on("change", "#ddlFruits", function () {
-                                        $("#UserName").val($(this).find("option:selected").text());
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Email_Address)</label>
-                                @Html.EditorFor(model => model.Email_Address, new
-                       {
-                           htmlAttributes = new
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Email_Address)</label>
+                                    @Html.EditorFor(model => model.Email_Address, new
                            {
-                               @class = "form-control ",
-                           }
-                       })
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                               }
+                           })
+                                </div>
+
                             </div>
 
-                        </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save/Update" class="btn btn-success" />
 
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Save/Update" class="btn btn-success" />
-
-                                || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                                    || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                }
-
-
-
-                    @section Scripts {
-                        @Scripts.Render("~/bundles/jqueryval")
+                        
                     }
+
+
+
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
+
+                    </div>
+                </div>
+</div>

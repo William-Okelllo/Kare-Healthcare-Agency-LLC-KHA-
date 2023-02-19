@@ -131,7 +131,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Status,Message,Type,HR_Email,Emp_Mail")] leave leave)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Status,Department,Message,Type,HR_Email,Emp_Mail")] leave leave)
         {
             if (leave.Department == null)
             {
