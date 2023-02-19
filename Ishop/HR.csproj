@@ -2337,6 +2337,7 @@
     <Content Include="Models\sp_timesheet.edmx.diagram">
       <DependentUpon>sp_timesheet.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CodeMirror\addon\comment\comment.js" />
