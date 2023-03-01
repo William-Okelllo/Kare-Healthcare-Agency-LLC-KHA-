@@ -83,9 +83,23 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
-            
-           
+            if (!roleManager.RoleExists("Tickets_Invoicing"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Tickets_Invoicing";
+                roleManager.Create(role);
 
+            }
+            if (!roleManager.RoleExists("Leaves_Approval"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Leaves_Approval";
+                roleManager.Create(role);
+
+            }
+
+
+            
         }
     }
 }

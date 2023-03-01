@@ -144,8 +144,11 @@
                         <td style="background-color:white">
                             @if (item.Ticket_status == 0)
                             {<small><i class="fa fa-pause-circle text-warning"></i> Pending Approval</small>}
-                            else
+                            else if (item.Ticket_status == 1)
                             {<small style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approved </small>}
+                            else if (item.Ticket_status == 2)
+                            {<small style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approved & Invoiced</small>}
+
                         </td>
                         <td style="background-color:ghostwhite">
                             <div class="btn-group dropdown">
@@ -159,6 +162,12 @@
 
                                         <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
                                             <i class="fa fa-check-double text-warning"></i> Approve Ticket
+                                        </a>}
+                                    @if ((item.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
+                                    {<div class="divider"></div>
+
+                                        <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
+                                            <i class="fa fa-cash-register text-primary"></i> Invoice Ticket
                                         </a>}
                                     @if (item.Ticket_status == 0)
                                     {

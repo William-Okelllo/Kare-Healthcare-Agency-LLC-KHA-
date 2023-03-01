@@ -15,5 +15,7 @@ namespace Ishop.Infa
         {
         }
         public DbSet<Ticket> tickets { get; set; }
+
+        public System.Data.Entity.DbSet<IShop.Core.leave> leaves { get; set; }
     }
 }

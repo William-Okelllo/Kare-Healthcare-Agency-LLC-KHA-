@@ -274,6 +274,11 @@
                  onclick="location.href='@Url.Action("Approve_Ticket", "Tickets" ,new { id = Model.id })'">
                 Approve_Ticket
             </button>}
+        @if ((Model.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
+        {<button type="button" class="btn btn-warning active"
+                 onclick="location.href='@Url.Action("Ticket_Invoicing", "Tickets" ,new { id = Model.id })'">
+                Invoice Ticket
+            </button>}
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
     </div>
     

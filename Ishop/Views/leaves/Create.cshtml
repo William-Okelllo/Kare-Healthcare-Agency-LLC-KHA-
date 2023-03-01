@@ -23,6 +23,7 @@
         border-radius: 1rem;
         border-color: red;
     }
+
     .form-rounded7 {
         border-radius: 1rem;
         border-color: darkblue;
@@ -78,13 +79,26 @@
     }, 4000);
 </script>
 <!-- /.card-header -->
-
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+    $(function () {
+        $("#datepicker3").datepicker();
+    });
+</script>
 
 <div class="card" style="background-color: rgb(255, 255, 255, 0.17);">
     <div class="card-body" style="background-color: #ffffffc1">
 
-       
+
 
         <div class="col d-flex justify-content-center">
             <div class="col-md-10 col-sm-12 col-12">
@@ -103,68 +117,68 @@
 
 
 
-                        <div class="form-row">
+                            <div class="form-row">
 
 
 
 
 
-                            <div class="form-group col-md-4">
-                                <label >@Html.LabelFor(model => model.CreatedOn)</label>
-                                @Html.EditorFor(model => model.CreatedOn, new
-                           {
-                               htmlAttributes = new
+                                <div class="form-group col-md-4">
+                                    <label>@Html.LabelFor(model => model.CreatedOn)</label>
+                                    @Html.EditorFor(model => model.CreatedOn, new
                                {
-                                   @class = "form-control ",
-                                   @placeholder = "Department Name",
-                                   @Value = DateTime.Now,
-                                        ReadOnly = true
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @placeholder = "Department Name",
+                                       @Value = DateTime.Now,
+                                            ReadOnly = true
 
 
 
 
 
-                               }
-                           })
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>@Html.LabelFor(model => model.Employee)</label>
-                                @Html.EditorFor(model => model.Employee, new
-                           {
-                               htmlAttributes = new
+                                   }
+                               })
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>@Html.LabelFor(model => model.Employee)</label>
+                                    @Html.EditorFor(model => model.Employee, new
                                {
-                                   @class = "form-control ",
-                                   @placeholder = "Contact Number",
-                                        @Value = User.Identity.Name,
-                                        ReadOnly = true
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @placeholder = "Contact Number",
+                                            @Value = User.Identity.Name,
+                                            ReadOnly = true
 
 
 
 
-                               }
-                           })
+                                   }
+                               })
 
 
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label >@Html.LabelFor(model => model.Department)</label>
-                                @Html.EditorFor(model => model.Department, new
-                             {
-                                 htmlAttributes = new
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>@Html.LabelFor(model => model.Department)</label>
+                                    @Html.EditorFor(model => model.Department, new
                                  {
-                                     @class = "form-control ",
+                                     htmlAttributes = new
+                                     {
+                                         @class = "form-control ",
 
-                                          @Value = ViewBag.Drpt,
-                                          ReadOnly = true
+                                              @Value = ViewBag.Drpt,
+                                              ReadOnly = true
 
 
 
 
-                                 }
-                             })
+                                     }
+                                 })
 
+                                </div>
                             </div>
-                        </div>
                             <div class="form-row">
 
                                 <div class="form-group col-md-3">
@@ -219,7 +233,7 @@
                                     <medium style="color:black"> <i class="fa fa-calendar-day"></i>  Select requests days</medium>
                                     <hr>
                                     <div class="row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label>@Html.LabelFor(model => model.From_Date)</label>
                                             @Html.EditorFor(model => model.From_Date, new
                                        {
@@ -227,7 +241,7 @@
                                            {
                                                @class = "form-control ",
                                                @placeholder = "Department Name",
-                                               @Type = "Date",
+                                               id = "datepicker"
 
 
 
@@ -237,7 +251,7 @@
                                            }
                                        })
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label>@Html.LabelFor(model => model.To_Date)</label>
                                             @Html.EditorFor(model => model.To_Date, new
                                        {
@@ -245,11 +259,21 @@
                                            {
                                                @class = "form-control ",
                                                @placeholder = "Department Name",
-                                               @Type = "Date",
+                                               id = "datepicker2"
 
 
-
-
+                                           }
+                                       })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>@Html.LabelFor(model => model.Return_Date)</label>
+                                            @Html.EditorFor(model => model.Return_Date, new
+                                       {
+                                           htmlAttributes = new
+                                           {
+                                               @class = "form-control ",
+                                               @placeholder = "Return Date",
+                                               id = "datepicker3"
 
 
                                            }
@@ -306,6 +330,7 @@
 
                             <div style="color:red">@Html.ValidationMessageFor(x => x.From_Date)</div>
                             <div style="color:red">@Html.ValidationMessageFor(x => x.To_Date)</div>
+                            <div style="color: red">@Html.ValidationMessageFor(x => x.Return_Date)</div>
                             <div style="color: red">@Html.ValidationMessageFor(x => x.Message)</div>
 
 
@@ -341,11 +366,9 @@
                                 </tbody>
                             </table>
 
-                            }
+                        }
 
-                            </form>
-
-
+                        </form>
 
 
 
@@ -365,14 +388,17 @@
 
 
 
-                            @section Scripts {
-                                @Scripts.Render("~/bundles/jqueryval")
-                            }
+
+
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
 
 
 
-                        </div>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+            </div>
 
-</div></div>
+        </div>
+    </div>

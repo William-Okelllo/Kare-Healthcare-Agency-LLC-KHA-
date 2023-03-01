@@ -27,7 +27,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header" style="background-color: navy">
+    <div class="card-header" style="background-color: #001F3F">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-thin fa-history"></i>
             Requested leaves
@@ -68,11 +68,13 @@
 
                 <thead>
                     <tr style="color:white">
-                        <th style="background-color: navy; "> Employee Name</th>
-                        <th style="background-color: navy; ">Type </th>
-                        <th style="background-color: navy; ">Submission Date </th>
-                        <th style="background-color: navy; ">Requested Leave </th>
-                        <th style="background-color: navy; ">Status </th>
+                        <th style="background-color: #001F3F; "> Employee Name</th>
+                        <th style="background-color: #001F3F; ">Type </th>
+                        <th style="background-color: #001F3F; ">Submission Date </th>
+                        <th style="background-color: #001F3F; ">Return Date </th>
+                        <th style="background-color: #001F3F; ">Requested Leave </th>
+                        <th style="background-color: #001F3F; ">Status </th>
+                        <th style="background-color: #001F3F; ">Actions </th>
 
 
 
@@ -87,18 +89,57 @@
                         <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Employee</td>
                         <td style="background-color:white"><i class="fa fa-circle-notch text-green"></i> @item.Type</td>
                         <td style="background-color:white"><i class="fa fa-calendar-day text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</td>
+
+                        <td style="background-color:white">
+                            <small>
+                                <i class="fa fa-calendar text-success"></i>  @item.Return_Date.ToString("dd-MMMM-yyyy")
+                            </small>
+                        </td>
                         <td style="background-color:white">
                             <small>
                                 <b><i class="fa fa-clock text-success"></i> From</b> @item.From_Date.ToString("dd-MMMM-yyyy") <b><i class="fa fa-clock text-warning"></i> To</b> @item.To_Date.ToString("dd-MMMM-yyyy")
-                            </small></td>
+                            </small>
+                        </td>
                         <td style="background-color:white">
-                            @if (item.Status == "0") {<small style="color:orangered"><i class="fa fa-clock"></i> awating approvals</small>}
-                                else if (item.Status == "Approved")
-                                {<small style="color:green"><i class="fa fa-check-circle"></i> Approved</small>}
-                                else
-                                {
-                                    <small style="color:red"><i class="fa fa-times-circle"></i> Denied</small>
-                                }
+                            @if (item.Status == "0")
+                            {<small style="color:orangered"><i class="fa fa-clock"></i> awating approvals</small>}
+                            else if (item.Status == "1")
+                            {<small style="color:green"><i class="fa fa-check-circle"></i> Awating 2nd Approvals</small>}
+                            else if (item.Status == "2")
+                            {<small style="color:green"><i class="fa fa-check-double"></i> leave Approved (1st & 2nd)</small>}
+                            else
+                            {
+                                <small style="color:red"><i class="fa fa-times-circle"></i> Denied</small>
+                            }
+
+                        </td>
+
+                        
+                            <td style="background-color:ghostwhite">
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn-xs btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-user-circle" s></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                        @if ((item.Status == "0" || item.Status == "1") && this.User.IsInRole("Leaves_Approval")) {
+                                            <a href="@Url.Action("Approve_leave", "leaves", new { id = item.Id })" class="dropdown-item">
+                                                <i class="fas fa-pen text-success"></i> Approve/Deny leave
+                                            </a>
+                                            }
+
+                                        <div class="divider"></div>
+                                       
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+                            </td>
+                       
 
 
 
@@ -109,11 +150,7 @@
 
 
 
-
-
-
-
-                    </tr>
+                        </tr>
                     <tr class="expandable-body">
 
                             <td colspan="5" style="background-color: rgb(255, 255, 255, 0.88);">
@@ -141,9 +178,11 @@
 
                             </td>
 
+
                         </tr>
 
                     }
+
                 </tbody>
             </table>
             @if (Model.Count() == 0)

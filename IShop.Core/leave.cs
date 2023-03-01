@@ -26,7 +26,9 @@ namespace IShop.Core
         [Display(Name = "To Date ")]
         public DateTime To_Date { get; set; }
 
-
+        [Required]
+        [Display(Name = "Return Date ")]
+        public DateTime Return_Date { get; set; }
 
 
 
@@ -41,6 +43,7 @@ namespace IShop.Core
 
 
         public string Message { get; set; }
+        public string Approver_Remarks { get; set; }
 
 
 

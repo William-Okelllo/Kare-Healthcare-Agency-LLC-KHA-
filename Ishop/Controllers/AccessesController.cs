@@ -64,12 +64,41 @@ namespace Ishop.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Grant_Role(int? id)
         {
-            
 
+            ViewBag.Roles2 = GetSystemRole();
             return View();
         }
+        private static List<A> GetSystemRole()
+        {
+            List<A> fruits = new List<A>();
+            string constr = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "sp_GetRoles";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            fruits.Add(new A
+                            {
+                                Role = sdr["Role"].ToString(),
 
-        
+
+                            });
+                        }
+                    }
+                    con.Close();
+                }
+            }
+
+            return fruits;
+        }
+
         // POST: Access/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

@@ -27,36 +27,43 @@ namespace Ishop.Controllers
         // GET: leaves
         public ActionResult Index(string searchBy, string search, int? page)
         {
+            lleave_llog ll = new lleave_llog();
+            var data10 = ll.leaves_logs.ToList();
+            ViewBag.F = data10;
 
 
-            if (!(search == null))
+            if (this.User.IsInRole("Leaves_Approval"))
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+
+                if (!(search == null))
+                {
+                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == search).ToList().ToPagedList(page ?? 1, 6));
+
+                }
+                else
+                {
+                    return View(db.leave.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 6));
+
+
+                }
 
             }
             else
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                if (!(search == null))
+                {
+                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+
+                }
+                else
+                {
+                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
 
+                }
             }
         }
-        public ActionResult leaves_Requests(string searchBy, string search, int? page)
-        {
-
-
-            if (!(search == null))
-            {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == search).ToList().ToPagedList(page ?? 1, 6));
-
-            }
-            else
-            {
-                return View(db.leave.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 6));
-
-
-            }
-        }
+       
 
         // GET: leaves/Details/5
         public ActionResult Details(int? id)
@@ -131,7 +138,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Status,Department,Message,Type,HR_Email,Emp_Mail")] leave leave)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail")] leave leave)
         {
             if (leave.Department == null)
             {
@@ -148,6 +155,7 @@ namespace Ishop.Controllers
                 db.leave.Add(leave);
 
                 leave.Status = "0";
+                leave.Approver_Remarks= "--";
                 leave.Emp_Mail = currentUser.Email;
                 TempData["msg"] = "leave request posted successfully ";
                 db.SaveChanges();
@@ -204,7 +212,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,From,To,Employee,Status,Message,Type,HR_Email,Emp_Mail")] leave leave)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail")] leave leave)
         {
             if (ModelState.IsValid)
             {
@@ -214,6 +222,91 @@ namespace Ishop.Controllers
             }
             return View(leave);
         }
+
+
+
+
+
+
+
+
+
+
+        public ActionResult Approve_leave (int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            leave leave = db.leave.Find(id);
+            if (leave == null)
+            {
+                return HttpNotFound();
+            }
+
+
+
+
+            lleave_llog ll = new lleave_llog();
+            var data10 = ll.leaves_logs.ToList();
+            ViewBag.F = data10;
+            return View(leave);
+        }
+
+        // POST: leaves/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Approve_leave([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail,Approver_Remarks")] leave leave)
+        {
+            if (ModelState.IsValid)
+            {
+                
+
+                db.Entry(leave).State = EntityState.Modified;
+                db.SaveChanges();
+                try
+                {
+                    string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                    SqlConnection sqlCon = new SqlConnection(strcon);
+                    SqlCommand sqlcmnd = new SqlCommand("sp_markleave_approved", sqlCon);
+                    sqlcmnd.CommandType = CommandType.StoredProcedure;
+                    sqlcmnd.Parameters.AddWithValue("@Id", leave.Id);
+                    sqlcmnd.Parameters.AddWithValue("@Approver_Remarks", leave.Approver_Remarks);
+                    sqlcmnd.Parameters.AddWithValue("@Approver", User.Identity.Name);
+                    sqlCon.Open();
+                    sqlcmnd.ExecuteNonQuery();
+                    sqlCon.Close();
+
+                    TempData["msg"] = "Leave approved successfully ";
+                }
+                catch
+                {
+                    TempData["msg"] = "error occured in approving leave request ";
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Index");
+            }
+            return View(leave);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: leaves/Delete/5
         public ActionResult Delete(int? id)
@@ -252,24 +345,7 @@ namespace Ishop.Controllers
 
         public ActionResult Approve(int? id, leave leave)
         {
-            try
-            {
-                string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-                SqlConnection sqlCon = new SqlConnection(strcon);
-                SqlCommand sqlcmnd = new SqlCommand("sp_markleave_approved", sqlCon);
-                sqlcmnd.CommandType = CommandType.StoredProcedure;
-                sqlcmnd.Parameters.AddWithValue("@Id", leave.Id);
-                sqlCon.Open();
-                sqlcmnd.ExecuteNonQuery();
-                sqlCon.Close();
-
-                
-            }
-            catch
-            {
-                TempData["msg"] = "error occured in approving leave request ";
-                return RedirectToAction("leaves_Requests");
-            }
+            
 
 
             {

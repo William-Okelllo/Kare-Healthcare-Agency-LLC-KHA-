@@ -514,6 +514,24 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\leaves_logs.cs">
+      <DependentUpon>lleave.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lleave.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lleave.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lleave.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lleave.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lleave.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lleave.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2021,6 +2039,16 @@
       <DependentUpon>Files_.edmx</DependentUpon>
       <LastGenOutput>Files_.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\lleave.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>lleave.edmx</DependentUpon>
+      <LastGenOutput>lleave.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\lleave.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>lleave.edmx</DependentUpon>
+      <LastGenOutput>lleave.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -2336,6 +2364,13 @@
     </EntityDeploy>
     <Content Include="Models\sp_timesheet.edmx.diagram">
       <DependentUpon>sp_timesheet.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\lleave.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>lleave.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\lleave.edmx.diagram">
+      <DependentUpon>lleave.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
@@ -3032,7 +3067,6 @@
     <Content Include="Views\DashBoard\Monitor.cshtml" />
     <Content Include="Views\Calender\Staffing_Agency.cshtml" />
     <Content Include="Views\Account\New_Employee.cshtml" />
-    <Content Include="Views\Accesses\Grant_Role_.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Files\Edit.cshtml" />
     <Content Include="Views\Employes\Create.cshtml" />
@@ -3098,6 +3132,7 @@
     <Content Include="Views\Tickets\Details.cshtml" />
     <Content Include="Views\Tickets\Ticket_Update.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
+    <Content Include="Views\leaves\Approve_leave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

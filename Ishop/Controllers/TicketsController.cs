@@ -217,6 +217,34 @@ namespace Ishop.Controllers
 
         }
 
+        public ActionResult Ticket_Invoicing(int? id, Ticket ticket)
+        {
+            try
+            {
+                string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand sqlcmnd = new SqlCommand("sp_markticket_Invoiced", sqlCon);
+                sqlcmnd.CommandType = CommandType.StoredProcedure;
+                sqlcmnd.Parameters.AddWithValue("@Id", ticket.id);
+                sqlCon.Open();
+                sqlcmnd.ExecuteNonQuery();
+                sqlCon.Close();
+                TempData["msg"] = "Ticket Invoiced successfully ";
+                return RedirectToAction("Index");
+
+
+            }
+            catch
+            {
+                TempData["msg"] = "error occured in  on Invoiced ticket ";
+                return RedirectToAction("Index");
+            }
+
+
+
+
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
