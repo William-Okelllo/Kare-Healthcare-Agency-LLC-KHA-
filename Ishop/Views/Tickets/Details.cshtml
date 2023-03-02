@@ -104,18 +104,7 @@
                    }
                })
                 </div>
-                <div class="form-group col-md-3">
-                    <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Gross_Profit) </label>
-                    @Html.EditorFor(model => model.Gross_Profit, new
-               {
-                   htmlAttributes = new
-                   {
-                       @class = "form-control form-control-sm",
-                       @Placeholder = "Pax Name",
-                       @Readonly = true,
-                   }
-               })
-                </div>
+
 
 
 
@@ -132,8 +121,6 @@
                    }
                })
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-2">
                     <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Recovery)</label>
                     @Html.EditorFor(model => model.Recovery, new
@@ -147,6 +134,9 @@
                    }
                })
                 </div>
+            </div>
+            <div class="row">
+               
 
 
 
@@ -189,20 +179,7 @@
                    }
                })
                 </div>
-                <div class="form-group col-md-3">
-                    <label><i class="fa fa-calendar-day text-warning"></i> @Html.LabelFor(model => model.USD_ACC)</label>
-                    @Html.EditorFor(model => model.USD_ACC, new
-               {
-                   htmlAttributes = new
-                   {
-                       @class = "form-control form-control-sm",
-                       @Placeholder = "0.0",
-                       @Readonly = true,
-
-                   }
-               })
-                </div>
-
+                
                 <div class="form-group col-md-2">
                     <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.CTC)</label>
                     @Html.EditorFor(model => model.CTC, new

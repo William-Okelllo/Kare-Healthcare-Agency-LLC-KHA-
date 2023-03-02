@@ -12,6 +12,7 @@ using PagedList;
 using EASendMail;
 using System.Configuration;
 using System.Data.SqlClient;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
@@ -26,18 +27,24 @@ namespace Ishop.Controllers
             if (this.User.IsInRole("Tickets_Approval"))
             {
 
-                if (!(search == null))
+                if (!(search == null) && (!(search == "")))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
 
                 }
-                else
-                {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+            
+            else if (search == " ")
+            {
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
 
-
-                }
             }
+            else
+            {
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+
+        }
             else
             {
                 if (!(search == null))
@@ -45,11 +52,16 @@ namespace Ishop.Controllers
                     return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Staff==User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
 
                 }
-                else
+                else if (search == null)
                 {
                     return View(db.tickets.OrderByDescending(p => p.id).Where(c => (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
 
+                }
+                else
+                {
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => (!(c.Ticket_status == 99))).ToList()
+                        .ToPagedList(page ?? 1, 6));
                 }
             }
         }
@@ -72,20 +84,37 @@ namespace Ishop.Controllers
         // GET: Tickets/Create
         public ActionResult New_Ticket()
         {
+            ticket_datasetlist dbb = new ticket_datasetlist();
+            var categories = dbb.Ticketing_Airlines.ToList();
+            ViewBag.Categories = new SelectList(categories, "Airline", "Airline");
+
+            ticket_datasetlist routelist = new ticket_datasetlist();
+            var routes = routelist.Ticketing_Routes.ToList();
+            ViewBag.routes = new SelectList(routes, "Routing", "Routing");
+
+            ticket_datasetlist service = new ticket_datasetlist();
+            var servicep = service.Ticketing_service_providers.ToList();
+            ViewBag.servicep = new SelectList(servicep, "Service_Provider", "Service_Provider");
+
+            ticket_datasetlist pp = new ticket_datasetlist();
+            var payment = pp.Ticket_payment_modes.ToList();
+            ViewBag.payment = new SelectList(payment, "Mode", "Mode");
+
+
             return View();
         }
+     
 
-        // POST: Tickets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,CONS,Airline,Service_Provider,Pax_Name,Client,Currency,Staff,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,USD_ACC,Remarks,Ticket_status")] Ticket ticket)
+        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,CONS,Airline,Mode,Service_Provider,Pax_Name,Client,Currency,Staff,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
         {
 
             ticket.Ticket_status = 0;
             if (ModelState.IsValid)
             {
+                ticket.Gross_Profit = (((ticket.Inv_Amount - ticket.Net_Amount) - (ticket.Recovery + ticket.Incentv)));
+
                 db.tickets.Add(ticket);
                 db.SaveChanges();
                 TempData["msg"] = "Ticket posted successfully ";
@@ -127,6 +156,7 @@ namespace Ishop.Controllers
             ticket.Ticket_status = 0;
             if (ModelState.IsValid)
             {
+                ticket.Gross_Profit = (((ticket.Inv_Amount - ticket.Net_Amount) - (ticket.Recovery + ticket.Incentv)));
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["msg"] = "Ticket updated successfully ";

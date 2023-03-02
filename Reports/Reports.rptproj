@@ -52,6 +52,7 @@
     <DataSource Include="D.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="Dashboard.rdl" />
     <Report Include="Expenses_report.rdl" />
     <Report Include="Invoices_report.rdl" />
     <Report Include="Tickets_Report.rdl" />

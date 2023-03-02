@@ -56,8 +56,7 @@ namespace IShop.Core
         [Required]
         public string CTC { get; set; }
 
-        [Display(Name = "USD/ACC")]
-        public decimal USD_ACC { get; set; }
+       
 
 
         [Required]
@@ -68,6 +67,9 @@ namespace IShop.Core
 
         public string Staff { get; set; }
 
+        [Required]
+        [Display(Name = "Payment Mode")]
+        public string Mode { get; set; }
     }
 
 }

@@ -83,11 +83,11 @@
     }
 
     <script>
-            window.setTimeout(function () {
-                $(".alert").fadeTo(500, 0).slideUp(500, function () {
-                    $(this).remove();
-                });
-            }, 2000);
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
     </script>
 
 
@@ -112,7 +112,7 @@
 
                     <th style="background-color: #001F3F; ">INV Amt </th>
                     <th style="background-color: #001F3F; ">NET Amt </th>
-                    <th style="background-color: #001F3F; ">Gross Profit </th>
+
                     <th style="background-color: #001F3F; ">Date of Travel </th>
                     <th style="background-color: #001F3F; ">Status </th>
                     <th style="background-color: #001F3F; ">Actions </th>
@@ -133,7 +133,7 @@
 
                         <td style="background-color:white">  @item.Inv_Amount</td>
                         <td style="background-color:white"> @item.Net_Amount</td>
-                        <td style="background-color:whitesmoke"> @item.Gross_Profit</td>
+
 
                         <td style="background-color:white">
                             <small>
@@ -194,7 +194,7 @@
 
 
 
-</td>
+                        </td>
 
 
 
@@ -246,63 +246,93 @@
 
 
 
-           
+
 
         }
 
-            @if (Model.Count() == 0)
-            {
-                <div style="text-align:center">
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box bg-gradient-black">
-                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
+        @if (Model.Count() == 0)
+        {
+            <div style="text-align:center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
 
 
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <span class="progress-description">
-                                    <i class="fa fa-calendar text-white nav-icon"></i>   No Invoices Found
-                                </span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 0%"></div>
                             </div>
-                            <!-- /.info-box-content -->
+                            <span class="progress-description">
+                                <i class="fa fa-calendar text-white nav-icon"></i>   No Invoices Found
+                            </span>
                         </div>
-                        <!-- /.info-box -->
+                        <!-- /.info-box-content -->
                     </div>
+                    <!-- /.info-box -->
                 </div>
+            </div>
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
             }
 
+            ul.pagination li {
+                display: inline;
+            }
 
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
 
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
 
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
 
-
-
-
-
-
-
-
-
-
-            <div class="small-box bg-gradient-gray-dark">
-                <div>
-                    <h5 style="font-family:Quicksand">
-                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
-                    , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
-                    </h5>
-                </div>
-
-
-
-
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
             </div>
-
-
         </div>
+
+
+    </div>
+
+
+
+</div>
 
 
 

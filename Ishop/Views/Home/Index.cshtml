@@ -101,43 +101,7 @@
                         <div class="card-body text-left">
 
 
-                            <section class="content">
-                                <div class="container-fluid">
-                                    <h6 style="color:navy"><i class="fa fa-file-invoice text-navy"></i> Invoices Status</h6>
-                                    <div class="row">
-
-                                        <div class="col-md-6 col-sm-5 col-10">
-                                            <div class="info-box" style="background-color: #001F3F">
-
-                                                @foreach (var item in ViewBag.l2)
-                                                {
-                                                    <div class="info-box-content">
-                                                        <span class="info-box-text" style="color:white"><i class="fa fa-file-invoice"></i> Invoices Month : @item.M</span>
-                                                        <span class="info-box-number" style="color:white"><i class="fa fa-cash-register"></i> Upaid : @item.New || Paid : @item.Paid</span>
-                                                    </div>
-                                                }
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                        <div class="col-md-6 col-sm-5 col-10">
-                                            <div class="info-box" style="background-color: #790404">
-
-
-                                                @foreach (var item in ViewBag.l3)
-                                                {
-                                                    <div class="info-box-content">
-                                                        <span class="info-box-text" style="color:white"><i class="fa fa-file-invoice"></i> Expenses Month : @item.M</span>
-                                                        <span class="info-box-number" style="color:white"><i class="fa fa-cash-register"></i> Paid : @item.Expenses</span>
-                                                    </div>
-                                                }
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+                           
 
 
 

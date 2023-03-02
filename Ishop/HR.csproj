@@ -387,6 +387,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AirlinesController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\CalenderController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
@@ -401,8 +402,11 @@
     <Compile Include="Controllers\leavesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
+    <Compile Include="Controllers\payment_modesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\RoutesController.cs" />
+    <Compile Include="Controllers\Service_providersController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\successController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
@@ -652,6 +656,48 @@
     </Compile>
     <Compile Include="Models\Tasks_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticketing_airlines.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ticketing_airlines.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticketing_Airlines.cs">
+      <DependentUpon>ticket_dataset.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticketing_airlines.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticketing_airlines1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ticketing_airlines.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticketing_Routes.cs">
+      <DependentUpon>ticket_dataset.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticketing_service_providers.cs">
+      <DependentUpon>ticket_dataset.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ticket_dataset.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ticket_dataset.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ticket_dataset.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ticket_dataset.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ticket_dataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ticket_dataset.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticket_payment_modes.cs">
+      <DependentUpon>ticket_dataset.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tie_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -2089,6 +2135,26 @@
       <DependentUpon>tableOffice.edmx</DependentUpon>
       <LastGenOutput>tableOffice.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Ticketing_airlines.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
+      <LastGenOutput>Ticketing_airlines.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Ticketing_airlines.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
+      <LastGenOutput>Ticketing_airlines1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ticket_dataset.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ticket_dataset.edmx</DependentUpon>
+      <LastGenOutput>ticket_dataset.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ticket_dataset.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ticket_dataset.edmx</DependentUpon>
+      <LastGenOutput>ticket_dataset.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\us.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>us.edmx</DependentUpon>
@@ -2371,6 +2437,20 @@
     </EntityDeploy>
     <Content Include="Models\lleave.edmx.diagram">
       <DependentUpon>lleave.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Ticketing_airlines.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ticketing_airlines.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Ticketing_airlines.edmx.diagram">
+      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ticket_dataset.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ticket_dataset.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ticket_dataset.edmx.diagram">
+      <DependentUpon>ticket_dataset.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
@@ -3133,6 +3213,26 @@
     <Content Include="Views\Tickets\Ticket_Update.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
     <Content Include="Views\leaves\Approve_leave.cshtml" />
+    <Content Include="Views\Airlines\Create.cshtml" />
+    <Content Include="Views\Airlines\Delete.cshtml" />
+    <Content Include="Views\Airlines\Details.cshtml" />
+    <Content Include="Views\Airlines\Edit.cshtml" />
+    <Content Include="Views\Airlines\Index.cshtml" />
+    <Content Include="Views\Service_providers\Create.cshtml" />
+    <Content Include="Views\Service_providers\Delete.cshtml" />
+    <Content Include="Views\Service_providers\Details.cshtml" />
+    <Content Include="Views\Service_providers\Edit.cshtml" />
+    <Content Include="Views\Service_providers\Index.cshtml" />
+    <Content Include="Views\Routes\Create.cshtml" />
+    <Content Include="Views\Routes\Delete.cshtml" />
+    <Content Include="Views\Routes\Details.cshtml" />
+    <Content Include="Views\Routes\Edit.cshtml" />
+    <Content Include="Views\Routes\Index.cshtml" />
+    <Content Include="Views\payment_modes\Create.cshtml" />
+    <Content Include="Views\payment_modes\Delete.cshtml" />
+    <Content Include="Views\payment_modes\Details.cshtml" />
+    <Content Include="Views\payment_modes\Edit.cshtml" />
+    <Content Include="Views\payment_modes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
