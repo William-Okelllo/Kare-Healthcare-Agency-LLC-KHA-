@@ -8,7 +8,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h7 class="modal-title"><i class="fa fa-id-card text-warning"></i> Ticket Details</h7>
     </div>
-    <div class="modal-body" style="width: 750px;">
+    <div class="modal-body" >
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-3">
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div class="row">
-               
+
 
 
 
@@ -179,7 +179,7 @@
                    }
                })
                 </div>
-                
+
                 <div class="form-group col-md-2">
                     <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.CTC)</label>
                     @Html.EditorFor(model => model.CTC, new
@@ -244,21 +244,51 @@
 
             </div>
         </div>
-
-        <hr />
-        @if ((Model.Ticket_status == 0) && this.User.IsInRole("Tickets_Approval"))
-        {<button type="button" class="btn btn-warning active"
-                 onclick="location.href='@Url.Action("Approve_Ticket", "Tickets" ,new { id = Model.id })'">
-                Approve_Ticket
-            </button>}
-        @if ((Model.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
-        {<button type="button" class="btn btn-warning active"
-                 onclick="location.href='@Url.Action("Ticket_Invoicing", "Tickets" ,new { id = Model.id })'">
-                Invoice Ticket
-            </button>}
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-    </div>
-    
        
-    
-</div>
+        <div class="table-responsive"style="border-radius: 10px; ">
+            <table class="table table-bordered table-hover  text-nowrap" style="border-radius: 10px; ">
+
+                <thead style="border-radius: 10px; ">
+                    <tr style="color:black">
+                        <th style="background-color: whitesmoke; "> <small>Date</small></th>
+
+                        <th style="background-color: whitesmoke; "><small>User</small> </th>
+
+
+                        <th style="background-color: whitesmoke; "><small>Action</small> </th>
+
+
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.F)
+                    {
+                        <tr data-widget="expandable-table" aria-expanded="false">
+
+                            <td style="background-color:white"><small> @item.CreatedOn</small></td>
+                            <td style="background-color:white"> <small><i class="fa fa-user-check"></i> @item.User_Acc</small></td>
+                            <td style="background-color:white"> <small><i class="fa fa-spinner"></i> @item.Action</small></td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <hr />
+            @if ((Model.Ticket_status == 0) && this.User.IsInRole("Tickets_Approval"))
+            {<button type="button" class="btn btn-warning active"
+                     onclick="location.href='@Url.Action("Approve_Ticket", "Tickets" ,new { id = Model.id })'">
+                    Approve_Ticket
+                </button>}
+            @if ((Model.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
+            {<button type="button" class="btn btn-warning active"
+                     onclick="location.href='@Url.Action("Ticket_Invoicing", "Tickets" ,new { id = Model.id })'">
+                    Invoice Ticket
+                </button>}
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+
+
+
+    </div>

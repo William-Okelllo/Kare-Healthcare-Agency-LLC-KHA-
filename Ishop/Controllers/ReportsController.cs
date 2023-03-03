@@ -35,7 +35,7 @@ namespace Ishop.Controllers
             viewer.ServerReport.ReportServerUrl = new Uri(ssrsUrl);
             viewer.ZoomMode = ZoomMode.PageWidth;
             viewer.Width = Unit.Percentage(100);
-            viewer.Height = Unit.Pixel(500);
+            viewer.Height = Unit.Pixel(900);
             viewer.BackColor = System.Drawing.Color.White;
             viewer.BorderColor = System.Drawing.Color.White;
             viewer.DocumentMapWidth = Unit.Percentage(100);

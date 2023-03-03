@@ -18,10 +18,10 @@ namespace IShop.Core
         [Required]
         public String CONS { get; set; }
 
-        [Required]
+        
         public String Airline { get; set; }
 
-        [Required]
+       
         [Display(Name = "Service Provider")]
         public String Service_Provider { get; set; }
 
@@ -32,8 +32,10 @@ namespace IShop.Core
         
         public String Client { get; set; }
         public String Currency { get; set; }
-        public decimal Inv_Amount { get; set; }
 
+        [Required]
+        public decimal Inv_Amount { get; set; }
+        [Required]
         public decimal Net_Amount { get; set; }
 
         public decimal Gross_Profit { get; set; }
@@ -50,7 +52,7 @@ namespace IShop.Core
         [Display(Name = "Arrival_Date")]
         public DateTime Arrival_Date { get; set; }
 
-        [Required]
+       
         public string Routing { get; set; }
 
         [Required]
@@ -67,7 +69,7 @@ namespace IShop.Core
 
         public string Staff { get; set; }
 
-        [Required]
+      
         [Display(Name = "Payment Mode")]
         public string Mode { get; set; }
     }

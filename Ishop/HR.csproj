@@ -657,23 +657,8 @@
     <Compile Include="Models\Tasks_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ticketing_airlines.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ticketing_airlines.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Ticketing_Airlines.cs">
       <DependentUpon>ticket_dataset.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ticketing_airlines.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ticketing_airlines1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ticketing_airlines.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ticketing_Routes.cs">
       <DependentUpon>ticket_dataset.tt</DependentUpon>
@@ -696,11 +681,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ticket_dataset.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ticket_logs.cs">
+      <DependentUpon>tiko_logs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ticket_payment_modes.cs">
       <DependentUpon>ticket_dataset.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tie_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tiko_logs.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiko_logs.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tiko_logs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiko_logs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tiko_logs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiko_logs.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\us.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2135,16 +2138,6 @@
       <DependentUpon>tableOffice.edmx</DependentUpon>
       <LastGenOutput>tableOffice.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Ticketing_airlines.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
-      <LastGenOutput>Ticketing_airlines.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Ticketing_airlines.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
-      <LastGenOutput>Ticketing_airlines1.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\ticket_dataset.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ticket_dataset.edmx</DependentUpon>
@@ -2154,6 +2147,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ticket_dataset.edmx</DependentUpon>
       <LastGenOutput>ticket_dataset.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\tiko_logs.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>tiko_logs.edmx</DependentUpon>
+      <LastGenOutput>tiko_logs.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\tiko_logs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>tiko_logs.edmx</DependentUpon>
+      <LastGenOutput>tiko_logs.cs</LastGenOutput>
     </Content>
     <Content Include="Models\us.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2438,19 +2441,19 @@
     <Content Include="Models\lleave.edmx.diagram">
       <DependentUpon>lleave.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\Ticketing_airlines.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Ticketing_airlines.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Ticketing_airlines.edmx.diagram">
-      <DependentUpon>Ticketing_airlines.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\ticket_dataset.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ticket_dataset.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\ticket_dataset.edmx.diagram">
       <DependentUpon>ticket_dataset.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\tiko_logs.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>tiko_logs.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\tiko_logs.edmx.diagram">
+      <DependentUpon>tiko_logs.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />

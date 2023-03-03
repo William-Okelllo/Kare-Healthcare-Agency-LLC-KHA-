@@ -1,39 +1,127 @@
-﻿@model IEnumerable<Ishop.Models.Ticketing_service_providers>
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<Ishop.Models.Ticketing_service_providers>
+
 
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
 
-<h2>Index</h2>
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Service_Provider)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </th>
-        <th></th>
-    </tr>
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Service_Provider)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
 
-</table>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header" style="background-color: #001F3F">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-handshake"></i>
+            Ticketing service_providers
+        </h3>
+
+
+
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "service_providers", FormMethod.Get))
+            {
+
+
+
+
+
+
+                <a style="font-family: Calibri"> service provider</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "  Mode" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                @Html.ActionLink(" Add  Provider ", "Create", "service_providers", null, new { @class = "btn btn-sm btn-default btn" })
+
+
+            }
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+    </script>
+
+
+
+
+
+
+
+
+
+    <div class="table-responsive" style="min-height: 400px">
+        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable">
+            <tr style="background-color: #001F3F ;color:white">
+                <th>
+                    <i class="fa fa-calendar"></i>  Added On
+                </th>
+                <th>
+                    <i class="fa fa-handshake"></i> Service provider
+                </th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr style="background-color:whitesmoke">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        <i class="fa fa-cash-register"></i>  @Html.DisplayFor(modelItem => item.Service_Provider)
+                    </td>
+
+                    <td>
+                        <i class="fa fa-trash text-danger nav-icon"></i>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+
+        </table>

@@ -13,7 +13,7 @@ namespace Ishop.Controllers
 {
     public class AirlinesController : Controller
     {
-        private Ticketing_airlineslist db = new Ticketing_airlineslist();
+        private ticket_datasetlist db = new ticket_datasetlist();
 
         // GET: Airlines
         public ActionResult Index(string searchBy, string search, int? page)
@@ -28,12 +28,12 @@ namespace Ishop.Controllers
 
             else if (search == " ")
             {
-                return View(db.Ticketing_Airlines.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 50));
+                return View(db.Ticketing_Airlines.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
 
             }
             else
             {
-                return View(db.Ticketing_Airlines.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 50));
+                return View(db.Ticketing_Airlines.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
 
             }
 
@@ -78,7 +78,7 @@ namespace Ishop.Controllers
                 return RedirectToAction("Index");
             }
 
-            return PartialView ("Create",ticketing_Airlines);
+            return View(ticketing_Airlines);
         }
 
         // GET: Airlines/Edit/5

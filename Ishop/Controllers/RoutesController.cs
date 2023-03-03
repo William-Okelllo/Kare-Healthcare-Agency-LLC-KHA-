@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ishop.Models;
+using PagedList;
 
 namespace Ishop.Controllers
 {
@@ -15,9 +16,27 @@ namespace Ishop.Controllers
         private ticket_datasetlist db = new ticket_datasetlist();
 
         // GET: Routes
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search, int? page)
         {
-            return View(db.Ticketing_Routes.ToList());
+
+
+            if (!(search == null) && (!(search == "")))
+            {
+                return View(db.Ticketing_Routes.OrderByDescending(p => p.id).Where(c => c.Routing == search).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+
+            else if (search == " ")
+            {
+                return View(db.Ticketing_Routes.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+            else
+            {
+                return View(db.Ticketing_Routes.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+
         }
 
         // GET: Routes/Details/5

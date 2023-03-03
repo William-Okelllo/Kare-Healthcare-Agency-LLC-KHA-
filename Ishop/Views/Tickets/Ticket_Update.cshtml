@@ -108,75 +108,67 @@
 
 
 
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
-                            @Html.EditorFor(model => model.CreatedOn, new
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
                        {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
+                           @class = "form-control form-control-sm",
 
-                              
-                               @Readonly = true
 
-                           }
-                       })
+                           @Readonly = true
 
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label><i class="fa fa-spinner text-warning"></i> @Html.LabelFor(model => model.CONS)</label>
-                            @{
-                                List<SelectListItem> v = new List<SelectListItem>();
-                                v.Add(new SelectListItem
-                                {
-                                    Text = "EA",
-                                    Value = "EA ",
-                                });
+                       }
+                   })
 
-                            }@Html.DropDownListFor(model => model.CONS, v, "---CONS---", new { @class = "form-control form-control-sm" })
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label><i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline) </label>
-                            @{
-                                List<SelectListItem> x = new List<SelectListItem>();
-                                x.Add(new SelectListItem
-                                {
-                                    Text = "KQ",
-                                    Value = "KQ",
-                                });
-                                x.Add(new SelectListItem
-                                {
-                                    Text = "JJ",
-                                    Value = "JJ",
-                                });
-                            }@Html.DropDownListFor(model => model.Airline, x, "---Airline---", new { @class = "form-control form-control-sm" })
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
-                            @Html.EditorFor(model => model.Pax_Name, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Placeholder = "Pax Name",
-
-                           }
-                       })
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label> <i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Client)</label>
-                            @{
-                                List<SelectListItem> s = new List<SelectListItem>();
-                                s.Add(new SelectListItem
-                                {
-                                    Text = "KENYA AIRPORTS AUTHORITY ",
-                                    Value = "KENYA AIRPORTS AUTHORITY",
-                                });
-
-                            }@Html.DropDownListFor(model => model.Client, s, "---Client---", new { @class = "form-control form-control-sm" })
-                        </div>
                     </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-spinner text-warning"></i> @Html.LabelFor(model => model.CONS)</label>
+                        @{
+                            List<SelectListItem> v = new List<SelectListItem>();
+                            v.Add(new SelectListItem
+                            {
+                                Text = "EA",
+                                Value = "EA ",
+                            });
+
+                        }@Html.DropDownListFor(model => model.CONS, v, "---CONS---", new { @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>
+                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">+</button>
+                            <i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline)
+                        </label>
+
+                        @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
+                        @Html.EditorFor(model => model.Pax_Name, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Pax Name",
+
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label> <i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Client)</label>
+                        @{
+                            List<SelectListItem> s = new List<SelectListItem>();
+                            s.Add(new SelectListItem
+                            {
+                                Text = "KENYA AIRPORTS AUTHORITY ",
+                                Value = "KENYA AIRPORTS AUTHORITY",
+                            });
+
+                        }@Html.DropDownListFor(model => model.Client, s, "---Client---", new { @class = "form-control form-control-sm" })
+                    </div>
+                </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Currency) </label>
@@ -282,35 +274,11 @@
                        })
                         </div>
                         <div class="form-group col-md-2">
-                            <label><i class="fa fa-road text-warning"></i> @Html.LabelFor(model => model.Routing)</label>
-                            @{
-                                List<SelectListItem> h = new List<SelectListItem>();
-                                h.Add(new SelectListItem
-                                {
-                                    Text = "NBO - MBA - NBO ",
-                                    Value = "NBO - MBA - NBO ",
-                                });
-
-                            }@Html.DropDownListFor(model => model.Routing, h, "---Routing---", new { @class = "form-control form-control-sm" })
+                            <label><i class="fa fa-route text-warning"></i> @Html.LabelFor(model => model.Routing)</label>
+                            @Html.DropDownList("Routing", ViewBag.routes as SelectList, "-- Select Route --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
                         </div>
-                       
-                        <script>
-                            $(document).ready(function () {
-                                //this calculates values automatically
-                                sum4();
-                                $("#Inv_Amount, #Net_Amount").on("keydown keyup", function () {
-                                    sum4();
-                                });
-                            });
-                            function sum4() {
-                                var num1 = document.getElementById('Inv_Amount').value;
 
-                                var result = parseFloat(num1);
-                                if (!isNaN(result)) {
-                                    document.getElementById('USD_ACC').value = result;
-                                }
-                            }
-                        </script>
+
                         <div class="form-group col-md-2">
                             <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.CTC)</label>
                             @Html.EditorFor(model => model.CTC, new
@@ -326,23 +294,18 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Service_Provider)</label>
-                            @{
-                                List<SelectListItem> b = new List<SelectListItem>();
-                                b.Add(new SelectListItem
-                                {
-                                    Text = "BSP PREMIER ",
-                                    Value = "BSP PREMIER ",
-                                });
-                                b.Add(new SelectListItem
-                                {
-                                    Text = "JJ Portal",
-                                    Value = "JJ Portal ",
-                                });
+                            @Html.DropDownList("Service_Provider", ViewBag.servicep as SelectList, "--  Service provider --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
 
-
-                            }@Html.DropDownListFor(model => model.Service_Provider, b, "---Service_Provider---", new { @class = "form-control form-control-sm" })
                         </div>
-                    </div>
+                        
+                            <div class="form-group col-md-2">
+                                <label><i class="fa fa-cube text-warning"></i> @Html.LabelFor(model => model.Mode) </label>
+                                @Html.DropDownList("Mode", ViewBag.payment as SelectList, "-- Payment Mode --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
+
+                            </div>
+                        </div>
+
+                   
 
                     <p style="font-family:Calibri">
                         <i class="fa fa-comment text-warning"></i>

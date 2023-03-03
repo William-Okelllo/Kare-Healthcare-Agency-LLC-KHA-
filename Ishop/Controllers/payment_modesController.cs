@@ -4,9 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Ishop.Models;
+using PagedList;
 
 namespace Ishop.Controllers
 {
@@ -15,9 +17,27 @@ namespace Ishop.Controllers
         private ticket_datasetlist db = new ticket_datasetlist();
 
         // GET: payment_modes
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search, int? page)
         {
-            return View(db.Ticket_payment_modes.ToList());
+
+
+            if (!(search == null) && (!(search == "")))
+            {
+                return View(db.Ticket_payment_modes.OrderByDescending(p => p.id).Where(c => c.Mode == search).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+
+            else if (search == " ")
+            {
+                return View(db.Ticket_payment_modes.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+            else
+            {
+                return View(db.Ticket_payment_modes.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+
         }
 
         // GET: payment_modes/Details/5

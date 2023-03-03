@@ -13,10 +13,10 @@ namespace Ishop.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Ticketing_airlineslist : DbContext
+    public partial class tikos_logs : DbContext
     {
-        public Ticketing_airlineslist()
-            : base("name=Ticketing_airlineslist")
+        public tikos_logs()
+            : base("name=tikos_logs")
         {
         }
     
@@ -25,6 +25,6 @@ namespace Ishop.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Ticketing_Airlines> Ticketing_Airlines { get; set; }
+        public virtual DbSet<Ticket_logs> Ticket_logs { get; set; }
     }
 }

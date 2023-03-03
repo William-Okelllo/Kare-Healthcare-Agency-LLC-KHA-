@@ -152,6 +152,7 @@
                            {
                                @class = "form-control form-control-sm",
                                @Placeholder = "Pax Name",
+                               @required = "required",
 
                            }
                        })
@@ -166,7 +167,7 @@
                                     Value = "KENYA AIRPORTS AUTHORITY",
                                 });
 
-                            }@Html.DropDownListFor(model => model.Client, s, "---Client---", new { @class = "form-control form-control-sm" })
+                            }@Html.DropDownListFor(model => model.Client, s, "---Client---", new { @class = "form-control form-control-sm", @required = "required", })
                         </div>
                     </div>
                     <div class="form-row">
@@ -194,6 +195,7 @@
                            {
                                @class = "form-control form-control-sm",
                                @Placeholder = "0.00",
+                               @required = "required",
 
                            }
                        })
@@ -206,6 +208,7 @@
                            {
                                @class = "form-control form-control-sm",
                                @Placeholder = "0.00",
+                               @required = "required",
 
                            }
                        })
@@ -260,7 +263,7 @@
                            {
                                @class = "form-control form-control-sm ",
                                @placeholder = " Departure_Date",
-                               id = "datepicker"
+                               id = "datepicker",@required = "required",
                            }
                        })
                         </div>
@@ -272,7 +275,8 @@
                            {
                                @class = "form-control form-control-sm ",
                                @placeholder = " Arrival_Date",
-                               id = "datepicker2"
+                               id = "datepicker2",
+                               @required = "required",
                            }
                        })
                         </div>
@@ -291,6 +295,7 @@
                            {
                                @class = "form-control form-control-sm",
                                @Placeholder = "CTC",
+                               @required = "required",
 
 
                            }
@@ -343,7 +348,7 @@
                        @placeholder = "Overall remarks",
                        @autofocus = ""
                        ,
-                       @class = "form-control form-rounded2"
+                       @class = "form-control form-rounded2",@required = "required",
 
                    })
 
