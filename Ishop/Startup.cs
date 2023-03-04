@@ -42,7 +42,7 @@ namespace Ishop
                 role.Name = "System";
                 roleManager.Create(role);
 
-                //Here we create a Admin super user who will maintain the website                   
+                //huyu ni bazeng                 
 
                 var user = new ApplicationUser();
                 user.UserName = "Muru";
@@ -97,9 +97,15 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Report_Viewer"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Report_Viewer";
+                roleManager.Create(role);
+
+            }
 
 
-            
         }
     }
 }

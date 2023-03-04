@@ -14,6 +14,7 @@ using Report = Ishop.Models.Report;
 
 namespace Ishop.Controllers
 {
+    [Authorize(Roles = "Report_Viewer")]
     public class ReportsController : Controller
     {
         private Reports_ db = new Reports_();

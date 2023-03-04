@@ -30,11 +30,11 @@
 <div class="row">
     <div class="col-12">
 
-        @if (TempData["Msg"] != null)
+        @if (TempData["msg2"] != null)
         {<div class="row">
                 <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    @TempData["Msg"]
+                    @TempData["msg2"]
                 </div>
             </div>
         }
@@ -84,7 +84,7 @@
                                     <div class="col-md-5 mb-5">
                                         <label><i class="fa fa-user-shield text-warning"></i> System Roles</label>
 
-                                        @Html.DropDownList("Role", new SelectList(ViewBag.Roles2, "Role", "Role"), "--Select System Role--", new { @id = "ddlFruits", @class = "form-control" })
+                                        @Html.DropDownList("Role", new SelectList(ViewBag.Roles2, "Role", "Role"), "--Select System Role--", new { @id = "ddlFruits", @class = "form-control",@required = "required" })
                                         @Html.Hidden("Role", null, new { @id = "hfRole" })
 
                                         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -110,7 +110,7 @@
                                                 Value = "0",
                                             });
 
-                                        }@Html.DropDownListFor(model => model.Status, y, "---Select action--", new { @class = "form-control" })
+                                        }@Html.DropDownListFor(model => model.Status, y, "---Select action--", new { @class = "form-control", @required = "required" })
                                     </div>
                                 </div>
                                 

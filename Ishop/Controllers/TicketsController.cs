@@ -16,7 +16,7 @@ using Ishop.Models;
 
 namespace Ishop.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Report_Viewer")]
     public class TicketsController : Controller
     {
         private TicketContext db = new TicketContext();

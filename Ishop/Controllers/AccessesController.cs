@@ -108,11 +108,7 @@ namespace Ishop.Controllers
         {
             access.Username = Id;
 
-            if (access.Role == null || access.Status==null)
-            {
-                TempData["msg"] = "Kindly select role ";
-                return RedirectToAction("Grant_Role");
-            }
+            
            
 
             
@@ -137,11 +133,12 @@ namespace Ishop.Controllers
                 }
                 catch (SqlException sqlEx)
                 {
-                    TempData["msg2"] = "✔ error updating system roles on the user ";
+                    TempData["msg2"] = "✔ Role already exist on account ";
                     return RedirectToAction("Grant_Role");
                     throw sqlEx;
                    
                 }
+
                 TempData["msg2"] = "✔ Success updating user account role ";
                 return RedirectToAction("Index", "Data");
             
@@ -231,104 +228,7 @@ namespace Ishop.Controllers
 
 
 
-        [Authorize(Roles = "Staffing_Agency")]
-        public ActionResult Grant_Role_(int? id)
-        {
-            ZO l2 = new ZO();
-            var boo2 = l2.GetEmpUsername(id).ToList();
-            ViewBag.l2 = boo2;
-
-            return View();
-        }
-
-
-        private static List<A> GetRoles()
-        {
-            List<A> fruits2 = new List<A>();
-            string constr = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                string query = "rolesL";
-                using (SqlCommand cmd = new SqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            fruits2.Add(new A
-                            {
-
-                                Role = sdr["Role"].ToString(),
-
-                            });
-                        }
-                    }
-                    con.Close();
-                }
-            }
-
-            return fruits2;
-        }
        
-        // POST: Access/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Grant_Role_([Bind(Include = "id,Username,Role,Status")] Access access,int? id)
-        {
-
-            if (access.Role == null)
-            {
-                TempData["msg"] = "Kindly select role ";
-                return RedirectToAction("Grant_Role_");
-            }
-            else if (access.Username == null)
-            {
-                TempData["msg"] = "Kindly select Username ";
-                return RedirectToAction("Grant_Role_");
-            }
-            else if (access.Status == null)
-            {
-                TempData["msg"] = "Kindly select Action ";
-                return RedirectToAction("Grant_Role_");
-            }
-
-
-            if (ModelState.IsValid)
-            {
-                db.Acesss.Add(access);
-                db.SaveChanges();
-
-                try
-                {
-                    string cnnString = System.Configuration.ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-                    SqlConnection cnn = new SqlConnection(cnnString);
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = cnn;
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "RolesAdd";
-                    //add any parameters the stored procedure might require
-                    cnn.Open();
-                    object o = cmd.ExecuteScalar();
-                    cnn.Close();
-                }
-                catch (SqlException)
-                {
-                    TempData["msg2"] = "✔ Error on updating access level";
-
-                }
-
-               
-            }
-
-            TempData["msg2"] = "✔ Success " + access.Username + " is now able to pickup tasks";
-            return RedirectToAction("Update_Profile", "Employes", new { id =id });
-
-        }
 
 
     }

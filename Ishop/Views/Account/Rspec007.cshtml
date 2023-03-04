@@ -27,36 +27,7 @@
         border-radius: 1rem;
     }
 </style>
-<div class="loading" align="center">
-    <img src="~/Images/t.gif" height="200" />
 
-</div>
-<script type="text/javascript">
-    var modal, loading;
-    function ShowProgress() {
-        modal = document.createElement("DIV");
-        modal.className = "modal";
-        document.body.appendChild(modal);
-        loading = document.getElementsByClassName("loading")[0];
-        loading.style.display = "block";
-        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-        loading.style.top = top + "px";
-        loading.style.left = left + "px";
-    };
-    ShowProgress();
-</script>
-<!-- Keep the Page Content Here.-->
-<script type="text/javascript">
-    window.onload = function () {
-        setTimeout(function () {
-            document.body.removeChild(modal);
-            loading.style.display = "none";
-        }, 800); //Delay just used for example and must be set to 0.
-    };
-</script>
-
-<!-- Main content -->
 
 <style>
     body {
@@ -127,7 +98,8 @@
                                    htmlAttributes = new
                                    {
                                        @class = "form-control form-rounded",
-                                       @PlaceHolder = "Username"
+                                       @PlaceHolder = "Username",
+                                       @required = "required"
                                    }
                                })  @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                             </div>
@@ -138,7 +110,8 @@
                                    htmlAttributes = new
                                    {
                                        @class = "form-control form-rounded",
-                                       @PlaceHolder = "Email Address"
+                                       @PlaceHolder = "Email Address",
+                                       @required = "required"
                                    }
                                })  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 </div>
@@ -152,6 +125,7 @@
                                    {
                                        @class = "form-control form-control-sm form-rounded",
                                        @PlaceHolder = "Password",
+                                       @required = "required"
 
                                    }
                                })  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
@@ -164,6 +138,7 @@
                                {
                                    @class = "form-control form-control-sm form-rounded",
                                    @PlaceHolder = "Confirm Password",
+                                   @required = "required"
 
                                }
                            })  @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
@@ -201,7 +176,7 @@
 
 
 
-            @Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, "-Account Type- ", new { @class = "form-control" })
+            @Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, "-Account Type- ", new { @class = "form-control", @required = "required" })
             @Html.ValidationMessageFor(model => model.UserRoles, "", new { @class = "text-danger" })
         </div>
     </div>

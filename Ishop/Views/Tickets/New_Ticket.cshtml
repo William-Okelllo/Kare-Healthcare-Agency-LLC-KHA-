@@ -134,7 +134,7 @@
                                     Value = "EA ",
                                 });
 
-                            }@Html.DropDownListFor(model => model.CONS, v, "---CONS---", new { @class = "form-control form-control-sm" })
+                            }@Html.DropDownListFor(model => model.CONS, v, "---CONS---", new { @class = "form-control form-control-sm",@required = "required" })
                         </div>
                         <div class="form-group col-md-2">
                             <label>
@@ -142,7 +142,8 @@
                                 <i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline)
                             </label>
                            
-                            @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
+                            @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --", 
+                           new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
                         </div>
                         <div class="form-group col-md-3">
                             <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
