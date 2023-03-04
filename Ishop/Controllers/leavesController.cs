@@ -17,6 +17,7 @@ using System.Configuration;
 using System.Web.Mail;
 using EASendMail;
 using SmtpMail = EASendMail.SmtpMail;
+using Syncfusion.DocIO.DLS;
 
 namespace Ishop.Controllers
 {[Authorize]
@@ -146,49 +147,56 @@ namespace Ishop.Controllers
                 return RedirectToAction("Create");
 
             }
-
-            if (ModelState.IsValid)
+            TimeSpan timeSpan = leave.From_Date - DateTime.Today;
+            int days = timeSpan.Days;
+            int dd = Int16.Parse( System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
+            var ddd= Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
+            if (days < dd)
+            { TempData["msg"] = "Kindly request leave  " + dd + "days from today's date"; }
+            else
             {
-                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                var currentUser = manager.FindById(User.Identity.GetUserId());
-
-                db.leave.Add(leave);
-
-                leave.Status = "0";
-                leave.Approver_Remarks= "--";
-                leave.Emp_Mail = currentUser.Email;
-                TempData["msg"] = "leave request posted successfully ";
-                db.SaveChanges();
-
-                try
+                if (ModelState.IsValid)
                 {
-                   
-                    SmtpMail oMail = new SmtpMail("TryIt");
-                    oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-                    oMail.To = leave.HR_Email;
-                    oMail.Subject = "New leave request";
-                    oMail.TextBody = "Hello, this a leave notification sent to you are the HOD of the department kindly login to the portal for approvals. "
-                    +
-                       "\n" + " thank you  :";
-                    SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+                    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(User.Identity.GetUserId());
 
-                    oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-                    oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
+                    db.leave.Add(leave);
 
-                    oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
-                    oServer.Port = 587;
-                    SmtpClient oSmtp = new SmtpClient();
-                    SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
+                    leave.Status = "0";
+                    leave.Approver_Remarks = "--";
+                    leave.Emp_Mail = currentUser.Email;
+                    TempData["msg"] = "leave request posted successfully ";
+                    db.SaveChanges();
+
+                    try
+                    {
+
+                        SmtpMail oMail = new SmtpMail("TryIt");
+                        oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                        oMail.To = leave.HR_Email;
+                        oMail.Subject = "New leave request";
+                        oMail.TextBody = "Hello, this a leave notification sent to you are the HOD of the department kindly login to the portal for approvals. "
+                        +
+                           "\n" + " thank you  :";
+                        SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+
+                        oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                        oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
+
+                        oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
+                        oServer.Port = 587;
+                        SmtpClient oSmtp = new SmtpClient();
+                        SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
+                        return RedirectToAction("Index");
+                    }
+                    catch
+                    {
+
+                    }
+
                     return RedirectToAction("Index");
                 }
-                catch
-                {
-
-                }
-
-                return RedirectToAction("Index");
             }
-
             return View(leave);
         }
 

@@ -70,26 +70,23 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.0.1\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
@@ -395,6 +392,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployesController.cs" />
+    <Compile Include="Controllers\Emp_ConfigController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -459,6 +457,9 @@
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmbedProperties.cs" />
+    <Compile Include="Models\Employees_Config.cs">
+      <DependentUpon>leaves_emp_config.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Emp_Dash_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
@@ -518,6 +519,24 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\leaves_Days_track.cs">
+      <DependentUpon>leaves_emp_config.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\leaves_emp_config.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>leaves_emp_config.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\leaves_emp_config.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>leaves_emp_config.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\leaves_emp_config.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>leaves_emp_config.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\leaves_logs.cs">
       <DependentUpon>lleave.tt</DependentUpon>
     </Compile>
@@ -2088,6 +2107,16 @@
       <DependentUpon>Files_.edmx</DependentUpon>
       <LastGenOutput>Files_.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\leaves_emp_config.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>leaves_emp_config.edmx</DependentUpon>
+      <LastGenOutput>leaves_emp_config.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\leaves_emp_config.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>leaves_emp_config.edmx</DependentUpon>
+      <LastGenOutput>leaves_emp_config.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\lleave.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>lleave.edmx</DependentUpon>
@@ -2454,6 +2483,13 @@
     </EntityDeploy>
     <Content Include="Models\tiko_logs.edmx.diagram">
       <DependentUpon>tiko_logs.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\leaves_emp_config.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>leaves_emp_config.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\leaves_emp_config.edmx.diagram">
+      <DependentUpon>leaves_emp_config.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
@@ -3109,7 +3145,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -3236,6 +3272,11 @@
     <Content Include="Views\payment_modes\Details.cshtml" />
     <Content Include="Views\payment_modes\Edit.cshtml" />
     <Content Include="Views\payment_modes\Index.cshtml" />
+    <Content Include="Views\Emp_Config\Create.cshtml" />
+    <Content Include="Views\Emp_Config\Delete.cshtml" />
+    <Content Include="Views\Emp_Config\Details.cshtml" />
+    <Content Include="Views\Emp_Config\Edit.cshtml" />
+    <Content Include="Views\Emp_Config\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

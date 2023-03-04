@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Ishop.Models.Employees_Config>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    ViewBag.Title = "Employees_Config";
+}
+
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 40%;
+        border-color: dodgerblue;
+    }
+
+    .bwe {
+        font-family: Quicksand;
+    }
+</style>
+
+
+@foreach (var item in Model)
+{
+    <div class="card" style="background-color: #ffffffd9">
+        <br />
+        <div class="col d-flex justify-content-center">
+            <div class="col-md-6" style="border-radius: 14px;">
+                <!-- Widget: user widget style 2 -->
+                <div class="card card-widget widget-user-2" style="border-radius: 14px;">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header" style="background-color: navy ">
+                        <div class="widget-user-image">
+                            <img src="~/Images/logo77.png" height="80" alt="User Avatar">
+                        </div>
+                        <!-- /.widget-user-image -->
+
+                        <h5 class="widget-user-username" style="color:white">Employees Configuration</h5>
+
+
+                    </div>
+                    <div class="card-body text-left">
+
+
+                        <a href="#" class="nav-link" style="color:midnightblue">
+                            <i class="fa fa-calendar"></i> Total Leaves Per year <span class="float-right" style="font-size: 90%">
+                                <i class="fa fa-calendar"></i>
+                                @item.Total_leaves_per_year
+                            </span>
+                        </a>
+
+                        <a href="#" class="nav-link" style="color:midnightblue">
+                            <i class="fa fa-calendar"></i>  leaves Pre Request Days <span class="float-right" style="font-size: 90%">
+                                <i class="fa fa-calendar"></i>
+                                @item.Leave_pre_days
+                            </span>
+                        </a>
+
+
+                        <a href="#" class="nav-link" style="color:midnightblue">
+                            <i class="fa fa-circle-notch"></i> Advance Payment Request limit <span class="float-right" style="font-size: 90%">
+                                <i class="fa fa-circle-notch"></i>
+
+                                @item.Advance_pay_limit
+
+                            </span>
+                        </a>
+
+
+                        <hr />
+                        <a href="@Url.Action("Edit", "Emp_Config", new { id = item.id })">
+                            <i class="fas fa-users text-success"></i>  Update Emp Config
+                        </a>
+                        ||
+                        <a href="@Url.Action("Index", "Configuration")">
+                            <i class="fas fa-sign-in text-success"></i>  Back to Configurations
+                        </a>
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+@if (Model.Count() == 0)
+
+{
+    <br />
+    <br />
+    <br />
+    <div class="col d-flex justify-content-center">
+
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box bg-gradient-black">
+                <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
+
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-description">
+                        <i class="fa fa-calendar text-white nav-icon"></i>   Employee Configurations not set
+                    </span>
+
+                    @Html.ActionLink("Set Up Configs", "Create", "Emp_Config", null, new { @class = "btn btn-success btn-sm" })
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+
+    </div>
+}

@@ -1,0 +1,92 @@
+﻿@model Ishop.Models.Employees_Config
+
+@{
+    ViewBag.Title = "Employees_Config Set";
+}
+
+<br>
+
+
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-7 col-sm-7 col-7">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #001F3F;color:white">
+                <i class="fa fa-id-card text-white nav-icon"></i> Set up Config
+            </div>
+            <div class="card-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                  
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                    <label>
+                        <i class="fa fa-calendar text-danger"></i> @Html.LabelFor(model => model.Total_leaves_per_year)
+                    </label>
+                    @Html.EditorFor(model => model.Total_leaves_per_year, new
+         {
+             htmlAttributes = new
+             {
+                 @class = "form-control ",
+                 @placeholder = "Total_leaves_per_year",
+
+                      }
+         })
+
+
+                </div>
+                    <div class="form-group col-md-4">
+                    <label>
+                        <i class="fa fa-calendar text-success"></i>  @Html.LabelFor(model => model.Leave_pre_days)
+                    </label>
+                    @Html.EditorFor(model => model.Leave_pre_days, new
+         {
+             htmlAttributes = new
+             {
+                 @class = "form-control ",
+                 @placeholder = "Leave_pre_days",
+
+                      }
+         })
+
+
+                </div>
+
+
+
+                            <div class="form-group col-md-4">
+                                <label>
+                                    <i class="fa fa-calendar"></i> @Html.LabelFor(model => model.Advance_pay_limit)
+                                </label>
+                                @Html.EditorFor(model => model.Advance_pay_limit, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control",
+                                   @placeholder = "Advance_pay_limit",
+                               }
+                           })
+                            </div>
+
+                        </div>
+                  
+
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save Configs " class="btn btn-success" />
+                            || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </div>
+
+                }
+
+

@@ -31,7 +31,7 @@ namespace Ishop.Controllers
             return View();
         }
         
-        public ActionResult About()
+        public ActionResult DashBoard()
         {
             ViewBag.Message = "Your application description page.";
 
