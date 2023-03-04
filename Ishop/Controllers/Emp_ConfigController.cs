@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,6 +11,7 @@ using System.Web.Configuration;
 
 using System.Web.Mvc;
 using Ishop.Models;
+using IShop.Core;
 
 namespace Ishop.Controllers
 {
@@ -102,6 +104,15 @@ namespace Ishop.Controllers
                 webConfigApp.AppSettings.Settings["Advance_pay_limit"].Value = employees_Config.Advance_pay_limit.ToString(); ;
                 webConfigApp.Save();
                 db.Entry(employees_Config).State = EntityState.Modified;
+                string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand sqlcmnd = new SqlCommand("sp_emp_update", sqlCon);
+                sqlcmnd.CommandType = CommandType.StoredProcedure;
+                sqlcmnd.Parameters.AddWithValue("@Total_leaves", employees_Config.Total_leaves_per_year);
+               
+                sqlCon.Open();
+                sqlcmnd.ExecuteNonQuery();
+                sqlCon.Close();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

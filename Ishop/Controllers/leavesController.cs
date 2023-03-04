@@ -139,7 +139,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail")] leave leave)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail,Requested_Days,Phone")] leave leave)
         {
             if (leave.Department == null)
             {
@@ -147,6 +147,11 @@ namespace Ishop.Controllers
                 return RedirectToAction("Create");
 
             }
+
+            
+          
+            
+
             TimeSpan timeSpan = leave.From_Date - DateTime.Today;
             int days = timeSpan.Days;
             int dd = Int16.Parse( System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
@@ -160,9 +165,23 @@ namespace Ishop.Controllers
                     var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                     var currentUser = manager.FindById(User.Identity.GetUserId());
 
+                    int totalDays = (int)(leave.To_Date - leave.From_Date).TotalDays + 1; // Total number of days between from date and to date, including weekends
+                    int weekendDays = 0;
+                    for (DateTime date = leave.From_Date; date <= leave.To_Date; date = date.AddDays(1))
+                    {
+                        if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            weekendDays++;
+                        }
+                    }
+
+                    int weekdays = totalDays - weekendDays; // Number of weekdays between from date and to date, excluding weekends
+
+
                     db.leave.Add(leave);
 
                     leave.Status = "0";
+                    leave.Requested_Days = weekdays;
                     leave.Approver_Remarks = "--";
                     leave.Emp_Mail = currentUser.Email;
                     TempData["msg"] = "leave request posted successfully ";
@@ -256,7 +275,7 @@ namespace Ishop.Controllers
 
 
             lleave_llog ll = new lleave_llog();
-            var data10 = ll.leaves_logs.ToList();
+            var data10 = ll.leaves_logs.Where(c => c.leave_id == id).ToList();
             ViewBag.F = data10;
             return View(leave);
         }
@@ -266,34 +285,49 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Approve_leave([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail,Approver_Remarks")] leave leave)
+        public ActionResult Approve_leave([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail,Approver_Remarks,Requested_Days,Phone")] leave leave)
         {
             if (ModelState.IsValid)
             {
                 
 
-                db.Entry(leave).State = EntityState.Modified;
-                db.SaveChanges();
-                try
-                {
-                    string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-                    SqlConnection sqlCon = new SqlConnection(strcon);
-                    SqlCommand sqlcmnd = new SqlCommand("sp_markleave_approved", sqlCon);
-                    sqlcmnd.CommandType = CommandType.StoredProcedure;
-                    sqlcmnd.Parameters.AddWithValue("@Id", leave.Id);
-                    sqlcmnd.Parameters.AddWithValue("@Approver_Remarks", leave.Approver_Remarks);
-                    sqlcmnd.Parameters.AddWithValue("@Approver", User.Identity.Name);
-                    sqlCon.Open();
-                    sqlcmnd.ExecuteNonQuery();
-                    sqlCon.Close();
+                    db.Entry(leave).State = EntityState.Modified;
 
-                    TempData["msg"] = "Leave approved successfully ";
-                }
-                catch
+
+                if (leave.Status == "2")
                 {
-                    TempData["msg"] = "error occured in approving leave request ";
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                        SqlConnection sqlCon = new SqlConnection(strcon);
+                        SqlCommand sqlcmnd = new SqlCommand("sp_track_leave", sqlCon);
+                        sqlcmnd.CommandType = CommandType.StoredProcedure;
+                        sqlcmnd.Parameters.AddWithValue("@Id", leave.Id);
+                        sqlcmnd.Parameters.AddWithValue("@TT_Leaves", System.Configuration.ConfigurationManager.AppSettings["Total_leaves_per_year"]);
+                        sqlcmnd.Parameters.AddWithValue("@Request_days", leave.Requested_Days);
+                        sqlcmnd.Parameters.AddWithValue("@User", leave.Employee);
+                        sqlcmnd.Parameters.AddWithValue("@Approver_Remarks", leave.Approver_Remarks);
+                        sqlcmnd.Parameters.AddWithValue("@Approver", User.Identity.Name);
+                        sqlCon.Open();
+                        sqlcmnd.ExecuteNonQuery();
+                        sqlCon.Close();
+
+                        TempData["msg"] = "Leave approved successfully ";
+                    }
+                    catch
+                    {
+                        TempData["msg"] = "error occured in approving leave request ";
+                        return RedirectToAction("Index");
+                    }
                 }
+
+
+
+
+
+                    db.SaveChanges();
+               
+                
                 return RedirectToAction("Index");
             }
             return View(leave);

@@ -17,8 +17,6 @@ namespace IShop.Core
         public DateTime CreatedOn { get; set; }
 
 
-
-
         [Display(Name = "From Date ")]
         public DateTime From_Date { get; set; }
 
@@ -43,7 +41,9 @@ namespace IShop.Core
 
 
         public string Message { get; set; }
-        public string Approver_Remarks { get; set; }
+        public string phone { get; set; }
+        public int Requested_Days { get; set; }
+        public string Approver_Remarks = "Type in comments";
 
 
 

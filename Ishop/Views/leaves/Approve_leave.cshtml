@@ -87,7 +87,7 @@
     }, 4000);
 </script>
 <!-- /.card-header -->
-<br />
+
 <div class="col d-flex justify-content-center">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
@@ -126,7 +126,7 @@
 
                         </div>
                         <div class="form-group col-md-2">
-                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Employee) </label>
+                            <label><i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Employee) </label>
                             @Html.EditorFor(model => model.Employee, new
                        {
                            htmlAttributes = new
@@ -140,8 +140,8 @@
                        })
 
                         </div>
-                        <div class="form-group col-md-3">
-                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Emp_Mail) </label>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-envelope text-warning"></i> @Html.LabelFor(model => model.Emp_Mail) </label>
                             @Html.EditorFor(model => model.Emp_Mail, new
                        {
                            htmlAttributes = new
@@ -156,7 +156,22 @@
 
                         </div>
                         <div class="form-group col-md-2">
-                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Department) </label>
+                            <label><i class="fa fa-phone text-warning"></i> @Html.LabelFor(model => model.phone) </label>
+                            @Html.EditorFor(model => model.phone, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+
+
+                               @Readonly = true
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-cube text-warning"></i> @Html.LabelFor(model => model.Department) </label>
                             @Html.EditorFor(model => model.Department, new
                        {
                            htmlAttributes = new
@@ -171,7 +186,7 @@
 
                         </div>
                         <div class="form-group col-md-2">
-                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.HR_Email) </label>
+                            <label><i class="fa fa-envelope text-warning"></i> @Html.LabelFor(model => model.HR_Email) </label>
                             @Html.EditorFor(model => model.HR_Email, new
                        {
                            htmlAttributes = new
@@ -233,6 +248,21 @@
 
                         </div>
                         <div class="form-group col-md-2">
+                            <label><i class="fa fa-hourglass text-success"></i> @Html.LabelFor(model => model.Requested_Days) </label>
+                            @Html.EditorFor(model => model.Requested_Days, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+
+
+                               @Readonly = true
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
                             <label><i class="fa fa-calendar text-success"></i> @Html.LabelFor(model => model.Type) </label>
                             @Html.EditorFor(model => model.Type, new
                        {
@@ -269,20 +299,20 @@
                     <hr />
                     <div>
 
-                        <div class="table-responsive" >
+                        <div class="table-responsive">
                             <table class="table table-bordered table-hover  text-nowrap">
 
                                 <thead>
-                                    <tr style="color:white">
-                                        <th style="background-color: darkgreen; "> Approval Date</th>
-                                   
-                                        <th style="background-color: darkgreen; ">Approver </th>
-                                   
-                                  
-                                        <th style="background-color: darkgreen; ">Approver Status </th>
-                                    
-                                   
-                                        <th style="background-color: darkgreen; ">Approver Remarks </th>
+                                    <tr style="color:black">
+                                        <th style="background-color: whitesmoke; "> Approval Date</th>
+
+                                        <th style="background-color: whitesmoke; ">Approver </th>
+
+
+                                        <th style="background-color: whitesmoke; ">Approver Status </th>
+
+
+                                        <th style="background-color: whitesmoke; ">Approver Remarks </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -290,10 +320,10 @@
                                     {
                                         <tr data-widget="expandable-table" aria-expanded="false">
 
-                                            <td style="background-color:white"> @item.CreatedOn</td>
-                                            <td style="background-color:white"> @item.Approver</td>
-                                            <td style="background-color:white"> @item.Approver_status</td>
-                                            <td style="background-color:white"> @item.Approver_remarks</td>
+                                            <td style="background-color:white"><i class="fa fa-calendar text-primary"></i> @item.CreatedOn</td>
+                                            <td style="background-color:white"><i class="fa fa-user-check text-primary"></i> @item.Approver</td>
+                                            <td style="background-color:white"> <i class=" fa fa-check-circle text-primary"></i>  @item.Approver_status</td>
+                                            <td style="background-color:white"><i class=" fa fa-comment text-primary"></i> @item.Approver_remarks</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -301,84 +331,89 @@
 
                         </div>
                     </div>
-                        <hr />
+                    <hr />
 
-                        <label><i class="fa fa-comment text-warning"></i> @Html.LabelFor(model => model.Approver_Remarks)</label>
-                        <div class="form-row">
-
-
-                            @Html.TextAreaFor(model => model.Approver_Remarks, 3, 60, htmlAttributes: new
-                       {
-                           style = "width: 60%; max-width:60%;",
-                           @placeholder = "Approver remarks",
-                           @autofocus = "",
-                                @value = ""
-    ,
-                           @class = "form-control form-rounded7"
-
-                       })
-
-                            @if (Model.Status == "1")
-                            {<div class="form-group col-md-3">
-                                    <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Status)</label>
-                                    @{
-                                        List<SelectListItem> b = new List<SelectListItem>();
-                                        b.Add(new SelectListItem
-                                        {
-                                            Text = "Approved",
-                                            Value = "2",
-                                        });
-                                        b.Add(new SelectListItem
-                                        {
-                                            Text = "Denied",
-                                            Value = "99",
-                                        });
+                    <label><i class="fa fa-comment text-warning"></i> @Html.LabelFor(model => model.Approver_Remarks)</label>
+                    <div class="form-row">
 
 
-                                    }@Html.DropDownListFor(model => model.Status, b, "---Select Approval status---", new { @class = "form-control form-control-sm" })
-                                </div>
+                        @Html.TextAreaFor(model => model.Approver_Remarks, 3, 60, htmlAttributes: new
+                   {
+                       style = "width: 60%; max-width:60%;",
+                       @placeholder = "Approver remarks",
+                       @autofocus = "",
+                       @value = ""
+,
+                       @class = "form-control form-rounded7",
+                       @required = "required"
 
-                            }
-                            else
-                            { <div class="form-group col-md-3">
-                                    <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Status)</label>
-                                    @{
-                                        List<SelectListItem> b = new List<SelectListItem>();
-                                        b.Add(new SelectListItem
-                                        {
-                                            Text = "Approved",
-                                            Value = "1",
-                                        });
-                                        b.Add(new SelectListItem
-                                        {
-                                            Text = "Denied",
-                                            Value = "99",
-                                        });
+                   })
 
-
-                                    }@Html.DropDownListFor(model => model.Status, b, "---Select Approval status---", new { @class = "form-control form-control-sm" })
-                                </div>}
-
-                        </div>
-
-                        <hr />
-                        <div>
-                            <input type="submit" value="Confirm approval" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to proceed?')" />
-
-
-                            <script>
-                                $(function () {
-                                    $('#Create').click(function () {
-                                        if (confirm('Are you sure?')) {
-                                            window.location.href = $(this).data('url');
-                                        }
+                        @if (Model.Status == "1")
+                        {<div class="form-group col-md-3">
+                                <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Status)</label>
+                                @{
+                                    List<SelectListItem> b = new List<SelectListItem>();
+                                    b.Add(new SelectListItem
+                                    {
+                                        Text = "Approved",
+                                        Value = "2",
                                     });
-                                });
-                            </script>
-                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                        </div>
-                        }
+                                    b.Add(new SelectListItem
+                                    {
+                                        Text = "Denied",
+                                        Value = "99",
+                                    });
 
-                        @section Scripts {
-                            @Scripts.Render("~/bundles/jqueryval")
+
+                                }@Html.DropDownListFor(model => model.Status, b, "---Select Approval status---", new { @class = "form-control form-control-sm", @required = "required" })
+                            </div>
+
                         }
+                        else
+                        { <div class="form-group col-md-3">
+                                <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Status)</label>
+                                @{
+                                    List<SelectListItem> b = new List<SelectListItem>();
+                                    b.Add(new SelectListItem
+                                    {
+                                        Text = "Approved",
+                                        Value = "1",
+                                    });
+                                    b.Add(new SelectListItem
+                                    {
+                                        Text = "Denied",
+                                        Value = "99",
+                                    });
+
+
+                                }@Html.DropDownListFor(model => model.Status, b, "---Select Approval status---", new { @class = "form-control form-control-sm" , @required = "required" })
+                            </div>}
+
+                    </div>
+
+                    <hr />
+                    <div>
+                        <input type="submit" value="Confirm approval" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to proceed?')" />
+
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                        </script>
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                    </div>
+                }
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+            </div>
+        </div>
+    </div>
+</div>

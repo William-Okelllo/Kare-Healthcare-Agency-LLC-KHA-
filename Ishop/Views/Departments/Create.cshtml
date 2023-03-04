@@ -109,18 +109,19 @@
                                 <div class="form-group col-md-4">
                                     <label style="font-family:Quicksand;"> <i class="fa fa-building"></i>@Html.LabelFor(model => model.DprtName)</label>
                                     @Html.EditorFor(model => model.DprtName, new
-                           {
-                               htmlAttributes = new
                                {
-                                   @class = "form-control ",
-                                   @placeholder = "Department Name",
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @placeholder = "Department Name",
+                                       @required = "required"
 
 
 
 
 
-                               }
-                           })
+                                   }
+                               })
                                 </div>
                             </div> <div class="form-row">
 
@@ -132,6 +133,7 @@
        {
            @class = "form-control ",
            @placeholder = "Contact Number",
+           @required = "required"
 
 
 
@@ -150,6 +152,7 @@
        {
            @class = "form-control ",
            @placeholder = "Email_Address",
+           @required = "required"
 
 
 
@@ -162,7 +165,7 @@
     </div>
     <div class="form-group col-md-3">
         <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Manager)  <i class="fa fa-user-check"></i></label>
-        @Html.DropDownList("Manager", new SelectList(ViewBag.l, "UserName", "UserName"), "Select HOD", new { @id = "ddlFruits", @class = "form-control " })
+        @Html.DropDownList("Manager", new SelectList(ViewBag.l, "UserName", "UserName"), "Select HOD", new { @id = "ddlFruits", @class = "form-control ", @required = "required" })
         @Html.Hidden("UserName", null, new { @id = "hfUserName" })
 
 

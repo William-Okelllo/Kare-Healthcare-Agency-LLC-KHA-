@@ -94,15 +94,13 @@
         $("#datepicker3").datepicker();
     });
 </script>
-
-<div class="card" style="background-color: rgb(255, 255, 255, 0.17);">
-    <div class="card-body" style="background-color: #ffffffc1">
-
-
-
-        <div class="col d-flex justify-content-center">
-            <div class="col-md-10 col-sm-12 col-12">
-                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #001F3F;color:white">
+                <i class="fa fa-paper-plane text-white nav-icon"></i> Leave Application
+            </div>
+           
 
                     <div class="card-outline card-navy card-body text-left" style="border-radius: 14px;">
 
@@ -117,68 +115,88 @@
 
 
 
-                            <div class="form-row">
+                        <div class="form-row">
 
-
-
-
-
-                                <div class="form-group col-md-4">
-                                    <label>@Html.LabelFor(model => model.CreatedOn)</label>
-                                    @Html.EditorFor(model => model.CreatedOn, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control ",
-                                       @placeholder = "Department Name",
-                                       @Value = DateTime.Now,
-                                            ReadOnly = true
-
-
-
-
-
-                                   }
-                               })
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>@Html.LabelFor(model => model.Employee)</label>
-                                    @Html.EditorFor(model => model.Employee, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control ",
-                                       @placeholder = "Contact Number",
-                                            @Value = User.Identity.Name,
-                                            ReadOnly = true
-
-
-
-
-                                   }
-                               })
-
-
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label>@Html.LabelFor(model => model.Department)</label>
-                                    @Html.EditorFor(model => model.Department, new
-                                 {
-                                     htmlAttributes = new
-                                     {
-                                         @class = "form-control ",
-
-                                              @Value = ViewBag.Drpt,
-                                              ReadOnly = true
-
-
-
-
-                                     }
-                                 })
-
-                                </div>
+                            <div style="text-align:left">
+                                Application Forms duly completed should be sent to Human Resources Section/Head of Department
+                                at least @System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"] days before leave commences.
                             </div>
+
+                            <hr />
+
+                            <div class="form-group col-md-4">
+                                <label>@Html.LabelFor(model => model.CreatedOn)</label>
+                                @Html.EditorFor(model => model.CreatedOn, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Department Name",
+                                   @Value = DateTime.Now,
+                                        ReadOnly = true
+
+
+
+
+
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>@Html.LabelFor(model => model.Employee)</label>
+                                @Html.EditorFor(model => model.Employee, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Contact Number",
+                                        @Value = User.Identity.Name,
+                                        ReadOnly = true
+
+
+
+
+                               }
+                           })
+
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>@Html.LabelFor(model => model.Department)</label>
+                                @Html.EditorFor(model => model.Department, new
+                             {
+                                 htmlAttributes = new
+                                 {
+                                     @class = "form-control ",
+
+                                          @Value = ViewBag.Drpt,
+                                          
+
+
+
+
+                                 }
+                             })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>@Html.LabelFor(model => model.phone)</label>
+                                @Html.EditorFor(model => model.phone, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @placeholder = "Phone Number",
+                                   @required = "required"
+
+
+
+
+                               }
+                           })
+
+                            </div>
+                        </div>
                             <div class="form-row">
 
                                 <div class="form-group col-md-3">
@@ -333,7 +351,7 @@
 
                             <label class="bwe">
                                 <i class="fa fa-comment text-yellow"></i>
-                                More info based on your leave requests
+                                Reason(s) for the leave application
                             </label>
                             <div class="form-row">
 
