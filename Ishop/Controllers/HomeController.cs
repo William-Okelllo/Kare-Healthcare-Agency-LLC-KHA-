@@ -26,14 +26,43 @@ namespace Ishop.Controllers
             var boo3 = l3.sp_expenses().ToList();
             ViewBag.l3 = boo3;
 
+            leaves_t l7 = new leaves_t();
+            var data12 = l7.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
+            ViewBag.F2 = data12;
 
 
             return View();
         }
         
-        public ActionResult DashBoard()
+        public ActionResult DashBoard(sp_dashboards sp_Dashboards ,string Staff, string Airline, string Service_Provider, string startDate, string endDate)
         {
-            ViewBag.Message = "Your application description page.";
+            if(Staff ==null || Airline == null|| Service_Provider == null ||startDate == "" || endDate == "")
+            {
+               var  startDated = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
+                var last = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+                Staff = "All";
+                Airline ="All";
+                Service_Provider = "All";
+                startDate = startDated.ToString();
+                endDate =last.ToString();
+
+            }
+            sp_dashboards l3 = new sp_dashboards();
+            var boo3 = l3.Dashboard_1(Staff, Airline, Service_Provider,startDate, endDate).ToList();
+            ViewBag.l3 = boo3;
+
+            sp_dashboards l4 = new sp_dashboards();
+            var boo4 = l3.Dashboard_2(Staff, Airline, Service_Provider, startDate, endDate).ToList();
+            ViewBag.l4 = boo4;
+
+            sp_dashboards l5 = new sp_dashboards();
+            var boo5 = l5.Dashboard_3(Staff, Airline, Service_Provider, startDate, endDate).ToList();
+            ViewBag.l5 = boo5;
+
+            sp_dashboards l6 = new sp_dashboards();
+            var boo6 = l6.Dashboard_4(Staff, Airline, Service_Provider, startDate, endDate).ToList();
+            ViewBag.l6 = boo6;
 
             return View();
         }

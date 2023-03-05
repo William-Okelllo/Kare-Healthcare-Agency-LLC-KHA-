@@ -453,6 +453,18 @@
     <Compile Include="Models\Dash1_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dashboard_1_Result.cs">
+      <DependentUpon>sp_dashboard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dashboard_2_Result.cs">
+      <DependentUpon>sp_dashboard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dashboard_3_Result.cs">
+      <DependentUpon>sp_dashboard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dashboard_4_Result.cs">
+      <DependentUpon>sp_dashboard.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
@@ -520,7 +532,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\leaves_Days_track.cs">
-      <DependentUpon>leaves_emp_config.tt</DependentUpon>
+      <DependentUpon>leave_track.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\leaves_emp_config.Context.cs">
       <AutoGen>True</AutoGen>
@@ -539,6 +551,21 @@
     </Compile>
     <Compile Include="Models\leaves_logs.cs">
       <DependentUpon>lleave.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\leave_track.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>leave_track.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\leave_track.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>leave_track.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\leave_track.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>leave_track.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\lleave.Context.cs">
       <AutoGen>True</AutoGen>
@@ -615,6 +642,21 @@
     </Compile>
     <Compile Include="Models\Sp_Agency_Users_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_dashboard.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_dashboard.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_dashboard.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_dashboard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_dashboard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_dashboard.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_Employee_Per_A_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -2117,6 +2159,16 @@
       <DependentUpon>leaves_emp_config.edmx</DependentUpon>
       <LastGenOutput>leaves_emp_config.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\leave_track.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>leave_track.edmx</DependentUpon>
+      <LastGenOutput>leave_track.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\leave_track.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>leave_track.edmx</DependentUpon>
+      <LastGenOutput>leave_track.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\lleave.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>lleave.edmx</DependentUpon>
@@ -2146,6 +2198,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>R.edmx</DependentUpon>
       <LastGenOutput>R.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_dashboard.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_dashboard.edmx</DependentUpon>
+      <LastGenOutput>sp_dashboard.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_dashboard.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_dashboard.edmx</DependentUpon>
+      <LastGenOutput>sp_dashboard.cs</LastGenOutput>
     </Content>
     <Content Include="Models\sp_timesheet.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2490,6 +2552,20 @@
     </EntityDeploy>
     <Content Include="Models\leaves_emp_config.edmx.diagram">
       <DependentUpon>leaves_emp_config.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\leave_track.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>leave_track.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\leave_track.edmx.diagram">
+      <DependentUpon>leave_track.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\sp_dashboard.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sp_dashboard.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sp_dashboard.edmx.diagram">
+      <DependentUpon>sp_dashboard.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />

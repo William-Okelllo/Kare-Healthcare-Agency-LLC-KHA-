@@ -84,52 +84,53 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr data-widget="expandable-table" aria-expanded="false">
+                        <tr data-widget="expandable-table" aria-expanded="false">
 
-                        <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Employee</td>
-                        <td style="background-color:white"><i class="fa fa-circle-notch text-green"></i> @item.Type</td>
-                        <td style="background-color:white"><i class="fa fa-calendar-day text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</td>
+                            <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Employee</td>
+                            <td style="background-color:white"><i class="fa fa-circle-notch text-green"></i> @item.Type</td>
+                            <td style="background-color:white"><i class="fa fa-calendar-day text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</td>
 
-                        <td style="background-color:white">
-                            <small>
-                                <i class="fa fa-calendar text-success"></i>  @item.Return_Date.ToString("dd-MMMM-yyyy")
-                            </small>
-                        </td>
-                        <td style="background-color:white">
-                            <small>
-                                <b><i class="fa fa-clock text-success"></i> From</b> @item.From_Date.ToString("dd-MMMM-yyyy") <b><i class="fa fa-clock text-warning"></i> To</b> @item.To_Date.ToString("dd-MMMM-yyyy")
-                            || <i class="fa fa-hourglass text-warning"></i> @item.Requested_Days days
-                            </small>
-                        </td>
-                        <td style="background-color:white">
-                            @if (item.Status == "0")
-                            {<small style="color:orangered"><i class="fa fa-clock"></i> awating approvals</small>}
-                            else if (item.Status == "1")
-                            {<small style="color:green"><i class="fa fa-check-circle"></i> Awating 2nd Approvals</small>}
-                            else if (item.Status == "2")
-                            {<small style="color:green"><i class="fa fa-check-double"></i> leave Approved (1st & 2nd)</small>}
-                            else
-                            {
-                                <small style="color:red"><i class="fa fa-times-circle"></i> Denied</small>
-                            }
+                            <td style="background-color:white">
+                                <small>
+                                    <i class="fa fa-calendar text-success"></i>  @item.Return_Date.ToString("dd-MMMM-yyyy")
+                                </small>
+                            </td>
+                            <td style="background-color:white">
+                                <small>
+                                    <b><i class="fa fa-clock text-success"></i> From</b> @item.From_Date.ToString("dd-MMMM-yyyy") <b><i class="fa fa-clock text-warning"></i> To</b> @item.To_Date.ToString("dd-MMMM-yyyy")
+                                    || <i class="fa fa-hourglass text-warning"></i> @item.Requested_Days days
+                                </small>
+                            </td>
+                            <td style="background-color:white">
+                                @if (item.Status == "0")
+                                {<small style="color:orangered"><i class="fa fa-clock"></i> awating approvals</small>}
+                                else if (item.Status == "1")
+                                {<small style="color:green"><i class="fa fa-check-circle"></i> Awating 2nd Approvals</small>}
+                                else if (item.Status == "2")
+                                {<small style="color:green"><i class="fa fa-check-double"></i> leave Approved (1st & 2nd)</small>}
+                                else
+                                {
+                                    <small style="color:red"><i class="fa fa-times-circle"></i> Denied</small>
+                                }
 
-                        </td>
+                            </td>
 
-                        
+
                             <td style="background-color:ghostwhite">
                                 <div class="btn-group dropdown">
                                     <button type="button" class="btn-xs btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-user-circle" s></i>  . Action
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                        @if ((item.Status == "0" || item.Status == "1") && this.User.IsInRole("Leaves_Approval")) {
+                                        @if ((item.Status == "0" || item.Status == "1") && this.User.IsInRole("Leaves_Approval"))
+                                        {
                                             <a href="@Url.Action("Approve_leave", "leaves", new { id = item.Id })" class="dropdown-item">
                                                 <i class="fas fa-pen text-success"></i> Approve/Deny leave
                                             </a>
-                                            }
+                                        }
 
                                         <div class="divider"></div>
-                                       
+
                                     </div>
 
                                 </div>
@@ -140,7 +141,7 @@
 
 
                             </td>
-                       
+
 
 
 
@@ -152,7 +153,7 @@
 
 
                         </tr>
-                    <tr class="expandable-body">
+                        <tr class="expandable-body">
 
                             <td colspan="5" style="background-color: rgb(255, 255, 255, 0.88);">
                                 <medium>
@@ -226,11 +227,54 @@
 
         </div>
 
+        <div class="container-fluid">
+            <h6 class="mb-2"><i class="fa fa-paper-plane"></i> leaves Monitor</h6>
+            <div class="row">
+                @foreach (var item in ViewBag.F2)
+                {
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-success"><i class="fa fa-hourglass"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total leaves Per year</span>
+                                <span class="info-box-number">@item.Total_leaves_per_year leaves</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Requested leaves</span>
+                                <span class="info-box-number">@item.Requested_leaves leaves</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Remaining leaves</span>
+                                <span class="info-box-number">@item.Remaining_leaves leaves</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                }
+                </div>
+        </div>
 
 
-
-        @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
-        <hr class='dotted' />
-    </div>
-</div>
+                @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
+                <hr class='dotted' />
+            </div>
+        </div>
 

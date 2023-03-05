@@ -1,182 +1,291 @@
-﻿<div class="card" style="background-color: #ffffffd9">
-    <div class="col d-flex justify-content-center">
-        <div class="col-xl-12">
-            <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> Operations Summary </div>
-                <div class="card-body text-left">
+﻿
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+</script>
+    <div class="card" style="background-color: #ffffffd9">
+        <div class="col d-flex justify-content-center">
+            <div class="col-xl-12">
+                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+                    <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> Operations Summary </div>
+                    <div class="card-body text-left">
+                        @using (Html.BeginForm("Dashboard", "Home", FormMethod.Post))
+                        {<div class="row">
+                                <div class="form-group col-md-2">
+                                    <label>Staff</label>
+                                    <input type="text" id="Staff" name="Staff" class="form-control form-control-sm form-rounded" Value="All" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label> Airline</label>
+                                    <input type="text" id="Airline" name="Airline" class="form-control form-control-sm form-rounded" Value="All" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label> Service Provider</label>
+                                    <input type="text" id="service_Provider" name="service_Provider" class="form-control form-control-sm form-rounded" Value="All" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label> From Date</label>
+                                    @{
+                                        DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                                    }
 
 
-                    <div class="container-fluid">
-                        <h6 class="mb-2"><i class="fa fa-paper-plane"></i> Tickets status</h6>
+                                    <input type="date" id="startDate" name="startDate" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label> To Date</label>
+                                    <input type="date" id="endDate" name="endDate" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="submit" value="Submit" class="btn btn btn-success" style="color:white" />
+                                </div>
+                            </div>
+
+                        }
+
+                        <div class="container-fluid">
+                            <h6 class="mb-2"><i class="fa fa-paper-plane"></i> Tickets status</h6>
+                            <div class="row">
+                                @foreach (var item in ViewBag.l3)
+                                {
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-success"><i class="far fa-check-circle"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Total Tickets</span>
+                                                <span class="info-box-number">@item.Total_Tickets tickets</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-success"><i class="far fa-check-circle"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Invoiced</span>
+                                                <span class="info-box-number">@item.Total_Tickets tickets</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-gradient-gray"><i class="far fa-pause-circle"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Approved</span>
+                                                <span class="info-box-number">@item.Approved tickets</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Pending Approval</span>
+                                                <span class="info-box-number">@item.Pending_Approval tickets</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+
+
+                                }
+                            </div>
+                        </div>
+                        <hr />
+                        <h6 class="mb-2"><i class="fa fa-spinner"></i> Service Providers Tickets Distribution</h6>
                         <div class="row">
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-success"><i class="far fa-check-circle"></i></span>
+                            @foreach (var item in ViewBag.l6)
+                            {
+                                <div class="col-md-2 col-sm-5 col-12">
+                                    <div class="info-box bg-primary">
+                                        <span class="info-box-icon"><i class="fa fa-users-cog"></i></span>
 
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Invoiced</span>
-                                        <span class="info-box-number">1,410 tickets</span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">@item.Service_Provider</span>
+                                            <span class="info-box-number">@item.Tickets Tickets</span>
+
+                                        </div>
+
                                     </div>
-                                    <!-- /.info-box-content -->
+                                    <!-- /.info-box -->
                                 </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+                            }
+                        </div>
 
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Approved</span>
-                                        <span class="info-box-number">1,410 tickets</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-gradient-gray"><i class="far fa-pause-circle"></i></span>
 
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Pending</span>
-                                        <span class="info-box-number">1,410 tickets</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-gradient-danger"><i class="fa fa-trash"></i></span>
+                        <hr />
+                        <h6 class="mb-2"><i class="fa fa-users"></i> Employees Monitor</h6>
+                        <div class="row">
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead style="background-color:whitesmoke">
+                                        <tr>
 
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Deleted</span>
-                                        <span class="info-box-number">1,410 tickets</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
+                                            <th><i class="fa fa-user-circle"></i> Staff</th>
+
+                                            <th>Submitted Tickets</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.l4)
+                                        {
+                                            <tr>
+
+
+                                                <td>@item.Staff</td>
+                                                <td>
+                                                    @item.Tickets - tickets <i class="fa fa-plane text-warning"></i>
+                                                </td>
+
+
+                                            </tr>
+}
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
-                    <hr />
-                    <h6 class="mb-2"><i class="fa fa-spinner"></i> Tickets Figures</h6>
-                    <div class="row">
-                        <div class="col-md-3 col-sm-5 col-12">
-                            <div class="info-box bg-info">
-                                <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Gross Profit</span>
-                                    <span class="info-box-number">41,410</span>
+                        <div class="row">
+                            <div class="card-body">
+                                
+                                <table class="table table-bordered">
+                                    <thead style="background-color:whitesmoke">
+                                        <tr>
 
-                                </div>
+                                            <th>Gross Profit Distributions</th>
 
+                                        </tr>
+                                    </thead>
+                                    <thead style="background-color:whitesmoke">
+                                        <tr>
+
+                                            <th> Approved</th>
+                                            <th>Invoiced</th>
+                                            <th>Pending</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.l5)
+                                        {
+                                            <tr>
+
+
+                                                <td>@item.Approved_Gp</td>
+                                                <td>
+                                                    @item.Approved__Inv_Gp
+                                                </td>
+                                                <td>
+                                                    @item.Pending_Gp
+                                                </td>
+                                                <td>
+                                                    @item.Deleted_Gp
+                                                </td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                                <hr />
+                                <table class="table table-bordered">
+                                    <thead style="background-color:whitesmoke">
+                                        <tr>
+
+                                            <th> Invoiced Amount Distributions</th>
+
+                                        </tr>
+                                    </thead>
+                                    <thead style="background-color:whitesmoke">
+                                        <tr>
+
+                                            <th> Approved</th>
+                                            <th>Invoiced</th>
+                                            <th>Pending</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.l5)
+                                        {
+                                            <tr>
+
+
+                                                <td>@item.Approved_InvAmnt</td>
+                                                <td>
+                                                    @item.Approved_Inv_Inv
+                                                </td>
+                                                <td>
+                                                    @item.Pending_Inv
+                                                </td>
+                                                <td>
+                                                    @item.Deleted_Inv
+                                                </td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                                <hr />
+                                <table class="table table-bordered">
+                                    <thead style="background-color:whitesmoke">
+                                        <tr>
+
+                                            <th> Net Amount Distributions</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <thead style="background-color:whitesmoke">
+                                        <tr>
+
+                                            <th> Approved</th>
+                                            <th>Invoiced</th>
+                                            <th>Pending</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.l5)
+                                        {
+                                            <tr>
+
+
+                                                <td>@item.Approved_NetAmnt</td>
+                                                <td>
+                                                    @item.Approved_Inv_NetAmnt
+                                                </td>
+                                                <td>
+                                                    @item.Pending_NetAmnt
+                                                </td>
+                                                <td>
+                                                    @item.Deleted_NetAmnt
+                                                </td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <div class="col-md-3 col-sm-5 col-12">
-                            <div class="info-box bg-primary">
-                                <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Invoice Amount</span>
-                                    <span class="info-box-number">41,410</span>
-
-                                </div>
-
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <div class="col-md-3 col-sm-5 col-12">
-                            <div class="info-box bg-primary">
-                                <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Net Amount</span>
-                                    <span class="info-box-number">41,410</span>
-
-                                </div>
-
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <div class="col-md-3 col-sm-5 col-12">
-                            <div class="info-box bg-primary">
-                                <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Incentive</span>
-                                    <span class="info-box-number">41,410</span>
-
-                                </div>
-
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                    </div>
-
-
-                    <hr />
-                    <h6 class="mb-2"><i class="fa fa-users"></i> Employees Monitor</h6>
-                    <div class="row">
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Task</th>
-                                        <th>Progress</th>
-                                        <th style="width: 40px">Label</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>Update software</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-danger">55%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2.</td>
-                                        <td>Clean database</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-warning">70%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3.</td>
-                                        <td>Cron job running</td>
-                                        <td>
-                                            <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-primary">30%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4.</td>
-                                        <td>Fix and squish bugs</td>
-                                        <td>
-                                            <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar bg-success" style="width: 90%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-success">90%</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-
 
 
                         <div class="card-footer p-0" style="background-color:whitesmoke">
@@ -184,4 +293,6 @@
 
                     </div>
                 </div>
+            </div>
+
         </div>

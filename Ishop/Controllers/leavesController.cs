@@ -32,6 +32,10 @@ namespace Ishop.Controllers
             var data10 = ll.leaves_logs.ToList();
             ViewBag.F = data10;
 
+            leaves_t l2 = new leaves_t();
+            var data12 = l2.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
+            ViewBag.F2 = data12;
+
 
             if (this.User.IsInRole("Leaves_Approval"))
             {
@@ -84,6 +88,16 @@ namespace Ishop.Controllers
         // GET: leaves/Create
         public ActionResult Create()
         {
+
+
+            leaves_t l2 = new leaves_t();
+            var data12 = l2.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
+            ViewBag.F2 = data12;
+
+
+
+
+
             string constr = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(constr))
             {

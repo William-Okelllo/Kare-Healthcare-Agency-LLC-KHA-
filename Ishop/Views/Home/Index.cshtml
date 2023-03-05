@@ -41,8 +41,8 @@
                         <!-- /.widget-user-image -->
 
                         <h5 style="color:white">
-                           
-                            <img src="~/Images/l.ico"  height="50" alt="User Avatar"> Welcome @User.Identity.Name
+
+                            <img src="~/Images/l.ico" height="50" alt="User Avatar"> Welcome @User.Identity.Name
                         </h5>
 
 
@@ -82,13 +82,79 @@
 
 
                     </div>
+
                 </div>
                 <!-- /.widget-user -->
             </div>
 
+            
+     
+
+            @if (this.User.IsInRole("Employee"))
+            {
+                <div class="col-xl-8">
+                    <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> Leaves Monitor </div>
+                        <div class="card-body text-left">
+
+                            <div class="container-fluid">
+
+                                <div class="row">
+                                    @foreach (var item in ViewBag.F2)
+                                    {
+                                        <div class="col-md-4 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span class="info-box-icon bg-success"><i class="fa fa-hourglass"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Total leaves Per year</span>
+                                                    <span class="info-box-number">@item.Total_leaves_per_year leaves</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Requested leaves</span>
+                                                    <span class="info-box-number">@item.Requested_leaves leaves</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Remaining leaves</span>
+                                                    <span class="info-box-number">@item.Remaining_leaves leaves</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                    }
+                                </div>
+                            </div>
 
 
 
+
+
+
+                            <div class="card-footer p-0" style="background-color:whitesmoke">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
 
 
 
@@ -193,12 +259,18 @@
 
 
 
-                                <div class="card-footer p-0" style="background-color:whitesmoke">
-                                </div>
-
+                            <div class="card-footer p-0" style="background-color:whitesmoke">
                             </div>
+
                         </div>
+                    </div>
                 </div>
+
+
+
+
+
+
 
             }
         </div>
@@ -207,7 +279,7 @@
         @if (this.User.IsInRole("Admin"))
         {
             <div class="row">
-                <div class="col-xl-3">
+                <div class="col-xl-4">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
                         <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-clock"></i>  Operations </div>
                         <div class="card-body text-left">
