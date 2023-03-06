@@ -472,9 +472,6 @@
     <Compile Include="Models\Employees_Config.cs">
       <DependentUpon>leaves_emp_config.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Emp_Dash_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Em_Agency2_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
@@ -661,6 +658,9 @@
     <Compile Include="Models\Sp_Employee_Per_A_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_employee_prog_Result.cs">
+      <DependentUpon>sp_e_prog.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Sp_Employee_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -669,6 +669,21 @@
     </Compile>
     <Compile Include="Models\sp_expenses_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_e_prog.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_e_prog.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_e_prog.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_e_prog.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_e_prog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_e_prog.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_Facility_Users_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -2209,6 +2224,16 @@
       <DependentUpon>sp_dashboard.edmx</DependentUpon>
       <LastGenOutput>sp_dashboard.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\sp_e_prog.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_e_prog.edmx</DependentUpon>
+      <LastGenOutput>sp_e_prog.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_e_prog.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_e_prog.edmx</DependentUpon>
+      <LastGenOutput>sp_e_prog.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\sp_timesheet.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>sp_timesheet.edmx</DependentUpon>
@@ -2566,6 +2591,13 @@
     </EntityDeploy>
     <Content Include="Models\sp_dashboard.edmx.diagram">
       <DependentUpon>sp_dashboard.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\sp_e_prog.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sp_e_prog.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sp_e_prog.edmx.diagram">
+      <DependentUpon>sp_e_prog.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />

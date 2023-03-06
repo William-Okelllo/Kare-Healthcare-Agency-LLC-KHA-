@@ -123,7 +123,7 @@
 
 
 
-                                }@Html.DropDownListFor(model => model.Category, v, "---Select File  Category---", new { @class = "form-control" })
+                                }@Html.DropDownListFor(model => model.Category, v, "---Select File  Category---", new { @class = "form-control" ,@required = "required" })
                             </div>
 
                         </div>
@@ -154,18 +154,7 @@
 
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <label style="font-family:Quicksand">Staffing Agency</label>
-
-                                @foreach (var item in ViewBag.A10)
-                                {
-
-
-                                    <input id="Agency" name="Agency" type="text" value="@item.Agency" class="form-control" readonly />
-
-
-                                }
-                            </div>
+                            
                         </div>
 
 
@@ -185,7 +174,8 @@
                            @placeholder = "File Description ...information on thes uploaded file",
                            @autofocus = ""
                            ,
-                           @class = "form-control form-rounded2"
+                           @class = "form-control form-rounded2",
+                           @required = "required"
 
                        })
                         </div>

@@ -42,7 +42,9 @@
 
                         <h5 style="color:white">
 
-                            <img src="~/Images/l.ico" height="50" alt="User Avatar"> Welcome @User.Identity.Name
+                            <img src="~/Images/l.ico" height="50" alt="User Avatar"> Welcome @User.Identity.Name 
+
+
                         </h5>
 
 
@@ -53,7 +55,7 @@
                         <i class="fa fa-user-shield"></i> Access Level :
                         @if (this.User.IsInRole("Admin"))
                         {<medium style="font-family:Calibri">
-                                <i class="fa fa-user-check text-success"></i>:-Administrator
+                                <i class="fa fa-user-check text-success"></i>:-Administrator 
                             </medium>}
 
 
@@ -92,13 +94,68 @@
 
             @if (this.User.IsInRole("Employee"))
             {
-                <div class="col-xl-8">
+                <div class="col-xl-7">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> Leaves Monitor </div>
+                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> My DashBoard </div>
                         <div class="card-body text-left">
 
                             <div class="container-fluid">
+                                <h6>Tickets summary</h6>
+                                @foreach (var item in ViewBag.l2)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span><i class="fa fa-list text-primary"></i></span>
 
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Total Tickets</span>
+                                                    <span class="info-box-number">@item.Total_Tickets tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span><i class="fa fa-check-double text-success"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Invoiced</span>
+                                                    <span class="info-box-number">@item.Invoiced tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span><i class="far fa-check-circle text-warning"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Approved</span>
+                                                    <span class="info-box-number">@item.Approved tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                            <!-- /.info-box -->
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span><i class="far fa-pause-circle text-danger"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Pending</span>
+                                                    <span class="info-box-number">@item.Pending tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                }
                                 <div class="row">
                                     @foreach (var item in ViewBag.F2)
                                     {
@@ -139,6 +196,7 @@
                                             <!-- /.info-box -->
                                         </div>
                                     }
+
                                 </div>
                             </div>
 
@@ -170,86 +228,74 @@
                             <div class="container-fluid">
                                 <h6 class="mb-2"><i class="fa fa-paper-plane"></i> Tickets status</h6>
                                 <div class="row">
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-success"><i class="far fa-check-circle"></i></span>
+                                    @foreach (var item in ViewBag.l9)
+                                    {
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span ><i class="fa fa-list text-primary"></i></span>
 
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Invoiced</span>
-                                                <span class="info-box-number">1,410 tickets</span>
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Total Tickets</span>
+                                                    <span class="info-box-number">@item.Total_Tickets tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
                                             </div>
-                                            <!-- /.info-box-content -->
+                                            <!-- /.info-box -->
                                         </div>
-                                        <!-- /.info-box -->
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span ><i class="fa fa-check-double text-success"></i></span>
 
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Approved</span>
-                                                <span class="info-box-number">1,410 tickets</span>
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Invoiced</span>
+                                                    <span class="info-box-number">@item.Approved___Invoiced tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
                                             </div>
-                                            <!-- /.info-box-content -->
+                                            <!-- /.info-box -->
                                         </div>
-                                        <!-- /.info-box -->
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-gradient-gray"><i class="far fa-pause-circle"></i></span>
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span><i class="far fa-check-circle text-warning"></i></span>
 
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Pending</span>
-                                                <span class="info-box-number">1,410 tickets</span>
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Approved</span>
+                                                    <span class="info-box-number">@item.Approved tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
                                             </div>
-                                            <!-- /.info-box-content -->
+                                            <!-- /.info-box -->
                                         </div>
-                                        <!-- /.info-box -->
-                                    </div>
+                                        <div class="col-md-3 col-sm-6 col-12">
+                                            <div class="info-box">
+                                                <span><i class="far fa-pause-circle text-danger"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Pending</span>
+                                                    <span class="info-box-number">@item.Pending_Approval tickets</span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+                                        </div>
+
+
+                                    }
                                 </div>
+                                
+                              
+                                <a href="@Url.Action("Dashboard", "Home")" class="nav-link">
+                                    <div class="spinner-border spinner-border-sm" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>  DashBoard View
+                                </a>
+                               
+                                
                             </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-md-4 col-sm-5 col-12">
-                                    <div class="info-box bg-info">
-                                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">Bookmarks</span>
-                                            <span class="info-box-number">41,410</span>
-
-                                        </div>
-
-                                    </div>
-                                    <!-- /.info-box -->
-                                </div>
-                                <div class="col-md-4 col-sm-5 col-12">
-                                    <div class="info-box bg-primary">
-                                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">Bookmarks</span>
-                                            <span class="info-box-number">41,410</span>
-
-                                        </div>
-
-                                    </div>
-                                    <!-- /.info-box -->
-                                </div>
-                                <div class="col-md-4 col-sm-5 col-12">
-                                    <div class="info-box bg-primary">
-                                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">Bookmarks</span>
-                                            <span class="info-box-number">41,410</span>
-
-                                        </div>
-
-                                    </div>
-                                    <!-- /.info-box -->
-                                </div>
-                            </div>
+                            
+                          
 
 
 
@@ -279,7 +325,7 @@
         @if (this.User.IsInRole("Admin"))
         {
             <div class="row">
-                <div class="col-xl-4">
+                <div class="col-xl-5">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
                         <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-clock"></i>  Operations </div>
                         <div class="card-body text-left">
@@ -287,19 +333,19 @@
                             <ul class="nav flex-column">
 
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Invoices")" class="nav-link">
-                                        Invoices <span class="float-right badge bg-primary"><i class="fa fa-file-invoice"></i></span>
+                                    <a href="@Url.Action("New_Ticket", "Tickets")" class="nav-link">
+                                        New Ticket <span class="float-right badge bg-primary"><i class="fa fa-plane-departure"></i></span>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Employes")" class="nav-link">
-                                        Employees  <span class="float-right badge bg-navy"><i class="fa fa-users"></i></span>
+                                    <a href="@Url.Action("Index", "Tickets")" class="nav-link">
+                                        Ticket lists  <span class="float-right badge bg-navy"><i class="fa fa-list"></i></span>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="@Url.Action("leaves_Requests", "leaves")" class="nav-link">
+                                    <a href="@Url.Action("Index", "leaves")" class="nav-link">
                                         Requested leaves <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
                                     </a>
                                 </li>
@@ -330,8 +376,8 @@
                         <ul class="nav flex-column">
 
                             <li class="nav-item">
-                                <a href="@Url.Action("Create", "Attendance")" class="nav-link">
-                                    CheckIn/Out Office <span class="float-right badge bg-primary"><i class="fa fa-hourglass"></i></span>
+                                <a href="@Url.Action("Post New Ticket", "Attendance")" class="nav-link">
+                                    Post New Ticket <span class="float-right badge bg-primary"><i class="fa fa-hourglass"></i></span>
                                 </a>
                             </li>
 
@@ -341,12 +387,7 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item">
-                                <a href="@Url.Action("My_Files", "Files")" class="nav-link">
-                                    My files <span class="float-right badge bg-warning"><i class="fa fa-folder-open"></i></span>
-                                </a>
-                            </li>
-
+                           
 
                         </ul>
 

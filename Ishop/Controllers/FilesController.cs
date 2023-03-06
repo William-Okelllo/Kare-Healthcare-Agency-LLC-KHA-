@@ -1,4 +1,5 @@
 ﻿using Ishop.Models;
+using IShop.Core;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using System;
@@ -10,6 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using File = Ishop.Models.File;
@@ -54,9 +56,7 @@ namespace Ishop.Controllers
         // GET: Files  
         public ActionResult Upload(FileUpload model, FormCollection form, HttpPostedFileBase file,int? id)
         {
-            ZO r10 = new ZO();
-            var data10 = r10.Em_Agency(User.Identity.Name).ToList();
-            ViewBag.A10 = data10;
+           
 
             ZO l2 = new ZO();
             var boo2 = l2.GetEmpUsername(id).ToList();
@@ -141,9 +141,11 @@ namespace Ishop.Controllers
                         files.SaveAs(path);
                         TempData["Msg"] = "Uploaded Successfully !!";
                         if (this.User.IsInRole("Admin"))
-                        { return RedirectToAction("Employee_Files", "Employes", new { id = id }); }
+                        { return RedirectToAction("Index", "Employes"); }
+                       
                         else if (this.User.IsInRole("Staffing_Agency"))
-                        { return RedirectToAction("Employee_Files", "Employes", new { id = id }); }
+                        { return RedirectToAction("Index", "Employes", new { id = id }); }
+                        
                         else
                         { return RedirectToAction("My_Files", "Files"); }
                     }

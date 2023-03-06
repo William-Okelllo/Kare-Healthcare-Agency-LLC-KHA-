@@ -131,7 +131,7 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label>@Html.LabelFor(model => model.Department)</label>
-                                @Html.DropDownList("Department", new SelectList(ViewBag.Departments, "Department", "Department"), "Select Department", new { @id = "ddlFruits", @class = "form-control " })
+                                @Html.DropDownList("Department", new SelectList(ViewBag.Departments, "Department", "Department"), "Select Department", new { @id = "ddlFruits", @class = "form-control ",  @required = "required" })
                                 @Html.Hidden("Department", null, new { @id = "hfDepartment" })
 
 

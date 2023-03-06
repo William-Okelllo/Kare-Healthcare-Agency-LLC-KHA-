@@ -83,6 +83,13 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("DashBoard"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "DashBoard";
+                roleManager.Create(role);
+
+            }
             if (!roleManager.RoleExists("Tickets_Invoicing"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();

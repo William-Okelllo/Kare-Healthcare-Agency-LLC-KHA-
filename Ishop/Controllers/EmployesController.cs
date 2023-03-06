@@ -60,6 +60,8 @@ namespace Ishop.Controllers
         // GET: Employes/Edit/5
         public ActionResult Update_Profile(int? id)
         {
+           
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -1,4 +1,6 @@
 ﻿using Ishop.Models;
+using IShop.Core;
+using Syncfusion.DocIO.DLS;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,18 +15,30 @@ namespace Ishop.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        public ActionResult Index( FileUpload fileUpload)
+        public ActionResult Index( FileUpload fileUpload ,string Staff, string Airline, string Service_Provider, string startDate, string endDate)
         {
+            if (Staff == null || Airline == null || Service_Provider == null || startDate == "" || endDate == "")
+            {
+                var startDated = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
-            
+                var last = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+                Staff = "All";
+                Airline = "All";
+                Service_Provider = "All";
+                startDate = startDated.ToString();
+                endDate = last.ToString();
 
-            HREntities l2 = new HREntities();
-            var boo2 = l2.sp_invoices().ToList();
+            }
+            sp_dashboards l9 = new sp_dashboards();
+            var boo9 = l9.Dashboard_1(Staff, Airline, Service_Provider, startDate, endDate).ToList();
+            ViewBag.l9 = boo9;
+
+
+            sp_e_progress l2 = new sp_e_progress();
+            var boo2 = l2.sp_employee_prog(User.Identity.Name).ToList();
             ViewBag.l2 = boo2;
 
-            HREntities l3 = new HREntities();
-            var boo3 = l3.sp_expenses().ToList();
-            ViewBag.l3 = boo3;
+            
 
             leaves_t l7 = new leaves_t();
             var data12 = l7.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
@@ -33,7 +47,7 @@ namespace Ishop.Controllers
 
             return View();
         }
-        
+        [Authorize(Roles = "DashBoard")]
         public ActionResult DashBoard(sp_dashboards sp_Dashboards ,string Staff, string Airline, string Service_Provider, string startDate, string endDate)
         {
             if(Staff ==null || Airline == null|| Service_Provider == null ||startDate == "" || endDate == "")

@@ -103,16 +103,14 @@
 </span>
                         </a>
                         <a href="#" class="nav-link" style="color:forestgreen">
-                            <i class="fa fa-shield-virus"></i>  Access level <span class="float-right" style="font-size: 90%">
-                                <i class="fa fa-user-md"></i>
+                            <i class="fa fa-user-shield"></i>  Access levels <span class="float-right" style="font-size: 90%">
+                               
 
                                 @item.Role
 
                             </span>
                         </a>
-                        <div style="text-align:right">
-                            @Html.ActionLink("Update Email & Phone", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-sm  btn-success btn" })
-                        </div>
+                        
                         <hr />
                         <p>Actions</p>
                         <a href="#" class="nav-link" style="color:navy">
@@ -120,7 +118,8 @@
                             <span class="float-right" style="font-size: 90%">
 
 
-                                @Html.ActionLink("Change Current Password", "ChangePassword", "Manage", null, new { @class = "btn btn-sm  btn-success btn" })
+                                @Html.ActionLink("Change Current Password", "ChangePassword", "Manage", null, new { @class = "btn btn-sm  btn-success btn" })||
+                             @Html.ActionLink("Update Email & Phone", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-sm  btn-warning btn" })
 
                             </span>
                         </a>

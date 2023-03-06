@@ -24,7 +24,8 @@ namespace Ishop.Controllers
         {
             UL db = new UL();
 
-            if(!(search == null))
+
+            if (!(search == null))
             {
                 return View(db.AspNetUsers.Where(c => c.UserName == search || c.UserName.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
 
@@ -33,7 +34,9 @@ namespace Ishop.Controllers
             {
                 return View(db.AspNetUsers.Where(c => c.UserName.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
             }
+
            
+
 
         }
 

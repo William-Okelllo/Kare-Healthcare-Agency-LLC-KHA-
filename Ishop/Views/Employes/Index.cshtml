@@ -110,7 +110,10 @@
                                     <a href="@Url.Action("Update_Profile", "Employes", new { id = item.Id})" class="dropdown-item">
                                         <i class="fas fa-sticky-note text-success"></i> View/Update Profile
                                     </a>
-                                   
+                                    <div class="divider"></div>
+                                    <a href="@Url.Action("Upload", "Files", new { id = item.Id})" class="dropdown-item">
+                                        <i class="fa fa-cloud text-primary"></i> Upload Employee files
+                                    </a>
                                     <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this account?')) { window.location.href = '@Url.Action("Delete_Acc", "Employes", new { id = item.Id})'; }">
                                         <i class="fas fa-trash text-danger"></i> Delete Account
                                     </a>

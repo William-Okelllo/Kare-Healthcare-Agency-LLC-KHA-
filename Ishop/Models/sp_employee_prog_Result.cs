@@ -11,10 +11,13 @@ namespace Ishop.Models
 {
     using System;
     
-    public partial class Emp_Dash_Result
+    public partial class sp_employee_prog_Result
     {
-        public Nullable<int> Completed_Shifts { get; set; }
-        public Nullable<int> Pending_Approval_Shifts { get; set; }
-        public Nullable<int> ClockedIn_Shifts { get; set; }
+        public string staff { get; set; }
+        public int id { get; set; }
+        public int Total_Tickets { get; set; }
+        public int Invoiced { get; set; }
+        public int Approved { get; set; }
+        public int Pending { get; set; }
     }
 }

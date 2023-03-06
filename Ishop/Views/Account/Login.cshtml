@@ -116,15 +116,38 @@
                                         <tr style="color:indigo">
 
                                             <th style="text-align:left">
-                                                <button class="btn btn btn-primary " type="submit">
+                                                <button class="btn btn btn-primary btn-lg btn-block " type="submit" id="login-btn" >
                                                     <i class="glyphicon glyphicon-log-in" style="color:white"></i>
-                                                   <i class="fa fa-sign-in"></i> Login
+                                                    <i class="fa fa-sign-in"></i> Login
                                                 </button>
+                                                <button class="hidden" type="button" id="hidden-button" disabled >
+                                                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                                                    Loading...
+                                                </button>
+                                                <style>
+                                                    .hidden {
+                                                        display: none;
+                                                                                                        }
+                                                </style>
+                                                <script>
+                                                    $(function () {
+                                                        $('#login-btn').click(function () {
+                                                            $(this).hide();
+                                                            
+                                                        });
+                                                    });
 
-                                                <button class="btn btn btn-danger " type="reset">
-                                                    <i class="glyphicon glyphicon-trash" style="color:white"></i>
-                                                    Reset
-                                                </button>
+                                                </script>
+                                                <script>
+                                                    $(function () {
+                                                        $('#login-btn').click(function () {
+                                                            $('#hidden-button').removeClass('hidden');
+                                                        });
+                                                    });
+
+                                                </script>
+
+                                               
 
 
 

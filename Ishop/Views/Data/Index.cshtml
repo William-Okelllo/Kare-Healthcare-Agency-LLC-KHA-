@@ -82,10 +82,10 @@
 
                         @foreach (var item in Model)
                         {
+                            <tr data-widget="expandable-table" aria-expanded="false">
 
-                            <tr>
                                 <td style="background-color: rgba(255, 255, 255, 0.60)">
-                                    @item.UserName
+                                    <i class="fa fa-user-circle text-primary"></i>  @item.UserName
                                 </td>
                                 <td style="background-color: rgba(255, 255, 255, 0.60)">
                                     @item.PhoneNumber
@@ -119,7 +119,7 @@
                                             </a>
 
                                             <div class="divider"></div>
-                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this account?')) { window.location.href = '@Url.Action("Delete_User", "Data", new { id = item.Id})'; }">
+                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this account?')) { window.location.href = '@Url.Action("Delete_User", "Data", new { id = item.Id })'; }">
                                                 <i class="fas fa-trash text-danger"></i> Delete Account
                                             </a>
                                             <script>
@@ -142,10 +142,16 @@
 
                                 </td>
                             </tr>
+                            
 
 
-
+                            
                         }
+
+
+
+
+
 
                     </tbody>
 

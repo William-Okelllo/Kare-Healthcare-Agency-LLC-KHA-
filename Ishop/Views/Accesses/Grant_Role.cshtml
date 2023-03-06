@@ -122,11 +122,11 @@
 
                                     ||@if (this.User.IsInRole("Admin"))
                                     {
-                                        @Html.ActionLink("❌ Cancel Request", "All", "Employes", null, new { @class = "btn btn-warning btn-sm" })
+                                        @Html.ActionLink("❌ Cancel Request", "Index", "Data", null, new { @class = "btn btn-warning btn-sm" })
                                     }
                                     else
                                     {
-                                        @Html.ActionLink("❌ Cancel Request", "Index", "Employes", null, new { @class = "btn btn-warning btn-sm" })
+                                        @Html.ActionLink("❌ Cancel Request", "Index", "Data", null, new { @class = "btn btn-warning btn-sm" })
                                     }
                                 </div>
 

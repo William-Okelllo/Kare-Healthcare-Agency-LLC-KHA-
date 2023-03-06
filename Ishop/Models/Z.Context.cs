@@ -168,14 +168,7 @@ namespace Ishop.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Em_Agency2_Result>("Em_Agency2", userParameter);
         }
     
-        public virtual ObjectResult<Emp_Dash_Result> Emp_Dash(string emp)
-        {
-            var empParameter = emp != null ?
-                new ObjectParameter("Emp", emp) :
-                new ObjectParameter("Emp", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Emp_Dash_Result>("Emp_Dash", empParameter);
-        }
+       
     
         public virtual ObjectResult<string> Get_Clients()
         {
