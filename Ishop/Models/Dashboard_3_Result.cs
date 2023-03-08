@@ -16,14 +16,14 @@ namespace Ishop.Models
         public decimal Approved_Gp { get; set; }
         public decimal Approved__Inv_Gp { get; set; }
         public decimal Pending_Gp { get; set; }
-        public decimal Deleted_Gp { get; set; }
+        public Nullable<decimal> Deleted_Gp { get; set; }
         public decimal Approved_Inv_Inv { get; set; }
         public decimal Approved_InvAmnt { get; set; }
         public decimal Pending_Inv { get; set; }
-        public decimal Deleted_Inv { get; set; }
+        public Nullable<decimal> Deleted_Inv { get; set; }
         public decimal Approved_NetAmnt { get; set; }
         public decimal Approved_Inv_NetAmnt { get; set; }
         public decimal Pending_NetAmnt { get; set; }
-        public decimal Deleted_NetAmnt { get; set; }
+        public Nullable<decimal> Deleted_NetAmnt { get; set; }
     }
 }

@@ -69,6 +69,8 @@
     <Compile Include="leaveContext.cs" />
     <Compile Include="leaveRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recovery_context.cs" />
+    <Compile Include="Recovery_Repo.cs" />
     <Compile Include="StaffContext.cs" />
     <Compile Include="StaffRepo.cs" />
     <Compile Include="TicketContext.cs" />

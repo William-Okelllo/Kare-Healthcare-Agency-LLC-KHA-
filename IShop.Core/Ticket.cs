@@ -49,11 +49,15 @@ namespace IShop.Core
         public DateTime Departure_Date { get; set; }
 
         [Required]
-        [Display(Name = "Arrival_Date")]
+        [Display(Name = "Return Date")]
         public DateTime Arrival_Date { get; set; }
 
        
         public string Routing { get; set; }
+
+        public string Payer { get; set; }
+        [Display(Name = "Ticketing System")]
+        public string Ticketing_System { get; set; }
 
         [Required]
         public string CTC { get; set; }

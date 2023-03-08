@@ -6,130 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Ishop.Models;
-using PagedList;
+using IShop.Core;
+using Ishop.Infa;
 
 namespace Ishop.Controllers
 {
-    public class RoutesController : Controller
+    public class RecoveriesController : Controller
     {
-        private tickets_datasetsv2 db = new tickets_datasetsv2();
+        private Recovery_context db = new Recovery_context();
 
-        // GET: Routes
-        public ActionResult Index(string searchBy, string search, int? page)
+        // GET: Recoveries
+        public ActionResult Index()
         {
-
-
-            if (!(search == null) && (!(search == "")))
-            {
-                return View(db.Ticketing_Routes.OrderByDescending(p => p.id).Where(c => c.Routing == search).ToList().ToPagedList(page ?? 1, 6));
-
-            }
-
-            else if (search == " ")
-            {
-                return View(db.Ticketing_Routes.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
-
-            }
-            else
-            {
-                return View(db.Ticketing_Routes.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
-
-            }
-
+            return View(db.recoveries.ToList());
         }
 
-        // GET: Routes/Details/5
+        // GET: Recoveries/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticketing_Routes ticketing_Routes = db.Ticketing_Routes.Find(id);
-            if (ticketing_Routes == null)
+            Recovery recovery = db.recoveries.Find(id);
+            if (recovery == null)
             {
                 return HttpNotFound();
             }
-            return View(ticketing_Routes);
+            return View(recovery);
         }
 
-        // GET: Routes/Create
+        // GET: Recoveries/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Routes/Create
+        // POST: Recoveries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Routing,CreatedOn")] Ticketing_Routes ticketing_Routes)
+        public ActionResult Create([Bind(Include = "id,CreatedOn,Staff,Inv_No,Inv_Amount,Balance")] Recovery recovery)
         {
             if (ModelState.IsValid)
             {
-                db.Ticketing_Routes.Add(ticketing_Routes);
+                db.recoveries.Add(recovery);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(ticketing_Routes);
+            return View(recovery);
         }
 
-        // GET: Routes/Edit/5
+        // GET: Recoveries/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticketing_Routes ticketing_Routes = db.Ticketing_Routes.Find(id);
-            if (ticketing_Routes == null)
+            Recovery recovery = db.recoveries.Find(id);
+            if (recovery == null)
             {
                 return HttpNotFound();
             }
-            return View(ticketing_Routes);
+            return View(recovery);
         }
 
-        // POST: Routes/Edit/5
+        // POST: Recoveries/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Routing,CreatedOn")] Ticketing_Routes ticketing_Routes)
+        public ActionResult Edit([Bind(Include = "id,CreatedOn,Staff,Inv_No,Inv_Amount,Balance")] Recovery recovery)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ticketing_Routes).State = EntityState.Modified;
+                db.Entry(recovery).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(ticketing_Routes);
+            return View(recovery);
         }
 
-        // GET: Routes/Delete/5
+        // GET: Recoveries/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticketing_Routes ticketing_Routes = db.Ticketing_Routes.Find(id);
-            if (ticketing_Routes == null)
+            Recovery recovery = db.recoveries.Find(id);
+            if (recovery == null)
             {
                 return HttpNotFound();
             }
-            return View(ticketing_Routes);
+            return View(recovery);
         }
 
-        // POST: Routes/Delete/5
+        // POST: Recoveries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ticketing_Routes ticketing_Routes = db.Ticketing_Routes.Find(id);
-            db.Ticketing_Routes.Remove(ticketing_Routes);
+            Recovery recovery = db.recoveries.Find(id);
+            db.recoveries.Remove(recovery);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

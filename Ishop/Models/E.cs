@@ -16,7 +16,7 @@ namespace Ishop.Models
 
         public string Facility_Set { get; set; }
 
-        public string Certification { get; set; }
+        public string Mode { get; set; }
 
         public string Department { get; set; }
     }

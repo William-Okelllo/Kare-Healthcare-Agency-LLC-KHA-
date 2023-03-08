@@ -11,12 +11,10 @@ namespace Ishop.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Ticketing_service_providers
     {
         public int id { get; set; }
-        [Required]
         public string Service_Provider { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
     }

@@ -13,7 +13,7 @@ namespace Ishop.Controllers
 {
     public class AirlinesController : Controller
     {
-        private ticket_datasetlist db = new ticket_datasetlist();
+        private tickets_datasetsv2 db = new tickets_datasetsv2();
 
         // GET: Airlines
         public ActionResult Index(string searchBy, string search, int? page)

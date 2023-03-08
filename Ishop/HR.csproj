@@ -401,12 +401,14 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\payment_modesController.cs" />
+    <Compile Include="Controllers\RecoveriesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\Service_providersController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\successController.cs" />
+    <Compile Include="Controllers\Ticketing_ClientsController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\TimesheetController.cs" />
     <Compile Include="Global.asax.cs">
@@ -454,16 +456,16 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Dashboard_1_Result.cs">
-      <DependentUpon>sp_dashboard.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Dashboard_2_Result.cs">
-      <DependentUpon>sp_dashboard.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Dashboard_3_Result.cs">
-      <DependentUpon>sp_dashboard.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Dashboard_4_Result.cs">
-      <DependentUpon>sp_dashboard.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
@@ -479,7 +481,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\File.cs">
-      <DependentUpon>Files_.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Files_.Context.cs">
       <AutoGen>True</AutoGen>
@@ -529,7 +531,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\leaves_Days_track.cs">
-      <DependentUpon>leave_track.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\leaves_emp_config.Context.cs">
       <AutoGen>True</AutoGen>
@@ -547,7 +549,7 @@
       <DependentUpon>leaves_emp_config.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\leaves_logs.cs">
-      <DependentUpon>lleave.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\leave_track.Context.cs">
       <AutoGen>True</AutoGen>
@@ -734,34 +736,37 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ticketing_Airlines.cs">
-      <DependentUpon>ticket_dataset.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ticketing_Clients.cs">
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ticketing_Routes.cs">
-      <DependentUpon>ticket_dataset.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ticketing_service_providers.cs">
-      <DependentUpon>ticket_dataset.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ticket_dataset.Context.cs">
+    <Compile Include="Models\tickets_datasetv2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ticket_dataset.Context.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ticket_dataset.cs">
+    <Compile Include="Models\tickets_datasetv2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ticket_dataset.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ticket_dataset.Designer.cs">
+    <Compile Include="Models\tickets_datasetv2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ticket_dataset.edmx</DependentUpon>
+      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Ticket_logs.cs">
-      <DependentUpon>tiko_logs.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ticket_payment_modes.cs">
-      <DependentUpon>ticket_dataset.tt</DependentUpon>
+      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tie_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -2254,15 +2259,15 @@
       <DependentUpon>tableOffice.edmx</DependentUpon>
       <LastGenOutput>tableOffice.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ticket_dataset.Context.tt">
+    <Content Include="Models\tickets_datasetv2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ticket_dataset.edmx</DependentUpon>
-      <LastGenOutput>ticket_dataset.Context.cs</LastGenOutput>
+      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
+      <LastGenOutput>tickets_datasetv2.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ticket_dataset.tt">
+    <Content Include="Models\tickets_datasetv2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ticket_dataset.edmx</DependentUpon>
-      <LastGenOutput>ticket_dataset.cs</LastGenOutput>
+      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
+      <LastGenOutput>tickets_datasetv2.cs</LastGenOutput>
     </Content>
     <Content Include="Models\tiko_logs.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2557,13 +2562,6 @@
     <Content Include="Models\lleave.edmx.diagram">
       <DependentUpon>lleave.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\ticket_dataset.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ticket_dataset.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ticket_dataset.edmx.diagram">
-      <DependentUpon>ticket_dataset.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\tiko_logs.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>tiko_logs.Designer.cs</LastGenOutput>
@@ -2599,7 +2597,13 @@
     <Content Include="Models\sp_e_prog.edmx.diagram">
       <DependentUpon>sp_e_prog.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\HR-ERP.pubxml" />
+    <EntityDeploy Include="Models\tickets_datasetv2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>tickets_datasetv2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\tickets_datasetv2.edmx.diagram">
+      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CodeMirror\addon\comment\comment.js" />
@@ -3287,11 +3291,9 @@
     <Content Include="Views\Data\Index.cshtml" />
     <Content Include="Views\Data\Delete_User.cshtml" />
     <Content Include="Views\Files\My_Files.cshtml" />
-    <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\Accesses\Acc_Profile.cshtml" />
     <Content Include="Views\Calender\Facility.cshtml" />
     <Content Include="Views\Files\Emp_Files.cshtml" />
-    <Content Include="Views\DashBoard\Monitor.cshtml" />
     <Content Include="Views\Calender\Staffing_Agency.cshtml" />
     <Content Include="Views\Account\New_Employee.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
@@ -3385,6 +3387,16 @@
     <Content Include="Views\Emp_Config\Details.cshtml" />
     <Content Include="Views\Emp_Config\Edit.cshtml" />
     <Content Include="Views\Emp_Config\Index.cshtml" />
+    <Content Include="Views\Recoveries\Create.cshtml" />
+    <Content Include="Views\Recoveries\Delete.cshtml" />
+    <Content Include="Views\Recoveries\Details.cshtml" />
+    <Content Include="Views\Recoveries\Edit.cshtml" />
+    <Content Include="Views\Recoveries\Index.cshtml" />
+    <Content Include="Views\Ticketing_Clients\Create.cshtml" />
+    <Content Include="Views\Ticketing_Clients\Delete.cshtml" />
+    <Content Include="Views\Ticketing_Clients\Details.cshtml" />
+    <Content Include="Views\Ticketing_Clients\Edit.cshtml" />
+    <Content Include="Views\Ticketing_Clients\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

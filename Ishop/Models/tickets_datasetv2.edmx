@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HRModel13.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="Uploaded_By" Type="nvarchar(max)" />
+          <Property Name="Access" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="UploadedOn" Type="datetime" />
+          <Property Name="Category" Type="nvarchar" MaxLength="100" />
+          <Property Name="Agency" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="leaves_Days_track">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Total_leaves_per_year" Type="int" />
+          <Property Name="Requested_leaves" Type="int" />
+          <Property Name="Remaining_leaves" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HR.dbo.leaves_logs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="leaves_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Approver" Type="nvarchar" MaxLength="100" />
+          <Property Name="Approver_status" Type="nvarchar" MaxLength="100" />
+          <Property Name="Approver_remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="leave_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HR.dbo.Ticket_logs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Ticket_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Action" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ticket_id" Type="int" />
+          <Property Name="User_Acc" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Ticket_payment_modes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mode" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ticketing_Airlines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Airline" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ticketing_Clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Client" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ticketing_Routes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Routing" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ticketing_service_providers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Service_Provider" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <Function Name="Dashboard_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staff" Type="nvarchar" Mode="In" />
+          <Parameter Name="Airline" Type="nvarchar" Mode="In" />
+          <Parameter Name="Service_Provider" Type="nvarchar" Mode="In" />
+          <Parameter Name="startDate" Type="varchar" Mode="In" />
+          <Parameter Name="endDate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Dashboard_2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staff" Type="nvarchar" Mode="In" />
+          <Parameter Name="Airline" Type="nvarchar" Mode="In" />
+          <Parameter Name="Service_Provider" Type="nvarchar" Mode="In" />
+          <Parameter Name="startDate" Type="varchar" Mode="In" />
+          <Parameter Name="endDate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Dashboard_3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staff" Type="nvarchar" Mode="In" />
+          <Parameter Name="Airline" Type="nvarchar" Mode="In" />
+          <Parameter Name="Service_Provider" Type="nvarchar" Mode="In" />
+          <Parameter Name="startDate" Type="varchar" Mode="In" />
+          <Parameter Name="endDate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Dashboard_4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staff" Type="nvarchar" Mode="In" />
+          <Parameter Name="Airline" Type="nvarchar" Mode="In" />
+          <Parameter Name="Service_Provider" Type="nvarchar" Mode="In" />
+          <Parameter Name="startDate" Type="varchar" Mode="In" />
+          <Parameter Name="endDate" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="HRModel13StoreContainer">
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leaves_Days_track" EntityType="Self.leaves_Days_track" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket_payment_modes" EntityType="Self.Ticket_payment_modes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticketing_Airlines" EntityType="Self.Ticketing_Airlines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticketing_Clients" EntityType="Self.Ticketing_Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticketing_Routes" EntityType="Self.Ticketing_Routes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticketing_service_providers" EntityType="Self.Ticketing_service_providers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leaves_logs" EntityType="Self.leaves_logs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [leaves_logs].[id] AS [id], 
+    [leaves_logs].[CreatedOn] AS [CreatedOn], 
+    [leaves_logs].[Approver] AS [Approver], 
+    [leaves_logs].[Approver_status] AS [Approver_status], 
+    [leaves_logs].[Approver_remarks] AS [Approver_remarks], 
+    [leaves_logs].[leave_id] AS [leave_id]
+    FROM [dbo].[leaves_logs] AS [leaves_logs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Ticket_logs" EntityType="Self.Ticket_logs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Ticket_logs].[id] AS [id], 
+    [Ticket_logs].[CreatedOn] AS [CreatedOn], 
+    [Ticket_logs].[Action] AS [Action], 
+    [Ticket_logs].[Ticket_id] AS [Ticket_id], 
+    [Ticket_logs].[User_Acc] AS [User_Acc]
+    FROM [dbo].[Ticket_logs] AS [Ticket_logs]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRModel13" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Uploaded_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Access" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UploadedOn" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Agency" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="leaves_Days_track">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Total_leaves_per_year" Type="Int32" />
+          <Property Name="Requested_leaves" Type="Int32" />
+          <Property Name="Remaining_leaves" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ticket_payment_modes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Ticketing_Airlines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Airline" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Ticketing_Clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Client" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Ticketing_Routes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Routing" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Ticketing_service_providers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Service_Provider" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="leaves_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Approver" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Approver_status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Approver_remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="leave_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Ticket_logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ticket_id" Type="Int32" />
+          <Property Name="User_Acc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="tickets_datasetsv2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Files" EntityType="Self.File" />
+          <EntitySet Name="leaves_Days_track" EntityType="Self.leaves_Days_track" />
+          <EntitySet Name="Ticket_payment_modes" EntityType="Self.Ticket_payment_modes" />
+          <EntitySet Name="Ticketing_Airlines" EntityType="Self.Ticketing_Airlines" />
+          <EntitySet Name="Ticketing_Clients" EntityType="Self.Ticketing_Clients" />
+          <EntitySet Name="Ticketing_Routes" EntityType="Self.Ticketing_Routes" />
+          <EntitySet Name="Ticketing_service_providers" EntityType="Self.Ticketing_service_providers" />
+          <EntitySet Name="leaves_logs" EntityType="Self.leaves_logs" />
+          <EntitySet Name="Ticket_logs" EntityType="Self.Ticket_logs" />
+          <FunctionImport Name="Dashboard_1" ReturnType="Collection(HRModel13.Dashboard_1_Result)">
+            <Parameter Name="Staff" Mode="In" Type="String" />
+            <Parameter Name="Airline" Mode="In" Type="String" />
+            <Parameter Name="Service_Provider" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="String" />
+            <Parameter Name="endDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dashboard_2" ReturnType="Collection(HRModel13.Dashboard_2_Result)">
+            <Parameter Name="Staff" Mode="In" Type="String" />
+            <Parameter Name="Airline" Mode="In" Type="String" />
+            <Parameter Name="Service_Provider" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="String" />
+            <Parameter Name="endDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dashboard_3" ReturnType="Collection(HRModel13.Dashboard_3_Result)">
+            <Parameter Name="Staff" Mode="In" Type="String" />
+            <Parameter Name="Airline" Mode="In" Type="String" />
+            <Parameter Name="Service_Provider" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="String" />
+            <Parameter Name="endDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dashboard_4" ReturnType="Collection(HRModel13.Dashboard_4_Result)">
+            <Parameter Name="Staff" Mode="In" Type="String" />
+            <Parameter Name="Airline" Mode="In" Type="String" />
+            <Parameter Name="Service_Provider" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="String" />
+            <Parameter Name="endDate" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Dashboard_1_Result">
+          <Property Type="Int32" Name="Total_Tickets" Nullable="true" />
+          <Property Type="Int32" Name="Pending_Approval" Nullable="true" />
+          <Property Type="Int32" Name="Approved" Nullable="true" />
+          <Property Type="Int32" Name="Approved___Invoiced" Nullable="true" />
+          <Property Type="Int32" Name="Deleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dashboard_2_Result">
+          <Property Type="String" Name="Staff" Nullable="true" MaxLength="360" />
+          <Property Type="Int32" Name="Tickets" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dashboard_3_Result">
+          <Property Type="Decimal" Name="Approved_Gp" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Approved__Inv_Gp" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Pending_Gp" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Deleted_Gp" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Approved_Inv_Inv" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Approved_InvAmnt" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Pending_Inv" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Deleted_Inv" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Approved_NetAmnt" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Approved_Inv_NetAmnt" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Pending_NetAmnt" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Deleted_NetAmnt" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="Dashboard_4_Result">
+          <Property Type="String" Name="Service_Provider" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Tickets" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HRModel13StoreContainer" CdmEntityContainer="tickets_datasetsv2">
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="HRModel13.File">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Uploaded_By" ColumnName="Uploaded_By" />
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UploadedOn" ColumnName="UploadedOn" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leaves_Days_track">
+            <EntityTypeMapping TypeName="HRModel13.leaves_Days_track">
+              <MappingFragment StoreEntitySet="leaves_Days_track">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Total_leaves_per_year" ColumnName="Total_leaves_per_year" />
+                <ScalarProperty Name="Requested_leaves" ColumnName="Requested_leaves" />
+                <ScalarProperty Name="Remaining_leaves" ColumnName="Remaining_leaves" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket_payment_modes">
+            <EntityTypeMapping TypeName="HRModel13.Ticket_payment_modes">
+              <MappingFragment StoreEntitySet="Ticket_payment_modes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticketing_Airlines">
+            <EntityTypeMapping TypeName="HRModel13.Ticketing_Airlines">
+              <MappingFragment StoreEntitySet="Ticketing_Airlines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Airline" ColumnName="Airline" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticketing_Clients">
+            <EntityTypeMapping TypeName="HRModel13.Ticketing_Clients">
+              <MappingFragment StoreEntitySet="Ticketing_Clients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticketing_Routes">
+            <EntityTypeMapping TypeName="HRModel13.Ticketing_Routes">
+              <MappingFragment StoreEntitySet="Ticketing_Routes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Routing" ColumnName="Routing" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticketing_service_providers">
+            <EntityTypeMapping TypeName="HRModel13.Ticketing_service_providers">
+              <MappingFragment StoreEntitySet="Ticketing_service_providers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Service_Provider" ColumnName="Service_Provider" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leaves_logs">
+            <EntityTypeMapping TypeName="HRModel13.leaves_logs">
+              <MappingFragment StoreEntitySet="leaves_logs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="Approver_status" ColumnName="Approver_status" />
+                <ScalarProperty Name="Approver_remarks" ColumnName="Approver_remarks" />
+                <ScalarProperty Name="leave_id" ColumnName="leave_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket_logs">
+            <EntityTypeMapping TypeName="HRModel13.Ticket_logs">
+              <MappingFragment StoreEntitySet="Ticket_logs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Ticket_id" ColumnName="Ticket_id" />
+                <ScalarProperty Name="User_Acc" ColumnName="User_Acc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Dashboard_1" FunctionName="HRModel13.Store.Dashboard_1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRModel13.Dashboard_1_Result">
+                <ScalarProperty Name="Total_Tickets" ColumnName="Total Tickets" />
+                <ScalarProperty Name="Pending_Approval" ColumnName="Pending Approval" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Approved___Invoiced" ColumnName="Approved &amp; Invoiced" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dashboard_2" FunctionName="HRModel13.Store.Dashboard_2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRModel13.Dashboard_2_Result">
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dashboard_3" FunctionName="HRModel13.Store.Dashboard_3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRModel13.Dashboard_3_Result">
+                <ScalarProperty Name="Approved_Gp" ColumnName="Approved_Gp" />
+                <ScalarProperty Name="Approved__Inv_Gp" ColumnName="Approved__Inv_Gp" />
+                <ScalarProperty Name="Pending_Gp" ColumnName="Pending_Gp" />
+                <ScalarProperty Name="Deleted_Gp" ColumnName="Deleted_Gp" />
+                <ScalarProperty Name="Approved_Inv_Inv" ColumnName="Approved_Inv_Inv" />
+                <ScalarProperty Name="Approved_InvAmnt" ColumnName="Approved_InvAmnt" />
+                <ScalarProperty Name="Pending_Inv" ColumnName="Pending_Inv" />
+                <ScalarProperty Name="Deleted_Inv" ColumnName="Deleted_Inv" />
+                <ScalarProperty Name="Approved_NetAmnt" ColumnName="Approved_NetAmnt" />
+                <ScalarProperty Name="Approved_Inv_NetAmnt" ColumnName="Approved_Inv_NetAmnt" />
+                <ScalarProperty Name="Pending_NetAmnt" ColumnName="Pending_NetAmnt" />
+                <ScalarProperty Name="Deleted_NetAmnt" ColumnName="Deleted_NetAmnt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dashboard_4" FunctionName="HRModel13.Store.Dashboard_4">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRModel13.Dashboard_4_Result">
+                <ScalarProperty Name="Service_Provider" ColumnName="Service_Provider" />
+                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

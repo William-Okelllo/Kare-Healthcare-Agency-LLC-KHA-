@@ -93,30 +93,33 @@ namespace Ishop.Controllers
         // GET: Tickets/Create
         public ActionResult New_Ticket()
         {
-            ticket_datasetlist dbb = new ticket_datasetlist();
+            tickets_datasetsv2 dbb = new tickets_datasetsv2();
             var categories = dbb.Ticketing_Airlines.ToList();
             ViewBag.Categories = new SelectList(categories, "Airline", "Airline");
 
-            ticket_datasetlist routelist = new ticket_datasetlist();
+            tickets_datasetsv2 routelist = new tickets_datasetsv2();
             var routes = routelist.Ticketing_Routes.ToList();
             ViewBag.routes = new SelectList(routes, "Routing", "Routing");
 
-            ticket_datasetlist service = new ticket_datasetlist();
+            tickets_datasetsv2 service = new tickets_datasetsv2();
             var servicep = service.Ticketing_service_providers.ToList();
             ViewBag.servicep = new SelectList(servicep, "Service_Provider", "Service_Provider");
 
-            ticket_datasetlist pp = new ticket_datasetlist();
+            tickets_datasetsv2 pp = new tickets_datasetsv2();
             var payment = pp.Ticket_payment_modes.ToList();
             ViewBag.payment = new SelectList(payment, "Mode", "Mode");
 
+            tickets_datasetsv2 cc = new tickets_datasetsv2();
+            var client = cc.Ticketing_Clients.ToList();
+            ViewBag.client = new SelectList(client, "Client", "Client");
 
             return View();
         }
-     
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,CONS,Airline,Mode,Service_Provider,Pax_Name,Client,Currency,Staff,Inv_Amount,Net_Amount,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
+        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,CONS,Airline,Mode,Ticketing_System,Service_Provider,Pax_Name,Payer,Client,Currency,Staff,Inv_Amount,Net_Amount,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
         {
 
             ticket.Ticket_status = 0;
@@ -158,21 +161,26 @@ namespace Ishop.Controllers
         // GET: Tickets/Edit/5
         public ActionResult Ticket_Update(int? id)
         {
-            ticket_datasetlist dbb = new ticket_datasetlist();
+            tickets_datasetsv2 dbb = new tickets_datasetsv2();
             var categories = dbb.Ticketing_Airlines.ToList();
             ViewBag.Categories = new SelectList(categories, "Airline", "Airline");
 
-            ticket_datasetlist routelist = new ticket_datasetlist();
+            tickets_datasetsv2 routelist = new tickets_datasetsv2();
             var routes = routelist.Ticketing_Routes.ToList();
             ViewBag.routes = new SelectList(routes, "Routing", "Routing");
 
-            ticket_datasetlist service = new ticket_datasetlist();
+            tickets_datasetsv2 service = new tickets_datasetsv2();
             var servicep = service.Ticketing_service_providers.ToList();
             ViewBag.servicep = new SelectList(servicep, "Service_Provider", "Service_Provider");
 
-            ticket_datasetlist pp = new ticket_datasetlist();
+            tickets_datasetsv2 pp = new tickets_datasetsv2();
             var payment = pp.Ticket_payment_modes.ToList();
             ViewBag.payment = new SelectList(payment, "Mode", "Mode");
+
+            tickets_datasetsv2 cc = new tickets_datasetsv2();
+            var clientlist = cc.Ticketing_Clients.ToList();
+            ViewBag.clientlist = new SelectList(clientlist, "Client", "Client");
+
 
             if (id == null)
             {
@@ -196,7 +204,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Ticket_Update([Bind(Include = "id,CreatedOn,CONS,Airline,Mode,Service_Provider,Staff,Pax_Name,Client,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
+        public ActionResult Ticket_Update([Bind(Include = "id,CreatedOn,CONS,Airline,Mode,Ticketing_System,Service_Provider,Payer,Staff,Pax_Name,Client,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
         {
             ticket.Ticket_status = 0;
             if (ModelState.IsValid)

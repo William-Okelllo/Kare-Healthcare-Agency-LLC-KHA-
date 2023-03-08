@@ -11,11 +11,13 @@ namespace Ishop.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Ticketing_Airlines
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Ticketing_Clients
     {
         public int id { get; set; }
-        public string Airline { get; set; }
+        [Required]
+        public string Client { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
     }
 }

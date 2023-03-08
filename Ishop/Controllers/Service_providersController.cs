@@ -13,7 +13,7 @@ namespace Ishop.Controllers
 {
     public class Service_providersController : Controller
     {
-        private ticket_datasetlist db = new ticket_datasetlist();
+        private tickets_datasetsv2 db = new tickets_datasetsv2();
 
         // GET: Service_providers
         public ActionResult Index(string searchBy, string search, int? page)
