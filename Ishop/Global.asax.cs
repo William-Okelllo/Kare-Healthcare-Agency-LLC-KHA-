@@ -30,6 +30,8 @@ namespace Ishop
             Database.SetInitializer<TicketContext>(null);
             Database.SetInitializer<AttendanceContext>(null);
             Database.SetInitializer<ExpenseContext>(null);
+            Database.SetInitializer<Recovery_context>(null);
+            Database.SetInitializer<Advance_Context>(null);
         }
     }
 }

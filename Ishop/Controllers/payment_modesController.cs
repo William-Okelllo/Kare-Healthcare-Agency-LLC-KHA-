@@ -81,7 +81,8 @@ namespace Ishop.Controllers
                 
                     db.Ticket_payment_modes.Add(ticket_payment_modes);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                TempData["msg"] = "Payment Mode added successfully ";
+                return RedirectToAction("Index");
                 
             }
 

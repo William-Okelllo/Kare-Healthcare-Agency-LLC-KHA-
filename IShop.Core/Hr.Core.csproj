@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access.cs" />
+    <Compile Include="Advance.cs" />
     <Compile Include="Attendance.cs" />
     <Compile Include="Bug.cs" />
     <Compile Include="Chat.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Expense.cs" />
     <Compile Include="Facilities.cs" />
     <Compile Include="Interface\IAccess.cs" />
+    <Compile Include="Interface\Iadvance.cs" />
     <Compile Include="Interface\IAttendance.cs" />
     <Compile Include="Interface\Ibug.cs" />
     <Compile Include="Interface\Ichat.cs" />

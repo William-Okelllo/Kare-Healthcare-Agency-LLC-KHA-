@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="AccessContext.cs" />
     <Compile Include="AccessRepo.cs" />
+    <Compile Include="Advance_Context.cs" />
+    <Compile Include="Advance_Repo.cs" />
     <Compile Include="AttendanceContext.cs" />
     <Compile Include="AttendanceRepo.cs" />
     <Compile Include="ChatContext.cs" />

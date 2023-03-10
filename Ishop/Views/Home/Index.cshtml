@@ -343,6 +343,11 @@
                                         Ticket lists  <span class="float-right badge bg-navy"><i class="fa fa-list"></i></span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Recoveries")" class="nav-link">
+                                        View Recoveries  <span class="float-right badge bg-navy"><i class="fa fa-piggy-bank"></i></span>
+                                    </a>
+                                </li>
 
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "leaves")" class="nav-link">
@@ -376,18 +381,27 @@
                         <ul class="nav flex-column">
 
                             <li class="nav-item">
-                                <a href="@Url.Action("Post New Ticket", "Attendance")" class="nav-link">
+                                <a href="@Url.Action("New_Ticket", "Tickets")" class="nav-link">
                                     Post New Ticket <span class="float-right badge bg-primary"><i class="fa fa-hourglass"></i></span>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="@Url.Action("Index", "Attendance")" class="nav-link">
-                                    My TimeSheet  <span class="float-right badge bg-navy"><i class="fa fa-clock"></i></span>
+                                <a href="@Url.Action("Index", "Tickets")" class="nav-link">
+                                    My Posted Tickets  <span class="float-right badge bg-navy"><i class="fa fa-clock"></i></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Tickets")" class="nav-link">
+                                    New Recovery  <span class="float-right badge bg-navy"><i class="fa fa-piggy-bank"></i></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Recoveries")" class="nav-link">
+                                    My Recoveries  <span class="float-right badge bg-navy"><i class="fa fa-piggy-bank"></i></span>
                                 </a>
                             </li>
 
-                           
 
                         </ul>
 

@@ -163,38 +163,45 @@
                                         <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
                                             <i class="fa fa-check-double text-warning"></i> Approve Ticket
                                         </a>}
-                                    @if ((item.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
-                                    {<div class="divider"></div>
+                                    @if (!(item.Recovery == 0))
+                                    
+                                        {<div class="divider"></div>
+                                         <a href="@Url.Action("Create", "Recoveries", new { id = item.id})" class="dropdown-item">
+                                             <i class="fa fa-piggy-bank text-primary"></i> Recover
+                                         </a>
+                                         }
+                                        @if ((item.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
+                                        {<div class="divider"></div>
 
-                                        <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
-                                            <i class="fa fa-cash-register text-primary"></i> Invoice Ticket
-                                        </a>}
-                                    @if (item.Ticket_status == 0)
-                                    {
-                                        <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("Ticket_Update", "Tickets", new { id = item.id })" class="dropdown-item">
-                                            <i class="fas fa-pen text-success"></i> Edit/Update Ticket
-                                        </a>
-                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Delete this Ticket?')) { window.location.href = '@Url.Action("Delete_Ticket", "Tickets", new { id = item.id })'; }">
-                                            <i class="fa fa-trash text-danger"></i> Delete Ticket
-                                        </a>
-                                        <script>
-                                            $(function () {
-                                                $('#Deny').click(function () {
-                                                    if (confirm('Are you sure?')) {
-                                                        window.location.href = $(this).data('url');
-                                                    }
+                                            <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
+                                                <i class="fa fa-cash-register text-primary"></i> Invoice Ticket
+                                            </a>}
+                                        @if (item.Ticket_status == 0)
+                                        {
+                                            <div class="dropdown-divider"></div>
+                                            <a href="@Url.Action("Ticket_Update", "Tickets", new { id = item.id })" class="dropdown-item">
+                                                <i class="fas fa-pen text-success"></i> Edit/Update Ticket
+                                            </a>
+                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Delete this Ticket?')) { window.location.href = '@Url.Action("Delete_Ticket", "Tickets", new { id = item.id })'; }">
+                                                <i class="fa fa-trash text-danger"></i> Delete Ticket
+                                            </a>
+                                            <script>
+                                                $(function () {
+                                                    $('#Deny').click(function () {
+                                                        if (confirm('Are you sure?')) {
+                                                            window.location.href = $(this).data('url');
+                                                        }
+                                                    });
                                                 });
-                                            });
-                                        </script>
-                                    }
+                                            </script>
+                                        }
 
 
 
 
 
 
-                        </td>
+</td>
 
 
 

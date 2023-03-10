@@ -12,6 +12,10 @@ namespace IShop.Core
     {
         public int id { get; set; }
 
+        [Display(Name = "Ticket id")]
+        public int Ticket_id { get; set; }
+        
+
         [Display(Name = "Posted On")]
         public DateTime CreatedOn { get; set; }
 
@@ -19,10 +23,12 @@ namespace IShop.Core
         public String Staff { get; set; }
 
         [Display(Name = "Invoice Number")]
-        public decimal Inv_No { get; set; }
+        public string Inv_No { get; set; }
         [Display(Name = "Invoice Amount")]
         public decimal Inv_Amount { get; set; }
 
+        [Display(Name = "Amount Recovered")]
+        public decimal Amount_Recovered { get; set; }
         public decimal Balance { get; set; }
     }
 }

@@ -71,6 +71,7 @@ namespace Ishop.Controllers
             {
                 db.Ticketing_Routes.Add(ticketing_Routes);
                 db.SaveChanges();
+                TempData["msg"] = "Route added successfully ";
                 return RedirectToAction("Index");
             }
 

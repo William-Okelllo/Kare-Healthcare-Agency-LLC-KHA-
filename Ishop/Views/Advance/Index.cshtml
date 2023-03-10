@@ -1,0 +1,203 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Advance>
+
+@{
+    ViewBag.Title = "My Requests";
+}
+
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+
+    .container {
+        border: 2px solid #dedede;
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.78);">
+
+
+    <div class="card-header" style="background-color: #001F3F">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-list"></i>
+            Applications
+        </h3>
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "Airlines", FormMethod.Get))
+            {
+
+
+                @Html.ActionLink("Post Request ", "Create", "Advance", null, new { @class = "btn btn-sm btn-default btn" })
+
+
+            }
+
+
+        </div>
+    </div>
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+    <div class="card-body">
+
+
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="card mb- mb-xl-0">
+
+                        <div class="card-outline card-warning card-header">
+
+                            <medium> <i class="fa fa-user-circle text-success"></i>  <b>Employee</b>  : @item.Employee</medium>
+
+                            <div class="dropdown-divider"></div>
+                            <small><i class="fa fa-calendar"></i>  Requested Amount : @item.Amount</small>
+                            <div class="dropdown-divider"></div>
+                            <small><i class="fa fa-calendar-day text-warning"></i> Due Date :  @item.Due_to.ToString("dd-MMM-yyyy") ||<i class="fa fa-calendar-day text-warning"></i> Pay Date : @item.Pay_Date.ToString("dd-MMM-yyyy")</small>
+
+                            <div class="dropdown-divider"></div>
+                           
+                            <small>
+                                <i class="fa fa-users text-success"></i> Approval from Finance :@if (item.Approved_by_Finance == false)
+                                {<small><i class="fa fa-times-circle text-danger"></i> Pending</small> }
+                                else
+                                {<small><i class="fa fa-check-circle text-success"></i> Pending</small>}
+                            </small>
+                            <div class="dropdown-divider"></div>
+                            <small>
+                                <i class="fa fa-users text-success"></i> Approval from Manager : @if (item.Approved_by_Manager == false)
+                                {<small><i class="fa fa-times-circle text-danger"></i> Pending</small> }
+                                else
+                                {<small><i class="fa fa-check-circle text-success"></i> Pending</small>}
+                            </small> 
+                        </div>
+                        <div class="card-body text-left">
+
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn  btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user-circle" s></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+                                    <a href="@Url.Action("Print_Form", "Advance", new { id = item.id })" class="dropdown-item">
+                                        <i class="fa fa-file-pdf text-danger"></i> Export To PDF
+                                    </a>
+
+                                    @if (item.Employee == User.Identity.Name)
+                                    {<div class="dropdown-divider"></div>
+                                        <a href="@Url.Action("Delete", "Advance", new { id = item.id })" class="dropdown-item">
+                                            <i class="fas fa-trash text-danger"></i> Delete Request
+                                        </a>}
+                                    <div class="dropdown-divider"></div>
+                                    @if (this.User.IsInRole("Finance"))
+                                    {
+                                        <a href="@Url.Action("Approve_Finance", "Advance", new { id = item.id })" class="dropdown-item">
+                                            <i class="fas fa-spinner text-success"></i> Approve/Deny  Request
+                                        </a>
+                                    }
+
+                                    @if (this.User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Approve_Admin", "Advance", new { id = item.id })" class="dropdown-item">
+                                            <i class="fas fa-spinner text-success"></i> Approve/Deny  Request
+                                        </a>
+                                    }
+
+
+                                    <div class="divider"></div>
+
+                                </div>
+
+                            </div>
+                           
+                            <div class="dropdown-divider"></div>
+
+                           
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+            @if (Model.Count() == 0)
+            {
+                <div class="col-md-5 col-sm-7 col-12">
+                    <div class="info-box">
+                        <span><i class="fa fa-spinner"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Advance Request</span>
+                            <span class="info-box-number">No applications made</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+
+                </div>
+            }
+            <div class="small-box bg-gradient-gray-dark">
+                <div>
+                    <h5 style="font-family:Quicksand">
+                        @Html.PagedListPager(Model, page => Url.Action("Posted_Jobs", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                    , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                    </h5>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <hr class='dotted' />

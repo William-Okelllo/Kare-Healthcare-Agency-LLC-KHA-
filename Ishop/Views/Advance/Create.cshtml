@@ -1,0 +1,257 @@
+﻿@model IShop.Core.Advance
+
+@{
+    ViewBag.Title = "New Request";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 0.5rem;
+        border-color: whitesmoke;
+        border-style:;
+    }
+
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+    $(function () {
+        $("#datepicker3").datepicker();
+    });
+    $(function () {
+        $("#datepicker4").datepicker();
+    });
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+           
+            <div class="card-body">
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+                    <div style="text-align:center"><b>SALARY ADVANCE FORM</b></div>
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-auto" style="text-align:center">
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><b style="color:darkblue">Your Name</b></div>
+                                </div>
+                                @Html.TextBoxFor(m => m.Employee, new { @class = "form-control form-rounded", @Value=User.Identity.Name, id = "Employee", @autofocus = "centre", @required = "required" ,@readonly=true})
+                            </div>
+                           
+                        </div>
+
+                        <div class="col-auto">
+                            <div class="input-group mb-2" style="text-align:center">
+
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><b style="color:darkblue">Date</b></div>
+                                </div>
+                                @Html.TextBoxFor(m => m.CreatedOn, new { @class = "form-control form-rounded", id = "datepicker", @placeholder = "Your name", @Value = DateTime.Now, @autofocus = "centre", @required = "required", @readonly = true })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr />
+                    <div>
+
+                        <p>
+                            I <span>
+                                @Html.TextBoxFor(model => model.Employee_Fullnames, new { @class = "form-rounded", @placeholder = "Your Fullnames", @required = "required" }) 
+                            </span>,
+                            request an advance payment of
+                            Ksh
+                              <span>@Html.TextBoxFor(model => model.Amount, new { @class = "form-rounded", @placeholder = "Amount", @required = "required" })</span>
+                            in words <span>
+                            @Html.TextBoxFor(model => model.Amount_Words, new { @class = "form-rounded", @placeholder = "Amount in Words", @required = "required" }) </span>
+                            on my salary to be
+                            paid on date
+                                     
+                            </p>
+                        <p>
+                            <span>
+                                @Html.TextBoxFor(model => model.Pay_Date, new { @class = "form-rounded", id = "datepicker4", @placeholder = "Pay Date" ,@required = "required" })
+
+                            </span> due to
+
+                            <span>
+                                @Html.TextBoxFor(model => model.Due_to, new { @class = "form-rounded", id = "datepicker3", @placeholder = "Due Date" ,@required = "required" })
+                            </span>
+                            as permitted by company policy.
+                        </p>
+                            <p>
+                                I agree to repay this advance as follows, One lump-sum payroll deduction to be made from my salary on the first pay period
+                                immediately following the pay period from which this advance is made.I also agree that if I terminate employment prior to total repayment of this advance, I
+                                authorize the company to deduct any unpaid advance amount from the salary owed me at the time of termination of employment.
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <hr />
+
+
+                        <table>
+                            <thead>
+                                <tr>
+
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <td style = "text-align:left" >
+
+                                <input type= "submit" value= "Submit Request" class="btn btn btn-warning" style="color:white" onclick="return confirm('Are you sure you want to submit?')" />
+
+
+                                <script>
+                                    $(function () {
+                                        $('#Create').click(function () {
+                if (confirm('Are you sure?'))
+                {
+                    window.location.href = $(this).data('url');
+                }
+            });
+                                    });
+            </script>
+
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+            <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+            </td>
+            </tbody>
+            </table>
+
+                                }
+
+                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
