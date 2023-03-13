@@ -79,7 +79,7 @@
 <!-- /.card-header -->
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-8 col-sm-8 col-8">
+    <div class="col-md-8 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #001F3F;color:white">
                 <i class="fa fa-piggy-bank text-white nav-icon"></i> New Recovery  
@@ -99,23 +99,30 @@
 
 
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
-                            @Html.EditorFor(model => model.CreatedOn, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-
-                               @Value = DateTime.Now,
-                               @Readonly = true
-
-                           }
-                       })
-
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <label><i class="fa fa-circle-notch text-warning"></i>Id </label>
+                        @foreach (var item in ViewBag.l2)
+                        {
+                            <input id="Ticket_id" name="Ticket_id" type="text" value="@item.id" class="form-control " readonly />
+                        }
                     </div>
+                    <div class="form-group col-md-4">
+                        <label><i class="fa fa-calendar text-warning"></i> Posted On </label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+
+                           @Value = DateTime.Now,
+                           @Readonly = true
+
+                       }
+                   })
+
+                    </div>
+                </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-3">
@@ -124,7 +131,7 @@
                        {
                            htmlAttributes = new
                            {
-                               @class = "form-control form-rounded",
+                               @class = "form-control ",
                                @Placeholder = "Invoice Number",
                                @required = "required",
 
@@ -152,13 +159,7 @@
 
                             }
                         </div>
-                            <div class="form-group col-md-1">
-                                <label><i class="fa fa-circle-notch text-warning"></i> id </label>
-                                @foreach (var item in ViewBag.l2)
-                                {
-                                    <input id="Ticket_id" name="Ticket_id" type="text" value="@item.id" class="form-control form-rounded" readonly />
-                                }
-                            </div>
+                            
 
                         
                     </div>
@@ -216,13 +217,13 @@
                        })
 
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label><i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Staff) </label>
                             @Html.EditorFor(model => model.Staff, new
                        {
                            htmlAttributes = new
                            {
-                               @class = "form-control form-rounded",
+                               @class = "form-control  form-rounded-sm",
                                @Value = User.Identity.Name,
                                @Readonly = true,
 
@@ -258,7 +259,7 @@
                         <div style="color:red">@Html.ValidationMessageFor(y => y.Amount_Recovered)</div>
 
 
-
+                        <small><i class="fa fa-sticky-note text-primary"></i> The Recovered Amount will be auto-deducated form the recovery amount on the orign ticket</small>
                         <hr />
 
 
