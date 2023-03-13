@@ -90,8 +90,24 @@ namespace Ishop.Controllers
             return PartialView("Details", ticket);
         }
 
-        // GET: Tickets/Create
-        public ActionResult New_Ticket()
+       
+           
+            public JsonResult GetDropdownData(string searchTerm)
+        {
+            tickets_datasetsv2 dbbbb = new tickets_datasetsv2();
+            var data = dbbbb.Ticketing_Airlines
+                            .Where(x => x.Airline.Contains(searchTerm))
+                            .OrderBy(x => x.Airline)
+                            .Select(x => new { id = x.id, FieldName = x.Airline })
+                            .ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+
+            // GET: Tickets/Create
+            public ActionResult New_Ticket()
         {
             tickets_datasetsv2 dbb = new tickets_datasetsv2();
             var categories = dbb.Ticketing_Airlines.ToList();

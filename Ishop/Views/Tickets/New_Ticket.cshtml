@@ -85,8 +85,7 @@
         });
     }, 4000);
 </script>
-<!-- /.card-header -->
-<br />
+
 <div class="col d-flex justify-content-center">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
@@ -108,65 +107,82 @@
 
 
 
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
-                            @Html.EditorFor(model => model.CreatedOn, new
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
                        {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
+                           @class = "form-control form-control-sm",
 
-                               @Value = DateTime.Now,
-                               @Readonly = true
+                           @Value = DateTime.Now,
+                           @Readonly = true
 
-                           }
-                       })
+                       }
+                   })
 
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label><i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Staff)</label>
-
-                            @Html.EditorFor(model => model.Staff, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Value = User.Identity.Name,
-                               @Readonly = true
-
-
-                           }
-                       })
-                        </div>
-
-                        <div class="form-group col-md-2">
-                            <label>
-                                <i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline)
-                            </label>
-
-                            @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --",
-                           new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
-                            @Html.EditorFor(model => model.Pax_Name, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Placeholder = "Pax Name",
-                               @required = "required",
-
-                           }
-                       })
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label> <i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Client)</label>
-                            @Html.DropDownList("client", ViewBag.client as SelectList, "-- Select client --",
-                           new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
-                        </div>
                     </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Staff)</label>
+
+                        @Html.EditorFor(model => model.Staff, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Value = User.Identity.Name,
+                           @Readonly = true
+
+
+                       }
+                   })
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label>
+                            <i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline)
+                        </label>
+
+                        @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --",
+                       new { @class = "form-control form-control-sm", @required = "required" })
+                    </div>
+
+
+
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#Airline").chosen();
+                            $("#client").chosen();
+                            $("#Service_Provider").chosen();
+                            $("#Routing").chosen();
+                            
+                        });
+
+                    </script>
+
+
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
+                        @Html.EditorFor(model => model.Pax_Name, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Pax Name",
+                           @required = "required",
+
+                       }
+                   })
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label> <i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Client)</label>
+                        @Html.DropDownList("client", ViewBag.client as SelectList, "-- Select client --",
+                       new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
+                    </div>
+                    
+                </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Currency) </label>
@@ -338,10 +354,10 @@
                                     var selectedValue = $(this).val();
                                     if (selectedValue != "") {
                                         $("#Payer").show(("slide", { direction: "down" }, 300));
-                                      
+
                                     } else {
                                         $("#Payer").hide(("slide", { direction: "up" }, 300));
-                                        
+
                                     }
                                 });
                             });
@@ -361,7 +377,7 @@
                            }
                        })
                         </div>
-                        
+
                         <div class="form-group col-md-2" id="x" style="display: none">
                             <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Group_id)</label>
                             <input type="text" name="Group_id" id="Group_id" class="form-control form-control-sm" />
@@ -421,15 +437,15 @@
                                 if ($(this).is(":checked")) {
                                     $("#x").show(("slide", { direction: "up" }, 300));
                                     $("#note").show(("slide", { direction: "up" }, 300));
-                                   
+
                                 } else {
                                     $("#x").hide(("slide", { direction: "left" }, 300));
                                     $("#note").hide(("slide", { direction: "left" }, 300));
-                                  ;
+                                    ;
                                 }
                             });
                         });
-                        
+
                     </script>
                     <div class="form-group col-md-6" style="display: none" id="note">
 
@@ -443,17 +459,17 @@
                         <small>Once generated the first code copy it to the next to be grouped tikcets</small>
 
                     </div>
-                        
-                        
-                   
-                
 
-                       
 
-                        
-                        
 
-                    
+
+
+
+
+
+
+
+
 
 
 
@@ -473,7 +489,8 @@
                        @placeholder = "Overall remarks",
                        @autofocus = ""
                        ,
-                       @class = "form-control form-rounded2",@required = "required",
+                       @class = "form-control form-rounded2",
+                            @required = "required",
 
                    })
 
@@ -533,11 +550,9 @@
                         </tbody>
                     </table>
 
-                }
+                    }
 
-                </form>
-
-
+                    </form>
 
 
 
@@ -557,13 +572,15 @@
 
 
 
-                @section Scripts {
-                    @Scripts.Render("~/bundles/jqueryval")
-                }
+
+
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }
 
 
 
-            </div>
+                </div>
         </div>
     </div>
 </div>
