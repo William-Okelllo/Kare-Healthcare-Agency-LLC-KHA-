@@ -32,6 +32,19 @@
             <i class="fa fa-thin fa-history"></i>
             Requested leaves
         </h3>
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "leaves", FormMethod.Get))
+            {
+
+
+                @Html.ActionLink("Request leave ", "Create", "leaves", null, new { @class = "btn btn-sm btn-default btn" })
+
+
+            }
+
+
+        </div>
     </div>
     @if (TempData["Msg"] != null)
     {<div class="row">

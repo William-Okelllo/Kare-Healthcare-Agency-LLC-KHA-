@@ -97,17 +97,11 @@
                             <div class="dropdown-divider"></div>
                            
                             <small>
-                                <i class="fa fa-users text-success"></i> Approval from Finance :@if (item.Approved_by_Finance == false)
-                                {<small><i class="fa fa-times-circle text-danger"></i> Pending</small> }
-                                else
-                                {<small><i class="fa fa-check-circle text-success"></i> Pending</small>}
+                                <i class="fa fa-users text-success"></i> Approval from Finance :@item.Approved_by_Finance
                             </small>
                             <div class="dropdown-divider"></div>
                             <small>
-                                <i class="fa fa-users text-success"></i> Approval from Manager : @if (item.Approved_by_Manager == false)
-                                {<small><i class="fa fa-times-circle text-danger"></i> Pending</small> }
-                                else
-                                {<small><i class="fa fa-check-circle text-success"></i> Pending</small>}
+                                <i class="fa fa-users text-success"></i> Approval from Manager :@item.Approved_by_Manager
                             </small> 
                         </div>
                         <div class="card-body text-left">
@@ -121,7 +115,7 @@
                                         <i class="fa fa-file-pdf text-danger"></i> Export To PDF
                                     </a>
 
-                                    @if (item.Employee == User.Identity.Name)
+                                    @if (item.Employee == User.Identity.Name && item.Approved_by_Manager=="Pending" )
                                     {<div class="dropdown-divider"></div>
                                         <a href="@Url.Action("Delete", "Advance", new { id = item.id })" class="dropdown-item">
                                             <i class="fas fa-trash text-danger"></i> Delete Request
@@ -129,15 +123,15 @@
                                     <div class="dropdown-divider"></div>
                                     @if (this.User.IsInRole("Finance"))
                                     {
-                                        <a href="@Url.Action("Approve_Finance", "Advance", new { id = item.id })" class="dropdown-item">
-                                            <i class="fas fa-spinner text-success"></i> Approve/Deny  Request
+                                        <a href="@Url.Action("Approve_Admin", "Advance", new { id = item.id })" class="dropdown-item">
+                                            <i class="fas fa-certificate text-success"></i> Approve/Deny  Request
                                         </a>
                                     }
 
-                                    @if (this.User.IsInRole("Admin"))
+                                    @if (this.User.IsInRole("Admin") && item.Approved_by_Manager == "Pending" )
                                     {
                                         <a href="@Url.Action("Approve_Admin", "Advance", new { id = item.id })" class="dropdown-item">
-                                            <i class="fas fa-spinner text-success"></i> Approve/Deny  Request
+                                            <i class="fas fa-certificate text-success"></i> Approve/Deny  Request
                                         </a>
                                     }
 

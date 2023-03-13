@@ -354,9 +354,15 @@
                                         Requested leaves <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
                                     </a>
                                 </li>
+                                @if (this.User.IsInRole("Advance_Approvals"))
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Advance")" class="nav-link">
+                                            Requested Advance Payments <span class="float-right badge bg-warning"><i class="fa fa-spinner"></i></span>
+                                        </a>
+                                    </li>}
 
-
-                            </ul>
+                                </ul>
 
 
                         </div>
@@ -402,7 +408,14 @@
                                 </a>
                             </li>
 
-
+                            @if (this.User.IsInRole("Advance_Approvals"))
+                            {
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Advance")" class="nav-link">
+                                        Requested Advance Payments <span class="float-right badge bg-warning"><i class="fa fa-spinner"></i></span>
+                                    </a>
+                                </li>
+}
                         </ul>
 
 

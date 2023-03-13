@@ -32,17 +32,11 @@
                                 <div class="dropdown-divider"></div>
 
                                 <small>
-                                    <i class="fa fa-users text-success"></i> Approval from Finance :@if (Model.Approved_by_Finance == false)
-                                    {<small><i class="fa fa-times-circle text-danger"></i> Pending</small> }
-                                    else
-                                    {<small><i class="fa fa-check-circle text-success"></i> Pending</small>}
+                                    <i class="fa fa-users text-success"></i> Approval from Finance :@Model.Approved_by_Finance
                                 </small>
                                 <div class="dropdown-divider"></div>
                                 <small>
-                                    <i class="fa fa-users text-success"></i> Approval from Manager : @if (Model.Approved_by_Manager == false)
-                                    {<small><i class="fa fa-times-circle text-danger"></i> Pending</small> }
-                                    else
-                                    {<small><i class="fa fa-check-circle text-success"></i> Pending</small>}
+                                    <i class="fa fa-users text-success"></i> Approval from Manager : @Model.Approved_by_Manager
                                 </small>
                             </div>
                         </div>

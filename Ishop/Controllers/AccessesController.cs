@@ -16,6 +16,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Ishop.Controllers
 {
+    [Authorize] 
     public class AccessesController : Controller
     {
         private AccessContext db = new AccessContext();

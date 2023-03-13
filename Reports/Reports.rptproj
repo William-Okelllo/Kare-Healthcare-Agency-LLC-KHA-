@@ -55,6 +55,7 @@
     <Report Include="Dashboard.rdl" />
     <Report Include="Expenses_report.rdl" />
     <Report Include="Invoices_report.rdl" />
+    <Report Include="Recoveries_report.rdl" />
     <Report Include="Tickets_Report.rdl" />
     <Report Include="Timesheet_report.rdl" />
   </ItemGroup>

@@ -111,8 +111,21 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Finance"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Finance";
+                roleManager.Create(role);
 
+            }
 
+            if (!roleManager.RoleExists("Advance_Approvals"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Advance_Approvals";
+                roleManager.Create(role);
+
+            }
         }
     }
 }

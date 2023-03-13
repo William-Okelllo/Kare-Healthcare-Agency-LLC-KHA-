@@ -12,6 +12,9 @@ using Ishop.Models;
 using PagedList;
 using Rotativa;
 using IShop.Core.Interface;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Net.Sockets;
 
 namespace Ishop.Controllers
 {
@@ -23,10 +26,10 @@ namespace Ishop.Controllers
         // GET: Advance
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            
 
 
-            if (this.User.IsInRole("Admin"))
+
+            if (this.User.IsInRole("Advance_Approvals"))
             {
 
                 if (!(search == null))
@@ -85,13 +88,13 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Employee,CreatedOn,Employee_Fullnames,Amount,Amount_Words,Pay_Date,Due_to,Approved_by_Manager,Approved_Date_Manager,Approved_by_Finance,Approved_Date_Finance,Request_status")] Advance advance)
+        public ActionResult Create([Bind(Include = "id,Employee,CreatedOn,Employee_Fullnames,Amount,Amount_Words,Pay_Date,Due_to,Approved_by_Manager,Approved_by_Finance,Request_status")] Advance advance)
         {
-            advance.Request_status = 0;
-            advance.Approved_by_Manager = false;
-            advance.Approved_Date_Manager = advance.CreatedOn;
-            advance.Approved_by_Finance = false;
-            advance.Approved_Date_Finance = advance.CreatedOn;
+
+            advance.Approved_by_Manager = "Pending";
+            
+            advance.Approved_by_Finance = "Pending";
+          
 
             if (ModelState.IsValid)
             {
@@ -105,7 +108,7 @@ namespace Ishop.Controllers
         }
 
         // GET: Advance/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Approve_Admin(int? id)
         {
             if (id == null)
             {
@@ -124,7 +127,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Employee,CreatedOn,Employee_Fullnames,Amount,Amount_Words,Pay_Date,Due_to,Approved_by_Manager,Approved_Date_Manager,Approved_by_Finance,Approved_Date_Finance")] Advance advance)
+        public ActionResult Approve_Admin([Bind(Include = "id,Employee,CreatedOn,Employee_Fullnames,Amount,Amount_Words,Pay_Date,Due_to,Approved_by_Manager,Approved_by_Finance")] Advance advance)
         {
             if (ModelState.IsValid)
             {
@@ -185,17 +188,8 @@ namespace Ishop.Controllers
             }
         }
 
-        public ActionResult Approve_Finance(int id)
-        {
 
-            return View();
+        
 
-        }
-        public ActionResult Approve_Admin(int id)
-        {
-
-            return View();
-
-        }
     }
 }

@@ -50,7 +50,15 @@ namespace Ishop.Controllers
         [Authorize(Roles = "DashBoard")]
         public ActionResult DashBoard(sp_dashboards sp_Dashboards ,string Staff, string Airline, string Service_Provider, string startDate, string endDate)
         {
-            if(Staff ==null || Airline == null|| Service_Provider == null ||startDate == "" || endDate == "")
+            tickets_datasetsv2 dbb = new tickets_datasetsv2();
+            var categories = dbb.Ticketing_Airlines.ToList();
+            ViewBag.Categories = new SelectList(categories, "Airline", "Airline");
+
+            tickets_datasetsv2 service = new tickets_datasetsv2();
+            var servicep = service.Ticketing_service_providers.ToList();
+            ViewBag.servicep = new SelectList(servicep, "Service_Provider", "Service_Provider");
+
+            if (Staff ==null || Airline == null|| Service_Provider == null ||startDate == "" || endDate == "")
             {
                var  startDated = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
@@ -77,6 +85,11 @@ namespace Ishop.Controllers
             sp_dashboards l6 = new sp_dashboards();
             var boo6 = l6.Dashboard_4(Staff, Airline, Service_Provider, startDate, endDate).ToList();
             ViewBag.l6 = boo6;
+
+
+
+
+            
 
             return View();
         }

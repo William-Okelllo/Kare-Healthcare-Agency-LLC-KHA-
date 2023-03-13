@@ -31,14 +31,16 @@ namespace IShop.Core
         [Display(Name = "Due to")]
         public DateTime Due_to { get; set; }
 
-        public bool Approved_by_Manager { get; set; }
-        public DateTime Approved_Date_Manager { get; set; }
+        [Display(Name = "Manager Approvals")]
+        public string Approved_by_Manager { get; set; }
 
-        public bool Approved_by_Finance { get; set; }
-        public DateTime Approved_Date_Finance { get; set; }
+     
 
+        [Display(Name = "Finance Approvals")]
+        public string Approved_by_Finance { get; set; }
 
-        public int  Request_status { get; set; }
+     
+
 
     }
 }

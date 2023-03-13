@@ -383,7 +383,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-clock text-white"></i>
                                 <p style="color: white">
-                                    leaves & Advances <i class="fas fa-angle-left right"></i>
+                                    leaves  <i class="fas fa-angle-left right"></i>
 
 
                                 </p>
@@ -391,12 +391,7 @@
                             <ul class="nav nav-treeview">
                                 @if (this.User.IsInRole("Admin"))
                                 {
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Create", "leaves")" class="nav-link">
-                                            <i class="fa fa-hand-holding text-white nav-icon"></i>
-                                            <p style="color: white">Request leave</p>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "leaves")" class="nav-link">
                                             <i class="fa fa-hand-holding text-white nav-icon"></i>
@@ -404,39 +399,55 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Advance")" class="nav-link">
-                                            <i class="fa fa-briefcase text-white nav-icon"></i>
-                                            <p style="color: white"> Advance requests </p>
-                                        </a>
+                                        @if (!(this.User.IsInRole("Advance_Approvals")))
+                                        {
+                                            <a href="@Url.Action("Index", "Advance")" class="nav-link">
+                                                <i class="fa fa-briefcase text-white nav-icon"></i>
+                                                <p style="color: white">My Advance requests </p>
+                                            </a>
+                                        }
                                     </li>
+                                    <li class="nav-item">
+                                        @if ((this.User.IsInRole("Advance_Approvals")))
+                                        {
+                                            <a href="@Url.Action("Index", "Advance")" class="nav-link">
+                                                <i class="fa fa-clipboard-list text-white nav-icon"></i>
+                                                <p style="color: white">All Advance requests </p>
+                                            </a>
+                                        }
+                                    </li>
+
 
                                 }
 
                                 @if (this.User.IsInRole("Employee"))
                                 {
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Create", "leaves")" class="nav-link">
-                                            <i class="fa fa-hand-holding text-white nav-icon"></i>
-                                            <p style="color: white">Request leaves</p>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "leaves")" class="nav-link">
                                             <i class="fa fa-book-open text-white nav-icon"></i>
                                             <p style="color: white">My leaves requests </p>
                                         </a>
                                     </li>
+                                    
+
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Create", "Advance")" class="nav-link">
-                                            <i class="fa fa-briefcase text-white nav-icon"></i>
-                                            <p style="color: white">Request Advance Salary</p>
-                                        </a>
+                                        @if (!(this.User.IsInRole("Advance_Approvals")))
+                                        {
+                                            <a href="@Url.Action("Index", "Advance")" class="nav-link">
+                                                <i class="fa fa-briefcase text-white nav-icon"></i>
+                                                <p style="color: white">My Advance requests </p>
+                                            </a>
+                                        }
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Advance")" class="nav-link">
-                                            <i class="fa fa-briefcase text-white nav-icon"></i>
-                                            <p style="color: white">My Advance requests </p>
-                                        </a>
+                                        @if ((this.User.IsInRole("Advance_Approvals")))
+                                        {
+                                            <a href="@Url.Action("Index", "Advance")" class="nav-link">
+                                                <i class="fa fa-clipboard-list text-white nav-icon"></i>
+                                                <p style="color: white">All Advance requests </p>
+                                            </a>
+                                        }
                                     </li>
                                 }
 

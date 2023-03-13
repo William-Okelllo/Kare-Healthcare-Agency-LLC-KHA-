@@ -3436,11 +3436,9 @@
     <Content Include="Views\Advance\Create.cshtml" />
     <Content Include="Views\Advance\Delete.cshtml" />
     <Content Include="Views\Advance\Details.cshtml" />
-    <Content Include="Views\Advance\Edit.cshtml" />
+    <Content Include="Views\Advance\Approve_Admin.cshtml" />
     <Content Include="Views\Advance\Index.cshtml" />
     <Content Include="Views\Advance\Print_Form.cshtml" />
-    <Content Include="Views\Advance\Approve_Finance.cshtml" />
-    <Content Include="Views\Advance\Approve_Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
