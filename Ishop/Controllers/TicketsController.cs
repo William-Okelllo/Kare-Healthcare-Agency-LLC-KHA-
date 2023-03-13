@@ -38,12 +38,12 @@ namespace Ishop.Controllers
             
             else if (search == " ")
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
 
             }
             else
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
 
             }
 
@@ -57,13 +57,13 @@ namespace Ishop.Controllers
                 }
                 else if (search == null)
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
 
                 }
                 else
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => (!(c.Ticket_status == 99))).ToList()
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || (!(c.Ticket_status == 99))).ToList()
                         .ToPagedList(page ?? 1, 6));
                 }
             }
@@ -119,7 +119,7 @@ namespace Ishop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,CONS,Airline,Mode,Ticketing_System,Service_Provider,Pax_Name,Payer,Client,Currency,Staff,Inv_Amount,Net_Amount,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
+        public ActionResult New_Ticket([Bind(Include = "id,CreatedOn,Group_ticket,Group_id,Airline,Mode,Ticketing_System,Service_Provider,Pax_Name,Payer,Client,Currency,Staff,Inv_Amount,Net_Amount,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
         {
 
             ticket.Ticket_status = 0;
@@ -204,7 +204,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Ticket_Update([Bind(Include = "id,CreatedOn,CONS,Airline,Mode,Ticketing_System,Service_Provider,Payer,Staff,Pax_Name,Client,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
+        public ActionResult Ticket_Update([Bind(Include = "id,Group_ticket,Group_id,CreatedOn,CONS,Airline,Mode,Ticketing_System,Service_Provider,Payer,Staff,Pax_Name,Client,Inv_Amount,Net_Amount,Gross_Profit,Incentv,Recovery,Departure_Date,Arrival_Date,Routing,CTC,Remarks,Ticket_status")] Ticket ticket)
         {
             ticket.Ticket_status = 0;
             if (ModelState.IsValid)

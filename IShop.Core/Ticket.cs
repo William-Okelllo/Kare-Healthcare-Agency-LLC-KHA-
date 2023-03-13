@@ -15,10 +15,10 @@ namespace IShop.Core
         [Display(Name = "Posted On")]
         public DateTime CreatedOn { get; set; }
 
-        [Required]
-        public String CONS { get; set; }
-
         
+        public bool Group_ticket { get; set; }
+        public String Group_id { get; set; }
+
         public String Airline { get; set; }
 
        
