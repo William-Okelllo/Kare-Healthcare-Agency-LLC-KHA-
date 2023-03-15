@@ -54,30 +54,30 @@
         {@Html.AntiForgeryToken()
         <!-- /.login-logo -->
 
-        <div class="card card-outline card-success" style="background-color: rgb(0, 0, 0, 0.72);">
+        <div class="card card-outline card-orange" style="background-color: rgb(0, 0, 0, 0.72);">
             <div class="card-header">
-                <a style="text-align:center"><img src="~/Images/logo7.png" height="100" /></a>
+                <a style="text-align:center"><img src="~/Images/client2.png" height="100" /></a>
 
 
                 <form>
                     <p class="login-box-msg" style="color:white">Sign in To Your Account</p>
 
                     <div class="form-group">
-                        <label style="color:white"> <span class="fa fa-user text-success"></span> Username</label>
+                        <label style="color:white"> <span class="fa fa-user text-orange"></span> Username</label>
                         <div class="input-group mb-3">
                             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
 
                             <div class="input-group-text">
-                                <span class="fas fa-user text-success"></span>
+                                <span class="fas fa-user text-orange"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label style="color:white"> <span class="fa fa-key text-success"></span> Password</label>
+                            <label style="color:white"> <span class="fa fa-key text-orange"></span> Password</label>
                             <div class="input-group mb-2">
 
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password", @autofocus = "" })
                                 <div class="input-group-text">
-                                    <span class="fas fa-key text-success"></span>
+                                    <span class="fas fa-key text-orange"></span>
                                 </div>
 
 

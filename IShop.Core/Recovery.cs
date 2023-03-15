@@ -14,7 +14,9 @@ namespace IShop.Core
 
         [Display(Name = "Ticket id")]
         public int Ticket_id { get; set; }
-        
+
+        [Display(Name = "Ticket/Ref NO")]
+        public String Ticket_No { get; set; }
 
         [Display(Name = "Posted On")]
         public DateTime CreatedOn { get; set; }

@@ -15,8 +15,19 @@ namespace IShop.Core
         [Display(Name = "Posted On")]
         public DateTime CreatedOn { get; set; }
 
-        
+        [Display(Name = "Issued On")]
+        public DateTime issue_Date { get; set; }
+
+        [Display(Name = "Ticket/Ref NO")]
+        public String Ticket_No { get; set; }
+
+        [Display(Name = "Is Grp Ticket?")]
         public bool Group_ticket { get; set; }
+
+        [Display(Name = "Invoiced As One?")]
+        public bool Invoice_As_One { get; set; }
+
+
         public String Group_id { get; set; }
 
         public String Airline { get; set; }

@@ -66,6 +66,9 @@
     $(function () {
         $("#datepicker2").datepicker();
     });
+    $(function () {
+        $("#datepicker9").datepicker();
+    });
 </script>
 
 
@@ -107,58 +110,74 @@
 
 
 
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
-                        @Html.EditorFor(model => model.CreatedOn, new
-                   {
-                       htmlAttributes = new
+                    <div class="form-row">
+                        <div class="form-group col-md-2" style="display:none">
+                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                            @Html.EditorFor(model => model.CreatedOn, new
                        {
-                           @class = "form-control form-control-sm",
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
 
+                               @Value = DateTime.Now,
+                               @Readonly = true
 
-                           @Readonly = true
+                           }
+                       })
 
-                       }
-                   })
-
-                    </div>
-
-                    <div class="form-group col-md-2">
-                        <label>
-                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">+</button>
-                            <i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline)
-                        </label>
-
-                        @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $("#Airline").chosen();
-                            $("#client").chosen();
-                            $("#Service_Provider").chosen();
-                            $("#Routing").chosen();
-
-                        });
-
-                    </script>
-                    <div class="form-group col-md-3">
-                        <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
-                        @Html.EditorFor(model => model.Pax_Name, new
-                   {
-                       htmlAttributes = new
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.issue_Date) </label>
+                            @Html.EditorFor(model => model.issue_Date, new
                        {
-                           @class = "form-control form-control-sm",
-                           @Placeholder = "Pax Name",
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               id = "datepicker9",
+                               @Placeholder = "Issue Date",
+                               @required = "required",
 
-                       }
-                   })
+
+                           }
+                       })
+
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label>
+                                <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">+</button>
+                                <i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Airline)
+                            </label>
+
+                            @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#Airline").chosen();
+                                $("#Client").chosen();
+                                $("#Service_Provider").chosen();
+                               
+
+                            });
+
+                        </script>
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-user text-warning"></i> @Html.LabelFor(model => model.Pax_Name) </label>
+                            @Html.EditorFor(model => model.Pax_Name, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Pax Name",
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> <i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Client)</label>
+                            @Html.DropDownList("Client", ViewBag.clientlist as SelectList, "-- Select client --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
+                        </div>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label> <i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Client)</label>
-                        @Html.DropDownList("Client", ViewBag.clientlist as SelectList, "-- Select client --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
-                    </div>
-                </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label><i class="fa fa-cash-register text-warning"></i> @Html.LabelFor(model => model.Currency) </label>
@@ -175,6 +194,19 @@
                                     Value = "USD",
                                 });
                             }@Html.DropDownListFor(model => model.Currency, m, "---Currency---", new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label> <i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Ticket_No) </label>
+                            @Html.EditorFor(model => model.Ticket_No, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Ticket No/REF",
+                               @required = "required",
+
+                           }
+                       })
                         </div>
                         <div class="form-group col-md-2">
                             <label> <i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Inv_Amount) </label>
@@ -265,7 +297,16 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label><i class="fa fa-route text-warning"></i> @Html.LabelFor(model => model.Routing)</label>
-                            @Html.DropDownList("Routing", ViewBag.routes as SelectList, "-- Select Route --", new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
+                            @Html.EditorFor(model => model.Routing, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @placeholder = " Routing ",
+
+
+                       }
+                   })
                         </div>
 
 
@@ -293,13 +334,18 @@
                                 List<SelectListItem> q = new List<SelectListItem>();
                                 q.Add(new SelectListItem
                                 {
-                                    Text = "Amadeus",
-                                    Value = "Amadeus",
+                                    Text = "Online",
+                                    Value = "Online",
                                 });
                                 q.Add(new SelectListItem
                                 {
-                                    Text = "Galileo",
-                                    Value = "Galileo",
+                                    Text = "Call Center",
+                                    Value = "Call Center",
+                                });
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "LCC -low cost carrier",
+                                    Value = "LCC -low cost carrier",
                                 });
 
                             }@Html.DropDownListFor(model => model.Ticketing_System, q, "---Ticket Origin---", new { @class = "form-control form-control-sm", @required = "required", })
@@ -307,7 +353,7 @@
 
                     </div>
                     <div class="form-row">
-                        
+
                         <div class="form-group col-md-2" id="Mode">
                             <label><i class="fa fa-cube text-warning"></i> @Html.LabelFor(model => model.Mode) </label>
                             @Html.DropDownList("Mode", ViewBag.payment as SelectList, "-- Payment Mode --", new { @class = "form-control form-control-sm", @id = "ddlFruits", @required = "required", data_live_search = "true" })
@@ -315,8 +361,8 @@
 
                         </div>
 
-                        
-                        <div class="form-group col-md-3"  id="Payer">
+
+                        <div class="form-group col-md-3" id="Payer">
                             <label><i class="fa fa-handshake text-warning"></i> @Html.LabelFor(model => model.Payer)</label>
 
                             @Html.EditorFor(model => model.Payer, new
@@ -331,7 +377,83 @@
                            }
                        })
                         </div>
+                        <div class="form-group col-md-2">
+                            <a class="form-check">
+                                <small style="color:midnightblue">
+                                    @Html.EditorFor(model => model.Invoice_As_One, new
+                               {
+                                   htmlAttributes = new
+                                   { @class = "coupon_question" }
+                               })
+                                    <label style="font-family:Quicksand">@Html.LabelFor(model => model.Invoice_As_One)</label>
+
+                                </small>
+
+                            </a>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <a class="form-check">
+                                <small style="color:midnightblue">
+                                    @Html.EditorFor(model => model.Group_ticket, new
+                               {
+                                   htmlAttributes = new
+                                   { @class = "coupon_question" }
+                               })
+                                    <label style="font-family:Quicksand">@Html.LabelFor(model => model.Group_ticket)</label>
+
+                                </small>
+
+                            </a>
+                            @if (Model.Group_ticket == true)
+                            {
+                                <div class="input-group nput-group-sm mb-3">
+
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><b><i class="fa fa-users text-primary"></i> </b></div>
+                                    </div>
+
+                                    @Html.TextBoxFor(model => model.Group_id, new { @class = "form-control form-control", @placeholder = "Group_id", @autofocus = "centre" })
+
+                                </div>
+                            }
+                        </div>
+
+                        <div class="form-group col-md-6" style="display: none" id="note2">
+
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div class="spinner-grow spinner-grow-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <small>On Grouped tickets provide a unique Group Name e.g COL 1 , the Id will be concatenated with the selected client <br /> <b style="color:orangered"> [AFRICA BLISS COL 1]</b> </small>
+
+
+                        </div>
+
+
                     </div>
+
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#Group_ticket").click(function () {
+                                if ($(this).is(":checked")) {
+                                    $("#x").show(("slide", { direction: "up" }, 300));
+                                    $("#note2").show(("slide", { direction: "up" }, 300));
+
+
+                                } else {
+                                    $("#x").hide(("slide", { direction: "left" }, 300));
+                                    $("#note2").hide(("slide", { direction: "left" }, 300));
+                                    ;
+                                }
+                            });
+                        });
+
+                    </script>
+
+               
 
 
                     <p style="font-family:Calibri">

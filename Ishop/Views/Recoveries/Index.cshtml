@@ -106,12 +106,12 @@
             <thead>
                 <tr style="color:white">
                     <th style="background-color: #001F3F; "> Posted On</th>
-
+                    <th style="background-color: #001F3F; "> Ticket/Ref No</th>
                     <th style="background-color: #001F3F; ">Invoice No </th>
                     <th style="background-color: #001F3F; ">Invoice Amount </th>
                     <th style="background-color: #001F3F; ">Recovered Amount </th>
                     <th style="background-color: #001F3F; ">Balance Amount </th>
-                   
+
 
 
                 </tr>
@@ -123,12 +123,12 @@
                     <tr data-widget="expandable-table" aria-expanded="false">
 
                         <td style="background-color:white" href="javascript:void(0);" class="anchorDetail" data-id="@item.id">@item.CreatedOn.ToString("dd-MMM-yyyy") - <small><i class="fa fa-user-circle text-primary"></i> @item.Staff</small></td>
-
+                        <td style="background-color:white"><i class="fa fa-qrcode text-warning"></i>  @item.Ticket_No  </td>
                         <td style="background-color:white"><i class="fa fa-angle-left text-warning"></i>  @item.Inv_No  </td>
                         <td style="background-color:white"><i class="fa fa-angle-left text-warning"></i>  @item.Inv_Amount</td>
                         <td style="background-color:white"><i class="fa fa-angle-right- text-warning"></i>  @item.Amount_Recovered</td>
                         <td style="background-color:white"><i class="fa fa-angle-right text-warning"></i>  @item.Balance</td>
-                        
+
 
 
 

@@ -101,14 +101,21 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-1">
-                        <label><i class="fa fa-circle-notch text-warning"></i>Id </label>
+                        <label><i class="fa fa-circle-notch text-orange"></i> Id </label>
                         @foreach (var item in ViewBag.l2)
                         {
                             <input id="Ticket_id" name="Ticket_id" type="text" value="@item.id" class="form-control " readonly />
                         }
                     </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-qrcode text-orange"></i> Ticket/Ref No </label>
+                        @foreach (var item in ViewBag.l2)
+                        {
+                            <input id="Ticket_id" name="Ticket_id" type="text" value="@item.Ticket_No" class="form-control " readonly />
+                        }
+                    </div>
                     <div class="form-group col-md-4">
-                        <label><i class="fa fa-calendar text-warning"></i> Posted On </label>
+                        <label><i class="fa fa-calendar text-orange"></i> Posted On </label>
                         @Html.EditorFor(model => model.CreatedOn, new
                    {
                        htmlAttributes = new
@@ -126,7 +133,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label><i class="fa fa-spinner text-warning"></i> @Html.LabelFor(model => model.Inv_No) </label>
+                            <label><i class="fa fa-spinner text-orange"></i> @Html.LabelFor(model => model.Inv_No) </label>
                             @Html.EditorFor(model => model.Inv_No, new
                        {
                            htmlAttributes = new
@@ -147,10 +154,10 @@
 
 
                                 <p style="color:navy">
-                                    <div class="spinner-border spinner-border-sm" role="status" style="color:navy">
+                                    <div class="spinner-border spinner-border-sm" role="status" style="color:orangered">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    <div class="spinner-grow spinner-grow-sm" role="status" style="color:navy">
+                                    <div class="spinner-grow spinner-grow-sm" role="status" style="color: orangered">
                                         <span class="sr-only">Loading...</span>
                                     </div>  Recovery Amount on ticket @item.Recovery
                                 </p>
@@ -165,7 +172,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Inv_Amount) </label>
+                            <label><i class="fa fa-circle-notch text-orange"></i> @Html.LabelFor(model => model.Inv_Amount) </label>
                             @foreach (var item in ViewBag.l2)
                             {
                                 <input id="Inv_Amount" name="Inv_Amount" type="text" value="@item.Recovery" class="form-control form-rounded" readonly />
@@ -173,7 +180,7 @@
                         </div>
                         
                         <div class="form-group col-md-3">
-                            <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Amount_Recovered) </label>
+                            <label><i class="fa fa-circle-notch text-orange"></i> @Html.LabelFor(model => model.Amount_Recovered) </label>
                             @Html.EditorFor(model => model.Amount_Recovered, new
                        {
                            htmlAttributes = new
@@ -202,7 +209,7 @@
                         
                         </script>
                         <div class="form-group col-md-3">
-                            <label><i class="fa fa-circle-notch text-warning"></i> @Html.LabelFor(model => model.Balance) </label>
+                            <label><i class="fa fa-circle-notch text-orange"></i> @Html.LabelFor(model => model.Balance) </label>
                             @Html.EditorFor(model => model.Balance, new
                        {
                            htmlAttributes = new
@@ -218,7 +225,7 @@
 
                         </div>
                         <div class="form-group col-md-2">
-                            <label><i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Staff) </label>
+                            <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.Staff) </label>
                             @Html.EditorFor(model => model.Staff, new
                        {
                            htmlAttributes = new

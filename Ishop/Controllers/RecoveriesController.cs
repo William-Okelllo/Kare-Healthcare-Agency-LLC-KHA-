@@ -86,7 +86,7 @@ namespace Ishop.Controllers
         {
             if (id == null) { id = 0; }
             
-            sp_Gett22 l2 = new sp_Gett22();
+            sp_GetRR l2 = new sp_GetRR();
             var boo2 = l2.sp_GetRecovery(id).ToList();
             ViewBag.l2 = boo2;
 
@@ -101,8 +101,15 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,CreatedOn,Staff,Ticket_id,Inv_No,Amount_Recovered,Inv_Amount,Balance")] Recovery recovery)
+        public ActionResult Create([Bind(Include = "id,CreatedOn,Staff,Ticket_No,Ticket_id,Inv_No,Amount_Recovered,Inv_Amount,Balance")] Recovery recovery)
         {
+            if (recovery.Ticket_No == null)
+            {
+                TempData["msg"] = "Error ,recover the needed amount from a ticket";
+                return RedirectToAction("Create");
+            }
+
+
             if (ModelState.IsValid)
             {
                 db.recoveries.Add(recovery);

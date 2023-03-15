@@ -14,6 +14,7 @@ namespace Ishop.Models
     public partial class sp_GetRecovery_Result
     {
         public int id { get; set; }
+        public string Ticket_No { get; set; }
         public Nullable<decimal> Recovery { get; set; }
     }
 }

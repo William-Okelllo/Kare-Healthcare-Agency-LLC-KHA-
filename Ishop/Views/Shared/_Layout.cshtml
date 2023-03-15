@@ -104,7 +104,7 @@
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
                         <div style="text-align:center">
-                            <img src="~/Images/l.ico" height="60" alt="User Avatar">
+                            <img src="~/Images/client.png" height="60" alt="User Avatar">
                             <p> <i class="fa fa-user"></i> User: @User.Identity.Name</p>
                         </div>
 
@@ -164,7 +164,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="@Url.Action("Index", "Home")" class="brand-link">
-            <img src="~/Images/logo7.png" height="85">
+            <img src="~/Images/client2.png" height="85">
 
         </a>
 
@@ -218,9 +218,9 @@
 
 
                     <li class="nav-item menu-open">
-                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-warning">
-                            <i class="nav-icon fa fa-home"></i>
-                            <p>
+                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-orange">
+                            <i class="nav-icon fa fa-home text-white"></i>
+                            <p style="color:white">
                                 Home-Page
 
                             </p>
@@ -285,7 +285,7 @@
                                     <p style="color: white">Tickets list</p>
                                 </a>
                             </li>
-
+                            
                         </ul>
                     </li>
                     @if (this.User.IsInRole("Admin"))
