@@ -53,8 +53,8 @@
 
 
 
-                <a style="font-family: Calibri"> PAX Name</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "PAX Name" })
+                <a style="font-family: Calibri"> Group Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Group Name" })
                 <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
@@ -99,14 +99,12 @@
 
 
     <div class="table-responsive" style="min-height: 400px">
-        @foreach (var group in Model.GroupBy(m => new { m.Client }).Where(g => g.Count() > 1))
+        @foreach (var group in Model.GroupBy(m => new { m.Group_id }).Where(g => g.Count() > 1))
         {
 
             <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable">
 
-                <thead>
-                    <tr style="color:white">
-                        <th style="background-color: #13ac99; "> @group.Key :-Total Invoiced Amount @group.Sum(m => m.Inv_Amount) </th></thead>
+
 
                 <thead>
                     <tr style="color:white">
@@ -137,7 +135,14 @@
                             <td style="background-color:white"><i class="fa fa-plane text-warning"></i>  @item.Airline - <small><i class="fa fa-globe text-primary"></i>  @item.Ticketing_System</small> </td>
                             <td style="background-color:white"><i class="fa fa-passport text-warning"></i>  @item.Pax_Name</td>
                             <td style="background-color:white"><i class="fa fa-user text-warning"></i>  @item.Client</td>
-                            <td style="background-color:white">  @item.Inv_Amount</td>
+                            @if (item.Invoice_As_One == false)
+                            {
+                                <td style="background-color:white">  @item.Inv_Amount</td>
+}
+                            else
+                            {
+                                <td style="background-color:#d75205d4">  @item.Inv_Amount</td>
+}
                             <td style="background-color:white"> @item.Net_Amount</td>
 
 
@@ -156,64 +161,50 @@
                                 {<small style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approved & Invoiced</small>}
 
                             </td>
-                            <td style="background-color:ghostwhite">
-                                <div class="btn-group dropdown">
-                                    <button type="button" class="btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-file-invoice"></i>  . Action
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-
-                                        @if ((item.Ticket_status == 0) && this.User.IsInRole("Tickets_Approval"))
-                                        {<div class="divider"></div>
-
-                                            <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
-                                                <i class="fa fa-check-double text-warning"></i> Approve Ticket
-                                            </a>}
-                                        @if (!(item.Recovery == 0))
-
-                                        {<div class="divider"></div>
-                                            <a href="@Url.Action("Create", "Recoveries", new { id = item.id })" class="dropdown-item">
-                                                <i class="fa fa-piggy-bank text-primary"></i> Recover
-                                            </a>
-                                        }
-                                        @if ((item.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
-                                        {<div class="divider"></div>
-
-                                            <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
-                                                <i class="fa fa-cash-register text-primary"></i> Invoice Ticket
-                                            </a>}
-                                        @if (item.Ticket_status == 0)
-                                        {
-                                            <div class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Ticket_Update", "Tickets", new { id = item.id })" class="dropdown-item">
-                                                <i class="fas fa-pen text-success"></i> Edit/Update Ticket
-                                            </a>
-                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Delete this Ticket?')) { window.location.href = '@Url.Action("Delete_Ticket", "Tickets", new { id = item.id })'; }">
-                                                <i class="fa fa-trash text-danger"></i> Delete Ticket
-                                            </a>
-                                            <script>
-                                                $(function () {
-                                                    $('#Deny').click(function () {
-                                                        if (confirm('Are you sure?')) {
-                                                            window.location.href = $(this).data('url');
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                        }
-
-
-
-
-
-
-                            </td>
-
+                           
 
 
                         </tr>
                     }
                 </tbody>
+                <tbody>
+                
+                    <tr style="color:white">
+                        <td style="background-color:whitesmoke"></td>
+                        <td style="background-color:whitesmoke"></td>
+                        <td style="background-color:whitesmoke"></td>
+                        <td style="background-color:whitesmoke"></td>
+                        <td style="background-color: #e45208e4; "> @group.Key  </td>
+                        <td style="background-color: #e45208e4; ">Total @group.Sum(m => m.Inv_Amount)</td>
+                        <td style="background-color: #e45208e4; ">Total @group.Sum(m => m.Net_Amount)</td>
+                        <td style="background-color:whitesmoke"></td>
+                        <td style="background-color:whitesmoke"></td>
+                        <td style="background-color:whitesmoke">
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-file-invoice"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                   
+
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Delete this Ticket?')) { window.location.href = '@Url.Action("View_Grp", "Tickets", new { idd = group.Key })'; }">
+                                        <i class="fa fa-print text-orange"></i> Print Tickets
+                                    </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Deny').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+
+
+                                </div>
+</td>
+</tbody>
+                
             </table>
         }
            

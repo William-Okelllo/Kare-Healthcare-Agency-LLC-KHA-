@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HRModel15.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="sp_print_grp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Grpid" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_print_grp_InvTT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Grpid" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="HRModel15StoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRModel15" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="tike_print" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="sp_print_grp" ReturnType="Collection(HRModel15.sp_print_grp_Result)">
+            <Parameter Name="Grpid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_print_grp_InvTT" ReturnType="Collection(HRModel15.sp_print_grp_InvTT_Result)">
+            <Parameter Name="Grpid" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_print_grp_Result">
+          <Property Type="DateTime" Name="issue_date" Nullable="true" />
+          <Property Type="String" Name="Airline" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Pax_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Client" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Inv_Amount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="Group_id" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Travel_Dates" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="sp_print_grp_InvTT_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Decimal" Name="Total_Inv" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HRModel15StoreContainer" CdmEntityContainer="tike_print" >
+          <FunctionImportMapping FunctionImportName="sp_print_grp" FunctionName="HRModel15.Store.sp_print_grp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRModel15.sp_print_grp_Result">
+                <ScalarProperty Name="issue_date" ColumnName="issue_date" />
+                <ScalarProperty Name="Airline" ColumnName="Airline" />
+                <ScalarProperty Name="Pax_Name" ColumnName="Pax_Name" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Inv_Amount" ColumnName="Inv_Amount" />
+                <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+                <ScalarProperty Name="Travel_Dates" ColumnName="Travel Dates" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_print_grp_InvTT" FunctionName="HRModel15.Store.sp_print_grp_InvTT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRModel15.sp_print_grp_InvTT_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Total_Inv" ColumnName="Total Inv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

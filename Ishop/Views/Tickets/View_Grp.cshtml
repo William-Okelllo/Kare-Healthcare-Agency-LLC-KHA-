@@ -1,0 +1,76 @@
+﻿@model IShop.Core.Ticket
+<div class="card " style="background-color: rgb(255, 255, 255, 0.91);">
+    <div class="card-header" style="background-color: #001F3F">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-print" onclick="printPage()"></i>
+
+        </h3>
+    </div>
+    <script>
+        function printPage() {
+            window.print();
+        }
+    </script>
+
+    <html lang="en">
+    <head>
+        <title>Table 01</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="css/style.css">
+
+    </head>
+    <body style="background-color:white">
+        <section class="ftco-section">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrap">
+                            <table class="table">
+                                <thead class="thead-primary">
+                                    <tr>
+
+                                        <th>Issue Date</th>
+                                        <th>Airline</th>
+                                        <th>Pax name</th>
+                                        <th>Client name</th>
+                                        <th>Inv Amount</th>
+                                        <th>Travel Dates</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.pp)
+                                    {
+                                        <tr>
+
+
+                                            <td>@item.issue_date</td>
+                                            <td>@item.Airline</td>
+                                            <td>@item.Pax_Name</td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>
+

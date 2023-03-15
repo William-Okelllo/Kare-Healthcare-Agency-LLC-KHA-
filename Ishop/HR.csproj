@@ -730,6 +730,12 @@
     <Compile Include="Models\sp_invoices_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_print_grp_InvTT_Result.cs">
+      <DependentUpon>tik_print.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_print_grp_Result.cs">
+      <DependentUpon>tik_print.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_timesheet.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -819,6 +825,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>tiko_logs.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tik_print.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tik_print.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tik_print.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tik_print.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tik_print.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tik_print.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\us.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2390,6 +2411,16 @@
       <DependentUpon>tiko_logs.edmx</DependentUpon>
       <LastGenOutput>tiko_logs.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\tik_print.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>tik_print.edmx</DependentUpon>
+      <LastGenOutput>tik_print.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\tik_print.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>tik_print.edmx</DependentUpon>
+      <LastGenOutput>tik_print.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\us.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>us.edmx</DependentUpon>
@@ -2744,6 +2775,13 @@
     </EntityDeploy>
     <Content Include="Models\sp_GetR.edmx.diagram">
       <DependentUpon>sp_GetR.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\tik_print.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>tik_print.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\tik_print.edmx.diagram">
+      <DependentUpon>tik_print.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -3562,6 +3600,8 @@
     <Content Include="Views\Advance\Index.cshtml" />
     <Content Include="Views\Advance\Print_Form.cshtml" />
     <Content Include="Views\Tickets\Groups.cshtml" />
+    <Content Include="Views\Tickets\Print_Form.cshtml" />
+    <Content Include="Views\Tickets\View_Grp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

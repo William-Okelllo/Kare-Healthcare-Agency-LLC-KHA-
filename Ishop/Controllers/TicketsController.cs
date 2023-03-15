@@ -13,6 +13,7 @@ using EASendMail;
 using System.Configuration;
 using System.Data.SqlClient;
 using Ishop.Models;
+using Rotativa;
 
 namespace Ishop.Controllers
 {
@@ -79,18 +80,18 @@ namespace Ishop.Controllers
 
                 if (!(search == null) && (!(search == "")))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id == search && c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
 
                 }
 
                 else if (search == " ")
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
 
                 }
                 else
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
 
                 }
 
@@ -99,18 +100,18 @@ namespace Ishop.Controllers
             {
                 if (!(search == null))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Staff == User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id == search && c.Staff == User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
 
                 }
                 else if (search == null)
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || (!(c.Ticket_status == 99)) && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || (!(c.Ticket_status == 99)) && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
 
                 }
                 else
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || (!(c.Ticket_status == 99))).ToList()
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || (!(c.Ticket_status == 99))).ToList()
                         .ToPagedList(page ?? 1, 6));
                 }
             }
@@ -216,7 +217,9 @@ namespace Ishop.Controllers
 
 
                 TempData["msg"] = "Ticket posted successfully ";
-                return RedirectToAction("Index");
+                
+                if(ticket.Group_ticket==true)
+                { return RedirectToAction("groups"); }else { return RedirectToAction("Index"); }
             }
 
             return View(ticket);
@@ -430,5 +433,21 @@ namespace Ishop.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public ActionResult View_Grp(string idd ,Ticket ticket)
+        {
+            tike_print Rec=new tike_print();
+            var bnb = Rec.sp_print_grp(idd).ToList();
+            ViewBag.pp = bnb;
+
+            tike_print Recc = new tike_print();
+            var bau = Recc.sp_print_grp_InvTT(idd).ToList();
+            ViewBag.R = bau;
+
+            
+            return View();
+        }
+        
     }
 }

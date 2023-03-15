@@ -32,7 +32,7 @@
     }
 </style>
 
-<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+<div class="card " style="background-color: rgb(255, 255, 255, 0.84);">
 
 
     <div class="card-header" style="background-color: #001F3F">
@@ -131,7 +131,14 @@
                         <td style="background-color:white">  @item.Ticket_No</td>
                         <td style="background-color:white"><i class="fa fa-plane text-orange"></i>  @item.Airline - <small><i class="fa fa-globe text-primary"></i>  @item.Ticketing_System</small> </td>
                         <td style="background-color:white"><i class="fa fa-passport text-orange"></i>  @item.Pax_Name</td>
-                        <td style="background-color:white"><i class="fa fa-user text-orange"></i>  @item.Client</td>
+                        @if (item.Group_ticket == true)
+                        {
+                            <td style="background-color:#09dede69"> <a href="@Url.Action("groups", "Tickets")"><i class="fa fa-group text-primary"></i> @item.Client </a></td>
+                        }
+                        else
+                        {
+                            <td style="background-color:white">  @item.Ticket_No</td>
+                        }
                         <td style="background-color:white">  @item.Inv_Amount</td>
                         <td style="background-color:white"> @item.Net_Amount</td>
 
