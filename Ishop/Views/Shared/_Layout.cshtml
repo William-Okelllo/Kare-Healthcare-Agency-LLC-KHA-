@@ -285,7 +285,13 @@
                                     <p style="color: white">Tickets list</p>
                                 </a>
                             </li>
-                            
+                            <li class="nav-item">
+                                <a href="@Url.Action("Groups", "Tickets")" class="nav-link">
+                                    <i class="fa fa-layer-group text-white nav-icon"></i>
+                                    <p style="color: white">Group Tickets list</p>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
                     @if (this.User.IsInRole("Admin"))
@@ -322,12 +328,7 @@
                                         <p style="color: white">Service Providers</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "routes")" class="nav-link">
-                                        <i class="fa fa-route text-white nav-icon"></i>
-                                        <p style="color: white">Routes</p>
-                                    </a>
-                                </li>
+                            
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "payment_modes")" class="nav-link">
                                         <i class="fa fa-shopping-bag text-white nav-icon"></i>

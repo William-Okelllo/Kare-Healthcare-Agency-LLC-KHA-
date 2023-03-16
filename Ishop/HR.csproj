@@ -405,7 +405,6 @@
     <Compile Include="Controllers\RecoveriesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\Service_providersController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\successController.cs" />
@@ -3568,11 +3567,6 @@
     <Content Include="Views\Service_providers\Details.cshtml" />
     <Content Include="Views\Service_providers\Edit.cshtml" />
     <Content Include="Views\Service_providers\Index.cshtml" />
-    <Content Include="Views\Routes\Create.cshtml" />
-    <Content Include="Views\Routes\Delete.cshtml" />
-    <Content Include="Views\Routes\Details.cshtml" />
-    <Content Include="Views\Routes\Edit.cshtml" />
-    <Content Include="Views\Routes\Index.cshtml" />
     <Content Include="Views\payment_modes\Create.cshtml" />
     <Content Include="Views\payment_modes\Delete.cshtml" />
     <Content Include="Views\payment_modes\Details.cshtml" />

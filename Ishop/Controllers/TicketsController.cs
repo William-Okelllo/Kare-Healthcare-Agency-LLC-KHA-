@@ -33,18 +33,18 @@ namespace Ishop.Controllers
 
                 if (!(search == null) && (!(search == "")))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 15));
 
                 }
             
             else if (search == " ")
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 15));
 
             }
             else
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 15));
 
             }
 
@@ -53,12 +53,12 @@ namespace Ishop.Controllers
             {
                 if (!(search == null))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Staff==User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Staff==User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 15));
 
                 }
                 else if (search == null)
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 15));
 
 
                 }
@@ -80,18 +80,18 @@ namespace Ishop.Controllers
 
                 if (!(search == null) && (!(search == "")))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id == search && c.Ticket_status != 99 && c.Group_ticket==true).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id == search && c.Ticket_status != 99 && c.Group_ticket==true).ToList().ToPagedList(page ?? 1, 15));
 
                 }
 
                 else if (search == " ")
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || c.Ticket_status != 99 && c.Group_ticket == true).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || c.Ticket_status != 99 && c.Group_ticket == true).ToList().ToPagedList(page ?? 1, 15));
 
                 }
                 else
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || c.Ticket_status != 99 && c.Group_ticket == true).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || c.Ticket_status != 99 && c.Group_ticket == true).ToList().ToPagedList(page ?? 1, 15));
 
                 }
 
@@ -100,12 +100,12 @@ namespace Ishop.Controllers
             {
                 if (!(search == null))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id == search && c.Staff == User.Identity.Name && (!(c.Ticket_status == 99)) && c.Group_ticket == true).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id == search && c.Staff == User.Identity.Name && (!(c.Ticket_status == 99)) && c.Group_ticket == true).ToList().ToPagedList(page ?? 1, 15));
 
                 }
                 else if (search == null)
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || (!(c.Ticket_status == 99)) && c.Staff == User.Identity.Name && c.Group_ticket == true ).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || (!(c.Ticket_status == 99)) && c.Staff == User.Identity.Name && c.Group_ticket == true ).ToList().ToPagedList(page ?? 1, 15));
 
 
                 }

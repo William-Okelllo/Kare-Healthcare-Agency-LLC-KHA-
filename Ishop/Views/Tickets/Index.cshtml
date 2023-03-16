@@ -139,9 +139,15 @@
                         {
                             <td style="background-color:white">  @item.Client</td>
                         }
-                        <td style="background-color:white">  @item.Inv_Amount</td>
-                        <td style="background-color:white"> @item.Net_Amount</td>
+                        @if (item.Invoice_As_One == false)
+                        {
+                            <td style="background-color:white">  @item.Inv_Amount</td>
+                        }
+                        else
+                        {
 
+                            <td style="background-color:#d75205d4">  @item.Inv_Amount</td>
+                        }
 
                         <td style="background-color:white">
                             <small>
