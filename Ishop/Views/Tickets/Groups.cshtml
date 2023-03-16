@@ -99,7 +99,7 @@
 
 
     <div class="table-responsive" style="min-height: 400px">
-        @foreach (var group in Model.GroupBy(m => new { m.Group_id }).Where(g => g.Count() > 1))
+        @foreach (var group in Model.GroupBy(m => new { m.Group_id}).Where(g => g.Count() > 1)) 
         {
 
             <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable">
