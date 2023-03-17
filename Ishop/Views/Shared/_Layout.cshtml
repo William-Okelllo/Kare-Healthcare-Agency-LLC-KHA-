@@ -211,7 +211,7 @@
             <nav class="mt-2" style="text-align:left">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
 
 
 
@@ -328,7 +328,7 @@
                                         <p style="color: white">Service Providers</p>
                                     </a>
                                 </li>
-                            
+
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "payment_modes")" class="nav-link">
                                         <i class="fa fa-shopping-bag text-white nav-icon"></i>
@@ -575,6 +575,10 @@
                                 </ul>
                             </li>
 
+
+                        }
+                        @if (this.User.IsInRole("Report_Viewer"))
+                        {
                             <li class="nav-header"><i class="fa fa-chart-line text-white"></i> B.I Reports</li>
 
                             <li class="nav-item">
@@ -587,7 +591,6 @@
                                 </a>
                             </li>
                         }
-
 
 
 

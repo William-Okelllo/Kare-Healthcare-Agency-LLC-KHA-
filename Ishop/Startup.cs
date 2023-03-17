@@ -76,13 +76,7 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Staff"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Staff";
-                roleManager.Create(role);
-
-            }
+            
             if (!roleManager.RoleExists("DashBoard"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
@@ -123,6 +117,14 @@ namespace Ishop
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
                 role.Name = "Advance_Approvals";
+                roleManager.Create(role);
+
+            }
+
+            if (!roleManager.RoleExists("Ticket_View"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Ticket_View";
                 roleManager.Create(role);
 
             }

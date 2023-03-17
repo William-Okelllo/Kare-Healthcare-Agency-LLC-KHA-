@@ -28,7 +28,7 @@ namespace Ishop.Controllers
             
             
 
-            if (this.User.IsInRole("Tickets_Approval"))
+            if (this.User.IsInRole("Ticket_View"))
             {
 
                 if (!(search == null) && (!(search == "")))
