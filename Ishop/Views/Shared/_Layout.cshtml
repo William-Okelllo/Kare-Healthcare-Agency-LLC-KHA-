@@ -459,6 +459,36 @@
                         </ul>
                     </li>
 
+                    @if (this.User.IsInRole("Timesheet"))
+                    {
+                        <li class="nav-header"><i class="fa fa-user-clock text-white"></i> Timesheet</li>
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
+
+                                <i class="fa fa-chart-bar text-white nav-icon"></i>
+                                <p style="color: white">
+                                    My Timesheets
+                                </p>
+                            </a>
+                        </li>
+                    }
+                    else if (this.User.IsInRole("Timesheet_view"))
+                    {
+                    <li class="nav-header"><i class="fa fa-user-clock text-white"></i> Timesheet</li>
+
+                    <li class="nav-item">
+                        <a href="@Url.Action("Timesheet", "Timesheet")" class="nav-link">
+
+                            <i class="fa fa-chart-bar text-white nav-icon"></i>
+                            <p style="color: white">
+                                Employees Timesheets
+                            </p>
+                        </a>
+                    </li>
+                    }
+
+
                     <li>
                         @if (this.User.IsInRole("Employee"))
                         {

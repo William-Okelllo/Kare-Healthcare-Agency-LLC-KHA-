@@ -15,10 +15,10 @@ namespace Ishop.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class timesheet : DbContext
+    public partial class sp_times : DbContext
     {
-        public timesheet()
-            : base("name=timesheet")
+        public sp_times()
+            : base("name=sp_times")
         {
         }
     
@@ -28,13 +28,21 @@ namespace Ishop.Models
         }
     
     
-        public virtual ObjectResult<Gettimesheet_Result> Gettimesheet(string user)
+        public virtual ObjectResult<Gettimesheet_Result> Gettimesheet(string user, string from_Date, string end_Date)
         {
             var userParameter = user != null ?
                 new ObjectParameter("User", user) :
                 new ObjectParameter("User", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gettimesheet_Result>("Gettimesheet", userParameter);
+            var from_DateParameter = from_Date != null ?
+                new ObjectParameter("From_Date", from_Date) :
+                new ObjectParameter("From_Date", typeof(string));
+    
+            var end_DateParameter = end_Date != null ?
+                new ObjectParameter("End_Date", end_Date) :
+                new ObjectParameter("End_Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gettimesheet_Result>("Gettimesheet", userParameter, from_DateParameter, end_DateParameter);
         }
     }
 }

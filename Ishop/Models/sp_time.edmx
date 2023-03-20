@@ -7,6 +7,8 @@
       <Schema Namespace="HRModel5.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <Function Name="Gettimesheet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="User" Type="nvarchar" Mode="In" />
+          <Parameter Name="From_Date" Type="varchar" Mode="In" />
+          <Parameter Name="End_Date" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="HRModel5StoreContainer" />
       </Schema>
@@ -14,34 +16,38 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HRModel5" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="timesheet" annotation:LazyLoadingEnabled="true" >
+        <EntityContainer Name="sp_times" annotation:LazyLoadingEnabled="true" >
           <FunctionImport Name="Gettimesheet" ReturnType="Collection(HRModel5.Gettimesheet_Result)">
             <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="From_Date" Mode="In" Type="String" />
+            <Parameter Name="End_Date" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Gettimesheet_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="employee" Nullable="true" />
           <Property Type="Boolean" Name="status" Nullable="true" />
-          <Property Type="String" Name="project" Nullable="true" />
+          <Property Type="String" Name="Project" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
           <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="feedback" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HRModel5StoreContainer" CdmEntityContainer="timesheet" >
+        <EntityContainerMapping StorageEntityContainer="HRModel5StoreContainer" CdmEntityContainer="sp_times" >
           <FunctionImportMapping FunctionImportName="Gettimesheet" FunctionName="HRModel5.Store.Gettimesheet">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HRModel5.Gettimesheet_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="employee" ColumnName="employee" />
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="project" ColumnName="project" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="feedback" ColumnName="feedback" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

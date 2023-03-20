@@ -521,7 +521,7 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gettimesheet_Result.cs">
-      <DependentUpon>sp_timesheet.tt</DependentUpon>
+      <DependentUpon>sp_time.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Get_FacilitesAdmin_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -735,20 +735,20 @@
     <Compile Include="Models\sp_print_grp_Result.cs">
       <DependentUpon>tik_print.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_timesheet.Context.cs">
+    <Compile Include="Models\sp_time.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sp_timesheet.Context.tt</DependentUpon>
+      <DependentUpon>sp_time.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_timesheet.cs">
+    <Compile Include="Models\sp_time.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sp_timesheet.tt</DependentUpon>
+      <DependentUpon>sp_time.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_timesheet.Designer.cs">
+    <Compile Include="Models\sp_time.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sp_timesheet.edmx</DependentUpon>
+      <DependentUpon>sp_time.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_timesheet_report_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -2370,15 +2370,15 @@
       <DependentUpon>sp_Gett.edmx</DependentUpon>
       <LastGenOutput>sp_Gett.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sp_timesheet.Context.tt">
+    <Content Include="Models\sp_time.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_timesheet.edmx</DependentUpon>
-      <LastGenOutput>sp_timesheet.Context.cs</LastGenOutput>
+      <DependentUpon>sp_time.edmx</DependentUpon>
+      <LastGenOutput>sp_time.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sp_timesheet.tt">
+    <Content Include="Models\sp_time.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_timesheet.edmx</DependentUpon>
-      <LastGenOutput>sp_timesheet.cs</LastGenOutput>
+      <DependentUpon>sp_time.edmx</DependentUpon>
+      <LastGenOutput>sp_time.cs</LastGenOutput>
     </Content>
     <Content Include="Models\tableOffice.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2687,13 +2687,6 @@
     <Content Include="Models\Userslist.edmx.diagram">
       <DependentUpon>Userslist.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\sp_timesheet.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sp_timesheet.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sp_timesheet.edmx.diagram">
-      <DependentUpon>sp_timesheet.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\lleave.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>lleave.Designer.cs</LastGenOutput>
@@ -2781,6 +2774,13 @@
     </EntityDeploy>
     <Content Include="Models\tik_print.edmx.diagram">
       <DependentUpon>tik_print.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\sp_time.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sp_time.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sp_time.edmx.diagram">
+      <DependentUpon>sp_time.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -3596,6 +3596,7 @@
     <Content Include="Views\Tickets\Groups.cshtml" />
     <Content Include="Views\Tickets\Print_Form.cshtml" />
     <Content Include="Views\Tickets\View_Grp.cshtml" />
+    <Content Include="Views\Timesheet\Timesheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

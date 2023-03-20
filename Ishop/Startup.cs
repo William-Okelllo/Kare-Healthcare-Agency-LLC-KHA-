@@ -128,6 +128,23 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Timesheet"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Timesheet";
+                roleManager.Create(role);
+
+            }
+            if (!roleManager.RoleExists("Timesheet_view"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Timesheet_view";
+                roleManager.Create(role);
+
+            }
+            
+
+
         }
     }
 }

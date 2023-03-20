@@ -10,6 +10,7 @@ using IShop.Core;
 using Ishop.Infa;
 using PagedList;
 using Ishop.Models;
+using Syncfusion.DocIO.DLS;
 
 namespace Ishop.Controllers
 {
@@ -21,23 +22,49 @@ namespace Ishop.Controllers
         // GET: Timesheet
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            if (!(search == null))
+            
+                if (!(search == null))
+                {
+                    return View(db.tt.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+
+                }
+                else
+                {
+                    return View(db.tt.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+
+
+                
+            }
+        }
+        [Authorize(Roles = "DashBoard")]
+        public ActionResult Timesheet(string User,  string From_Date, string End_Date)
+        {
+
+
+
+            if (User == null || From_Date == "" || End_Date == "")
             {
-                return View(db.tt.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                var startDated = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                var last = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+               
+                User = "All";
+                From_Date = startDated.ToString();
+                End_Date = last.ToString();
 
             }
-            else
-            {
-                return View(db.tt.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+            
+                sp_times dbb = new sp_times();
+                var categories = dbb.Gettimesheet(User, From_Date, End_Date).ToList();
+                ViewBag.l5 = categories;
+            
 
-
-            }
+            return View();
         }
         public JsonResult GetEvents()
         {
-            using (timesheet dc = new timesheet())
+            using (sp_times dc = new sp_times())
             {
-                var events = dc.Gettimesheet(User.Identity.Name).ToList();
+                var events = dc.Gettimesheet(User.Identity.Name,"","").ToList();
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }
@@ -49,12 +76,12 @@ namespace Ishop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TT bp = db.tt.Find(id);
-            if (bp == null)
+            TT tt = db.tt.Find(id);
+            if (tt == null)
             {
                 return HttpNotFound();
             }
-            return PartialView("Details", bp);
+            return PartialView("Details", tt);
         }
         // GET: Timesheet/Create
         public ActionResult Create()

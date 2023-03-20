@@ -16,8 +16,9 @@ namespace Ishop.Models
         public int id { get; set; }
         public string employee { get; set; }
         public Nullable<bool> status { get; set; }
-        public string project { get; set; }
+        public string Project { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string feedback { get; set; }
     }
 }
