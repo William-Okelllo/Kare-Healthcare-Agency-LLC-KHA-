@@ -12,12 +12,13 @@ namespace Ishop.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.IO;
-
-    public partial class Files_list_ : DbContext
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+    
+    public partial class calt2 : DbContext
     {
-        public Files_list_()
-            : base("name=Files_list_")
+        public calt2()
+            : base("name=calt2")
         {
         }
     
@@ -26,6 +27,14 @@ namespace Ishop.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<File> Files { get; set; }
+    
+        public virtual ObjectResult<Gettimesheet2_Result> Gettimesheet2(string employees)
+        {
+            var employeesParameter = employees != null ?
+                new ObjectParameter("Employees", employees) :
+                new ObjectParameter("Employees", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gettimesheet2_Result>("Gettimesheet2", employeesParameter);
+        }
     }
 }

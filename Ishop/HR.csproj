@@ -385,7 +385,6 @@
     <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdvanceController.cs" />
-    <Compile Include="Controllers\AirlinesController.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\CalenderController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
@@ -401,32 +400,57 @@
     <Compile Include="Controllers\leavesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
-    <Compile Include="Controllers\payment_modesController.cs" />
-    <Compile Include="Controllers\RecoveriesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\Service_providersController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\successController.cs" />
-    <Compile Include="Controllers\Ticketing_ClientsController.cs" />
-    <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\TimesheetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\A.cs" />
     <Compile Include="Models\AccessRolesSp_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Acc_Profile_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\All_procs.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>All_procs.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\All_procs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>All_procs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\All_procs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>All_procs.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Approved_Employees_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Userslist.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\calt.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>calt.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\calt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>calt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\calt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>calt.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Check_F_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -455,18 +479,6 @@
     <Compile Include="Models\Dash1_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Dashboard_1_Result.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Dashboard_2_Result.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Dashboard_3_Result.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Dashboard_4_Result.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
@@ -480,9 +492,7 @@
     <Compile Include="Models\Em_Agency_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\File.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\File.cs" />
     <Compile Include="Models\Files_.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -500,10 +510,10 @@
     </Compile>
     <Compile Include="Models\FileUpload.cs" />
     <Compile Include="Models\GetEmpUsername_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetEmp_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetFacility_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -520,8 +530,11 @@
     <Compile Include="Models\GetStaffing_Acc_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Gettimesheet2_Result.cs">
+      <DependentUpon>All_procs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Gettimesheet_Result.cs">
-      <DependentUpon>GetTtEmp.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetTtEmp.Context.cs">
       <AutoGen>True</AutoGen>
@@ -545,9 +558,7 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\leaves_Days_track.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\leaves_Days_track.cs" />
     <Compile Include="Models\leaves_emp_config.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -563,9 +574,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>leaves_emp_config.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\leaves_logs.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\leaves_logs.cs" />
     <Compile Include="Models\leave_track.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -616,7 +625,7 @@
       <DependentUpon>tableOffice.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PushEmp_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\R.Context.cs">
       <AutoGen>True</AutoGen>
@@ -651,26 +660,26 @@
     <Compile Include="Models\Shift_List_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spdash11.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>spdash11.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spdash11.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>spdash11.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spdash11.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>spdash11.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Sp_Agency_Profile_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_Agency_Users_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dashboard.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_dashboard.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dashboard.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_dashboard.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dashboard.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_dashboard.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_Employee_Per_A_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -679,13 +688,13 @@
       <DependentUpon>sp_e_prog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_Employee_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_expenses_report_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_expenses_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_e_prog.Context.cs">
       <AutoGen>True</AutoGen>
@@ -723,6 +732,9 @@
     <Compile Include="Models\sp_GetRecovery_Result.cs">
       <DependentUpon>sp_GetR.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_GetRoles_Result.cs">
+      <DependentUpon>All_procs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_Gett.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -739,16 +751,10 @@
       <DependentUpon>sp_Gett.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_invoices_report_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_invoices_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_print_grp_InvTT_Result.cs">
-      <DependentUpon>tik_print.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_print_grp_Result.cs">
-      <DependentUpon>tik_print.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_time.Context.cs">
       <AutoGen>True</AutoGen>
@@ -765,8 +771,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>sp_time.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_TimesheetDash_Result.cs">
+      <DependentUpon>spdash11.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_timesheet_report_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>All_procs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_u_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -789,71 +798,8 @@
     <Compile Include="Models\Tasks_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ticketing_Airlines.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ticketing_Clients.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ticketing_Routes.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ticketing_service_providers.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tickets_datasetv2.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tickets_datasetv2.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tickets_datasetv2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tickets_datasetv2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ticket_logs.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ticket_payment_modes.cs">
-      <DependentUpon>tickets_datasetv2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Tie_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tiko_logs.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tiko_logs.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tiko_logs.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tiko_logs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tiko_logs.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tiko_logs.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tik_print.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tik_print.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tik_print.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tik_print.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tik_print.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tik_print.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\us.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2264,6 +2210,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\bell.png" />
+    <Content Include="Images\bell3.png" />
     <Content Include="Images\client.png" />
     <Content Include="Images\client2.png" />
     <Content Include="Images\co.gif" />
@@ -2275,6 +2223,26 @@
     <Content Include="Images\uu.ico" />
     <Content Include="Images\v3.jpg" />
     <Content Include="Images\whatsapp.ico" />
+    <Content Include="Models\All_procs.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>All_procs.edmx</DependentUpon>
+      <LastGenOutput>All_procs.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\All_procs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>All_procs.edmx</DependentUpon>
+      <LastGenOutput>All_procs.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\calt.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>calt.edmx</DependentUpon>
+      <LastGenOutput>calt.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\calt.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>calt.edmx</DependentUpon>
+      <LastGenOutput>calt.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Config_.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Config_.edmx</DependentUpon>
@@ -2355,15 +2323,15 @@
       <DependentUpon>R.edmx</DependentUpon>
       <LastGenOutput>R.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sp_dashboard.Context.tt">
+    <Content Include="Models\spdash11.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_dashboard.edmx</DependentUpon>
-      <LastGenOutput>sp_dashboard.Context.cs</LastGenOutput>
+      <DependentUpon>spdash11.edmx</DependentUpon>
+      <LastGenOutput>spdash11.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sp_dashboard.tt">
+    <Content Include="Models\spdash11.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_dashboard.edmx</DependentUpon>
-      <LastGenOutput>sp_dashboard.cs</LastGenOutput>
+      <DependentUpon>spdash11.edmx</DependentUpon>
+      <LastGenOutput>spdash11.cs</LastGenOutput>
     </Content>
     <Content Include="Models\sp_e_prog.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2414,36 +2382,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>tableOffice.edmx</DependentUpon>
       <LastGenOutput>tableOffice.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tickets_datasetv2.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
-      <LastGenOutput>tickets_datasetv2.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tickets_datasetv2.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
-      <LastGenOutput>tickets_datasetv2.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tiko_logs.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tiko_logs.edmx</DependentUpon>
-      <LastGenOutput>tiko_logs.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tiko_logs.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tiko_logs.edmx</DependentUpon>
-      <LastGenOutput>tiko_logs.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tik_print.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tik_print.edmx</DependentUpon>
-      <LastGenOutput>tik_print.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tik_print.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tik_print.edmx</DependentUpon>
-      <LastGenOutput>tik_print.cs</LastGenOutput>
     </Content>
     <Content Include="Models\us.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2719,13 +2657,6 @@
     <Content Include="Models\lleave.edmx.diagram">
       <DependentUpon>lleave.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\tiko_logs.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>tiko_logs.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\tiko_logs.edmx.diagram">
-      <DependentUpon>tiko_logs.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\leaves_emp_config.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>leaves_emp_config.Designer.cs</LastGenOutput>
@@ -2740,26 +2671,12 @@
     <Content Include="Models\leave_track.edmx.diagram">
       <DependentUpon>leave_track.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\sp_dashboard.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sp_dashboard.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sp_dashboard.edmx.diagram">
-      <DependentUpon>sp_dashboard.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\sp_e_prog.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>sp_e_prog.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\sp_e_prog.edmx.diagram">
       <DependentUpon>sp_e_prog.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\tickets_datasetv2.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>tickets_datasetv2.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\tickets_datasetv2.edmx.diagram">
-      <DependentUpon>tickets_datasetv2.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\sp_Gett.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -2793,13 +2710,6 @@
     <Content Include="Models\sp_GetR.edmx.diagram">
       <DependentUpon>sp_GetR.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\tik_print.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>tik_print.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\tik_print.edmx.diagram">
-      <DependentUpon>tik_print.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\sp_time.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>sp_time.Designer.cs</LastGenOutput>
@@ -2813,6 +2723,27 @@
     </EntityDeploy>
     <Content Include="Models\GetTtEmp.edmx.diagram">
       <DependentUpon>GetTtEmp.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\calt.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>calt.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\calt.edmx.diagram">
+      <DependentUpon>calt.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\All_procs.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>All_procs.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\All_procs.edmx.diagram">
+      <DependentUpon>All_procs.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\spdash11.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>spdash11.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\spdash11.edmx.diagram">
+      <DependentUpon>spdash11.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -3484,7 +3415,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -3583,52 +3513,20 @@
     <Content Include="Views\Timesheet\Details.cshtml" />
     <Content Include="Views\Timesheet\Edit.cshtml" />
     <Content Include="Views\Timesheet\Index.cshtml" />
-    <Content Include="Views\Tickets\New_Ticket.cshtml" />
-    <Content Include="Views\Tickets\Delete.cshtml" />
-    <Content Include="Views\Tickets\Details.cshtml" />
-    <Content Include="Views\Tickets\Ticket_Update.cshtml" />
-    <Content Include="Views\Tickets\Index.cshtml" />
     <Content Include="Views\leaves\Approve_leave.cshtml" />
-    <Content Include="Views\Airlines\Create.cshtml" />
-    <Content Include="Views\Airlines\Delete.cshtml" />
-    <Content Include="Views\Airlines\Details.cshtml" />
-    <Content Include="Views\Airlines\Edit.cshtml" />
-    <Content Include="Views\Airlines\Index.cshtml" />
-    <Content Include="Views\Service_providers\Create.cshtml" />
-    <Content Include="Views\Service_providers\Delete.cshtml" />
-    <Content Include="Views\Service_providers\Details.cshtml" />
-    <Content Include="Views\Service_providers\Edit.cshtml" />
-    <Content Include="Views\Service_providers\Index.cshtml" />
-    <Content Include="Views\payment_modes\Create.cshtml" />
-    <Content Include="Views\payment_modes\Delete.cshtml" />
-    <Content Include="Views\payment_modes\Details.cshtml" />
-    <Content Include="Views\payment_modes\Edit.cshtml" />
-    <Content Include="Views\payment_modes\Index.cshtml" />
     <Content Include="Views\Emp_Config\Create.cshtml" />
     <Content Include="Views\Emp_Config\Delete.cshtml" />
     <Content Include="Views\Emp_Config\Details.cshtml" />
     <Content Include="Views\Emp_Config\Edit.cshtml" />
     <Content Include="Views\Emp_Config\Index.cshtml" />
-    <Content Include="Views\Recoveries\Create.cshtml" />
-    <Content Include="Views\Recoveries\Delete.cshtml" />
-    <Content Include="Views\Recoveries\Details.cshtml" />
-    <Content Include="Views\Recoveries\Edit.cshtml" />
-    <Content Include="Views\Recoveries\Index.cshtml" />
-    <Content Include="Views\Ticketing_Clients\Create.cshtml" />
-    <Content Include="Views\Ticketing_Clients\Delete.cshtml" />
-    <Content Include="Views\Ticketing_Clients\Details.cshtml" />
-    <Content Include="Views\Ticketing_Clients\Edit.cshtml" />
-    <Content Include="Views\Ticketing_Clients\Index.cshtml" />
     <Content Include="Views\Advance\Create.cshtml" />
     <Content Include="Views\Advance\Delete.cshtml" />
     <Content Include="Views\Advance\Details.cshtml" />
     <Content Include="Views\Advance\Approve_Admin.cshtml" />
     <Content Include="Views\Advance\Index.cshtml" />
     <Content Include="Views\Advance\Print_Form.cshtml" />
-    <Content Include="Views\Tickets\Groups.cshtml" />
-    <Content Include="Views\Tickets\Print_Form.cshtml" />
-    <Content Include="Views\Tickets\View_Grp.cshtml" />
     <Content Include="Views\Timesheet\Timesheet.cshtml" />
+    <Content Include="Views\Timesheet\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

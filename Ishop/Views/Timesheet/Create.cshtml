@@ -91,7 +91,7 @@
 
                 <!-- /.widget-user-image -->
 
-                <h5 style="color:white"> <i class="fa fa-calendar"></i> New Timesheet : <i style="font-family:Cookie">@DateTime.Now.ToString("dddd dd -MMMM -yyyy")</i>  </h5>
+                <h5 style="color:white"> <i class="fa fa-calendar"></i> New Timesheet : <small>@DateTime.Now.ToString("dddd dd -MMMM -yyyy")</small> </h5>
 
 
             </div>
@@ -110,7 +110,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
+                            <label>@Html.LabelFor(model => model.CreatedOn)</label>
                             @Html.EditorFor(model => model.CreatedOn, new
                        {
                            htmlAttributes = new
@@ -128,7 +128,7 @@
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Employee)</label>
+                            <label>@Html.LabelFor(model => model.Employee)</label>
                             @Html.EditorFor(model => model.Employee, new
                        {
                            htmlAttributes = new
@@ -140,7 +140,7 @@
                            }
                        })
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Project)</label>
                             @Html.EditorFor(model => model.Project, new
                        {
@@ -148,6 +148,7 @@
                            {
                                @class = "form-control ",
                                @Placeholder = "Project working on",
+                               @required = "required",
 
                            }
                        })
@@ -160,12 +161,13 @@
                     <div class="form-row">
 
 
-                        @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+                        @Html.TextAreaFor(model => model.Description, 5, 100, htmlAttributes: new
                    {
-                       style = "width: 70%; max-width:70%;",
+                       style = "width: 100%; max-width:100%;",
                        @placeholder = "Duties Done",
                        @autofocus = ""
                        ,
+                       @required = "required",
                        @class = "form-control form-rounded2"
 
                    })

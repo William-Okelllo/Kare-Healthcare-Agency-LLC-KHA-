@@ -35,43 +35,63 @@ namespace Ishop.Controllers
 
                 
             }
-        }
-        [Authorize(Roles = "DashBoard")]
-        public ActionResult Timesheet(string Employees,  string From_Date, string End_Date)
-        {
 
-
-
-            if (Employees == null || From_Date == "" || End_Date == "")
-            {
-                var startDated = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                var last = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-
-                Employees = "All";
-                From_Date = startDated.ToString();
-                End_Date = last.ToString();
-
-            }
-
-                GetTtEmp2 dbb = new GetTtEmp2();
-                var categories = dbb.Gettimesheet(Employees, From_Date, End_Date).ToList();
-                ViewBag.l5 = categories;
-
-
-            Employee_Context dbbb = new Employee_Context();
-            var Employ = dbbb.Employees.ToList();
-            ViewBag.Employees = new SelectList(Employ, "Username", "Username");  
-
-            return View();
         }
         public JsonResult GetEvents()
         {
-            using (sp_times dc = new sp_times())
+            using (calt2 dc = new calt2())
             {
-                var events = dc.Gettimesheet(User.Identity.Name,"","").ToList();
+                var events = dc.Gettimesheet2(User.Identity.Name).ToList();
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }
+        public ActionResult list(string searchBy, string search, int? page)
+        {
+
+            if (!(search == null))
+            {
+                return View(db.tt.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name && c.Project.StartsWith(search) ).ToList().ToPagedList(page ?? 1, 6));
+
+            }
+            else
+            {
+                return View(db.tt.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+
+
+
+            }
+
+        }
+
+
+
+
+
+
+        [Authorize(Roles = "DashBoard")]
+        public ActionResult Timesheet(string searchBy, string search, string Employees, int? page)
+        {
+            Employee_Context dbbb = new Employee_Context();
+            var Employ = dbbb.Employees.ToList();
+            ViewBag.Employees = new SelectList(Employ, "Username", "Username");
+
+            if (!(search == null || search ==""))
+            {
+                return View(db.tt.OrderByDescending(p => p.Id).Where(c => c.Employee == search).ToList().ToPagedList(page ?? 1, 9));
+
+            }
+            else
+            {
+                return View(db.tt.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 9));
+
+            }
+
+
+           
+
+         
+        }
+       
 
         // GET: Timesheet/Details/5
         public ActionResult Details(int id)
@@ -104,7 +124,8 @@ namespace Ishop.Controllers
             {
                 db.tt.Add(tT);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["msg"] = "Timesheet posted Successfully";
+                return RedirectToAction("list");
             }
 
             return View(tT);
@@ -136,6 +157,7 @@ namespace Ishop.Controllers
             {
                 db.Entry(tT).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["msg"] = "Timesheet updated Successfully";
                 return RedirectToAction("Index");
             }
             return View(tT);

@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HR2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Acc_Profile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="u" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AccessRolesSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AddPhone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Checkin_Checkout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Checkin/Checkout">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="type" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Delete_File" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Delete_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staffing" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmpUsername" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Gettimesheet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Employees" Type="nvarchar" Mode="In" />
+          <Parameter Name="From_Date" Type="varchar" Mode="In" />
+          <Parameter Name="End_Date" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Gettimesheet2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Employees" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="PushEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Role" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Role_Set" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="status" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SetRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="nvarchar" Mode="In" />
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+          <Parameter Name="role" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_departments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_emp_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Total_leaves" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_employee_prog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="staff" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_expenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_expenses_report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="varchar" Mode="In" />
+          <Parameter Name="endDate" Type="varchar" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_getDrpt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_getHodEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetRecovery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_invoices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_invoices_report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="varchar" Mode="In" />
+          <Parameter Name="endDate" Type="varchar" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_timesheet_report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="varchar" Mode="In" />
+          <Parameter Name="endDate" Type="varchar" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TimesheetDash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Employee" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_track_leave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TT_Leaves" Type="int" Mode="In" />
+          <Parameter Name="Request_days" Type="int" Mode="In" />
+          <Parameter Name="User" Type="nvarchar" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Approver_Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Approver" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="HR2ModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HR2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="All_procss" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Acc_Profile" ReturnType="Collection(HR2Model.Acc_Profile_Result)">
+            <Parameter Name="u" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AccessRolesSp" ReturnType="Collection(HR2Model.AccessRolesSp_Result)" />
+          <FunctionImport Name="AddPhone">
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Checkin_Checkout">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_File">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_User">
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetData" ReturnType="Collection(String)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmp" ReturnType="Collection(HR2Model.GetEmp_Result)">
+            <Parameter Name="Staffing" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmpUsername" ReturnType="Collection(HR2Model.GetEmpUsername_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Gettimesheet" ReturnType="Collection(HR2Model.Gettimesheet_Result)">
+            <Parameter Name="Employees" Mode="In" Type="String" />
+            <Parameter Name="From_Date" Mode="In" Type="String" />
+            <Parameter Name="End_Date" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Gettimesheet2" ReturnType="Collection(HR2Model.Gettimesheet2_Result)">
+            <Parameter Name="Employees" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PushEmp" ReturnType="Collection(HR2Model.PushEmp_Result)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Role_Set">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SetRole">
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="role" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_departments" ReturnType="Collection(String)" />
+          <FunctionImport Name="sp_emp_update">
+            <Parameter Name="Total_leaves" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Employee" ReturnType="Collection(HR2Model.Sp_Employee_Result)" />
+          <FunctionImport Name="sp_employee_prog">
+            <Parameter Name="staff" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_expenses" ReturnType="Collection(HR2Model.sp_expenses_Result)" />
+          <FunctionImport Name="sp_expenses_report" ReturnType="Collection(HR2Model.sp_expenses_report_Result)">
+            <Parameter Name="startDate" Mode="In" Type="String" />
+            <Parameter Name="endDate" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_getDrpt" ReturnType="Collection(String)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_getHodEmail" ReturnType="Collection(String)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetRecovery">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetRoles" ReturnType="Collection(HR2Model.sp_GetRoles_Result)" />
+          <FunctionImport Name="sp_invoices" ReturnType="Collection(HR2Model.sp_invoices_Result)" />
+          <FunctionImport Name="sp_invoices_report" ReturnType="Collection(HR2Model.sp_invoices_report_Result)">
+            <Parameter Name="startDate" Mode="In" Type="String" />
+            <Parameter Name="endDate" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_timesheet_report" ReturnType="Collection(HR2Model.sp_timesheet_report_Result)">
+            <Parameter Name="startDate" Mode="In" Type="String" />
+            <Parameter Name="endDate" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TimesheetDash" ReturnType="Collection(HR2Model.sp_TimesheetDash_Result)">
+            <Parameter Name="Employee" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_track_leave">
+            <Parameter Name="TT_Leaves" Mode="In" Type="Int32" />
+            <Parameter Name="Request_days" Mode="In" Type="Int32" />
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Approver_Remarks" Mode="In" Type="String" />
+            <Parameter Name="Approver" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Acc_Profile_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AccessRolesSp_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="RoleId" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="GetEmp_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEmpUsername_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Gettimesheet_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="employee" Nullable="true" />
+          <Property Type="Boolean" Name="status" Nullable="true" />
+          <Property Type="String" Name="Project" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="feedback" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Gettimesheet2_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="employee" Nullable="true" />
+          <Property Type="Boolean" Name="status" Nullable="true" />
+          <Property Type="String" Name="Project" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="feedback" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PushEmp_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Fullname" Nullable="true" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Employee_Address" Nullable="true" />
+          <Property Type="String" Name="Home_Address" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="DateTime" Name="Last_Update" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Emergency_Contact" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Wage" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="Current_Access" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Userid" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Sp_Employee_Result">
+          <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Agency" Nullable="true" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_expenses_Result">
+          <Property Type="Decimal" Name="Expenses" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="String" Name="M" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_expenses_report_Result">
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="Additional_Notes" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetRoles_Result">
+          <Property Type="String" Name="Roleid" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="sp_invoices_Result">
+          <Property Type="Decimal" Name="New" Nullable="true" Precision="7" Scale="2" />
+          <Property Type="Decimal" Name="Paid" Nullable="true" Precision="7" Scale="2" />
+          <Property Type="String" Name="M" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_invoices_report_Result">
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Due_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Client_Name" Nullable="true" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="Status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_timesheet_report_Result">
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="User_Account" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Check_status" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Cordinates" Nullable="true" MaxLength="236" />
+          <Property Type="Decimal" Name="Distance" Nullable="true" Precision="19" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_TimesheetDash_Result">
+          <Property Type="String" Name="Employee" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="Int32" Name="Current_Week" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HR2ModelStoreContainer" CdmEntityContainer="All_procss" >
+          <FunctionImportMapping FunctionImportName="Acc_Profile" FunctionName="HR2Model.Store.Acc_Profile">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.Acc_Profile_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AccessRolesSp" FunctionName="HR2Model.Store.AccessRolesSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.AccessRolesSp_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddPhone" FunctionName="HR2Model.Store.AddPhone" />
+          <FunctionImportMapping FunctionImportName="Checkin_Checkout" FunctionName="HR2Model.Store.Checkin_Checkout" />
+          <FunctionImportMapping FunctionImportName="Delete_File" FunctionName="HR2Model.Store.Delete_File" />
+          <FunctionImportMapping FunctionImportName="Delete_User" FunctionName="HR2Model.Store.Delete_User" />
+          <FunctionImportMapping FunctionImportName="GetData" FunctionName="HR2Model.Store.GetData" />
+          <FunctionImportMapping FunctionImportName="GetEmp" FunctionName="HR2Model.Store.GetEmp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.GetEmp_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmpUsername" FunctionName="HR2Model.Store.GetEmpUsername">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.GetEmpUsername_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Gettimesheet" FunctionName="HR2Model.Store.Gettimesheet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.Gettimesheet_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="employee" ColumnName="employee" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="feedback" ColumnName="feedback" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Gettimesheet2" FunctionName="HR2Model.Store.Gettimesheet2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.Gettimesheet2_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="employee" ColumnName="employee" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="feedback" ColumnName="feedback" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PushEmp" FunctionName="HR2Model.Store.PushEmp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.PushEmp_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Employee_Address" ColumnName="Employee_Address" />
+                <ScalarProperty Name="Home_Address" ColumnName="Home_Address" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Last_Update" ColumnName="Last_Update" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Emergency_Contact" ColumnName="Emergency_Contact" />
+                <ScalarProperty Name="Wage" ColumnName="Wage" />
+                <ScalarProperty Name="Current_Access" ColumnName="Current_Access" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Role_Set" FunctionName="HR2Model.Store.Role_Set" />
+          <FunctionImportMapping FunctionImportName="SetRole" FunctionName="HR2Model.Store.SetRole" />
+          <FunctionImportMapping FunctionImportName="sp_departments" FunctionName="HR2Model.Store.sp_departments" />
+          <FunctionImportMapping FunctionImportName="sp_emp_update" FunctionName="HR2Model.Store.sp_emp_update" />
+          <FunctionImportMapping FunctionImportName="Sp_Employee" FunctionName="HR2Model.Store.Sp_Employee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.Sp_Employee_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_employee_prog" FunctionName="HR2Model.Store.sp_employee_prog" />
+          <FunctionImportMapping FunctionImportName="sp_expenses" FunctionName="HR2Model.Store.sp_expenses">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.sp_expenses_Result">
+                <ScalarProperty Name="Expenses" ColumnName="Expenses" />
+                <ScalarProperty Name="M" ColumnName="M" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_expenses_report" FunctionName="HR2Model.Store.sp_expenses_report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.sp_expenses_report_Result">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Additional_Notes" ColumnName="Additional_Notes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_getDrpt" FunctionName="HR2Model.Store.sp_getDrpt" />
+          <FunctionImportMapping FunctionImportName="sp_getHodEmail" FunctionName="HR2Model.Store.sp_getHodEmail" />
+          <FunctionImportMapping FunctionImportName="sp_GetRecovery" FunctionName="HR2Model.Store.sp_GetRecovery" />
+          <FunctionImportMapping FunctionImportName="sp_GetRoles" FunctionName="HR2Model.Store.sp_GetRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.sp_GetRoles_Result">
+                <ScalarProperty Name="Roleid" ColumnName="Roleid" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_invoices" FunctionName="HR2Model.Store.sp_invoices">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.sp_invoices_Result">
+                <ScalarProperty Name="New" ColumnName="New" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="M" ColumnName="M" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_invoices_report" FunctionName="HR2Model.Store.sp_invoices_report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.sp_invoices_report_Result">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Due_Date" ColumnName="Due_Date" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_timesheet_report" FunctionName="HR2Model.Store.sp_timesheet_report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.sp_timesheet_report_Result">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="User_Account" ColumnName="User_Account" />
+                <ScalarProperty Name="Check_status" ColumnName="Check_status" />
+                <ScalarProperty Name="Cordinates" ColumnName="Cordinates" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_TimesheetDash" FunctionName="HR2Model.Store.sp_TimesheetDash">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HR2Model.sp_TimesheetDash_Result">
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Current_Week" ColumnName="Current Week" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_track_leave" FunctionName="HR2Model.Store.sp_track_leave" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -104,10 +104,10 @@
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
                         <div style="text-align:center">
-                            <img src="~/Images/client.png" height="60" alt="User Avatar">
+                            <img src="~/Images/bell3.png" height="60" alt="User Avatar">
                             <p> <i class="fa fa-user"></i> User: @User.Identity.Name</p>
                         </div>
-
+                        <div class="dropdown-divider"></div>
                         <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
                             <i class="fas fa-user-circle text-warning nav-icon"></i> My Profile
                         </a>
@@ -121,7 +121,7 @@
                         <div class="dropdown-divider"></div>
 
 
-    </a>
+</a>
 
 
 
@@ -164,10 +164,10 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="@Url.Action("Index", "Home")" class="brand-link">
-            <img src="~/Images/client2.png" height="85">
+            <img src="~/Images/bell.png" height="55">
 
         </a>
-
+        
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:white">
@@ -218,7 +218,7 @@
 
 
                     <li class="nav-item menu-open">
-                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-orange">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-primary">
                             <i class="nav-icon fa fa-home text-white"></i>
                             <p style="color:white">
                                 Home-Page
@@ -228,7 +228,7 @@
                     </li>
 
 
-                    @if (this.User.IsInRole("DashBoard"))
+                    @if (this.User.IsInRole("Admin"))
                     {
                         <li class="nav-item">
 
@@ -246,9 +246,9 @@
 
 
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Dashboard", "Home")" class="nav-link">
+                                    <a href="@Url.Action("Timesheet", "Timesheet")" class="nav-link">
                                         <i class="fa fa-chart-line text-white nav-icon"></i>
-                                        <p style="color: white">Operations</p>
+                                        <p style="color: white">Timesheets</p>
                                     </a>
                                 </li>
 
@@ -257,124 +257,60 @@
                         </li>
                     }
 
-                    <li class="nav-header"><i class="fa fa-plane-departure"></i> Ticketing</li>
-                    <li class="nav-item">
-
-
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-id-card text-white"></i>
-                            <p style="color: white">
-                                Ticketing <i class="fas fa-angle-left right"></i>
-
-
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-
-
-
-                            <li class="nav-item">
-                                <a href="@Url.Action("New_Ticket", "Tickets")" class="nav-link">
-                                    <i class="fa fa-id-card text-white nav-icon"></i>
-                                    <p style="color: white">New Ticket</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Tickets")" class="nav-link">
-                                    <i class="fa fa-clipboard-list text-white nav-icon"></i>
-                                    <p style="color: white">Tickets list</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Groups", "Tickets")" class="nav-link">
-                                    <i class="fa fa-layer-group text-white nav-icon"></i>
-                                    <p style="color: white">Group Tickets list</p>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    @if (this.User.IsInRole("Admin"))
+                    @if (this.User.IsInRole("Employee"))
                     {
+                        <li class="nav-header"><i class="fa fa-layer-group text-white"></i> Timesheet</li>
+
                         <li class="nav-item">
-
-
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-circle-notch text-white"></i>
+
+                                <i class="fa fa-chart-bar text-white nav-icon"></i>
                                 <p style="color: white">
-                                    Ticketing_Dataset <i class="fas fa-angle-left right"></i>
-
-
+                                    My Timesheets <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
 
-
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Ticketing_Clients")" class="nav-link">
-                                        <i class="fa fa-users text-white nav-icon"></i>
-                                        <p style="color: white">Clients</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Airlines")" class="nav-link">
-                                        <i class="fa fa-paper-plane text-white nav-icon"></i>
-                                        <p style="color: white">Airlines</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "service_providers")" class="nav-link">
-                                        <i class="fa fa-hands-helping text-white nav-icon"></i>
-                                        <p style="color: white">Service Providers</p>
+                                    <a href="@Url.Action("Create", "Timesheet")" class="nav-link">
+                                        <i class="fa fa-handshake text-white nav-icon"></i>
+                                        <p style="color: white">Post Timesheet</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "payment_modes")" class="nav-link">
-                                        <i class="fa fa-shopping-bag text-white nav-icon"></i>
-                                        <p style="color: white">Payment Modes</p>
+                                    <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
+                                        <i class="fa fa-calendar-day text-white nav-icon"></i>
+                                        <p style="color: white">My Timesheets -Calendar</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="@Url.Action("list", "Timesheet")" class="nav-link">
+                                        <i class="fa fa-list text-white nav-icon"></i>
+                                        <p style="color: white">My Timesheets -list</p>
+                                    </a>
+                                </li>
 
 
                             </ul>
                         </li>
+                    }
+                    else if (this.User.IsInRole("Timesheet_view"))
+                    {
+                        <li class="nav-header"><i class="fa fa-user-clock text-white"></i> Timesheet</li>
 
+                        <li class="nav-item">
+                            <a href="@Url.Action("Timesheet", "Timesheet")" class="nav-link">
 
+                                <i class="fa fa-chart-bar text-white nav-icon"></i>
+                                <p style="color: white">
+                                    Employees Timesheets
+                                </p>
+                            </a>
+                        </li>
                     }
 
-                    <li class="nav-header"><i class="fa fa-piggy-bank"></i> Recoveries </li>
-                    <li class="nav-item">
 
-
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-piggy-bank text-white"></i>
-                            <p style="color: white">
-                                Ticket Recovery <i class="fas fa-angle-left right"></i>
-
-
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-
-
-
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Tickets")" class="nav-link">
-                                    <i class="fa fa-piggy-bank text-white nav-icon"></i>
-                                    <p style="color: white">New Recovery</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Recoveries")" class="nav-link">
-                                    <i class="fa fa-clipboard-list text-white nav-icon"></i>
-                                    <p style="color: white">Recovery list</p>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
 
 
                     <li class="nav-header"><i class="fa fa-hourglass"></i> Leaves </li>
@@ -459,34 +395,7 @@
                         </ul>
                     </li>
 
-                    @if (this.User.IsInRole("Timesheet"))
-                    {
-                        <li class="nav-header"><i class="fa fa-user-clock text-white"></i> Timesheet</li>
 
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
-
-                                <i class="fa fa-chart-bar text-white nav-icon"></i>
-                                <p style="color: white">
-                                    My Timesheets
-                                </p>
-                            </a>
-                        </li>
-                    }
-                    else if (this.User.IsInRole("Timesheet_view"))
-                    {
-                    <li class="nav-header"><i class="fa fa-user-clock text-white"></i> Timesheet</li>
-
-                    <li class="nav-item">
-                        <a href="@Url.Action("Timesheet", "Timesheet")" class="nav-link">
-
-                            <i class="fa fa-chart-bar text-white nav-icon"></i>
-                            <p style="color: white">
-                                Employees Timesheets
-                            </p>
-                        </a>
-                    </li>
-                    }
 
 
                     <li>

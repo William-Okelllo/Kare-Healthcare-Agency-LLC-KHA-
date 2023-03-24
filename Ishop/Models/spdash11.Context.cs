@@ -12,12 +12,13 @@ namespace Ishop.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.IO;
-
-    public partial class Files_list_ : DbContext
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+    
+    public partial class HR2Entities : DbContext
     {
-        public Files_list_()
-            : base("name=Files_list_")
+        public HR2Entities()
+            : base("name=HR2Entities")
         {
         }
     
@@ -26,6 +27,14 @@ namespace Ishop.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<File> Files { get; set; }
+    
+        public virtual ObjectResult<sp_TimesheetDash_Result> sp_TimesheetDash(string employee)
+        {
+            var employeeParameter = employee != null ?
+                new ObjectParameter("Employee", employee) :
+                new ObjectParameter("Employee", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TimesheetDash_Result>("sp_TimesheetDash", employeeParameter);
+        }
     }
 }

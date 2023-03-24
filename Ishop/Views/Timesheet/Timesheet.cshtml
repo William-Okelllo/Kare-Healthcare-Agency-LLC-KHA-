@@ -1,4 +1,7 @@
-﻿@model IShop.Core.TT
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.TT>
+
 <script>
     $(function () {
         $("#datepicker").datepicker();
@@ -6,169 +9,229 @@
     $(function () {
         $("#datepicker2").datepicker();
     });
+
+
 </script>
-<div class="card" style="background-color: #ffffffd9">
-    <div class="col d-flex justify-content-center">
-        <div class="col-xl-12">
-            <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-chart-line"></i> Dashboard  </div>
-                <div class="card-body">
-                    <div class="card">
-                        <div class="card-body">
-                            @using (Html.BeginForm("Timesheet", "Timesheet", FormMethod.Post))
-                            {<script type="text/javascript">
-                                        $(function () {
-                                            $("#Employees").chosen();
-                                           
-
-                                        });
-
-                                    </script>
-                                
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label>Staff</label>
-                                        @Html.DropDownList("Employees", ViewBag.Employees as SelectList, "-- Select Employe --",
-                                               new { @class = "form-control form-control-sm", data_live_search = "true" })
-                                     </div>
+<script type="text/javascript">
+    $(function () {
+        $("#search").chosen();
+       
 
 
-                                    <div class="form-group col-md-2">
-                                        <label> From Date</label>
-                                        @{
-                                            DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-                                        }
+    });
 
-                                        <input type="date" id="From_Date" name="From_Date" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
-                                       
+</script>
+<style>
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card" style="background-color: #ffffffe5">
+
+
+    <div class="card " style="background-color: #ffffffc1">
+
+        <div class="card-header" style="background-color: #001F3F">
+            <h3 class="card-title" style="color:white;text-align:center">
+                <i class="fa fa-users nav-icon"></i>
+                Employees Timesheets
+            </h3>
+
+
+            <div style="text-align: right; color: white ">
+                @using (Html.BeginForm("Timesheet", "Timesheet", FormMethod.Get))
+                {
+
+
+
+
+
+
+                    <a style="font-family: Calibri"> Filter</a>
+
+                    @Html.DropDownList("search", ViewBag.Employees as SelectList, "-- Select Employe --",
+                                              new { @class = "form-control2 form-control-sm", data_live_search = "true" })
+                    <button type="submit" value="search" class="btn btn-sm btn-warning">
+                        <i class="fa fa-search"></i>
+                    </button>
+
+                }
+
+
+            </div>
+        </div>
+        <div class="card-body">
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="container-fluid">
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4" style="border-radius: 24px;">
+                        <!-- Widget: user widget style 2 -->
+                        <div class="card card-outline card-primary card-widget widget-user-2" style="border-radius: 24px;">
+                            <!-- Add the bg color to the header using any of the bg-* classes -->
+
+                            <div class="card-body text-left">
+
+                                <div class="divider" style="color:forestgreen"></div>
+                                <medium>
+                                    <i class="fa fa-user-shield"></i>
+                                    <b>Employee</b> :@item.Employee
+                                </medium>
+                                <div class="dropdown-divider"></div>
+                                <medium style="font-family:Calibri">
+                                    <i class="fa fa-spinner text-success"></i> <b>Project</b> :@item.Project
+                                </medium>
+
+                                <div class="dropdown-divider"></div>
+                                <medium style="font-family:Calibri">
+                                    <i class="fa fa-calendar-check text-success"></i> <b>Posted on</b> :@item.CreatedOn
+                                </medium>
+
+                                <div class="dropdown-divider"></div>
+
+                                <button href="javascript:void(0);" class="btn btn-sm btn-primary btn anchorDetail" data-id="@item.Id">
+                                    <div class="spinner-border spinner-border-sm" role="status">
+                                        <span class="sr-only">Loading...</span>
                                     </div>
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div> View Details
+                                </button>
 
-                                    <div class="form-group col-md-2">
-                                        <label> To Date</label>
-                                        <input type="date" id="End_Date" name="End_Date" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label> Filter</label>
-                                        <input type="submit" value="search" class="btn btn btn-outline-secondary" style="color:black" />
-                                    </div>
-                                </div>
 
-                            }
+
+                            </div>
+
+                        </div>
+                        <hr />
+                        <!-- /.widget-user -->
+                    </div>
+
+
+                    <div id='Details' class='modal'>
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div id='myModalContent'></div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="container-fluid">
 
-                        <div class="row">
-                            @foreach (var item in ViewBag.l5)
-                            {
-                                <div class="col-md-5" style="border-radius: 24px;">
-                                    <!-- Widget: user widget style 2 -->
-                                    <div class="card card-widget widget-user-2" style="border-radius: 24px;">
-                                        <!-- Add the bg color to the header using any of the bg-* classes -->
-
-                                        <div class="card-body text-left">
-
-                                            <div class="divider" style="color:forestgreen"></div>
-                                            <medium>
-                                                <i class="fa fa-user-shield"></i>
-                                                <b>Employee</b> :@item.employee
-                                            </medium>
-                                            <div class="dropdown-divider"></div>
-                                            <medium style="font-family:Calibri">
-                                                <i class="fa fa-spinner text-success"></i> <b>Project</b> :@item.Project
-                                            </medium>
-
-                                            <div class="dropdown-divider"></div>
-                                            <medium style="font-family:Calibri">
-                                                <i class="fa fa-calendar-check text-success"></i> <b>Posted on</b> :@item.CreatedOn
-                                            </medium>
-
-                                            <div class="dropdown-divider"></div>
-
-                                            <button  href="javascript:void(0);" class="btn btn-sm btn-primary btn anchorDetail" data-id="@item.id">
-                                                <div class="spinner-border spinner-border-sm" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow spinner-grow-sm" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div> View Details
-                                            </button>
+                    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+                    <script src="~/Scripts/bootstrap.js"></script>
+                    <script src="~/Scripts/bootstrap.min.js"></script>
+                    <script>
+                        var TeamDetailPostBackURL = '/Timesheet/Details';
+                        $(function () {
+                            $(".anchorDetail").click(function () {
+                                var $buttonClicked = $(this);
+                                var id = $buttonClicked.attr('data-id');
+                                $.ajax({
+                                    type: "GET",
+                                    url: TeamDetailPostBackURL,
+                                    contentType: "application/json; charset=utf-8",
+                                    data: { "Id": id },
+                                    datatype: "json",
+                                    success: function (data) {
+                                        $('#myModalContent').html(data);
+                                        $('#Details').modal('show').fade(900);
+                                    },
+                                    error: function () {
+                                        alert("Dynamic content load failed.");
+                                    }
+                                });
+                            });
+                        });
+                    </script>
 
 
 
 
 
 
-                                        </div>
-
-                                    </div>
-                                    <!-- /.widget-user -->
-                                </div>
-                            
-
-                           
-                             
-                                <div id='Details' class='modal'>
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div id='myModalContent'></div>
-                                        </div>
-                                    </div>
-                                </div>
+                }
 
 
 
 
-
-                                <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-                                <script src="~/Scripts/bootstrap.js"></script>
-                                <script src="~/Scripts/bootstrap.min.js"></script>
-                                <script>
-                                    var TeamDetailPostBackURL = '/Timesheet/Details';
-                                    $(function () {
-                                        $(".anchorDetail").click(function () {
-                                            var $buttonClicked = $(this);
-                                            var id = $buttonClicked.attr('data-id');
-                                            $.ajax({
-                                                type: "GET",
-                                                url: TeamDetailPostBackURL,
-                                                contentType: "application/json; charset=utf-8",
-                                                data: { "Id": id },
-                                                datatype: "json",
-                                                success: function (data) {
-                                                    $('#myModalContent').html(data);
-                                                    $('#Details').modal('show').fade(900);
-                                                },
-                                                error: function () {
-                                                    alert("Dynamic content load failed.");
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
+            </div>
 
 
+            <style>
+                .ul.pagination {
+                    display: inline-block;
+                    padding: 1;
+                    margin: 1;
+                    border-radius: 0.5rem;
+                }
 
+                ul.pagination li {
+                    display: inline;
+                }
 
+                    ul.pagination li a {
+                        color: black;
+                        float: left;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                        transition: background-color;
+                        background-color: #ddd;
+                        border-color: white;
+                        border-radius: 0.5rem;
+                    }
 
-                            }
-                           </div>
-                        </div>
+                        ul.pagination li a.active {
+                            background-color: dodgerblue;
+                            color: white;
+                        }
 
-                        
+                        ul.pagination li a:hover:not(.active) {
+                            background-color: dodgerblue;
+                            border-radius: 0.5rem;
+                        }
+            </style>
+            <div id="container" style="text-align:left">
 
-                    </div>
-
-                    <hr />
-
-
-
-                    <div class="card-footer p-0" style="background-color:whitesmoke">
-                    </div>
-
+                <div class="pagination" style="text-align:left">
+                    @Html.PagedListPager(Model, page => Url.Action("Timesheet", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
                 </div>
             </div>
+        </div>
+
+        <hr />
+
+
+
+        <div class="card-footer p-0" style="background-color:whitesmoke">
+        </div>
+
+    </div>
+</div>
         </div>
 
     </div>

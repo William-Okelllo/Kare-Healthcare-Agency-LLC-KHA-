@@ -42,7 +42,7 @@
 
                         <h5 style="color:white">
 
-                            <img src="~/Images/l.ico" height="50" alt="User Avatar"> Welcome @User.Identity.Name 
+                            <img src="~/Images/l.ico" height="50" alt="User Avatar"> Welcome @User.Identity.Name
 
 
                         </h5>
@@ -55,7 +55,7 @@
                         <i class="fa fa-user-shield"></i> Access Level :
                         @if (this.User.IsInRole("Admin"))
                         {<medium style="font-family:Calibri">
-                                <i class="fa fa-user-check text-success"></i>:-Administrator 
+                                <i class="fa fa-user-check text-success"></i>:-Administrator
                             </medium>}
 
 
@@ -89,8 +89,8 @@
                 <!-- /.widget-user -->
             </div>
 
-            
-     
+
+
 
             @if (this.User.IsInRole("Employee"))
             {
@@ -98,64 +98,51 @@
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
                         <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> My DashBoard </div>
                         <div class="card-body text-left">
-
-                            <div class="container-fluid">
-                                <h6>Tickets summary</h6>
-                                @foreach (var item in ViewBag.l2)
+                            <p><i class="fa fa-spinner text-warning"></i> Timesheets Tracker</p>
+                            <div class="row">
+                                @foreach (var item in ViewBag.Alp)
                                 {
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span><i class="fa fa-list text-primary"></i></span>
+                                    <div class="col-md-4 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-warning"><i class="fa fa-layer-group"></i></span>
 
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Total Tickets</span>
-                                                    <span class="info-box-number">@item.Total_Tickets tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Total Sheets</span>
+                                                <span class="info-box-number">@item.Total</span>
                                             </div>
-                                            <!-- /.info-box -->
+                                            <!-- /.info-box-content -->
                                         </div>
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span><i class="fa fa-check-double text-success"></i></span>
 
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Invoiced</span>
-                                                    <span class="info-box-number">@item.Invoiced tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span><i class="far fa-check-circle text-warning"></i></span>
-
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Approved</span>
-                                                    <span class="info-box-number">@item.Approved tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span><i class="far fa-pause-circle text-danger"></i></span>
-
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Pending</span>
-                                                    <span class="info-box-number">@item.Pending tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                        </div>
+                                        <!-- /.info-box -->
                                     </div>
+                                    <div class="col-md-4 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-primary"><i class="fa fa-calendar-day"></i></span>
 
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Current Week</span>
+                                                <span class="info-box-number">@item.Current_Week</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
 
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-maroon"><i class="fa fa-calendar-minus"></i></span>
 
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Today' Sheets</span>
+                                                <span class="info-box-number">@item.Today</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+
+                                        <!-- /.info-box -->
+                                    </div>
                                 }
+                            </div>
                                 <div class="row">
                                     @foreach (var item in ViewBag.F2)
                                     {
@@ -209,91 +196,64 @@
                             </div>
 
                         </div>
-                    </div>
                 </div>
+
 
             }
 
 
 
             <hr />
-            @if (this.User.IsInRole("Admin"))
-            {
-                <div class="col-xl-8">
+
+        </div>
+
+        @if (this.User.IsInRole("Admin"))
+        {
+            <div class="row">
+                <div class="col-xl-5">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> Operations Summary </div>
+                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-clock"></i>  Operations </div>
                         <div class="card-body text-left">
 
+                            <ul class="nav flex-column">
 
-                            <div class="container-fluid">
-                                <h6 class="mb-2"><i class="fa fa-paper-plane"></i> Tickets status</h6>
-                                <div class="row">
-                                    @foreach (var item in ViewBag.l9)
-                                    {
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span ><i class="fa fa-list text-primary"></i></span>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Timesheet", "Timesheet")" class="nav-link">
+                                        View Posted Timesheet <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
+                                    </a>
+                                </li>
 
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Total Tickets</span>
-                                                    <span class="info-box-number">@item.Total_Tickets tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span ><i class="fa fa-check-double text-success"></i></span>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "leaves")" class="nav-link">
+                                        Requested leaves <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
+                                    </a>
+                                </li>
+                                @if (this.User.IsInRole("Advance_Approvals"))
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Advance")" class="nav-link">
+                                            Requested Advance Payments <span class="float-right badge bg-warning"><i class="fa fa-spinner"></i></span>
+                                        </a>
+                                    </li>
+}
 
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Invoiced</span>
-                                                    <span class="info-box-number">@item.Approved___Invoiced tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span><i class="far fa-check-circle text-warning"></i></span>
-
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Approved</span>
-                                                    <span class="info-box-number">@item.Approved tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span><i class="far fa-pause-circle text-danger"></i></span>
-
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Pending</span>
-                                                    <span class="info-box-number">@item.Pending_Approval tickets</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                        </div>
+                            </ul>
 
 
-                                    }
-                                </div>
-                                
-                              
-                                <a href="@Url.Action("Dashboard", "Home")" class="nav-link">
-                                    <div class="spinner-border spinner-border-sm" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow spinner-grow-sm" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>  DashBoard View
-                                </a>
-                               
-                                
-                            </div>
+                        </div>
+                        <!-- /.widget-user -->
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        }
+
+
+        
+
                             
                           
 
@@ -322,59 +282,7 @@
         </div>
 
 
-        @if (this.User.IsInRole("Admin"))
-        {
-            <div class="row">
-                <div class="col-xl-5">
-                    <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-clock"></i>  Operations </div>
-                        <div class="card-body text-left">
-
-                            <ul class="nav flex-column">
-
-                                <li class="nav-item">
-                                    <a href="@Url.Action("New_Ticket", "Tickets")" class="nav-link">
-                                        New Ticket <span class="float-right badge bg-primary"><i class="fa fa-plane-departure"></i></span>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Tickets")" class="nav-link">
-                                        Ticket lists  <span class="float-right badge bg-navy"><i class="fa fa-list"></i></span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Recoveries")" class="nav-link">
-                                        View Recoveries  <span class="float-right badge bg-navy"><i class="fa fa-piggy-bank"></i></span>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "leaves")" class="nav-link">
-                                        Requested leaves <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
-                                    </a>
-                                </li>
-                                @if (this.User.IsInRole("Advance_Approvals"))
-                                {
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Advance")" class="nav-link">
-                                            Requested Advance Payments <span class="float-right badge bg-warning"><i class="fa fa-spinner"></i></span>
-                                        </a>
-                                    </li>}
-
-                                </ul>
-
-
-                        </div>
-                        <!-- /.widget-user -->
-                    </div>
-                </div>
-
-
-
-
-            </div>
-        }
+     
     
     @if (this.User.IsInRole("Employee"))
     {
@@ -386,27 +294,9 @@
 
                         <ul class="nav flex-column">
 
-                            <li class="nav-item">
-                                <a href="@Url.Action("New_Ticket", "Tickets")" class="nav-link">
-                                    Post New Ticket <span class="float-right badge bg-primary"><i class="fa fa-hourglass"></i></span>
-                                </a>
-                            </li>
+                           
 
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Tickets")" class="nav-link">
-                                    My Posted Tickets  <span class="float-right badge bg-navy"><i class="fa fa-clock"></i></span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Tickets")" class="nav-link">
-                                    New Recovery  <span class="float-right badge bg-navy"><i class="fa fa-piggy-bank"></i></span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Recoveries")" class="nav-link">
-                                    My Recoveries  <span class="float-right badge bg-navy"><i class="fa fa-piggy-bank"></i></span>
-                                </a>
-                            </li>
+                            
 
                             @if (this.User.IsInRole("Advance_Approvals"))
                             {
