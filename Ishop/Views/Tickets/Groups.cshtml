@@ -148,8 +148,12 @@
 
                             <td style="background-color:white">
                                 <small>
-                                    <i class="fa fa-calendar-check text-warning"></i> @item.Departure_Date.ToString("dd-MMMM-yyyy")
-                                    -- <i class="fa fa-calendar-day text-warning"></i>  @item.Arrival_Date.ToString("dd-MMMM-yyyy")
+                                    <i class="fa fa-calendar-check text-orange"></i> @item.Departure_Date.ToString("dd-MMMM-yyyy")
+                                    @if (item.Arrival_Date == null) { }
+                                    else
+                                    {
+                                        <small>-- <i class="fa fa-calendar-day text-orange"></i> @item.Arrival_Date.Value.ToString("dd-MMMM-yyyy")</small>
+                                    }
                                 </small>
                             </td>
                             <td style="background-color:white">

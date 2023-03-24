@@ -27,7 +27,7 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.Employees.OrderByDescending(p => p.Id).Where(c =>c.Username==search).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.Employees.OrderByDescending(p => p.Id).Where(c =>c.Username.StartsWith(search) || c.Username == search).ToList().ToPagedList(page ?? 1, 6));
 
             }
             else

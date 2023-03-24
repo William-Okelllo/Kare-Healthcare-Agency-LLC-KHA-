@@ -6,7 +6,7 @@
 
 <div class="modal-header " style="text-align:center">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h7 class="modal-title"><i class="fa fa-id-card text-warning"></i> Ticket Details</h7>
+    <h7 class="modal-title"><i class="fa fa-id-card text-warning"></i> Timesheet Details</h7>
 </div>
 <div class="modal-body" style="width: 100%;">
     <div class="card-body">
@@ -17,7 +17,7 @@
            {
                htmlAttributes = new
                {
-                   @class = "form-control form-control-sm",
+                   @class = "form-control form-control",
 
                    @Readonly = true
 
@@ -25,13 +25,27 @@
            })
 
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
+                <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Employee) </label>
+                @Html.EditorFor(model => model.Employee, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control form-control",
+
+                   @Readonly = true
+
+               }
+           })
+
+            </div>
+            <div class="form-group col-md-4">
                 <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Project) </label>
                 @Html.EditorFor(model => model.Project, new
            {
                htmlAttributes = new
                {
-                   @class = "form-control form-control-sm",
+                   @class = "form-control form-control",
 
                    @Readonly = true
 
@@ -42,6 +56,27 @@
 
         </div>
 
+
+        <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Description) </label>
+        <div class="row">
+
+
+            @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+       {
+           style = "width: 100%; max-width:100%;",
+           @placeholder = "Provide your response based on the test records",
+           @autofocus = ""
+           ,
+           @class = "form-control form-rounded",
+           @ReadOnly = true
+
+       })
+
+
+
+
+        </div>
+    </div>
     </div>
 </div>
         <hr />

@@ -67,6 +67,22 @@
 
                 </div>
                 <div class="card-body text-left">
+                    @if (TempData["Msg"] != null)
+                    {<div class="row">
+                            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @TempData["Msg"]
+                            </div>
+                        </div>
+                    }
+
+                    <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(700, 0).slideUp(700, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+                    </script>
 
 
                     @foreach (var item in ViewBag.F)
@@ -90,27 +106,27 @@
 
                             </span>
                         </a>
-                         <a href="#" class="nav-link" style="color:midnightblue">
+                        <a href="#" class="nav-link" style="color:midnightblue">
                             <i class="fa fa-phone"></i> Phone Number <span class="float-right" style="font-size: 90%">
 
 
-    @if (item.PhoneNumber == null)
-    {
-                           <small><i class="fa fa-times-circle text-danger"></i> Not set</small>
-    }
-    else
-    {@item.PhoneNumber <small>@Html.ActionLink("Update My Number", "AddPhoneNumber", "Manage")</small>}
-</span>
+                                @if (item.PhoneNumber == null)
+                                {
+                                    <small><i class="fa fa-times-circle text-danger"></i> Not set</small>
+                                }
+                                else
+                                {@item.PhoneNumber <small>@Html.ActionLink("Update My Number", "AddPhoneNumber", "Manage")</small>}
+                            </span>
                         </a>
                         <a href="#" class="nav-link" style="color:forestgreen">
                             <i class="fa fa-user-shield"></i>  Access levels <span class="float-right" style="font-size: 90%">
-                               
+
 
                                 @item.Role
 
                             </span>
                         </a>
-                        
+
                         <hr />
                         <p>Actions</p>
                         <a href="#" class="nav-link" style="color:navy">
@@ -119,7 +135,7 @@
 
 
                                 @Html.ActionLink("Change Current Password", "ChangePassword", "Manage", null, new { @class = "btn btn-sm  btn-success btn" })||
-                             @Html.ActionLink("Update Email & Phone", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-sm  btn-warning btn" })
+                                @Html.ActionLink("Update Email & Phone", "AddPhoneNumber", "Manage", null, new { @class = "btn btn-sm  btn-warning btn" })
 
                             </span>
                         </a>
@@ -129,7 +145,7 @@
 
 
 
-                   
+
                 </div>
             </div>
         </div>

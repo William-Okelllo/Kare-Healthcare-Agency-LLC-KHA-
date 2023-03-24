@@ -37,26 +37,30 @@ namespace Ishop.Controllers
             }
         }
         [Authorize(Roles = "DashBoard")]
-        public ActionResult Timesheet(string User,  string From_Date, string End_Date)
+        public ActionResult Timesheet(string Employees,  string From_Date, string End_Date)
         {
 
 
 
-            if (User == null || From_Date == "" || End_Date == "")
+            if (Employees == null || From_Date == "" || End_Date == "")
             {
                 var startDated = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 var last = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-               
-                User = "All";
+
+                Employees = "All";
                 From_Date = startDated.ToString();
                 End_Date = last.ToString();
 
             }
-            
-                sp_times dbb = new sp_times();
-                var categories = dbb.Gettimesheet(User, From_Date, End_Date).ToList();
+
+                GetTtEmp2 dbb = new GetTtEmp2();
+                var categories = dbb.Gettimesheet(Employees, From_Date, End_Date).ToList();
                 ViewBag.l5 = categories;
-            
+
+
+            Employee_Context dbbb = new Employee_Context();
+            var Employ = dbbb.Employees.ToList();
+            ViewBag.Employees = new SelectList(Employ, "Username", "Username");  
 
             return View();
         }

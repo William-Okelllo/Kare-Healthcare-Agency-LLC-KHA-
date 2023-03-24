@@ -11,29 +11,26 @@ using PagedList;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class Ticketing_ClientsController : Controller
     {
         private tickets_datasetsv2 db = new tickets_datasetsv2();
 
         // GET: Ticketing_Clients
-        public ActionResult Index(string searchBy, string search, int? page)
+        public ActionResult Index( string search, int? page)
         {
 
 
-            if (!(search == null) && (!(search == "")))
+            if (!(search == null))
             {
-                return View(db.Ticketing_Clients.OrderByDescending(p => p.id).Where(c => c.Client == search).ToList().ToPagedList(page ?? 1, 10));
+                return View(db.Ticketing_Clients.OrderByDescending(p => p.id).Where(c => c.Client.StartsWith(search) || c.Client==search).ToList().ToPagedList(page ?? 1, 10));
 
             }
 
-            else if (search == " ")
-            {
-                return View(db.Ticketing_Clients.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 10));
-
-            }
+           
             else
             {
-                return View(db.Ticketing_Clients.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 10));
+                return View(db.Ticketing_Clients.OrderByDescending(p => p.id).Where(c => c.Client.StartsWith(search) || search == null || search == "").ToList().ToPagedList(page ?? 1, 10));
 
             }
 

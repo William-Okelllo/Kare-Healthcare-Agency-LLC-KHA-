@@ -325,7 +325,7 @@
                                @class = "form-control form-control-sm ",
                                @placeholder = " Arrival_Date",
                                id = "datepicker2",
-                               @required = "required",
+                               
                            }
                        })
                         </div>
@@ -367,6 +367,16 @@
                             <label> <i class="fa fa-globe text-orange"></i> @Html.LabelFor(model => model.Ticketing_System)</label>
                             @{
                                 List<SelectListItem> q = new List<SelectListItem>();
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Amadeus",
+                                    Value = "Amadeus",
+                                });
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Galileo",
+                                    Value = "Galileo",
+                                });
                                 q.Add(new SelectListItem
                                 {
                                     Text = "Online",
@@ -529,7 +539,7 @@
                            @autofocus = ""
                            ,
                            @class = "form-control form-rounded2",
-                                @required = "required",
+                              
 
                        })
 

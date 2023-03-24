@@ -290,7 +290,39 @@ namespace Ishop.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                try
+                {
+                    
+
+                    SmtpMail oMail = new SmtpMail("TryIt");
+                    oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(User.Identity.GetUserId());
+                    oMail.To = currentUser.Email;
+                    oMail.Subject = "Account Password Updated";
+                    oMail.TextBody = "Hello there your password has been updated to the following " +
+                        "\n" + " Email Address   :-" + currentUser.Email +
+                    "\n" + " New Password   :-" + model.NewPassword;
+
+                    SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+
+                    oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                    oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
+
+                    oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
+                    oServer.Port = 587;
+                    SmtpClient oSmtp = new SmtpClient();
+                    SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
+                }
+
+
+                catch
+                {
+                    TempData["msg"] = "error   ";
+
+                }
+                TempData["msg"] = "Password changed successfully ";
+                return RedirectToAction("Acc_Profile", "Accesses");
             }
             AddErrors(result);
             return View(model);

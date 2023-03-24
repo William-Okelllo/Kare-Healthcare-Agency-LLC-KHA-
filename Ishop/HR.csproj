@@ -521,7 +521,22 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gettimesheet_Result.cs">
-      <DependentUpon>sp_time.tt</DependentUpon>
+      <DependentUpon>GetTtEmp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTtEmp.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetTtEmp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTtEmp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetTtEmp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTtEmp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetTtEmp.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Get_FacilitesAdmin_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -2280,6 +2295,16 @@
       <DependentUpon>Files_.edmx</DependentUpon>
       <LastGenOutput>Files_.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\GetTtEmp.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetTtEmp.edmx</DependentUpon>
+      <LastGenOutput>GetTtEmp.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\GetTtEmp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetTtEmp.edmx</DependentUpon>
+      <LastGenOutput>GetTtEmp.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\leaves_emp_config.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>leaves_emp_config.edmx</DependentUpon>
@@ -2781,6 +2806,13 @@
     </EntityDeploy>
     <Content Include="Models\sp_time.edmx.diagram">
       <DependentUpon>sp_time.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\GetTtEmp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GetTtEmp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\GetTtEmp.edmx.diagram">
+      <DependentUpon>GetTtEmp.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />

@@ -91,7 +91,17 @@
     </script>
 
 
-
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+        $(function () {
+            $("#datepicker2").datepicker();
+        });
+        $(function () {
+            $("#datepicker9").datepicker();
+        });
+    </script>
 
 
 
@@ -152,7 +162,11 @@
                         <td style="background-color:white">
                             <small>
                                 <i class="fa fa-calendar-check text-orange"></i> @item.Departure_Date.ToString("dd-MMMM-yyyy")
-                                -- <i class="fa fa-calendar-day text-orange"></i>  @item.Arrival_Date.ToString("dd-MMMM-yyyy")
+                                @if (item.Arrival_Date == null) { }
+                                else
+                                {
+                                    <small>-- <i class="fa fa-calendar-day text-orange"></i> @item.Arrival_Date.Value.ToString("dd-MMMM-yyyy")</small>
+                                }
                             </small>
                         </td>
                         <td style="background-color:white">
@@ -177,22 +191,20 @@
                                         <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
                                             <i class="fa fa-check-double text-warning"></i> Approve Ticket
                                         </a>}
-                                    @if (!(item.Recovery == 0))
+                                    <div class="dropdown-divider"></div>
 
-                                    {<div class="divider"></div>
-                                        <a href="@Url.Action("Create", "Recoveries", new { id = item.id})" class="dropdown-item">
-                                            <i class="fa fa-piggy-bank text-primary"></i> Recover
-                                        </a>
-                                    }
+
+                                    <div class="dropdown-divider"></div>
                                     @if ((item.Ticket_status == 1) && this.User.IsInRole("Tickets_Invoicing"))
-                                    {<div class="divider"></div>
+                                    {
 
                                         <a type="button" href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.id">
                                             <i class="fa fa-cash-register text-primary"></i> Invoice Ticket
                                         </a>}
+                                    <div class="divider"></div>
                                     @if (item.Ticket_status == 0)
                                     {
-                                        <div class="dropdown-divider"></div>
+
                                         <a href="@Url.Action("Ticket_Update", "Tickets", new { id = item.id })" class="dropdown-item">
                                             <i class="fas fa-pen text-success"></i> Edit/Update Ticket
                                         </a>
@@ -224,7 +236,7 @@
             </tbody>
         </table>
 
-       
+
 
         @foreach (var item in Model)
         {

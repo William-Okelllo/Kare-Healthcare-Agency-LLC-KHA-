@@ -33,18 +33,18 @@ namespace Ishop.Controllers
 
                 if (!(search == null) && (!(search == "")))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 15));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Pax_Name == search && c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 10));
 
                 }
             
             else if (search == " ")
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 15));
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 10));
 
             }
             else
             {
-                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 15));
+                return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) || c.Ticket_status != 99).ToList().ToPagedList(page ?? 1, 10));
 
             }
 
@@ -53,12 +53,12 @@ namespace Ishop.Controllers
             {
                 if (!(search == null))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Staff==User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 15));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name == search && c.Staff==User.Identity.Name && (!(c.Ticket_status == 99))).ToList().ToPagedList(page ?? 1, 10));
 
                 }
                 else if (search == null)
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 15));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Pax_Name.StartsWith(search) ||  (!(c.Ticket_status == 99))  && c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 10));
 
 
                 }
@@ -80,7 +80,7 @@ namespace Ishop.Controllers
 
                 if (!(search == null) && (!(search == "")))
                 {
-                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id == search && c.Ticket_status != 99 && c.Group_ticket==true).ToList().ToPagedList(page ?? 1, 15));
+                    return View(db.tickets.OrderByDescending(p => p.id).Where(c => c.Group_id.StartsWith(search) || c.Pax_Name == search && c.Ticket_status != 99 && c.Group_ticket==true).ToList().ToPagedList(page ?? 1, 15));
 
                 }
 
@@ -386,6 +386,37 @@ namespace Ishop.Controllers
             catch
             {
                 TempData["msg"] = "error occured in  on approving ticket ";
+                return RedirectToAction("Index");
+            }
+
+
+
+
+
+        }
+        public ActionResult Mark_Recovery(int? id, Ticket ticket)
+        {
+            try
+            {
+                string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand sqlcmnd = new SqlCommand("sp_markticket_forRecovery", sqlCon);
+                sqlcmnd.CommandType = CommandType.StoredProcedure;
+                sqlcmnd.Parameters.AddWithValue("@Id", ticket.id);
+                sqlcmnd.Parameters.AddWithValue("@Action", "Ticket Marked for Recovery");
+                sqlcmnd.Parameters.AddWithValue("@User", User.Identity.Name);
+                sqlCon.Open();
+                sqlcmnd.ExecuteNonQuery();
+                sqlCon.Close();
+
+                TempData["msg"] = "Ticket Marked for Recovery successfully ";
+                return RedirectToAction("Index");
+
+
+            }
+            catch
+            {
+                TempData["msg"] = "error occured in  on making ticket for recovery ticket ";
                 return RedirectToAction("Index");
             }
 

@@ -59,9 +59,9 @@ namespace IShop.Core
         [Display(Name = "Departure Date")]
         public DateTime Departure_Date { get; set; }
 
-        [Required]
+        
         [Display(Name = "Return Date")]
-        public DateTime Arrival_Date { get; set; }
+        public DateTime? Arrival_Date { get; set; }
 
        
         public string Routing { get; set; }

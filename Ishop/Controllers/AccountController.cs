@@ -282,8 +282,7 @@ namespace Ishop.Controllers
         public ActionResult Rspec007()
         {
             {
-                ViewBag.Name = new SelectList(context.Roles.Where(u => (!(u.Name == "Can_Post_Shift" || u.Name == "Can_Take_Shift" || u.Name == "Can_Approve_Shift" || u.Name == "Can_Delete_Shift"
-               || u.Name == "Can_View_Shift")))
+                ViewBag.Name = new SelectList(context.Roles.Where(u => ((u.Name == "Admin")))
                                        .ToList(), "Name", "Name");
                 return View();
             }
@@ -314,24 +313,7 @@ namespace Ishop.Controllers
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here     
 
-                    try
-                    {
-                        string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-                        SqlConnection sqlCon = new SqlConnection(strcon);
-                        SqlCommand sqlcmnd = new SqlCommand("PushEmp", sqlCon);
-                        sqlcmnd.CommandType = CommandType.StoredProcedure;
-                        sqlcmnd.Parameters.AddWithValue("@Username", model.UserName);
-                        sqlcmnd.Parameters.AddWithValue("@Email", model.Email);
-                        sqlcmnd.Parameters.AddWithValue("@Role", model.UserRoles);
-                        sqlCon.Open();
-                        sqlcmnd.ExecuteNonQuery();
-                        sqlCon.Close();
-
-                    }
-                    catch (SqlException sqlEx)
-                    {
-                        throw sqlEx;
-                    }
+                   
 
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackurl = Url.Action("confirmEmail", "Account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);

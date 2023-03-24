@@ -17,7 +17,18 @@
                         <div class="card">
                             <div class="card-body">
                                 @using (Html.BeginForm("Dashboard", "Home", FormMethod.Post))
-                                {<div class="row">
+                                {
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $("#Airline").chosen();
+                                            $("#client").chosen();
+                                            $("#Service_Provider").chosen();
+
+
+                                        });
+
+                                    </script>
+                                    <div class="row">
                                         <div class="form-group col-md-2">
                                             <label>Staff</label>
                                             <input type="text" id="Staff" name="Staff" class="form-control form-control-sm form-rounded" Value="All" />
@@ -26,30 +37,30 @@
                                             <label> Airline</label>
                                             @Html.DropDownList("Airline", ViewBag.Categories as SelectList, "-- Select Airline --",
                                                new { @class = "form-control form-control-sm", data_live_search = "true" })
-                                            </div>
+                                        </div>
                                         <div class="form-group col-md-2">
                                             <label> Service Provider</label>
                                             @Html.DropDownList("Service_Provider", ViewBag.servicep as SelectList, "--  Service provider --", new { @class = "form-control form-control-sm", data_live_search = "true" })
                                         </div>
-                                            <div class="form-group col-md-2">
-                                                <label> From Date</label>
-                                                @{
-                                                    DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-                                                }
+                                        <div class="form-group col-md-2">
+                                            <label> From Date</label>
+                                            @{
+                                                DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                                            }
 
 
-                                                <input type="date" id="startDate" name="startDate" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
-                                            </div>
-
-                                            <div class="form-group col-md-2">
-                                                <label> To Date</label>
-                                                <input type="date" id="endDate" name="endDate" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label> Filter</label>
-                                                <input type="submit" value="=" class="btn btn btn-outline-success" style="color:black" />
-                                            </div>
+                                            <input type="date" id="startDate" name="startDate" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
                                         </div>
+
+                                        <div class="form-group col-md-2">
+                                            <label> To Date</label>
+                                            <input type="date" id="endDate" name="endDate" class="form-control form-control-sm form-rounded" Value="firstDayOfMonth" />
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label> Filter</label>
+                                            <input type="submit" value="=" class="btn btn btn-outline-success" style="color:black" />
+                                        </div>
+                                    </div>
 
                                 }
                             </div>
