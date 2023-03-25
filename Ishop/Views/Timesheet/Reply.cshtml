@@ -1,7 +1,7 @@
 ﻿@model IShop.Core.TT
 
 @{
-    ViewBag.Title = "New Timesheet";
+    ViewBag.Title = "Reply";
 }
 
 
@@ -18,6 +18,7 @@
     .form-rounded {
         border-radius: 1rem;
     }
+
     .form-rounded2 {
         border-radius: 1rem;
     }
@@ -91,7 +92,7 @@
 
                 <!-- /.widget-user-image -->
 
-                <h5 style="color:white"> <i class="fa fa-calendar"></i> New Timesheet : <small>@DateTime.Now.ToString("dddd dd -MMMM -yyyy")</small> </h5>
+                <h5 style="color:white"> <i class="fa fa-calendar"></i> Feedback Post  </h5>
 
 
             </div>
@@ -108,63 +109,65 @@
 
 
 
+                   <div class="card">
+                       <div class="card-body" style="background-color:#bababaa3">
+                           <div class="form-row">
+                               <div class="form-group col-md-3">
+                                   <label>@Html.LabelFor(model => model.CreatedOn)</label>
+                                   @foreach (var item in ViewBag.Data)
+                                   {
+                                       <input id="Ticket_id" name="Ticket_No" type="text" value="@item.CreatedOn" class="form-control " readonly />
+                                   }
+
+                               </div>
+                               <div class="form-group col-md-3">
+                                   <label>@Html.LabelFor(model => model.Employee)</label>
+                                   @foreach (var item in ViewBag.Data)
+                                   {
+                                       <input id="Ticket_id" name="Ticket_No" type="text" value="@item.Employee" class="form-control " readonly />
+                                   }
+                               </div>
+                               <div class="form-group col-md-1">
+                                   <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Id)</label>
+                                   @foreach (var item in ViewBag.Data)
+                                   {
+                                       <input id="Id" name="Id" type="text" value="@item.Id" class="form-control " readonly />
+                                   }
+                               </div>
+                               <div class="form-group col-md-4">
+                                   <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Project)</label>
+                                   @foreach (var item in ViewBag.Data)
+                                   {
+                                       <input id="Ticket_id" name="Ticket_No" type="text" value="@item.Project" class="form-control " readonly />
+                                   }
+                               </div>
+                           </div>
+                           <p style="font-family:Calibri">
+                               <i class="fa fa-books text-navy"></i>
+                               Duties Done
+                           </p>
+                           <div class="form-row">
+
+                               @foreach (var item in ViewBag.Data)
+                               {
+                                   string D = item.Description;
+
+                                   <textarea class="form-control" rows="4" readonly>@D</textarea>
+                               }
+
+                           </div>
+                       </div>
+                   </div>
+
+
+                   <p>Reply</p>
                     <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label>@Html.LabelFor(model => model.CreatedOn)</label>
-                            @Html.EditorFor(model => model.CreatedOn, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-
-                               @Value = DateTime.Now,
-                               @Readonly = true
 
 
-
-
-                           }
-                       })
-
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>@Html.LabelFor(model => model.Employee)</label>
-                            @Html.EditorFor(model => model.Employee, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-                               @Placeholder = "Client Name",
-                               @Value = User.Identity.Name,
-                                    @Readonly = true
-                           }
-                       })
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Project)</label>
-                            @Html.EditorFor(model => model.Project, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-                               @Placeholder = "Project working on",
-                               @required = "required",
-
-                           }
-                       })
-                        </div>
-                    </div>
-                    <p style="font-family:Calibri">
-                        <i class="fa fa-books text-navy"></i>
-                        Duties Done
-                    </p>
-                    <div class="form-row">
-
-
-                        @Html.TextAreaFor(model => model.Description, 5, 100, htmlAttributes: new
+                        @Html.TextAreaFor(model => model.feedback, 5, 100, htmlAttributes: new
                    {
                        style = "width: 100%; max-width:100%;",
-                       @placeholder = "Duties Done",
+                       @placeholder = "Timesheet Reply",
                        @autofocus = ""
                        ,
                        @required = "required",
@@ -174,16 +177,13 @@
                     </div>
 
 
-
-
-
-
                     <div style="color:red">@Html.ValidationMessageFor(x => x.Description)</div>
                     <div style="color: red">@Html.ValidationMessageFor(x => x.Project)</div>
 
 
                     <hr />
 
+                   
                     <table>
                         <thead>
                             <tr>
@@ -194,7 +194,7 @@
                         <tbody>
                         <td style="text-align:left">
 
-                            <input type="submit" value="Post Today''s TimeSheet" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to post this TImesheet?')" />
+                            <input type="submit" value="Post Reply" class="btn btn btn-success" style="color:white" onclick="return confirm('Post Reply?')" />
 
 
                             <script>

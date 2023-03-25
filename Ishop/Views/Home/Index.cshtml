@@ -141,61 +141,70 @@
 
                                         <!-- /.info-box -->
                                     </div>
+
+                                    <div style ="text-align:right">
+                                        <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <a href="@Url.Action("Index", "Timesheet")" style="text-align:right">
+                                            Calender Mode View
+                                        </a>
+</div>
                                 }
                             </div>
-                                <div class="row">
-                                    @foreach (var item in ViewBag.F2)
-                                    {
-                                        <div class="col-md-4 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span class="info-box-icon bg-success"><i class="fa fa-hourglass"></i></span>
+                            <div class="row">
+                                @foreach (var item in ViewBag.F2)
+                                {
+                                    <div class="col-md-4 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-success"><i class="fa fa-hourglass"></i></span>
 
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Total leaves Per year</span>
-                                                    <span class="info-box-number">@item.Total_leaves_per_year leaves</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Total leaves Per year</span>
+                                                <span class="info-box-number">@item.Total_leaves_per_year leaves</span>
                                             </div>
-                                            <!-- /.info-box -->
+                                            <!-- /.info-box-content -->
                                         </div>
-                                        <div class="col-md-4 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
 
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Requested leaves</span>
-                                                    <span class="info-box-number">@item.Requested_leaves leaves</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Requested leaves</span>
+                                                <span class="info-box-number">@item.Requested_leaves leaves</span>
                                             </div>
-                                            <!-- /.info-box -->
+                                            <!-- /.info-box-content -->
                                         </div>
-                                        <div class="col-md-4 col-sm-6 col-12">
-                                            <div class="info-box">
-                                                <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
 
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Remaining leaves</span>
-                                                    <span class="info-box-number">@item.Remaining_leaves leaves</span>
-                                                </div>
-                                                <!-- /.info-box-content -->
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Remaining leaves</span>
+                                                <span class="info-box-number">@item.Remaining_leaves leaves</span>
                                             </div>
-                                            <!-- /.info-box -->
+                                            <!-- /.info-box-content -->
                                         </div>
-                                    }
+                                        <!-- /.info-box -->
+                                    </div>
+                                }
 
-                                </div>
                             </div>
-
-
-
-
-
-
-                            <div class="card-footer p-0" style="background-color:whitesmoke">
-                            </div>
-
                         </div>
+
+
+
+
+
+
+                        <div class="card-footer p-0" style="background-color:whitesmoke">
+                        </div>
+
+                    </div>
                 </div>
 
 
@@ -235,7 +244,7 @@
                                             Requested Advance Payments <span class="float-right badge bg-warning"><i class="fa fa-spinner"></i></span>
                                         </a>
                                     </li>
-}
+                                }
 
                             </ul>
 
@@ -251,73 +260,11 @@
             </div>
         }
 
-
-        
-
-                            
-                          
-
-
-
-
-
-
-
-
-
-                            <div class="card-footer p-0" style="background-color:whitesmoke">
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-            }
+        <div class="card-footer p-0" style="background-color:whitesmoke">
         </div>
 
+
+    </div>
+</div>
 
      
-    
-    @if (this.User.IsInRole("Employee"))
-    {
-        <div class="row">
-            <div class="col-xl-5" style="border-radius: 24px;">
-                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                    <div class="card-header" style="background-color: navy; color: white "><i class="fa fa-clock"></i>  Operations </div>
-                    <div class="card-body text-left">
-
-                        <ul class="nav flex-column">
-
-                           
-
-                            
-
-                            @if (this.User.IsInRole("Advance_Approvals"))
-                            {
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Advance")" class="nav-link">
-                                        Requested Advance Payments <span class="float-right badge bg-warning"><i class="fa fa-spinner"></i></span>
-                                    </a>
-                                </li>
-}
-                        </ul>
-
-
-                    </div>
-                    <!-- /.widget-user -->
-                </div>
-            </div>
-
-
-
-
-        </div>
-    }
-
-</div>

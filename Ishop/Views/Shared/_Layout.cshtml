@@ -104,21 +104,23 @@
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
                         <div style="text-align:center">
-                            <img src="~/Images/bell3.png" height="60" alt="User Avatar">
-                            <p> <i class="fa fa-user"></i> User: @User.Identity.Name</p>
+                            <img src="~/Images/bell3.png" height="30" alt="User Avatar">
+
                         </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
-                            <i class="fas fa-user-circle text-warning nav-icon"></i> My Profile
-                        </a>
-                        <div class="dropdown-divider"></div>
+                        <div style="text-align:center">
+                            ...</div>
+                            <div class="dropdown-divider"></div>
+                            <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
+                                <i class="fas fa-user-circle text-warning nav-icon"></i> My Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
 
-                        <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
-                            <i class="fa fa-user-lock text-primary nav-icon"></i> Change Password
-                        </a>
-                        <div class="dropdown-divider"></div>
+                            <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
+                                <i class="fa fa-user-lock text-primary nav-icon"></i> Change Password
+                            </a>
+                            <div class="dropdown-divider"></div>
 
-                        <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>
 
 
 </a>
@@ -278,15 +280,10 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
-                                        <i class="fa fa-calendar-day text-white nav-icon"></i>
-                                        <p style="color: white">My Timesheets -Calendar</p>
-                                    </a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a href="@Url.Action("list", "Timesheet")" class="nav-link">
-                                        <i class="fa fa-list text-white nav-icon"></i>
+                                        <i class="fa fa-bookmark text-white nav-icon"></i>
                                         <p style="color: white">My Timesheets -list</p>
                                     </a>
                                 </li>

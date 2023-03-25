@@ -53,13 +53,13 @@
 
 
 
-                <a style="font-family: Calibri"> Project Name</a>
+                <a style="font-family: Calibri"> Project</a>
                 @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Project Name" })
                 <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
 
-                @Html.ActionLink("Post Sheet ", "Create", "Timesheet", null, new { @class = "btn btn-sm btn-default btn" })
+              
 
 
             }
@@ -99,19 +99,16 @@
 
 
     <div class="table-responsive" style="min-height: 400px">
-        <table class="table table-bordered table-hover  table-condensed table-striped table-hover sortable">
+        <table class="table table-bordered table-hover text-nowrap table-condensed table-striped table-hover sortable">
 
 
-            <colgroup>
-                <col style="width: 20%;">
-                <col style="width: 20%;">
-                <col style="width: 60%;">
-            </colgroup>
+           
             <thead>
                 <tr style="color:white">
                     <th style="background-color: #001F3F; "> Issued On</th>
+                    <th style="background-color: #001F3F; "> Owner</th>
                     <th style="background-color: #001F3F; "> Project/Client</th>
-                    <th style="background-color: #001F3F; "> Description</th>
+
                     <th style="background-color: #001F3F; ">Actions </th>
 
 
@@ -123,9 +120,9 @@
                 {
                     <tr data-widget="expandable-table" aria-expanded="false">
 
-                        <td style="background-color:white" href="javascript:void(0);" class="anchorDetail" data-id="@item.Id">@item.CreatedOn.ToString("dd-MMM-yyyy") - <small><i class="fa fa-user-circle text-primary"></i> @item.Employee</small></td>
+                        <td style="background-color:white" href="javascript:void(0);" class="anchorDetail" data-id="@item.Id">@item.CreatedOn.ToString("dd-MMM-yyyy") </td>
+                        <td style="background-color:white">  @item.Employee</td>
                         <td style="background-color:white">  @item.Project</td>
-                        <td style="background-color:whitesmoke"><i>@item.Description</i> </td>
 
                         <td style="background-color:ghostwhite">
 
@@ -184,7 +181,7 @@
 
         @foreach (var item in Model)
         {
-            <div id='Details' class='modal'>
+            <div id='Details' class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div id='myModalContent'></div>
@@ -200,7 +197,7 @@
             <script src="~/Scripts/bootstrap.js"></script>
             <script src="~/Scripts/bootstrap.min.js"></script>
             <script>
-                var TeamDetailPostBackURL = '/Tickets/Details';
+                var TeamDetailPostBackURL = '/Timesheet/Details';
                 $(function () {
                     $(".anchorDetail").click(function () {
                         var $buttonClicked = $(this);

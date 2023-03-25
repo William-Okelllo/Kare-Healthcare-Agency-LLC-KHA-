@@ -11,6 +11,8 @@ using Ishop.Infa;
 using PagedList;
 using Ishop.Models;
 using Syncfusion.DocIO.DLS;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Ishop.Controllers
 {
@@ -96,6 +98,12 @@ namespace Ishop.Controllers
         // GET: Timesheet/Details/5
         public ActionResult Details(int id)
         {
+
+            TTresponses dbb = new TTresponses();
+            var data10 = dbb.Timesheet_replies.Where(c => c.Sheetid == id).ToList();
+            ViewBag.F = data10;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -127,6 +135,53 @@ namespace Ishop.Controllers
                 TempData["msg"] = "Timesheet posted Successfully";
                 return RedirectToAction("list");
             }
+
+            return View(tT);
+        }
+
+        public ActionResult Reply(int? id)
+        {
+
+            TT_Context bd= new TT_Context();
+            var Data = bd.tt.ToList().Where(c => c.Id==id );
+            ViewBag.Data = Data;
+
+
+
+            return View();
+        }
+
+        // POST: Timesheet/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reply([Bind(Include = "Id,feedback")] TT tT)
+        {
+           
+                try
+                {
+                    string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                    SqlConnection sqlCon = new SqlConnection(strcon);
+                    SqlCommand sqlcmnd = new SqlCommand("sp_sheet_reply", sqlCon);
+                    sqlcmnd.CommandType = CommandType.StoredProcedure;
+                    sqlcmnd.Parameters.AddWithValue("@Id", tT.Id);
+                    sqlcmnd.Parameters.AddWithValue("@feedback", tT.feedback);
+                    sqlcmnd.Parameters.AddWithValue("@User", User.Identity.Name);
+                    sqlCon.Open();
+                    sqlcmnd.ExecuteNonQuery();
+                    sqlCon.Close();
+
+                }
+                catch
+                {
+
+                }
+
+
+                TempData["msg"] = "Reply posted Successfully";
+                return RedirectToAction("Timesheet");
+            
 
             return View(tT);
         }

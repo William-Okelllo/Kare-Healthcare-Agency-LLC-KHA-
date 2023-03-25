@@ -801,6 +801,24 @@
     <Compile Include="Models\Tie_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Timesheet_replies.cs">
+      <DependentUpon>TTresponse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TTresponse.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TTresponse.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TTresponse.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TTresponse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TTresponse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TTresponse.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\us.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2383,6 +2401,16 @@
       <DependentUpon>tableOffice.edmx</DependentUpon>
       <LastGenOutput>tableOffice.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\TTresponse.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TTresponse.edmx</DependentUpon>
+      <LastGenOutput>TTresponse.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\TTresponse.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TTresponse.edmx</DependentUpon>
+      <LastGenOutput>TTresponse.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\us.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>us.edmx</DependentUpon>
@@ -2744,6 +2772,13 @@
     </EntityDeploy>
     <Content Include="Models\spdash11.edmx.diagram">
       <DependentUpon>spdash11.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\TTresponse.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TTresponse.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TTresponse.edmx.diagram">
+      <DependentUpon>TTresponse.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -3527,6 +3562,7 @@
     <Content Include="Views\Advance\Print_Form.cshtml" />
     <Content Include="Views\Timesheet\Timesheet.cshtml" />
     <Content Include="Views\Timesheet\list.cshtml" />
+    <Content Include="Views\Timesheet\Reply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

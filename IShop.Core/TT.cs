@@ -27,7 +27,8 @@ namespace IShop.Core
         [Display(Name = "Project ")]
         public String Project { get; set; }
 
-
+        [Display(Name = "feedback ")]
+        public String feedback { get; set; }
 
     }
 }
