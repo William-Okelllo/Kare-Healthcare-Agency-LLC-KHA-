@@ -120,10 +120,10 @@
                 {
                     <tr data-widget="expandable-table" aria-expanded="false">
 
-                        <td style="background-color:white" href="javascript:void(0);" class="anchorDetail" data-id="@item.Id">@item.CreatedOn.ToString("dd-MMM-yyyy") </td>
-                        <td style="background-color:white">  @item.Employee</td>
-                        <td style="background-color:white">  @item.Project</td>
-
+                        <td style="background-color:white"><i class="fa fa-calendar-day text-warning"></i> @item.CreatedOn.ToString("dd-MMM-yyyy") </td>
+                        <td style="background-color:white"><i class="fa fa-user-circle text-primary"></i>  @item.Employee</td>
+                        <td style="background-color:white"><i class="fa fa-layer-group text-primary"></i>  @item.Project</td>
+                       
                         <td style="background-color:ghostwhite">
 
 
@@ -149,12 +149,15 @@
                             }
 
                             else
-                {
-                        <div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <small>...</small>
-                }
+                            {
+
+                                <small>
+                                    <a href="javascript:void(0);" class="anchorDetail" data-id="@item.Id">
+                                        <i class="fa fa-eye text-primary"></i> View
+                                    </a>
+                                </small>
+
+                            }
 
 
 
@@ -167,7 +170,7 @@
 
 
 
-                            </td>
+                        </td>
 
 
 
@@ -177,6 +180,20 @@
         </table>
 
 
+        <script>
+            $(document).ready(function () {
+                var ids = {};
+                $('Project').each(function () {
+                    var id = $(this).find('td:first').text();
+                    if (ids[id]) {
+                        ids[id] += 1;
+                        $(this).addClass('duplicate-' + ids[id]);
+                    } else {
+                        ids[id] = 1;
+                    }
+                });
+            });
+        </script>
 
 
         @foreach (var item in Model)

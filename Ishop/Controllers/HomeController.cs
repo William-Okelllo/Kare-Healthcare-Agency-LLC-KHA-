@@ -17,7 +17,7 @@ namespace Ishop.Controllers
     {
         public ActionResult Index()
         {
-            HR2Entities ap =new HR2Entities();
+            Sp_timesheetDA ap =new Sp_timesheetDA();
             var Alp= ap.sp_TimesheetDash(User.Identity.Name).ToList();
             ViewBag.Alp = Alp;
 

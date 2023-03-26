@@ -15,10 +15,10 @@ namespace Ishop.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class HR2Entities : DbContext
+    public partial class Sp_timesheetDA : DbContext
     {
-        public HR2Entities()
-            : base("name=HR2Entities")
+        public Sp_timesheetDA()
+            : base("name=Sp_timesheetDA")
         {
         }
     

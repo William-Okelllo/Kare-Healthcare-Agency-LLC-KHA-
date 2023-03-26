@@ -660,21 +660,6 @@
     <Compile Include="Models\Shift_List_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\spdash11.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>spdash11.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\spdash11.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>spdash11.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\spdash11.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>spdash11.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Sp_Agency_Profile_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
@@ -771,8 +756,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>sp_time.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sp_timesheetD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sp_timesheetD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sp_timesheetD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sp_timesheetD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sp_timesheetD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sp_timesheetD.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_TimesheetDash_Result.cs">
-      <DependentUpon>spdash11.tt</DependentUpon>
+      <DependentUpon>Sp_timesheetD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_timesheet_report_Result.cs">
       <DependentUpon>All_procs.tt</DependentUpon>
@@ -2341,16 +2341,6 @@
       <DependentUpon>R.edmx</DependentUpon>
       <LastGenOutput>R.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\spdash11.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>spdash11.edmx</DependentUpon>
-      <LastGenOutput>spdash11.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\spdash11.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>spdash11.edmx</DependentUpon>
-      <LastGenOutput>spdash11.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\sp_e_prog.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>sp_e_prog.edmx</DependentUpon>
@@ -2390,6 +2380,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>sp_time.edmx</DependentUpon>
       <LastGenOutput>sp_time.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Sp_timesheetD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Sp_timesheetD.edmx</DependentUpon>
+      <LastGenOutput>Sp_timesheetD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Sp_timesheetD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Sp_timesheetD.edmx</DependentUpon>
+      <LastGenOutput>Sp_timesheetD.cs</LastGenOutput>
     </Content>
     <Content Include="Models\tableOffice.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2766,19 +2766,19 @@
     <Content Include="Models\All_procs.edmx.diagram">
       <DependentUpon>All_procs.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\spdash11.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>spdash11.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\spdash11.edmx.diagram">
-      <DependentUpon>spdash11.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\TTresponse.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TTresponse.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\TTresponse.edmx.diagram">
       <DependentUpon>TTresponse.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Sp_timesheetD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Sp_timesheetD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Sp_timesheetD.edmx.diagram">
+      <DependentUpon>Sp_timesheetD.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />

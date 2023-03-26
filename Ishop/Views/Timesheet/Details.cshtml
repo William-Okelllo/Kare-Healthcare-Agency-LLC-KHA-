@@ -78,44 +78,48 @@
         </div>
 
         <hr /> <div class="table-responsive" style="border-radius: 10px; ">
-            <table class="table table-bordered table-hover  " style="border-radius: 10px; ">
+    <table class="table table-bordered table-hover  text-nowrap " style="border-radius: 10px; ">
 
-                <thead style="border-radius: 10px; ">
-                    <tr style="color:black">
-                        <th style="background-color: whitesmoke; "> <small>Date</small></th>
+        <thead style="border-radius: 10px; ">
+            <tr style="color:black">
+                <th style="background-color: whitesmoke; "> <small>Date</small></th>
 
-                        <th style="background-color: whitesmoke; "><small>User</small> </th>
-                        <th style="background-color: whitesmoke; "><small>feedback</small> </th>
-
-
-
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in ViewBag.F)
-                    {
-                        <tr data-widget="expandable-table" aria-expanded="false">
-
-                            <td style="background-color:white"><small> @item.CreatedOn</small></td>
-                            <td style="background-color:white"> <small><i class="fa fa-user-check"></i> @item.staff</small></td>
-                            <td style="background-color:white"> <small><i class="fa fa-spinner"></i> @item.feedback</small></td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                <th style="background-color: whitesmoke; "><small>User</small> </th>
+                <th style="background-color: whitesmoke; "><small>feedback</small> </th>
 
 
 
 
-            @if (this.User.IsInRole("DashBoard"))
-            {<div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <a href="@Url.Action("Reply", "Timesheet", new { id = Model.Id})">
-                    <i class="fa fa-comment text-primary"></i> Post feedback
-                </a>}
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.F)
+            {
+                <tr data-widget="expandable-table" aria-expanded="false">
+
+                    <td style="background-color:white"><small> @item.CreatedOn</small></td>
+                    <td style="background-color:white"> <small><i class="fa fa-user-check"></i> @item.staff</small></td>
+                    <td style="background-color:white"> <small><i class="fa fa-spinner"></i> @item.feedback</small></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+    @if (this.User.IsInRole("DashBoard"))
+    {<div class="spinner-grow spinner-grow-sm text-primary" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
+        <a href="@Url.Action("Reply", "Timesheet", new { id = Model.Id})">
+            <i class="fa fa-comment text-primary"></i> Post feedback
+        </a>}
+
+               <div style="text-align:right">
+                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+               </div>
+</div>
     </div>
 

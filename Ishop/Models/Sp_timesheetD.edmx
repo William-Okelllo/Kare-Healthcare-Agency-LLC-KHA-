@@ -14,7 +14,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HR2Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="HR2Entities" annotation:LazyLoadingEnabled="true" >
+        <EntityContainer Name="Sp_timesheetDA" annotation:LazyLoadingEnabled="true" >
           <FunctionImport Name="sp_TimesheetDash" ReturnType="Collection(HR2Model1.sp_TimesheetDash_Result)">
             <Parameter Name="Employee" Mode="In" Type="String" />
           </FunctionImport>
@@ -30,7 +30,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HR2Model1StoreContainer" CdmEntityContainer="HR2Entities" >
+        <EntityContainerMapping StorageEntityContainer="HR2Model1StoreContainer" CdmEntityContainer="Sp_timesheetDA" >
           <FunctionImportMapping FunctionImportName="sp_TimesheetDash" FunctionName="HR2Model1.Store.sp_TimesheetDash">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HR2Model1.sp_TimesheetDash_Result">

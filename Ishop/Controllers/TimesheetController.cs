@@ -47,8 +47,11 @@ namespace Ishop.Controllers
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }
-        public ActionResult list(string searchBy, string search, int? page)
+        public ActionResult list(string searchBy, string search, int? page,TT tT)
         {
+            TTresponses dbb = new TTresponses();
+            var data10 = dbb.Timesheet_replies.Where(c => c.Sheetid==tT.Id).ToList();
+            ViewBag.F = data10;
 
             if (!(search == null))
             {
@@ -241,7 +244,8 @@ namespace Ishop.Controllers
             TT tT = db.tt.Find(id);
             db.tt.Remove(tT);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Timesheet deleted Successfully";
+            return RedirectToAction("list");
         }
 
         protected override void Dispose(bool disposing)
