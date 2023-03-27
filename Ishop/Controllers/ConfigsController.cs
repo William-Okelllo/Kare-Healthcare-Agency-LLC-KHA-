@@ -14,7 +14,7 @@ namespace Ishop.Controllers
 {
     public class ConfigsController : Controller
     {
-        private Configs_table db = new Configs_table();
+        private Config_x11 db = new Config_x11();
 
         // GET: Configs
         public ActionResult Index()
@@ -48,7 +48,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail")] Config config)
+        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Config config)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace Ishop.Controllers
                 //Modifying the AppKey from AppValue to AppValue1
                 webConfigApp.AppSettings.Settings["Email"].Value = config.Email;
                 webConfigApp.AppSettings.Settings["Password"].Value = config.Password;
-
+                webConfigApp.AppSettings.Settings["smtp"].Value = config.Smtp;
                 webConfigApp.AppSettings.Settings["SSRSReportsUrl"].Value = config.SSRSReportsUrl;
                 webConfigApp.AppSettings.Settings["Businesssmail"].Value = config.Business_mail;
                 
@@ -91,7 +91,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail")] Config config)
+        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Config config)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace Ishop.Controllers
                 //Modifying the AppKey from AppValue to AppValue1
                 webConfigApp.AppSettings.Settings["Email"].Value = config.Email;
                 webConfigApp.AppSettings.Settings["Password"].Value = config.Password;
-
+                webConfigApp.AppSettings.Settings["smtp"].Value = config.Smtp;
                 webConfigApp.AppSettings.Settings["SSRSReportsUrl"].Value = config.SSRSReportsUrl;
                 webConfigApp.AppSettings.Settings["Businesssmail"].Value = config.Business_mail;
 

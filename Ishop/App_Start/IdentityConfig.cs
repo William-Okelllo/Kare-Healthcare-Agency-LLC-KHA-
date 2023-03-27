@@ -45,8 +45,8 @@ namespace Ishop
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
-            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential (ConfigurationManager.AppSettings["Email"].ToString(),ConfigurationManager.AppSettings["Password"].ToString());
+            SmtpClient smtpClient = new SmtpClient(System.Configuration.ConfigurationManager.AppSettings["smtp"].ToString(), Convert.ToInt32(587));
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
             smtpClient.Credentials = credentials;
             smtpClient.EnableSsl = true;
             smtpClient.Send(msg);
@@ -70,7 +70,7 @@ namespace Ishop
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -111,7 +111,7 @@ namespace Ishop
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;

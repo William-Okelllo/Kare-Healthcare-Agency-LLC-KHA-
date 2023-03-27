@@ -228,8 +228,7 @@ namespace Ishop.Controllers
                         + "\n" + "   Employee Email Address :- " + model.Email
                         + "\n" + "   login password :- " + model.Password;
 
-                        SmtpServer oServer = new SmtpServer("smtp.gmail.com");
-
+                        SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
                         oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
                         oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
 

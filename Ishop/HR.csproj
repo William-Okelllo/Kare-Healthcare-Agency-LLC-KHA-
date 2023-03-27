@@ -459,22 +459,22 @@
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs">
-      <DependentUpon>Config_.tt</DependentUpon>
+      <DependentUpon>Config_x1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Config_.Context.cs">
+    <Compile Include="Models\Config_x1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Config_.Context.tt</DependentUpon>
+      <DependentUpon>Config_x1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Config_.cs">
+    <Compile Include="Models\Config_x1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Config_.tt</DependentUpon>
+      <DependentUpon>Config_x1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Config_.Designer.cs">
+    <Compile Include="Models\Config_x1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Config_.edmx</DependentUpon>
+      <DependentUpon>Config_x1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Dash1_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -2261,15 +2261,15 @@
       <DependentUpon>calt.edmx</DependentUpon>
       <LastGenOutput>calt.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Config_.Context.tt">
+    <Content Include="Models\Config_x1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Config_.edmx</DependentUpon>
-      <LastGenOutput>Config_.Context.cs</LastGenOutput>
+      <DependentUpon>Config_x1.edmx</DependentUpon>
+      <LastGenOutput>Config_x1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Config_.tt">
+    <Content Include="Models\Config_x1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Config_.edmx</DependentUpon>
-      <LastGenOutput>Config_.cs</LastGenOutput>
+      <DependentUpon>Config_x1.edmx</DependentUpon>
+      <LastGenOutput>Config_x1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Files_.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2656,13 +2656,6 @@
     <Content Include="Models\R.edmx.diagram">
       <DependentUpon>R.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\Config_.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Config_.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Config_.edmx.diagram">
-      <DependentUpon>Config_.edmx</DependentUpon>
-    </Content>
     <Content Include="Images\tst.json" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -2780,6 +2773,14 @@
     <Content Include="Models\Sp_timesheetD.edmx.diagram">
       <DependentUpon>Sp_timesheetD.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\Config_x1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Config_x1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Config_x1.edmx.diagram">
+      <DependentUpon>Config_x1.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

@@ -25,7 +25,7 @@ namespace Ishop.Controllers
 
         public ManageController()
         {
-           
+
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -40,9 +40,9 @@ namespace Ishop.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -143,7 +143,7 @@ namespace Ishop.Controllers
                 SqlConnection sqlCon = new SqlConnection(strcon);
                 SqlCommand sqlcmnd = new SqlCommand("AddPhone", sqlCon);
                 sqlcmnd.CommandType = CommandType.StoredProcedure;
-                sqlcmnd.Parameters.AddWithValue("@Phone",model.Number);
+                sqlcmnd.Parameters.AddWithValue("@Phone", model.Number);
                 sqlcmnd.Parameters.AddWithValue("@Email", model.Email);
                 sqlcmnd.Parameters.AddWithValue("@user", User.Identity.Name);
                 sqlCon.Open();
@@ -161,8 +161,7 @@ namespace Ishop.Controllers
                     "\n" + " Email Address   :-" + model.Email +
                 "\n" + " Phone Number   :-" + model.Number;
 
-                SmtpServer oServer = new SmtpServer("smtp.gmail.com");
-
+                SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
                 oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
                 oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
 
@@ -176,10 +175,10 @@ namespace Ishop.Controllers
             catch
             {
                 TempData["msg"] = "error occured in adding phone number  ";
-               
+
             }
 
-            return RedirectToAction("Acc_Profile","Accesses");
+            return RedirectToAction("Acc_Profile", "Accesses");
         }
 
         //
@@ -292,7 +291,7 @@ namespace Ishop.Controllers
                 }
                 try
                 {
-                    
+
 
                     SmtpMail oMail = new SmtpMail("TryIt");
                     oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
@@ -304,7 +303,7 @@ namespace Ishop.Controllers
                         "\n" + " Email Address   :-" + currentUser.Email +
                     "\n" + " New Password   :-" + model.NewPassword;
 
-                    SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+                    SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
 
                     oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
                     oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
@@ -417,7 +416,7 @@ namespace Ishop.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -468,6 +467,6 @@ namespace Ishop.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

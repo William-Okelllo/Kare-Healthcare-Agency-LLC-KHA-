@@ -13,10 +13,10 @@ namespace Ishop.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Configs_table : DbContext
+    public partial class Config_x11 : DbContext
     {
-        public Configs_table()
-            : base("name=Configs_table")
+        public Config_x11()
+            : base("name=Config_x11")
         {
         }
     

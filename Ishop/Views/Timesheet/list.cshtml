@@ -136,7 +136,18 @@
                                     <button type="button" class="btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-file-invoice"></i>  . Action
                                     </button>
+
+                                    
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+
+                                        <a href="javascript:void(0);" class="dropdown-item anchorDetail" data-id="@item.Id">
+                                           
+                                            <div class="spinner-grow spinner-grow-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div> View Details
+                                        </a>
+                                        <div class="divider"></div>
                                         <a href="@Url.Action("Edit", "Timesheet", new { id = item.Id })" class="dropdown-item">
                                             <i class="fa fa-layer-group text-warning"></i> Edit/Update Sheet
                                         </a>

@@ -19,5 +19,6 @@ namespace Ishop.Models
         public string Password { get; set; }
         public string SSRSReportsUrl { get; set; }
         public string Business_mail { get; set; }
+        public string Smtp { get; set; }
     }
 }

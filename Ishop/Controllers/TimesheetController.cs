@@ -13,6 +13,9 @@ using Ishop.Models;
 using Syncfusion.DocIO.DLS;
 using System.Configuration;
 using System.Data.SqlClient;
+using EASendMail;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace Ishop.Controllers
 {
@@ -135,6 +138,43 @@ namespace Ishop.Controllers
             {
                 db.tt.Add(tT);
                 db.SaveChanges();
+
+
+                try
+                {
+
+
+                    SmtpMail oMail = new SmtpMail("TryIt");
+                    oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(User.Identity.GetUserId());
+
+                    oMail.To = System.Configuration.ConfigurationManager.AppSettings["Businesssmail"].ToString();
+                    oMail.Subject = tT.Employee +" Timesheet posted";
+                    
+                    oMail.TextBody = "The following are the the timesheet details"
+                       
+                        +"\n" 
+                         + "   Client/Project  :- " + tT.Project
+                    + "\n" + "   Duities actioned  " + "\n"
+                    + "\n" + tT.Description  ;
+
+                    SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
+                    oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                    oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
+
+                    oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
+                    oServer.Port = 587;
+                    SmtpClient oSmtp = new SmtpClient();
+                    SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
+                }
+
+
+                catch
+                {
+                    TempData["msg"] = "error sending email notification";
+                    
+                }
                 TempData["msg"] = "Timesheet posted Successfully";
                 return RedirectToAction("list");
             }
@@ -159,7 +199,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Reply([Bind(Include = "Id,feedback")] TT tT)
+        public ActionResult Reply([Bind(Include = "Id,feedback,Project")] TT tT)
         {
            
                 try
@@ -175,14 +215,67 @@ namespace Ishop.Controllers
                     sqlcmnd.ExecuteNonQuery();
                     sqlCon.Close();
 
+
+
                 }
                 catch
                 {
 
                 }
+            try
+            {
+                string Employee_Email = null;
+
+                string constr = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                using (SqlConnection conn = new SqlConnection(constr))
+                {
+
+                    using (SqlCommand cmd2 = conn.CreateCommand())
+                    {
+                        cmd2.Connection = conn;
+                        cmd2.CommandType = System.Data.CommandType.StoredProcedure;
+                        conn.Open();
+                        cmd2.CommandText = "Getmail_TT";
+                        cmd2.Parameters.Add("@id", SqlDbType.Int).Value = tT.Id;
+                        Employee_Email = (string)cmd2.ExecuteScalar();
+
+                        conn.Close();
 
 
-                TempData["msg"] = "Reply posted Successfully";
+                    }
+
+                }
+                SmtpMail oMail = new SmtpMail("TryIt");
+                oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+
+                oMail.To = Employee_Email;
+                oMail.Subject =  " Timesheet feedback posted";
+
+                oMail.TextBody = "feedback posted on project/Client "+ tT.Project
+
+                    + "\n"
+                     
+                + "\n" + "   Feedback  " + "\n"
+                + "\n" + tT.feedback;
+
+                SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
+                oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
+
+                oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
+                oServer.Port = 587;
+                SmtpClient oSmtp = new SmtpClient();
+                SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
+            }
+            catch
+            {
+
+            }
+
+
+            TempData["msg"] = "Reply posted Successfully";
                 return RedirectToAction("Timesheet");
             
 
