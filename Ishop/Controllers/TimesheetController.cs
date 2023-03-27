@@ -275,7 +275,7 @@ namespace Ishop.Controllers
             }
 
 
-            TempData["msg"] = "Reply posted Successfully";
+            TempData["msg"] = "Reply posted Successfully.";
                 return RedirectToAction("Timesheet");
             
 
