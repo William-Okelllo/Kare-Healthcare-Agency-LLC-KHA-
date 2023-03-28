@@ -400,6 +400,7 @@
     <Compile Include="Controllers\leavesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -623,6 +624,24 @@
     </Compile>
     <Compile Include="Models\Office.cs">
       <DependentUpon>tableOffice.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Project.cs">
+      <DependentUpon>Projects_table.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Projects_table.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Projects_table.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Projects_table.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Projects_table.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Projects_table.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Projects_table.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PushEmp_Result.cs">
       <DependentUpon>All_procs.tt</DependentUpon>
@@ -2331,6 +2350,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Projects_table.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Projects_table.edmx</DependentUpon>
+      <LastGenOutput>Projects_table.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Projects_table.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Projects_table.edmx</DependentUpon>
+      <LastGenOutput>Projects_table.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\R.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>R.edmx</DependentUpon>
@@ -2779,6 +2808,13 @@
     </EntityDeploy>
     <Content Include="Models\Config_x1.edmx.diagram">
       <DependentUpon>Config_x1.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Projects_table.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Projects_table.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Projects_table.edmx.diagram">
+      <DependentUpon>Projects_table.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
@@ -3564,6 +3600,11 @@
     <Content Include="Views\Timesheet\Timesheet.cshtml" />
     <Content Include="Views\Timesheet\list.cshtml" />
     <Content Include="Views\Timesheet\Reply.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

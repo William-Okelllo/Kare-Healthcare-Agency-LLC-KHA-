@@ -124,6 +124,12 @@ namespace Ishop.Controllers
         // GET: Timesheet/Create
         public ActionResult Create()
         {
+            Projects_table1 dbb = new Projects_table1();
+            var categories = dbb.Projects.ToList();
+            ViewBag.Categories = new SelectList(categories, "Project1", "Project1");
+
+
+
             return View();
         }
 
@@ -285,6 +291,11 @@ namespace Ishop.Controllers
         // GET: Timesheet/Edit/5
         public ActionResult Edit(int? id)
         {
+            Projects_table1 dbb = new Projects_table1();
+            var categories = dbb.Projects.ToList();
+            ViewBag.Categories = new SelectList(categories, "Project1", "Project1");
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
