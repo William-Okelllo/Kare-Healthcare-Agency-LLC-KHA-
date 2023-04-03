@@ -11,13 +11,12 @@ namespace Ishop.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Project
     {
         public int id { get; set; }
-        [Display(Name = "Project/Client Name")]
         public string Project1 { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string Staff { get; set; }
     }
 }

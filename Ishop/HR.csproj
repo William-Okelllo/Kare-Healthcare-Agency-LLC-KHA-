@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -626,7 +627,7 @@
       <DependentUpon>tableOffice.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
-      <DependentUpon>Projects_table.tt</DependentUpon>
+      <DependentUpon>sp_project_t.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Projects_table.Context.cs">
       <AutoGen>True</AutoGen>
@@ -759,6 +760,21 @@
     </Compile>
     <Compile Include="Models\sp_invoices_Result.cs">
       <DependentUpon>All_procs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_project_t.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_project_t.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_project_t.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_project_t.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_project_t.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_project_t.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_time.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2400,6 +2416,16 @@
       <DependentUpon>sp_Gett.edmx</DependentUpon>
       <LastGenOutput>sp_Gett.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\sp_project_t.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_project_t.edmx</DependentUpon>
+      <LastGenOutput>sp_project_t.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_project_t.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_project_t.edmx</DependentUpon>
+      <LastGenOutput>sp_project_t.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\sp_time.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>sp_time.edmx</DependentUpon>
@@ -2815,6 +2841,13 @@
     </EntityDeploy>
     <Content Include="Models\Projects_table.edmx.diagram">
       <DependentUpon>Projects_table.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\sp_project_t.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sp_project_t.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sp_project_t.edmx.diagram">
+      <DependentUpon>sp_project_t.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
@@ -3672,10 +3705,13 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
     <Error Condition="!Exists('..\packages\OctoPack.3.6.5\build\OctoPack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OctoPack.3.6.5\build\OctoPack.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Import Project="..\packages\OctoPack.3.6.5\build\OctoPack.targets" Condition="Exists('..\packages\OctoPack.3.6.5\build\OctoPack.targets')" />
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.0.3\build\Microsoft.TypeScript.MSBuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

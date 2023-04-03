@@ -13,7 +13,7 @@ namespace Ishop.Controllers
 {
     public class ProjectsController : Controller
     {
-        private Projects_table1 db = new Projects_table1();
+        private sp_project_ta db = new sp_project_ta();
 
         // GET: Projects
         public ActionResult Index(string searchBy, string search, int? page)
@@ -22,12 +22,12 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.Projects.OrderByDescending(p => p.id).Where(c => c.Project1.StartsWith(search) || c.Project1 == search).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.Projects.OrderByDescending(p => p.id).Where(c => c.Project1.StartsWith(search) || c.Project1 == search).ToList().ToPagedList(page ?? 1, 12));
 
             }
             else
             {
-                return View(db.Projects.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.Projects.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 12));
 
 
             }
@@ -59,12 +59,13 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Project1,CreatedOn")] Project project)
+        public ActionResult Create([Bind(Include = "id,Project1,CreatedOn,Staff")] Project project)
         {
             if (ModelState.IsValid)
             {
                 db.Projects.Add(project);
                 db.SaveChanges();
+                TempData["msg"] = "Client/Project added  Successfully";
                 return RedirectToAction("Index");
             }
 
