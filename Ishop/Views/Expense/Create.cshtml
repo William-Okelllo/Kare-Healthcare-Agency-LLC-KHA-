@@ -99,73 +99,92 @@
 
 
 
-                    <div class="form-row">
-                        <div class="form-group col-md-3" style="display:none">
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
-                            @Html.EditorFor(model => model.CreatedOn, new
+                <div class="form-row">
+                    <div class="form-group col-md-3" style="display:none">
+                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
                        {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
+                           @class = "form-control ",
 
-                               @Value = DateTime.Now,
-                               @Readonly = true
+                           @Value = DateTime.Now,
+                           @Readonly = true
 
 
 
 
-                           }
-                       })
-
-
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label><i class="fa fa-cubes text-orange"></i> @Html.LabelFor(model => model.Item)</label>
-
-                            @Html.DropDownList("Item", ViewBag.Categories as SelectList, "-- Select item --",
-                           new { @class = "form-control form-control", @required = "required" })
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label> <i class="fa fa-globe text-orange"></i> @Html.LabelFor(model => model.Mode)</label>
-                            @{
-                                List<SelectListItem> q = new List<SelectListItem>();
-                                q.Add(new SelectListItem
-                                {
-                                    Text = "Cash Payment",
-                                    Value = "Cash Payment",
-                                });
-                                q.Add(new SelectListItem
-                                {
-                                    Text = "Mpesa Payment",
-                                    Value = "Mpesa Payment",
-                                });
-                                q.Add(new SelectListItem
-                                {
-                                    Text = "Credit Card Payment",
-                                    Value = "Credit Card Payment",
-                                });
-
-
-                            }@Html.DropDownListFor(model => model.Mode, q, "---Payment Mode---", new { @class = "form-control form-control", @required = "required", })
-                        </div>
-
-
-                        <div class="form-group col-md-3">
-                            <label><i class="fa fa-gavel text-orange"></i>   @Html.LabelFor(model => model.Transaction_cost)</label>
-                            @Html.EditorFor(model => model.Transaction_cost, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-                               @Placeholder = "0.00/=",
-                               @Type = "Number",
-                               @Value = 0,
-                           }
-                       })
-                        </div>
+                       }
+                   })
 
 
                     </div>
+                    <div class="form-group col-md-3" style="display:none">
+                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.staff)</label>
+                        @Html.EditorFor(model => model.staff, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+
+                           @Value =User.Identity.Name,
+                           @Readonly = true
+
+
+
+
+                       }
+                   })
+
+
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label><i class="fa fa-cubes text-orange"></i> @Html.LabelFor(model => model.Item)</label>
+
+                        @Html.DropDownList("Item", ViewBag.Categories as SelectList, "-- Select item --",
+                       new { @class = "form-control form-control", @required = "required" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label> <i class="fa fa-globe text-orange"></i> @Html.LabelFor(model => model.Mode)</label>
+                        @{
+                            List<SelectListItem> q = new List<SelectListItem>();
+                            q.Add(new SelectListItem
+                            {
+                                Text = "Cash Payment",
+                                Value = "Cash Payment",
+                            });
+                            q.Add(new SelectListItem
+                            {
+                                Text = "Mpesa Payment",
+                                Value = "Mpesa Payment",
+                            });
+                            q.Add(new SelectListItem
+                            {
+                                Text = "Credit Card Payment",
+                                Value = "Credit Card Payment",
+                            });
+
+
+                        }@Html.DropDownListFor(model => model.Mode, q, "---Payment Mode---", new { @class = "form-control form-control", @required = "required", })
+                    </div>
+
+
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-gavel text-orange"></i>   @Html.LabelFor(model => model.Transaction_cost)</label>
+                        @Html.EditorFor(model => model.Transaction_cost, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+                           @Placeholder = "0.00/=",
+                           @Type = "Number",
+                           @Value = 0,
+                       }
+                   })
+                    </div>
+
+
+                </div>
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label><i class="fa fa-money-bill text-orange"></i>  @Html.LabelFor(model => model.Fuliza)</label>

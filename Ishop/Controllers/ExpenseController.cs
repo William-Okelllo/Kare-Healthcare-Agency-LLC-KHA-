@@ -22,19 +22,18 @@ namespace Ishop.Controllers
         // GET: Expense
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            
-            sp_expensess l9 = new sp_expensess();
-            var boo9 = l9.sp_dash().ToList();
+            sp_allprocs l9 = new sp_allprocs();
+            var boo9 = l9.sp_dash(User.Identity.Name).ToList();
             ViewBag.l9 = boo9;
 
             if (!(search == null))
             {
-                return View(db.expenses.OrderByDescending(p => p.Id).Where(c => c.Additional_Notes == search).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.expenses.OrderByDescending(p => p.Id).Where(c => c.Item.StartsWith(search) || c.Item == search && c.staff==User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
             }
             else
             {
-                return View(db.expenses.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.expenses.OrderByDescending(p => p.Id).Where(c=> c.staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
 
             }
@@ -70,7 +69,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Amount,Fuliza,Transaction_cost,Mode,item,Additional_Notes,Total")] Expense expense)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Amount,Fuliza,Transaction_cost,Mode,item,Additional_Notes,Total,staff")] Expense expense)
         {
             if (ModelState.IsValid)
             {

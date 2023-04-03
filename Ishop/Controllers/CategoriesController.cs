@@ -21,12 +21,12 @@ namespace Ishop.Models
 
             if (!(search == null))
             {
-                return View(db.Categories.OrderByDescending(p => p.id).Where(c => c.item.StartsWith(search) || c.item == search).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.Categories.OrderByDescending(p => p.id).Where(c => c.item.StartsWith(search) || c.item == search).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else
             {
-                return View(db.Categories.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.Categories.OrderByDescending(p => p.id).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
@@ -52,7 +52,11 @@ namespace Ishop.Models
         {
             return View();
         }
-
+        public ActionResult CheckValueExists(string Item)
+        {
+            bool exists = db.Categories.Any(c => c.item == Item);
+            return Json(exists, JsonRequestBehavior.AllowGet);
+        }
         // POST: Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,6 +68,7 @@ namespace Ishop.Models
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
+                TempData["msg"] = "Item added successfully ";
                 return RedirectToAction("Index");
             }
 

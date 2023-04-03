@@ -149,6 +149,31 @@
 
         </table>
 
+        @if (Model.Count() == 0)
+        {
+            <div style="text-align:center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"> <img src="~/Images/logo77.png" height="50" /> </span>
+
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-description">
+                                <i class="fa fa-calendar text-white nav-icon"></i>   No records Found
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        }
+
 
         <style>
             .ul.pagination {

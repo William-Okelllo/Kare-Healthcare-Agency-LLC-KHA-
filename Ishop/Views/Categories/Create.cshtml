@@ -4,45 +4,93 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Category</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-8 col-8">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #001F3F;color:white">
+                <i class="fa fa-paper-plane text-white nav-icon"></i> Add Item
             </div>
-        </div>
+            <div class="card-body">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.item, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.item, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.item, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+
+                           @Value = DateTime.Now,
+                           @Readonly = true
+
+                       }
+                   })
+
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label>
+                            <i class="fa fa-layer-group text-warning"></i> @Html.LabelFor(model => model.item)
+                        </label>
+                        @Html.TextBoxFor(model => model.item, new { @class = "form-control", placeholder = "item" })
+                        @Html.ValidationMessageFor(model => model.item)
+
+                        <div id="errorMessage" style="display:none;color:red">
+                            <a href="#" style="color:red">
+                                <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>  Item already exist
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                    <script>
+$(document).ready(function () {
+    $("#item").keyup(function () {
+        var item = $(this).val();
+        $.ajax({
+            url: "@Url.Action("CheckValueExists", "Categories")",
+            data: { item: item },
+            success: function (data) {
+                if (data) {
+                    $("#errorMessage").show();
+                    $("#myButton").hide();
+                } else {
+                    $("#errorMessage").hide();
+                    $("#myButton").show();
+                }
+            }
+        });
+    });
+});
+                    </script>
+                </div>
+
+
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add Item "  id="myButton" class="btn btn-warning" />
+                            || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </div>
+
+                }
+
+

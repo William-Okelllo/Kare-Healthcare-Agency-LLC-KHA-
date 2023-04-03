@@ -38,8 +38,10 @@ namespace IShop.Core
         [Display(Name = "Payment Mode")]
         public string Mode { get; set; }
 
+        public string staff { get; set; }
 
-        [Required]
+
+       
         [Display(Name = "Notes")]
         public string Additional_Notes { get; set; }
 

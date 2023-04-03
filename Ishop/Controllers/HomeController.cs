@@ -23,8 +23,8 @@ namespace Ishop.Controllers
             string Current = User.Identity.Name;
 
 
-            sp_expensess l9 = new sp_expensess();
-            var boo9 = l9.sp_dash().ToList();
+            sp_allprocs l9 = new sp_allprocs();
+            var boo9 = l9.sp_dash(User.Identity.Name).ToList();
             ViewBag.l9 = boo9;
 
 

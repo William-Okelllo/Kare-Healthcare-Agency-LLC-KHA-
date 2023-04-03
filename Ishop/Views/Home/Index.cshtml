@@ -33,29 +33,26 @@
     <div class="card-body">
        
 
-        @if (this.User.IsInRole("Admin"))
-        {
             <div class="row">
                 <div class="col-xl-4">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
                         <div class="card-header" style="background-color: black; color: white ">  <img src="~/Images/logo.png" height="50" alt="User Avatar"> : Welcome @User.Identity.Name </div>
                         <div class="card-body text-left" style="background-color:whitesmoke;border-radius: 14px;">
 
-                            <ul style="text-align:left">
-                                <li>
+                                <div>
                                     <i class="fa fa-user-circle text-orange"></i> <b>User</b> : @User.Identity.Name
 
-                                </li>
+                                </div>
 
                                 @foreach (var item in ViewBag.F)
                                 {
-                                    <li>
+                                    <div>
                                         <i class="fa fa-envelope text-orange"></i> <b>Email</b> : @item.email
-                                    </li>
+                                    </div>
                                 }
 
-                                <li><i class="fa fa-hourglass-start text-orange"></i> <b>Today</b> : @DateTime.Now.ToString("dddd:dd-MMMM-yyyy")</li>
-                            </ul>
+                                <div><i class="fa fa-hourglass-start text-orange"></i> <b>Today</b> : @DateTime.Now.ToString("dddd:dd-MMMM-yyyy")</div>
+                            
 
                         </div>
                         <!-- /.widget-user -->
@@ -109,30 +106,13 @@
                                 </div>
                             }
                             <hr />
-                            <a href="@Url.Action("Dashboard", "Home")">
-                                <div class="spinner-border spinner-border-sm" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                                <div class="spinner-grow spinner-grow-sm" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>  Monthly Statements
-                            </a>
-                            ||
-                            <a href="@Url.Action("Index", "Reports")">
-                                <div class="spinner-border spinner-border-sm text-warning" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                                <div class="spinner-grow spinner-grow-sm text-warning" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>  Today Statement
-                            </a>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-           
-        }
-
+         
+        
         <div class="card-footer p-0" style="background-color:whitesmoke">
         </div>
 

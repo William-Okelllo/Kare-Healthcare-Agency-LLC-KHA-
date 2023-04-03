@@ -398,6 +398,7 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StatementController.cs" />
     <Compile Include="Controllers\successController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -598,6 +599,21 @@
     <Compile Include="Models\Sp_Agency_Users_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_allproc.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_allproc.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_allproc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_allproc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_allproc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_allproc.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_categories.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -614,7 +630,7 @@
       <DependentUpon>sp_categories.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_dash_Result.cs">
-      <DependentUpon>sp_expense.tt</DependentUpon>
+      <DependentUpon>sp_allproc.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_Employee_Per_A_Result.cs">
       <DependentUpon>Z.tt</DependentUpon>
@@ -672,6 +688,27 @@
     </Compile>
     <Compile Include="Models\sp_invoices_Result.cs">
       <DependentUpon>All_procs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_monthly_statement_Result.cs">
+      <DependentUpon>sp_statemen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_statemen.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_statemen.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_statemen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_statemen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_statemen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sp_statemen.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_statement_footer_Result.cs">
+      <DependentUpon>sp_statemen.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_timesheet_report_Result.cs">
       <DependentUpon>All_procs.tt</DependentUpon>
@@ -2168,6 +2205,16 @@
       <DependentUpon>R.edmx</DependentUpon>
       <LastGenOutput>R.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\sp_allproc.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_allproc.edmx</DependentUpon>
+      <LastGenOutput>sp_allproc.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_allproc.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_allproc.edmx</DependentUpon>
+      <LastGenOutput>sp_allproc.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\sp_categories.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>sp_categories.edmx</DependentUpon>
@@ -2197,6 +2244,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>sp_e_prog.edmx</DependentUpon>
       <LastGenOutput>sp_e_prog.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_statemen.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_statemen.edmx</DependentUpon>
+      <LastGenOutput>sp_statemen.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\sp_statemen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>sp_statemen.edmx</DependentUpon>
+      <LastGenOutput>sp_statemen.cs</LastGenOutput>
     </Content>
     <Content Include="Models\us.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2510,6 +2567,20 @@
     </EntityDeploy>
     <Content Include="Models\sp_expense.edmx.diagram">
       <DependentUpon>sp_expense.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\sp_allproc.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sp_allproc.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sp_allproc.edmx.diagram">
+      <DependentUpon>sp_allproc.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\sp_statemen.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sp_statemen.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sp_statemen.edmx.diagram">
+      <DependentUpon>sp_statemen.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
@@ -3264,6 +3335,7 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Statement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
