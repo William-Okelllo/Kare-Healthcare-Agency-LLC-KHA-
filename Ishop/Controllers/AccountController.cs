@@ -281,7 +281,7 @@ namespace Ishop.Controllers
         public ActionResult Rspec007()
         {
             {
-                ViewBag.Name = new SelectList(context.Roles.Where(u => ((u.Name == "Admin")))
+                ViewBag.Name = new SelectList(context.Roles.Where(u => (!(u.Name == "Can_Post_Shift")))
                                        .ToList(), "Name", "Name");
                 return View();
             }

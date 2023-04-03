@@ -59,90 +59,15 @@ namespace Ishop
 
                 }
             }
-          
 
-          
-            if (!roleManager.RoleExists("Employee"))
+            if (!roleManager.RoleExists("App_user"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employee";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Tickets_Approval"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Tickets_Approval";
-                roleManager.Create(role);
-
-            }
-            
-            if (!roleManager.RoleExists("DashBoard"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "DashBoard";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Tickets_Invoicing"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Tickets_Invoicing";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Leaves_Approval"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Leaves_Approval";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Report_Viewer"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Report_Viewer";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Finance"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Finance";
+                role.Name = "App_user";
                 roleManager.Create(role);
 
             }
 
-            if (!roleManager.RoleExists("Advance_Approvals"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Advance_Approvals";
-                roleManager.Create(role);
-
-            }
-
-            if (!roleManager.RoleExists("Ticket_View"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Ticket_View";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Timesheet"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Timesheet";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Timesheet_view"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Timesheet_view";
-                roleManager.Create(role);
-
-            }
-            
 
 
         }

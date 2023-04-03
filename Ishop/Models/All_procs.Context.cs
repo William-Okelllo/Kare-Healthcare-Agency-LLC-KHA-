@@ -311,14 +311,7 @@ namespace Ishop.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_timesheet_report_Result>("sp_timesheet_report", startDateParameter, endDateParameter, statusParameter);
         }
     
-        public virtual ObjectResult<sp_TimesheetDash_Result> sp_TimesheetDash(string employee)
-        {
-            var employeeParameter = employee != null ?
-                new ObjectParameter("Employee", employee) :
-                new ObjectParameter("Employee", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TimesheetDash_Result>("sp_TimesheetDash", employeeParameter);
-        }
+        
     
         public virtual int sp_track_leave(Nullable<int> tT_Leaves, Nullable<int> request_days, string user, Nullable<int> id, string approver_Remarks, string approver)
         {

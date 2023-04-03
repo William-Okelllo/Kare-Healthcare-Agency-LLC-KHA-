@@ -81,20 +81,12 @@
 <br>
 
 
-<div class="col d-flex justify-content-center">
-    <div class="col-md-9" style="border-radius: 24px;">
-        <!-- Widget: user widget style 2 -->
-        <div class="card card-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header" style="background-color:navy ">
-
-                <!-- /.widget-user-image -->
-
-                <h5 style="color:white"> New Expense  </h5>
-
-
-            </div>
-            <div class="card-body" style="background-color: #ffffffc1">
+<div class="card" style="border-radius: 24px;">
+    <div class="card-header" style="background-color: #001F3F;color:white">
+        <i class="fa fa-id-card text-white nav-icon"></i> New Expense
+    </div>
+        <div class="card-body" style="background-color: white;border-radius: 24px;">
+            <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
 
                 @using (Html.BeginForm())
                 {
@@ -107,54 +99,135 @@
 
 
 
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
-                        @Html.EditorFor(model => model.CreatedOn, new
-                   {
-                       htmlAttributes = new
+                    <div class="form-row">
+                        <div class="form-group col-md-3" style="display:none">
+                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
                        {
-                           @class = "form-control ",
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
 
-                           @Value = DateTime.Now,
-                           @Readonly = true
+                               @Value = DateTime.Now,
+                               @Readonly = true
 
 
 
 
-                       }
-                   })
+                           }
+                       })
+
+
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label><i class="fa fa-cubes text-orange"></i> @Html.LabelFor(model => model.Item)</label>
+
+                            @Html.DropDownList("Item", ViewBag.Categories as SelectList, "-- Select item --",
+                           new { @class = "form-control form-control", @required = "required" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> <i class="fa fa-globe text-orange"></i> @Html.LabelFor(model => model.Mode)</label>
+                            @{
+                                List<SelectListItem> q = new List<SelectListItem>();
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Cash Payment",
+                                    Value = "Cash Payment",
+                                });
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Mpesa Payment",
+                                    Value = "Mpesa Payment",
+                                });
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Credit Card Payment",
+                                    Value = "Credit Card Payment",
+                                });
+
+
+                            }@Html.DropDownListFor(model => model.Mode, q, "---Payment Mode---", new { @class = "form-control form-control", @required = "required", })
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-gavel text-orange"></i>   @Html.LabelFor(model => model.Transaction_cost)</label>
+                            @Html.EditorFor(model => model.Transaction_cost, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "0.00/=",
+                               @Type = "Number",
+                               @Value = 0,
+                           }
+                       })
+                        </div>
 
 
                     </div>
-                    <div class="form-group col-md-2">
-                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Status)</label>
-                        @Html.EditorFor(model => model.Status, new
-                   {
-                       htmlAttributes = new
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-money-bill text-orange"></i>  @Html.LabelFor(model => model.Fuliza)</label>
+                            @Html.EditorFor(model => model.Fuliza, new
                        {
-                           @class = "form-control ",
-                           @Value = "New",
-                           @Readonly = true
-                       }
-                   })
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Amount)</label>
-                        @Html.EditorFor(model => model.Amount, new
-                   {
-                       htmlAttributes = new
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "0.00/=",
+                               @Type = "Number",
+                               @Value = 0,
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> <i class="fa fa-cash-register text-orange"></i>      @Html.LabelFor(model => model.Amount)</label>
+                            @Html.EditorFor(model => model.Amount, new
                        {
-                           @class = "form-control ",
-                           @Placeholder = "0.00/=",
-                           @Type = "Number"
-                       }
-                   })
-                    </div>
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "0.00/=",
+                               @Type = "Number",
+                               @Value = 0,
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label> <i class="fa fa-cash-register text-orange"></i>      @Html.LabelFor(model => model.Total)</label>
+                            @Html.EditorFor(model => model.Total, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "0.00/=",
+                               @Type = "Number",
+                                @Value = 0,
+                               @Readonly = true
+                           }
+                       })
+                        </div>
 
-                </div>
-                   
+                        <script>
+                            $(document).ready(function () {
+                                //this calculates values automatically
+                                sum();
+                                $("#Transaction_cost,#Fuliza, #Amount,#Total").on("keydown keyup", function () {
+                                    sum();
+                                });
+                            });
+                            function sum() {
+                                var num1 = document.getElementById('Transaction_cost').value;
+                                var num2 = document.getElementById('Fuliza').value;
+                                var num3 = document.getElementById('Amount').value;
+
+                                var result = parseFloat(num1) + parseFloat(num2) + parseFloat(num3);
+                                if (!isNaN(result)) {
+                                    document.getElementById('Total').value = result;
+                                }
+                            }
+                        </script>
+                    </div>
 
                     <p style="font-family:Calibri">
                         <i class="fa fa-comment text-yellow"></i>
@@ -179,7 +252,7 @@
 
 
 
-                    
+
                     <div style="color: red">@Html.ValidationMessageFor(x => x.Amount)</div>
 
                     <hr />
@@ -197,13 +270,13 @@
 
 
                             <script>
-                                        $(function () {
-                                            $('#Create').click(function () {
-                                                if (confirm('Are you sure?')) {
-                                                    window.location.href = $(this).data('url');
-                                                }
-                                            });
-                                        });
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
                             </script>
                             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
                             <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />

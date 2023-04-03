@@ -1,50 +1,129 @@
 ﻿@model IShop.Core.Expense
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Expense Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Expense</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Additional_Notes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Additional_Notes)
-        </dd>
-
-    </dl>
+<div class="modal-header " style="text-align: center; background-color: #001F3F">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h7 class="modal-title" style="color:white"><i class="fa fa-id-card text-warning"></i> Expense Details</h7>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="modal-body" style="width: 100%;">
+    <div class="card-body">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                @Html.EditorFor(model => model.CreatedOn, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control form-control",
+
+                   @Readonly = true
+
+               }
+           })
+
+            </div>
+            <div class="form-group col-md-3">
+                <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Item) </label>
+                @Html.EditorFor(model => model.Item, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control form-control",
+
+                   @Readonly = true
+
+               }
+           })
+
+            </div>
+            <div class="form-group col-md-3">
+                <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Fuliza) </label>
+                @Html.EditorFor(model => model.Fuliza, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control form-control",
+
+                   @Readonly = true
+
+               }
+           })
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Transaction_cost) </label>
+                @Html.EditorFor(model => model.Transaction_cost, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control form-control",
+
+                   @Readonly = true
+
+               }
+           })
+
+            </div>
+            <div class="form-group col-md-3">
+                <label><i class="fa fa-cash-register text-primary"></i> @Html.LabelFor(model => model.Amount) </label>
+                @Html.EditorFor(model => model.Amount, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control form-control",
+
+                   @Readonly = true
+
+               }
+           })
+
+            </div>
+            <div class="form-group col-md-3">
+                <label><i class="fa fa-spinner text-primary"></i> @Html.LabelFor(model => model.Total) </label>
+                @Html.EditorFor(model => model.Total, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control form-control",
+
+                   @Readonly = true
+
+               }
+           })
+
+            </div>
+        </div>
+
+        <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Additional_Notes) </label>
+        <div class="row">
+
+
+            @Html.TextAreaFor(model => model.Additional_Notes, 5, 70, htmlAttributes: new
+       {
+           style = "width: 100%; max-width:100%;",
+           @placeholder = "Provide your response based on the test records",
+           @autofocus = ""
+           ,
+           @class = "form-control form-rounded",
+           @ReadOnly = true
+
+       })
+
+
+
+
+        </div>
+
+
+
+    </div>
+    <div style="text-align:right">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+    </div>

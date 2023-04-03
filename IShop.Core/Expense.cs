@@ -19,10 +19,24 @@ namespace IShop.Core
         [Required]
         public Decimal Amount { get; set; }
 
+        
+        [Display(Name = "Fuliza Charges ")]
+        [DisplayFormat(DataFormatString = "{0:#,##0.00}")]
+        public Decimal Fuliza { get; set; }
+
+
+        public Decimal Total { get; set; }
+
+        [Display(Name = "Transaction cost")]
+        public Decimal Transaction_cost { get; set; }
+
 
         [Required]
-        [Display(Name = "Status")]
-        public string Status { get; set; }
+        public string Item { get; set; }
+
+        [Required]
+        [Display(Name = "Payment Mode")]
+        public string Mode { get; set; }
 
 
         [Required]

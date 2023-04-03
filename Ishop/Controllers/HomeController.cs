@@ -17,14 +17,17 @@ namespace Ishop.Controllers
     {
         public ActionResult Index()
         {
-            Sp_timesheetDA ap =new Sp_timesheetDA();
-            var Alp= ap.sp_TimesheetDash(User.Identity.Name).ToList();
-            ViewBag.Alp = Alp;
+            ZO F = new ZO();
+            var FF = F.Acc_Profile(User.Identity.Name).ToList();
+            ViewBag.F = FF;
+            string Current = User.Identity.Name;
 
 
-            leaves_t l7 = new leaves_t();
-            var data12 = l7.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
-            ViewBag.F2 = data12;
+            sp_expensess l9 = new sp_expensess();
+            var boo9 = l9.sp_dash().ToList();
+            ViewBag.l9 = boo9;
+
+
 
 
             return View();

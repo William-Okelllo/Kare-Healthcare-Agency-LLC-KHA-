@@ -22,11 +22,10 @@ namespace Ishop.Controllers
         // GET: Expense
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            HREntities l = new HREntities();
-            var boo = l.sp_expenses().ToList();
-            ViewBag.l = boo;
-
-
+            
+            sp_expensess l9 = new sp_expensess();
+            var boo9 = l9.sp_dash().ToList();
+            ViewBag.l9 = boo9;
 
             if (!(search == null))
             {
@@ -44,6 +43,7 @@ namespace Ishop.Controllers
         // GET: Expense/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -53,12 +53,15 @@ namespace Ishop.Controllers
             {
                 return HttpNotFound();
             }
-            return View(expense);
+            return PartialView("Details", expense);
         }
 
         // GET: Expense/Create
         public ActionResult Create()
         {
+            HR2_CashmateEntities dbb = new HR2_CashmateEntities();
+            var categories = dbb.Categories.ToList();
+            ViewBag.Categories = new SelectList(categories, "item", "item");
             return View();
         }
 
@@ -67,7 +70,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Amount,Status,Additional_Notes")] Expense expense)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Amount,Fuliza,Transaction_cost,Mode,item,Additional_Notes,Total")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -174,5 +177,29 @@ namespace Ishop.Controllers
             }
         }
 
+        public ActionResult Drop(int? id, Ticket ticket)
+        {
+            try
+            {
+                string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand sqlcmnd = new SqlCommand("sp_drop_expense", sqlCon);
+                sqlcmnd.CommandType = CommandType.StoredProcedure;
+                sqlcmnd.Parameters.AddWithValue("@Id", ticket.id);
+                sqlCon.Open();
+                sqlcmnd.ExecuteNonQuery();
+                sqlCon.Close();
+                TempData["msg"] = "Expense deleted successfully ";
+                return RedirectToAction("Index");
+
+
+            }
+            catch
+            {
+                TempData["msg"] = "error occured in  on deleting Expense ";
+                return RedirectToAction("Index");
+            }
+
+        }
     }
 }

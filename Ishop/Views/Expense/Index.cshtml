@@ -41,33 +41,17 @@
     }
 </style>
 
-<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+<div class="card " style="background-color: rgb(255, 255, 255, 0.95);">
 
 
-    <div class="card-header" style="background-color: #4a0606ff">
+    <div class="card-header" style="background-color: black">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-thin fa-history"></i>
-            Expenses Section
+            Expenses 
         </h3>
 
 
-        <div style="text-align: center; color: white ">
-            Month
-
-
-            @foreach (var item in ViewBag.l)
-            {
-                @item.M
-            }
-
-            Total Expense
-
-
-            @foreach (var item in ViewBag.l)
-            {
-                @item.Expenses
-            }
-        </div>
+        
      
 
     </div>
@@ -79,7 +63,7 @@
 
         @if (TempData["Msg"] != null)
         {<div class="row">
-                <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     @TempData["Msg"]
                 </div>
@@ -106,17 +90,18 @@
 
 
 
-            <div class="table-responsive" style="min-height: 400px">
-                <table class="table table-bordered table-hover  ">
+            <div class="table-responsive" style="min-height: 300px">
+                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable">
 
 
                     <thead>
                         <tr style="color:white">
-                            <th style="background-color: #4a0606ff; "> Post On</th>
-                            <th style="background-color: #4a0606ff; "> Notes</th>
-                            <th style="background-color: #4a0606ff; ">Amount </th>
-                            <th style="background-color: #4a0606ff; ">Status </th>
-                            <th style="background-color: #4a0606ff; ">Action </th>
+                            <th style="background-color: black; "> Post On</th>
+                            <th style="background-color: black; "> Category</th>
+                            <th style="background-color: black; ">Mode </th>
+
+                            <th style="background-color: black; ">Amount </th>
+                            <th style="background-color: black; ">Action </th>
 
 
 
@@ -126,68 +111,52 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr data-widget="expandable-table" aria-expanded="false">
+                            <tr data-widget="expandable-table" aria-expanded="false">
 
-                            <td style="background-color:white">
-                                <small> <i class="fa fa-calendar text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small>
-                            </td>
-                            <td style="background-color:white"> @item.Additional_Notes</td>
-                            <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Amount /=</td>
-                            <td style="background-color:white">
-                                @if (item.Status == "New")
-                                {<span class="float-center badge bg-green">Expense Status : @item.Status </span>}
-                            else if (item.Status == "Paid")
-                            { <span class="float-center badge bg-warning">Expense Status : @item.Status </span>}
-                        else
-                        { <span class="float-center badge bg-danger">Expense Status : @item.Status </span>}
-                            </td>
+                                <td style="background-color:white">
+                                    <small> <i class="fa fa-calendar text-green"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small>
+                                </td>
+                                <td style="background-color:white"><i class="fa fa-layer-group text-orange"></i>  @item.Item</td>
+                                <td style="background-color:white"><i class="fa fa-money-bill text-green"></i>    @item.Mode</td>
+                                <td style="background-color:white"><i class="fa fa-user-circle text-green"></i> @item.Total.ToString("#,##0.00")</td>
 
 
-                            <td style="background-color:ghostwhite">
-                                <div class="btn-group dropdown">
-                                    <button type="button" class="btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-file-invoice"></i>  . Action
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                        @if (item.Status == "New")
-                                        {
+
+                                <td style="background-color:ghostwhite">
+                                    <div class="btn-group dropdown">
+                                        <button type="button" class="btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-file-invoice"></i>  . Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
                                             <div class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Edit", "Expense", new { id = item.Id })" class="dropdown-item">
-                                                <i class="fas fa-pen text-success"></i> Edit/Update Expense
+
+                                            <a href="javascript:void(0);" class="anchorDetail dropdown-item" data-id="@item.Id">
+                                                <i class="fa fa-eye text-primary"></i> View
                                             </a>
-                                        }
-                                        @if (item.Status == "New" || item.Status == "Paid")
-                                        {
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want cancel this Expense?')) { window.location.href = '@Url.Action("Cancelled", "Expense", new { id = item.Id })'; }">
-                                                <i class="fas fa-times-circle text-danger"></i> Cancel Expense
+                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to drop this expense?')) { window.location.href = '@Url.Action("Drop", "Expense", new { id = item.Id })'; }">
+                                                <i class="fa fa-times-circle text-danger"></i> Drop Expense
                                             </a>
                                             <script>
                                                 $(function () {
-                                                    $('#Paid').click(function () {
+                                                    $('#Deny').click(function () {
                                                         if (confirm('Are you sure?')) {
                                                             window.location.href = $(this).data('url');
                                                         }
                                                     });
                                                 });
                                             </script>
-                                            <div class="dropdown-divider"></div>
-                                        }
+                                        </div>
 
                                     </div>
 
-                                </div>
 
 
 
 
 
-
-                            </td>
-
-
-
-
+                                </td>
 
 
 
@@ -195,12 +164,126 @@
 
 
 
-                        </tr>
+
+
+
+
+                            </tr>
 
 
                         }
                     </tbody>
                 </table>
+
+
+                @foreach (var item in ViewBag.l9)
+                {
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                                <span><i class="fa fa-book-reader text-primary"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Month - @DateTime.Now.ToString("MMMM")</span>
+                                    <span class="info-box-number">@item.Total_Month.ToString("#,##0.00") </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                                <span><i class="fa fa-list text-primary"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Week - </span>
+                                    <span class="info-box-number">@item.Total_Week.ToString("#,##0.00") </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                                <span><i class="fa fa-calendar-day text-orange"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Today-@DateTime.Now.ToString("dddd")</span>
+                                    <span class="info-box-number">@item.Total_Today.ToString("#,##0.00") </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                    </div>
+                }
+
+
+
+                <div id='Details' class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div id='myModalContent'></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+                <script src="~/Scripts/bootstrap.js"></script>
+                <script src="~/Scripts/bootstrap.min.js"></script>
+                <script>
+                    var TeamDetailPostBackURL = '/Expense/Details';
+                    $(function () {
+                        $(".anchorDetail").click(function () {
+                            var $buttonClicked = $(this);
+                            var id = $buttonClicked.attr('data-id');
+                            $.ajax({
+                                type: "GET",
+                                url: TeamDetailPostBackURL,
+                                contentType: "application/json; charset=utf-8",
+                                data: { "Id": id },
+                                datatype: "json",
+                                success: function (data) {
+                                    $('#myModalContent').html(data);
+                                    $('#Details').modal('show').fade(900);
+                                },
+                                error: function () {
+                                    alert("Dynamic content load failed.");
+                                }
+                            });
+                        });
+                    });
+                </script>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 @if (Model.Count() == 0)
                 {
                     <div style="text-align:center">
@@ -244,8 +327,4 @@
 
 
 
-            @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
-            <hr class='dotted' />
-        </div>
-    </div>
 

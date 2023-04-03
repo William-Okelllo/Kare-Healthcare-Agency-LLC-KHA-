@@ -24,240 +24,113 @@
 
 
 
-    <div class="card-header" style="background-color: #001F3F ">
+    <div class="card-header" style="background-color: black ">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-home"></i>
             HomePage
         </h3>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-4" style="border-radius: 24px;">
-                <!-- Widget: user widget style 2 -->
-                <div class="card card-widget widget-user-2" style="border-radius: 24px;">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div style="background-color: #001F3F ">
-
-                        <!-- /.widget-user-image -->
-
-                        <h5 style="color:white">
-
-                            <img src="~/Images/l.ico" height="50" alt="User Avatar"> Welcome @User.Identity.Name
-
-
-                        </h5>
-
-
-                    </div>
-                    <div class="card-body text-left">
-
-                        <div class="divider" style="color:forestgreen"></div>
-                        <i class="fa fa-user-shield"></i> Access Level :
-                        @if (this.User.IsInRole("Admin"))
-                        {<medium style="font-family:Calibri">
-                                <i class="fa fa-user-check text-success"></i>:-Administrator
-                            </medium>}
-
-
-                        else if (this.User.IsInRole("Employee"))
-                        { <medium style="font-family:Calibri">
-                                :-Employee
-                            </medium>}
-                        else if (this.User.IsInRole("Staffing_Agency"))
-                        { <medium style="font-family:Calibri">
-                                :-Staffing Agency user
-                            </medium>}
-
-                        else if (this.User.IsInRole("Facility"))
-                        { <medium style="font-family:Calibri">
-                                Facility
-                            </medium>}
-                        else
-                        { <medium style="font-family:Calibri">
-                                unknown
-                            </medium>}
-                        <div class="divider" style="color:forestgreen"></div>
-                        <medium><i class="fa fa-calendar text-success"></i> @DateTime.Now.ToString("dd-MMMM-yyyy") </medium>
-                        <div class="dropdown-divider"></div>
-
-
-
-
-                    </div>
-
-                </div>
-                <!-- /.widget-user -->
-            </div>
-
-
-
-
-            @if (this.User.IsInRole("Employee"))
-            {
-                <div class="col-xl-7">
-                    <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-spinner"></i> My DashBoard </div>
-                        <div class="card-body text-left">
-                            <p><i class="fa fa-spinner text-warning"></i> Timesheets Tracker</p>
-                            <div class="row">
-                                @foreach (var item in ViewBag.Alp)
-                                {
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-warning"><i class="fa fa-layer-group"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Total Sheets</span>
-                                                <span class="info-box-number">@item.Total</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-
-                                        <!-- /.info-box -->
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-primary"><i class="fa fa-calendar-day"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Current Week</span>
-                                                <span class="info-box-number">@item.Current_Week</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-
-                                        <!-- /.info-box -->
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-maroon"><i class="fa fa-calendar-minus"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Today' Sheets</span>
-                                                <span class="info-box-number">@item.Today</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-
-                                        <!-- /.info-box -->
-                                    </div>
-
-                                    <div style ="text-align:right">
-                                        <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        <a href="@Url.Action("Index", "Timesheet")" style="text-align:right">
-                                            Calender Mode View
-                                        </a>
-</div>
-                                }
-                            </div>
-                            <div class="row">
-                                @foreach (var item in ViewBag.F2)
-                                {
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-success"><i class="fa fa-hourglass"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Total leaves Per year</span>
-                                                <span class="info-box-number">@item.Total_leaves_per_year leaves</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-                                        <!-- /.info-box -->
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Requested leaves</span>
-                                                <span class="info-box-number">@item.Requested_leaves leaves</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-                                        <!-- /.info-box -->
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-warning"><i class="fa fa-check-double"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Remaining leaves</span>
-                                                <span class="info-box-number">@item.Remaining_leaves leaves</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-                                        <!-- /.info-box -->
-                                    </div>
-                                }
-
-                            </div>
-                        </div>
-
-
-
-
-
-
-                        <div class="card-footer p-0" style="background-color:whitesmoke">
-                        </div>
-
-                    </div>
-                </div>
-
-
-            }
-
-
-
-            <hr />
-
-        </div>
+       
 
         @if (this.User.IsInRole("Admin"))
         {
             <div class="row">
-                <div class="col-xl-5">
+                <div class="col-xl-4">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-clock"></i>  Operations </div>
-                        <div class="card-body text-left">
+                        <div class="card-header" style="background-color: black; color: white ">  <img src="~/Images/logo.png" height="50" alt="User Avatar"> : Welcome @User.Identity.Name </div>
+                        <div class="card-body text-left" style="background-color:whitesmoke;border-radius: 14px;">
 
-                            <ul class="nav flex-column">
+                            <ul style="text-align:left">
+                                <li>
+                                    <i class="fa fa-user-circle text-orange"></i> <b>User</b> : @User.Identity.Name
 
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Timesheet", "Timesheet")" class="nav-link">
-                                        View Posted Timesheet <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
-                                    </a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "leaves")" class="nav-link">
-                                        Requested leaves <span class="float-right badge bg-warning"><i class="fa fa-clock"></i></span>
-                                    </a>
-                                </li>
-                                @if (this.User.IsInRole("Advance_Approvals"))
+                                @foreach (var item in ViewBag.F)
                                 {
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Advance")" class="nav-link">
-                                            Requested Advance Payments <span class="float-right badge bg-warning"><i class="fa fa-spinner"></i></span>
-                                        </a>
+                                    <li>
+                                        <i class="fa fa-envelope text-orange"></i> <b>Email</b> : @item.email
                                     </li>
                                 }
 
+                                <li><i class="fa fa-hourglass-start text-orange"></i> <b>Today</b> : @DateTime.Now.ToString("dddd:dd-MMMM-yyyy")</li>
                             </ul>
-
 
                         </div>
                         <!-- /.widget-user -->
                     </div>
                 </div>
+                <div class="col-xl-8">
+                    <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+                        <div class="card-header" style="background-color: black; color: white "> <i class="fa fa-spinner"></i> Summary </div>
+                        <div class="card-body text-left" style="background-color:white;border-radius: 14px;">
 
+                            <h6><i class="fa fa-chart-line text-primary"></i> Expense summary</h6>
+                            @foreach (var item in ViewBag.l9)
+                            {
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span><i class="fa fa-book-reader text-primary"></i></span>
 
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Month - @DateTime.Now.ToString("MMMM")</span>
+                                                <span class="info-box-number">@item.Total_Month.ToString("#,##0.00") </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span><i class="fa fa-list text-primary"></i></span>
 
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Week - </span>
+                                                <span class="info-box-number">@item.Total_Week.ToString("#,##0.00") </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span><i class="fa fa-calendar-day text-orange"></i></span>
 
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Today-@DateTime.Now.ToString("dddd")</span>
+                                                <span class="info-box-number">@item.Total_Today.ToString("#,##0.00") </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                </div>
+                            }
+                            <hr />
+                            <a href="@Url.Action("Dashboard", "Home")">
+                                <div class="spinner-border spinner-border-sm" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow spinner-grow-sm" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>  Monthly Statements
+                            </a>
+                            ||
+                            <a href="@Url.Action("Index", "Reports")">
+                                <div class="spinner-border spinner-border-sm text-warning" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow spinner-grow-sm text-warning" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>  Today Statement
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+           
         }
 
         <div class="card-footer p-0" style="background-color:whitesmoke">
