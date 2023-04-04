@@ -249,10 +249,10 @@
                     {
                         <ul class="list-unstyled">
 
-                            <li><strong>Amount Charge:</strong> @item.Transaction_cost </li>
-                            <li><strong>Fuliza Charge:</strong> @item.Fuliza</li>
-                            <li><strong>Transactions Charge:</strong> @item.Amount</li>
-                            <li><strong>Total:</strong> @item.Total</li>
+                            <li><strong>Amount Charge:</strong> @item.Transaction_cost.ToString("#,##0.00") </li>
+                            <li><strong>Fuliza Charge:</strong> @item.Fuliza.ToString("#,##0.00")</li>
+                            <li><strong>Transactions Charge:</strong> @item.Amount.ToString("#,##0.00")</li>
+                            <li><strong>Total:</strong> @item.Total.ToString("#,##0.00")</li>
                         </ul>
                     }
 
