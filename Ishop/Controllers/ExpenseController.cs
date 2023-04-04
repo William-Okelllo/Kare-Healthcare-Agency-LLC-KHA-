@@ -28,12 +28,12 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.expenses.OrderByDescending(p => p.Id).Where(c => c.Item.StartsWith(search) || c.Item == search && c.staff==User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.expenses.OrderByDescending(p => p.Id).Where(c => c.Item.StartsWith(search) || c.Item == search && c.staff==User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
 
             }
             else
             {
-                return View(db.expenses.OrderByDescending(p => p.Id).Where(c=> c.staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.expenses.OrderByDescending(p => p.Id).Where(c=> c.staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
 
 
             }
@@ -69,8 +69,31 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Amount,Fuliza,Transaction_cost,Mode,item,Additional_Notes,Total,staff")] Expense expense)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Amount,Fuliza,Transaction_cost,Mode,item,Additional_Notes,Total,staff,Item2")] Expense expense)
         {
+            if (expense.Item == "Other") 
+            { expense.Item = expense.Item2;
+                try
+                {
+                    string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                    SqlConnection sqlCon = new SqlConnection(strcon);
+                    SqlCommand sqlcmnd = new SqlCommand("sp_add_item", sqlCon);
+                    sqlcmnd.CommandType = CommandType.StoredProcedure;
+                    sqlcmnd.Parameters.AddWithValue("@item", expense.Item2);
+                    sqlCon.Open();
+                    sqlcmnd.ExecuteNonQuery();
+                    sqlCon.Close();
+
+                }
+                catch
+                {
+                    TempData["msg"] = "Error adding item ";
+
+                }
+            }
+
+
+
             if (ModelState.IsValid)
             {
                 db.expenses.Add(expense);

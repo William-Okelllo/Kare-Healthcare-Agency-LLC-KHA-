@@ -34,6 +34,8 @@ namespace IShop.Core
         [Required]
         public string Item { get; set; }
 
+        public string Item2 { get; set; }
+
         [Required]
         [Display(Name = "Payment Mode")]
         public string Mode { get; set; }
