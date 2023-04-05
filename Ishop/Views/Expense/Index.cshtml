@@ -202,11 +202,11 @@
             @foreach (var item in ViewBag.l9)
             {
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box">
-                            <span><i class="fa fa-book-reader text-primary"></i></span>
+                    <div class="col-md-2 col-sm-4 col-7" style="border-radius: 24px;">
+                        <div class="info-box" style="border-radius: 14px;background-color:darkslategrey">
+                            <span><i class="fa fa-book-reader text-white"></i></span>
 
-                            <div class="info-box-content">
+                            <div class="info-box-content" style="color:white">
                                 <span class="info-box-text">Month - @DateTime.Now.ToString("MMMM")</span>
                                 <span class="info-box-number">@item.Total_Month.ToString("#,##0.00") </span>
                             </div>
@@ -214,11 +214,11 @@
                         </div>
                         <!-- /.info-box -->
                     </div>
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box">
-                            <span><i class="fa fa-list text-primary"></i></span>
+                    <div class="col-md-2 col-sm-4 col-8">
+                        <div class="info-box" style="border-radius: 14px;background-color:black">
+                            <span><i class="fa fa-clipboard-list text-white"></i></span>
 
-                            <div class="info-box-content">
+                            <div class="info-box-content" style="color:white">
                                 <span class="info-box-text">Week - </span>
                                 <span class="info-box-number">@item.Total_Week.ToString("#,##0.00") </span>
                             </div>
@@ -226,11 +226,11 @@
                         </div>
                         <!-- /.info-box -->
                     </div>
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box">
-                            <span><i class="fa fa-calendar-day text-orange"></i></span>
+                    <div class="col-md-2 col-sm-4 col-9">
+                        <div class="info-box" style="border-radius: 14px;background-color:#064e12">
+                            <span><i class="fa fa-calendar-day text-white"></i></span>
 
-                            <div class="info-box-content">
+                            <div class="info-box-content" style="color:white">
                                 <span class="info-box-text">Today-@DateTime.Now.ToString("dddd")</span>
                                 <span class="info-box-number">@item.Total_Today.ToString("#,##0.00") </span>
                             </div>
