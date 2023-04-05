@@ -15,6 +15,7 @@ using Ishop.Models;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class ExpenseController : Controller
     {
         private ExpenseContext db = new ExpenseContext();
@@ -71,6 +72,8 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CreatedOn,Amount,Fuliza,Transaction_cost,Mode,item,Additional_Notes,Total,staff,Item2")] Expense expense)
         {
+           
+
             if (expense.Item == "Other") 
             { expense.Item = expense.Item2;
                 try

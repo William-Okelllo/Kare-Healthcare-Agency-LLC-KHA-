@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class StatementController : Controller
     {
         // GET: Statement
