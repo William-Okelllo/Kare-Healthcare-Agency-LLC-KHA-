@@ -2132,6 +2132,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\bg.jpg" />
+    <Content Include="Images\bgg.jpg" />
     <Content Include="Images\co.gif" />
     <Content Include="Images\f.jpg" />
     <Content Include="Images\ff.jpg" />

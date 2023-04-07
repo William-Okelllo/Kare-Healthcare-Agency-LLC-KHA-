@@ -12,7 +12,7 @@ namespace IShop.Core
         public int Id { get; set; }
 
 
-        [Display(Name = " Generated On")]
+        [Display(Name = " Expense Date")]
         public DateTime CreatedOn { get; set; }
 
 

@@ -29,12 +29,12 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.expenses.OrderByDescending(p => p.Id).Where(c => c.Item.StartsWith(search) || c.Item == search && c.staff==User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
+                return View(db.expenses.OrderByDescending(p => p.CreatedOn).Where(c => c.Item.StartsWith(search) || c.Item == search && c.staff==User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
 
             }
             else
             {
-                return View(db.expenses.OrderByDescending(p => p.Id).Where(c=> c.staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
+                return View(db.expenses.OrderByDescending(p => p.CreatedOn).Where(c=> c.staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
 
 
             }

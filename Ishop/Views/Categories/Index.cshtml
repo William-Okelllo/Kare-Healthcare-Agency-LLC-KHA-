@@ -88,9 +88,9 @@
 <div class="card " style="background-color: rgb(248, 248, 248, 0.96);">
 
 
-    <div class="card-header" style="background-color: black">
+    <div class="card-header" style="background-color: #3c0303; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white">
-            <i class="fa fa-certificate"></i>
+            <i class="fa fa-layer-group"></i>
             Items lists
         </h3>
         <div style="text-align: right; color: white ">
@@ -129,15 +129,15 @@
             @foreach (var item in Model)
             {
 
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box">
-                  
+                <div class="col-md-3 col-sm-6 col-6">
+                    <div class="info-box" style="border-radius: 20px;background-color: #3c0303">
 
-                        <div class="info-box-content">
-                            <span class="info-box-text"><medium><i class="fa fa-layer-group text-orange"></i>    @item.item</medium></span>
+
+                        <div class="info-box-content" style="color:white">
+                            <span class="info-box-text"><medium><i class="fa fa-layer-group text-white"></i>    @item.item</medium></span>
 
                             <div class="btn-group dropdown dropright">
-                                <button type="button" class="btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-file-invoice"></i>  . Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -238,15 +238,4 @@
     </div>
 }
 
-            </div>
-
-
-
-
-<div>
-    @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-info btn-sm" })
-    <hr class='dotted' />
-</div>
-                </div>
-
-    </div>
+           
