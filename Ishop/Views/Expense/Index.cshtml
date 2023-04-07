@@ -39,18 +39,38 @@
         width: 20%;
         border-color: white;
     }
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            
+        }
 </style>
 
 <div class="card " style="background-color: rgb(255, 255, 255, 0.95);">
 
 
-    <div class="card-header" style="background-color: #331603">
+    <div class="card-header" style="background-color: #331603; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-cart-plus"></i>
             Expenses
         </h3>
 
+        <div style="text-align: right; color: white ">
 
+
+            @Html.ActionLink("New ", "Create", "Expense", null, new { @class = "btn btn-sm btn-default btn" })
+
+
+
+
+
+        </div>
 
 
 
@@ -91,7 +111,7 @@
 
 
         <div class="table-responsive" style="min-height: 300px">
-            <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable">
+            <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
 
 
                 <thead>

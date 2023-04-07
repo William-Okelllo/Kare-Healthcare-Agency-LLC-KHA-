@@ -100,7 +100,7 @@
 
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-8 col-sm-12 col-12">
+    <div class="col-md-9 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #803209; color: white; border-radius: 14px ">
                 <i class="fa fa-spinner"></i> New Expenditure
@@ -120,7 +120,7 @@
 
 
                             <div class="form-row">
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-3">
                                     <small><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</small>
                                     @Html.EditorFor(model => model.CreatedOn, new
                                {
@@ -249,7 +249,7 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-6 col-md-2">
+                                <div class="col-9 col-md-3">
                                     <small> <i class="fa fa-cash-register text-orange"></i>      @Html.LabelFor(model => model.Amount)</small>
                                     @Html.EditorFor(model => model.Amount, new
                                {
@@ -262,7 +262,7 @@
                                    }
                                })
                                 </div>
-                                <div class="col-8 col-md-2">
+                                <div class="col-6 col-md-3">
                                     <small><i class="fa fa-gavel text-orange"></i>   @Html.LabelFor(model => model.Transaction_cost)</small>
                                     @Html.EditorFor(model => model.Transaction_cost, new
                                {
@@ -275,7 +275,7 @@
                                    }
                                })
                                 </div>
-                                <div class="col-6 col-md-2">
+                                <div class="col-6 col-md-3">
                                     <small><i class="fa fa-layer-group text-orange"></i>  @Html.LabelFor(model => model.Fuliza)</small>
                                     @Html.EditorFor(model => model.Fuliza, new
                                {
@@ -290,7 +290,7 @@
                                })
                                 </div>
 
-                                <div class="col-9 col-md-3">
+                                <div class="col-9 col-md-2">
                                     <small> <i class="fa fa-cash-register text-orange"></i>      @Html.LabelFor(model => model.Total)</small>
                                     @Html.EditorFor(model => model.Total, new
                                {
@@ -325,7 +325,7 @@
                                     }
                                 </script>
                             </div>
-
+                            <hr />
                             <small style="font-family:Calibri">
                                 <i class="fa fa-comment text-orange"></i>
                                 Additional Information
