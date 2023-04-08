@@ -88,27 +88,84 @@
                 </li>
             </ul>
 
-            <!-- Right navbar links -->
+
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown" style="font-family:Calibri">
-                    <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
-
-                        <i class="fa fa-user text-navy">
-                            @Html.Label("" + User.Identity.GetUserName()
-+ "", null, htmlAttributes: new { title = "Manage" })
-                        </i>
-                        <i class="fas fa-angle-down right"></i>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell text-orange"></i>
+                        <span class="badge badge-warning navbar-badge">2</span>
                     </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="~/Images/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Incomes Records <small style="color:blue">coming soon</small>
+                                        <span class="float-right text-sm text-orange">
+                                            <div class="spinner-border spinner-border-sm" role="status"></div>
+                                        </span>
+                                    </h3>
+                                    <p class="text-sm">Track your incomes on the go</p>
 
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
-                        <div style="text-align:center">
-                            <img src="~/Images/logo.png" height="50" alt="User Avatar">
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="~/Images/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Super DashBoard-<small style="color:blue">coming soon</small>
+                                        <span class="float-right text-sm text-orange">
+                                        <div class="spinner-border spinner-border-sm" role="status"></div></span>
+                                    </h3>
+                                    <p class="text-sm">Giving you a quick summary of everything at a Glance</p>
 
-                        </div>
-                        <div style="text-align:center">
-                            ...</div>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        
+                    </div>
+                </li>
+                </ul>
+
+
+
+
+
+
+
+
+
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Navbar Search -->
+                    <!-- Messages Dropdown Menu -->
+                    <li class="nav-item dropdown" style="font-family:Calibri">
+                        <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
+
+                            <i class="fa fa-user text-navy">
+                                @Html.Label("" + User.Identity.GetUserName()
+    + "", null, htmlAttributes: new { title = "Manage" })
+                            </i>
+                            <i class="fas fa-angle-down right"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
+                            <div style="text-align:center">
+                                <img src="~/Images/logo.png" height="50" alt="User Avatar">
+
+                            </div>
+                            <div style="text-align:center">
+                                ...
+                            </div>
                             <div class="dropdown-divider"></div>
                             <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
                                 <i class="fas fa-user-circle text-warning nav-icon"></i> My Profile
