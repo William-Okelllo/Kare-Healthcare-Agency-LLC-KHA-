@@ -12,6 +12,11 @@ using PagedList;
 using System.Configuration;
 using System.Data.SqlClient;
 using Ishop.Models;
+using System.Threading;
+using Syncfusion.XlsIO.Implementation.Security;
+using System.Web.Configuration;
+using System.Timers;
+using System.Web.UI;
 
 namespace Ishop.Controllers
 {
@@ -27,14 +32,17 @@ namespace Ishop.Controllers
             var boo9 = l9.sp_dash(User.Identity.Name).ToList();
             ViewBag.l9 = boo9;
 
+            int currentMonth = DateTime.Now.Month;
+
+
             if (!(search == null))
             {
-                return View(db.expenses.OrderByDescending(p => p.CreatedOn).Where(c => c.Item.StartsWith(search) || c.Item == search && c.staff==User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
+                return View(db.expenses.OrderByDescending(p => p.CreatedOn).Where(c => c.Item.StartsWith(search) || c.Item == search && c.staff==User.Identity.Name && c.CreatedOn.Month==currentMonth).ToList().ToPagedList(page ?? 1, 8));
 
             }
             else
             {
-                return View(db.expenses.OrderByDescending(p => p.CreatedOn).Where(c=> c.staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 8));
+                return View(db.expenses.OrderByDescending(p => p.CreatedOn).Where(c=> c.staff == User.Identity.Name && c.CreatedOn.Month == currentMonth).ToList().ToPagedList(page ?? 1, 8));
 
 
             }
@@ -226,5 +234,14 @@ namespace Ishop.Controllers
             }
 
         }
+
+
+
+
+
+
+      
+
+       
     }
 }

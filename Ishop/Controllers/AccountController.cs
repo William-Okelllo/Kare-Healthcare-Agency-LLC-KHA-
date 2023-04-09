@@ -84,6 +84,7 @@ namespace Ishop.Controllers
                 return View();
             }
         }
+
         [AllowAnonymous]
         public JsonResult CheckLogedIn()
         {

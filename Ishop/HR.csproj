@@ -61,6 +61,9 @@
     <Reference Include="EASendMail, Version=7.9.0.3, Culture=neutral, PublicKeyToken=88adb80ecd66540b, processorArchitecture=MSIL">
       <HintPath>..\packages\EASendMail.7.9.0.3\lib\net461\EASendMail.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -448,6 +451,21 @@
       <DependentUpon>calt.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Models\Cashmate_sp.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cashmate_sp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cashmate_sp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cashmate_sp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cashmate_sp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cashmate_sp.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>sp_categories.tt</DependentUpon>
     </Compile>
@@ -628,6 +646,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>sp_categories.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_dash_2_Result.cs">
+      <DependentUpon>Cashmate_sp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_dash_3_Result.cs">
+      <DependentUpon>Cashmate_sp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_dash_4_Result.cs">
+      <DependentUpon>Cashmate_sp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_dash_Result.cs">
       <DependentUpon>sp_allproc.tt</DependentUpon>
@@ -2166,6 +2193,16 @@
       <DependentUpon>calt.edmx</DependentUpon>
       <LastGenOutput>calt.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Cashmate_sp.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Cashmate_sp.edmx</DependentUpon>
+      <LastGenOutput>Cashmate_sp.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Cashmate_sp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Cashmate_sp.edmx</DependentUpon>
+      <LastGenOutput>Cashmate_sp.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Config_x1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Config_x1.edmx</DependentUpon>
@@ -2582,6 +2619,14 @@
     </EntityDeploy>
     <Content Include="Models\sp_statemen.edmx.diagram">
       <DependentUpon>sp_statemen.edmx</DependentUpon>
+    </Content>
+    <Content Include="log4net.config" />
+    <EntityDeploy Include="Models\Cashmate_sp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Cashmate_sp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Cashmate_sp.edmx.diagram">
+      <DependentUpon>Cashmate_sp.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
@@ -3337,6 +3382,7 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Statement\Index.cshtml" />
+    <Content Include="Views\Home\Dash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

@@ -1,8 +1,18 @@
-﻿using Ishop.Models;
+﻿using Ishop.Infa;
+using Ishop.Models;
+using IShop.Core;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading;
+using System.Timers;
+using System.Web.UI;
 
 [assembly: OwinStartupAttribute(typeof(Ishop.Startup))]
 namespace Ishop
@@ -12,9 +22,10 @@ namespace Ishop
 
         public void Configuration(IAppBuilder app)
         {
-          
+
             ConfigureAuth(app);
             createRolesandUsers();
+          
 
         }
 
@@ -71,5 +82,9 @@ namespace Ishop
 
 
         }
+
+        
     }
+
 }
+   

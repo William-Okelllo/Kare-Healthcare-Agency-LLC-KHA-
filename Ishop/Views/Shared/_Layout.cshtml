@@ -93,26 +93,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell text-orange"></i>
-                        <span class="badge badge-warning navbar-badge">2</span>
+                        <span class="badge badge-warning navbar-badge">1</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/Images/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Incomes Records <small style="color:blue">coming soon</small>
-                                        <span class="float-right text-sm text-orange">
-                                            <div class="spinner-border spinner-border-sm" role="status"></div>
-                                        </span>
-                                    </h3>
-                                    <p class="text-sm">Track your incomes on the go</p>
-
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
+                       
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
@@ -120,12 +104,13 @@
                                 <img src="~/Images/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
-                                        Super DashBoard-<small style="color:blue">coming soon</small>
-                                        <span class="float-right text-sm text-orange">
-                                        <div class="spinner-border spinner-border-sm" role="status"></div></span>
+                                        Super DashBoard-<small style="color:blue"></small>
+                                                        <span class="float-right text-sm text-orange">
+                                                            <span class="float-right badge bg-danger">New</span>
+                                                        </span>
                                     </h3>
                                     <p class="text-sm">Giving you a quick summary of everything at a Glance</p>
-
+                                   
                                 </div>
                             </div>
                             <!-- Message End -->
@@ -285,12 +270,11 @@
                     </li>
 
 
-                    @if (this.User.IsInRole("Admin"))
-                    {
+                   
                         <li class="nav-item">
 
 
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("Dash", "Home")" class="nav-link">
                                 <i class="nav-icon fa fa-chart-pie text-brown"></i>
                                 <p style="color: brown">
                                     DashBoard <i class="fas fa-angle-left right"></i>
@@ -300,7 +284,7 @@
                             </a>
 
                         </li>
-                    }
+                    
 
                     <li class="nav-header">Expenses & Income</li>
                     <li class="nav-item">
@@ -565,7 +549,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text" style="color: white">Support Team</span>
                     <span class="info-box-number">
-                        <a href="https://api.whatsapp.com/send?phone=+254727422197&text=Hello%20Sharpolex%20Support%20team%20am%20in%20need%20of%20your%20assistance
+                        <a href="https://api.whatsapp.com/send?phone=+254727422197&text=Hello%20Charles%20am%20in%20need%20of%20your%20assistance
                                                      " class="btn btn-sm  btn-secondary btn-lg active" role="button" aria-pressed="true">WhastApp</a>
                     </span>
                 </div>
@@ -580,7 +564,7 @@
 
 
                     <li class="nav-header">
-                        Version 20.0.7
+                        Version 2.0.0
 
                     </li>
                     <li>

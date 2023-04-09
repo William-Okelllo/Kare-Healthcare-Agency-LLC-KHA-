@@ -119,135 +119,153 @@
 
 
 
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <small><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</small>
-                                    @Html.EditorFor(model => model.CreatedOn, new
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <small><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</small>
+                                @Html.EditorFor(model => model.CreatedOn, new
+                           {
+                               htmlAttributes = new
                                {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control ",
-                                       @placeholder = " Expense Date",
-                                       id = "datepicker",
-                                       @required = "required",
-                                   }
-                               })
-                                </div>
-                                <div class="form-group col-md-3" style="display:none">
-                                    <small style="font-family:Quicksand;">@Html.LabelFor(model => model.staff)</small>
-                                    @Html.EditorFor(model => model.staff, new
+                                   @class = "form-control form-control ",
+                                   @placeholder = " Expense Date",
+                                   id = "datepicker",
+                                   @required = "required",
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-3" style="display:none">
+                                <small style="font-family:Quicksand;">@Html.LabelFor(model => model.staff)</small>
+                                @Html.EditorFor(model => model.staff, new
+                           {
+                               htmlAttributes = new
                                {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control ",
+                                   @class = "form-control ",
 
-                                       @Value = User.Identity.Name,
-                                       @Readonly = true
+                                   @Value = User.Identity.Name,
+                                   @Readonly = true
 
 
 
 
-                                   }
-                               })
-
-
-                                </div>
-
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $("#Item").chosen();
-
-                                    });
-                                </script>
-                                <div class="col-12 col-md-4" id="Original">
-                                    <small><i class="fa fa-cubes text-orange"></i> @Html.LabelFor(model => model.Item)</small>
-
-                                    @Html.DropDownList("Item", ViewBag.Categories as SelectList, "-- Select item --",
-                                   new { @class = "form-control form-control", @required = "required" })
-                                </div>
-                                <script>
-                                    $(document).ready(function () {
-                                        $('#Item').change(function () {
-                                            if ($(this).val() == 'Other') {
-                                                $('#other').show(("slide", { direction: "down" }, 300));
-                                                $('#Original').Hide(("slide", { direction: "down" }, 300));
-                                            } else {
-                                                $('#other').hide(("slide", { direction: "down" }, 300));
-                                                $('#Original').show(("slide", { direction: "down" }, 300));
-                                            }
-                                        });
-                                    });
-                                </script>
-                                <script>
-                                    // Chosen touch support.
-                                    if ($('.chosen').length > 0) {
-                                        $('.chosen').on('touchstart', function (e) {
-                                            e.stopPropagation(); e.preventDefault();
-                                            // Trigger the mousedown event.
-                                            $(this).trigger('mousedown');
-                                        });
-                                    }
-                                </script>
-
-                                <div class="form-group col-md-3" id="other" style="display:none">
-                                    <small><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Item)</small>
-                                    @Html.EditorFor(model => model.Item2, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control ",
-                                       @Placeholder = "item Name",
-
-                                   }
-                               })
-                                </div>
-
-
-
-
-
-
-
-
-
-                                <div class="col-11 col-md-3">
-                                    <small> <i class="fa fa-globe text-orange"></i> @Html.LabelFor(model => model.Mode)</small>
-                                    @{
-                                        List<SelectListItem> q = new List<SelectListItem>();
-                                        q.Add(new SelectListItem
-                                        {
-                                            Text = "Cash Payment",
-                                            Value = "Cash Payment",
-                                        });
-                                        q.Add(new SelectListItem
-                                        {
-                                            Text = "Mpesa Payment",
-                                            Value = "Mpesa Payment",
-                                        });
-                                        q.Add(new SelectListItem
-                                        {
-                                            Text = "Credit Card Payment",
-                                            Value = "Credit Card Payment",
-                                        });
-
-
-                                    }@Html.DropDownListFor(model => model.Mode, q, "---Payment Mode---", new { @class = "form-control form-control", @required = "required", })
-                                </div>
-
-
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script>
-                                    $(function () {
-                                        $("input[name='Transaction_cost'],input[name='Fuliza'],input[name='Amount']").blur(function () {
-                                            if ($(this).val() == "") {
-                                                $(this).val(0);
-                                            }
-                                        });
-                                    });
-                                </script>
+                               }
+                           })
 
 
                             </div>
+
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#Item").chosen();
+
+                                });
+                            </script>
+                            <div class="col-12 col-md-4" id="Original">
+                                <small><i class="fa fa-cubes text-orange"></i> @Html.LabelFor(model => model.Item)</small>
+
+                                @Html.DropDownList("Item", ViewBag.Categories as SelectList, "-- Select item --",
+                               new { @class = "form-control form-control", @required = "required" })
+                            </div>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#Item').change(function () {
+                                        if ($(this).val() == 'Other') {
+                                            $('#other').show(("slide", { direction: "down" }, 300));
+                                            $('#Original').Hide(("slide", { direction: "down" }, 300));
+                                        } else {
+                                            $('#other').hide(("slide", { direction: "down" }, 300));
+                                            $('#Original').show(("slide", { direction: "down" }, 300));
+                                        }
+                                    });
+                                });
+                            </script>
+                            <script>
+                                // Chosen touch support.
+                                if ($('.chosen').length > 0) {
+                                    $('.chosen').on('touchstart', function (e) {
+                                        e.stopPropagation(); e.preventDefault();
+                                        // Trigger the mousedown event.
+                                        $(this).trigger('mousedown');
+                                    });
+                                }
+                            </script>
+
+                            <div class="form-group col-md-3" id="other" style="display:none">
+                                <small><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Item)</small>
+                                @Html.EditorFor(model => model.Item2, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Placeholder = "item Name",
+
+                               }
+                           })
+                            </div>
+                            <div class="col-11 col-md-4">
+                                <small> <i class="fa fa-globe text-orange"></i> @Html.LabelFor(model => model.Mode)</small>
+                                @{
+                                    List<SelectListItem> q = new List<SelectListItem>();
+                                    q.Add(new SelectListItem
+                                    {
+                                        Text = "Cash Payment",
+                                        Value = "Cash Payment",
+                                    });
+                                    q.Add(new SelectListItem
+                                    {
+                                        Text = "Mpesa Payment",
+                                        Value = "Mpesa Payment",
+                                    });
+                                    q.Add(new SelectListItem
+                                    {
+                                        Text = "Credit Card Payment",
+                                        Value = "Credit Card Payment",
+                                    });
+
+
+                                }@Html.DropDownListFor(model => model.Mode, q, "---Payment Mode---", new { @class = "form-control form-control", @required = "required", })
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+                               
+
+
+                            
+
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#Auto_post").click(function () {
+                                        if ($(this).is(":checked")) {
+                                            $("#x").show(("slide", { direction: "up" }, 300));
+                                            $("#note2").show(("slide", { direction: "up" }, 300));
+                                        } else {
+                                            $("#x").hide(("slide", { direction: "left" }, 300));
+                                            $("#note2").hide(("slide", { direction: "left" }, 300));
+                                            ;
+                                        }
+                                    });
+                                });
+                            </script>
+
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
+                                $(function () {
+                                    $("input[name='Transaction_cost'],input[name='Fuliza'],input[name='Amount']").blur(function () {
+                                        if ($(this).val() == "") {
+                                            $(this).val(0);
+                                        }
+                                    });
+                                });
+                            </script>
+
+
+                       
                             <div class="row">
                                 <div class="col-9 col-md-3">
                                     <small> <i class="fa fa-cash-register text-orange"></i>      @Html.LabelFor(model => model.Amount)</small>

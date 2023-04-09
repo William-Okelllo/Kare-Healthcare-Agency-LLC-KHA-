@@ -32,7 +32,30 @@ namespace Ishop.Controllers
 
             return View();
         }
-    
+
+        public ActionResult Dash()
+        {
+            sp_allprocs l9 = new sp_allprocs();
+            var boo9 = l9.sp_dash(User.Identity.Name).ToList();
+            ViewBag.l9 = boo9;
+            
+
+            Cashmate_sp_das A2 = new Cashmate_sp_das();
+            var Dash2 = A2.sp_dash_2(User.Identity.Name).ToList();
+            ViewBag.A2 = Dash2;
+
+            Cashmate_sp_das A3 = new Cashmate_sp_das();
+            var Dash3 = A3.sp_dash_3(User.Identity.Name).ToList();
+            ViewBag.A3 = Dash3;
+
+            Cashmate_sp_das A4 = new Cashmate_sp_das();
+            var Dash4 = A4.sp_dash_4(User.Identity.Name).ToList();
+            ViewBag.A4 = Dash4;
+
+            
+
+            return View();
+        }
 
         public ActionResult Contact()
         {

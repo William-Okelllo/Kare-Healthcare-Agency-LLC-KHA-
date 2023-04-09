@@ -47,5 +47,6 @@ namespace IShop.Core
         [Display(Name = "Notes")]
         public string Additional_Notes { get; set; }
 
+       
     }
 }
