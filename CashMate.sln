@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Infa", "Ishop.Infa\Hr.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR", "Ishop\HR.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
 EndProject
-Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Reports", "Reports\Reports.rptproj", "{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,14 +34,6 @@ Global
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.Debug|Any CPU.ActiveCfg = Debug
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.Debug|Any CPU.Build.0 = Debug
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.Debug|Any CPU.Deploy.0 = Debug
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.DebugLocal|Any CPU.Build.0 = DebugLocal
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.Release|Any CPU.ActiveCfg = Release
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.Release|Any CPU.Build.0 = Release
-		{6E966BC5-40DF-47E9-AD8D-C26743ACE16D}.Release|Any CPU.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
