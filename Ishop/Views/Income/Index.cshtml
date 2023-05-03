@@ -1,11 +1,10 @@
 ﻿@using PagedList
 @using PagedList.Mvc;
-@model IPagedList<IShop.Core.Expense>
+@model IPagedList<IShop.Core.Invoice>
 
 @{
-    ViewBag.Title = "Expense";
+    ViewBag.Title = "Income";
 }
-
 
 <style type="text/css">
     .loading {
@@ -39,22 +38,21 @@
         width: 20%;
         border-color: white;
     }
-    
 </style>
 
 <div class="card " style="background-color: rgb(255, 255, 255, 0.95);">
 
 
-    <div class="card-header" style="background-color: #331603; color: white; border-radius: 14px ">
+    <div class="card-header" style="background-color: #0d4d28; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white">
-            <i class="fa fa-cart-plus"></i>
-            Expenses
+            <i class="fa fa-wallet"></i>
+            Incomes 
         </h3>
 
         <div style="text-align: right; color: white ">
 
 
-            @Html.ActionLink("New ", "Create", "Expense", null, new { @class = "btn btn-sm btn-default btn" })
+            @Html.ActionLink("New ", "Create", "Income", null, new { @class = "btn btn-sm btn-default btn" })
 
 
 
@@ -106,11 +104,11 @@
 
                 <thead>
                     <tr style="color:white">
-                        <th style="background-color: #331603; "> Post On</th>
-                        <th style="background-color: #331603; "> Category</th>
+                        <th style="background-color: #0d4d28; "> Date</th>
+                        <th style="background-color: #0d4d28; "> Source of Fund</th>
 
-                        <th style="background-color: #331603; ">Amount </th>
-                        <th style="background-color: #331603; ">Action </th>
+                        <th style="background-color: #0d4d28; ">Amount </th>
+                        <th style="background-color: #0d4d28; ">Action </th>
 
 
 
@@ -123,13 +121,14 @@
                         <tr data-widget="expandable-table" aria-expanded="false">
 
                             <td style="background-color:white">
-                                <small> <i class="fa fa-calendar-check text-orange"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small>
+                                <small> <i class="fa fa-calendar-check text-success"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")</small>
                             </td>
-                            <td style="background-color:white"><i class="fa fa-shopping-bag text-orange"></i>  @item.Item : <span class="badge badge-dark">@item.Mode</span>
+                            <td style="background-color:white">
+                                <i class="fa fa-shopping-bag text-success"></i>  @item.Source : <span class="badge badge-success">@item.Mode </span>
 
-</td>
+                            </td>
 
-                            <td style="background-color:white"> @item.Total.ToString("#,##0.00")</td>
+                            <td style="background-color:white"> @item.Amount.ToString("#,##0.00")</td>
 
 
 
@@ -146,12 +145,8 @@
                                             <i class="fa fa-eye text-primary"></i> View
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("Edit", "Expense", new { Id = item.Id })" class="dropdown-item">
-                                            <i class="fa fa-spinner text-success"></i> Update Info
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to drop this expense?')) { window.location.href = '@Url.Action("Drop", "Expense", new { id = item.Id })'; }">
-                                            <i class="fa fa-times-circle text-danger"></i> Drop Expense
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to drop this Income?')) { window.location.href = '@Url.Action("Drop", "Income", new { id = item.Id })'; }">
+                                            <i class="fa fa-times-circle text-danger"></i> Drop Income
                                         </a>
                                         <script>
                                             $(function () {
@@ -255,12 +250,12 @@
                 </div>
             </div>
 
-
-            @foreach (var item in ViewBag.l9)
+            <h6 style="color:darkgreen"><i class="fa fa-piggy-bank text-success"></i> Income summary</h6>
+            @foreach (var item in ViewBag.l8)
             {
                 <div class="row">
                     <div class="col-md-2 col-sm-5 col-6" style="border-radius: 24px;">
-                        <div class="info-box" style="border-radius: 14px; background-color: #803209">
+                        <div class="info-box" style="border-radius: 14px; background-color: #0d4d28">
                             <span><i class="fa fa-book-reader text-white"></i></span>
 
                             <div class="info-box-content" style="color:white">
@@ -271,9 +266,9 @@
                         </div>
                         <!-- /.info-box -->
                     </div>
-                    <div class="col-md-2 col-sm-5 col-6">
-                        <div class="info-box" style="border-radius: 14px;background-color:black">
-                            <span><i class="fa fa-clipboard-list text-white"></i></span>
+                    <div class="col-md-2 col-sm-5 col-6" style="border-radius: 24px;">
+                        <div class="info-box" style="border-radius: 14px; background-color: #0d4d28">
+                            <span><i class="fa fa-coins-list text-white"></i></span>
 
                             <div class="info-box-content" style="color:white">
                                 <span class="info-box-text">Week - </span>
@@ -283,8 +278,8 @@
                         </div>
                         <!-- /.info-box -->
                     </div>
-                    <div class="col-md-2 col-sm-5 col-6">
-                        <div class="info-box" style="border-radius: 14px;background-color:#064e12">
+                    <div class="col-md-2 col-sm-5 col-6" style="border-radius: 24px;">
+                        <div class="info-box" style="border-radius: 14px; background-color: #0d4d28">
                             <span><i class="fa fa-calendar-day text-white"></i></span>
 
                             <div class="info-box-content" style="color:white">
@@ -297,74 +292,3 @@
                     </div>
                 </div>
             }
-
-
-
-            <div id='Details' class="modal fade" role="dialog">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div id='myModalContent'></div>
-                    </div>
-                </div>
-            </div>
-
-
-            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-            <script src="~/Scripts/bootstrap.js"></script>
-            <script src="~/Scripts/bootstrap.min.js"></script>
-            <script>
-                var TeamDetailPostBackURL = '/Expense/Details';
-                $(function () {
-                    $(".anchorDetail").click(function () {
-                        var $buttonClicked = $(this);
-                        var id = $buttonClicked.attr('data-id');
-                        $.ajax({
-                            type: "GET",
-                            url: TeamDetailPostBackURL,
-                            contentType: "application/json; charset=utf-8",
-                            data: { "Id": id },
-                            datatype: "json",
-                            success: function (data) {
-                                $('#myModalContent').html(data);
-                                $('#Details').modal('show').fade(900);
-                            },
-                            error: function () {
-                                alert("Dynamic content load failed.");
-                            }
-                        });
-                    });
-                });
-            </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-
-
-
-</div>

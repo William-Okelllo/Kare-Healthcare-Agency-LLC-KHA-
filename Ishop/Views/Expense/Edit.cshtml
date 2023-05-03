@@ -5,104 +5,271 @@
 }
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-9" style="border-radius: 24px;">
-        <!-- Widget: user widget style 2 -->
-        <div class="card card-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header" style="background-color:navy ">
-
-                <!-- /.widget-user-image -->
-
-                <h5 style="color:white">  Expense Update </h5>
-
-
+    <div class="col-md-9 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #803209; color: white; border-radius: 14px ">
+                <i class="fa fa-spinner"></i> Update Expenditure
             </div>
-            <div class="card-body" style="background-color: #ffffffc1">
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+                    <div class="card-body" style="background-color: #ffffffc1">
 
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-                    <div class="form-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <small><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</small>
+                                    @Html.EditorFor(model => model.CreatedOn, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control ",
+                                       @placeholder = " Expense Date",
+                                       id = "datepicker",
+                                       @required = "required",
+                                   }
+                               })
+                                </div>
+                                <div class="form-group col-md-3" style="display:none">
+                                    <small style="font-family:Quicksand;">@Html.LabelFor(model => model.staff)</small>
+                                    @Html.EditorFor(model => model.staff, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
 
-
-                        <div class="form-group col-md-4">
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.CreatedOn)</label>
-                            @Html.EditorFor(model => model.CreatedOn, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-
-                               @Readonly = true
-                           }
-                       })
-                        </div>
-
-
-                        <div class="form-group col-md-3">
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Amount)</label>
-                            @Html.EditorFor(model => model.Amount, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-
-
-                           }
-                       })
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-
-
-                        <div class="form-group col-md-2">
-                            <label style="font-family:Quicksand;">@Html.LabelFor(model => model.Status)</label>
-                            @Html.EditorFor(model => model.Status, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-
-                               @Readonly = true
-                           }
-                       })
-                        </div>
-                    </div>
-                   
-                        <p style="font-family:Calibri">
-                            <i class="fa fa-comment text-yellow"></i>
-                            Additional Information
-                        </p>
-                        <div class="form-row">
-
-
-                            @Html.TextAreaFor(model => model.Additional_Notes, 4, 70, htmlAttributes: new
-                       {
-                           style = "width: 70%; max-width:70%;",
-                           @placeholder = "Additional information",
-                           @autofocus = ""
-                           ,
-                           @class = "form-control form-rounded2"
-
-                       })
-                        </div>
+                                       @Value = User.Identity.Name,
+                                       @Readonly = true
 
 
 
 
+                                   }
+                               })
 
 
+                                </div>
+
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $("#Item").chosen();
+
+                                    });
+                                </script>
+                                <div class="col-12 col-md-4" id="Original">
+                                    <small><i class="fa fa-cubes text-orange"></i> @Html.LabelFor(model => model.Item)</small>
+
+                                    @Html.DropDownList("Item", ViewBag.Categories as SelectList, "-- Select item --",
+new { @class = "form-control form-control", @required = "required" })
+                                </div>
+                                <script>
+                                    $(document).ready(function () {
+                                        $('#Item').change(function () {
+                                            if ($(this).val() == 'Other') {
+                                                $('#other').show(("slide", { direction: "down" }, 300));
+                                                $('#Original').Hide(("slide", { direction: "down" }, 300));
+                                            } else {
+                                                $('#other').hide(("slide", { direction: "down" }, 300));
+                                                $('#Original').show(("slide", { direction: "down" }, 300));
+                                            }
+                                        });
+                                    });
+                                </script>
+                                <script>
+                                    // Chosen touch support.
+                                    if ($('.chosen').length > 0) {
+                                        $('.chosen').on('touchstart', function (e) {
+                                            e.stopPropagation(); e.preventDefault();
+                                            // Trigger the mousedown event.
+                                            $(this).trigger('mousedown');
+                                        });
+                                    }
+                                </script>
+
+                                <div class="form-group col-md-3" id="other" style="display:none">
+                                    <small><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Item)</small>
+                                    @Html.EditorFor(model => model.Item2, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @Placeholder = "item Name",
+
+                                   }
+                               })
+                                </div>
+                                <div class="col-11 col-md-4">
+                                    <small> <i class="fa fa-globe text-orange"></i> @Html.LabelFor(model => model.Mode)</small>
+                                    @{
+                                        List<SelectListItem> q = new List<SelectListItem>();
+                                        q.Add(new SelectListItem
+                                        {
+                                            Text = "Cash Payment",
+                                            Value = "Cash Payment",
+                                        });
+                                        q.Add(new SelectListItem
+                                        {
+                                            Text = "Mpesa Payment",
+                                            Value = "Mpesa Payment",
+                                        });
+                                        q.Add(new SelectListItem
+                                        {
+                                            Text = "Credit Card Payment",
+                                            Value = "Credit Card Payment",
+                                        });
 
 
-                        <hr />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Update Expense" class="btn btn-success" />
-                                || @Html.ActionLink("Cancel", "Index", "Expense", null, new { @class = "btn btn-danger btn" })
+                                    }@Html.DropDownListFor(model => model.Mode, q, "---Payment Mode---", new { @class = "form-control form-control", @required = "required", })
+                                </div>
+
                             </div>
-                        </div>
 
+
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#Auto_post").click(function () {
+                                        if ($(this).is(":checked")) {
+                                            $("#x").show(("slide", { direction: "up" }, 300));
+                                            $("#note2").show(("slide", { direction: "up" }, 300));
+                                        } else {
+                                            $("#x").hide(("slide", { direction: "left" }, 300));
+                                            $("#note2").hide(("slide", { direction: "left" }, 300));
+                                            ;
+                                        }
+                                    });
+                                });
+                            </script>
+
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
+                                $(function () {
+                                    $("input[name='Transaction_cost'],input[name='Fuliza'],input[name='Amount']").blur(function () {
+                                        if ($(this).val() == "") {
+                                            $(this).val(0);
+                                        }
+                                    });
+                                });
+                            </script>
+
+
+
+                            <div class="row">
+                                <div class="col-9 col-md-3">
+                                    <small> <i class="fa fa-cash-register text-orange"></i>      @Html.LabelFor(model => model.Amount)</small>
+                                    @Html.EditorFor(model => model.Amount, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @Placeholder = "0.00/=",
+                                       @Type = "Number",
+                                   }
+                               })
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <small><i class="fa fa-gavel text-orange"></i>   @Html.LabelFor(model => model.Transaction_cost)</small>
+                                    @Html.EditorFor(model => model.Transaction_cost, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @Placeholder = "0.00/=",
+                                       @Type = "Number",
+                                   }
+                               })
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <small><i class="fa fa-layer-group text-orange"></i>  @Html.LabelFor(model => model.Fuliza)</small>
+                                    @Html.EditorFor(model => model.Fuliza, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @Placeholder = "0.00/=",
+                                       @Type = "Number",
+                                       @Value = 0,
+
+                                   }
+                               })
+                                </div>
+
+                                <div class="col-9 col-md-2">
+                                    <small> <i class="fa fa-cash-register text-orange"></i>      @Html.LabelFor(model => model.Total)</small>
+                                    @Html.EditorFor(model => model.Total, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control ",
+                                       @Placeholder = "0.00/=",
+                                       @Type = "Number",
+                                       @Value = 0,
+                                       @Readonly = true
+                                   }
+                               })
+                                </div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        //this calculates values automatically
+                                        sum();
+                                        $("#Transaction_cost,#Fuliza, #Amount,#Total").on("keydown keyup", function () {
+                                            sum();
+                                        });
+                                    });
+                                    function sum() {
+                                        var num1 = document.getElementById('Transaction_cost').value;
+                                        var num2 = document.getElementById('Fuliza').value;
+                                        var num3 = document.getElementById('Amount').value;
+
+                                        var result = parseFloat(num1) + parseFloat(num2) + parseFloat(num3);
+                                        if (!isNaN(result)) {
+                                            document.getElementById('Total').value = result;
+                                        }
+                                    }
+                                </script>
+                            </div>
+                            <hr />
+                            <small style="font-family:Calibri">
+                                <i class="fa fa-comment text-orange"></i>
+                                Additional Information
+                            </small>
+                            <div class="form-row">
+
+
+                                @Html.TextAreaFor(model => model.Additional_Notes, 4, 100, htmlAttributes: new
+                           {
+                               style = "width: 100%; max-width:100%;",
+                               @placeholder = "Additional information",
+                               @autofocus = ""
+                                                                 ,
+                               @class = "form-control form-rounded2"
+
+                           })
+                            </div>
+
+
+
+
+
+
+
+                            <hr />
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Update Expense" class="btn btn-success" />
+                                    || @Html.ActionLink("Cancel", "Index", "Expense", null, new { @class = "btn btn-danger btn" })
+                                </div>
+                            </div>
                         }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 

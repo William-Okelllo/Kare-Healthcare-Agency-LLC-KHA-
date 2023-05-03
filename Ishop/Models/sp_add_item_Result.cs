@@ -11,11 +11,10 @@ namespace Ishop.Models
 {
     using System;
     
-    public partial class sp_dash_Result
+    public partial class sp_add_item_Result
     {
-        public decimal Total_Week { get; set; }
-        public decimal Total_Today { get; set; }
-        public decimal Total_Month { get; set; }
         public int id { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string item { get; set; }
     }
 }

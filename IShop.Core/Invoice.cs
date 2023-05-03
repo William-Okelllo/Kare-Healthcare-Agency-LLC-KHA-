@@ -13,17 +13,15 @@ namespace IShop.Core
 
         
 
-        [Required]
-        [Display(Name = "Client Name")]
-        public string Client_Name { get; set; }
+        
 
         [Display(Name = " Generated On")]
         public DateTime CreatedOn { get; set; }
 
 
 
-        [Display(Name = " Due Date")]
-        public DateTime Due_Date { get; set; }
+        [Display(Name = "Source of Fund")]
+        public string Source { get; set; }
 
         [Required]
         public Decimal Amount { get; set; }
@@ -31,7 +29,9 @@ namespace IShop.Core
 
         [Required]
         [Display(Name = "Status")]
-        public string Status { get; set; }
+        public string Mode { get; set; }
+
+        public string User_Acc { get; set; }
 
 
         [Required]

@@ -36,17 +36,17 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.74);">
 
 
-    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: #cf6113; color: white; border-radius: 14px ">
+    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: #0d4d28; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-calendar-day"></i>
-            Expense Statements  -@DateTime.Now.Year
+            Income Statements  -@DateTime.Now.Year
         </h3>
     </div>
     <div class="card-body">
         <p>
-            <div class="spinner-grow spinner-grow-sm text-orange" role="status">
+            <div class="spinner-grow spinner-grow-sm text-success" role="status">
                 <span class="sr-only">Loading...</span>
-            </div> Select the month to auto generate expense statement
+            </div> Select the month to auto generate Income statement
         </p>
 
 
@@ -55,13 +55,13 @@
             {
 
                 <div class="col-md-2 col-sm-6 col-6">
-                    <div class="info-box" style="border-radius: 16px; background-color: #cf6113">
+                    <div class="info-box" style="border-radius: 16px; background-color: #0d4d28">
 
 
                         <div class="info-box-content" style="color:white">
                             <span class="info-box-text text-wrap"><p> <i class="fa fa-calendar-check"></i> @item.Month -<small> @item.Id-@DateTime.Now.Year</small></p></span>
 
-                            <button type="button" class="btn btn-xs btn-default " onclick="location.href='@Url.Action("Statement", "Statement",new { M = item.Month })'">View</button>
+                            <button type="button" class="btn btn-xs btn-default " onclick="location.href='@Url.Action("Inc_Statement", "Statement",new { M = item.Month })'">View</button>
 
 
                             <!-- /.info-box-content -->

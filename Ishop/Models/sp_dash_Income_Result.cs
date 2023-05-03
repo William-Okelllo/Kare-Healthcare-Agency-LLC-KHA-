@@ -11,7 +11,7 @@ namespace Ishop.Models
 {
     using System;
     
-    public partial class sp_dash_Result
+    public partial class sp_dash_Income_Result
     {
         public decimal Total_Week { get; set; }
         public decimal Total_Today { get; set; }

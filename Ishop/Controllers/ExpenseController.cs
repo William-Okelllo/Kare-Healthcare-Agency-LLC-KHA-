@@ -28,7 +28,7 @@ namespace Ishop.Controllers
         // GET: Expense
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            sp_allprocs l9 = new sp_allprocs();
+            sp_Charles_M l9 = new sp_Charles_M();
             var boo9 = l9.sp_dash(User.Identity.Name).ToList();
             ViewBag.l9 = boo9;
 
@@ -67,7 +67,7 @@ namespace Ishop.Controllers
         // GET: Expense/Create
         public ActionResult Create()
         {
-            HR2_CashmateEntities dbb = new HR2_CashmateEntities();
+            sp_cA dbb = new sp_cA();
             var categories = dbb.Categories.ToList();
             ViewBag.Categories = new SelectList(categories, "item", "item");
             return View();
@@ -119,6 +119,9 @@ namespace Ishop.Controllers
         // GET: Expense/Edit/5
         public ActionResult Edit(int? id)
         {
+            sp_cA dbb = new sp_cA();
+            var categories = dbb.Categories.ToList();
+            ViewBag.Categories = new SelectList(categories, "item", "item");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -136,8 +139,29 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Amount,Status,Additional_Notes")] Expense expense)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Amount,Fuliza,Transaction_cost,Mode,item,Additional_Notes,Total,staff,Item2")] Expense expense)
         {
+            if (expense.Item == "Other")
+            {
+                expense.Item = expense.Item2;
+                try
+                {
+                    string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                    SqlConnection sqlCon = new SqlConnection(strcon);
+                    SqlCommand sqlcmnd = new SqlCommand("sp_add_item", sqlCon);
+                    sqlcmnd.CommandType = CommandType.StoredProcedure;
+                    sqlcmnd.Parameters.AddWithValue("@item", expense.Item2);
+                    sqlCon.Open();
+                    sqlcmnd.ExecuteNonQuery();
+                    sqlCon.Close();
+
+                }
+                catch
+                {
+                    TempData["msg"] = "Error adding item ";
+
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(expense).State = EntityState.Modified;
@@ -210,7 +234,7 @@ namespace Ishop.Controllers
             }
         }
 
-        public ActionResult Drop(int? id, Ticket ticket)
+        public ActionResult Drop(int? id)
         {
             try
             {
@@ -218,7 +242,7 @@ namespace Ishop.Controllers
                 SqlConnection sqlCon = new SqlConnection(strcon);
                 SqlCommand sqlcmnd = new SqlCommand("sp_drop_expense", sqlCon);
                 sqlcmnd.CommandType = CommandType.StoredProcedure;
-                sqlcmnd.Parameters.AddWithValue("@Id", ticket.id);
+                sqlcmnd.Parameters.AddWithValue("@Id", id);
                 sqlCon.Open();
                 sqlcmnd.ExecuteNonQuery();
                 sqlCon.Close();

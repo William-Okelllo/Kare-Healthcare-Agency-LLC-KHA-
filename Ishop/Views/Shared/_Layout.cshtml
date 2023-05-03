@@ -104,12 +104,12 @@
                                 <img src="~/Images/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
-                                        Super DashBoard-<small style="color:blue"></small>
-                                                        <span class="float-right text-sm text-orange">
-                                                            <span class="float-right badge bg-danger">New</span>
+                                        Incomes Module Added<small style="color:blue"></small>
+                                                        <span class="float-right text-sm text-success">
+                                                            <span class="float-right badge bg-success">New</span>
                                                         </span>
                                     </h3>
-                                    <p class="text-sm">Giving you a quick summary of everything at a Glance</p>
+                                    <p class="text-sm">Track you incomes on the go </p>
                                    
                                 </div>
                             </div>
@@ -318,12 +318,12 @@
                             </li>
                         </ul>
                     </li>
-                   
+                    
                     <li class="nav-item">
 
 
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-piggy-bank text-navy"></i>
+                            <i class="nav-icon fa fa-piggy-bank text-success"></i>
                             <p style="color: black; font-family: Calibri">
                                 Incomes <i class="fas fa-angle-left right"></i>
 
@@ -333,36 +333,23 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    
-                                    <p style="font-family:Calibri;color:grey">
-                                        <div class="spinner-border spinner-border-sm" role="status">
-                                           
-                                        </div>  coming soon <i class="fas fa-angle-left right"></i>
+                                <a href="@Url.Action("Create", "Income")" class="nav-link">
+                                    <i class="fa fa-clipboard-list text-success nav-icon"></i>
+                                    <p style="font-family:Calibri;color:black">
+                                        Add Income  <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>
                             </li>
-                            </ul>
-                            <!-- <ul class="nav nav-treeview">
-
-        <li class="nav-item">
-            <a href="@Url.Action("Create", "Income")" class="nav-link">
-                <i class="fa fa-piggy-bank text-navy nav-icon"></i>
-                <p style="font-family:Calibri;color:black">
-                    New Income <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="@Url.Action("Index", "Income")" class="nav-link">
-                <i class="fa fa-clipboard-list text-navy nav-icon"></i>
-                <p style="font-family:Calibri;color:black">
-                    Income list <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-        </li>
-    </ul>
-                        -->
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Income")" class="nav-link">
+                                    <i class="fa fa-clipboard-list text-success nav-icon"></i>
+                                    <p style="font-family:Calibri;color:black">
+                                        Incomes list <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        
 </li>
     <li class="nav-item">
 
@@ -399,9 +386,9 @@
 
 
         <a href="#" class="nav-link">
-            <i class="nav-icon fa fa-paperclip text-indigo"></i>
-            <p style="color: indigo; font-family: Calibri ">
-                Statement <i class="fas fa-angle-left right"></i>
+            <i class="nav-icon fa fa-clipboard-list text-black "></i>
+            <p style="color: black; font-family: Calibri ">
+                Statements <i class="fas fa-angle-left right"></i>
 
 
             </p>
@@ -410,32 +397,23 @@
 
             <li class="nav-item">
                 <a href="@Url.Action("index", "Statement")" class="nav-link">
-                    <i class="fa fa-paperclip text-indigo nav-icon"></i>
-                    <p style="font-family: Calibri; color: indigo">
-                        Monthly Statement <i class="fas fa-angle-left right"></i>
+                    <i class="fa fa-clipboard-list text-black nav-icon"></i>
+                    <p style="font-family: Calibri; color: black">
+                        Expense statements <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("index2", "Statement")" class="nav-link">
+                    <i class="fa fa-clipboard-list text-black nav-icon"></i>
+                    <p style="font-family: Calibri; color: black">
+                        Income statements <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
             </li>
 
         </ul>
     </li>
-
-
-    @if (this.User.IsInRole("Report_Viewer"))
-    {
-        <li class="nav-header"><i class="fa fa-chart-line text-white"></i> B.I Reports</li>
-
-        <li class="nav-item">
-            <a href="@Url.Action("Index", "Reports")" class="nav-link">
-
-                <i class="fa fa-chart-bar text-white nav-icon"></i>
-                <p style="color: white">
-                    Reports
-                </p>
-            </a>
-        </li>
-    }
-
 
 
 
@@ -485,79 +463,6 @@
 
 
     }
-
-    <style>
-        @@-webkit-keyframes pulse {
-            0% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-
-            50% {
-                -webkit-transform: scale3d(1.05, 1.05, 1.05);
-                transform: scale3d(1.05, 1.05, 1.05);
-            }
-
-            100% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-        }
-
-        @@keyframes pulse {
-            0% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-
-            50% {
-                -webkit-transform: scale3d(1.05, 1.05, 1.05);
-                transform: scale3d(1.05, 1.05, 1.05);
-            }
-
-            100% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-        }
-
-        .pulse:hover {
-            -webkit-animation-name: pulse;
-            animation-name: pulse;
-        }
-
-        .animated {
-            -webkit-animation-duration: 1s;
-            animation-duration: 1s;
-            -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-        }
-
-            .animated.infinite {
-                -webkit-animation-iteration-count: infinite;
-                animation-iteration-count: infinite;
-            }
-    </style>
-    <div class="pulse animated infinite">
-        <div class="col-md-11 col-sm-8 col-12">
-            <div class="info-box " style="background-color: #ff6a00cc; border-radius: 14px;">
-
-                <span class="info-box-icon  ">
-                    <i class="fa fa-comment text-white nav-icon"></i>
-                </span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text" style="color: white">Support Team</span>
-                    <span class="info-box-number">
-                        <a href="https://api.whatsapp.com/send?phone=+254727422197&text=Hello%20Charles%20am%20in%20need%20of%20your%20assistance
-                                                     " class="btn btn-sm  btn-secondary btn-lg active" role="button" aria-pressed="true">WhastApp</a>
-                    </span>
-                </div>
-                <!-- /.info-box-content -->
-</div>
-                            <!-- /.info-box -->
-                        </div>
-                    </div>
 
 
 

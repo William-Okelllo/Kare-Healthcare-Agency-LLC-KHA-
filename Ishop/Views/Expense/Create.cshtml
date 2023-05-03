@@ -215,6 +215,11 @@
                                         Text = "Mpesa Payment",
                                         Value = "Mpesa Payment",
                                     });
+                                     q.Add(new SelectListItem
+                                    {
+                                        Text = "Cheque Payment",
+                                        Value = "Cheque Payment",
+                                    });
                                     q.Add(new SelectListItem
                                     {
                                         Text = "Credit Card Payment",
@@ -394,8 +399,7 @@
                                         });
                                     </script>
                                     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                                    <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
-
+                                    
 
 
                                 </td>

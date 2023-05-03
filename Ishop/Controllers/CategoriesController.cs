@@ -12,7 +12,7 @@ namespace Ishop.Models
 {
     public class CategoriesController : Controller
     {
-        private HR2_CashmateEntities db = new HR2_CashmateEntities();
+        private sp_cA db = new sp_cA();
 
         // GET: Categories
         public ActionResult Index(string searchBy, string search, int? page)

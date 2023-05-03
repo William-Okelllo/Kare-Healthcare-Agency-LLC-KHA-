@@ -20,7 +20,7 @@
     }
 </style>
 
-<div class="card " style="background-color: rgb(255, 255, 255, 0.93);">
+<div class="card " style="background-color: rgb(255, 255, 255, 0.58);">
 
 
 
@@ -58,12 +58,53 @@
                         <!-- /.widget-user -->
                     </div>
                 </div>
-                <div class="col-xl-7">
+                <div class="col-xl-8">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
                         <div class="card-header" style="background-color: #331603; color: white; border-radius: 14px "> <i class="fa fa-spinner"></i> Summary </div>
                         <div class="card-body text-left" style="background-color:white;border-radius: 14px;">
+                            <h6 style="color:darkgreen"><i class="fa fa-piggy-bank text-success"></i> Income summary</h6>
+                            @foreach (var item in ViewBag.l8)
+                            {
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-5 col-6" style="border-radius: 24px;">
+                                        <div class="info-box" style="border-radius: 14px; background-color: #0d4d28">
+                                            <span><i class="fa fa-book-reader text-white"></i></span>
 
-                            <h6><i class="fa fa-chart-line text-primary"></i> Expense summary</h6>
+                                            <div class="info-box-content" style="color:white">
+                                                <span class="info-box-text">Month - @DateTime.Now.ToString("MMMM")</span>
+                                                <span class="info-box-number">@item.Total_Month.ToString("#,##0.00") </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-4 col-sm-5 col-6">
+                                        <div class="info-box" style="border-radius: 14px; background-color: #0d4d28">
+                                            <span><i class="fa fa-coins-list text-white"></i></span>
+
+                                            <div class="info-box-content" style="color:white">
+                                                <span class="info-box-text">Week - </span>
+                                                <span class="info-box-number">@item.Total_Week.ToString("#,##0.00") </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <div class="col-md-4 col-sm-5 col-6">
+                                        <div class="info-box" style="border-radius: 14px; background-color: #0d4d28">
+                                            <span><i class="fa fa-calendar-day text-white"></i></span>
+
+                                            <div class="info-box-content" style="color:white">
+                                                <span class="info-box-text">Today-@DateTime.Now.ToString("dddd")</span>
+                                                <span class="info-box-number">@item.Total_Today.ToString("#,##0.00") </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                </div>
+                            }
+                            <h6 style="color:red"><i class="fa fa-coins text-danger"></i> Expense summary</h6>
                             @foreach (var item in ViewBag.l9)
                             {
                                 <div class="row">
@@ -80,7 +121,7 @@
                                         <!-- /.info-box -->
                                     </div>
                                     <div class="col-md-4 col-sm-5 col-6">
-                                        <div class="info-box" style="border-radius: 14px;background-color:black">
+                                        <div class="info-box" style="border-radius: 14px; background-color: #803209">
                                             <span><i class="fa fa-clipboard-list text-white"></i></span>
 
                                             <div class="info-box-content" style="color:white">
@@ -92,7 +133,7 @@
                                         <!-- /.info-box -->
                                     </div>
                                     <div class="col-md-4 col-sm-5 col-6">
-                                        <div class="info-box" style="border-radius: 14px;background-color:#064e12">
+                                        <div class="info-box" style="border-radius: 14px; background-color: #803209">
                                             <span><i class="fa fa-calendar-day text-white"></i></span>
 
                                             <div class="info-box-content" style="color:white">
@@ -106,7 +147,7 @@
                                 </div>
                             }
                             <hr />
-                            
+
                         </div>
                     </div>
                 </div>
