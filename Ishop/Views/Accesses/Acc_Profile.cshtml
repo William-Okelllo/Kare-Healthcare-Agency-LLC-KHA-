@@ -52,17 +52,12 @@
 
 <div class="card" style="background-color: #ffffffd9">
     <br />
+
     <div class="col d-flex justify-content-center">
-        <div class="col-md-8" style="border-radius: 14px;">
-            <!-- Widget: user widget style 2 -->
-            <div class="card card-widget widget-user-2" style="border-radius: 14px;">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header" style="background-color: black ">
-                    <div class="widget-user-image">
-                        <img src="~/Images/logo.png" height="80" alt="User Avatar">
-                    </div>
-                    <!-- /.widget-user-image -->
-                    <h6 class="widget-user-username" style="color:white">Account Profile : @User.Identity.Name</h6>
+        <div class="col-md-9 col-sm-12 col-12">
+            <div class="card mb- mb-xl-4" style="border-radius: 24px;">
+                <div class="card-header" style="background-color: #076f79d4; color: white; border-radius: 14px ">
+                    <i class="bx bxs-user-detail"></i>Account Profile : @User.Identity.Name</h6>
 
 
                 </div>
@@ -134,7 +129,7 @@
                         int remainingDays = remainingTime.Days;
                     }
 
-                <p><i class="fa fa-certificate text-warning"></i> License : 1 yr  ( @remainingDays Days left)</p>
+                    <p><i class="fa fa-certificate text-warning"></i> License : 1 yr  ( @remainingDays Days left)</p>
 
                     <hr />
                     <p>Actions</p>

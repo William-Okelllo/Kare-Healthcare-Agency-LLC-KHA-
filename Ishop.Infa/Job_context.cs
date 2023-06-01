@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Ishop.Infa
 {
-    public class ExpenseContext : DbContext
+    public class Job_context  : DbContext
     {
-        public ExpenseContext()
-             : base("Ishop")
+        public Job_context()
+           : base("Job_Villa")
         {
         }
-        public DbSet<Expense> expenses { get; set; }
+        public DbSet<Job> Jobs { get; set; }
     }
 }

@@ -70,7 +70,14 @@ namespace Ishop
 
                 }
             }
+            
+            if (!roleManager.RoleExists("Candidate"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Candidate";
+                roleManager.Create(role);
 
+            }
             if (!roleManager.RoleExists("App_user"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
@@ -83,7 +90,7 @@ namespace Ishop
 
         }
 
-        
+
     }
 
 }

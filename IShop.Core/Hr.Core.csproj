@@ -53,28 +53,17 @@
     <Compile Include="Expense.cs" />
     <Compile Include="Facilities.cs" />
     <Compile Include="Interface\IAccess.cs" />
-    <Compile Include="Interface\Iadvance.cs" />
-    <Compile Include="Interface\IAttendance.cs" />
-    <Compile Include="Interface\Ibug.cs" />
     <Compile Include="Interface\Ichat.cs" />
     <Compile Include="Interface\Idata.cs" />
-    <Compile Include="Interface\Idepartment.cs" />
     <Compile Include="Interface\Iemp.cs" />
-    <Compile Include="Interface\Iexpense.cs" />
-    <Compile Include="Interface\Ifacilities.cs" />
-    <Compile Include="Interface\Iinvoice.cs" />
-    <Compile Include="Interface\Ileave.cs" />
+    <Compile Include="Interface\Ijob.cs" />
     <Compile Include="Interface\Istaff.cs" />
-    <Compile Include="Interface\Iticket.cs" />
-    <Compile Include="Interface\Itt.cs" />
-    <Compile Include="Interface\RR.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="Job.cs" />
     <Compile Include="leave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recovery.cs" />
     <Compile Include="Staff.cs" />
-    <Compile Include="Ticket.cs" />
-    <Compile Include="TT.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

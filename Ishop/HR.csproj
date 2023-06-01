@@ -391,12 +391,10 @@
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployesController.cs" />
-    <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IncomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -2140,7 +2138,9 @@
     <Content Include="FrontEnd\plugins\uplot\uPlot.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\1.png" />
     <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\Applo.png" />
     <Content Include="Images\bg.jpg" />
     <Content Include="Images\bgg.jpg" />
     <Content Include="Images\co.gif" />
@@ -3286,7 +3286,7 @@
     <Content Include="Views\Calender\Facility.cshtml" />
     <Content Include="Views\Files\Emp_Files.cshtml" />
     <Content Include="Views\Calender\Staffing_Agency.cshtml" />
-    <Content Include="Views\Account\New_Employee.cshtml" />
+    <Content Include="Views\Account\Register_Acc.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Files\Edit.cshtml" />
     <Content Include="Views\Employes\Create.cshtml" />
@@ -3335,6 +3335,11 @@
     <Content Include="Views\Statement\Statement.cshtml" />
     <Content Include="Views\Statement\Inc_Statement.cshtml" />
     <Content Include="Views\Statement\Index2.cshtml" />
+    <Content Include="Views\Jobs\Create.cshtml" />
+    <Content Include="Views\Jobs\Delete.cshtml" />
+    <Content Include="Views\Jobs\Details.cshtml" />
+    <Content Include="Views\Jobs\Edit.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

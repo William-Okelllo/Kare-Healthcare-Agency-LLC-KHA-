@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace IShop.Core.Interface
 {
-    public interface Iadvance
+    public interface Ijob
     {
-        void Add(Advance advance);
-        void Edit(Advance advance);
+        void Add(Job job);
+        void Edit(Job job);
         void Remove(int Id);
 
-        IEnumerable Getadvance(); Advance FindById(int Id);
+        IEnumerable Getjobs(); Job FindById(int Id);
 
 
     }

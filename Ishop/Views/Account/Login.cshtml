@@ -25,6 +25,7 @@
      hr {
          color:white;
      }
+   
 </style>
 
 <!DOCTYPE html>
@@ -43,161 +44,163 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page" style="background-image: url('../../Images/bgg.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;">
+<body class="hold-transition login-page" style="background-image: url('../../Images/bgg.jpg'); background-repeat: no-repeat; background-size: cover;">
 
-   
 
-    <div class="login-box">
-        <div class="login-logo">
+    
+        <div class="login-box" style="float:right">
+            <div class="login-logo">
 
-        </div>
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {@Html.AntiForgeryToken()
-        <!-- /.login-logo -->
+            </div>
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {@Html.AntiForgeryToken()
+            <!-- /.login-logo -->
 
-        <div class="card card-outline card-orange" style="background-color: rgb(0, 0, 0, 0.72); border-radius: 24px;">
-            <div class="card-header" style="border-radius: 24px;">
-                <a style="text-align:center"><img src="~/Images/logo.png" height="70" /> </a>
-               
-               <hr />
+            <div class="card card-outline card-cyan" style="background-color: rgb(255, 255, 255, 0.74); border-radius: 24px;">
+                <div class="card-header" style="border-radius: 24px;">
+                    <a style="text-align:center"><img src="~/Images/logo.png" height="70" /> </a>
 
-                <form>
-                    <h6 class="login-box-msg" style="color:white;font-family:Calibri">Sign in To Your Account</h6>
+                    <hr />
 
-                    <div class="form-group">
-                        <label style="color:white"> <span class="fa fa-user text-white"></span> Username</label>
-                        <div class="input-group mb-3">
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
-
-                            <div class="input-group-text">
-                                <span class="fas fa-user text-orange"></span>
-                            </div>
-                        </div>
+                    <form>
+                       
                         <div class="form-group">
-                            <label style="color:white"> <span class="fa fa-key text-white"></span> Password</label>
-                            <div class="input-group mb-2">
-
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password", @autofocus = "" })
-                                <div class="input-group-text">
-                                    <span class="fas fa-key text-orange"></span>
-                                </div>
+                            <label style="color: black"> <span class="fa fa-user-circle text-cyan"></span> Username</label>
+                            <div class="input-group mb-3">
+                                
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
 
 
                             </div>
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-                                  rel="stylesheet" type="text/css" />
-                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
-                            <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-white"> </p> 
-                            <script type="text/javascript">
-                                $(function () {
-                                    $("#toggle_pwd").click(function () {
-                                        $(this).toggleClass("fa-eye fa-eye-slash");
-                                        var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
-                                        $("[id*=Password]").attr("type", type);
-                                    });
-                                });
-                            </script>
-                        </div>
-                      <br />
+                            <div class="form-group">
+                                <label style="color: black"> <span class="fa fa-lock text-cyan"></span> Password</label>
+                                <div class="input-group mb-2">
+                                   
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password", @autofocus = "" })
 
-                                <div style="text-align:right">
-                                    <small style="color:white">
-                                        <i class="fa fa-key
+
+
+                                </div>
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                                <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                                      rel="stylesheet" type="text/css" />
+                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
+                                <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-cyan"> </p>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $("#toggle_pwd").click(function () {
+                                            $(this).toggleClass("fa-eye fa-eye-slash");
+                                            var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
+                                            $("[id*=Password]").attr("type", type);
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            <br />
+                            <div style="text-align:left">
+                                <medium style="color:white">
+                                    <i class="fa fa-sign-out text-cyan"></i>
+
+                                    <a href="@Url.Action("Register_Acc", "Account")">
+                                        Create account
+                                    </a>
+                                </medium>
+                            </div>
+                            <div style="text-align:right">
+                                <small style="color: cyan">
+                                    <i class="fa fa-key
                text-yellow"></i>
 
-                                        <a href="@Url.Action("ForgotPassword", "Account")">
-                                            Forgot Password
-                                        </a>
-                                    </small>
-                                </div>
-                               
-                                <table class="table">
-
-                                    <thead>
-                                        <tr style="color:indigo">
-
-                                            <th style="text-align:left">
-                                                <button class="btn btn btn-warning btn-lg btn-block " type="submit" id="login-btn" >
-                                                    <i class="glyphicon glyphicon-log-in" style="color:white"></i>
-                                                    <i class="fa fa-sign-in"></i> Login
-                                                </button>
-                                                <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled >
-                                                    <span class="spinner-border spinner-border-sm" role="status"></span>
-                                                    <small> ..Verifing...</small>
-                                                </button>
-                                                <style>
-                                                    .hidden {
-                                                        display: none;
-                                                                                                        }
-                                                </style>
-                                                <script>
-                                                    $(function () {
-                                                        $('#login-btn').click(function () {
-                                                            $(this).hide();
-                                                            
-                                                        });
-                                                    });
-
-                                                </script>
-                                                <script>
-                                                    $(function () {
-                                                        $('#login-btn').click(function () {
-                                                            $('#hidden-button').removeClass('hidden');
-                                                        });
-                                                    });
-
-                                                </script>
-
-                                               
-
-
-
-                                            </th>
-                                            <div style="text-align:center">
-                                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
-                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            </div>
-                                        </tr>
-
-
-                                    </thead>
-                                    <tbody>
-                                </table>
+                                    <a href="@Url.Action("ForgotPassword", "Account")">
+                                        Forgot Password
+                                    </a>
+                                </small>
                             </div>
-                </form>
+
+                            <table class="table">
+
+                                <thead>
+                                    <tr style="color:indigo">
+
+                                        <th style="text-align:left">
+                                            <button class="btn btn btn-warning btn-lg btn-block " type="submit" id="login-btn">
+                                                <i class="glyphicon glyphicon-log-in" style="color:white"></i>
+                                                <i class="fa fa-sign-in"></i> Login
+                                            </button>
+                                            <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled>
+                                                <span class="spinner-border spinner-border-sm" role="status"></span>
+                                                <small> ..Verifing...</small>
+                                            </button>
+                                            <style>
+                                                .hidden {
+                                                    display: none;
+                                                }
+                                            </style>
+                                            <script>
+                                                $(function () {
+                                                    $('#login-btn').click(function () {
+                                                        $(this).hide();
+
+                                                    });
+                                                });
+
+                                            </script>
+                                            <script>
+                                                $(function () {
+                                                    $('#login-btn').click(function () {
+                                                        $('#hidden-button').removeClass('hidden');
+                                                    });
+                                                });
+
+                                            </script>
+
+
+
+
+
+                                        </th>
+                                        <div style="text-align:center">
+                                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        </div>
+                                    </tr>
+
+
+                                </thead>
+                                <tbody>
+                            </table>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div style="text-align:center">
+                    <small style="color: black">
+                        <b style="font-family:Calibri">
+                            Version 2.0.0
+
+
+
+                        </b>
+                    </small>
+                    <br />
+                    <small style="color: black"><b>© 2019- @DateTime.Now.Year</b></small>
+                    <br />
+                    <small style="color: black">Powered by Speculate Techs</small>
+                </div>
+                <!-- /.social-auth-links -->
+
+
 
             </div>
-
-            <div style="text-align:center">
-                <small style="color:white">
-                    <b style="font-family:Calibri">
-                        Version 2.0.0
+            <!-- /.login-card-body -->
 
 
 
-                    </b>
-                </small>
-                <br />
-                <small style="color:white"><b>© 2019- @DateTime.Now.Year</b></small>
-                <br />
-                <small style="color:white">Powered by Speculate Techs</small>
-            </div>
-            <!-- /.social-auth-links -->
 
-
-
+        }
         </div>
-        <!-- /.login-card-body -->
-
-
-
-
-    }
-    </div>
 </body>
 
 </html>

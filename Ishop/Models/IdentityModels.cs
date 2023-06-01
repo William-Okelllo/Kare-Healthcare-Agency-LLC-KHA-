@@ -21,7 +21,7 @@ namespace Ishop.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("Ishop", throwIfV1Schema: false)
+            : base("Job_Villa", throwIfV1Schema: false)
         {
         }
 

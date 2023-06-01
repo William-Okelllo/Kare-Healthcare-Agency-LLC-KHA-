@@ -20,18 +20,12 @@ namespace Ishop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<InvoiceContext>(null);
-            Database.SetInitializer<leaveContext>(null);
+          
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
             Database.SetInitializer<StaffContext>(null);
             Database.SetInitializer<Employee_Context>(null);
-            Database.SetInitializer<DepartmentContext>(null);
-            Database.SetInitializer<TicketContext>(null);
-            Database.SetInitializer<AttendanceContext>(null);
-            Database.SetInitializer<ExpenseContext>(null);
-            Database.SetInitializer<Recovery_context>(null);
-            Database.SetInitializer<Advance_Context>(null);
+            Database.SetInitializer<Job_context>(null);
 
             log4net.Config.XmlConfigurator.Configure();
         }

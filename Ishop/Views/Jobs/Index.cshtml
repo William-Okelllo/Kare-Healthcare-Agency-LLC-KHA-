@@ -1,0 +1,186 @@
+﻿@model IEnumerable<IShop.Core.Job>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .form-rounded3 {
+        border-radius: 0.5rem;
+        width: 10%;
+        height: 50%;
+        border-color: orange;
+    }
+</style>
+<div class="card" style="background-color: #ffffffd9">
+
+    <div class="col d-flex justify-content-center">
+
+        <h3 style="color:black">
+            <br />
+            Explore and discover
+            the right job for you!
+        </h3>
+
+    </div>
+    <div class="col d-flex justify-content-center">
+        <div class="card-body" style="background-color: #078096ae;border-radius: 24px;">
+            <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+
+                <div class="form-group row">
+                    <div class="form-group col-md-3">
+                        <label style="color:black"><i class="bx bxs-cog"></i> Job Sector</label>
+                        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                            <option selected>Job sector</option>
+                            <option value="1">Information Technology</option>
+                            <option value="2">Education</option>
+                            <option value="3">HealthCare</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label style="color:black"><i class="bx bxs-book-open"></i> Job Type</label>
+                        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                            <option selected>Job Type</option>
+                            <option value="1">Fulltime</option>
+                            <option value="2">Contract</option>
+                            <option value="3">Internship</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label style="color:black"><i class="bx bxs-map-pin"></i>  Job location</label>
+                        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                            <option selected>Job location</option>
+                            <option value="1">Nairobi</option>
+                            <option value="2">Meru</option>
+                            <option value="3">Nakuru</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+
+                        <button type="submit" value="search" class="btn  btn-primary">
+                            <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Find Job
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+            <br />
+            <p style="color:white"><i class="bx bxs-flag"></i> Popular Jobs Categories</p>
+            <button type="button"
+                    class="btn btn-icon btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#backDropModal">
+                <i class="bx bxs-eyedropper"></i>
+            </button>
+            <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+                <div class="modal-dialog">
+                    <form class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="backDropModalTitle">Popular Job Categories</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameBackdrop" class="form-label">Name</label>
+                                    <input type="text"
+                                           id="nameBackdrop"
+                                           class="form-control"
+                                           placeholder="Enter Name" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-0">
+                                    <label for="emailBackdrop" class="form-label">Email</label>
+                                    <input type="text"
+                                           id="emailBackdrop"
+                                           class="form-control"
+                                           placeholder="xxxx@xxx.xx" />
+                                </div>
+                                <div class="col mb-0">
+                                    <label for="dobBackdrop" class="form-label">DOB</label>
+                                    <input type="text"
+                                           id="dobBackdrop"
+                                           class="form-control"
+                                           placeholder="DD / MM / YY" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="card-body" style="background-color: white;border-radius: 24px;">
+        <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+            <div class="row">
+                @foreach (var item in Model)
+                {<div class="col-md-6 col-xl-4">
+                        <div class="card bg-whitesmoke text-black mb-3" style="background-color: #e1dfdfff;border-radius: 24px;">
+
+                            <div class="card-body">
+                                <h5 style="color:black"><span class="badge  rounded-pill  bg-gradient-gray"> @item.Type </span> - @item.Title </h5>
+                                <span class="badge  rounded-pill  bg-warning">Qualifications @item.Qualifications </span>
+                                <span class="badge rounded-pill bg-primary">Sector : @item.Sector </span>
+                                <div class="dropdown-divider"></div>
+
+                                <medium class="card-text">Deadline :  @item.Application_Deadline.ToString("dd-MMMM-yyyy") ||  </medium>
+                                @Html.ActionLink("Apply", "Index", null, new { @class = "btn btn-primary btn" })
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="col-lg-8 mb-4 order-0">
+        <div class="card">
+            <div class="d-flex align-items-end row">
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Ultimate Solution for Hiring Top Talent! 🎉</h5>
+                        <p class="mb-4">
+                            Are you tired of spending countless hours sifting through resumes and conducting countless interviews to find the perfect employee? Look no further! MyJobsVilla is a revolutionary web platform designed to connect employers with the right employees quickly and efficiently.
+                        </p>
+
+                        <a href="javascript:;" class="btn btn-sm btn-primary">Get Started Today</a>
+                    </div>
+                </div>
+                <div class="col-sm-5 text-center text-sm-left">
+                    <div class="card-body pb-0 px-0 px-md-4">
+                        <img src="~/Fontv2/assets/img/illustrations/man-with-laptop-light.png"
+                             height="140"
+                             alt="View Badge User"
+                             data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                             data-app-light-img="illustrations/man-with-laptop-light.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

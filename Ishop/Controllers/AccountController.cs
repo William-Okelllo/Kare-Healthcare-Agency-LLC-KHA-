@@ -169,8 +169,8 @@ namespace Ishop.Controllers
                     return View(model);
             }
         }
-        [Authorize(Roles = "Admin")]
-        public ActionResult New_Employee()
+        
+        public ActionResult Register_Acc()
         {
             {
                 ViewBag.Name = new SelectList(context.Roles.Where(u => (!(u.Name == "Can_Post_Shift" || u.Name == "Can_Take_Shift" || u.Name == "Can_Approve_Shift" || u.Name == "Can_Delete_Shift"
@@ -185,12 +185,12 @@ namespace Ishop.Controllers
 
         [ValidateAntiForgeryToken]
         // [Authorize(Roles = "System")]
-        public async Task<ActionResult> New_Employee(RegisterViewModel model)
+        public async Task<ActionResult> Register_Acc(RegisterViewModel model)
         {
             if (model.UserRoles == null)
             {
                 TempData["msg"] = "Kindly select user account type";
-                return RedirectToAction("New_Employee");
+                return RedirectToAction("Register_Acc");
             }
             if (ModelState.IsValid)
             {
@@ -209,7 +209,7 @@ namespace Ishop.Controllers
                     var callbackurl = Url.Action("confirmEmail", "Account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl + "\">here</a>");
 
-                    TempData["msg"] = "✔ Employee account Created successfully ,Confirmation sent to user account mail";
+                    TempData["msg"] = "✔  Account Created successfully ";
 
 
 
@@ -222,12 +222,12 @@ namespace Ishop.Controllers
                         var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                         var currentUser = manager.FindById(User.Identity.GetUserId());
 
-                        oMail.To = currentUser.Email;
-                        oMail.Subject = "New Employee Added";
-                        oMail.TextBody = "New employee added to staffing facility"
-                             + "\n" + "   Employee Username :- " + model.UserName
-                        + "\n" + "   Employee Email Address :- " + model.Email
-                        + "\n" + "   login password :- " + model.Password;
+                        oMail.To = model.Email;
+                        oMail.Subject = "Welcome to MyJobsVilla";
+                        oMail.TextBody = "Hello there your account is set proceed to login with the provided credentials"
+                             + "\n" + "Username :- " + model.UserName
+                        + "\n" + "login password :- " + model.Password
+                        + "\n" + "Email Address :- " + model.Email;
 
                         SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
                         oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
@@ -243,30 +243,12 @@ namespace Ishop.Controllers
                     catch
                     {
                         TempData["msg"] = "error occured in creating account ";
-                        return RedirectToAction("Index", "Employes");
+                        return RedirectToAction("Register_Acc", "Account");
                     }
 
-                    try
-                    {
-                        string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-                        SqlConnection sqlCon = new SqlConnection(strcon);
-                        SqlCommand sqlcmnd = new SqlCommand("PushEmp", sqlCon);
-                        sqlcmnd.CommandType = CommandType.StoredProcedure;
-                        sqlcmnd.Parameters.AddWithValue("@Username", model.UserName);
-                        sqlcmnd.Parameters.AddWithValue("@Email", model.Email);
-                        sqlcmnd.Parameters.AddWithValue("@Role", model.UserRoles);
                     
-                        sqlCon.Open();
-                        sqlcmnd.ExecuteNonQuery();
-                        sqlCon.Close();
-                       
-                    }
-                    catch (SqlException sqlEx)
-                    {
-                        throw sqlEx;
-                    }
 
-                    return RedirectToAction("Index", "Employes");
+                    return RedirectToAction("login", "Account");
                 }
                
             }
