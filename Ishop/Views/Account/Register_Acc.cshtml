@@ -114,7 +114,7 @@
     <body  style="background-image: url('../../Images/bgg.jpg'); background-repeat: no-repeat; background-size: cover;">
 
 
-        <div class="col d-flex justify-content-left">
+        <div class="col d-flex justify-content-center">
             <div class="col-md-7 col-sm-9 col-12">
                 <div class="card mb- mb-xl-0" style="border-radius: 14px; background-color: rgb(255, 255, 255, 0.89)">
 
@@ -203,7 +203,7 @@
 
 
 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-5">
                     <medium>Account Type</medium>
                     @{
                         List<SelectListItem> q = new List<SelectListItem>();
@@ -223,14 +223,16 @@
                     }@Html.DropDownListFor(model => model.UserRoles, q, "--Account Type--", new { @class = "form-control form-control", @required = "required", })
                     </div>
 
+                    <i class="fa fa-twitter"></i>
                     <hr />
                     <input type="submit" value="Create account" class="btn btn-success" />
 
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary btn" })
 
+              <hr />
+             
 
-
-                    }
+}
 
 </form>
 
