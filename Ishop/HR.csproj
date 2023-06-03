@@ -386,77 +386,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Controllers\EmployesController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SectorsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Controllers\StatementController.cs" />
     <Compile Include="Controllers\successController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\A.cs" />
-    <Compile Include="Models\AccessRolesSp_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Acc_Profile_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\All_procs.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>All_procs.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\All_procs.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\All_procs.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>All_procs.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Approved_Employees_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Userslist.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\calt.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>calt.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\calt.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>calt.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\calt.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>calt.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>sp_c.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Check_F_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Check_Pending_A_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs">
       <DependentUpon>Config_x1.tt</DependentUpon>
@@ -476,19 +426,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Config_x1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Dash1_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmbedProperties.cs" />
-    <Compile Include="Models\Em_Agency2_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Em_Agency_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\Files_.Context.cs">
       <AutoGen>True</AutoGen>
@@ -506,74 +447,8 @@
       <DependentUpon>Files_.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\FileUpload.cs" />
-    <Compile Include="Models\GetEmpUsername_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetEmp_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetFacility_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetFacilty_Acc_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetSetFacility_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetShifts_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetStaffing_Acc_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Gettimesheet2_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Gettimesheet_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Get_FacilitesAdmin_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Get_Facilites_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\m.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>m.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\m.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>m.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\m.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>m.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PushEmp_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\R.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -592,164 +467,23 @@
     <Compile Include="Models\Report.cs">
       <DependentUpon>R.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RoleGrant_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Sectorslist.cs">
+      <DependentUpon>sectortab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\rolesL_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Shifts_Per_Agency_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Shifts_Status_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Shift_List_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_add_item_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sp_Agency_Profile_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sp_Agency_Users_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_c.Context.cs">
+    <Compile Include="Models\sectortab.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sp_c.Context.tt</DependentUpon>
+      <DependentUpon>sectortab.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_c.cs">
+    <Compile Include="Models\sectortab.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sp_c.tt</DependentUpon>
+      <DependentUpon>sectortab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_c.Designer.cs">
+    <Compile Include="Models\sectortab.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sp_c.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Charles.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_Charles.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Charles.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Charles.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_Charles.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dash_2_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dash_3_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dash_4_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dash_Income_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_dash_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sp_Employee_Per_A_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sp_Employee_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_expenses_report_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_expenses_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sp_Facility_Users_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetRoles_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Income_pro.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_Income_pro.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Income_pro.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_Income_pro.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Income_pro.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sp_Income_pro.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_invoices_report_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_invoices_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_monthly_statement_Inc_Result.cs">
-      <DependentUpon>sp_Income_pro.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_monthly_statement_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_months_list_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Statements_Inc_Result.cs">
-      <DependentUpon>sp_Income_pro.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_Statements_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_statement_footer_Result.cs">
-      <DependentUpon>sp_Charles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_timesheet_report_Result.cs">
-      <DependentUpon>All_procs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sp_u_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tasks_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tie_Result.cs">
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\us.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>us.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\us.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>us.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\us.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>us.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\userlist_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Users31_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>sectortab.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Userslist.Context.cs">
       <AutoGen>True</AutoGen>
@@ -765,24 +499,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Userslist.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Users_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Z.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Z.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Z.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Z.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Z.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Z.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2156,26 +1872,6 @@
     <Content Include="Images\uu.ico" />
     <Content Include="Images\v3.jpg" />
     <Content Include="Images\whatsapp.ico" />
-    <Content Include="Models\All_procs.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>All_procs.edmx</DependentUpon>
-      <LastGenOutput>All_procs.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\All_procs.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>All_procs.edmx</DependentUpon>
-      <LastGenOutput>All_procs.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\calt.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>calt.edmx</DependentUpon>
-      <LastGenOutput>calt.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\calt.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>calt.edmx</DependentUpon>
-      <LastGenOutput>calt.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\Config_x1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Config_x1.edmx</DependentUpon>
@@ -2196,26 +1892,6 @@
       <DependentUpon>Files_.edmx</DependentUpon>
       <LastGenOutput>Files_.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\m.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>m.edmx</DependentUpon>
-      <LastGenOutput>m.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\m.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>m.edmx</DependentUpon>
-      <LastGenOutput>m.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\R.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>R.edmx</DependentUpon>
@@ -2226,45 +1902,15 @@
       <DependentUpon>R.edmx</DependentUpon>
       <LastGenOutput>R.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sp_c.Context.tt">
+    <Content Include="Models\sectortab.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_c.edmx</DependentUpon>
-      <LastGenOutput>sp_c.Context.cs</LastGenOutput>
+      <DependentUpon>sectortab.edmx</DependentUpon>
+      <LastGenOutput>sectortab.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sp_c.tt">
+    <Content Include="Models\sectortab.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_c.edmx</DependentUpon>
-      <LastGenOutput>sp_c.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\sp_Charles.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_Charles.edmx</DependentUpon>
-      <LastGenOutput>sp_Charles.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\sp_Charles.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_Charles.edmx</DependentUpon>
-      <LastGenOutput>sp_Charles.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\sp_Income_pro.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_Income_pro.edmx</DependentUpon>
-      <LastGenOutput>sp_Income_pro.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\sp_Income_pro.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sp_Income_pro.edmx</DependentUpon>
-      <LastGenOutput>sp_Income_pro.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\us.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>us.edmx</DependentUpon>
-      <LastGenOutput>us.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\us.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>us.edmx</DependentUpon>
-      <LastGenOutput>us.cs</LastGenOutput>
+      <DependentUpon>sectortab.edmx</DependentUpon>
+      <LastGenOutput>sectortab.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Userslist.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2275,16 +1921,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Userslist.edmx</DependentUpon>
       <LastGenOutput>Userslist.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Z.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Z.edmx</DependentUpon>
-      <LastGenOutput>Z.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Z.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Z.edmx</DependentUpon>
-      <LastGenOutput>Z.cs</LastGenOutput>
     </Content>
     <Content Include="MvcReportViewer.aspx" />
     <Content Include="MvcReportViewerErrorPage.html" />
@@ -2473,33 +2109,12 @@
     <Content Include="Models\Files_.edmx.diagram">
       <DependentUpon>Files_.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\us.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>us.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\us.edmx.diagram">
-      <DependentUpon>us.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\Z.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Z.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Z.edmx.diagram">
-      <DependentUpon>Z.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\R.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>R.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\R.edmx.diagram">
       <DependentUpon>R.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\Userslist.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -2526,20 +2141,6 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
-    <EntityDeploy Include="Models\calt.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>calt.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\calt.edmx.diagram">
-      <DependentUpon>calt.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\All_procs.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>All_procs.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\All_procs.edmx.diagram">
-      <DependentUpon>All_procs.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\Config_x1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Config_x1.Designer.cs</LastGenOutput>
@@ -2548,34 +2149,12 @@
       <DependentUpon>Config_x1.edmx</DependentUpon>
     </Content>
     <Content Include="Images\tst.json" />
-    <Content Include="log4net.config" />
-    <EntityDeploy Include="Models\m.edmx">
+    <EntityDeploy Include="Models\sectortab.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>m.Designer.cs</LastGenOutput>
+      <LastGenOutput>sectortab.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\m.edmx.diagram">
-      <DependentUpon>m.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\sp_Charles.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sp_Charles.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sp_Charles.edmx.diagram">
-      <DependentUpon>sp_Charles.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\sp_c.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sp_c.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sp_c.edmx.diagram">
-      <DependentUpon>sp_c.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\sp_Income_pro.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sp_Income_pro.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sp_Income_pro.edmx.diagram">
-      <DependentUpon>sp_Income_pro.edmx</DependentUpon>
+    <Content Include="Models\sectortab.edmx.diagram">
+      <DependentUpon>sectortab.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
@@ -3258,10 +2837,6 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Accesses\Grant_Role.cshtml" />
-    <Content Include="Views\Accesses\Details.cshtml" />
-    <Content Include="Views\Accesses\Edit.cshtml" />
-    <Content Include="Views\Accesses\Index.cshtml" />
     <Content Include="Views\Account\New_Client.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
@@ -3282,7 +2857,6 @@
     <Content Include="Views\Data\Index.cshtml" />
     <Content Include="Views\Data\Delete_User.cshtml" />
     <Content Include="Views\Files\My_Files.cshtml" />
-    <Content Include="Views\Accesses\Acc_Profile.cshtml" />
     <Content Include="Views\Calender\Facility.cshtml" />
     <Content Include="Views\Files\Emp_Files.cshtml" />
     <Content Include="Views\Calender\Staffing_Agency.cshtml" />
@@ -3340,6 +2914,16 @@
     <Content Include="Views\Jobs\Details.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\Profile\Create.cshtml" />
+    <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Profile\Details.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Sectors\Create.cshtml" />
+    <Content Include="Views\Sectors\Delete.cshtml" />
+    <Content Include="Views\Sectors\Details.cshtml" />
+    <Content Include="Views\Sectors\Edit.cshtml" />
+    <Content Include="Views\Sectors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

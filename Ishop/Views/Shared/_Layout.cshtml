@@ -294,7 +294,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Create", "jobs")" class="nav-link">
+                                    <a href="@Url.Action("Index", "Profile")" class="nav-link">
                                         <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
                                         <p style="font-family:Calibri;color:black">
                                             General Info  <i class="fas fa-angle-left right"></i>
@@ -347,43 +347,74 @@
                         </li>
                     }
 
-                  
+
+                    <li class="nav-item">
 
 
-                        <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-layer-group text-cyan"></i>
+                            <p style="color: black; font-family: Calibri">
+                                Sectors <i class="fas fa-angle-left right"></i>
 
 
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-briefcase text-cyan"></i>
-                                <p style="color: black; font-family: Calibri">
-                                    Jobs Section <i class="fas fa-angle-left right"></i>
+                            </p>
+
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Create", "Sectors")" class="nav-link">
+                                    <i class="fa fa-plus-circle text-cyan nav-icon"></i>
+                                    <p style="font-family:Calibri;color:black">
+                                       Add sector  <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Sectors")" class="nav-link">
+                                    <i class="fa fa-layer-group text-cyan nav-icon"></i>
+                                    <p style="font-family:Calibri;color:black">
+                                        Sectors list <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <li class="nav-item">
 
 
-                                </p>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-briefcase text-cyan"></i>
+                            <p style="color: black; font-family: Calibri">
+                                Jobs Section <i class="fas fa-angle-left right"></i>
 
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Create", "jobs")" class="nav-link">
-                                        <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Post Job  <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "jobs")" class="nav-link">
-                                        <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Jobs list <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
 
-                        </li>
+                            </p>
 
-                   
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Create", "jobs")" class="nav-link">
+                                    <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
+                                    <p style="font-family:Calibri;color:black">
+                                        Post Job  <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "jobs")" class="nav-link">
+                                    <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
+                                    <p style="font-family:Calibri;color:black">
+                                        Jobs list <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+
 
                     @if (this.User.IsInRole("Admin"))
                     {
@@ -467,7 +498,7 @@
 
     </div>
 
-    @Html.Bold().ScriptManager()
+   
     <!-- /.content-wrapper -->
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

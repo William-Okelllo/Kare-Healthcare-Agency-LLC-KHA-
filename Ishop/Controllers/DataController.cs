@@ -46,7 +46,7 @@ namespace Ishop.Controllers
         // GET: Data/Create
         public ActionResult Delete_User(Guid? id)
         {
-            uss db = new uss();
+            
             string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             SqlCommand cmd = new SqlCommand("Delete_User", sqlCon);

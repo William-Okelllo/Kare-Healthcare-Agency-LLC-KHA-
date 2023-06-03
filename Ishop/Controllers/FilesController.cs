@@ -58,9 +58,6 @@ namespace Ishop.Controllers
         {
            
 
-            ZO l2 = new ZO();
-            var boo2 = l2.GetEmpUsername(id).ToList();
-            ViewBag.l2 = boo2;
 
 
 

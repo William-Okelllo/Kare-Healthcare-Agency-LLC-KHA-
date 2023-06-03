@@ -1,0 +1,127 @@
+﻿@model IEnumerable<IShop.Core.Profile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.92);">
+
+
+    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: darkcyan; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:left">
+            <i class="fa fa-user-circle"></i>
+            My Profile
+        </h3>
+    </div>
+    <div class="card-body">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+
+                <div class="form-group col-md-3">
+                    <label class="bwe">
+                        <i class="fa fa-user-circle text-cyan"></i>
+                        Fullnames
+                    </label>
+
+                    <input type="text" id="Fullnames" name="Fullnames" value=@item.Fullnames . class="form-control" readonly=true>
+
+
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="bwe">
+                        <i class="fa fa-mobile text-cyan"></i>
+                        Phone Number
+                    </label>
+
+                    <input type="text" id="Fullnames" name="Fullnames" value=@item.Phone . class="form-control" readonly=true>
+
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="bwe">
+                        <i class="fa fa-envelope text-cyan"></i>
+                        Email Address
+                    </label>
+
+                    <input type="text" id="Fullnames" name="Fullnames" value=@item.email . class="form-control" readonly=true>
+
+
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+
+                <div class="form-group col-md-2">
+                    <label class="bwe">
+                        <i class="fa fa-dna text-cyan"></i>
+                        Gender
+                    </label>
+
+                    <input type="text" id="Fullnames" name="Fullnames" value=@item.Gender . class="form-control" readonly=true>
+
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="bwe">
+                        <i class="fa fa-layer-group text-cyan"></i>
+                        Sector
+                    </label>
+
+                    <input type="text" id="Fullnames" name="Fullnames" value=@item.sector . class="form-control" readonly=true>
+
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="bwe">
+                        <i class="fa fa-map-marker text-cyan"></i>
+                        Residency
+                    </label>
+
+                    <input type="text" id="Fullnames" name="Fullnames" value=@item.Residency . class="form-control" readonly=true>
+
+
+                </div>
+            </div>
+                }
+
+        <hr />
+
+        <p><i class="fa fa-briefcase text-cyan"></i> My Documents</p>
+            
+        
