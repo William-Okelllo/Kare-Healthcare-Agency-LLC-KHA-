@@ -22,7 +22,8 @@ namespace IShop.Core
         public string Sector { get; set; }
 
         public string Experience { get; set; }
-       
+        [Display(Name = "External link ")]
+        public string link_email { get; set; }
         public string Qualifications { get; set; }
 
         public string Type { get; set; }

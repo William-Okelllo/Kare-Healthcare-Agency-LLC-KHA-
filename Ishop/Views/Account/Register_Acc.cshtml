@@ -129,8 +129,8 @@
 
                                 <div class="form-row">
 
-                                    <div class="form-group col-md-5">
-                                        <label style="color:darkblue"><i class="fa fa-user-circle"></i>  Username</label>
+                                    <div class="form-group col-md-3">
+                                        <label style="color:darkcyan"><i class="fa fa-user-circle"></i>  Username</label>
                                         @Html.EditorFor(model => model.UserName, new
                                    {
                                        htmlAttributes = new
@@ -141,8 +141,8 @@
                                        }
                                    })  @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-md-5">
-                                <label style="color:darkblue"><span class="fa fa-envelope text-cyan"></span>   Email Address</label>
+                            <div class="form-group col-md-4">
+                                <label style="color: darkcyan"><span class="fa fa-envelope text-cyan"></span>   Email Address</label>
                                 @Html.EditorFor(model => model.Email, new
                            {
                                htmlAttributes = new
@@ -152,11 +152,80 @@
                                    @required = "required"
                                }
                            })  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                        <span id="emailValidationResult"></span>
+                        <div id="errorMessage" style="display:none;color:red">
+                            <a href="#" style="color:red">
+                                <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>  Email already in use
+                            </a>
+                        </div>
+                        
+
+
+
+                        <script>
+$(document).ready(function () {
+    $("#Email").keyup(function () {
+        var Email = $(this).val();
+        $.ajax({
+            url: "@Url.Action("CheckValueExists", "Account")",
+            data: { Email: Email },
+            success: function (data) {
+                if (data) {
+                    $("#errorMessage").show();
+                    $("#myButton").hide();
+                } else {
+                    $("#errorMessage").hide();
+                    $("#myButton").show();
+                }
+            }
+        });
+    });
+});
+                        </script>
+                        </div>
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+    $(document).ready(function () {
+        $("#Email").on("input", function () {
+            var email = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("ValidateEmail", "Account")',
+                type: 'POST',
+                data: { email: email },
+                success: function (result) {
+                    if (result.isValid) {
+                        $("#emailValidationResult").text("Valid email address.").css("color", "green");
+                    } else {
+                        $("#emailValidationResult").text("Invalid email address.").css("color", "red");
+                    }
+                }
+            });
+        });
+    });
+                        </script>
+                        <div class="form-group col-md-4">
+                            <label style="color: darkcyan"><span class="fa fa-mobile text-cyan"></span>   Phone number</label>
+                            @Html.EditorFor(model => model.PhoneNumber, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @PlaceHolder = "PhoneNumber",
+                               @required = "required"
+                           }
+                       })  @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+</div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label style="color:darkblue"><span> ***</span>  Password </label>
+                        <label style="color: darkcyan"><span> *</span>  Password </label>
                         @Html.EditorFor(model => model.Password, new
                    {
                        htmlAttributes = new
@@ -169,7 +238,7 @@
                    })  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
                     <div class="form-group col-md-3">
-                        <label style="color:darkblue"><span> ***</span> Confirm Password </label>
+                        <label style="color: darkcyan"><span> *</span> Confirm Password </label>
                         @Html.EditorFor(model => model.ConfirmPassword, new
                    {
                        htmlAttributes = new
@@ -186,7 +255,7 @@
 
     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
 
-    <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-primary"> </p>
+    <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-cyan"> </p>
     <small>Show password</small>
 
     <script type="text/javascript">
@@ -204,7 +273,7 @@
 
 </div>
                 <div class="form-group col-md-5">
-                    <medium>Account Type</medium>
+                    <medium style="color:darkcyan"><span class="fa fa-user-cog"></span> Account Type</medium>
                     @{
                         List<SelectListItem> q = new List<SelectListItem>();
                         q.Add(new SelectListItem
@@ -222,8 +291,13 @@
 
                     }@Html.DropDownListFor(model => model.UserRoles, q, "--Account Type--", new { @class = "form-control form-control", @required = "required", })
                     </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $("#UserRoles").chosen();
 
-                    <i class="fa fa-twitter"></i>
+                    });
+                </script>
+                   
                     <hr />
                     <input type="submit" value="Create account" class="btn btn-success" />
 

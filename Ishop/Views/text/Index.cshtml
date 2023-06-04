@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+       
+</script>
+

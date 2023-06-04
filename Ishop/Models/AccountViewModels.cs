@@ -73,7 +73,7 @@ namespace Ishop.Models
         [Display(Name = "UserRoles")]
         public string UserRoles { get; set; }
         public string Name { get; set; }
-
+        public string PhoneNumber { get; set; }
         [Required]
         [Display(Name = "Username/ Facility Name")]
 

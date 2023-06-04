@@ -247,52 +247,10 @@ namespace Ishop.Controllers
             sqlcmnd.ExecuteNonQuery();
             sqlCon.Close(); 
             TempData["Msg"] = "File delete successfully";
-            return RedirectToAction("My_Files", "Files");
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
-        public ActionResult Emp_Files(string searchBy, string search, int? page)
-        {
-            string AA = null;
-
-            string constr = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(constr))
-            {
-
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.Connection = conn;
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    conn.Open();
-                    cmd.CommandText = "Em_Agency2";
-                    cmd.Parameters.Add("@user", SqlDbType.NChar).Value = User.Identity.Name;
-
-
-                    AA = (string)cmd.ExecuteScalar();
-
-                    conn.Close();
-
-
-                }
-
-
-
-            }
-
-            Files_list_ db = new Files_list_();
-
-            if (!(search == null))
-            {
-                return View(db.Files.OrderByDescending(p => p.id).Where(c => c.Agency == AA && c.Access == search).ToList().ToPagedList(page ?? 1, 9));
-
-            }
-            else
-            {
-                return View(db.Files.OrderByDescending(p => p.id).Where(c => c.Agency == AA).ToList().ToPagedList(page ?? 1, 9));
-
-            }
-
-
-
-        }
+       
 
 
 

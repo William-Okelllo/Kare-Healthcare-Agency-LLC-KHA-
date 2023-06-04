@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using Ishop.Models;
+using PagedList;
 
 namespace Ishop.Controllers
 {
@@ -19,6 +20,11 @@ namespace Ishop.Controllers
         // GET: Profile
         public ActionResult Index()
         {
+            filetab dbb = new filetab();
+            var boo9 = dbb.Files.ToList();
+            ViewBag.l9 = boo9;
+
+
             return View(db.profiles.ToList());
         }
 
@@ -151,5 +157,7 @@ namespace Ishop.Controllers
 
             return regex.IsMatch(email);
         }
+
+        
     }
 }

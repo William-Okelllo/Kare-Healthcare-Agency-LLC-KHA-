@@ -92,8 +92,15 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell text-orange"></i>
-                        <span class="badge badge-warning navbar-badge">1</span>
+                        <i class="far fa-clock text-cyan"></i>
+                        <span class="badge badge-info navbar-badge">@DateTime.Now.ToString("dddd :hh : mm tt")</span>
+                    </a>
+                    
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell text-cyan"></i>
+                        <span class="badge badge-info navbar-badge">1</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
@@ -104,12 +111,12 @@
                                 <img src="~/Images/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
-                                        Incomes Module Added<small style="color:blue"></small>
-                                        <span class="float-right text-sm text-success">
-                                            <span class="float-right badge bg-success">New</span>
+                                        sms notifications<small style="color:blue"></small>
+                                        <span class="float-right text-sm text-cyan">
+                                            <span class="float-right badge bg-gradient-cyan">New</span>
                                         </span>
                                     </h3>
-                                    <p class="text-sm">Track you incomes on the go </p>
+                                    <p class="text-sm">Automated sms notifications added </p>
 
                                 </div>
                             </div>
@@ -136,7 +143,7 @@
                 <li class="nav-item dropdown" style="font-family:Calibri">
                     <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
 
-                        <i class="fa fa-user text-navy">
+                        <i class="fa fa-user-circle text-cyan">
                             @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                         </i>
@@ -217,7 +224,7 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
                 <div class="info" style="font-family:Calibri">
                     <a href="#" class="d-block" style="color: black">
-                        <i class="fa fa-grin-wink text-orange"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
+                        <i class="fa fa-grin-wink text-cyan"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                     </a>
                     <a>
@@ -225,26 +232,48 @@
                         @if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
                         {
                             <medium style="font-family:Calibri">
-                                <i class="fa fa-cloud-sun text-orange"></i> :-Good Morning
+                                <i class="fa fa-cloud-sun text-cyan"></i> Good Morning
                             </medium>
                         }
                         else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
                         {
                             <medium style="font-family:Calibri">
-                                <i class="fa fa-sun text-orange"></i> :-Good Afternoon
+                                <i class="fa fa-sun text-cyan"></i> : Good Afternoon
                             </medium>
                         }
                         else
                         {
                             <medium style="font-family:Calibri">
-                                <i class="fa fa-cloud-sun text-orange"></i> :-Good Evenning
+                                <i class="fa fa-cloud-sun text-cyan"></i> : Good Evenning
                             </medium>
                         }
 
 
 
                     </a>
-                </div>
+                    <a>
+
+                        
+                            
+                            @if (this.User.IsInRole("Candidate"))
+                            {<div style="font-family:Calibri">
+                                <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-info"><i class="fa fa-book-reader"></i> Candidate </span>
+                                </div>
+                            }
+                            else if (this.User.IsInRole("Admin"))
+                            { <div style="font-family:Calibri">
+                                 <i class="fa fa-circle-notch text-cyan"></i>   Access :    <span class="badge badge-pill badge-info"><i class="fa fa-user-cog"></i> Admin </span>
+                                </div>}
+                            else if (this.User.IsInRole("Employer"))
+                            { <div style="font-family:Calibri">
+                                   <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-info"><i class="fa fa-user-clock"></i> Employer </span>
+                                </div>}
+
+
+                        
+                    </a>
+               
+            </div>
 
             </div>
 
@@ -327,7 +356,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Create", "jobs")" class="nav-link">
+                                    <a href="@Url.Action("Open_Jobs", "jobs")" class="nav-link">
                                         <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
                                         <p style="font-family:Calibri;color:black">
                                             Open Jobs  <i class="fas fa-angle-left right"></i>
@@ -348,38 +377,7 @@
                     }
 
 
-                    <li class="nav-item">
 
-
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-layer-group text-cyan"></i>
-                            <p style="color: black; font-family: Calibri">
-                                Sectors <i class="fas fa-angle-left right"></i>
-
-
-                            </p>
-
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="@Url.Action("Create", "Sectors")" class="nav-link">
-                                    <i class="fa fa-plus-circle text-cyan nav-icon"></i>
-                                    <p style="font-family:Calibri;color:black">
-                                       Add sector  <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Sectors")" class="nav-link">
-                                    <i class="fa fa-layer-group text-cyan nav-icon"></i>
-                                    <p style="font-family:Calibri;color:black">
-                                        Sectors list <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
 
                     <li class="nav-item">
 
@@ -422,7 +420,38 @@
 
 
 
+                        <li class="nav-item">
 
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-layer-group text-cyan"></i>
+                                <p style="color: black; font-family: Calibri">
+                                    Sectors <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Create", "Sectors")" class="nav-link">
+                                        <i class="fa fa-plus-circle text-cyan nav-icon"></i>
+                                        <p style="font-family:Calibri;color:black">
+                                            Add sector  <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Sectors")" class="nav-link">
+                                        <i class="fa fa-layer-group text-cyan nav-icon"></i>
+                                        <p style="font-family:Calibri;color:black">
+                                            Sectors list <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
 
 
                         <li class="nav-item">

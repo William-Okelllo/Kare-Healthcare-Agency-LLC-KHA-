@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using Ishop.Models;
+using PagedList;
 
 namespace Ishop.Controllers
 {
@@ -21,8 +23,25 @@ namespace Ishop.Controllers
             return View(db.Jobs.ToList());
         }
 
-        // GET: Jobs/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Open_Jobs(string searchBy, string search, int? page)
+        {
+
+            if (!(search == null))
+            {
+                return View(db.Jobs.Where(c => c.Sector == search || c.Sector.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
+
+            }
+            else
+            {
+                return View(db.Jobs.ToList().ToPagedList(page ?? 1, 6));
+            }
+
+        }
+
+
+
+            // GET: Jobs/Details/5
+            public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -39,6 +58,9 @@ namespace Ishop.Controllers
         // GET: Jobs/Create
         public ActionResult Create()
         {
+            sectortabb dbb = new sectortabb();
+            var sectors = dbb.Sectorslists.ToList();
+            ViewBag.sectors = new SelectList(sectors, "Sector", "Sector");
             return View();
         }
 
@@ -47,8 +69,13 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary")] Job job)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email")] Job job)
         {
+            if(job.Application_Type=="Internal")
+            {
+                job.link_email = " --";
+            }
+
             if (ModelState.IsValid)
             {
                 db.Jobs.Add(job);

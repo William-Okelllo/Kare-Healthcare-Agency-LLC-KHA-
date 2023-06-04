@@ -16,6 +16,10 @@ using System.Web.Mail;
 using EASendMail;
 using SmtpMail = EASendMail.SmtpMail;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using Ishop.Infa;
 
 namespace Ishop.Controllers
 {
@@ -169,7 +173,12 @@ namespace Ishop.Controllers
                     return View(model);
             }
         }
-        
+        private ApplicationDbContext dbb = new ApplicationDbContext ();
+        public ActionResult CheckValueExists(string Email)
+        {
+            bool exists = dbb.Users.Any(c => c.Email == Email);
+            return Json(exists, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Register_Acc()
         {
             {
@@ -194,7 +203,7 @@ namespace Ishop.Controllers
             }
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email ,PhoneNumber=model.PhoneNumber};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -225,9 +234,12 @@ namespace Ishop.Controllers
                         oMail.To = model.Email;
                         oMail.Subject = "Welcome to MyJobsVilla";
                         oMail.TextBody = "Hello there your account is set proceed to login with the provided credentials"
-                             + "\n" + "Username :- " + model.UserName
+                         + "\n" + " "
+                        + "\n" + "Username :- " + model.UserName
                         + "\n" + "login password :- " + model.Password
-                        + "\n" + "Email Address :- " + model.Email;
+                        + "\n" + "..."
+                        + "\n" + "login link :- " + System.Configuration.ConfigurationManager.AppSettings["systemlink"].ToString();
+
 
                         SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
                         oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
@@ -237,6 +249,8 @@ namespace Ishop.Controllers
                         oServer.Port = 587;
                         SmtpClient oSmtp = new SmtpClient();
                         SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
+
+                        sms_send(model.PhoneNumber, oMail.TextBody);
                     }
 
 
@@ -256,7 +270,45 @@ namespace Ishop.Controllers
             // If we got this far, something failed, redisplay form    
             return View();
         }
+        public void sms_send(string recipient, string message)
+        {
+            string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
+            string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
+            string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
+            int partnerID1 = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString());
 
+            using (HttpClient client = new HttpClient())
+            {
+                // Prepare the request body
+                var requestBody = new
+                {
+                    apikey = APIkey1,
+                    partnerID = partnerID1,
+                    message = message,
+                    shortcode = shortcode1,
+                    mobile = recipient
+
+                };
+                var json = JsonConvert.SerializeObject(requestBody);
+                try
+                {
+                    var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        TempData["msg"] = "Account created successfully";
+                    }
+                    else
+                    {
+                        var errorResponse = response.Content.ReadAsStringAsync().Result;
+                        TempData["msg"] = "error  : ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["msg"] = "An error occurred while sending the SMS:";
+                }
+            }
+        }
 
         // GET: /Account/Register
 
@@ -625,7 +677,25 @@ namespace Ishop.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+        public ActionResult ValidateEmail(string email)
+        {
+            bool isValid = IsValidEmail(email);
 
+            return Json(new { isValid = isValid });
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            // Regex pattern to validate email addresses
+            string pattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern);
+
+            return regex.IsMatch(email);
+        }
         //
         // POST: /Account/LogOff
         [HttpPost]
