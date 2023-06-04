@@ -1,0 +1,212 @@
+﻿@model IShop.Core.Application
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    form-rounded2 {
+        border-radius: 4rem;
+        border-color: orangered;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+
+</script>
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+
+</script>
+
+<br />
+
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-4" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #076f79d4; color: white; border-radius: 24px ">
+                <i class="bx bxs-hand-up"></i>  Apply for Position
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div>
+                        @foreach (var item in ViewBag.F)
+                        {
+                            <div class="col-md-6 col-xl-9">
+                                <div class="card bg-whitesmoke text-black mb-3 card-outline card-cyan"  style="background-color: white;border-radius: 24px;">
+
+                                    <div class="card-body">
+                                        <h5 style="color:black"><span class="badge  rounded-pill  bg-gradient-gray"> @item.Type </span> - @item.Title </h5>
+                                        <span class="badge  rounded-pill  bg-warning">Qualifications @item.Qualifications </span>
+                                        <span class="badge rounded-pill bg-primary">Sector : @item.Sector </span>
+                                        <div class="dropdown-divider"></div>
+                                        <p><b><i class="fa fa-wallet text-cyan"></i> Salary :</b> Ksh @item.Salary.ToString("#,##0.00") || <b><i class="fa fa-calendar-check text-cyan"></i>  Deadline</b> :  @item.Application_Deadline.ToString("dd-MMMM-yyyy")</p>
+                                        <p>
+                                          <button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">View Job Description</button>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                                    <div class="card card-body" style="background-color: white;border-radius: 14px;">
+                                                        @item.Description
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+
+                            <div class="form-group row">
+                                <div class="form-group col-md-2">
+                                    @foreach (var item in ViewBag.F)
+                                    {
+                                        <label style="color:black"><i class="fa fa-barcode text-cyan"></i> @Html.LabelFor(model => model.Job_id)</label>
+                                        <input type="text" id="Job_id" name="Job_id" class="form-control" value="@item.Id" readonly="true">
+                                    }
+                                    </div>
+                                <div class="form-group col-md-3">
+                                    <label style="color:black"><i class="fa fa-bookmark text-cyan"></i> @Html.LabelFor(model => model.Job_Title)</label>
+                                    @foreach (var item in ViewBag.F)
+                                    {
+                                        
+                                        <input type="text" id="Job_Title" name="Job_Title" class="form-control" value="@item.Title" readonly="true">
+                                    }
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label style="color:black"><i class="fa fa-calendar text-cyan"></i> @Html.LabelFor(model => model.Application_Date)</label>
+                                    @Html.EditorFor(model => model.Application_Date, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control ",
+                                       @placeholder = " Job Title",
+                                       @Value = DateTime.Now,
+                                       @required = "required",
+                                       @Readonly = true
+                                   }
+                               })
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label style="color:black"><i class="fa fa-user-check text-cyan"></i> @Html.LabelFor(model => model.Applicant)</label>
+                                    @Html.EditorFor(model => model.Applicant, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control ",
+                                       @placeholder = " Job Title",
+                                       @Value=User.Identity.Name,
+                                       @required = "required",
+                                       @Readonly=true
+                                   }
+                               })
+                                </div>
+                            </div>
+                            <hr />
+
+                            <input type="submit" value="Apply Job" class="btn btn btn-info" style="color:white" onclick="return confirm('Are you sure you want apply for this Job?')" />
+
+
+                            <script>
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
+                            </script>
+                            @Html.ActionLink("Back to List", "Open_Jobs", "Jobs", null, new { @class = "btn btn-primary btn" })
+                           
+
+
+                        }
+                    </div>
+        </div>
+    </div>
+</div>

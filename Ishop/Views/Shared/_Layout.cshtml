@@ -364,7 +364,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "jobs")" class="nav-link">
+                                    <a href="@Url.Action("Index", "Applications")" class="nav-link">
                                         <i class="fa fa-briefcase text-cyan nav-icon"></i>
                                         <p style="font-family:Calibri;color:black">
                                             Applied Jobs <i class="fas fa-angle-left right"></i>
@@ -378,55 +378,15 @@
 
 
 
-
-                    <li class="nav-item">
-
-
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-briefcase text-cyan"></i>
-                            <p style="color: black; font-family: Calibri">
-                                Jobs Section <i class="fas fa-angle-left right"></i>
-
-
-                            </p>
-
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="@Url.Action("Create", "jobs")" class="nav-link">
-                                    <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                    <p style="font-family:Calibri;color:black">
-                                        Post Job  <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "jobs")" class="nav-link">
-                                    <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                    <p style="font-family:Calibri;color:black">
-                                        Jobs list <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-
-
-
-                    @if (this.User.IsInRole("Admin"))
+                    @if (this.User.IsInRole("Employer"))
                     {
-                        <li class="nav-header">Admin</li>
-
-
-
                         <li class="nav-item">
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-layer-group text-cyan"></i>
+                                <i class="nav-icon fa fa-briefcase text-cyan"></i>
                                 <p style="color: black; font-family: Calibri">
-                                    Sectors <i class="fas fa-angle-left right"></i>
+                                    Jobs Section <i class="fas fa-angle-left right"></i>
 
 
                                 </p>
@@ -434,76 +394,117 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Create", "Sectors")" class="nav-link">
-                                        <i class="fa fa-plus-circle text-cyan nav-icon"></i>
+                                    <a href="@Url.Action("Create", "jobs")" class="nav-link">
+                                        <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
                                         <p style="font-family:Calibri;color:black">
-                                            Add sector  <i class="fas fa-angle-left right"></i>
+                                            Post Job  <i class="fas fa-angle-left right"></i>
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Sectors")" class="nav-link">
-                                        <i class="fa fa-layer-group text-cyan nav-icon"></i>
+                                    <a href="@Url.Action("Index", "jobs")" class="nav-link">
+                                        <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
                                         <p style="font-family:Calibri;color:black">
-                                            Sectors list <i class="fas fa-angle-left right"></i>
+                                            Jobs list <i class="fas fa-angle-left right"></i>
                                         </p>
                                     </a>
                                 </li>
                             </ul>
 
                         </li>
-
-
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Service")" class="nav-link">
-
-                                <i class="fa fa-cogs text-black nav-icon"></i>
-                                <p style="color: black">
-                                    Admin <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Data")" class="nav-link">
-
-                                        <i class="fa fa-users text-black nav-icon"></i>
-                                        <p style="color: black">
-                                            All  Profile
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Configuration")" class="nav-link">
-
-                                        <i class="fa fa-cogs text-black nav-icon"></i>
-                                        <p style="color: black">
-                                            Configurations
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-
-
-                        </li>
-
-
 
                     }
 
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <li class="nav-header">Admin</li>
+
+
+
+                            <li class="nav-item">
+
+
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-layer-group text-cyan"></i>
+                                    <p style="color: black; font-family: Calibri">
+                                        Sectors <i class="fas fa-angle-left right"></i>
+
+
+                                    </p>
+
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Sectors")" class="nav-link">
+                                            <i class="fa fa-plus-circle text-cyan nav-icon"></i>
+                                            <p style="font-family:Calibri;color:black">
+                                                Add sector  <i class="fas fa-angle-left right"></i>
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Sectors")" class="nav-link">
+                                            <i class="fa fa-layer-group text-cyan nav-icon"></i>
+                                            <p style="font-family:Calibri;color:black">
+                                                Sectors list <i class="fas fa-angle-left right"></i>
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Service")" class="nav-link">
+
+                                    <i class="fa fa-cogs text-black nav-icon"></i>
+                                    <p style="color: black">
+                                        Admin <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Data")" class="nav-link">
+
+                                            <i class="fa fa-users text-black nav-icon"></i>
+                                            <p style="color: black">
+                                                All  Profile
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Configuration")" class="nav-link">
+
+                                            <i class="fa fa-cogs text-black nav-icon"></i>
+                                            <p style="color: black">
+                                                Configurations
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+
+
+                            </li>
+
+
+
+                        }
 
 
 
 
-                    <li class="nav-header">
-                        Version 2.0.0
 
-                    </li>
-                    <li>
-                        <small style="color:black"> Powered By Speculate Techs</small>
-                    </li>
+                        <li class="nav-header">
+                            Version 2.0.0
 
-                </ul>
+                        </li>
+                        <li>
+                            <small style="color:black"> Powered By Speculate Techs</small>
+                        </li>
+
+                    </ul>
 
             </nav>
 

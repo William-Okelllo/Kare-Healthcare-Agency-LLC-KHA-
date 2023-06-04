@@ -53,12 +53,10 @@
   <ItemGroup>
     <Compile Include="AccessContext.cs" />
     <Compile Include="AccessRepo.cs" />
-    <Compile Include="ChatContext.cs" />
-    <Compile Include="ChatRepo.cs" />
+    <Compile Include="ApplicationContext.cs" />
+    <Compile Include="ApplicationRepo.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
-    <Compile Include="Employee_Context.cs" />
-    <Compile Include="Employee_Repo.cs" />
     <Compile Include="Job_context.cs" />
     <Compile Include="Job_repo.cs" />
     <Compile Include="ProfileContext.cs" />

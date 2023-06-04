@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace IShop.Core.Interface
 {
-    public interface Iemp
+    public interface Iapp
     {
-        void Add(Employee employee);
-        void Edit(Employee employee);
+        void Add(Application application);
+        void Edit(Application application);
         void Remove(int Id);
 
-        IEnumerable GetEmployee(); Employee FindById(int Id);
+        IEnumerable GetApps(); Application FindById(int Id);
 
 
     }
