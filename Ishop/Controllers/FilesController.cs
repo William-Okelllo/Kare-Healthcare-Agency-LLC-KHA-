@@ -29,30 +29,6 @@ namespace Ishop.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // GET: Files  
         public ActionResult Upload(FileUpload model, FormCollection form, HttpPostedFileBase file,int? id)
         {
@@ -138,10 +114,9 @@ namespace Ishop.Controllers
                         files.SaveAs(path);
                         TempData["Msg"] = "Uploaded Successfully !!";
                         if (this.User.IsInRole("Admin"))
-                        { return RedirectToAction("Index", "Employes"); }
+                        { return RedirectToAction("my_files", "Files"); }
                        
-                        else if (this.User.IsInRole("Staffing_Agency"))
-                        { return RedirectToAction("Index", "Employes", new { id = id }); }
+                        
                         
                         else
                         { return RedirectToAction("My_Files", "Files"); }
@@ -174,7 +149,7 @@ namespace Ishop.Controllers
         private DataTable GetFileDetails()
         {
             DataTable dtData = new DataTable();
-            string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             sqlCon.Open();
             SqlCommand command = new SqlCommand("Select * From files ", sqlCon);
@@ -188,7 +163,7 @@ namespace Ishop.Controllers
         {
             string strQry = "INSERT INTO Files (Name,Path,Uploaded_By,Description,UploadedOn,Access,Category,Agency) VALUES('" +
                 model.Name + "','" + model.Path + "' ,'" + model.Uploaded_By + "' ,'" + model.Description + "' ,'" + model.UploadedOn + "' ,'" + model.Access + "' ,'" + model.Category + "' ,'" + model.Agency + "')";
-            string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             SqlCommand command = new SqlCommand(strQry, sqlCon);
             sqlCon.Open();
@@ -197,7 +172,7 @@ namespace Ishop.Controllers
 
             try
             {
-                string strcon2 = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+                string strcon2 = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
                 SqlConnection sqlCon2 = new SqlConnection(strcon);
                 SqlCommand sqlcmnd = new SqlCommand("UpAcccess", sqlCon);
                 sqlcmnd.CommandType = CommandType.StoredProcedure;
@@ -237,29 +212,10 @@ namespace Ishop.Controllers
 
 
 
-        public ActionResult Index2(string searchBy, string search, int? page)
-        {
-
-            Files_list_ db = new Files_list_();
-
-            if (searchBy == "Product")
-            {
-                return View(db.Files.OrderByDescending(p => p.id).Where(c => c.Name == search || search == null && c.Uploaded_By == User.Identity.Name).ToList().ToPagedList(page ?? 1, 9));
-
-            }
-            else
-            {
-                return View(db.Files.OrderByDescending(p => p.id).Where(c => c.Name.StartsWith(search) || search == null && c.Uploaded_By == User.Identity.Name).ToList().ToPagedList(page ?? 1, 9));
-
-            }
-
-
-
-        }
         public ActionResult My_Files(string searchBy, string search, int? page)
         {
 
-            Files_list_ db = new Files_list_();
+            filetab db = new filetab();
 
             if (searchBy == "Product")
             {
@@ -280,7 +236,7 @@ namespace Ishop.Controllers
         {
             Files_list_ db = new Files_list_();
 
-            string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             SqlCommand sqlcmnd = new SqlCommand("Delete_File", sqlCon);
             sqlcmnd.CommandType = CommandType.StoredProcedure;

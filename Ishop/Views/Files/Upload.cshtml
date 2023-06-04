@@ -48,12 +48,12 @@
         width: 100%;
     }
 </style>
-<div class="card-body">
+<div class="card-body" style="border-radius: 24px;">
     <div class="col d-flex justify-content-center">
-        <div class="col-md-9 col-sm-9 col-12">
-            <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+        <div class="col-md-9 col-sm-9 col-12" style="border-radius: 24px;">
+            <div class="card mb- mb-xl-0" style="border-radius: 24px;">
 
-                <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
+                <div class="card-outline card-cyan card-body text-left" style="border-radius: 24px;">
 
 
                     @if (TempData["Msg"] != null)
@@ -87,8 +87,8 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="row">
                             <div class="form-group col-md-5">
-                                <label class="bwe">
-                                    <i class="fa fa-file-excel text-success"></i>
+                                <label>
+                                    <i class="fa fa-cloud text-cyan"></i>
                                     Select File
                                 </label>
                                 <div class="form-group col-md-12">
@@ -99,70 +99,56 @@
 
 
 
+
+
                             <div class="form-group col-md-4">
-                                <label class="bwe"><i class="fa fa-folder-open text-success"></i>  File Category. </label>
+                                <label><i class="fa fa-folder-open text-cyan"></i>  File Category. </label>
                                 @{
                                     List<SelectListItem> v = new List<SelectListItem>();
                                     v.Add(new SelectListItem
                                     {
-                                        Text = "KRA P9A Returns",
-                                        Value = "KRA P9A Returns",
+                                        Text = "Resume/CV",
+                                        Value = "Resume/Cv",
                                     });
                                     v.Add(new SelectListItem
                                     {
-                                        Text = "Payslips",
-                                        Value = "Payslips",
+                                        Text = "Cover letter",
+                                        Value = "Cover letter",
 
                                     });
                                     v.Add(new SelectListItem
                                     {
-                                        Text = "Other Files",
-                                        Value = "Other Files",
+                                        Text = "Certificate",
+                                        Value = "Certificate",
 
                                     });
 
 
 
-                                }@Html.DropDownListFor(model => model.Category, v, "---Select File  Category---", new { @class = "form-control" ,@required = "required" })
+                                }@Html.DropDownListFor(model => model.Category, v, "---Select File  Category---", new { @class = "form-control", @required = "required" })
                             </div>
 
-                        </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3" style="display:none">
                                 <label class="bwe">
-                                    <i class="fa fa-user-lock text-success"></i>
-                                    Employee Account
+                                    <i class="fa fa-user-lock text-cyan"></i>
+                                    Account
                                 </label>
-                                @if (this.User.IsInRole("Admin") || (this.User.IsInRole("Staffing_Agency")))
-                                {
-                                    <div>
-                                        @foreach (var item in ViewBag.l2)
-                                        {
 
 
-                                            <input id="Access" name="Access" type="text" value="@item.username" class="form-control form-rounded" readonly />
-
-
-                                        }
-                                    </div>
-
-                                }
-
-                                else
-                                {<input id="Access" name="Access" type="text" value="@User.Identity.Name" class="form-control form-rounded" readonly />}
+                                <input id="Access" name="Access" type="text" value="@User.Identity.Name" class="form-control form-rounded" readonly />
 
                             </div>
 
-                            
+
                         </div>
 
 
                         <hr />
 
 
-                        <label class="bwe">
-                            <i class="fa fa-comment text-yellow"></i>
+                        <label>
+                            <i class="fa fa-comment text-cyan"></i>
                             File Description / Information
                         </label>
                         <div class="form-row">

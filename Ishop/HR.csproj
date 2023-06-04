@@ -430,7 +430,9 @@
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmbedProperties.cs" />
-    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\File.cs">
+      <DependentUpon>filetab.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Files_.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -445,6 +447,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Files_.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\filetab.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>filetab.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\filetab.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>filetab.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\filetab.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>filetab.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\FileUpload.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -1892,6 +1909,16 @@
       <DependentUpon>Files_.edmx</DependentUpon>
       <LastGenOutput>Files_.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\filetab.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>filetab.edmx</DependentUpon>
+      <LastGenOutput>filetab.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\filetab.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>filetab.edmx</DependentUpon>
+      <LastGenOutput>filetab.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\R.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>R.edmx</DependentUpon>
@@ -2155,6 +2182,13 @@
     </EntityDeploy>
     <Content Include="Models\sectortab.edmx.diagram">
       <DependentUpon>sectortab.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\filetab.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>filetab.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\filetab.edmx.diagram">
+      <DependentUpon>filetab.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
