@@ -78,14 +78,20 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("App_user"))
+            if (!roleManager.RoleExists("Institution"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "App_user";
+                role.Name = "Institution";
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Employer"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Employer";
+                roleManager.Create(role);
 
+            }
 
 
         }

@@ -39,6 +39,19 @@ namespace Ishop.Controllers
             }
         }
 
+        public ActionResult Employer(string option, string search, int? page)
+        {
+            
+                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c => c.Sector.StartsWith(search) || c.Sector == search).ToList().ToPagedList(page ?? 1, 11));
+
+            
+            
+        }
+
+
+
+
+
         // GET: Applications/Details/5
         public ActionResult Details(int? id)
         {

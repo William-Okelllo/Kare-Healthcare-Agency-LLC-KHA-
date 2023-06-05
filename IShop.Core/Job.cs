@@ -16,6 +16,9 @@ namespace IShop.Core
         public string Title { get; set; }
         public string Description { get; set; }
 
+
+        [Display(Name = "Responsibilites")]
+        public string Responsibilites { get; set; }
         [Display(Name = "Application Deadline")]
         public DateTime Application_Deadline { get; set; }
 
@@ -25,7 +28,7 @@ namespace IShop.Core
         [Display(Name = "External link ")]
         public string link_email { get; set; }
         public string Qualifications { get; set; }
-
+        public string Posted_By { get; set; }
         public string Type { get; set; }
         [Display(Name = "Application Type")]
         public string Application_Type { get; set; }

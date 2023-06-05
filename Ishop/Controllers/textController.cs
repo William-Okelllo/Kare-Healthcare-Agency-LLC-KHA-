@@ -1,11 +1,12 @@
-﻿
-
+﻿using System.Threading.Tasks;
+using RestSharp;
 using Newtonsoft.Json;
 using System;
+using Jose;
 using System.Net.Http;
 using System.Text;
 using System.Web.Mvc;
-
+using Encoding = System.Text.Encoding;
 namespace Ishop.Controllers
 {
     public class textController : Controller
@@ -23,10 +24,10 @@ namespace Ishop.Controllers
                 // Prepare the request body
                 var requestBody = new
                 {
-                    apikey = APIkey1,
-                    partnerID = partnerID1,
-                    message = "ddddddd",
-                    shortcode = shortcode1,
+                    apikey = "f4fe66a92642ef75760af4724393d0e0",
+                    partnerID = 7604,
+                    message = "ddddd",
+                    shortcode = "Savvy_sms",
                     mobile = 0727422197
 
                 };
@@ -36,18 +37,20 @@ namespace Ishop.Controllers
                     var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        return Json(new { success = true, message = "SMS sent successfully." }, JsonRequestBehavior.AllowGet);
+                        TempData["msg"] = "SMS sent successfully.";
                     }
                     else
                     {
                         var errorResponse = response.Content.ReadAsStringAsync().Result;
-                        return Json(new { success = false, message = "Failed to send SMS: " + errorResponse }, JsonRequestBehavior.AllowGet);
+                        TempData["msg"] = "Failed to send SMS : ";
                     }
                 }
                 catch (Exception ex)
                 {
-                    return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                    TempData["msg"] = ex;
                 }
+
+                return View();
             }
 
         }

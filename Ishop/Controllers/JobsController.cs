@@ -18,9 +18,19 @@ namespace Ishop.Controllers
         private Job_context db = new Job_context();
 
         // GET: Jobs
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search, int? page)
         {
-            return View(db.Jobs.ToList());
+
+            if (!(search == null))
+            {
+                return View(db.Jobs.Where(c => c.Sector == search || c.Sector.StartsWith(search) && c.Posted_By==User.Identity.Name).ToList().ToPagedList(page ?? 1, 7));
+
+            }
+            else
+            {
+                return View(db.Jobs.Where(c => c.Posted_By ==User.Identity.Name ).ToList().ToPagedList(page ?? 1, 6));
+            }
+
         }
 
         public ActionResult Open_Jobs(string searchBy, string search, int? page)
@@ -69,7 +79,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Post_Job([Bind(Include = "Id,Title,Description,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email,Show_salary")] Job job)
+        public ActionResult Post_Job([Bind(Include = "Id,Title,Description,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email,Show_salary,Posted_By,Responsibilites")] Job job)
         {
             if(job.Application_Type=="Internal")
             {
