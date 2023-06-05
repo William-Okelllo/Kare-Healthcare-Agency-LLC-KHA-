@@ -24,10 +24,10 @@ namespace Ishop
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
             Database.SetInitializer<StaffContext>(null);
-            
+            Database.SetInitializer<ApplicationContext>(null);
             Database.SetInitializer<Job_context>(null);
             Database.SetInitializer<ProfileContext>(null);
-            log4net.Config.XmlConfigurator.Configure();
+            
         }
     }
 }

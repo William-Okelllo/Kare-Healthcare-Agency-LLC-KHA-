@@ -91,8 +91,8 @@
 
 
 
-<div class="col d-flex justify-content-center">
-    <div class="col-md-11 col-sm-12 col-12">
+
+    <div class="col-md-12 col-sm-12 col-12">
         <div class="card mb- mb-xl-4" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #076f79d4; color: white; border-radius: 14px ">
                 <i class="bx bxs-hand-up"></i>  Post Job
@@ -284,6 +284,61 @@
                         </div>
                         <hr />
                         <div class="form-group row">
+                            <div class="form-group col-md-3">
+
+                                <a class="form-check">
+                                    <small style="color:darkcyan">
+                                        @Html.EditorFor(model => model.Show_salary, new
+                                   {
+                                       htmlAttributes = new
+                                       { @class = "coupon_question" }
+                                   })
+                                        <label style="font-family:Quicksand">@Html.LabelFor(model => model.Show_salary)</label>
+
+                                    </small>
+
+                                </a>
+
+                                <div style="display: none" id="note2">
+
+                                    <div class="spinner-border spinner-border-sm text-cyan" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-cyan" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    
+                                    <medium style="color:orange">The salary amount on this job will be visible as requested</medium>
+
+                                </div>
+                                <div style="display: none" id="note">
+
+                                    <div class="spinner-border spinner-border-sm text-warning" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-warning" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <medium style="color:darkcyan">The salary amount on this job will be hidden as requested</medium>
+
+
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#Show_salary").click(function () {
+                                        if ($(this).is(":checked")) {
+                                            $("#note2").show(("slide", { direction: "up" }, 300));
+                                            $("#note").hide(("slide", { direction: "up" }, 300));
+
+                                        } else {
+                                            $("#note2").hide(("slide", { direction: "left" }, 300));
+                                            $("#note").show(("slide", { direction: "left" }, 300));
+                                            ;
+                                        }
+                                    });
+                                });
+                            </script>
 
                             <div class="form-group col-md-3">
                                 <label style="color:black"> <i class="fa fa-wallet text-cyan"></i> @Html.LabelFor(model => model.Salary) </label>
@@ -302,6 +357,7 @@
 
 
                             </div>
+
                             <script>
                                 function addCommas(element) {
                                     var value = parseFloat(element.value.replace(/,/g, ''));

@@ -15,8 +15,23 @@ namespace IShop.Core
         public string Job_Title { get; set; }     
         public DateTime Application_Date { get; set; }
         public string Applicant { get; set; }
+        public DateTime Application_Deadline { get; set; }
 
-        
+        public string Sector { get; set; }
+
+        public string Experience { get; set; }
+        [Display(Name = "External link ")]
+        public string link_email { get; set; }
+        public string Qualifications { get; set; }
+
+        public string Type { get; set; }
+        [Display(Name = "Application Type")]
+        public string Application_Type { get; set; }
+        [Display(Name = "Show Salary")]
+        public bool Show_salary { get; set; }
+
+        public Decimal Salary { get; set; }
+
 
     }
 }

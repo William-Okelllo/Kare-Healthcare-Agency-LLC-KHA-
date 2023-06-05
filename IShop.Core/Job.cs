@@ -29,8 +29,8 @@ namespace IShop.Core
         public string Type { get; set; }
         [Display(Name = "Application Type")]
         public string Application_Type { get; set; }
-
-
+        [Display(Name = "Show Salary")]
+        public bool Show_salary { get; set; }
         public Decimal Salary { get; set; }
        
     }

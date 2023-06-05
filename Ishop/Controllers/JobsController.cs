@@ -56,7 +56,7 @@ namespace Ishop.Controllers
         }
 
         // GET: Jobs/Create
-        public ActionResult Create()
+        public ActionResult Post_Job()
         {
             sectortabb dbb = new sectortabb();
             var sectors = dbb.Sectorslists.ToList();
@@ -69,7 +69,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email")] Job job)
+        public ActionResult Post_Job([Bind(Include = "Id,Title,Description,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email,Show_salary")] Job job)
         {
             if(job.Application_Type=="Internal")
             {

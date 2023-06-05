@@ -7,111 +7,142 @@
 }
 
 
-<div class="col-md-12 col-sm-12 col-12">
-    <div class="card mb- mb-xl-0" style="border-radius: 24px;">
-        <div class="card-header" style="background-color: darkcyan; color: white; border-radius: 14px ">
-            <i class="fa fa-user-circle"></i> Profile Setup
+
+<style>
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .form-rounded3 {
+        border-radius: 0.5rem;
+        width: 10%;
+        height: 50%;
+        border-color: orange;
+    }
+</style>
+
+
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.38);">
+
+
+    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: darkcyan; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-layer-group"></i>
+            Sectors
+        </h3>
+    </div>
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Success!</strong> @TempData["Msg"]
+            </div>
+        </div>
+    }
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+
+
+
+
+
+    <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+        <div style="text-align:right">
+            @Html.ActionLink("Add Sector", "Create", "Sectors", null, new { @class = "btn btn-info btn" })
         </div>
 
-        @if (TempData["Msg"] != null)
-        {<div class="row">
-                <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    @TempData["Msg"]
-                </div>
-            </div>
-        }
+        <div class="row">
+            @foreach (var item in Model)
+            {
 
-        <script>
-            window.setTimeout(function () {
-                $(".alert").fadeTo(500, 0).slideUp(500, function () {
-                    $(this).remove();
-                });
-            }, 2000);
-        </script>
+                <div class="col-md-3 col-sm-6 col-6">
+                    <div class="info-box" style="border-radius: 16px; background-color: #088189dc">
 
 
-        <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
-            <div style="text-align:right">
-                @Html.ActionLink("Add Sector", "Create", "Sectors", null, new { @class = "btn btn-info btn" })
-            </div>
-
-            <div class="row">
-                @foreach (var item in Model)
-                {
-
-                    <div class="col-md-3 col-sm-6 col-6">
-                        <div class="info-box" style="border-radius: 16px; background-color: #088189dc">
+                        <div class="info-box-content" style="color:white">
+                            <span class="info-box-text text-wrap"><medium><i class="fa fa-user-circle"></i>  .@item.Sector</medium></span>
+                            <div class="col-md-3 col-sm-3 col-3">
+                                <span class="badge rounded-pill bg-primary">Sector </span>
 
 
-                            <div class="info-box-content" style="color:white">
-                                <span class="info-box-text text-wrap"><medium><i class="fa fa-user-circle"></i>  .@item.Sector</medium></span>
-                                <div class="col-md-3 col-sm-3 col-3">
-                                    <span class="badge rounded-pill bg-primary">Sector </span>
+                                <div class="btn-group dropdown dropright">
+                                    <button type="button" class="btn-xs btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-paper-plane"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                        <a href="@Url.Action("Delete", "landloards", new { id = item.id })" class="dropdown-item">
+                                            <i class="fa fa-trash text-danger"></i> Trash Data
+                                        </a>
 
-
-                                    <div class="btn-group dropdown dropright">
-                                        <button type="button" class="btn-xs btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-paper-plane"></i>  . Action
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                            <a href="@Url.Action("Delete", "landloards", new { id = item.id })" class="dropdown-item">
-                                                <i class="fa fa-trash text-danger"></i> Trash Data
-                                            </a>
-
-                                        </div>
                                     </div>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                        </div><!-- /.info-box -->
-                    </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                    </div><!-- /.info-box -->
+                </div>
 
-                }
-            </div>
-            <style>
-                .ul.pagination {
-                    display: inline-block;
-                    padding: 1;
-                    margin: 1;
+            }
+        </div>
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
                     border-radius: 0.5rem;
                 }
 
-                ul.pagination li {
-                    display: inline;
-                }
-
-                    ul.pagination li a {
-                        color: black;
-                        float: left;
-                        padding: 8px 16px;
-                        text-decoration: none;
-                        transition: background-color;
-                        background-color: #ddd;
-                        border-color: white;
-                        border-radius: 0.5rem;
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
                     }
 
-                        ul.pagination li a.active {
-                            background-color: dodgerblue;
-                            color: white;
-                        }
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
 
-                        ul.pagination li a:hover:not(.active) {
-                            background-color: dodgerblue;
-                            border-radius: 0.5rem;
-                        }
-            </style>
-            <div id="container" style="text-align:left">
-
-                <div class="pagination" style="text-align:left">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
-                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
-                </div>
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
             </div>
-
-
         </div>
+
+
+    </div>
 
 
 

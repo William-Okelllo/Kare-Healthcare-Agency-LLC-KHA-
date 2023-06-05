@@ -18,7 +18,7 @@
 
 
 
-    <div class="card-header" style="background-color: #001F3F ">
+    <div class="card-header" style="background-color: darkcyan ">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-home"></i>
             Configurations Section
@@ -26,29 +26,11 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-xl-3">
-                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                    <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-users"></i> Employees Configs </div>
-                    <div class="card-body text-left">
-                        <small><i class="fa fa-calendar text-warning"></i> Total leaves Per Year</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Total_leaves_per_year"]" ReadOnly=true>
-                        <small><i class="fa fa-handshake text-warning"></i> leaves Per Request Days</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]" ReadOnly=true>
-                        <small><i class="fa fa-dollar-sign text-warning"></i> Advance payment limit Request</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Advance_pay_limit"]" ReadOnly=true>
-
-                        <div class="card-footer p-0" style="background-color:whitesmoke">
-                        </div>
-                    </div>
-                    <a href="@Url.Action("Index", "Emp_Config")" class="nav-link">
-                        View/Update Configs <span class="float-right badge bg-primary"><i class="fa fa-users"></i></span>
-                    </a>
-                </div>
-            </div>
+           
 
             <div class="col-xl-5">
                 <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                    <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-envelope"></i> Mail Configs </div>
+                    <div class="card-header" style="background-color: darkcyan; color: white "><i class="fa fa-envelope"></i> Mail Configs </div>
                     <div class="card-body text-left">
                         <small><i class="fa fa-envelope text-warning"></i> Sending Mail</small>
                         <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Email"]" ReadOnly=true>
@@ -66,26 +48,34 @@
                 </div>
             </div>
 
-        </div>
-        <hr />
-        <div class="row">
-            <div class="col-xl-5">
+     
+      
+            <div class="col-xl-6" style="border-radius: 14px;">
                 <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                    <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-location-arrow"></i> Office Cordinates </div>
+                    <div class="card-header" style="background-color: darkcyan; color: white "><i class="fa fa-sms"></i> Sms Configs </div>
                     <div class="card-body text-left">
-                        <small><i class="fa fa-building text-navy"></i>  Office location</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Office_location"]" ReadOnly=true>
-                        <small><i class="fa fa-location-arrow text-navy"></i> latitude</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["latitude"]" ReadOnly=true>
-                        <small><i class="fa fa-location-arrow text-navy"></i> longitude</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["longitude"]" ReadOnly=true>
-                        <small><i class="fa fa-circle-notch text-navy"></i> Distance Radius</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Distance_Radius"] " ReadOnly=true>
-                        <div class="card-footer p-0" style="background-color:whitesmoke">
+                        <div class="form-row">
+                            <div class="col-md-7 mb-7">
+                                <small><i class="fa fa-envelope text-warning"></i> API Key</small>
+                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["APIkey"]" ReadOnly>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <small><i class="fa fa-key text-warning"></i> Partner ID</small>
+                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["partnerID"]" ReadOnly>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <small><i class="fa fa-key text-warning"></i> shortcode</small>
+                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["shortcode"]" ReadOnly>
+                            </div>
+                            <div class="col-md-8 mb-8">
+                                <small><i class="fa fa-key text-warning"></i> APIUrl</small>
+                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["APIUrl"]" ReadOnly>
+                                <div class="card-footer p-0" style="background-color:whitesmoke">
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <a href="@Url.Action("Index", "Office")" class="nav-link">
+                    <a href="@Url.Action("Index", "sms")" class="nav-link">
                         View/Update Configs <span class="float-right badge bg-primary"><i class="fa fa-users"></i></span>
                     </a>
                 </div>

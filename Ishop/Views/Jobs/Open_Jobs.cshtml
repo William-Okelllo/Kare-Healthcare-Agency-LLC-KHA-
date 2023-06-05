@@ -49,7 +49,11 @@
                             <span class="badge  rounded-pill  bg-warning">Qualifications @item.Qualifications </span>
                             <span class="badge rounded-pill bg-primary">Sector : @item.Sector </span>
                             <div class="dropdown-divider"></div>
-                            <p><b><i class="fa fa-wallet text-cyan"></i> Salary :</b> Ksh @item.Salary.ToString("#,##0.00") || <b><i class="fa fa-calendar-check text-cyan"></i>  Deadline</b> :  @item.Application_Deadline.ToString("dd-MMMM-yyyy")</p>
+                            <p><b><i class="fa fa-wallet text-cyan"></i> Salary :</b> Ksh @if (item.Show_salary == true)
+                            {@item.Salary.ToString("#,##0.00")} else { <b style="color:red">Confidential</b>  }
+                            
+                            
+                             || <b><i class="fa fa-calendar-check text-cyan"></i>  Deadline</b> :  @item.Application_Deadline.ToString("dd-MMMM-yyyy")</p>
                             @if (item.Application_Type == "External")
                             { <p>
                             <a href="@Url.Action("create", "record_payment", new { id = item.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>

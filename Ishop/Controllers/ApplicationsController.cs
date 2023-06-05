@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using PagedList;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Ishop.Controllers
 {
@@ -16,9 +19,24 @@ namespace Ishop.Controllers
         private ApplicationContext db = new ApplicationContext();
 
         // GET: Applications
-        public ActionResult Index()
+        public ActionResult Index(string option, string search, int? page)
         {
-            return View(db.applications.ToList());
+            if (!(search == null) && (!(search == "")))
+            {
+                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c => c.Sector.StartsWith(search) || c.Sector == search).ToList().ToPagedList(page ?? 1, 11));
+
+            }
+            else if (search == "")
+            {
+                return View(db.applications.OrderByDescending(p => p.Application_Date).ToList().ToPagedList(page ?? 1, 11));
+
+
+            }
+            else
+            {
+                return View(db.applications.OrderByDescending(p => p.Application_Date).ToList()
+                    .ToPagedList(page ?? 1, 11));
+            }
         }
 
         // GET: Applications/Details/5
@@ -44,16 +62,30 @@ namespace Ishop.Controllers
             ViewBag.F = data10;
 
 
+           
+
             return View();
         }
-
-        // POST: Applications/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Job_id,Job_Title,Application_Date,Applicant")] Application application)
+        public ActionResult Create([Bind(Include = "Id,Job_id,Job_Title,Application_Date,Applicant,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email")] Application application)
         {
+
+            Job_context dbbb = new Job_context();
+            var data10 = dbbb.Jobs.FirstOrDefault(d => d.Id ==application.Job_id );
+
+            application.Application_Deadline = data10.Application_Deadline;
+            application.Sector = data10.Sector;
+            application.Experience = data10.Experience;
+            application.Qualifications = data10.Qualifications;
+            application.Type = data10.Type;
+            application.Salary = data10.Salary;
+            application.Application_Type = data10.Application_Type;
+            application.link_email = data10.link_email;
+            application.Show_salary = data10.Show_salary;
+
             if (ModelState.IsValid)
             {
                 db.applications.Add(application);
@@ -129,5 +161,34 @@ namespace Ishop.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Cancel_Application(int? id)
+        {
+            try
+            {
+                string strcon = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand sqlcmnd = new SqlCommand("sp_cancel_application", sqlCon);
+                sqlcmnd.CommandType = CommandType.StoredProcedure;
+                sqlcmnd.Parameters.AddWithValue("@Id", id);
+                sqlCon.Open();
+                sqlcmnd.ExecuteNonQuery();
+                sqlCon.Close();
+                TempData["msg"] = "Application cancelled successfully ";
+                string returnUrl = Request.UrlReferrer.ToString();
+                return Redirect(returnUrl);
+
+
+            }
+            catch
+            {
+                TempData["msg"] = "error occured on cancelling application ";
+                string returnUrl = Request.UrlReferrer.ToString();
+                return Redirect(returnUrl);
+            }
+
+
+        }
+
     }
 }

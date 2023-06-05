@@ -2997,7 +2997,7 @@
     <Content Include="Views\Statement\Statement.cshtml" />
     <Content Include="Views\Statement\Inc_Statement.cshtml" />
     <Content Include="Views\Statement\Index2.cshtml" />
-    <Content Include="Views\Jobs\Create.cshtml" />
+    <Content Include="Views\Jobs\Post_Job.cshtml" />
     <Content Include="Views\Jobs\Delete.cshtml" />
     <Content Include="Views\Jobs\Details.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
