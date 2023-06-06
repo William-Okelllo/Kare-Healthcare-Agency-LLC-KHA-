@@ -17,7 +17,7 @@ namespace Ishop.Controllers
         // GET: Expertise
         public ActionResult Index()
         {
-            return View(db.Expertises.ToList());
+            return View(db.Expertises.Where(c => c.App_user == User.Identity.Name).ToList());
         }
 
         // GET: Expertise/Details/5

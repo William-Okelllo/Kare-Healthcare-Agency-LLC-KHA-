@@ -21,19 +21,19 @@ namespace Ishop.Controllers
         public ActionResult Index()
         {
             filetab dbb = new filetab();
-            var boo9 = dbb.Files.ToList();
+            var boo9 = dbb.Files.Where(c => c.Uploaded_By == User.Identity.Name).ToList();
             ViewBag.l9 = boo9;
 
             GrptabsEnt dd = new GrptabsEnt();
-            var boo8 = dd.Educations.ToList();
+            var boo8 = dd.Educations.Where(c => c.App_user == User.Identity.Name).ToList();
             ViewBag.l8 = boo8;
 
             GrptabsEnt dv = new GrptabsEnt();
-            var boo7 = dv.Experiences.ToList();
+            var boo7 = dv.Experiences.Where(c => c.App_user == User.Identity.Name).ToList();
             ViewBag.l7 = boo7;
 
 
-            return View(db.profiles.ToList());
+            return View(db.profiles.Where(c=>c.app_user==User.Identity.Name).ToList());
         }
 
         // GET: Profile/Details/5

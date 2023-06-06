@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Core", "IShop.Core\Hr.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Infa", "Ishop.Infa\Hr.Infa.csproj", "{19E99617-6A61-4D71-B2D6-16FF9A9373A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR", "Ishop\HR.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs_Villa", "Ishop\Jobs_Villa.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

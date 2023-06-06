@@ -14,6 +14,17 @@ using System.Data.SqlClient;
 using static System.Net.Mime.MediaTypeNames;
 using Application = IShop.Core.Application;
 using Ishop.Models;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using EASendMail;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
+using RestSharp;
+
+using Jose;
+
+using Encoding = System.Text.Encoding;
 
 namespace Ishop.Controllers
 {
@@ -28,18 +39,18 @@ namespace Ishop.Controllers
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c => c.Sector.StartsWith(search) || c.Sector == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c => c.Sector.StartsWith(search) || c.Sector == search && c.Applicant==User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.applications.OrderByDescending(p => p.Application_Date).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c=> c.Applicant == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.applications.OrderByDescending(p => p.Application_Date).ToList()
+                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c => c.Applicant == User.Identity.Name).ToList()
                     .ToPagedList(page ?? 1, 11));
             }
         }
@@ -109,12 +120,80 @@ namespace Ishop.Controllers
             {
                 db.applications.Add(application);
                 db.SaveChanges();
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+                try
+                {
+                    string message = "Hello , " + currentUser.UserName
+
+
+
+                   + "\n" + " your application has been received successfully"
+
+                   + "\n" + " ..."
+                   + "\n" + application.Job_Title
+                    + "\n" + application.Type
+                     + "\n" + application.Sector
+                   + "\n" + "thank you regards ";
+
+
+
+
+
+
+                    sms_send(currentUser.PhoneNumber, message);
+                }
+
+
+                catch
+                {
+                    TempData["msg"] = "✔  reninder not sent "; ;
+
+                }
                 return RedirectToAction("Index");
             }
 
             return View(application);
         }
+        public void sms_send(string recipient, string message)
+        {
+            string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
+            string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
+            string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
+            int partnerID1 = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString());
 
+            using (HttpClient client = new HttpClient())
+            {
+                // Prepare the request body
+                var requestBody = new
+                {
+                    apikey = APIkey1,
+                    partnerID = partnerID1,
+                    message = message,
+                    shortcode = shortcode1,
+                    mobile = recipient
+
+                };
+                var json = JsonConvert.SerializeObject(requestBody);
+                try
+                {
+                    var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        TempData["msg"] = "SMS sent successfully.";
+                    }
+                    else
+                    {
+                        var errorResponse = response.Content.ReadAsStringAsync().Result;
+                        TempData["msg"] = "Failed to send SMS : ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["msg"] = "An error occurred while sending the SMS:";
+                }
+            }
+        }
         // GET: Applications/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -219,16 +298,16 @@ namespace Ishop.Controllers
             ApplicationContext dqb = new ApplicationContext();
             ProfileContext AA = new ProfileContext();
             GrptabsEnt FC =new GrptabsEnt();
+            var data10 = dqb.applications.FirstOrDefault(d => d.Id == id);
 
-            
-            var boo9 = AA.profiles.ToList();
+            var boo9 = AA.profiles.Where(c=>c.app_user==data10.Applicant).ToList();
             ViewBag.l9 = boo9;
 
-            var boo8 = FC.Educations.ToList();
+            var boo8 = FC.Educations.Where(c => c.App_user == data10.Applicant).ToList();
             ViewBag.l8 = boo8;
 
 
-            var boo7 = FC.Experiences.ToList();
+            var boo7 = FC.Experiences.Where(c => c.App_user == data10.Applicant).ToList();
             ViewBag.l7 = boo7;
 
             var boo6 = dbbb.Jobs.ToList();

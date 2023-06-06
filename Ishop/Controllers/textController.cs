@@ -14,45 +14,53 @@ namespace Ishop.Controllers
         // GET: text
         public ActionResult Index()
         {
-            string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
-            string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
-            string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
-            int partnerID1 = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString());
+            
 
-            using (HttpClient client = new HttpClient())
+
+
+            sms_send();
+
+
+            return View();
+        }
+    public void sms_send()
+    {
+        string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
+        string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
+        string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
+        int partnerID1 = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString());
+
+        using (HttpClient client = new HttpClient())
+        {
+            // Prepare the request body
+            var requestBody = new
             {
-                // Prepare the request body
-                var requestBody = new
-                {
-                    apikey = "f4fe66a92642ef75760af4724393d0e0",
-                    partnerID = 7604,
-                    message = "ddddd",
-                    shortcode = "Savvy_sms",
-                    mobile = 0727422197
+                apikey = APIkey1,
+                partnerID = partnerID1,
+                message = "ddfsdffd",
+                shortcode = shortcode1,
+                mobile = 727422197
 
-                };
-                var json = JsonConvert.SerializeObject(requestBody);
-                try
+            };
+            var json = JsonConvert.SerializeObject(requestBody);
+            try
+            {
+                var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        TempData["msg"] = "SMS sent successfully.";
-                    }
-                    else
-                    {
-                        var errorResponse = response.Content.ReadAsStringAsync().Result;
-                        TempData["msg"] = "Failed to send SMS : ";
-                    }
+                    TempData["msg"] = "SMS sent successfully.";
                 }
-                catch (Exception ex)
+                else
                 {
-                    TempData["msg"] = ex;
+                    var errorResponse = response.Content.ReadAsStringAsync().Result;
+                    TempData["msg"] = "Failed to send SMS: ";
                 }
-
-                return View();
             }
-
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex;
+            }
         }
     }
+}
 }

@@ -17,7 +17,7 @@ namespace Ishop.Controllers
         // GET: Education
         public ActionResult Index()
         {
-            return View(db.Educations.ToList());
+            return View(db.Educations.Where(c => c.App_user == User.Identity.Name).ToList());
         }
 
         // GET: Education/Details/5

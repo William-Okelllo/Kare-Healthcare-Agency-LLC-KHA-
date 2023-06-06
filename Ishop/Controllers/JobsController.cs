@@ -10,11 +10,24 @@ using IShop.Core;
 using Ishop.Infa;
 using Ishop.Models;
 using PagedList;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using EASendMail;
+using System.Configuration;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Ishop.Controllers
 {
     public class JobsController : Controller
     {
+       
+        ApplicationContext dqb = new ApplicationContext();
+        ProfileContext AA = new ProfileContext();
+        GrptabsEnt FC = new GrptabsEnt();
+        
         private Job_context db = new Job_context();
 
         // GET: Jobs
@@ -90,10 +103,89 @@ namespace Ishop.Controllers
             {
                 db.Jobs.Add(job);
                 db.SaveChanges();
+
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+                try
+                {
+                    SmtpMail oMail = new SmtpMail("TryIt");
+                    oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                    oMail.To = currentUser.Email;
+                    oMail.Subject = "Job Posted Successfullly ";
+                    oMail.TextBody = "Hello , " + currentUser.UserName
+
+
+
+                   + "\n" + " Ypur job has been posted successsfully"
+                   
+                   + "\n" + " ..."
+                   + "\n" + "thank you regards ";
+
+
+
+                    SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
+                    oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
+                    oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
+                    oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
+                    oServer.Port = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["port"].ToString());
+                    SmtpClient oSmtp = new SmtpClient();
+                    SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
+
+                    
+
+
+                    sms_send(currentUser.PhoneNumber, oMail.TextBody);
+                }
+
+
+                catch
+                {
+                    TempData["msg"] = "✔  reninder not sent "; ;
+
+                }
                 return RedirectToAction("Index");
             }
 
             return View(job);
+        }
+        public void sms_send(string recipient, string message)
+        {
+            string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
+            string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
+            string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
+            int partnerID1 = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString());
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Prepare the request body
+                var requestBody = new
+                {
+                    apikey = APIkey1,
+                    partnerID = partnerID1,
+                    message = message,
+                    shortcode = shortcode1,
+                    mobile = recipient
+
+                };
+                var json = JsonConvert.SerializeObject(requestBody);
+                try
+                {
+                    var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        TempData["msg"] = "SMS sent successfully.";
+                    }
+                    else
+                    {
+                        var errorResponse = response.Content.ReadAsStringAsync().Result;
+                        TempData["msg"] = "Failed to send SMS : ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["msg"] = "An error occurred while sending the SMS:";
+                }
+            }
         }
 
         // GET: Jobs/Edit/5

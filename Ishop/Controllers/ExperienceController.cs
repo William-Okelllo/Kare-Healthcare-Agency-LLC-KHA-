@@ -17,7 +17,7 @@ namespace Ishop.Controllers
         // GET: Experience
         public ActionResult Index()
         {
-            return View(db.Experiences.ToList());
+            return View(db.Experiences.Where(c => c.App_user == User.Identity.Name).ToList());
         }
 
         // GET: Experience/Details/5
