@@ -1,0 +1,299 @@
+﻿
+@{
+    ViewBag.Title = "Applicant_details";
+}
+
+<style>
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .form-rounded3 {
+        border-radius: 0.5rem;
+        width: 10%;
+        height: 50%;
+        border-color: orange;
+    }
+</style>
+
+<style>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid cyan;
+        }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.95);">
+
+
+    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: darkcyan; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-user"></i>
+            Applicant:
+        </h3>
+    </div>
+  
+    <div class="card-body">
+        <div class="row">
+            <div class="dropdown-divider"></div>
+
+            @foreach (var item in ViewBag.l9)
+            {
+
+                <div class="col-md-6 col-xl-5">
+                    <div class="card bg-whitesmoke text-black mb-3" style="background-color: white;border-radius: 24px;">
+
+                        <div class="card-body">
+                            <h5 style="color:black"><span class="badge  rounded-pill  bg-gradient-gray"> Names </span> - @item.Fullnames </h5>
+                            <span class="badge rounded-pill bg-primary">Sector :  </span> @item.sector : <span class="badge rounded-pill bg-warning">Phone Number :   </span> @item.Phone
+                            <div class="dropdown-divider"></div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+            @foreach (var item in ViewBag.l6)
+            {
+
+                <div class="col-md-6 col-xl-5">
+                    <div class="card bg-whitesmoke text-black mb-3" style="background-color: white;border-radius: 24px;">
+
+                        <div class="card-body">
+                            <h5 style="color:black"><span class="badge  rounded-pill  bg-gradient-gray"> Job Name </span> - @item.Title </h5>
+                            <span class="badge rounded-pill bg-primary">Sector :  </span> @item.Sector : <span class="badge rounded-pill bg-warning">Qualification :   </span> @item.Qualifications
+                            <h6 style="color:black"><span class="badge  rounded-pill  bg-gradient-cyan"> Job Type </span> - @item.Type </h6>
+                            <div class="dropdown-divider"></div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table class="table table-bordered curved-table text-nowrap">
+                        <thead style="background-color: darkcyan">
+                            <tr style="color:white">
+
+                                <th> Education</th>
+
+                            </tr>
+                        </thead>
+                        <thead style="background-color:whitesmoke">
+                            <tr style="color:white">
+
+                                <th style="background-color: darkcyan "><small><i class="fa fa-university"></i> Institution</small></th>
+                                <th style="background-color: darkcyan"><small><i class="fa fa-file-invoice"></i> Course</small></th>
+                                <th style="background-color: darkcyan"><small><i class="fa fa-calendar"></i> Start</small></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.l8)
+                            {
+                                <tr style="background-color:white">
+
+
+                                    <td><i class="fa fa-university text-cyan"></i> @item.Institute</td>
+                                    <td><i class="fa fa-address-book text-cyan"></i> @item.Description</td>
+                                    <td><i class="fa fa-calendar-day text-cyan"></i> @item.Start_Date.ToString("dd-MMM-yyyy")</td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table class="table table-bordered curved-table text-nowrap">
+                        <thead style="background-color: darkcyan">
+                            <tr>
+
+                                <th style="color:white;width:40%"> Work Experience</th>
+
+                            </tr>
+                        </thead>
+                        <thead style="background-color:whitesmoke">
+                            <tr>
+
+                                <th style="background-color: darkcyan; color: white"><small><i class="fa fa-user-clock"></i> Company</small></th>
+                                <th style="background-color: darkcyan; color: white"><small><i class="fa fa-file-invoice"></i> Description</small></th>
+                                <th style="background-color: darkcyan; color: white"><small><i class="fa fa-calendar"></i> Start</small></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.l7)
+                            {
+                                <tr style="background-color:white">
+
+
+                                    <td><i class="fa fa-bookmark"></i>  @item.Company</td>
+                                    <td><i class="fa fa-bookmark"></i>  @item.Description</td>
+                                    <td><i class="fa fa-calendar-day text-cyan"></i> @item.Start_Date.ToString("dd-MMM-yyyy")</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+        <a class="btn btn-sm btn-info" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fa fa-book"></i> Applicant Documents</a>
+        <div class="dropdown-divider"></div>
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="col-sm-8">
+                        <div class="table-responsive">
+                            <table class="table table-bordered curved-table text-nowrap">
+
+                                <thead style="background-color: darkcyan">
+                                    <tr style="color:white">
+
+                                        <th> Documents</th>
+
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr style="color:white">
+                                        <th style="background-color: darkcyan; ">Category </th>
+                                        <th style="background-color: darkcyan; ">File </th>
+
+
+                                        <th style="background-color: darkcyan; ">Action </th>
+
+                                    </tr>
+                                </thead>
+                                @foreach (var item in ViewBag.l5)
+                                {
+                                    <tbody>
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+
+                                            <td style="background-color:white"><i class="fa fa-folder-open  text-cyan"></i>  @item.Category</td>
+                                            <td style="background-color:white;color:navy">
+                                                @if (@Path.GetExtension(@item.Path) == ".jpg")
+                                                {
+                                                    <i class="fa fa-images"></i>
+
+                                                }
+                                                else if (@Path.GetExtension(@item.Path) == ".png")
+                                                {
+                                                    <i class="fa fa-images"></i>
+
+                                                }
+
+                                                else if (@Path.GetExtension(@item.Path) == ".xlsx")
+                                                {
+                                                    <i class="fa fa-file-excel"></i>
+
+
+                                                }
+                                                else if (@Path.GetExtension(@item.Path) == ".docx")
+                                                {
+                                                    <i class="fa fa-file-word"></i>
+
+                                                }
+
+                                                else if (@Path.GetExtension(@item.Path) == ".pdf")
+                                                {
+                                                    <i class="fa fa-file-pdf"></i>
+
+                                                }  @item.Name
+
+                                            </td>
+
+
+                                            <td style="background-color:white">
+
+                                                <div class="btn-group dropdown">
+                                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-briefcase"></i>  . Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                        <a href="~/Files/DownloadFile?filePath=@item.Path" class="dropdown-item"> <i class="fa fa-file-download text-primary"></i> Download</a>
+                                                        <div class="dropdown-divider"></div>
+
+
+
+
+                                                    </div>
+                                            </td>
+
+
+
+
+
+
+                                        </tr>
+
+                                        <tr class="expandable-body">
+
+                                            <td colspan="5" style="background-color: rgb(255, 255, 255, 0.88);">
+                                                <medium>
+                                                    <div class="col d-flex justify-content-left">
+                                                        <div class="col-md-11 col-sm-11 col-12">
+                                                            <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                                                                <div class="card-outline card-cyan card-body text-left" style="border-radius: 14px;">
+
+                                                                    <div><b>File Notes</b></div>
+                                                                    <div class="divider"></div>
+
+                                                                    <div style="font-style:italic">
+                                                                        @item.Description
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </medium>
+
+
+
+                                            </td>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                }
+                            </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+
+
+
+
+        <a href="@Url.Action("Details", "Jobs", new { id = @ViewBag.MyId })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> Request Interview</a>

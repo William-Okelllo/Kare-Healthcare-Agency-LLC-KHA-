@@ -1,0 +1,153 @@
+﻿@model Ishop.Models.Experience
+
+@{
+    ViewBag.Title = "Add Experience";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9 col-sm-8 col-8">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: darkcyan;color:white">
+                <i class="fa fa-user-clock text-white nav-icon"></i> Add Experience
+            </div>
+            <div class="card-body">
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label style="color:black"><i class="fa fa-university text-cyan"></i> @Html.LabelFor(model => model.Company)</label>
+                            @Html.EditorFor(model => model.Company, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control ",
+                               @placeholder = "Institute",
+
+
+                               @required = "required",
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label style="color:black"><i class="fa fa-calendar-day text-cyan"></i> @Html.LabelFor(model => model.Start_Date)</label>
+                            @Html.EditorFor(model => model.Start_Date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control ",
+                               @placeholder = "Start Date",
+
+                               @Type = "Date",
+                               @required = "required",
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3" id="note2">
+                            <label style="color:black"><i class="fa fa-calendar-day text-cyan"></i> @Html.LabelFor(model => model.End_date)</label>
+                            @Html.EditorFor(model => model.End_date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control ",
+                               @placeholder = "End Date",
+
+                                    @Type = "Date",
+
+                               
+
+
+                           }
+                       })
+                        </div>
+                        <script type="text/javascript">
+                        $(function () {
+                            $("#Present").click(function () {
+                                if ($(this).is(":checked")) {
+                                    $("#note2").hide(("slide", { direction: "up" }, 300));
+
+
+                                } else {
+                                    $("#note2").show(("slide", { direction: "left" }, 300));
+
+                                    ;
+                                }
+                            });
+                        });
+                        </script>
+                        <div class="form-group col-md-3">
+
+                            <a class="form-check">
+                                <small style="color:darkcyan">
+                                    @Html.EditorFor(model => model.Present, new
+                               {
+                                   htmlAttributes = new
+                                   { @class = "coupon_question" }
+                               })
+                                    <label style="font-family:Quicksand">@Html.LabelFor(model => model.Present)</label>
+
+                                </small>
+
+                            </a>
+                        </div>
+                        <div class="form-group col-md-2" style="display:none">
+                            <label style="color:black"><i class="fa fa-university text-cyan"></i> @Html.LabelFor(model => model.App_user)</label>
+                            @Html.EditorFor(model => model.App_user, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control ",
+                               @placeholder = "Institute",
+
+                               @Value = User.Identity.Name,
+                               @Readonly = true,
+                           }
+                       })
+                        </div>
+                    </div>
+                    <label>@Html.LabelFor(model => model.Description)</label>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-8">
+                            @Html.TextAreaFor(model => model.Description, 3, 100, htmlAttributes: new
+                            {
+                               style = "width: 100%; max-width:100%;",
+                               @placeholder = "Description",
+                               @autofocus = "",
+                                    @required = true
+                               ,
+                               @class = "form-control form-rounded2",
+                                })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add Experience " class="btn btn-warning" />
+                            || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    </div>

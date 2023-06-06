@@ -24,6 +24,14 @@ namespace Ishop.Controllers
             var boo9 = dbb.Files.ToList();
             ViewBag.l9 = boo9;
 
+            GrptabsEnt dd = new GrptabsEnt();
+            var boo8 = dd.Educations.ToList();
+            ViewBag.l8 = boo8;
+
+            GrptabsEnt dv = new GrptabsEnt();
+            var boo7 = dv.Experiences.ToList();
+            ViewBag.l7 = boo7;
+
 
             return View(db.profiles.ToList());
         }
@@ -52,6 +60,8 @@ namespace Ishop.Controllers
             ViewBag.sectors = new SelectList(sectors, "Sector", "Sector");
 
 
+
+
             return View();
         }
 
@@ -60,7 +70,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Fullnames,email,Phone,sector,Gender,lastupdate,Residency")] Profile profile)
+        public ActionResult Create([Bind(Include = "Id,Fullnames,email,Phone,sector,Gender,lastupdate,Residency,app_user")] Profile profile)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +102,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Fullnames,email,Phone,sector,Gender,lastupdate,Residency")] Profile profile)
+        public ActionResult Edit([Bind(Include = "Id,Fullnames,email,Phone,sector,Gender,lastupdate,Residency,app_user")] Profile profile)
         {
             if (ModelState.IsValid)
             {

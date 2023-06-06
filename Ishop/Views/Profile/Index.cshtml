@@ -14,7 +14,19 @@
         z-index: 999;
     }
 </style>
+<style>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid cyan;
+        }
+</style>
 <style>
     body {
         background-image: url(../../images/33.jpg);
@@ -72,7 +84,7 @@
 
 
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label class="bwe">
                         <i class="fa fa-envelope text-cyan"></i>
                         Email Address
@@ -83,7 +95,7 @@
 
                 </div>
             </div>
-            <hr />
+
             <div class="row">
 
                 <div class="form-group col-md-2">
@@ -97,7 +109,7 @@
 
                 </div>
 
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label class="bwe">
                         <i class="fa fa-layer-group text-cyan"></i>
                         Sector
@@ -119,133 +131,219 @@
                 </div>
             </div>
         }
+        @if (Model.Count() == 0)
+        {
+            <a href="@Url.Action("Create", "Profile", new {  })" class="btn-sm btn btn-info btn"><i class="fa fa-user-plus text-white"></i> Add Profile Details</a>
+        }
+        <div class="dropdown-divider"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table class="table table-bordered curved-table text-nowrap">
+                        <thead style="background-color: darkcyan">
+                            <tr style="color:white">
 
-        <hr />
+                                <th> Education</th>
 
-        <p><i class="fa fa-briefcase text-cyan"></i> My Documents</p>
+                            </tr>
+                        </thead>
+                        <thead style="background-color:whitesmoke">
+                            <tr style="color:white">
+
+                                <th style="background-color: darkcyan "><small><i class="fa fa-university"></i> Institution</small></th>
+                                <th style="background-color: darkcyan"><small><i class="fa fa-file-invoice"></i> Course</small></th>
+                                <th style="background-color: darkcyan"><small><i class="fa fa-calendar"></i> Start</small></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.l8)
+                            {
+                                <tr style="background-color:white">
 
 
-        <div class="table-responsive" style="min-height: 400px">
-            <table class="table table-bordered  text-nowrap">
+                                    <td><i class="fa fa-university text-cyan"></i> @item.Institute</td>
+                                    <td><i class="fa fa-address-book text-cyan"></i> @item.Description</td>
+                                    <td><i class="fa fa-calendar-day text-cyan"></i> @item.Start_Date.ToString("dd-MMM-yyyy")</td>
 
+                                </tr>
+                            }
 
-                <thead>
-                    <tr style="color:white">
-                        <th style="background-color: darkcyan; ">Uploaded On </th>
-                        <th style="background-color: darkcyan; ">Category </th>
-                        <th style="background-color: darkcyan; ">File </th>
+                        </tbody>
+                    </table>
 
+                </div>
+            </div>
+                <div class="col-sm-6">
+                    <div class="table-responsive">
+                        <table class="table table-bordered curved-table text-nowrap">
+                            <thead style="background-color: darkcyan">
+                                <tr>
 
-                        <th style="background-color: darkcyan; ">Action </th>
+                                    <th style="color:white;width:40%"> Work Experience</th>
 
-                    </tr>
-                </thead>
-                @foreach (var item in ViewBag.l9)
-                {
-                    <tbody>
-                        <tr data-widget="expandable-table" aria-expanded="false">
+                                </tr>
+                            </thead>
+                            <thead style="background-color:whitesmoke">
+                                <tr>
 
-                            <td style="background-color:white"><i class="fa fa-calendar-check text-cyan"></i>  @item.UploadedOn.ToString("dd-MMM-yyyy")</td>
-                            <td style="background-color:white"><i class="fa fa-folder-open  text-cyan"></i>  @item.Category</td>
-                            <td style="background-color:white;color:navy">
-                                @if (@Path.GetExtension(@item.Path) == ".jpg")
+                                    <th style="background-color: darkcyan; color: white"><small><i class="fa fa-user-clock"></i> Company</small></th>
+                                    <th style="background-color: darkcyan; color: white"><small><i class="fa fa-file-invoice"></i> Description</small></th>
+                                    <th style="background-color: darkcyan; color: white"><small><i class="fa fa-calendar"></i> Start</small></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.l7)
                                 {
-                                    <i class="fa fa-images"></i>
+                                    <tr style="background-color:white">
 
+
+                                        <td><i class="fa fa-bookmark"></i>  @item.Company</td>
+                                        <td><i class="fa fa-bookmark"></i>  @item.Description</td>
+                                        <td><i class="fa fa-calendar-day text-cyan"></i> @item.Start_Date.ToString("dd-MMM-yyyy")</td>
+                                    </tr>
                                 }
-                                else if (@Path.GetExtension(@item.Path) == ".png")
-                                {
-                                    <i class="fa fa-images"></i>
 
-                                }
+                            </tbody>
+                        </table>
 
-                                else if (@Path.GetExtension(@item.Path) == ".xlsx")
-                                {
-                                    <i class="fa fa-file-excel"></i>
+                    </div>
 
-
-                                }
-                                else if (@Path.GetExtension(@item.Path) == ".docx")
-                                {
-                                    <i class="fa fa-file-word"></i>
-
-                                }
-
-                                else if (@Path.GetExtension(@item.Path) == ".pdf")
-                                {
-                                    <i class="fa fa-file-pdf"></i>
-
-                                }  @item.Name
-
-                            </td>
-
-
-                            <td style="background-color:white">
-
-                                <div class="btn-group dropdown">
-                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-briefcase"></i>  . Action
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                        <a href="~/Files/DownloadFile?filePath=@item.Path" class="dropdown-item"> <i class="fa fa-file-download text-primary"></i> Download</a>
-                                        <div class="dropdown-divider"></div>
-
-
-                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this file?')) { window.location.href = '@Url.Action("Delete_File", "Files", new { @item.id})'; }">
-                                            <i class="fas fa-trash text-danger"></i> Delete file
-                                        </a>
-                                        <script>
-                                            $(function () {
-                                                $('#Delete_User').click(function () {
-                                                    if (confirm('Are you sure?')) {
-                                                        window.location.href = $(this).data('url');
-                                                    }
-                                                });
-                                            });
-                                        </script>
-
-                                    </div>
-                            </td>
+                </div>
 
 
 
+                <div class="col-sm-8">
+                    <div class="table-responsive">
+                        <table class="table table-bordered curved-table text-nowrap">
+
+                            <thead style="background-color: darkcyan">
+                                <tr style="color:white">
+
+                                    <th> Documents</th>
+
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr style="color:white">
+                                    <th style="background-color: darkcyan; ">Date </th>
+                                    <th style="background-color: darkcyan; ">Category </th>
+                                    <th style="background-color: darkcyan; ">File </th>
 
 
+                                    <th style="background-color: darkcyan; ">Action </th>
 
-                        </tr>
+                                </tr>
+                            </thead>
+                            @foreach (var item in ViewBag.l9)
+                            {
+                                <tbody>
+                                    <tr data-widget="expandable-table" aria-expanded="false">
 
-                        <tr class="expandable-body">
+                                        <td style="background-color:white"><i class="fa fa-calendar-check text-cyan"></i>  @item.UploadedOn.ToString("dd-MMM-yyyy")</td>
+                                        <td style="background-color:white"><i class="fa fa-folder-open  text-cyan"></i>  @item.Category</td>
+                                        <td style="background-color:white;color:navy">
+                                            @if (@Path.GetExtension(@item.Path) == ".jpg")
+                                            {
+                                                <i class="fa fa-images"></i>
 
-                            <td colspan="5" style="background-color: rgb(255, 255, 255, 0.88);">
-                                <medium>
-                                    <div class="col d-flex justify-content-left">
-                                        <div class="col-md-11 col-sm-11 col-12">
-                                            <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+                                            }
+                                            else if (@Path.GetExtension(@item.Path) == ".png")
+                                            {
+                                                <i class="fa fa-images"></i>
 
-                                                <div class="card-outline card-cyan card-body text-left" style="border-radius: 14px;">
+                                            }
 
-                                                    <div><b>File Notes</b></div>
-                                                    <div class="divider"></div>
+                                            else if (@Path.GetExtension(@item.Path) == ".xlsx")
+                                            {
+                                                <i class="fa fa-file-excel"></i>
 
-                                                    <div style="font-style:italic">
-                                                        @item.Description
-                                                    </div>
+
+                                            }
+                                            else if (@Path.GetExtension(@item.Path) == ".docx")
+                                            {
+                                                <i class="fa fa-file-word"></i>
+
+                                            }
+
+                                            else if (@Path.GetExtension(@item.Path) == ".pdf")
+                                            {
+                                                <i class="fa fa-file-pdf"></i>
+
+                                            }  @item.Name
+
+                                        </td>
+
+
+                                        <td style="background-color:white">
+
+                                            <div class="btn-group dropdown">
+                                                <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-briefcase"></i>  . Action
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                    <a href="~/Files/DownloadFile?filePath=@item.Path" class="dropdown-item"> <i class="fa fa-file-download text-primary"></i> Download</a>
+                                                    <div class="dropdown-divider"></div>
+
+
+                                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this file?')) { window.location.href = '@Url.Action("Delete_File", "Files", new { @item.id})'; }">
+                                                        <i class="fas fa-trash text-danger"></i> Delete file
+                                                    </a>
+                                                    <script>
+                                                        $(function () {
+                                                            $('#Delete_User').click(function () {
+                                                                if (confirm('Are you sure?')) {
+                                                                    window.location.href = $(this).data('url');
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
 
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </medium>
+                                        </td>
 
 
 
-                            </td>
-
-                        </tr>
 
 
-                    </tbody>
-                }
-            </table>
 
-        </div>
+                                    </tr>
+
+                                    <tr class="expandable-body">
+
+                                        <td colspan="5" style="background-color: rgb(255, 255, 255, 0.88);">
+                                            <medium>
+                                                <div class="col d-flex justify-content-left">
+                                                    <div class="col-md-11 col-sm-11 col-12">
+                                                        <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                                                            <div class="card-outline card-cyan card-body text-left" style="border-radius: 14px;">
+
+                                                                <div><b>File Notes</b></div>
+                                                                <div class="divider"></div>
+
+                                                                <div style="font-style:italic">
+                                                                    @item.Description
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </medium>
+
+
+
+                                        </td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            }
+                        </table>
+
+                    </div>
+                </div>
+    </div>

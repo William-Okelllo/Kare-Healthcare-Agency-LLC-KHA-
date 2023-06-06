@@ -432,6 +432,9 @@
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\EducationController.cs" />
+    <Compile Include="Controllers\ExperienceController.cs" />
+    <Compile Include="Controllers\ExpertiseController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
@@ -472,8 +475,17 @@
     </Compile>
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
+    <Compile Include="Models\Education.cs">
+      <DependentUpon>Grptabs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmbedProperties.cs" />
+    <Compile Include="Models\Experience.cs">
+      <DependentUpon>Grptabs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Expertise.cs">
+      <DependentUpon>Grptabs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\File.cs">
       <DependentUpon>filetab.tt</DependentUpon>
     </Compile>
@@ -508,6 +520,21 @@
       <DependentUpon>filetab.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\FileUpload.cs" />
+    <Compile Include="Models\Grptabs.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Grptabs.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grptabs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Grptabs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grptabs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Grptabs.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\R.Context.cs">
@@ -1981,6 +2008,16 @@
       <DependentUpon>filetab.edmx</DependentUpon>
       <LastGenOutput>filetab.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Grptabs.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Grptabs.edmx</DependentUpon>
+      <LastGenOutput>Grptabs.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Grptabs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Grptabs.edmx</DependentUpon>
+      <LastGenOutput>Grptabs.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\R.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>R.edmx</DependentUpon>
@@ -2269,6 +2306,13 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Grptabs.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Grptabs.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Grptabs.edmx.diagram">
+      <DependentUpon>Grptabs.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
@@ -3035,6 +3079,23 @@
     <Content Include="Views\Applications\Details.cshtml" />
     <Content Include="Views\Applications\Edit.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
+    <Content Include="Views\Applications\Employer.cshtml" />
+    <Content Include="Views\Applications\Applicant_details.cshtml" />
+    <Content Include="Views\Education\Create.cshtml" />
+    <Content Include="Views\Education\Delete.cshtml" />
+    <Content Include="Views\Education\Details.cshtml" />
+    <Content Include="Views\Education\Edit.cshtml" />
+    <Content Include="Views\Education\Index.cshtml" />
+    <Content Include="Views\Experience\Create.cshtml" />
+    <Content Include="Views\Experience\Delete.cshtml" />
+    <Content Include="Views\Experience\Details.cshtml" />
+    <Content Include="Views\Experience\Edit.cshtml" />
+    <Content Include="Views\Experience\Index.cshtml" />
+    <Content Include="Views\Expertise\Create.cshtml" />
+    <Content Include="Views\Expertise\Delete.cshtml" />
+    <Content Include="Views\Expertise\Details.cshtml" />
+    <Content Include="Views\Expertise\Edit.cshtml" />
+    <Content Include="Views\Expertise\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

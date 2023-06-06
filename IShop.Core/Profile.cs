@@ -19,6 +19,7 @@ namespace IShop.Core
         public string Residency { get; set; }
         public string Fullnames { get; set; }
         public string Gender { get; set; }
+        public string app_user { get; set; }
         [Display(Name = "last update")]
         public DateTime lastupdate { get; set; }
     }

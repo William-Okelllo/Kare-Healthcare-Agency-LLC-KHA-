@@ -94,7 +94,7 @@
 
     <div class="col-md-12 col-sm-12 col-12">
         <div class="card mb- mb-xl-4" style="border-radius: 24px;">
-            <div class="card-header" style="background-color: #076f79d4; color: white; border-radius: 14px ">
+            <div class="card-header" style="background-color: #076f79d4; color: white; border-radius: 24px ">
                 <i class="bx bxs-hand-up"></i>  Post Job
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
@@ -112,7 +112,7 @@
 
                         <div class="form-group row">
                             <div class="form-group col-md-3">
-                                <label style="color:black"><i class="fa fa-calendar text-cyan"></i> @Html.LabelFor(model => model.Title)</label>
+                                <label style="color:black"><i class="fa fa-briefcase text-cyan"></i> @Html.LabelFor(model => model.Title)</label>
                                 @Html.EditorFor(model => model.Title, new
                            {
                                htmlAttributes = new
@@ -165,14 +165,14 @@
 
                                 }@Html.DropDownListFor(model => model.Experience, q, "---Work Experience---", new { @class = "form-control form-control", @required = "required", })
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label style="color:black"><i class="fa fa-calendar-day text-cyan"></i> @Html.LabelFor(model => model.Application_Deadline)</label>
                                 @Html.EditorFor(model => model.Application_Deadline, new
                            {
                                htmlAttributes = new
                                {
                                    @class = "form-control form-control ",
-                                   @placeholder = " Application_Deadline",
+                                   @placeholder = "Deadline",
                                    id = "datepicker",
                                         
                                    @required = "required",
@@ -182,7 +182,7 @@
                         </div>
                         <hr />
                         <div class="form-group row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label style="color:black"> <i class="fa fa-university text-cyan"></i> @Html.LabelFor(model => model.Qualifications)</label>
                                 @{
                                     List<SelectListItem> x = new List<SelectListItem>();
@@ -207,7 +207,7 @@
                             </div>
 
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label style="color:black"><i class="fa fa-hourglass text-cyan"></i> @Html.LabelFor(model => model.Type)</label>
                                 @{
                                     List<SelectListItem> g = new List<SelectListItem>();
@@ -352,10 +352,10 @@
 
                                 <div style="display: none" id="note2">
 
-                                    <div class="spinner-border spinner-border-sm text-cyan" role="status">
+                                    <div class="spinner-border spinner-border-sm text-warning" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    <div class="spinner-grow spinner-grow-sm text-cyan" role="status">
+                                    <div class="spinner-grow spinner-grow-sm text-warning" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
 
@@ -364,10 +364,10 @@
                                 </div>
                                 <div style="display: none" id="note">
 
-                                    <div class="spinner-border spinner-border-sm text-warning" role="status">
+                                    <div class="spinner-border spinner-border-sm text-cyan" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    <div class="spinner-grow spinner-grow-sm text-warning" role="status">
+                                    <div class="spinner-grow spinner-grow-sm text-cyan" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                     <medium style="color:darkcyan">The salary amount on this job will be hidden as requested</medium>
@@ -436,7 +436,7 @@
 
                         <hr />
 
-                        <input type="submit" value="Post Job" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to post this Job?')" />
+                        <input type="submit" value="Post Job" class="btn btn btn-info" style="color:white" onclick="return confirm('Are you sure you want to post this Job?')" />
 
 
                         <script>
@@ -449,7 +449,7 @@
                             });
                         </script>
                         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                        <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+                        
                     }
                 </div>
             </div>

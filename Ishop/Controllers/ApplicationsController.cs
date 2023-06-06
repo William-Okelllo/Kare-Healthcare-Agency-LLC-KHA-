@@ -11,9 +11,14 @@ using Ishop.Infa;
 using PagedList;
 using System.Configuration;
 using System.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
+using Application = IShop.Core.Application;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
+
     public class ApplicationsController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
@@ -42,7 +47,7 @@ namespace Ishop.Controllers
         public ActionResult Employer(string option, string search, int? page)
         {
             
-                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c => c.Sector.StartsWith(search) || c.Sector == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.applications.OrderByDescending(p => p.Application_Date).Where(c => c.Posted_By == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
             
             
@@ -83,7 +88,7 @@ namespace Ishop.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Job_id,Job_Title,Application_Date,Applicant,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email")] Application application)
+        public ActionResult Create([Bind(Include = "Id,Job_id,Job_Title,Application_Date,Applicant,Application_Deadline,Sector,Experience,Qualifications,Type,Application_Type,Salary,link_email,Posted_By")] Application application)
         {
 
             Job_context dbbb = new Job_context();
@@ -98,6 +103,7 @@ namespace Ishop.Controllers
             application.Application_Type = data10.Application_Type;
             application.link_email = data10.link_email;
             application.Show_salary = data10.Show_salary;
+            application.Posted_By=data10.Posted_By;
 
             if (ModelState.IsValid)
             {
@@ -201,6 +207,38 @@ namespace Ishop.Controllers
             }
 
 
+        }
+
+        public ActionResult Applicant_details(int? id)
+
+        {
+
+            ViewBag.MyId = id;
+
+            Job_context dbbb = new Job_context();
+            ApplicationContext dqb = new ApplicationContext();
+            ProfileContext AA = new ProfileContext();
+            GrptabsEnt FC =new GrptabsEnt();
+
+            
+            var boo9 = AA.profiles.ToList();
+            ViewBag.l9 = boo9;
+
+            var boo8 = FC.Educations.ToList();
+            ViewBag.l8 = boo8;
+
+
+            var boo7 = FC.Experiences.ToList();
+            ViewBag.l7 = boo7;
+
+            var boo6 = dbbb.Jobs.ToList();
+            ViewBag.l6 = boo6;
+
+
+            filetab dbb = new filetab();
+            var boo5 = dbb.Files.ToList();
+            ViewBag.l5 = boo5;
+            return View();
         }
 
     }

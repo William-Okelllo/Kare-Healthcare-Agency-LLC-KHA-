@@ -331,15 +331,31 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@Url.Action("my_files", "files")" class="nav-link">
-                                        <i class="fa fa-folder-open text-cyan nav-icon"></i>
+                                    <a href="@Url.Action("Index", "education")" class="nav-link">
+                                        <i class="fa fa-university text-cyan nav-icon"></i>
                                         <p style="font-family:Calibri;color:black">
-                                            My Documents <i class="fas fa-angle-left right"></i>
+                                            Education<i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Experience")" class="nav-link">
+                                        <i class="fa fa-user-clock text-cyan nav-icon"></i>
+                                        <p style="font-family:Calibri;color:black">
+                                            Work Experience<i class="fas fa-angle-left right"></i>
                                         </p>
                                     </a>
                                 </li>
                             </ul>
 
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("my_files", "files")" class="nav-link">
+                                <i class="fa fa-folder-open text-cyan nav-icon"></i>
+                                <p style="font-family:Calibri;color:black">
+                                    My Documents <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-header">Jobs section</li>
                         <li class="nav-item">
@@ -380,7 +396,7 @@
 
                     @if (this.User.IsInRole("Employer"))
                     {
-                        
+
 
                         <li class="nav-header">Jobs section</li>
 
@@ -403,14 +419,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Applications")" class="nav-link">
+                            <a href="@Url.Action("Employer", "Applications")" class="nav-link">
                                 <i class="fa fa-briefcase text-cyan nav-icon"></i>
                                 <p style="font-family:Calibri;color:black">
                                     Applications <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                         </li>
-                       
+
 
                     }
 

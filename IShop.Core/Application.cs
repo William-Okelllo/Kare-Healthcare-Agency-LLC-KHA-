@@ -16,7 +16,7 @@ namespace IShop.Core
         public DateTime Application_Date { get; set; }
         public string Applicant { get; set; }
         public DateTime Application_Deadline { get; set; }
-
+        public string Posted_By { get; set; }
         public string Sector { get; set; }
 
         public string Experience { get; set; }
