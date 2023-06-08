@@ -6,112 +6,123 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Ishop.Infa;
 using Ishop.Models;
 
 namespace Ishop.Controllers
 {
-    [Authorize]
-    public class ExperienceController : Controller
+    public class InterviewsController : Controller
     {
-        private GrptabsEnt db = new GrptabsEnt();
+        private sp_dashprocs db = new sp_dashprocs();
 
-        // GET: Experience
+        // GET: Interviews
         public ActionResult Index()
         {
-            return View(db.Experiences.Where(c => c.App_user == User.Identity.Name).ToList());
+            return View(db.Interviewlists.ToList());
         }
 
-        // GET: Experience/Details/5
+        // GET: Interviews/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experience experience = db.Experiences.Find(id);
-            if (experience == null)
+            Interviewlist interviewlist = db.Interviewlists.Find(id);
+            if (interviewlist == null)
             {
                 return HttpNotFound();
             }
-            return View(experience);
+            return View(interviewlist);
         }
 
-        // GET: Experience/Create
-        public ActionResult Create()
+        // GET: Interviews/Create
+        public ActionResult Create(int? id)
+
         {
+
+
+            ProfileContext AA = new ProfileContext();
+            ApplicationContext dqb = new ApplicationContext();
+            var data10 = dqb.applications.OrderByDescending(p => p.Id).Where(c => c.Id == id).ToList();
+            ViewBag.F = data10;
+
+
+
+
             return View();
         }
 
-        // POST: Experience/Create
+        // POST: Interviews/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Start_Date,End_date,Present,Company,Description,App_user")] Experience experience)
+        public ActionResult Create([Bind(Include = "id,CreatedOn,Status,Job_Name,Sector,Type,Posted_by,Applicant,Location,Phone")] Interviewlist interviewlist)
         {
             if (ModelState.IsValid)
             {
-                db.Experiences.Add(experience);
+                db.Interviewlists.Add(interviewlist);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(experience);
+            return View(interviewlist);
         }
 
-        // GET: Experience/Edit/5
+        // GET: Interviews/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experience experience = db.Experiences.Find(id);
-            if (experience == null)
+            Interviewlist interviewlist = db.Interviewlists.Find(id);
+            if (interviewlist == null)
             {
                 return HttpNotFound();
             }
-            return View(experience);
+            return View(interviewlist);
         }
 
-        // POST: Experience/Edit/5
+        // POST: Interviews/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Start_Date,End_date,Present,Company,Description")] Experience experience)
+        public ActionResult Edit([Bind(Include = "id,CreatedOn,Status,Job_Name,Sector,Type,Posted_by,Applicant,Location,Phone")] Interviewlist interviewlist)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(experience).State = EntityState.Modified;
+                db.Entry(interviewlist).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(experience);
+            return View(interviewlist);
         }
 
-        // GET: Experience/Delete/5
+        // GET: Interviews/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Experience experience = db.Experiences.Find(id);
-            if (experience == null)
+            Interviewlist interviewlist = db.Interviewlists.Find(id);
+            if (interviewlist == null)
             {
                 return HttpNotFound();
             }
-            return View(experience);
+            return View(interviewlist);
         }
 
-        // POST: Experience/Delete/5
+        // POST: Interviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Experience experience = db.Experiences.Find(id);
-            db.Experiences.Remove(experience);
+            Interviewlist interviewlist = db.Interviewlists.Find(id);
+            db.Interviewlists.Remove(interviewlist);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

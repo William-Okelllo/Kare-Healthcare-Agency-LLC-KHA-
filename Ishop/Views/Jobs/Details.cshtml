@@ -71,20 +71,23 @@
                         || <b><i class="fa fa-calendar-check text-cyan"></i>  Deadline</b> :  @Model.Application_Deadline.ToString("dd-MMMM-yyyy")
                     </p>
 
-
-                    <div class="dropdown-divider"></div>
-                    @if (Model.Application_Type == "External")
-                    {<p>
-                            <a href="@Url.Action("create", "record_payment", new { id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
-                            <i class="fa fa-link text-cyan"></i> Apply via <a href="@Model.link_email"> @Model.link_email</a>
-                        </p>}
-                    else
+                    @if (this.User.IsInRole("Candidate"))
                     {
+                    <div class="dropdown-divider"></div>
+                    <div>
+                        @if (Model.Application_Type == "External")
+                        {<p>
+                                <a href="@Url.Action("create", "record_payment", new { id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
+                                <i class="fa fa-link text-cyan"></i> Apply via <a href="@Model.link_email"> @Model.link_email</a>
+                            </p>}
+                        else
+                        {
 
-                        
-                        <a href="@Url.Action("create", "Applications", new { id = Model.Id })" class="btn-sm btn btn-info btn"><i class="fa fa-bookmark text-white"></i> Apply</a>
+
+                            <a href="@Url.Action("create", "Applications", new { id = Model.Id })" class="btn-sm btn btn-info btn"><i class="fa fa-bookmark text-white"></i> Apply</a>
+                        }
+                                    </div>
                     }
-
 
                 </div>
             </div>

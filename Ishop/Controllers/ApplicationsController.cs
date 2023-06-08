@@ -90,10 +90,14 @@ namespace Ishop.Controllers
             var data10 = dbbb.Jobs.OrderByDescending(p => p.Id).Where(c => c.Id == Id).ToList();
             ViewBag.F = data10;
 
+            bool exists = db.applications.Any(m => m.Job_id == Id && m.Applicant==User.Identity.Name);
+            if (exists)
+            {
+                TempData["msg"] =  " You already applied this";
+                return RedirectToAction("Open_Jobs", "jobs");
+            }
 
-           
-
-            return View();
+                return View();
         }
         
         
@@ -135,19 +139,34 @@ namespace Ishop.Controllers
                     + "\n" + application.Type
                      + "\n" + application.Sector
                    + "\n" + "thank you regards ";
+                    string messageToEmployer = "Hello , " + data10.Posted_By
 
 
 
+                   + "\n" + " A candidate has made an application on your posted job"
+
+                   + "\n" + " ..."
+                   + "\n" + application.Job_Title
+                    + "\n" + application.Type
+                     + "\n" + application.Sector
+                   + "\n" + "thank you regards ";
 
 
 
+                    ApplicationDbContext bm = new ApplicationDbContext();
+                    var data11 = bm.Users.FirstOrDefault(d => d.UserName == application.Posted_By);
+                    
+
+                    Notify_employer(data11.PhoneNumber, messageToEmployer);
                     sms_send(currentUser.PhoneNumber, message);
+
+                    TempData["msg"] = "✔  Job applied successfully ";
                 }
 
 
                 catch
                 {
-                    TempData["msg"] = "✔  reninder not sent "; ;
+                    TempData["msg"] = "✔  error sending notifications "; ;
 
                 }
                 return RedirectToAction("Index");
@@ -157,6 +176,49 @@ namespace Ishop.Controllers
         }
         public void sms_send(string recipient, string message)
         {
+            string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
+            string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
+            string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
+            int partnerID1 = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString());
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Prepare the request body
+                var requestBody = new
+                {
+                    apikey = APIkey1,
+                    partnerID = partnerID1,
+                    message = message,
+                    shortcode = shortcode1,
+                    mobile = recipient
+
+                };
+                var json = JsonConvert.SerializeObject(requestBody);
+                try
+                {
+                    var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        TempData["msg"] = "Job applied successfully.";
+                    }
+                    else
+                    {
+                        var errorResponse = response.Content.ReadAsStringAsync().Result;
+                        TempData["msg"] = "error occured on application : ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["msg"] = "An error occurred while sending the SMS:";
+                }
+            }
+        }
+        public void Notify_employer(string recipient, string message)
+        {
+           
+
+            
+
             string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
             string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
             string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
@@ -310,12 +372,12 @@ namespace Ishop.Controllers
             var boo7 = FC.Experiences.Where(c => c.App_user == data10.Applicant).ToList();
             ViewBag.l7 = boo7;
 
-            var boo6 = dbbb.Jobs.ToList();
+            var boo6 = dbbb.Jobs.Where(c => c.Id ==data10.Job_id).ToList();
             ViewBag.l6 = boo6;
 
 
             filetab dbb = new filetab();
-            var boo5 = dbb.Files.ToList();
+            var boo5 = dbb.Files.Where(c => c.Access == data10.Applicant).ToList();
             ViewBag.l5 = boo5;
             return View();
         }

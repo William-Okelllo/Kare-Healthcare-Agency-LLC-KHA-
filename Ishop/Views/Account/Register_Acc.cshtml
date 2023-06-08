@@ -163,7 +163,7 @@
                                 </div>  Email already in use
                             </a>
                         </div>
-                        
+
 
 
 
@@ -222,101 +222,106 @@ $(document).ready(function () {
                            }
                        })  @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                         </div>
-</div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label style="color: darkcyan"><span> *</span>  Password </label>
-                        @Html.EditorFor(model => model.Password, new
-                   {
-                       htmlAttributes = new
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label style="color: darkcyan"><span> *</span>  Password </label>
+                                @Html.EditorFor(model => model.Password, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control  ",
+                                   @PlaceHolder = "Password",
+                                   @required = "required"
+
+                               }
+                           })  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label style="color: darkcyan"><span> *</span> Confirm Password </label>
+                            @Html.EditorFor(model => model.ConfirmPassword, new
                        {
-                           @class = "form-control  ",
-                           @PlaceHolder = "Password",
-                           @required = "required"
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @PlaceHolder = "Confirm Password",
+                               @required = "required"
 
-                       }
-                   })  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-                    <div class="form-group col-md-3">
-                        <label style="color: darkcyan"><span> *</span> Confirm Password </label>
-                        @Html.EditorFor(model => model.ConfirmPassword, new
-                   {
-                       htmlAttributes = new
-                       {
-                           @class = "form-control ",
-                           @PlaceHolder = "Confirm Password",
-                           @required = "required"
-
-                       }
-                   })  @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                    </div>
+                           }
+                       })  @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
 
 
 
-    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
 
-    <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-cyan"> </p>
-    <small>Show password</small>
+                        <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-cyan"> </p>
+                        <small>Show password</small>
 
-    <script type="text/javascript">
-        $(function () {
-            $("#toggle_pwd").click(function () {
-                $(this).toggleClass("fa-eye fa-eye-slash");
-                var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
-                $("[id*=Password]").attr("type", type);
-            });
-        });
-    </script>
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#toggle_pwd").click(function () {
+                                    $(this).toggleClass("fa-eye fa-eye-slash");
+                                    var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
+                                    $("[id*=Password]").attr("type", type);
+                                });
+                            });
+                        </script>
 
 
 
 
-</div>
-                <div class="form-group col-md-5">
-                    <medium style="color:darkcyan"><span class="fa fa-user-cog"></span> Account Type</medium>
-                    @{
-                        List<SelectListItem> q = new List<SelectListItem>();
-                        q.Add(new SelectListItem
-                        {
-                            Text = "Candidate",
-                            Value = "Candidate",
-                        });
+                        </div>
+                        <div class="form-group col-md-5">
+                            <medium style="color:darkcyan"><span class="fa fa-user-cog"></span> Account Type</medium>
+                            @{
+                                List<SelectListItem> q = new List<SelectListItem>();
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Candidate",
+                                    Value = "Candidate",
+                                });
 
-                        q.Add(new SelectListItem
-                        {
-                            Text = "Employer",
-                            Value = "Employer",
-                        });
-                        q.Add(new SelectListItem
-                        {
-                            Text = "Institution",
-                            Value = "Institution",
-                        });
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Employer",
+                                    Value = "Employer",
+                                });
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Institution",
+                                    Value = "Institution",
+                                });
 
 
-                    }@Html.DropDownListFor(model => model.UserRoles, q, "--Account Type--", new { @class = "form-control form-control", @required = "required", })
-                    </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $("#UserRoles").chosen();
+                            }@Html.DropDownListFor(model => model.UserRoles, q, "--Account Type--", new { @class = "form-control form-control", @required = "required", })
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#UserRoles").chosen();
 
-                    });
-                </script>
-                   
-                    <hr />
+                            });
+                        </script>
 
-                    <p>Add phone number message</p>
+                        <hr />
+                        <div class="spinner-border spinner-border-sm text-cyan" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow spinner-grow-sm text-cyan" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <p>Kindly ensure to provide your actual phone no to receive automated system sms notifactions</p>
 
-                    <input type="submit" value="Create account" class="btn btn-success" />
+                        <input type="submit" value="Create account" class="btn btn-success" />
 
-                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary btn" })
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary btn" })
 
-              <hr />
-             
+                        <hr />
 
-}
 
-</form>
+                    }
+
+                        </form>
 
 
 

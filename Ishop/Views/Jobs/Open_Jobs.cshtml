@@ -32,8 +32,25 @@
             Open Jobs
         </h3>
     </div>
+    <script src="path/to/alertify.js"></script>
+    <link rel="stylesheet" href="path/to/alertify.css" />
+    @if (TempData["Msg"] != null)
+    {
+        <div class="col d-flex justify-content-right">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
 
-
+    <script>
+        window.setTimeout(function () {
+            $(".alert").slideUp(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 4000);
+    </script>
 
     <div class="card-body" style="background-color: #e2f8f6a6; border-radius: 24px;">
 
@@ -41,34 +58,39 @@
 
         <div class="row">
             @foreach (var item in Model)
-            {<div class="col-md-6 col-xl-5">
-                    <div class="card bg-whitesmoke text-black mb-3" style="background-color: white;border-radius: 24px;">
+            {<div class="col-md-4 col-xl-4">
+    <div class="card bg-whitesmoke text-black mb-3" style="background-color: white;border-radius: 24px;">
 
-                        <div class="card-body">
-                            <h5 style="color:black"><span class="badge  rounded-pill  bg-gradient-gray"> @item.Type </span> - @item.Title </h5>
-                            <span class="badge  rounded-pill  bg-warning">Qualifications @item.Qualifications </span>
-                            <span class="badge rounded-pill bg-primary">Sector : @item.Sector </span>
-                            <div class="dropdown-divider"></div>
-                            <p><b><i class="fa fa-wallet text-cyan"></i> Salary :</b> Ksh @if (item.Show_salary == true)
-                            {@item.Salary.ToString("#,##0.00")} else { <b style="color:red">Confidential</b>  }
-                            
-                            
-                             || <b><i class="fa fa-calendar-check text-cyan"></i>  Deadline</b> :  @item.Application_Deadline.ToString("dd-MMMM-yyyy")</p>
-                            @if (item.Application_Type == "External")
-                            { <p>
-                            <a href="@Url.Action("Details", "Jobs", new { id = item.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
-                            <i class="fa fa-link text-cyan"></i> Apply via <a href="@item.link_email"> @item.link_email</a></p>}
-                        else
-                        {
-
-                            <a href="@Url.Action("Details", "Jobs", new { id = item.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
-                            <a href="@Url.Action("create", "Applications", new { id = item.Id })" class="btn-sm btn btn-info btn"><i class="fa fa-bookmark text-white"></i> Apply</a>
-                        }
+        <div class="card-body">
+            <h5 style="color:black"><span class="badge  rounded-pill  bg-gradient-gray"> @item.Type </span> - @item.Title </h5>
+            <span class="badge  rounded-pill  bg-warning">Qualifications @item.Qualifications </span>
+            <span class="badge rounded-pill bg-primary">Sector : @item.Sector </span>
+            <div class="dropdown-divider"></div>
+            <p>
+                <b><i class="fa fa-wallet text-cyan"></i> Salary :</b> Ksh @if (item.Show_salary == true)
+                {@item.Salary.ToString("#,##0.00")}
+            else
+            { <b style="color:red">Confidential</b>}
 
 
-                        </div>
-                    </div>
-                </div>
+                || <b><i class="fa fa-calendar-check text-cyan"></i>  Deadline</b> :  @item.Application_Deadline.ToString("dd-MMMM-yyyy")
+            </p>
+            @if (item.Application_Type == "External")
+            {<p>
+                    <a href="@Url.Action("Details", "Jobs", new { id = item.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
+                    <i class="fa fa-link text-cyan"></i> Apply via <a href="@item.link_email"> @item.link_email</a>
+                </p>}
+            else
+            {
+
+                <a href="@Url.Action("Details", "Jobs", new { id = item.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
+                <a href="@Url.Action("create", "Applications", new { id = item.Id })" class="btn-sm btn btn-info btn"><i class="fa fa-bookmark text-white"></i> Apply</a>
+            }
+
+
+        </div>
+    </div>
+</div>
 
             }
         </div>

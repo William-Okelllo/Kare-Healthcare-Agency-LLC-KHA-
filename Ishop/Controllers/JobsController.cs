@@ -36,12 +36,12 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.Jobs.Where(c => c.Sector == search || c.Sector.StartsWith(search) && c.Posted_By==User.Identity.Name).ToList().ToPagedList(page ?? 1, 7));
+                return View(db.Jobs.OrderByDescending(p => p.Id).Where(c => c.Sector == search || c.Sector.StartsWith(search) && c.Posted_By==User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
 
             }
             else
             {
-                return View(db.Jobs.Where(c => c.Posted_By ==User.Identity.Name ).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.Jobs.OrderByDescending(p => p.Id).Where(c => c.Posted_By ==User.Identity.Name ).ToList().ToPagedList(page ?? 1, 6));
             }
 
         }
@@ -51,7 +51,7 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.Jobs.Where(c => c.Sector == search || c.Sector.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
+                return View(db.Jobs.Where(c => c.Sector == search || c.Sector.StartsWith(search)).ToList().ToPagedList(page ?? 1, 6));
 
             }
             else

@@ -16,8 +16,8 @@
 
 </script>
 <br />
-<div class="col d-flex justify-content-center">
-    <div class="col-md-9 col-sm-8 col-8">
+<div class="col d-flex justify-content-center" style="border-radius: 24px;">
+    <div class="col-md-9 col-sm-12 col-12" style="border-radius: 24px;">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: darkcyan;color:white">
                 <i class="fa fa-user-clock text-white nav-icon"></i> Add Experience
@@ -72,26 +72,26 @@
 
                                     @Type = "Date",
 
-                               
+
 
 
                            }
                        })
                         </div>
                         <script type="text/javascript">
-                        $(function () {
-                            $("#Present").click(function () {
-                                if ($(this).is(":checked")) {
-                                    $("#note2").hide(("slide", { direction: "up" }, 300));
+                            $(function () {
+                                $("#Present").click(function () {
+                                    if ($(this).is(":checked")) {
+                                        $("#note2").hide(("slide", { direction: "up" }, 300));
 
 
-                                } else {
-                                    $("#note2").show(("slide", { direction: "left" }, 300));
+                                    } else {
+                                        $("#note2").show(("slide", { direction: "left" }, 300));
 
-                                    ;
-                                }
+                                        ;
+                                    }
+                                });
                             });
-                        });
                         </script>
                         <div class="form-group col-md-3">
 

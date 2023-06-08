@@ -41,7 +41,7 @@
 
         <div class="row">
             @foreach (var item in Model)
-            {<div class="col-md-6 col-xl-5">
+            {<div class="col-md-4 col-xl-4">
                     <div class="card bg-whitesmoke text-black mb-3 card-outline card-cyan" style="background-color: white;border-radius: 24px;">
 
                         <div class="card-body">
@@ -58,9 +58,9 @@
 
                                 || <b><i class="fa fa-calendar-check text-cyan"></i>  Deadline</b> :  @item.Application_Deadline.ToString("dd-MMMM-yyyy")
                             </p>
-                           
-                                    <a href="@Url.Action("Details", "Jobs", new { id = item.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
-                                   
+
+                            <a href="@Url.Action("Details", "Jobs", new { id = item.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-eye text-white"></i> View Job</a>
+
 
 
                         </div>
@@ -69,5 +69,54 @@
 
             }
         </div>
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
     </div>
 </div>
