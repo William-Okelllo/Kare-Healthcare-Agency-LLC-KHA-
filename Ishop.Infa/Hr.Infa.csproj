@@ -55,15 +55,19 @@
     <Compile Include="AccessRepo.cs" />
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="ApplicationRepo.cs" />
+    <Compile Include="Cardcontext.cs" />
+    <Compile Include="CardRepo.cs" />
+    <Compile Include="CheckInContext.cs" />
+    <Compile Include="CheckInRepo.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
-    <Compile Include="Job_context.cs" />
-    <Compile Include="Job_repo.cs" />
-    <Compile Include="ProfileContext.cs" />
-    <Compile Include="ProfileRepo.cs" />
+    <Compile Include="PartContext.cs" />
+    <Compile Include="PartRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaffContext.cs" />
-    <Compile Include="StaffRepo.cs" />
+    <Compile Include="ServiceContext.cs" />
+    <Compile Include="ServiceRepo.cs" />
+    <Compile Include="VehicleContext.cs" />
+    <Compile Include="VehicleRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

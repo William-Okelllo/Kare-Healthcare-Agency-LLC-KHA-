@@ -27,7 +27,7 @@ namespace Ishop.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Interviewlist> Interviewlists { get; set; }
+       
     
         public virtual ObjectResult<Nullable<int>> sp_dash_applied_jobs(string username)
         {

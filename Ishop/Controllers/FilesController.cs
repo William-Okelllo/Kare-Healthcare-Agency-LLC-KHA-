@@ -149,7 +149,7 @@ namespace Ishop.Controllers
         private DataTable GetFileDetails()
         {
             DataTable dtData = new DataTable();
-            string strcon = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             sqlCon.Open();
             SqlCommand command = new SqlCommand("Select * From files ", sqlCon);
@@ -163,7 +163,7 @@ namespace Ishop.Controllers
         {
             string strQry = "INSERT INTO Files (Name,Path,Uploaded_By,Description,UploadedOn,Access,Category,Agency) VALUES('" +
                 model.Name + "','" + model.Path + "' ,'" + model.Uploaded_By + "' ,'" + model.Description + "' ,'" + model.UploadedOn + "' ,'" + model.Access + "' ,'" + model.Category + "' ,'" + model.Agency + "')";
-            string strcon = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             SqlCommand command = new SqlCommand(strQry, sqlCon);
             sqlCon.Open();
@@ -172,7 +172,7 @@ namespace Ishop.Controllers
 
             try
             {
-                string strcon2 = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
+                string strcon2 = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
                 SqlConnection sqlCon2 = new SqlConnection(strcon);
                 SqlCommand sqlcmnd = new SqlCommand("UpAcccess", sqlCon);
                 sqlcmnd.CommandType = CommandType.StoredProcedure;
@@ -236,7 +236,7 @@ namespace Ishop.Controllers
         {
             Files_list_ db = new Files_list_();
 
-            string strcon = ConfigurationManager.ConnectionStrings["Job_Villa"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             SqlCommand sqlcmnd = new SqlCommand("Delete_File", sqlCon);
             sqlcmnd.CommandType = CommandType.StoredProcedure;

@@ -23,13 +23,10 @@ namespace Ishop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-          
+            Database.SetInitializer<CheckInContext>(null);
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
-            Database.SetInitializer<StaffContext>(null);
-            Database.SetInitializer<ApplicationContext>(null);
-            Database.SetInitializer<Job_context>(null);
-            Database.SetInitializer<ProfileContext>(null);
+         
             
         }
     }

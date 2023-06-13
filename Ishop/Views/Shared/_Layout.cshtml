@@ -52,7 +52,7 @@
     <a class="wrapper">
 
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="~/Images/logo.png" height="100">
+            <img class="animation__shake" src="~/Images/grs.png" height="100">
             <br />
             <h5 style="font-style:italic;color:navy">...loading...</h5>
             <div class="row">
@@ -70,7 +70,7 @@
 
 
 
-        <nav class="main-header navbar navbar-expand navbar-light navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-light navbar-dark">
 
             <!-- Left navbar links -->
             <ul class="navbar-nav">
@@ -92,15 +92,15 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-clock text-cyan"></i>
-                        <span class="badge badge-info navbar-badge">@DateTime.Now.ToString("dddd :hh : mm tt")</span>
+                        <i class="far fa-clock text-orange"></i>
+                        <span class="badge badge-light navbar-badge">@DateTime.Now.ToString("dddd :hh : mm tt")</span>
                     </a>
                     
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell text-cyan"></i>
-                        <span class="badge badge-info navbar-badge">1</span>
+                        <i class="far fa-bell text-orange"></i>
+                        <span class="badge badge-light navbar-badge">1</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
@@ -108,12 +108,12 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="~/Images/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <img src="~/Images/grs.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         sms notifications<small style="color:blue"></small>
-                                        <span class="float-right text-sm text-cyan">
-                                            <span class="float-right badge bg-gradient-cyan">New</span>
+                                        <span class="float-right text-sm text-orange">
+                                            <span class="float-right badge bg-gradient-orange">New</span>
                                         </span>
                                     </h3>
                                     <p class="text-sm">Automated sms notifications added </p>
@@ -143,7 +143,7 @@
                 <li class="nav-item dropdown" style="font-family:Calibri">
                     <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
 
-                        <i class="fa fa-user-circle text-cyan">
+                        <i class="fa fa-user-circle text-orange">
                             @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                         </i>
@@ -152,7 +152,7 @@
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
                         <div style="text-align:center">
-                            <img src="~/Images/logo.png" height="50" alt="User Avatar">
+                            <img src="~/Images/grs.png" height="50" alt="User Avatar">
 
                         </div>
                         <div style="text-align:center">
@@ -215,7 +215,7 @@
     <aside class="main-sidebar sidebar-light-primary elevation-4">
         <!-- Brand Logo -->
         <a href="@Url.Action("Index", "Home")" class="brand-link">
-            <img src="~/Images/logo.png" height="65">
+            <img src="~/Images/grs.png" height="65">
 
         </a>
 
@@ -224,7 +224,7 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
                 <div class="info" style="font-family:Calibri">
                     <a href="#" class="d-block" style="color: black">
-                        <i class="fa fa-grin-wink text-cyan"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
+                        <i class="fa fa-grin-wink text-orange"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                     </a>
                     <a>
@@ -232,19 +232,19 @@
                         @if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
                         {
                             <medium style="font-family:Calibri">
-                                <i class="fa fa-cloud-sun text-cyan"></i> Good Morning
+                                <i class="fa fa-cloud-sun text-orange"></i> Good Morning
                             </medium>
                         }
                         else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
                         {
                             <medium style="font-family:Calibri">
-                                <i class="fa fa-sun text-cyan"></i> : Good Afternoon
+                                <i class="fa fa-sun text-orange"></i> : Good Afternoon
                             </medium>
                         }
                         else
                         {
                             <medium style="font-family:Calibri">
-                                <i class="fa fa-cloud-sun text-cyan"></i> : Good Evenning
+                                <i class="fa fa-cloud-sun text-orange"></i> : Good Evenning
                             </medium>
                         }
 
@@ -257,16 +257,16 @@
                             
                             @if (this.User.IsInRole("Candidate"))
                             {<div style="font-family:Calibri">
-                                <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-info"><i class="fa fa-book-reader"></i> Candidate </span>
+                                <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-warning"><i class="fa fa-book-reader"></i> Candidate </span>
                                 </div>
                             }
                             else if (this.User.IsInRole("Admin"))
                             { <div style="font-family:Calibri">
-                                 <i class="fa fa-circle-notch text-cyan"></i>   Access :    <span class="badge badge-pill badge-info"><i class="fa fa-user-cog"></i> Admin </span>
+                                 <i class="fa fa-circle-notch text-cyan"></i>   Access :    <span class="badge badge-pill badge-warning"><i class="fa fa-user-cog"></i> Admin </span>
                                 </div>}
                             else if (this.User.IsInRole("Employer"))
                             { <div style="font-family:Calibri">
-                                   <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-info"><i class="fa fa-user-clock"></i> Employer </span>
+                                   <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-warning"><i class="fa fa-user-clock"></i> Employer </span>
                                 </div>}
 
 
@@ -289,7 +289,7 @@
 
 
                     <li class="nav-item menu-open">
-                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-cyan">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-orange">
                             <i class="nav-icon fa fa-home text-white"></i>
                             <p style="color:white">
                                 Home-Page
@@ -297,226 +297,138 @@
                             </p>
                         </a>
                     </li>
-                    @if (this.User.IsInRole("Candidate"))
-                    {
-                        <li class="nav-header">Profile</li>
-
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "jobs")" class="nav-link">
-                                <i class="fa fa-chart-line text-cyan nav-icon"></i>
-                                <p style="font-family:Calibri;color:black">
-                                    DashBoard <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
+                    <li class="nav-header">Bookings/CheckIns</li>
+                    <li class="nav-item">
 
 
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user-circle text-cyan"></i>
-                                <p style="color: black; font-family: Calibri">
-                                    My Profile <i class="fas fa-angle-left right"></i>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-bookmark text-orange"></i>
+                            <p style="color: black; font-family: Calibri">
+                                CheckIn/Bookings <i class="fas fa-angle-left right"></i>
 
 
-                                </p>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("create", "CheckIns")" class="nav-link">
 
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Profile")" class="nav-link">
-                                        <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            General Info  <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "education")" class="nav-link">
-                                        <i class="fa fa-university text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Education<i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Experience")" class="nav-link">
-                                        <i class="fa fa-user-clock text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Work Experience<i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
+                                    <i class="fa fa-plus-circle text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        New Booking
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "CheckIns")" class="nav-link">
 
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("my_files", "files")" class="nav-link">
-                                <i class="fa fa-folder-open text-cyan nav-icon"></i>
-                                <p style="font-family:Calibri;color:black">
-                                    My Documents <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-header">Jobs section</li>
-                        <li class="nav-item">
+                                    <i class="fa fa-clipboard-list text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        Bookings list
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
 
 
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-bezier-curve text-cyan"></i>
-                                <p style="color: black; font-family: Calibri">
-                                    Jobs Dash <i class="fas fa-angle-left right"></i>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-id-card text-orange"></i>
+                            <p style="color: black; font-family: Calibri">
+                                Job Cards <i class="fas fa-angle-left right"></i>
 
 
-                                </p>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "JobsCards")" class="nav-link">
 
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Open_Jobs", "jobs")" class="nav-link">
-                                        <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Open Jobs  <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Applications")" class="nav-link">
-                                        <i class="fa fa-briefcase text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Applied Jobs <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
+                                    <i class="fa fa-clipboard-list text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        Job Cards
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-header">Management</li>
 
-                        </li>
+                    <li class="nav-item">
 
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "interviews")" class="nav-link">
-                                <i class="fa fa-handshake text-cyan nav-icon"></i>
-                                <p style="font-family:Calibri;color:black">
-                                    My Interviews <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
 
-                    }
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-car text-orange"></i>
+                            <p style="color: black; font-family: Calibri">
+                                Models <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("create", "Vehicles")" class="nav-link">
+
+                                    <i class="fa fa-car text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        New Make
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Vehicles")" class="nav-link">
+
+                                    <i class="fa fa-clipboard-list text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        Makes list
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
 
 
-                    @if (this.User.IsInRole("Employer"))
-                    {
 
 
-                        <li class="nav-header">Jobs section</li>
+                    <li class="nav-item">
 
 
-                        <li class="nav-item">
-                            <a href="@Url.Action("Post_Job", "jobs")" class="nav-link">
-                                <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                <p style="font-family:Calibri;color:black">
-                                    Post Job  <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "jobs")" class="nav-link">
-                                <i class="fa fa-clipboard-list text-cyan nav-icon"></i>
-                                <p style="font-family:Calibri;color:black">
-                                    Jobs list <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-user-cog text-orange"></i>
+                            <p style="color: black; font-family: Calibri">
+                                Configs & Users <i class="fas fa-angle-left right"></i>
 
-                        <li class="nav-item">
-                            <a href="@Url.Action("Employer", "Applications")" class="nav-link">
-                                <i class="fa fa-briefcase text-cyan nav-icon"></i>
-                                <p style="font-family:Calibri;color:black">
-                                    Applications <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "interviews")" class="nav-link">
-                                <i class="fa fa-handshake text-cyan nav-icon"></i>
-                                <p style="font-family:Calibri;color:black">
-                                    Requested Interviews <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
-                    }
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Data")" class="nav-link">
 
-                    @if (this.User.IsInRole("Admin"))
-                    {
-                        <li class="nav-header">Admin</li>
+                                    <i class="fa fa-users text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        All users
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Configuration")" class="nav-link">
+
+                                    <i class="fa fa-cogs text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        Configurations
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
 
 
 
-                        <li class="nav-item">
-
-
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-layer-group text-cyan"></i>
-                                <p style="color: black; font-family: Calibri">
-                                    Sectors <i class="fas fa-angle-left right"></i>
-
-
-                                </p>
-
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Create", "Sectors")" class="nav-link">
-                                        <i class="fa fa-plus-circle text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Add sector  <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Sectors")" class="nav-link">
-                                        <i class="fa fa-layer-group text-cyan nav-icon"></i>
-                                        <p style="font-family:Calibri;color:black">
-                                            Sectors list <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </li>
-
-
-                        <li class="nav-item">
-
-
-
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Data")" class="nav-link">
-
-                                <i class="fa fa-users text-cyan nav-icon"></i>
-                                <p style="color: black">
-                                    All users
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Configuration")" class="nav-link">
-
-                                <i class="fa fa-cogs text-cyan nav-icon"></i>
-                                <p style="color: black">
-                                    Configurations
-                                </p>
-                            </a>
-                        </li>
-
-
-
-                        </li>
-
-
-
-                    }
 
 
 
@@ -532,14 +444,14 @@
 
                 </ul>
 
-            </nav>
+</nav>
 
         </div>
 
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="background-image: url('../../Images/bgg.jpg');
+    <div class="content-wrapper" style="background-image: url('../../Images/vvc.jpg');
         background-repeat: no-repeat;
         background-size: cover;">
 

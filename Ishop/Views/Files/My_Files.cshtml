@@ -43,8 +43,8 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.83);">
 
 
-    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: darkcyan; color: white; border-radius: 14px ">
-        <h3 class="card-title" style="color:white;text-align:center">
+    <div class="card-header col-md-12 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: darkcyan; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:left">
             <i class="fa fa-briefcase"></i>
             My Documents
         </h3>
@@ -71,10 +71,10 @@
 
 
 
+    <div class="dropdown-divider"></div>
+    <div style="text-align: center; color:white ">
 
-    <div style="text-align: right; color: white ">
-
-        @Html.ActionLink("New Upload", "Upload", "Files", null, new { @class = "btn btn-info btn-sm" })
+        @Html.ActionLink("Upload New Documents", "Upload", "Files", null, new { @class = "btn btn-primary btn-sm" })
     </div>
 
 

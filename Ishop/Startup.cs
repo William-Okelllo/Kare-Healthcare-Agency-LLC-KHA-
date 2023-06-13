@@ -71,27 +71,14 @@ namespace Ishop
                 }
             }
             
-            if (!roleManager.RoleExists("Candidate"))
+            if (!roleManager.RoleExists("CheckIn"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Candidate";
+                role.Name = "CheckIn";
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Institution"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Institution";
-                roleManager.Create(role);
-
-            }
-            if (!roleManager.RoleExists("Employer"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employer";
-                roleManager.Create(role);
-
-            }
+           
 
 
         }

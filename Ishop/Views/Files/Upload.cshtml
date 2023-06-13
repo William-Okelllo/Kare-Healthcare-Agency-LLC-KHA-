@@ -48,6 +48,14 @@
         width: 100%;
     }
 </style>
+<style>
+    .preview-image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+</style>
 <div class="card-body" style="border-radius: 24px;">
     <div class="col d-flex justify-content-center">
         <div class="col-md-9 col-sm-9 col-12" style="border-radius: 24px;">
@@ -92,7 +100,35 @@
                                     Select File
                                 </label>
                                 <div class="form-group col-md-12">
-                                    <input type="file" id="files" name="files" class="form-control" required="required"><br />
+                                    <input type="file" id="files" name="files" class="form-control" multiple required="required">
+                                    <input type="file" name="files" id="imageInput" multiple accept="image/*" onchange="previewImages()" />
+                                    <br />
+                                    <div id="imagePreviewContainer"></div>
+                                    @section scripts {
+                                        <script>
+                                            function previewImages() {
+                                                var previewContainer = document.getElementById("imagePreviewContainer");
+                                                previewContainer.innerHTML = "";
+
+                                                var files = document.getElementById("imageInput").files;
+
+                                                for (var i = 0; i < files.length; i++) {
+                                                    var file = files[i];
+                                                    var reader = new FileReader();
+
+                                                    reader.onload = function (e) {
+                                                        var imgElement = document.createElement("img");
+                                                        imgElement.src = e.target.result;
+                                                        imgElement.classList.add("preview-image");
+                                                        previewContainer.appendChild(imgElement);
+                                                    };
+
+                                                    reader.readAsDataURL(file);
+                                                }
+                                            }
+                                        </script>
+                                    }
+                                    <br />
                                 </div>
 
                             </div>
