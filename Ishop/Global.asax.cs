@@ -24,6 +24,7 @@ namespace Ishop
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer<CheckInContext>(null);
+            Database.SetInitializer<Cardcontext>(null);
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
          

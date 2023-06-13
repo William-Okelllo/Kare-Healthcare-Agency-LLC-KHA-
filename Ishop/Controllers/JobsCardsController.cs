@@ -66,6 +66,12 @@ namespace Ishop.Controllers
             var data12 = Pe.services.Where(d => d.Booking_Id == id);
             ViewBag.Service = data12;
 
+            decimal Autopart = Pd.parts.Where(d => d.Booking_Id == id).Sum(d =>d.Amount);
+            decimal Services = Pe.services.Where(d => d.Booking_Id == id).Sum(d => d.Amount);
+            decimal combinedSum = Autopart + Services;
+
+            ViewBag.Estimate = combinedSum;
+
             return View();
         }
 
@@ -74,7 +80,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff")] Card card)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff,Estimate")] Card card)
         {
 
 

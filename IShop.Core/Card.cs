@@ -21,5 +21,6 @@ namespace IShop.Core
         public String Description { get; set; }
         public String Customer { get; set; }
         public String staff { get; set; }
+        public decimal Estimate { get; set; }
     }
 }

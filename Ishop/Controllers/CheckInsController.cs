@@ -22,12 +22,12 @@ namespace Ishop.Controllers
         {
             if (!(search == null))
             {
-                return View(db.checkIns.Where(c => c.Vehicle_Reg == search || c.Make.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
+                return View(db.checkIns.OrderByDescending(p => p.Id).Where(c => c.Vehicle_Reg == search || c.Make.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
 
             }
             else
             {
-                return View(db.checkIns.Where(c => c.Vehicle_Reg.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.checkIns.OrderByDescending(p => p.Id).Where(c => c.Vehicle_Reg.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
             }
 
         }

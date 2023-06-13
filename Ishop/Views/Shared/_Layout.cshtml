@@ -158,10 +158,7 @@
                         <div style="text-align:center">
                             ...
                         </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
-                            <i class="fas fa-user-circle text-warning nav-icon"></i> My Profile
-                        </a>
+                        
                         <div class="dropdown-divider"></div>
 
                         <a href="@Url.Action("Acc_Profile", "Accesses")" class="dropdown-item">
@@ -251,27 +248,7 @@
 
 
                     </a>
-                    <a>
-
-                        
-                            
-                            @if (this.User.IsInRole("Candidate"))
-                            {<div style="font-family:Calibri">
-                                <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-warning"><i class="fa fa-book-reader"></i> Candidate </span>
-                                </div>
-                            }
-                            else if (this.User.IsInRole("Admin"))
-                            { <div style="font-family:Calibri">
-                                 <i class="fa fa-circle-notch text-cyan"></i>   Access :    <span class="badge badge-pill badge-warning"><i class="fa fa-user-cog"></i> Admin </span>
-                                </div>}
-                            else if (this.User.IsInRole("Employer"))
-                            { <div style="font-family:Calibri">
-                                   <i class="fa fa-circle-notch text-cyan"></i>   Access :  <span class="badge badge-pill badge-warning"><i class="fa fa-user-clock"></i> Employer </span>
-                                </div>}
-
-
-                        
-                    </a>
+                    
                
             </div>
 

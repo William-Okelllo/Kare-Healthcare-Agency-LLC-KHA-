@@ -54,7 +54,7 @@
         <div style="text-align: right; color: white ">
 
 
-            @Html.ActionLink("Add Vehicle ", "Create", "Vehicle", null, new { @class = "btn btn-sm btn-default btn" })
+            @Html.ActionLink("Add Vehicle ", "Index", "CheckIns", null, new { @class = "btn btn-sm btn-default btn" })
 
 
 
@@ -111,6 +111,7 @@
                         <th style="background-color: #001F3F; "> Customer</th>
                         <th style="background-color: #001F3F; ">Phone Number </th>
                         <th style="background-color: #001F3F; ">Vehicle </th>
+                        <th style="background-color: #001F3F; ">Estimate </th>
                         <th style="background-color: #001F3F; ">Actions </th>
 
 
@@ -130,7 +131,7 @@
                             <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Customer </td>
                             <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Phone </td>
                             <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Vehicle </td>
-
+                            <td style="background-color:white">KSH  @item.Estimate.ToString("#,##0.00") </td>
 
                             <td style="background-color: white">
                                 <div class="btn-group dropdown">
@@ -144,7 +145,7 @@
                                             <i class="fa fa-user-shield text-success"></i> Print Estimate
                                         </a>
 
-                                       
+
                                     </div>
 
                                 </div>
