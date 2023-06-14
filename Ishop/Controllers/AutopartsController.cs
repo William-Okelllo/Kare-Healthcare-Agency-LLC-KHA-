@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Ishop.Controllers
 {
@@ -50,7 +52,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Booking_Id,Part_Name,Condition,Amount")] Part part)
+        public ActionResult Add([Bind(Include = "Id,Booking_Id,Part_Name,Condition,Amount,Total_Amount,VAT")] Part part)
         {
             if (ModelState.IsValid)
             {
@@ -126,6 +128,36 @@ namespace Ishop.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Remove(int id)
+        {
+            try
+            {
+                string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand cmd = new SqlCommand("sp_remove_autopart", sqlCon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+
+                sqlCon.Open();
+                cmd.ExecuteNonQuery();
+                sqlCon.Close();
+
+                TempData["msg"] = "Autopart removed successfully";
+
+
+            }
+
+            catch
+            {
+                return HttpNotFound();
+                TempData["msg"] = "error";
+            }
+
+
+
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
     }
 }

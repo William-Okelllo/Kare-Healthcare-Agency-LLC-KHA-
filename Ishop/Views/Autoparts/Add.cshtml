@@ -147,21 +147,80 @@
 
                                 }@Html.DropDownListFor(model => model.Condition, q, "Autopart Condition", new { @class = "form-control form-control", @required = "required", })
                             </div>
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
-                                @Html.EditorFor(model => model.Amount, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Amount",
-                                   @required = true,
-                               }
-                           })
-                            </div>
+                            
                         </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
+                            @Html.EditorFor(model => model.Amount, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "Amount",
+                               @required = true,
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2" id="other">
+                            <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.VAT)</label>
+                            @{
+                                List<SelectListItem> v = new List<SelectListItem>();
+                                v.Add(new SelectListItem
+                                {
+                                    Text = "ADD VAT",
+                                    Value = "True",
+                                });
+                                v.Add(new SelectListItem
+                                {
+                                    Text = "NO VAT",
+                                    Value = "False",
+                                });
 
+
+
+                            }@Html.DropDownListFor(model => model.VAT, v, "VAT", new { @class = "form-control form-control", @required = "required", })
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                // Get references to the dropdown and textboxes
+                                var dropdown = $('#VAT');
+                                var textBoxB = $('#Amount');
+                                var textBoxC = $('#Total_Amount');
+
+                                // Event handler for when the dropdown value changes
+                                dropdown.on('change', function () {
+                                    // Get the selected value from the dropdown
+                                    var selectedValue = dropdown.val();
+
+                                    // Check if the selected value is "true"
+                                    if (selectedValue === "True") {
+                                        // Perform the calculation and set the result in TextBox C
+                                        var inputValue = parseFloat(textBoxB.val());
+
+                                        var result = inputValue + (inputValue * 0.16); // Multiply by 16%
+                                        textBoxC.val(result.toFixed(2)); // Set the result in TextBox C with 2 decimal places
+                                    } else if (selectedValue === "False") {
+                                        var result2 = parseFloat(textBoxB.val());
+                                        textBoxC.val(result2.toFixed(2));
+                                    }
+                                });
+                            });
+                        </script>
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-circle-notch text-orange"></i>   @Html.LabelFor(model => model.Total_Amount)</label>
+                            @Html.EditorFor(model => model.Total_Amount, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "Amount",
+                               @Readonly = true,
+                           }
+                       })
+                        </div>
+                    </div>
 
                         <div class="dropdown-divider"></div>
                                 <input type="submit" value="Add Autopart" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want add this?')" />

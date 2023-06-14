@@ -15,9 +15,10 @@ namespace IShop.Core
         public int Booking_Id { get; set; }
         [Display(Name = "part Name ")]
         public String Part_Name { get; set; }
-
+        public bool VAT { get; set; }
         public String Condition { get; set; }
         public decimal Amount { get; set; }
-
+        [Display(Name = "Total Amount ")]
+        public decimal Total_Amount { get; set; }
     }
 }

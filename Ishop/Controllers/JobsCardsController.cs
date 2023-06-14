@@ -66,11 +66,11 @@ namespace Ishop.Controllers
             var data12 = Pe.services.Where(d => d.Booking_Id == id);
             ViewBag.Service = data12;
 
-            decimal Autopart = Pd.parts.Where(d => d.Booking_Id == id).Sum(d =>d.Amount);
-            decimal Services = Pe.services.Where(d => d.Booking_Id == id).Sum(d => d.Amount);
-            decimal combinedSum = Autopart + Services;
-
-            ViewBag.Estimate = combinedSum;
+            decimal Autopart = Pd.parts.Where(d => d.Booking_Id == id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal Services = Pe.services.Where(d => d.Booking_Id == id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal combinedSum = Autopart;
+            decimal combinedSum2 = Services;
+            ViewBag.Estimate = combinedSum + combinedSum2;
 
             return View();
         }

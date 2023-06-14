@@ -16,5 +16,7 @@ namespace IShop.Core
         [Display(Name = "Service Name ")]
         public String Service_Name { get; set; }
         public decimal Amount { get; set; }
+        public decimal Total_Amount { get; set; }
+        public bool VAT { get; set; }
     }
 }

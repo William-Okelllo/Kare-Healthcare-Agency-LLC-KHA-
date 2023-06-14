@@ -194,9 +194,10 @@
                                 <tr style="color:white">
                                     <th style="background-color: #803209; "> Part Name</th>
                                     <th style="background-color: #803209; "> Part Condition</th>
+                                    <th style="background-color: #803209; "> VAT</th>
                                     <th style="background-color: #803209; "> Amount</th>
-
-
+                                    <th style="background-color: #803209; "> Total Amount</th>
+                                    <th style="background-color: #803209; "> Action</th>
 
                                 </tr>
                             </thead>
@@ -204,15 +205,44 @@
                             <tbody>
                                 @foreach (var item2 in ViewBag.Auto)
                                 {
-                                    <tr data-widget="expandable-table" aria-expanded="false">
+                                   <div>
+                                       @{
+                                           decimal difference = item2.Total_Amount - item2.Amount;
+                                                                   }
+                                    </div>
 
-                                        <td style="background-color:white">
-                                            <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
-                                        </td>
-                                        <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
-                                        <td style="background-color:white">Ksh @item2.Amount.ToString("#,##0.00") </td>
+                                   <tr data-widget="expandable-table" aria-expanded="false">
 
-                                    </tr>
+                                       <td style="background-color:white">
+                                           <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
+                                       </td>
+                                       <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
+                                       <td style="background-color:white">
+                                           @if (item2.VAT == true)
+                                           {<b>Ksh @difference</b>}
+                                       else
+                                       {<b>Ksh @difference</b>}
+                                       </td>
+                                       <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                       <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                       <td style="background-color:ghostwhite">
+
+                                           <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove the Autopart?')) { window.location.href = '@Url.Action("Remove", "Autoparts", new { id = item2.Id, })'; }">
+                                               <i class="fa fa-times-circle text-black"></i> Remove Autopart
+                                           </a>
+                                           <script>
+                                               $(function () {
+                                                   $('#Deny').click(function () {
+                                                       if (confirm('Are you sure?')) {
+                                                           window.location.href = $(this).data('url');
+                                                       }
+                                                   });
+                                               });
+                                           </script>
+
+
+                                       </td>
+                                   </tr>
 
                                 }
 
@@ -236,8 +266,11 @@
                             <thead>
                                 <tr style="color:white">
                                     <th style="background-color: #803209; "> Service Name</th>
-                                    <th style="background-color: #803209; "> Amount</th>
 
+                                    <th style="background-color: #803209; "> Amount</th>
+                                    <th style="background-color: #803209; "> VAT</th>
+                                    <th style="background-color: #803209; "> Total Amount</th>
+                                    <th style="background-color: #803209; "> Action</th>
 
 
                                 </tr>
@@ -246,15 +279,44 @@
                             <tbody>
                                 @foreach (var item2 in ViewBag.Service)
                                 {
+                                    <div>
+                                        @{
+                                            decimal difference = item2.Total_Amount - item2.Amount;
+                                        }
+                                    </div>
                                     <tr data-widget="expandable-table" aria-expanded="false">
 
                                         <td style="background-color:white">
                                             <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
                                         </td>
 
-                                        <td style="background-color:white">Ksh @item2.Amount.ToString("#,##0.00") </td>
+                                        <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                        <td style="background-color:white">
+                                            @if (item2.VAT == true)
+                                            {<b>Ksh @difference</b>}
+                                        else
+                                        {<b>Ksh @difference</b>}
+                                        </td>
+                                        <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                        <td style="background-color:ghostwhite">
 
+                                            <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove this service?')) { window.location.href = '@Url.Action("Remove", "Services", new { id = item2.Id, })'; }">
+                                                <i class="fa fa-times-circle text-black"></i> Remove Service
+                                            </a>
+                                            <script>
+                                                $(function () {
+                                                    $('#Deny').click(function () {
+                                                        if (confirm('Are you sure?')) {
+                                                            window.location.href = $(this).data('url');
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+
+
+                                        </td>
                                     </tr>
+                                 
 
                                 }
 
