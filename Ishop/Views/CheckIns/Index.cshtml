@@ -136,8 +136,8 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Create Job Card?')) { window.location.href = '@Url.Action("create", "JobsCards", new { id = item.Id })'; }">
-                                            <i class="fas fa-clipboard-list text-orange"></i> Create Job Card
+                                        <a class="dropdown-item" onclick="if (confirm('Proceed to create Estimate?')) { window.location.href = '@Url.Action("create", "Estimate", new { id = item.Id })'; }">
+                                            <i class="fas fa-clipboard-list text-orange"></i> Create Estimate
                                         </a>
                                         <script>
                                             $(function () {

@@ -42,6 +42,10 @@ namespace Ishop.Controllers
         // GET: Services/Create
         public ActionResult Add(int? id)
         {
+            SevContext dbb = new SevContext();
+            var autopart = dbb.sev.ToList();
+            ViewBag.RoomType = new SelectList(autopart, "Service_Name", "Service_Name");
+
             CheckInContext dbbb = new CheckInContext();
             var data10 = dbbb.checkIns.Where(d => d.Id == id);
             ViewBag.CheckIn = data10;
@@ -59,7 +63,7 @@ namespace Ishop.Controllers
             {
                 db.services.Add(service);
                 db.SaveChanges();
-                return RedirectToAction("create", "JobsCards", new { id = service.Booking_Id });
+                return RedirectToAction("create", "Estimate", new { id = service.Booking_Id });
             }
 
             return View(service);

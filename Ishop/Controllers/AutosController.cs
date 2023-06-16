@@ -12,125 +12,116 @@ using PagedList;
 
 namespace Ishop.Controllers
 {
-    [Authorize]
-    public class CheckInsController : Controller
+    public class AutosController : Controller
     {
-        VehicleContext dbb = new VehicleContext();
-        private CheckInContext db = new CheckInContext();
+        private AutoContext db = new AutoContext();
 
-        // GET: CheckIns
+        // GET: Autos
         public ActionResult Index(string searchBy, string search, int? page)
         {
             if (!(search == null))
             {
-                return View(db.checkIns.OrderByDescending(p => p.Id).Where(c => c.Vehicle_Reg == search || c.Make.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
+                return View(db.autoparts.OrderByDescending(p => p.Id).Where(c => c.Part_Name == search || c.Part_Name.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
 
             }
             else
             {
-                return View(db.checkIns.OrderByDescending(p => p.Id).Where(c => c.Vehicle_Reg.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.autoparts.OrderByDescending(p => p.Id).Where(c => c.Part_Name.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
             }
 
         }
-            // GET: CheckIns/Details/5
-            public ActionResult Details(int? id)
+
+        // GET: Autos/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CheckIn checkIn = db.checkIns.Find(id);
-            if (checkIn == null)
+            Autoparts autoparts = db.autoparts.Find(id);
+            if (autoparts == null)
             {
                 return HttpNotFound();
             }
-            return View(checkIn);
+            return View(autoparts);
         }
 
-       
-
-
-        // GET: CheckIns/Create
+        // GET: Autos/Create
         public ActionResult Create()
         {
-            
-            var Make = dbb.vehicles.ToList();
-            ViewBag.Make = new SelectList(Make, "Make", "Make");
-            ViewBag.Model = new SelectList(Make, "Model", "Model");
-            ViewBag.Type = new SelectList(Make, "Type", "Type");
             return View();
         }
 
-        // POST: CheckIns/Create
+        // POST: Autos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Make,Model,Type,Vehicle_Reg,Description,Customer,Phone,staff")] CheckIn checkIn)
+        public ActionResult Create([Bind(Include = "Id,Part_Name,Category,CreatedOn")] Autoparts autoparts)
         {
             if (ModelState.IsValid)
             {
-                db.checkIns.Add(checkIn);
+                db.autoparts.Add(autoparts);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(checkIn);
+            return View(autoparts);
         }
 
-        // GET: CheckIns/Edit/5
+        // GET: Autos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CheckIn checkIn = db.checkIns.Find(id);
-            if (checkIn == null)
+            Autoparts autoparts = db.autoparts.Find(id);
+            if (autoparts == null)
             {
                 return HttpNotFound();
             }
-            return View(checkIn);
+            return View(autoparts);
         }
 
-        // POST: CheckIns/Edit/5
+        // POST: Autos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Make,Model,Type,Vehicle_Reg,Description,Customer,staff")] CheckIn checkIn)
+        public ActionResult Edit([Bind(Include = "Id,Part_Name,Category,CreatedOn")] Autoparts autoparts)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(checkIn).State = EntityState.Modified;
+                db.Entry(autoparts).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(checkIn);
+            return View(autoparts);
         }
 
-        // GET: CheckIns/Delete/5
+        // GET: Autos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CheckIn checkIn = db.checkIns.Find(id);
-            if (checkIn == null)
+            Autoparts autoparts = db.autoparts.Find(id);
+            if (autoparts == null)
             {
                 return HttpNotFound();
             }
-            return View(checkIn);
+            return View(autoparts);
         }
 
-        // POST: CheckIns/Delete/5
+        // POST: Autos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CheckIn checkIn = db.checkIns.Find(id);
-            db.checkIns.Remove(checkIn);
+            Autoparts autoparts = db.autoparts.Find(id);
+            db.autoparts.Remove(autoparts);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace Ishop.Infa
 {
-    public class ServiceContext : DbContext
+    public class SevContext : DbContext
     {
-        public ServiceContext()
+        public SevContext()
            : base("GRS")
         {
         }
-        public DbSet<Service> services { get; set; }
-
-        public System.Data.Entity.DbSet<IShop.Core.Sev> Sevs { get; set; }
+        public DbSet<Sev> sev { get; set; }
     }
 }

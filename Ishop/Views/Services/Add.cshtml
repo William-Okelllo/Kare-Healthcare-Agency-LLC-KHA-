@@ -104,32 +104,34 @@
 
 
 
-                        <div class="form-row">
-                            @foreach (var item2 in ViewBag.CheckIn)
-                            {<div class="form-group col-md-2 ">
-                                    <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
-                                    <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
+                    <div class="form-row">
+                        @foreach (var item2 in ViewBag.CheckIn)
+                        {<div class="form-group col-md-2 ">
+                                <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
+                                <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
 
-                                </div>
-                            }
-
-
-
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-hands-wash text-orange"></i>   @Html.LabelFor(model => model.Service_Name)</label>
-                                @Html.EditorFor(model => model.Service_Name, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Service Name",
-                                   @required = true,
-                               }
-                           })
                             </div>
+                        }
 
+
+
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#Service_Name").chosen();
+                                $("#Condition").chosen();
+                            });
+                        </script>
+
+                        <div class="form-group col-md-4" id="other">
+                            <label><i class="fa fa-cogs text-orange"></i>   @Html.LabelFor(model => model.Service_Name)</label>
+
+                            @Html.DropDownList("Service_Name", ViewBag.RoomType as SelectList, "-- Select Service --",
+                       new { @class = "form-control ", @required = "required" })
 
                         </div>
+
+
+                    </div>
                         <div class="row">
                             <div class="form-group col-md-3" id="other">
                                 <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>

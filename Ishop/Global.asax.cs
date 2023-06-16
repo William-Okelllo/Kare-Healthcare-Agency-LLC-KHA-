@@ -27,8 +27,8 @@ namespace Ishop
             Database.SetInitializer<Cardcontext>(null);
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
-         
-            
+            Database.SetInitializer<AutoContext>(null);
+
         }
     }
 }

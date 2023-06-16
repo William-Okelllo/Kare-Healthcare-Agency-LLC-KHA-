@@ -8,145 +8,120 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
-using static System.Net.Mime.MediaTypeNames;
 using PagedList;
 
 namespace Ishop.Controllers
 {
-    public class JobsCardsController : Controller
+    public class ServiceController : Controller
     {
-        private Cardcontext db = new Cardcontext();
+        private ServiceContext db = new ServiceContext();
 
-        // GET: JobsCards
+        // GET: Service
         public ActionResult Index(string searchBy, string search, int? page)
         {
             if (!(search == null))
             {
-                return View(db.cards.Where(c => c.Vehicle_Reg == search || c.Vehicle_Reg.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
+                return View(db.Sevs.OrderByDescending(p => p.Id).Where(c => c.Service_Name == search || c.Service_Name.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
 
             }
             else
             {
-                return View(db.cards.Where(c => c.Vehicle_Reg.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
+                return View(db.Sevs.OrderByDescending(p => p.Id).Where(c => c.Service_Name.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
             }
-
-
-
 
         }
 
-        // GET: JobsCards/Details/5
+        // GET: Service/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Card card = db.cards.Find(id);
-            if (card == null)
+            Sev sev = db.Sevs.Find(id);
+            if (sev == null)
             {
                 return HttpNotFound();
             }
-            return View(card);
+            return View(sev);
         }
 
-        // GET: JobsCards/Create
-        public ActionResult Create(int? id)
+        // GET: Service/Create
+        public ActionResult Create()
         {
-
-            CheckInContext dbbb = new CheckInContext();
-            var data10 = dbbb.checkIns.Where(d => d.Id == id);
-            ViewBag.CheckIn=data10;
-
-            PartContext Pd = new PartContext();
-            var data11 = Pd.parts.Where(d => d.Booking_Id == id);
-            ViewBag.Auto = data11;
-
-            ServiceContext Pe = new ServiceContext();
-            var data12 = Pe.services.Where(d => d.Booking_Id == id);
-            ViewBag.Service = data12;
-
-            decimal Autopart = Pd.parts.Where(d => d.Booking_Id == id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
-            decimal Services = Pe.services.Where(d => d.Booking_Id == id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
-            decimal combinedSum = Autopart;
-            decimal combinedSum2 = Services;
-            ViewBag.Estimate = combinedSum + combinedSum2;
-
             return View();
         }
 
-        // POST: JobsCards/Create
+        // POST: Service/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff,Estimate")] Card card)
+        public ActionResult Create([Bind(Include = "Id,Service_Name,CreatedOn,Taxable")] Sev sev)
         {
-
-
             if (ModelState.IsValid)
             {
-                db.cards.Add(card);
+                db.Sevs.Add(sev);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(card);
+            return View(sev);
         }
 
-        // GET: JobsCards/Edit/5
+        // GET: Service/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Card card = db.cards.Find(id);
-            if (card == null)
+            Sev sev = db.Sevs.Find(id);
+            if (sev == null)
             {
                 return HttpNotFound();
             }
-            return View(card);
+            return View(sev);
         }
 
-        // POST: JobsCards/Edit/5
+        // POST: Service/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff")] Card card)
+        public ActionResult Edit([Bind(Include = "Id,Service_Name,CreatedOn,Taxable")] Sev sev)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(card).State = EntityState.Modified;
+                db.Entry(sev).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(card);
+            return View(sev);
         }
 
-        // GET: JobsCards/Delete/5
+        // GET: Service/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Card card = db.cards.Find(id);
-            if (card == null)
+            Sev sev = db.Sevs.Find(id);
+            if (sev == null)
             {
                 return HttpNotFound();
             }
-            return View(card);
+            return View(sev);
         }
 
-        // POST: JobsCards/Delete/5
+        // POST: Service/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Card card = db.cards.Find(id);
-            db.cards.Remove(card);
+            Sev sev = db.Sevs.Find(id);
+            db.Sevs.Remove(sev);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

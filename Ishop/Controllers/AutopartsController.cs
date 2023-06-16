@@ -41,10 +41,17 @@ namespace Ishop.Controllers
         // GET: Autoparts/Create
         public ActionResult Add(int? id)
         {
+            AutoContext dbb = new AutoContext();
+            var autopart = dbb.autoparts.ToList();
+            ViewBag.RoomType = new SelectList(autopart, "Part_Name", "Part_Name");
+
             CheckInContext dbbb = new CheckInContext();
             var data10 = dbbb.checkIns.Where(d => d.Id == id);
             ViewBag.CheckIn = data10;
             return View();
+
+
+
         }
 
         // POST: Autoparts/Create
@@ -58,7 +65,7 @@ namespace Ishop.Controllers
             {
                 db.parts.Add(part);
                 db.SaveChanges();
-                return RedirectToAction("create", "JobsCards", new { id = part.Booking_Id });
+                return RedirectToAction("create", "Estimate", new { id = part.Booking_Id });
             }
 
             return View(part);

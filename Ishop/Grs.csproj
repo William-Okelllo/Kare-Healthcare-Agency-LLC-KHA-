@@ -429,16 +429,18 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AutopartsController.cs" />
+    <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\CheckInsController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JobsCardsController.cs" />
+    <Compile Include="Controllers\EstimateController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\smsController.cs" />
@@ -447,7 +449,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ImgContext.cs" />
     <Compile Include="Models\A.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetUser.cs">
@@ -3021,11 +3022,11 @@
     <Content Include="Views\CheckIns\Details.cshtml" />
     <Content Include="Views\CheckIns\Edit.cshtml" />
     <Content Include="Views\CheckIns\Index.cshtml" />
-    <Content Include="Views\JobsCards\Create.cshtml" />
-    <Content Include="Views\JobsCards\Delete.cshtml" />
-    <Content Include="Views\JobsCards\Details.cshtml" />
-    <Content Include="Views\JobsCards\Edit.cshtml" />
-    <Content Include="Views\JobsCards\Index.cshtml" />
+    <Content Include="Views\Estimate\Create.cshtml" />
+    <Content Include="Views\Estimate\Delete.cshtml" />
+    <Content Include="Views\Estimate\Details.cshtml" />
+    <Content Include="Views\Estimate\Edit.cshtml" />
+    <Content Include="Views\Estimate\Index.cshtml" />
     <Content Include="Views\Autoparts\Add.cshtml" />
     <Content Include="Views\Autoparts\Delete.cshtml" />
     <Content Include="Views\Autoparts\Details.cshtml" />
@@ -3036,6 +3037,17 @@
     <Content Include="Views\Services\Details.cshtml" />
     <Content Include="Views\Services\Edit.cshtml" />
     <Content Include="Views\Services\Index.cshtml" />
+    <Content Include="Views\Estimate\Estimate_Print.cshtml" />
+    <Content Include="Views\Autos\Create.cshtml" />
+    <Content Include="Views\Autos\Delete.cshtml" />
+    <Content Include="Views\Autos\Details.cshtml" />
+    <Content Include="Views\Autos\Edit.cshtml" />
+    <Content Include="Views\Autos\Index.cshtml" />
+    <Content Include="Views\Service\Create.cshtml" />
+    <Content Include="Views\Service\Delete.cshtml" />
+    <Content Include="Views\Service\Details.cshtml" />
+    <Content Include="Views\Service\Edit.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

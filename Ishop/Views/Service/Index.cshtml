@@ -1,0 +1,141 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Sev>
+
+@{
+    ViewBag.Title = "Garage Services";
+ }
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.92);">
+
+
+    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: #060c4e; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-calendar-day"></i>
+           Garage Services
+        </h3>
+    </div>
+    <div class="card-body">
+        <div style="text-align:right">
+            @Html.ActionLink("Add Service", "Create", "Service", null, new { @class = "btn btn-primary btn" })
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-3 col-sm-6 col-6">
+                    <div class="info-box" style="border-radius: 16px; background-color: #722106">
+
+
+                        <div class="info-box-content" style="color:white">
+                            <span class="info-box-text text-wrap"><medium><i class="fa fa-hands-wash"></i>  .@item.Service_Name</medium></span>
+                            <span><i class="fa fa-taxi"></i> @item.Taxable</span>
+                           
+
+                            <div class="btn-group dropdown dropright">
+                                <button type="button" class="btn-xs btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-paper-plane"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                    <a href="@Url.Action("Delete", "landloards", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-trash text-danger"></i> Trash Data
+                                    </a>
+
+                                </div>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                    </div><!-- /.info-box -->
+                </div>
+
+            }
+        </div>
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+

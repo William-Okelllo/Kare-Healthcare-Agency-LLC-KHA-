@@ -1,0 +1,203 @@
+﻿@model IShop.Core.Card
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12" style="border-radius: 24px;">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #803209; color: white">
+                <i class="fa fa-trash text-white nav-icon"></i> Delete
+            </div>
+            <div class="card-body" style="border-radius: 24px;">
+
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Vehicle_Reg)</label>
+                        @Html.EditorFor(model => model.Vehicle_Reg, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.Customer)</label>
+                        @Html.EditorFor(model => model.Customer, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-mobile text-orange"></i> @Html.LabelFor(model => model.Phone)</label>
+                        @Html.EditorFor(model => model.Phone, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-wallet text-orange"></i> @Html.LabelFor(model => model.Estimate)</label>
+                        @Html.EditorFor(model => model.Estimate, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                </div>
+                
+               
+                <p><i class="fa fa-cog text-orange"></i> Vehcile AutoParts</p>
+
+                <div class="table-responsive" style="min-height: 100px">
+                    <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+
+
+                        <thead>
+                            <tr style="color:white">
+                                <th style="background-color: #803209; "> Part Name</th>
+                                <th style="background-color: #803209; "> Part Condition</th>
+                                <th style="background-color: #803209; "> VAT</th>
+                                <th style="background-color: #803209; "> Amount</th>
+                                <th style="background-color: #803209; "> Total Amount</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item2 in ViewBag.Auto)
+                            {
+                                <div>
+                                    @{
+                                        decimal difference = item2.Total_Amount - item2.Amount;
+                                    }
+                                </div>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+
+                                    <td style="background-color:white">
+                                        <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
+                                    </td>
+                                    <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
+                                    <td style="background-color:white">
+                                        @if (item2.VAT == true)
+                                        {<b>Ksh @difference</b>}
+                                    else
+                                    {<b>Ksh @difference</b>}
+                                    </td>
+                                    <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                    <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                   
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="dropdown-divider"></div>
+               
+                <p><i class="fa fa-hands-wash text-orange"></i> Repair Services</p>
+
+                <div class="table-responsive" style="min-height: 100px">
+                    <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+
+
+                        <thead>
+                            <tr style="color:white">
+                                <th style="background-color: #803209; "> Service Name</th>
+
+                                <th style="background-color: #803209; "> Amount</th>
+                                <th style="background-color: #803209; "> VAT</th>
+                                <th style="background-color: #803209; "> Total Amount</th>
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item2 in ViewBag.Service)
+                            {
+                                <div>
+                                    @{
+                                        decimal difference = item2.Total_Amount - item2.Amount;
+                                    }
+                                </div>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+
+                                    <td style="background-color:white">
+                                        <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
+                                    </td>
+
+                                    <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                    <td style="background-color:white">
+                                        @if (item2.VAT == true)
+                                        {<b>Ksh @difference</b>}
+                                    else
+                                    {<b>Ksh @difference</b>}
+                                    </td>
+                                    <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                   
+                                </tr>
+
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <hr />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete Data" class="btn btn-danger" /> |
+                        || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

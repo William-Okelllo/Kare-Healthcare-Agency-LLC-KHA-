@@ -113,42 +113,42 @@
 
                             </div>
                         }
-                        
-                        
-                        
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-cogs text-orange"></i>   @Html.LabelFor(model => model.Part_Name)</label>
-                                @Html.EditorFor(model => model.Part_Name, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Part Name",
-                                   @required = true,
-                               }
-                           })
-                            </div>
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.Condition)</label>
-                                @{
-                                    List<SelectListItem> q = new List<SelectListItem>();
-                                    q.Add(new SelectListItem
-                                    {
-                                        Text = "New Autopart",
-                                        Value = "New autopart",
-                                    });
-                                    q.Add(new SelectListItem
-                                    {
-                                        Text = "Open Market",
-                                        Value = "Open Market",
-                                    });
-                                   
 
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#Part_Name").chosen();
+                                $("#Condition").chosen();
+                            });
+                        </script>
 
-                                }@Html.DropDownListFor(model => model.Condition, q, "Autopart Condition", new { @class = "form-control form-control", @required = "required", })
-                            </div>
-                            
+                        <div class="form-group col-md-4" id="other">
+                            <label><i class="fa fa-cogs text-orange"></i>   @Html.LabelFor(model => model.Part_Name)</label>
+
+                            @Html.DropDownList("Part_Name", ViewBag.RoomType as SelectList, "-- Select Autopart --",
+                       new { @class = "form-control ", @required = "required" })
+
                         </div>
+                        <div class="form-group col-md-4" id="other">
+                            <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.Condition)</label>
+                            @{
+                                List<SelectListItem> q = new List<SelectListItem>();
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "New Autopart",
+                                    Value = "New autopart",
+                                });
+                                q.Add(new SelectListItem
+                                {
+                                    Text = "Open Market",
+                                    Value = "Open Market",
+                                });
+
+
+
+                            }@Html.DropDownListFor(model => model.Condition, q, "Autopart Condition", new { @class = "form-control form-control", @required = "required", })
+                        </div>
+
+                    </div>
 
                     <div class="row">
                         <div class="form-group col-md-3" id="other">
@@ -236,7 +236,7 @@
                                         });
                                 </script>
 
-                                @Html.ActionLink("Back to List", "create", "JobsCards", null, new { @class = "btn btn-primary btn" })
+                                @Html.ActionLink("Back to List", "create", "Estimate", null, new { @class = "btn btn-primary btn" })
 
 
 

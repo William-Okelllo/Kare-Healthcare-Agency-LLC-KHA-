@@ -86,7 +86,7 @@
 
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-9 col-sm-12 col-12">
+    <div class="col-md-11 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #803209; color: white; border-radius: 14px ">
                 <i class="fa fa-spinner"></i> Book In Vehicle
@@ -120,42 +120,32 @@
                                }
                            })
                             </div>
+
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#Make").chosen();
+                                    $("#Model").chosen();
+                                    $("#Type").chosen();
+                                    
+
+                                });
+                            </script>
                             <div class="form-group col-md-3" id="other">
                                 <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Make)</label>
-                                @Html.EditorFor(model => model.Make, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Vehcile Make",
-                                   @required = true,
-                               }
-                           })
+                                @Html.DropDownList("Make", ViewBag.Make as SelectList, "-- Select Make --",
+                              new { @class = "form-control ", @required = "required", data_live_search = "true" })
                             </div>
                             <div class="form-group col-md-3" id="other">
                                 <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Model)</label>
-                                @Html.EditorFor(model => model.Model, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Vehcile Model",
-                                   @required = true,
-                               }
-                           })
+                                @Html.DropDownList("Model", ViewBag.Model as SelectList, "-- Select Model --",
+                              new { @class = "form-control ", @required = "required", data_live_search = "true" })
                             </div>
                             <div class="form-group col-md-3" id="other">
                                 <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Type)</label>
-                                @Html.EditorFor(model => model.Type, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Vehcile Type",
-                                   @required = true,
-                               }
-                           })
+                                @Html.DropDownList("Type", ViewBag.Type as SelectList, "-- Select Type --",
+                             new { @class = "form-control ", @required = "required", data_live_search = "true" })
                             </div>
+                           
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3" id="other">
