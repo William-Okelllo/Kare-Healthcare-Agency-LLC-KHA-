@@ -106,13 +106,16 @@
 
 
                     <div class="form-row">
-                        @foreach (var item2 in ViewBag.CheckIn)
-                        {<div class="form-group col-md-2 ">
-                                <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
-                                <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
+                        <div class="form-group col-md-2 ">
+                            <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
+                            <input id="Booking_Id" name="Booking_Id" type="number" value=" @ViewBag.bookid" class="form-control  form-control  " readonly />
 
-                            </div>
-                        }
+                        </div>
+                        <div class="form-group col-md-2 " style="display:none">
+
+                            <input id="idE" name="idE" type="number" value=" @ViewBag.Muru" class="form-control  form-control  " readonly />
+
+                        </div>
 
                         <script type="text/javascript">
                             $(function () {
@@ -150,39 +153,39 @@
 
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-3" id="other">
-                            <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
-                            @Html.EditorFor(model => model.Amount, new
-                       {
-                           htmlAttributes = new
+                        <div class="row">
+                            <div class="form-group col-md-3" id="other">
+                                <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
+                                @Html.EditorFor(model => model.Amount, new
                            {
-                               @class = "form-control ",
-                               @Placeholder = "Amount",
-                               @required = true,
-                           }
-                       })
-                        </div>
-                        <div class="form-group col-md-2" id="other">
-                            <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.VAT)</label>
-                            @{
-                                List<SelectListItem> v = new List<SelectListItem>();
-                                v.Add(new SelectListItem
-                                {
-                                    Text = "ADD VAT",
-                                    Value = "True",
-                                });
-                                v.Add(new SelectListItem
-                                {
-                                    Text = "NO VAT",
-                                    Value = "False",
-                                });
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Placeholder = "Amount",
+                                   @required = true,
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.VAT)</label>
+                                @{
+                                    List<SelectListItem> v = new List<SelectListItem>();
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "ADD VAT",
+                                        Value = "True",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "NO VAT",
+                                        Value = "False",
+                                    });
 
 
 
-                            }@Html.DropDownListFor(model => model.VAT, v, "VAT", new { @class = "form-control form-control", @required = "required", })
-                        </div>
-                        <script>
+                                }@Html.DropDownListFor(model => model.VAT, v, "VAT", new { @class = "form-control form-control", @required = "required", })
+                            </div>
+                            <script>
                             $(document).ready(function () {
                                 // Get references to the dropdown and textboxes
                                 var dropdown = $('#VAT');
@@ -207,26 +210,26 @@
                                     }
                                 });
                             });
-                        </script>
-                        <div class="form-group col-md-3" id="other">
-                            <label><i class="fa fa-circle-notch text-orange"></i>   @Html.LabelFor(model => model.Total_Amount)</label>
-                            @Html.EditorFor(model => model.Total_Amount, new
-                       {
-                           htmlAttributes = new
+                            </script>
+                            <div class="form-group col-md-3" id="other">
+                                <label><i class="fa fa-circle-notch text-orange"></i>   @Html.LabelFor(model => model.Total_Amount)</label>
+                                @Html.EditorFor(model => model.Total_Amount, new
                            {
-                               @class = "form-control ",
-                               @Placeholder = "Amount",
-                               @Readonly = true,
-                           }
-                       })
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Placeholder = "Amount",
+                                   @Readonly = true,
+                               }
+                           })
+                            </div>
                         </div>
-                    </div>
 
                         <div class="dropdown-divider"></div>
-                                <input type="submit" value="Add Autopart" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want add this?')" />
+                        <input type="submit" value="Add Autopart" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want add this?')" />
 
 
-                                <script>
+                        <script>
                                         $(function () {
                                             $('#Create').click(function () {
                                                 if (confirm('Are you sure?')) {
@@ -234,13 +237,13 @@
                                                 }
                                             });
                                         });
-                                </script>
+                        </script>
 
-                                @Html.ActionLink("Back to List", "create", "Estimate", null, new { @class = "btn btn-primary btn" })
+                        @Html.ActionLink("Back to List", "create", "Estimate", null, new { @class = "btn btn-primary btn" })
 
 
 
-                           
+
 
                     }
 

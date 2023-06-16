@@ -88,7 +88,7 @@
     <div class="col-md-9 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #803209; color: white; border-radius: 14px ">
-                <i class="fa fa-spinner"></i> New Make
+                <i class="fa fa-spinner"></i> Add Service
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
                 <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
@@ -105,13 +105,18 @@
 
 
                     <div class="form-row">
-                        @foreach (var item2 in ViewBag.CheckIn)
-                        {<div class="form-group col-md-2 ">
-                                <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
-                                <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
+                      <div class="form-group col-md-2 ">
+                            <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
+                            <input id="Booking_Id" name="Booking_Id" type="number" value=" @ViewBag.bookid" class="form-control  form-control  " readonly />
 
-                            </div>
-                        }
+                        </div>
+                        <div class="form-group col-md-2 " style="display:none">
+
+                            <input id="idE" name="idE" type="number" value=" @ViewBag.Muru" class="form-control  form-control  " readonly />
+
+                        </div>
+                        
+
 
 
 
@@ -219,7 +224,7 @@
                             });
                         </script>
 
-                        @Html.ActionLink("Back to List", "Index", "Estimate", null, new { @class = "btn btn-primary btn" })
+                        @Html.ActionLink("Back to List", "create", "JobsCards", null, new { @class = "btn btn-primary btn" })
 
 
 

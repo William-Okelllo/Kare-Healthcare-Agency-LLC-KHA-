@@ -10,6 +10,7 @@ using IShop.Core;
 using Ishop.Infa;
 using System.Configuration;
 using System.Data.SqlClient;
+using IShop.Core.Interface;
 
 namespace Ishop.Controllers
 {
@@ -66,6 +67,40 @@ namespace Ishop.Controllers
                 db.parts.Add(part);
                 db.SaveChanges();
                 return RedirectToAction("create", "Estimate", new { id = part.Booking_Id });
+            }
+
+            return View(part);
+        }
+
+        public ActionResult Add_Auto(int? id ,int idE)
+        {
+            ViewBag.bookid = id;
+            ViewBag.Muru = idE;
+            AutoContext dbb = new AutoContext();
+            var autopart = dbb.autoparts.ToList();
+            ViewBag.RoomType = new SelectList(autopart, "Part_Name", "Part_Name");
+
+            CheckInContext dbbb = new CheckInContext();
+            var data10 = dbbb.checkIns.Where(d => d.Id == id);
+            ViewBag.CheckIn = data10;
+            return View();
+
+
+
+        }
+
+        // POST: Autoparts/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add_Auto([Bind(Include = "Id,Booking_Id,Part_Name,Condition,Amount,Total_Amount,VAT")] Part part , int idE)
+        {
+            if (ModelState.IsValid)
+            {
+                db.parts.Add(part);
+                db.SaveChanges();
+                return RedirectToAction("Edit", "Estimate", new { id = idE });
             }
 
             return View(part);

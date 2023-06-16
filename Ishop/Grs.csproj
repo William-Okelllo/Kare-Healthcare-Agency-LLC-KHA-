@@ -3024,7 +3024,7 @@
     <Content Include="Views\CheckIns\Index.cshtml" />
     <Content Include="Views\Estimate\Create.cshtml" />
     <Content Include="Views\Estimate\Delete.cshtml" />
-    <Content Include="Views\Estimate\Details.cshtml" />
+    <Content Include="Views\Estimate\Process.cshtml" />
     <Content Include="Views\Estimate\Edit.cshtml" />
     <Content Include="Views\Estimate\Index.cshtml" />
     <Content Include="Views\Autoparts\Add.cshtml" />
@@ -3048,6 +3048,8 @@
     <Content Include="Views\Service\Details.cshtml" />
     <Content Include="Views\Service\Edit.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Autoparts\Add_Auto.cshtml" />
+    <Content Include="Views\Services\Add_E.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

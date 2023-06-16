@@ -40,8 +40,38 @@ namespace Ishop.Controllers
         }
 
         // GET: JobsCards/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Process(int? id)
         {
+            var data1 = db.cards.FirstOrDefault(c => c.Id == id);
+            
+
+            CheckInContext dbbb = new CheckInContext();
+            var data10 = dbbb.checkIns.Where(d => d.Id == data1.Booking_Id);
+            ViewBag.CheckIn = data10;
+
+            PartContext Pd = new PartContext();
+            var data11 = Pd.parts.Where(d => d.Booking_Id == data1.Booking_Id);
+            ViewBag.Auto = data11;
+
+            ServiceContext Pe = new ServiceContext();
+            var data12 = Pe.services.Where(d => d.Booking_Id == data1.Booking_Id);
+            ViewBag.Service = data12;
+
+
+            decimal Autopart = Pd.parts.Where(d => d.Booking_Id == data1.Booking_Id).Select(d => d.Total_Amount - d.Amount).DefaultIfEmpty(0).Sum();
+            decimal Services = Pe.services.Where(d => d.Booking_Id == data1.Booking_Id).Select(d => d.Total_Amount -d.Amount).DefaultIfEmpty(0).Sum();
+            decimal AutopartTotal = Pd.parts.Where(d => d.Booking_Id == data1.Booking_Id).Select(d => d.Amount).DefaultIfEmpty(0).Sum();
+            decimal ServicesTotal = Pe.services.Where(d => d.Booking_Id == data1.Booking_Id).Select(d => d.Amount).DefaultIfEmpty(0).Sum();
+            decimal combinedSum = Autopart;
+            decimal combinedSum2 = Services;
+            decimal AutopTotals = AutopartTotal;
+            decimal ServicesT = ServicesTotal;
+            ViewBag.VATtotal = combinedSum+ combinedSum2;
+            ViewBag.AutonServices = AutopTotals + ServicesT;
+
+
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -95,9 +125,9 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff,Estimate")] Card card)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff,Estimate,Estimate_Status")] Card card)
         {
-
+            card.Estimate_Status = 0;
 
             if (ModelState.IsValid)
             {
@@ -112,6 +142,24 @@ namespace Ishop.Controllers
         // GET: JobsCards/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            var data10 = db.cards.FirstOrDefault(d => d.Id == id);
+            
+
+            PartContext Pd = new PartContext();
+            var data11 = Pd.parts.OrderByDescending(c=>c.Id).Where(d => d.Booking_Id == data10.Booking_Id);
+            ViewBag.Auto = data11;
+
+            ServiceContext Pe = new ServiceContext();
+            var data12 = Pe.services.OrderByDescending(c => c.Id).Where(d => d.Booking_Id == data10.Booking_Id);
+            ViewBag.Service = data12;
+
+            decimal Autopart = Pd.parts.Where(d => d.Booking_Id == data10.Booking_Id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal Services = Pe.services.Where(d => d.Booking_Id == data10.Booking_Id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal combinedSum = Autopart;
+            decimal combinedSum2 = Services;
+            ViewBag.Estimate = combinedSum + combinedSum2;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -129,8 +177,9 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff")] Card card)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff,Estimate,Estimate_Status")] Card card)
         {
+            card.Estimate_Status = 0;
             if (ModelState.IsValid)
             {
                 db.Entry(card).State = EntityState.Modified;
@@ -265,6 +314,37 @@ namespace Ishop.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Approve(int? id)
+        {
+
+            string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
+            SqlConnection sqlCon = new SqlConnection(strcon);
+            SqlCommand cmd = new SqlCommand("Estimate_approve", sqlCon);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            sqlCon.Open();
+            cmd.ExecuteNonQuery();
+            sqlCon.Close();
+            TempData["msg"] = "Estimate approved successfully";
+
+            return RedirectToAction("Index", "Estimate");
+        }
+        public ActionResult Reject(int? id)
+        {
+
+            string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
+            SqlConnection sqlCon = new SqlConnection(strcon);
+            SqlCommand cmd = new SqlCommand("Estimate_reject", sqlCon);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            sqlCon.Open();
+            cmd.ExecuteNonQuery();
+            sqlCon.Close();
+            TempData["msg"] = "Estimate rejected successfully";
+
+            return RedirectToAction("Index", "Estimate");
         }
     }
 }

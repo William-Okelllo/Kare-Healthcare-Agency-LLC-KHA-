@@ -1,0 +1,258 @@
+﻿@model IShop.Core.Card
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12" style="border-radius: 24px;">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #803209; color: white">
+                <i class="fa fa-circle-notch text-white nav-icon"></i> Estimate Processing
+            </div>
+            <div class="card-body" style="border-radius: 24px;">
+
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Vehicle_Reg)</label>
+                        @Html.EditorFor(model => model.Vehicle_Reg, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.Customer)</label>
+                        @Html.EditorFor(model => model.Customer, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-mobile text-orange"></i> @Html.LabelFor(model => model.Phone)</label>
+                        @Html.EditorFor(model => model.Phone, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+
+
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-dice-five text-orange"></i> Total Repair Excl VAT</label>
+                        <input id="Access" name="Access" type="number" value="@ViewBag.AutonServices" class="form-control form-rounded" readonly />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-dice-five text-orange"></i>  VAT</label>
+                        <input id="Access" name="Access" type="number" value="@ViewBag.VATtotal" class="form-control form-rounded" readonly />
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-dice-five text-orange"></i> Estimate Total</label>
+                        @Html.EditorFor(model => model.Estimate, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control ",
+                           @placeholder = " Expense Date",
+
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                </div>
+                    <div class="dropdown-divider"></div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                               <i class="fa fa-circle-notch"></i>  Process Estimate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-cogs"></i> Estimate AutoParts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-hands-wash"></i>  Estimate Services</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+                            <div class="table-responsive" style="min-height: 100px">
+                                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+
+
+                                    <thead>
+                                        <tr style="color:white">
+                                            <th style="background-color: #803209; "> Part Name</th>
+                                            <th style="background-color: #803209; "> Part Condition</th>
+
+                                            <th style="background-color: #803209; "> Amount</th>
+                                            <th style="background-color: #803209; "> VAT</th>
+                                            <th style="background-color: #803209; "> Total Amount</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item2 in ViewBag.Auto)
+                                        {
+                                            <div>
+                                                @{
+                                                    decimal difference = item2.Total_Amount - item2.Amount;
+                                                }
+                                            </div>
+
+                                            <tr data-widget="expandable-table" aria-expanded="false">
+
+                                                <td style="background-color:white">
+                                                    <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
+                                                </td>
+                                                <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
+
+                                                <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                                <td style="background-color:white">
+                                                    @if (item2.VAT == true)
+                                                    {<b>Ksh @difference</b>}
+                                                else
+                                                {<b>Ksh @difference</b>}
+                                                </td>
+                                                <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="table-responsive" style="min-height: 100px">
+                                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+
+
+                                    <thead>
+                                        <tr style="color:white">
+                                            <th style="background-color: #803209; "> Service Name</th>
+
+                                            <th style="background-color: #803209; "> Amount</th>
+                                            <th style="background-color: #803209; "> VAT</th>
+                                            <th style="background-color: #803209; "> Total Amount</th>
+
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item2 in ViewBag.Service)
+                                        {
+                                            <div>
+                                                @{
+                                                    decimal difference = item2.Total_Amount - item2.Amount;
+                                                }
+                                            </div>
+                                            <tr data-widget="expandable-table" aria-expanded="false">
+
+                                                <td style="background-color:white">
+                                                    <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
+                                                </td>
+
+                                                <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                                <td style="background-color:white">
+                                                    @if (item2.VAT == true)
+                                                    {<b>Ksh @difference</b>}
+                                                else
+                                                {<b>Ksh @difference</b>}
+                                                </td>
+                                                <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+
+                                            </tr>
+
+
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="table-responsive" style="min-height: 100px">
+                                <h5 style="text-align:center">  Estimate Processing</h5>
+                                <div class="dropdown-divider"></div>
+                                <div style="text-align:center">
+
+                                    <a class="btn btn-success active" onclick="if (confirm('Proceed to Approve Estimate?')) { window.location.href = '@Url.Action("Approve", "Estimate", new { id = Model.Id })'; }">
+                                        <i class="fa fa-check-circle"></i>  Approve Estimate
+                                    </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Delete_User').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+
+                                    ||
+                                    <a class="btn btn-danger active" onclick="if (confirm('Proceed to Reject Estimate?')) { window.location.href = '@Url.Action("Reject", "Estimate", new { id = Model.Id })'; }">
+                                        <i class="fa fa-times-circle"></i>  Reject Estimate
+                                    </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Delete_User').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    ||
+                                    <button type="button" class="btn btn-default active" onclick="location.href='@Url.Action("Index", "Estimate")'"> Back to Estimates</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        <hr />
+
+

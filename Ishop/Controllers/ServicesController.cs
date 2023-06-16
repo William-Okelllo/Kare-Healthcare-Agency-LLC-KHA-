@@ -69,6 +69,39 @@ namespace Ishop.Controllers
             return View(service);
         }
 
+        public ActionResult Add_E(int? id, int idE)
+        {
+
+            ViewBag.bookid = id;
+            ViewBag.Muru = idE;
+
+            SevContext dbb = new SevContext();
+            var autopart = dbb.sev.ToList();
+            ViewBag.RoomType = new SelectList(autopart, "Service_Name", "Service_Name");
+
+            CheckInContext dbbb = new CheckInContext();
+            var data10 = dbbb.checkIns.Where(d => d.Id == id);
+            ViewBag.CheckIn = data10;
+            return View();
+        }
+
+        // POST: Services/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add_E([Bind(Include = "Id,Booking_Id,Service_Name,Amount,Total_Amount,VAT")] Service service, int idE)
+        {
+            if (ModelState.IsValid)
+            {
+                db.services.Add(service);
+                db.SaveChanges();
+                return RedirectToAction("Edit", "Estimate", new { id = idE });
+            }
+
+            return View(service);
+        }
+
         // GET: Services/Edit/5
         public ActionResult Edit(int? id)
         {
