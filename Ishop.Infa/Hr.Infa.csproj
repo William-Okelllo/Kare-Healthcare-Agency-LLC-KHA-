@@ -61,6 +61,10 @@
     <Compile Include="CheckInRepo.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
+    <Compile Include="InspectionContext.cs" />
+    <Compile Include="InspectionRepo.cs" />
+    <Compile Include="Inspections_partsContext.cs" />
+    <Compile Include="Inspection_partRepo.cs" />
     <Compile Include="PartContext.cs" />
     <Compile Include="PartRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

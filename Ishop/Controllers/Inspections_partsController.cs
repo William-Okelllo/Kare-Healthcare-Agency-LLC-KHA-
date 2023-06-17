@@ -8,120 +8,112 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
-using PagedList;
 
 namespace Ishop.Controllers
 {
-    public class AutosController : Controller
+    public class Inspections_partsController : Controller
     {
-        private AutoContext db = new AutoContext();
+        private Inspections_partsContext db = new Inspections_partsContext();
 
-        // GET: Autos
-        public ActionResult Index(string searchBy, string search, int? page)
+        // GET: Inspections_parts
+        public ActionResult Index()
         {
-            if (!(search == null))
-            {
-                return View(db.autoparts.OrderByDescending(p => p.Id).Where(c => c.Part_Name == search || c.Part_Name.StartsWith(search)).ToList().ToPagedList(page ?? 1, 15));
-
-            }
-            else
-            {
-                return View(db.autoparts.OrderByDescending(p => p.Id).Where(c => c.Part_Name.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 15));
-            }
-
+            return View(db.inspections_Parts.ToList());
         }
 
-        // GET: Autos/Details/5
+        // GET: Inspections_parts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Autoparts autoparts = db.autoparts.Find(id);
-            if (autoparts == null)
+            Inspections_parts inspections_parts = db.inspections_Parts.Find(id);
+            if (inspections_parts == null)
             {
                 return HttpNotFound();
             }
-            return View(autoparts);
+            return View(inspections_parts);
         }
 
-        // GET: Autos/Create
+        // GET: Inspections_parts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Autos/Create
+        // POST: Inspections_parts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Part_Name,Category,CreatedOn")] Autoparts autoparts)
+        public ActionResult Create([Bind(Include = "Id,Booking_Id,Part_Name,VAT,Condition,Estimate_Totals,Amount,Total_Amount")] Inspections_parts inspections_parts)
         {
             if (ModelState.IsValid)
             {
-                db.autoparts.Add(autoparts);
+                db.inspections_Parts.Add(inspections_parts);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(autoparts);
+            return View(inspections_parts);
         }
 
-        // GET: Autos/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Inspections_parts/Edit/5
+        public ActionResult Edit(int? id ,int id2)
         {
+            ViewBag.id2 = id2;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Autoparts autoparts = db.autoparts.Find(id);
-            if (autoparts == null)
+            Inspections_parts inspections_parts = db.inspections_Parts.Find(id);
+            if (inspections_parts == null)
             {
                 return HttpNotFound();
             }
-            return View(autoparts);
+            return View(inspections_parts);
         }
 
-        // POST: Autos/Edit/5
+        // POST: Inspections_parts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Part_Name,Category,CreatedOn")] Autoparts autoparts)
+        public ActionResult Edit([Bind(Include = "Id,Booking_Id,Part_Name,VAT,Condition,Estimate_Totals,Amount,Total_Amount")] Inspections_parts inspections_parts ,int id2)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(autoparts).State = EntityState.Modified;
+                db.Entry(inspections_parts).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Inspect", "Inspections", new { id = id2 });
             }
-            return View(autoparts);
+            return View(inspections_parts);
         }
 
-        // GET: Autos/Delete/5
+        // GET: Inspections_parts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Autoparts autoparts = db.autoparts.Find(id);
-            if (autoparts == null)
+            Inspections_parts inspections_parts = db.inspections_Parts.Find(id);
+            if (inspections_parts == null)
             {
                 return HttpNotFound();
             }
-            return View(autoparts);
+            return View(inspections_parts);
         }
 
-        // POST: Autos/Delete/5
+        // POST: Inspections_parts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Autoparts autoparts = db.autoparts.Find(id);
-            db.autoparts.Remove(autoparts);
+            Inspections_parts inspections_parts = db.inspections_Parts.Find(id);
+            db.inspections_Parts.Remove(inspections_parts);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

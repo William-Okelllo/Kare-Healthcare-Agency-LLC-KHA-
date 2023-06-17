@@ -4,7 +4,6 @@
     ViewBag.Title = "Create";
 }
 
-
 <style type="text/css">
     .loading {
         font-size: 10pt;
@@ -14,6 +13,7 @@
         position: fixed;
         z-index: 999;
     }
+
     .curved-table {
         border-collapse: collapse;
         border-radius: 10px;
@@ -25,6 +25,7 @@
             padding: 10px;
             border: 1px solid orange;
         }
+
     .form-rounded {
         border-radius: 1rem;
     }
@@ -107,66 +108,66 @@
 
 
 
-                              
-                                <div class="form-row">
-                                    <div class="form-group col-md-3">
-                                        <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</label>
-                                        @Html.EditorFor(model => model.CreatedOn, new
-                                   {
-                                       htmlAttributes = new
-                                       {
-                                           @class = "form-control form-control ",
-                                           @placeholder = " Expense Date",
-                                           @Value = DateTime.Now,
-                                           @Readonly = true
-                                       }
-                                   })
-                                    </div>
-                                    @foreach (var item2 in ViewBag.CheckIn)
-                                    {
-                                        <div class="form-group col-md-2 ">
-                                            <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.Customer)</label>
-                                            <input id="Customer" name="Customer" type="text" value="@item2.Customer" class="form-control  form-control  " readonly />
 
-                                        </div>
-                                        <div class="form-group col-md-2 ">
-                                            <label><i class="fa fa-mobile text-orange"></i> @Html.LabelFor(model => model.Phone)</label>
-                                            <input id="Phone" name="Phone" type="text" value="@item2.Phone" class="form-control  form-control  " readonly />
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control ",
+                               @placeholder = " Expense Date",
+                               @Value = DateTime.Now,
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                        @foreach (var item2 in ViewBag.CheckIn)
+                        {
+                            <div class="form-group col-md-2 ">
+                                <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.Customer)</label>
+                                <input id="Customer" name="Customer" type="text" value="@item2.Customer" class="form-control  form-control  " readonly />
 
-                                        </div>
-                                        <div class="form-group col-md-2 ">
-                                            <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.Vehicle_Reg)</label>
-                                            <input id="Vehicle_Reg" name="Vehicle_Reg" type="text" value="@item2.Vehicle_Reg" class="form-control  form-control  " readonly />
+                            </div>
+                            <div class="form-group col-md-2 ">
+                                <label><i class="fa fa-mobile text-orange"></i> @Html.LabelFor(model => model.Phone)</label>
+                                <input id="Phone" name="Phone" type="text" value="@item2.Phone" class="form-control  form-control  " readonly />
 
-                                        </div>
-                                    }
-                                </div>
-                                <div class="form-row">
-                                    @foreach (var item2 in ViewBag.CheckIn)
-                                    {<div class="form-group col-md-2 ">
-                                            <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
-                                            <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
+                            </div>
+                            <div class="form-group col-md-2 ">
+                                <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.Vehicle_Reg)</label>
+                                <input id="Vehicle_Reg" name="Vehicle_Reg" type="text" value="@item2.Vehicle_Reg" class="form-control  form-control  " readonly />
 
-                                        </div>
-                                        <div class="form-group col-md-4 ">
-                                            <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Vehicle)</label>
-                                            <input id="Vehicle" name="Vehicle" type="text" value="@item2.Make @item2.Model @item2.Type" class="form-control  form-control  " readonly />
+                            </div>
+                        }
+                    </div>
+                    <div class="form-row">
+                        @foreach (var item2 in ViewBag.CheckIn)
+                        {<div class="form-group col-md-2 ">
+                                <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
+                                <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
 
-                                        </div>
-                                    }
-                                    <div class="form-group col-md-2 " >
-                                        <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.staff)</label>
-                                        <input id="staff" name="staff" type="text" value=@User.Identity.Name class="form-control  form-control  " readonly />
+                            </div>
+                            <div class="form-group col-md-4 ">
+                                <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Vehicle)</label>
+                                <input id="Vehicle" name="Vehicle" type="text" value="@item2.Make @item2.Model @item2.Type" class="form-control  form-control  " readonly />
 
-                                    </div>
-                                    <div class="form-group col-md-2 " style="display:none">
-                                        <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Estimate)</label>
-                                        <input id="Estimate" name="Estimate" type="number" value="@ViewBag.Estimate" class="form-control  form-control  " readonly />
+                            </div>
+                        }
+                        <div class="form-group col-md-2 ">
+                            <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.staff)</label>
+                            <input id="staff" name="staff" type="text" value=@User.Identity.Name class="form-control  form-control  " readonly />
 
-                                    </div>
+                        </div>
+                        <div class="form-group col-md-2 " style="display:none">
+                            <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Estimate)</label>
+                            <input id="Estimate" name="Estimate" type="number" value="@ViewBag.Estimate" class="form-control  form-control  " readonly />
+
+                        </div>
 
 
-                                </div>
+                    </div>
                     <div class="dropdown-divider"></div>
                     <div style="text-align:center">
                         <h4>
@@ -202,44 +203,44 @@
                             <tbody>
                                 @foreach (var item2 in ViewBag.Auto)
                                 {
-                                   <div>
-                                       @{
-                                           decimal difference = item2.Total_Amount - item2.Amount;
-                                                                   }
+                                    <div>
+                                        @{
+                                            decimal difference = item2.Total_Amount - item2.Amount;
+                                        }
                                     </div>
 
-                                   <tr data-widget="expandable-table" aria-expanded="false">
+                                    <tr data-widget="expandable-table" aria-expanded="false">
 
-                                       <td style="background-color:white">
-                                           <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
-                                       </td>
-                                       <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
-                                       <td style="background-color:white">
-                                           @if (item2.VAT == true)
-                                           {<b>Ksh @difference</b>}
-                                       else
-                                       {<b>Ksh @difference</b>}
-                                       </td>
-                                       <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
-                                       <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
-                                       <td style="background-color:ghostwhite">
+                                        <td style="background-color:white">
+                                            <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
+                                        </td>
+                                        <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
+                                        <td style="background-color:white">
+                                            @if (item2.VAT == true)
+                                            {<b>Ksh @difference</b>}
+                                        else
+                                        {<b>Ksh @difference</b>}
+                                        </td>
+                                        <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                        <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                        <td style="background-color:ghostwhite">
 
-                                           <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove the Autopart?')) { window.location.href = '@Url.Action("Remove", "Autoparts", new { id = item2.Id, })'; }">
-                                               <i class="fa fa-times-circle text-black"></i> Remove Autopart
-                                           </a>
-                                           <script>
-                                               $(function () {
-                                                   $('#Deny').click(function () {
-                                                       if (confirm('Are you sure?')) {
-                                                           window.location.href = $(this).data('url');
-                                                       }
-                                                   });
-                                               });
-                                           </script>
+                                            <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove the Autopart?')) { window.location.href = '@Url.Action("Remove", "Autoparts", new { id = item2.Id, })'; }">
+                                                <i class="fa fa-times-circle text-black"></i> Remove Autopart
+                                            </a>
+                                            <script>
+                                                $(function () {
+                                                    $('#Deny').click(function () {
+                                                        if (confirm('Are you sure?')) {
+                                                            window.location.href = $(this).data('url');
+                                                        }
+                                                    });
+                                                });
+                                            </script>
 
 
-                                       </td>
-                                   </tr>
+                                        </td>
+                                    </tr>
 
                                 }
 
@@ -313,7 +314,7 @@
 
                                         </td>
                                     </tr>
-                                 
+
 
                                 }
 
@@ -342,4 +343,3 @@
 
                 }
             </div>
-                  

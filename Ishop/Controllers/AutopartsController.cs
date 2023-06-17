@@ -11,6 +11,7 @@ using Ishop.Infa;
 using System.Configuration;
 using System.Data.SqlClient;
 using IShop.Core.Interface;
+using System.Numerics;
 
 namespace Ishop.Controllers
 {
@@ -38,6 +39,29 @@ namespace Ishop.Controllers
             }
             return View(part);
         }
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
+
+
+            using (var PartContext = new PartContext())
+            {
+                var Part_Name = (from customer in PartContext.parts
+                                 where customer.Part_Name.StartsWith(prefix)
+                                 select new
+                                 {
+                                     label = customer.Part_Name,
+                                     val = customer.Id
+                                 }).ToList();
+
+                return Json(Part_Name);
+            }
+
+        }
+
+
+
+
 
         // GET: Autoparts/Create
         public ActionResult Add(int? id)

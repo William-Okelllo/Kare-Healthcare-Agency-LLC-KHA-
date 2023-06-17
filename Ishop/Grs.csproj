@@ -437,6 +437,7 @@
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EstimateController.cs" />
+    <Compile Include="Controllers\Inspections_partsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -449,6 +450,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\InspectionsController.cs" />
     <Compile Include="Models\A.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetUser.cs">
@@ -3050,6 +3052,13 @@
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\Autoparts\Add_Auto.cshtml" />
     <Content Include="Views\Services\Add_E.cshtml" />
+    <Content Include="Views\Inspections\Inspect.cshtml" />
+    <Content Include="Views\Inspections\Index.cshtml" />
+    <Content Include="Views\Inspections_parts\Create.cshtml" />
+    <Content Include="Views\Inspections_parts\Delete.cshtml" />
+    <Content Include="Views\Inspections_parts\Details.cshtml" />
+    <Content Include="Views\Inspections_parts\Edit.cshtml" />
+    <Content Include="Views\Inspections_parts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

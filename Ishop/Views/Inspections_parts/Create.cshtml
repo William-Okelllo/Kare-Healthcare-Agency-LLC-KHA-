@@ -1,4 +1,4 @@
-﻿@model IShop.Core.Service
+﻿@model IShop.Core.Inspections_parts
 
 @{
     ViewBag.Title = "Create";
@@ -88,7 +88,7 @@
     <div class="col-md-9 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #803209; color: white; border-radius: 14px ">
-                <i class="fa fa-spinner"></i> New Make
+                <i class="fa fa-cogs"></i> Add Autoparts
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
                 <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
@@ -104,34 +104,94 @@
 
 
 
-                    <div class="form-row">
-                        @foreach (var item2 in ViewBag.CheckIn)
-                        {<div class="form-group col-md-2 ">
-                                <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
-                                <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
+                        <div class="form-row">
+                            @foreach (var item2 in ViewBag.CheckIn)
+                            {<div class="form-group col-md-2 ">
+                                    <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
+                                    <input id="Booking_Id" name="Booking_Id" type="number" value="@item2.Id" class="form-control  form-control  " readonly />
 
+                                </div>
+                            }
+
+                            <script type="text/javascript">
+                                $(function () {
+
+                                    $("#Condition").chosen();
+                                });
+                            </script>
+
+                            <div class="form-group col-md-4" id="other">
+                                <label><i class="fa fa-cogs text-orange"></i>   @Html.LabelFor(model => model.Part_Name)</label>
+                                @Html.EditorFor(model => model.Part_Name, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Placeholder = "Part Name",
+                                   @Id = "Part_Name",
+                                  @required = true,
+                               }
+                           })
                             </div>
-                        }
+
+                            <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+                            <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+                            <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
+                                  rel="Stylesheet" type="text/css" />
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#Part_Name").autocomplete({
+                                        source: function (request, response) {
+                                            $.ajax({
+                                                url: '/Autoparts/AutoComplete/',
+                                                data: "{'prefix': '" + request.term + "'}",
+                                                dataType: "json",
+                                                type: "POST",
+                                                contentType: "application/json; charset=utf-8",
+                                                success: function (data) {
+                                                    response($.map(data, function (item) {
+                                                        return item;
+                                                    }))
+                                                },
+                                                error: function (response) {
+                                                    alert(response.responseText
+                                                        , "Reload Page");
+                                                },
+                                                failure: function (response) {
+                                                    alert(response.responseText, "Reload Page");
+                                                }
+                                            });
+                                        },
+                                        select: function (e, i) {
+                                            $("#hfPart_Name").val(i.item.val);
+                                        },
+                                        minLength: 1
+                                    });
+                                });
+                            </script>
+
+                            <div class="form-group col-md-4" id="other">
+                                <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.Condition)</label>
+                                @{
+                                    List<SelectListItem> q = new List<SelectListItem>();
+                                    q.Add(new SelectListItem
+                                    {
+                                        Text = "New Autopart",
+                                        Value = "New autopart",
+                                    });
+                                    q.Add(new SelectListItem
+                                    {
+                                        Text = "Open Market",
+                                        Value = "Open Market",
+                                    });
 
 
 
-                        <script type="text/javascript">
-                            $(function () {
-                                $("#Service_Name").chosen();
-                                $("#Condition").chosen();
-                            });
-                        </script>
-
-                        <div class="form-group col-md-4" id="other">
-                            <label><i class="fa fa-cogs text-orange"></i>   @Html.LabelFor(model => model.Service_Name)</label>
-
-                            @Html.DropDownList("Service_Name", ViewBag.RoomType as SelectList, "-- Select Service --",
-                       new { @class = "form-control ", @required = "required" })
+                                }@Html.DropDownListFor(model => model.Condition, q, "Autopart Condition", new { @class = "form-control form-control", @required = "required", })
+                            </div>
 
                         </div>
 
-
-                    </div>
                         <div class="row">
                             <div class="form-group col-md-3" id="other">
                                 <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
@@ -204,9 +264,8 @@
                             </div>
                         </div>
 
-
                         <div class="dropdown-divider"></div>
-                        <input type="submit" value="Add Service" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want add this?')" />
+                        <input type="submit" value="Add Autopart" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want add this?')" />
 
 
                         <script>
@@ -218,8 +277,10 @@
                                 });
                             });
                         </script>
-
                         <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+
+
+
 
 
 
