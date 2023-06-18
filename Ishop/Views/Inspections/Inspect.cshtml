@@ -1,7 +1,7 @@
 ﻿@model IShop.Core.Inspection
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Inspection";
 }
 
 <style type="text/css">
@@ -281,7 +281,64 @@
                                         <td style="background-color:whitesmoke">Ksh <b>@item2.Estimate_Totals.ToString("#,##0.00")</b> </td>
                                         <td style="background-color:ghostwhite">
 
-                                            @Html.ActionLink("Update", "Edit", "Inspections_parts", new { id = item2.Id, id2 = @ViewBag.id2 }, new { @class = "btn btn-xs btn-primary" })
+                                            @Html.ActionLink("Update/Edit", "Edit", "Inspections_parts", new { id = item2.Id, id2 = @ViewBag.id2 }, new { @class = "btn btn-xs btn-outline-secondary" })
+
+
+                                        </td>
+                                    </tr>
+
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <p><i class="fa fa-hands-wash text-orange"></i> Services</p>
+
+                    <div class="table-responsive" style="min-height: 100px">
+                        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+
+
+                            <thead>
+                                <tr style="color:white">
+                                    <th style="background-color: black; "> Service Name</th>
+                                   
+                                    <th style="background-color: black; "> VAT</th>
+                                    <th style="background-color: black; "> Amount</th>
+                                    <th style="background-color: black; "> Total Amount</th>
+                                    <th style="background-color: black; "> Original Amount</th>
+                                    <th style="background-color: black; "> Action</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item2 in ViewBag.Services)
+                                {
+                                    <div>
+                                        @{
+                                            decimal difference = item2.Total_Amount - item2.Amount;
+                                        }
+                                    </div>
+
+                                    <tr data-widget="expandable-table" aria-expanded="false">
+
+                                        <td style="background-color:white">
+                                            <i class="fa fa-cogs text-orange"></i> @item2.Service_Name
+                                        </td>
+                                        
+                                        <td style="background-color:white">
+                                            @if (item2.VAT == true)
+                                            {<b>Ksh @difference</b>}
+                                        else
+                                        {<b>Ksh @difference</b>}
+                                        </td>
+                                        <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                        <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                        <td style="background-color:whitesmoke">Ksh <b>@item2.Estimate_Totals.ToString("#,##0.00")</b> </td>
+                                        <td style="background-color:ghostwhite">
+
+                                            @Html.ActionLink("Update/Edit", "Edit", "Inspections_parts", new { id = item2.Id, id2 = @ViewBag.id2 }, new { @class = "btn btn-xs btn-outline-secondary" })
 
 
                                         </td>
@@ -294,6 +351,8 @@
                         </table>
                     </div>
 
+
+                
 
                 }
             </div>

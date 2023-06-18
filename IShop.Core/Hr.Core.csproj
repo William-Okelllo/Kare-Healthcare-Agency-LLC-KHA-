@@ -51,6 +51,7 @@
     <Compile Include="CheckIn.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Inspections_parts.cs" />
+    <Compile Include="Inspection_serv.cs" />
     <Compile Include="Interface\IAccess.cs" />
     <Compile Include="Interface\Iapp.cs" />
     <Compile Include="Interface\IAutos.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Interface\Idata.cs" />
     <Compile Include="Interface\Inspec.cs" />
     <Compile Include="Interface\Insp_part.cs" />
+    <Compile Include="Interface\Insp_serv.cs" />
     <Compile Include="Interface\IPart.cs" />
     <Compile Include="Interface\Iservice.cs" />
     <Compile Include="Interface\Isev.cs" />

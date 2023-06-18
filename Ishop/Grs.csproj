@@ -438,6 +438,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EstimateController.cs" />
     <Compile Include="Controllers\Inspections_partsController.cs" />
+    <Compile Include="Controllers\Inspection_servController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -3059,6 +3060,11 @@
     <Content Include="Views\Inspections_parts\Details.cshtml" />
     <Content Include="Views\Inspections_parts\Edit.cshtml" />
     <Content Include="Views\Inspections_parts\Index.cshtml" />
+    <Content Include="Views\Inspection_serv\Create.cshtml" />
+    <Content Include="Views\Inspection_serv\Delete.cshtml" />
+    <Content Include="Views\Inspection_serv\Details.cshtml" />
+    <Content Include="Views\Inspection_serv\Edit.cshtml" />
+    <Content Include="Views\Inspection_serv\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

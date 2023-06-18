@@ -30,7 +30,7 @@ namespace Ishop
             Database.SetInitializer<AutoContext>(null);
             Database.SetInitializer<Inspection_Context>(null);
             Database.SetInitializer<Inspections_partsContext>(null);
-
+            Database.SetInitializer<Inspec_serv_context>(null);
         }
     }
 }

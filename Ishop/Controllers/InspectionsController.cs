@@ -49,10 +49,16 @@ namespace Ishop
             var data11 = Pd.inspections_Parts.OrderByDescending(c => c.Id).Where(d => d.Booking_Id == data10.Booking_Id);
             ViewBag.Auto = data11;
 
-            decimal Autopart = Pd.inspections_Parts.Where(d => d.Booking_Id == data10.Booking_Id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
-            decimal combinedSum = Autopart;
+            Inspec_serv_context Dp = new Inspec_serv_context();
+            var data12 = Dp.Inspection_Servs.OrderByDescending(c => c.Id).Where(d => d.Booking_Id == data10.Booking_Id);
+            ViewBag.Services = data12;
 
-            ViewBag.InspectionTotals = combinedSum;
+            decimal Autopart = Pd.inspections_Parts.Where(d => d.Booking_Id == data10.Booking_Id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal Services = Dp.Inspection_Servs.Where(d => d.Booking_Id == data10.Booking_Id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal combinedSum = Autopart;
+            decimal combinedSum2 = Services;
+
+            ViewBag.InspectionTotals = combinedSum + combinedSum2;
 
 
 
