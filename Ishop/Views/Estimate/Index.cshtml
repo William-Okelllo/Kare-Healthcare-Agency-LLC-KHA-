@@ -132,11 +132,14 @@
 
                             <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Vehicle </td>
                             <td style="background-color:white">KSH  @item.Estimate.ToString("#,##0.00") </td>
-                            <td style="background-color:white"> @if (item.Estimate_Status == 0)
-                            { <p style="color:darkcyan"><i class="fa fa-clock text-cyan"></i> Pending</p>}
-                            else if (item.Estimate_Status == 1)
-                            { <p style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approved</p>}
-                            else { <p style="color:darkred"><i class="fa fa-check-circle text-danger"></i> Rejected</p>} </td>
+                            <td style="background-color:white">
+                                @if (item.Estimate_Status == 0)
+                                {<p style="color:darkcyan"><i class="fa fa-clock text-cyan"></i> Pending</p>}
+                                else if (item.Estimate_Status == 1)
+                                { <p style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approved</p>}
+                                else
+                                { <p style="color:darkred"><i class="fa fa-check-circle text-danger"></i> Rejected</p>}
+                            </td>
                             <td style="background-color: white">
                                 <div class="btn-group dropdown">
                                     <button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -196,19 +199,18 @@
                 <div style="text-align:center">
                     <div class="col-md-3 col-sm-6 col-12">
                         <div class="info-box bg-gradient-black">
-                           
+                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
                             <div class="info-box-content">
-                                <div class="spinner-border spinner-border-sm" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                                <div class="spinner-grow spinner-grow-sm" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>No records Found
+                                <span class="info-box-text"> <img src="~/Images/gg.ico" height="50" /> </span>
+
+
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 0%"></div>
                                 </div>
-                               
+                                <span class="progress-description">
+                                    <i class="fa fa-calendar text-white nav-icon"></i>   No records Found
+                                </span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -259,7 +261,7 @@
             </div>
 
 
-            
+
 
 
 

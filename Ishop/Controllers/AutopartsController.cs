@@ -12,9 +12,12 @@ using System.Configuration;
 using System.Data.SqlClient;
 using IShop.Core.Interface;
 using System.Numerics;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
+
     public class AutopartsController : Controller
     {
         private PartContext db = new PartContext();
@@ -39,24 +42,16 @@ namespace Ishop.Controllers
             }
             return View(part);
         }
-        [HttpPost]
-        public JsonResult AutoComplete(string prefix)
+        public ActionResult AutoComplete(string term)
         {
-
-
-            using (var PartContext = new PartContext())
+            using (var db = new AutoContext())
             {
-                var Part_Name = (from customer in PartContext.parts
-                                 where customer.Part_Name.StartsWith(prefix)
-                                 select new
-                                 {
-                                     label = customer.Part_Name,
-                                     val = customer.Id
-                                 }).ToList();
+                var autoParts = db.autoparts.Where(ap => ap.Part_Name.StartsWith(term))
+                                           .Select(ap => ap.Part_Name)
+                                           .ToList();
 
-                return Json(Part_Name);
+                return Json(autoParts, JsonRequestBehavior.AllowGet);
             }
-
         }
 
 

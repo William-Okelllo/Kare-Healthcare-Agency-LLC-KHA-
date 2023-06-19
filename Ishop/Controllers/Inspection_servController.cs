@@ -11,6 +11,7 @@ using Ishop.Infa;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class Inspection_servController : Controller
     {
         private Inspec_serv_context db = new Inspec_serv_context();
@@ -53,6 +54,7 @@ namespace Ishop.Controllers
             {
                 db.Inspection_Servs.Add(inspection_serv);
                 db.SaveChanges();
+                TempData["msg"] = "Service updated successfully";
                 return RedirectToAction("Index");
             }
 
@@ -60,8 +62,11 @@ namespace Ishop.Controllers
         }
 
         // GET: Inspection_serv/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int id2)
         {
+            ViewBag.id2 = id2;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -79,13 +84,13 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Booking_Id,Service_Name,Estimate_Totals,Amount,Total_Amount,VAT")] Inspection_serv inspection_serv)
+        public ActionResult Edit([Bind(Include = "Id,Booking_Id,Service_Name,Estimate_Totals,Amount,Total_Amount,VAT")] Inspection_serv inspection_serv, int id2)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(inspection_serv).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Inspect", "Inspections", new { id = id2 });
             }
             return View(inspection_serv);
         }

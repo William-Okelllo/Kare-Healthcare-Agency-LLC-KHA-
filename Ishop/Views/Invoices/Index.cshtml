@@ -1,9 +1,9 @@
 ﻿@using PagedList
 @using PagedList.Mvc;
-@model IPagedList<IShop.Core.Inspection>
+@model IPagedList<IShop.Core.Invoice>
 
 @{
-    ViewBag.Title = "Inspection";
+    ViewBag.Title = "Invoices";
 }
 
 
@@ -44,13 +44,13 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.95);">
 
 
-    <div class="card-header" style="background-color: #001F3F; color: white; border-radius: 14px ">
+    <div class="card-header" style="background-color: #81320a; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-book-reader"></i>
-            Inspections
+            Invoices
         </h3>
 
-        
+
 
 
 
@@ -96,14 +96,13 @@
 
                 <thead>
                     <tr style="color:white">
-                        <th style="background-color: #001F3F; "> Added On</th>
-                        <th style="background-color: #001F3F; "> Vehicle Reg</th>
-                        <th style="background-color: #001F3F; "> Customer</th>
-                        <th style="background-color: #001F3F; ">Vehicle </th>
-                        <th style="background-color: #001F3F; ">Estimate Total </th>
-                        <th style="background-color: #001F3F; ">Inspection Total </th>
-                        <th style="background-color: #001F3F; ">Status </th>
-                        <th style="background-color: #001F3F; ">Actions </th>
+                        <th style="background-color: #81320a; "> Added On</th>
+                        <th style="background-color: #81320a; "> Vehicle Reg</th>
+                        <th style="background-color: #81320a; "> Customer</th>
+                        <th style="background-color: #81320a; ">Vehicle </th>
+                        <th style="background-color: #81320a; ">Amount </th>
+                        <th style="background-color: #81320a; ">Status </th>
+                        <th style="background-color: #81320a; ">Actions </th>
 
 
 
@@ -122,15 +121,14 @@
                             <td style="background-color:white"><i class="fa fa-user-check text-orange"></i>  @item.Customer - <i class="fa fa-mobile text-orange"></i> @item.Phone </td>
 
                             <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Vehicle </td>
-                            <td style="background-color:white">KSH  @item.Estimate.ToString("#,##0.00") </td>
-                            <td style="background-color:white">KSH  @item.Inspection_Total.ToString("#,##0.00") </td>
+
+                            <td style="background-color:white">KSH  @item.Invoice_Amount.ToString("#,##0.00") </td>
                             <td style="background-color:white">
-                                @if (item.Inspection_Status == 0)
+                                @if (item.Invoice_Status == 0)
                                 {<p style="color:darkcyan"><i class="fa fa-clock text-cyan"></i> Pending</p>}
-                                else if (item.Inspection_Status == 1)
-                                { <p style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Completed</p>}
                                 else
-                                { <p style="color:darkred"><i class="fa fa-check-circle text-primary"></i> In progress</p>}
+                                { <p style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> PAID</p>}
+
                             </td>
                             <td style="background-color: white">
                                 <div class="btn-group dropdown">
@@ -143,16 +141,23 @@
 
 
 
-                                        @if (!(item.Inspection_Status == 1))
-                                        {
-                                            <div class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Inspect", "Inspections", new { Id = item.Id })" class="dropdown-item">
-                                                <i class="fa fa-clipboard-list text-info"></i> Inspect Vehicle
+                                        @if ((item.Invoice_Status == 0))
+                                        {<a class="dropdown-item" onclick="if (confirm('Mark invoice as paid?')) { window.location.href = '@Url.Action("Mark_Paid", "invoices", new { id = item.Id })'; }">
+                                                <i class="fas fa-check-circle text-success"></i> Mark as Paid
                                             </a>
+                                            <script>
+                                                $(function () {
+                                                    $('#Delete_User').click(function () {
+                                                        if (confirm('Are you sure?')) {
+                                                            window.location.href = $(this).data('url');
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                         }
                                         <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("Inspection_Print", "Inspections", new { Id = item.Id })" class="dropdown-item">
-                                            <i class="fa fa-file-pdf text-warning"></i> Print Inspection
+                                        <a href="@Url.Action("Estimate_Print", "invoices", new { Id = item.Id })" class="dropdown-item">
+                                            <i class="fa fa-file-pdf text-warning"></i> Print Invoice
                                         </a>
                                     </div>
 
@@ -179,7 +184,8 @@
                 </tbody>
             </table>
             @if (Model.Count() == 0)
-            {<div style="text-align:center">
+            {
+                <div style="text-align:center">
                     <div class="col-md-3 col-sm-6 col-12">
                         <div class="info-box bg-gradient-black">
                             <span class="info-box-icon"><i class="far fa-bed"></i></span>

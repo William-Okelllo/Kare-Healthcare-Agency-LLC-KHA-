@@ -4,76 +4,258 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Inspection_serv</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+    .form-rounded {
+        border-radius: 1rem;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Booking_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Booking_Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Booking_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    form-rounded2 {
+        border-radius: 4rem;
+        border-color: orangered;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Service_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Service_Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Service_Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Estimate_Totals, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Estimate_Totals, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Estimate_Totals, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Total_Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Total_Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Total_Amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<!-- Main content -->
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.VAT, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.VAT)
-                    @Html.ValidationMessageFor(model => model.VAT, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+
+
+
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #803209; color: white; border-radius: 14px ">
+                <i class="fa fa-spinner"></i> Add Service
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2 ">
+                            <label><i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.Booking_Id)</label>
+                            @Html.EditorFor(model => model.Booking_Id, new
+                                                      {
+                                                          htmlAttributes = new
+                                                          {
+                                                              @class = "form-control ",
+                                                              @Placeholder = "Service_Name",
+                                                              @required = true,
+                                    @Readonly = true,
+                                                          }
+                                                      })
+                        </div>
+                        <div class="form-group col-md-2 " style="display:none">
+
+                            <input id="idE" name="idE" type="number" value=" @ViewBag.Muru" class="form-control  form-control  " readonly />
+
+                        </div>
+
+
+
+
+
+                        <script type="text/javascript">
+                            $(function () {
+
+                                $("#Condition").chosen();
+                            });
+                        </script>
+
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-cogs text-orange"></i>   @Html.LabelFor(model => model.Service_Name)</label>
+                            @Html.EditorFor(model => model.Service_Name, new
+                                                       {
+                                                           htmlAttributes = new
+                                                           {
+                                                               @class = "form-control ",
+                                                               @Placeholder = "Service_Name",
+                                                               @required = true,
+                                    @Readonly = true,
+                                                           }
+                                                       })
+                        </div>
+
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-cogs text-orange"></i>   @Html.LabelFor(model => model.Estimate_Totals)</label>
+                            @Html.EditorFor(model => model.Estimate_Totals, new
+                                                       {
+                                                           htmlAttributes = new
+                                                           {
+                                                               @class = "form-control ",
+                                                               @Placeholder = "Service_Name",
+                                                               @required = true,
+                                    @Readonly = true,
+                                                           }
+                                                       })
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" id="other">
+                                <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
+                                @Html.EditorFor(model => model.Amount, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Placeholder = "Amount",
+                                   @required = true,
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.VAT)</label>
+                                @{
+                                    List<SelectListItem> v = new List<SelectListItem>();
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "ADD VAT",
+                                        Value = "True",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "NO VAT",
+                                        Value = "False",
+                                    });
+
+
+
+                                }@Html.DropDownListFor(model => model.VAT, v, "VAT", new { @class = "form-control form-control", @required = "required", })
+                            </div>
+                            <script>
+                                $(document).ready(function () {
+                                    // Get references to the dropdown and textboxes
+                                    var dropdown = $('#VAT');
+                                    var textBoxB = $('#Amount');
+                                    var textBoxC = $('#Total_Amount');
+
+                                    // Event handler for when the dropdown value changes
+                                    dropdown.on('change', function () {
+                                        // Get the selected value from the dropdown
+                                        var selectedValue = dropdown.val();
+
+                                        // Check if the selected value is "true"
+                                        if (selectedValue === "True") {
+                                            // Perform the calculation and set the result in TextBox C
+                                            var inputValue = parseFloat(textBoxB.val());
+
+                                            var result = inputValue + (inputValue * 0.16); // Multiply by 16%
+                                            textBoxC.val(result.toFixed(2)); // Set the result in TextBox C with 2 decimal places
+                                        } else if (selectedValue === "False") {
+                                            var result2 = parseFloat(textBoxB.val());
+                                            textBoxC.val(result2.toFixed(2));
+                                        }
+                                    });
+                                });
+                            </script>
+                            <div class="form-group col-md-3" id="other">
+                                <label><i class="fa fa-circle-notch text-orange"></i>   @Html.LabelFor(model => model.Total_Amount)</label>
+                                @Html.EditorFor(model => model.Total_Amount, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control ",
+                                   @Placeholder = "Amount",
+                                   @Readonly = true,
+                               }
+                           })
+                            </div>
+                        </div>
+
+
+                        <div class="dropdown-divider"></div>
+                        <input type="submit" value="Update/Edit Service" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want add this?')" />
+
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                        </script>
+
+                        <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+
+
+
+
+
+                    }
+
+                    </form>

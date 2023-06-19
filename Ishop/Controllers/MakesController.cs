@@ -8,128 +8,120 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
-using Ishop.Models;
 using PagedList;
 
 namespace Ishop.Controllers
 {
-    [Authorize]
-    public class VehiclesController : Controller
+    public class MakesController : Controller
     {
-        private VehicleContext db = new VehicleContext();
+        private Makes_context db = new Makes_context();
 
-        // GET: Vehicles
-        public ActionResult Index(string searchBy, string search, int? page , string Makes)
+        // GET: Makes
+        public ActionResult Index(string searchBy, string search, int? page)
         {
-            if(Makes==null)
+            if (!(search == null))
             {
-                return View(db.vehicles.ToList().ToPagedList(page ?? 1, 6));
+                return View(db.makes.OrderByDescending(p => p.Id).Where(c => c.Make == search || c.Make.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
+
             }
-            else {
-                return View(db.vehicles.Where(c => c.Make == Makes).ToList().ToPagedList(page ?? 1, 6));
+            else
+            {
+                return View(db.makes.OrderByDescending(p => p.Id).Where(c => c.Make.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
             }
-                
-            
-
-
-
 
         }
 
-        // GET: Vehicles/Details/5
+        // GET: Makes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.vehicles.Find(id);
-            if (vehicle == null)
+            Makes makes = db.makes.Find(id);
+            if (makes == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            return View(makes);
         }
 
-        // GET: Vehicles/Create
+        // GET: Makes/Create
         public ActionResult Create()
         {
-            Makes_context dbb = new Makes_context();
-            var autopart = dbb.makes.ToList();
-            ViewBag.Makes = new SelectList(autopart, "Make", "Make");
             return View();
         }
 
-        // POST: Vehicles/Create
+        // POST: Makes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Make,Model,Type")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,Make,Code")] Makes makes)
         {
             if (ModelState.IsValid)
             {
-                db.vehicles.Add(vehicle);
+                db.makes.Add(makes);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(vehicle);
+            return View(makes);
         }
 
-        // GET: Vehicles/Edit/5
+        // GET: Makes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.vehicles.Find(id);
-            if (vehicle == null)
+            Makes makes = db.makes.Find(id);
+            if (makes == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            return View(makes);
         }
 
-        // POST: Vehicles/Edit/5
+        // POST: Makes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Make,Model,Type")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,Make,Code")] Makes makes)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vehicle).State = EntityState.Modified;
+                db.Entry(makes).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(vehicle);
+            return View(makes);
         }
 
-        // GET: Vehicles/Delete/5
+        // GET: Makes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.vehicles.Find(id);
-            if (vehicle == null)
+            Makes makes = db.makes.Find(id);
+            if (makes == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            return View(makes);
         }
 
-        // POST: Vehicles/Delete/5
+        // POST: Makes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = db.vehicles.Find(id);
-            db.vehicles.Remove(vehicle);
+            Makes makes = db.makes.Find(id);
+            db.makes.Remove(makes);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

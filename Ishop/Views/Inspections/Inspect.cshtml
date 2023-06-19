@@ -193,19 +193,7 @@
                        })
                         </div>
 
-                        <div class="form-group col-md-2 ">
-                            <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.staff)</label>
-                            @Html.EditorFor(model => model.staff, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control ",
-                               @placeholder = " Expense Date",
 
-                               @Readonly = true
-                           }
-                       })
-                        </div>
                         <div class="form-group col-md-2 ">
                             <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.Estimate)</label>
                             @Html.EditorFor(model => model.Estimate, new
@@ -219,22 +207,28 @@
                            }
                        })
                         </div>
-                        <div class="form-group col-md-2 " style="display:none">
+                        <div class="form-group col-md-2 ">
                             <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Inspection_Total)</label>
                             <input id="Inspection_Total" name="Inspection_Total" type="number" value="@ViewBag.InspectionTotals" class="form-control  form-control  " readonly />
 
                         </div>
 
+                        <div class="form-group col-md-1 ">
+                            <label><i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.staff)</label>
+                            @Html.EditorFor(model => model.staff, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control ",
+                               @placeholder = " Expense Date",
 
+                               @Readonly = true
+                           }
+                       })
+                        </div>
                     </div>
                     <div class="dropdown-divider"></div>
-                    <div style="text-align:center">
-                        <h5>
-                            Total Inspection  : KSH .@ViewBag.InspectionTotals.ToString("#,##0.00")
-
-                        </h5>
-
-                    </div>
+                   
 
                     <p><i class="fa fa-cog text-orange"></i> Vehicle AutoParts</p>
 
@@ -302,7 +296,7 @@
                             <thead>
                                 <tr style="color:white">
                                     <th style="background-color: black; "> Service Name</th>
-                                   
+
                                     <th style="background-color: black; "> VAT</th>
                                     <th style="background-color: black; "> Amount</th>
                                     <th style="background-color: black; "> Total Amount</th>
@@ -326,7 +320,7 @@
                                         <td style="background-color:white">
                                             <i class="fa fa-cogs text-orange"></i> @item2.Service_Name
                                         </td>
-                                        
+
                                         <td style="background-color:white">
                                             @if (item2.VAT == true)
                                             {<b>Ksh @difference</b>}
@@ -338,7 +332,7 @@
                                         <td style="background-color:whitesmoke">Ksh <b>@item2.Estimate_Totals.ToString("#,##0.00")</b> </td>
                                         <td style="background-color:ghostwhite">
 
-                                            @Html.ActionLink("Update/Edit", "Edit", "Inspections_parts", new { id = item2.Id, id2 = @ViewBag.id2 }, new { @class = "btn btn-xs btn-outline-secondary" })
+                                            @Html.ActionLink("Update/Edit", "Edit", "Inspection_serv", new { id = item2.Id, id2 = @ViewBag.id2 }, new { @class = "btn btn-xs btn-outline-secondary" })
 
 
                                         </td>
@@ -351,8 +345,39 @@
                         </table>
                     </div>
 
+                    <label style="font-family:Calibri">
+                        <i class="fa fa-comment text-orange"></i>
+                        Overall Remarks
+                    </label>
+                    <div class="form-row">
 
-                
 
+                        @Html.TextAreaFor(model => model.Description, 4, 100, htmlAttributes: new
+                   {
+                       style = "width: 100%; max-width:100%;",
+                       @placeholder = "Overall remarks",
+                       @autofocus = ""
+                       ,
+                       @Required = true,
+                       @class = "form-control form-rounded2"
+
+                   })
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+                    <input type="submit" name="action" value="save" class="btn btn btn-info" style="color:white" onclick="return confirm('Are you sure you save this Inspection?')" />
+                    <input type="submit" name="action" value="saveAndSubmit" class="btn btn btn-secondary" style="color:white" onclick="return confirm('Are you sure you submit this Inspection?')" />
+
+
+                    <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                    </script>
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
                 }
             </div>

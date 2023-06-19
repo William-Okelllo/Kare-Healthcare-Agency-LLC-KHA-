@@ -439,6 +439,8 @@
     <Compile Include="Controllers\EstimateController.cs" />
     <Compile Include="Controllers\Inspections_partsController.cs" />
     <Compile Include="Controllers\Inspection_servController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
+    <Compile Include="Controllers\MakesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -474,6 +476,30 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Config_x1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dash.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dash.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dash.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dash.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dash.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dash.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dash_1_Result.cs">
+      <DependentUpon>dash.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dash_2_Result.cs">
+      <DependentUpon>dash.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dash_3_Result.cs">
+      <DependentUpon>dash.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
@@ -516,21 +542,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\R.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1954,6 +1965,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\1.png" />
     <Content Include="Images\co.gif" />
+    <Content Include="Images\gg.ico" />
     <Content Include="Images\grs.png" />
     <Content Include="Images\l.ico" />
     <Content Include="Images\logo.ico" />
@@ -1972,6 +1984,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Config_x1.edmx</DependentUpon>
       <LastGenOutput>Config_x1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\dash.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dash.edmx</DependentUpon>
+      <LastGenOutput>dash.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\dash.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dash.edmx</DependentUpon>
+      <LastGenOutput>dash.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Files_.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1992,16 +2014,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>filetab.edmx</DependentUpon>
       <LastGenOutput>filetab.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\R.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2275,12 +2287,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\dash.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>dash.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\dash.edmx.diagram">
+      <DependentUpon>dash.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
@@ -3055,16 +3067,19 @@
     <Content Include="Views\Services\Add_E.cshtml" />
     <Content Include="Views\Inspections\Inspect.cshtml" />
     <Content Include="Views\Inspections\Index.cshtml" />
-    <Content Include="Views\Inspections_parts\Create.cshtml" />
-    <Content Include="Views\Inspections_parts\Delete.cshtml" />
-    <Content Include="Views\Inspections_parts\Details.cshtml" />
     <Content Include="Views\Inspections_parts\Edit.cshtml" />
-    <Content Include="Views\Inspections_parts\Index.cshtml" />
-    <Content Include="Views\Inspection_serv\Create.cshtml" />
-    <Content Include="Views\Inspection_serv\Delete.cshtml" />
-    <Content Include="Views\Inspection_serv\Details.cshtml" />
     <Content Include="Views\Inspection_serv\Edit.cshtml" />
-    <Content Include="Views\Inspection_serv\Index.cshtml" />
+    <Content Include="Views\Invoices\Create.cshtml" />
+    <Content Include="Views\Invoices\Delete.cshtml" />
+    <Content Include="Views\Invoices\Details.cshtml" />
+    <Content Include="Views\Invoices\Edit.cshtml" />
+    <Content Include="Views\Invoices\Index.cshtml" />
+    <Content Include="Views\Inspections\Inspection_Print.cshtml" />
+    <Content Include="Views\Makes\Create.cshtml" />
+    <Content Include="Views\Makes\Delete.cshtml" />
+    <Content Include="Views\Makes\Details.cshtml" />
+    <Content Include="Views\Makes\Edit.cshtml" />
+    <Content Include="Views\Makes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

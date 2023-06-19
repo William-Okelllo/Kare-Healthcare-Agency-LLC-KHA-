@@ -1,7 +1,7 @@
-﻿@model IShop.Core.Vehicle
+﻿@model IShop.Core.Makes
 
 @{
-    ViewBag.Title = "New Make";
+    ViewBag.Title = "Create";
 }
 
 
@@ -107,58 +107,37 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <small><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</small>
-                            @Html.EditorFor(model => model.CreatedOn, new
+                            <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.Code)</label>
+                            @Html.EditorFor(model => model.Code, new
                        {
                            htmlAttributes = new
                            {
                                @class = "form-control form-control ",
-                               @placeholder = " Expense Date",
-                              @Value = DateTime.Now,@Readonly=true
+                               @placeholder = " Code Name",
+                               @Required = true,
+
                            }
                        })
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <script type="text/javascript">
-                            $(function () {
-                                $("#Make").chosen();
-                                
-
-
-                            });
-                        </script>
-                        <div class="form-group col-md-4" id="other">
-                            <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Make)   </label>
-                            @Html.DropDownList("Make", ViewBag.Makes as SelectList, "-- Select Make --",
-                          new { @class = "form-control ", @required = "required", data_live_search = "true" })
-                            <a href="@Url.Action("create", "Makes" )"><i class="fa fa-plus-circle text-primary"></i> Add Make </a>
-                        </div>
-                        <div class="form-group col-md-3" id="other">
-                            <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Model)</label>
-                            @Html.EditorFor(model => model.Model, new
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                       
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Make)</label>
+                            @Html.EditorFor(model => model.Make, new
                        {
                            htmlAttributes = new
                            {
-                               @class = "form-control ",
-                               @Placeholder = "Model Name",
-                               @required = true,
+                               @class = "form-control form-control ",
+                               @placeholder = "Make Name",
+                               @id = "Make",
+                               @Required = true,
+
                            }
                        })
                         </div>
-                        <div class="form-group col-md-3" id="other">
-                            <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Type)</label>
-                            @Html.EditorFor(model => model.Type, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control ",
-                               @Placeholder = "Type Name",
-                               @required = true,
-                           }
-                       })
-                        </div>
+                       
                     </div>
+                     
 
 
 
@@ -169,10 +148,6 @@
 
 
 
-
-
-
-                        
                         <hr />
                         <table>
                             <thead>

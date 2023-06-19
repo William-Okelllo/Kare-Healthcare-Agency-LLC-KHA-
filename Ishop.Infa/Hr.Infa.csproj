@@ -67,6 +67,10 @@
     <Compile Include="Inspection_partRepo.cs" />
     <Compile Include="Inspec_serv_context.cs" />
     <Compile Include="Inspec_serv_Repo.cs" />
+    <Compile Include="Invoice_Context.cs" />
+    <Compile Include="Invoice_Repo.cs" />
+    <Compile Include="MakesRepo.cs" />
+    <Compile Include="Makes_context.cs" />
     <Compile Include="PartContext.cs" />
     <Compile Include="PartRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

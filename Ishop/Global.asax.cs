@@ -31,6 +31,9 @@ namespace Ishop
             Database.SetInitializer<Inspection_Context>(null);
             Database.SetInitializer<Inspections_partsContext>(null);
             Database.SetInitializer<Inspec_serv_context>(null);
+            Database.SetInitializer<Invoice_Context>(null);
+            Database.SetInitializer<Makes_context>(null);
+
         }
     }
 }

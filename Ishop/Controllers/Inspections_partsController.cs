@@ -89,6 +89,7 @@ namespace Ishop.Controllers
             {
                 db.Entry(inspections_parts).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["msg"] = "Part updated successfully";
                 return RedirectToAction("Inspect", "Inspections", new { id = id2 });
             }
             return View(inspections_parts);

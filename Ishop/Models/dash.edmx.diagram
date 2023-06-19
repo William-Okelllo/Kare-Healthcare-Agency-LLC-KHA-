@@ -4,9 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a00e483cf2e24277926edcb7c5d12f31" Name="Diagram1">
-        <EntityTypeShape EntityType="Job_VillaModel4.Interviewlist" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-      </Diagram>
+      <Diagram DiagramId="44f13e2f9cc64d8e92d129ad1adfc63b" Name="Diagram1" />
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

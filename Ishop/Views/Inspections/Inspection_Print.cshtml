@@ -1,5 +1,5 @@
 ﻿
-@model IShop.Core.Card
+@model IShop.Core.Inspection
 @using Microsoft.AspNet.Identity
 <!DOCTYPE html>
 <html>
@@ -92,7 +92,7 @@
 
             <div>Generated on : @DateTime.Now.ToString("dd-MMMM-yyyy")</div>
         </div>
-        <h3 style="text-align: center; color: #803209"><u>ESTIMATE REPORT</u></h3>
+        <h3 style="text-align: center; color: #803209"><u>INSPECTION REPORT</u></h3>
         <h4 style="text-align: left; color: #803209">Vehicle Details</h4>
         <hr />
         <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
@@ -132,7 +132,8 @@
 
                     <th style="background-color: #803209; "> Amount</th>
                     <th style="background-color: #803209; "> VAT</th>
-                    <th style="background-color: #803209; "> Total Amount</th>
+                    <th style="background-color: #803209; ">Estimate Amount</th>
+                    <th style="background-color: #803209; "> Final Amount</th>
 
 
                 </tr>
@@ -154,14 +155,15 @@
                         </td>
                         <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
 
-                        <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                        <td style="background-color:white">@item2.Amount.ToString("#,##0.00")</td>
                         <td style="background-color:white">
                             @if (item2.VAT == true)
-                            {<b>Ksh @difference1</b>}
+                            {@difference1}
                         else
-                        {<b>Ksh @difference1.ToString("#,##0.00")</b>}
+                        {@difference1.ToString("#,##0.00")}
                         </td>
-                        <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                        <td style="background-color:white"> @item2.Estimate_Totals.ToString("#,##0.00") </td>
+                        <td style="background-color:white"> @item2.Total_Amount.ToString("#,##0.00") </td>
 
                     </tr>
 
@@ -180,7 +182,8 @@
 
                     <th style="background-color: #803209; "> Amount</th>
                     <th style="background-color: #803209; "> VAT</th>
-                    <th style="background-color: #803209; "> Total Amount</th>
+                    <th style="background-color: #803209; ">Estimate Amount</th>
+                    <th style="background-color: #803209; "> Final Amount</th>
 
 
 
@@ -201,14 +204,15 @@
                             <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
                         </td>
 
-                        <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                        <td style="background-color:white">@item2.Amount.ToString("#,##0.00") </td>
                         <td style="background-color:white">
                             @if (item2.VAT == true)
-                            {<b>Ksh @difference</b>}
+                            {@difference}
                         else
-                        {<b>Ksh @difference.ToString("#,##0.00")</b>}
+                        {@difference.ToString("#,##0.00")}
                         </td>
-                        <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                        <td style="background-color:white"> @item2.Estimate_Totals.ToString("#,##0.00") </td>
+                        <td style="background-color:white">@item2.Total_Amount.ToString("#,##0.00") </td>
 
                     </tr>
 
@@ -218,11 +222,8 @@
             </tbody>
         </table>
         <div class="invoice-total" style="text-align: right ;color: #803209">
-            Amount:  @ViewBag.Estimate1.ToString("#,##0.00")
-            <div class="dropdown-divider"></div>
 
-            Total Amount:  @foreach (var item5 in @ViewBag.F)
-            {@item5.Estimate.ToString("#,##0.00")}
+            Total Amount: @Model.Inspection_Total.ToString("#,##0.00")
         </div>
 
         <hr />

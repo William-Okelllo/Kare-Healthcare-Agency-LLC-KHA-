@@ -1,9 +1,9 @@
 ﻿@using PagedList
 @using PagedList.Mvc;
-@model IPagedList<IShop.Core.Inspection>
+@model IPagedList<IShop.Core.Makes>
 
 @{
-    ViewBag.Title = "Inspection";
+    ViewBag.Title = "Makes";
 }
 
 
@@ -46,11 +46,20 @@
 
     <div class="card-header" style="background-color: #001F3F; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white">
-            <i class="fa fa-book-reader"></i>
-            Inspections
+            <i class="fa fa-car"></i>
+            Vehicle Makes ,Models
         </h3>
 
-        
+        <div style="text-align: right; color: white ">
+
+
+            @Html.ActionLink("Add Make ", "Create", "Makes", null, new { @class = "btn btn-sm btn-warning btn" })
+
+
+
+
+
+        </div>
 
 
 
@@ -96,14 +105,10 @@
 
                 <thead>
                     <tr style="color:white">
-                        <th style="background-color: #001F3F; "> Added On</th>
-                        <th style="background-color: #001F3F; "> Vehicle Reg</th>
-                        <th style="background-color: #001F3F; "> Customer</th>
-                        <th style="background-color: #001F3F; ">Vehicle </th>
-                        <th style="background-color: #001F3F; ">Estimate Total </th>
-                        <th style="background-color: #001F3F; ">Inspection Total </th>
-                        <th style="background-color: #001F3F; ">Status </th>
-                        <th style="background-color: #001F3F; ">Actions </th>
+                        <th style="background-color: #001F3F; "> Code</th>
+                        <th style="background-color: #001F3F; "> Make</th>
+                        <th style="background-color: #001F3F; "> Model & Type</th>
+
 
 
 
@@ -116,54 +121,17 @@
                         <tr data-widget="expandable-table" aria-expanded="false">
 
                             <td style="background-color:white">
-                                <i class="fa fa-calendar-check text-orange"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")
+                                <small> <i class="fa fa-calendar-check text-orange"></i> @item.Code</small>
                             </td>
-                            <td style="background-color:white"><i class="fa fa-car text-orange"></i>  @item.Vehicle_Reg </td>
-                            <td style="background-color:white"><i class="fa fa-user-check text-orange"></i>  @item.Customer - <i class="fa fa-mobile text-orange"></i> @item.Phone </td>
-
-                            <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Vehicle </td>
-                            <td style="background-color:white">KSH  @item.Estimate.ToString("#,##0.00") </td>
-                            <td style="background-color:white">KSH  @item.Inspection_Total.ToString("#,##0.00") </td>
+                            <td style="background-color:white"><i class="fa fa-car text-orange"></i>  @item.Make </td>
                             <td style="background-color:white">
-                                @if (item.Inspection_Status == 0)
-                                {<p style="color:darkcyan"><i class="fa fa-clock text-cyan"></i> Pending</p>}
-                                else if (item.Inspection_Status == 1)
-                                { <p style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Completed</p>}
-                                else
-                                { <p style="color:darkred"><i class="fa fa-check-circle text-primary"></i> In progress</p>}
+                                <i class="fa fa-car text-primary"></i>
+                                <a href="@Url.Action("Index", "Vehicles" , new { Makes = item.Make})"> Models & Types </a>
                             </td>
-                            <td style="background-color: white">
-                                <div class="btn-group dropdown">
-                                    <button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-car"></i>  . Action
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
 
 
 
-
-                                        @if (!(item.Inspection_Status == 1))
-                                        {
-                                            <div class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Inspect", "Inspections", new { Id = item.Id })" class="dropdown-item">
-                                                <i class="fa fa-clipboard-list text-info"></i> Inspect Vehicle
-                                            </a>
-                                        }
-                                        <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("Inspection_Print", "Inspections", new { Id = item.Id })" class="dropdown-item">
-                                            <i class="fa fa-file-pdf text-warning"></i> Print Inspection
-                                        </a>
-                                    </div>
-
-                                </div>
-
-
-
-
-
-
-                            </td>
 
 
 
@@ -179,7 +147,8 @@
                 </tbody>
             </table>
             @if (Model.Count() == 0)
-            {<div style="text-align:center">
+            {
+                <div style="text-align:center">
                     <div class="col-md-3 col-sm-6 col-12">
                         <div class="info-box bg-gradient-black">
                             <span class="info-box-icon"><i class="far fa-bed"></i></span>
