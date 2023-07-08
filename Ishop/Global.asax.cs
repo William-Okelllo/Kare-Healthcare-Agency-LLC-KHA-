@@ -33,6 +33,8 @@ namespace Ishop
             Database.SetInitializer<Inspec_serv_context>(null);
             Database.SetInitializer<Invoice_Context>(null);
             Database.SetInitializer<Makes_context>(null);
+            Database.SetInitializer<GarageContext>(null);
+            Database.SetInitializer<CoverContext>(null);
 
         }
     }

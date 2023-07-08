@@ -1,5 +1,7 @@
-﻿using Ishop.Models;
+﻿using Ishop.Infa;
+using Ishop.Models;
 using IShop.Core;
+using IShop.Core.Interface;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using System;
@@ -14,6 +16,8 @@ using System.Net;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
+using System.Web.UI.WebControls.WebParts;
 using File = Ishop.Models.File;
 
 namespace Ishop.Controllers
@@ -32,8 +36,10 @@ namespace Ishop.Controllers
         // GET: Files  
         public ActionResult Upload(FileUpload model, FormCollection form, HttpPostedFileBase file,int? id)
         {
-           
 
+            CheckInContext dbbb = new CheckInContext();
+            var data10 = dbbb.checkIns.Where(d => d.Id == id);
+            ViewBag.CheckIn = data10;
 
 
 
@@ -47,9 +53,9 @@ namespace Ishop.Controllers
                     Id = dr["ID"].ToString(),
                     Name = dr["NAME"].ToString(),
                     Path = dr["PATH"].ToString(),
-                    Uploaded_By = User.Identity.GetUserName(),
-                    Access = form["Access"],
-                    Agency = form["Agency"],
+                    
+                    Vehicle_Reg = form["Vehicle_Reg"],
+                    Vehicle = form["Vehicle"],
                     Description = model.Description,
                 });
             }
@@ -61,7 +67,7 @@ namespace Ishop.Controllers
 
         [HttpPost]
      
-        public ActionResult Upload(FormCollection form, HttpPostedFileBase files ,int? id)
+        public ActionResult Upload(FormCollection form, HttpPostedFileBase files ,int? id , int vehid)
         {
 
 
@@ -76,11 +82,9 @@ namespace Ishop.Controllers
                     Id = @dr["Id"].ToString(),
                     Name = @dr["NAME"].ToString(),
                     Path = @dr["PATH"].ToString(),
-                    Uploaded_By = User.Identity.GetUserName(),
-                    UploadedOn = DateTime.Now,
-                    Description = form["Description"],
-                    Access = form["Access"],
-                    Category = form["Category"],
+                    Vehicle_Reg = form["Vehicle_Reg"],
+                    Vehicle = form["Vehicle"],
+
                     Agency = form["Agency"]
                    
                 }); ;
@@ -98,12 +102,12 @@ namespace Ishop.Controllers
                     string path = Path.Combine(Server.MapPath("~/Files"), fileName);
                     model.Path = Url.Content(Path.Combine("~/Files/", fileName));
                     model.Name = fileName;
-                    model.Uploaded_By = User.Identity.GetUserName();
+                    
                     model.UploadedOn = DateTime.Now;
                     model.Description = form["Description"];
                     model.Access = form["Access"];
-                    model.Agency = form["Agency"];
-                    model.Category = form["Category"];
+                    model.Vehicle = form["Vehicle"];
+                    model.Vehicle_Reg = form["Vehicle_Reg"];
 
 
 
@@ -114,12 +118,12 @@ namespace Ishop.Controllers
                         files.SaveAs(path);
                         TempData["Msg"] = "Uploaded Successfully !!";
                         if (this.User.IsInRole("Admin"))
-                        { return RedirectToAction("my_files", "Files"); }
+                        { return RedirectToAction("Details", "CheckIns", new { id = vehid }); }
                        
                         
                         
                         else
-                        { return RedirectToAction("My_Files", "Files"); }
+                        { return RedirectToAction("Details", "CheckIns", new { id = vehid }); }
                     }
                     else
                     {
@@ -133,13 +137,13 @@ namespace Ishop.Controllers
                     TempData["Msg"] = "Please Choose Correct File Type";
                     return View(model);
                 }
-                return RedirectToAction("Upload", "Files");
+                return RedirectToAction("Details", "CheckIns", new { id = vehid });
             }
             else
             {
                 ModelState.AddModelError("", "Please Choose Correct File Type !!");
                 TempData["Msg"] = "Please Choose Correct File Type";
-                return RedirectToAction("Upload", "Files");
+                return RedirectToAction("Details", "CheckIns", new { id = vehid });
             }
         }
 
@@ -162,7 +166,7 @@ namespace Ishop.Controllers
         private bool SaveFile(FileUpload model)
         {
             string strQry = "INSERT INTO Files (Name,Path,Uploaded_By,Description,UploadedOn,Access,Category,Agency) VALUES('" +
-                model.Name + "','" + model.Path + "' ,'" + model.Uploaded_By + "' ,'" + model.Description + "' ,'" + model.UploadedOn + "' ,'" + model.Access + "' ,'" + model.Category + "' ,'" + model.Agency + "')";
+                model.Name + "','" + model.Path + "' ,'" + model.Vehicle_Reg + "' ,'" + model.Description + "' ,'" + model.UploadedOn + "' ,'" + model.Access + "' ,'" + model.Vehicle + "' ,'" + model.Vehicle + "')";
             string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(strcon);
             SqlCommand command = new SqlCommand(strQry, sqlCon);
@@ -232,7 +236,7 @@ namespace Ishop.Controllers
 
         }
 
-        public ActionResult Delete_File(int? id)
+        public ActionResult Delete_File(int? id )
         {
             Files_list_ db = new Files_list_();
 

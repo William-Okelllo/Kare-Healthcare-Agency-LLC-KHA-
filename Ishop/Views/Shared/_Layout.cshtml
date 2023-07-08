@@ -41,8 +41,8 @@
     <link rel="stylesheet" href="~/FrontEnd/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/FrontEnd/plugins/summernote/summernote-bs4.min.css">
-
-
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
 </head>
 
 
@@ -393,11 +393,19 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Cover")" class="nav-link">
 
+                                    <i class="fa fa-car text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        Insuarance Covers
+                                    </p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "Makes")" class="nav-link">
 
-                                   <i class="fa fa-car text-orange nav-icon"></i>
+                                    <i class="fa fa-car text-orange nav-icon"></i>
                                     <p style="color: black">
                                         Makes list
                                     </p>

@@ -13,6 +13,7 @@ using PagedList;
 using System.Configuration;
 using System.Data.SqlClient;
 using Rotativa;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
@@ -192,6 +193,16 @@ namespace Ishop.Controllers
 
         public ActionResult Estimate_Print(int id)
         {
+            filetab dbbb = new filetab();
+
+            var data191 = db.cards.FirstOrDefault(c => c.Id == id);
+
+            var data10 = dbbb.Files.Where(d => d.Uploaded_By == data191.Vehicle_Reg);
+            ViewBag.CheckIn = data10;
+
+
+
+
             var card = db.cards.FirstOrDefault(c => c.Id == id);
            
 

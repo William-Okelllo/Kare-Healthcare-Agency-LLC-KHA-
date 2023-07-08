@@ -1,0 +1,130 @@
+﻿@model IShop.Core.Garage
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<br />
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-8 col-8">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #001F3F;color:white">
+                <i class="fa fa-car text-white nav-icon"></i> Garage Configs Set
+            </div>
+            <div class="card-body">
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Name) </label>
+                            @Html.EditorFor(model => model.Name, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               placeholder = "Name",
+                               @required = "required",
+
+
+                           }
+                       })
+
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>
+                                <i class="fa fa-map-marker text-warning"></i> @Html.LabelFor(model => model.location)
+                            </label>
+                            @Html.TextBoxFor(model => model.location, new
+                            {
+                                @class = "form-control",
+                                placeholder = "location",
+                           @required = "required",
+                       })
+                            @Html.ValidationMessageFor(model => model.location)
+
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <i class="fa fa-plane text-warning"></i> @Html.LabelFor(model => model.Phone)
+                            </label>
+                            @Html.TextBoxFor(model => model.Phone, new
+                            {
+                                @class = "form-control",
+                                placeholder = "Phone",
+                           @required = "required",
+                       })
+                            @Html.ValidationMessageFor(model => model.Phone)
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Email) </label>
+                            @Html.EditorFor(model => model.Email, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               placeholder = "Email",
+                               @required = "required",
+
+
+                           }
+                       })
+
+                        </div>
+
+
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.VAT) </label>
+                            @Html.EditorFor(model => model.VAT, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               placeholder = "VAT",
+                               @required = "required",
+
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-calendar text-warning"></i> @Html.LabelFor(model => model.Mark_Up) </label>
+                            @Html.EditorFor(model => model.Mark_Up, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               placeholder = "Mark_Up",
+                               @required = "required",
+
+
+                           }
+                       })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save " class="btn btn-warning" />
+                            || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

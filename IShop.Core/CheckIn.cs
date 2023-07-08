@@ -14,6 +14,8 @@ namespace IShop.Core
         public String Make { get; set; }
         public String Model { get; set; }
         public String Type { get; set; }
+
+        public String Insuarance { get; set; }
         public String Vehicle_Reg { get; set; }
         public String Phone { get; set; }
         public String Description { get; set; }

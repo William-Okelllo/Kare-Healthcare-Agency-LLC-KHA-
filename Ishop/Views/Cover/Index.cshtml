@@ -1,0 +1,166 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Cover>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header" style="background-color: #06545f">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-university"></i>
+            Insuarance Covers
+        </h3>
+
+
+
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "Cover", FormMethod.Get))
+            {
+
+
+
+
+
+
+                <a style="font-family: Calibri"> Company Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = " Company Name" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                @Html.ActionLink(" Add  Cover ", "Create", "Cover", null, new { @class = "btn btn-sm btn-default btn" })
+
+
+            }
+
+
+        </div>
+    </div>
+    <div class="card-body">
+
+
+
+
+
+        @if (TempData["Msg"] != null)
+        {<div class="row">
+                <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @TempData["Msg"]
+                </div>
+            </div>
+        }
+
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+        </script>
+
+
+
+
+
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-3 col-sm-6 col-6">
+                    <div class="info-box" style="border-radius: 16px; background-color: #06545f">
+
+
+                        <div class="info-box-content" style="color:white">
+                            <h5><span class="info-box-text text-wrap"><medium><i class="fa fa-university"></i>  .@item.Insuarance </medium></span></h5>
+                            <span class="info-box-text text-wrap"><medium><i class="fa fa-circle-notch"></i>  .@item.CreatedOn</medium></span>
+                            <div class="btn-group dropdown dropright">
+                                <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-paper-plane"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                    <a href="@Url.Action("Delete", "Bank", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-trash text-danger"></i> Delete Account
+                                    </a>
+
+                                </div>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                    </div><!-- /.info-box -->
+                </div>
+
+            }
+        </div>
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+
+
+    </div>

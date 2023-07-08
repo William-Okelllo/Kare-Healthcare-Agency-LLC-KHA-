@@ -11,6 +11,7 @@ using Ishop.Infa;
 using PagedList;
 using System.Configuration;
 using System.Data.SqlClient;
+using Rotativa;
 
 namespace Ishop.Controllers
 {
@@ -161,5 +162,65 @@ namespace Ishop.Controllers
             return Redirect(returnUrl);
         }
 
+
+        public ActionResult Invoice_Print(int id)
+        {
+
+            Inspection_Context III= new Inspection_Context();
+
+            var card = III.inspections.FirstOrDefault(c => c.Id == id);
+
+
+            var card2 = III.inspections.Where(c => c.Id == id);
+            ViewBag.data20 = card2;
+
+            Inspections_partsContext bb = new Inspections_partsContext();
+            var data14 = bb.inspections_Parts.Where(d => d.Booking_Id == card.Booking_Id);
+
+
+            Inspec_serv_context nn = new Inspec_serv_context();
+            var data15 = nn.Inspection_Servs.Where(d => d.Booking_Id == card.Booking_Id);
+
+
+            decimal Autopart = bb.inspections_Parts.Where(d => d.Booking_Id == card.Booking_Id).Select(d => d.Amount).DefaultIfEmpty(0).Sum();
+            decimal Services = nn.Inspection_Servs.Where(d => d.Booking_Id == card.Booking_Id).Select(d => d.Amount).DefaultIfEmpty(0).Sum();
+            decimal combinedSum = Autopart;
+            decimal combinedSum2 = Services;
+            ViewBag.Estimate1 = combinedSum + combinedSum2;
+
+
+            decimal Autopart2 = bb.inspections_Parts.Where(d => d.Booking_Id == card.Booking_Id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal Services2 = nn.Inspection_Servs.Where(d => d.Booking_Id == card.Booking_Id).Select(d => d.Total_Amount).DefaultIfEmpty(0).Sum();
+            decimal combinedSum222 = Autopart;
+            decimal combinedSum2222 = Services;
+            ViewBag.Estimate2 = combinedSum2 + combinedSum2222;
+
+
+
+
+
+
+
+
+
+            Inspections_partsContext Pd = new Inspections_partsContext();
+            var data11 = Pd.inspections_Parts.Where(d => d.Booking_Id == card.Booking_Id);
+            ViewBag.Auto = data11;
+
+            Inspec_serv_context Pe = new Inspec_serv_context();
+            var data12 = Pe.Inspection_Servs.Where(d => d.Booking_Id == card.Booking_Id);
+            ViewBag.Service = data12;
+
+
+            var FF = III.inspections.Where(c => c.Id == id).ToList();
+            ViewBag.F = FF;
+
+            {
+                Inspection customer = III.inspections.FirstOrDefault(c => c.Id == id);
+
+                var report = new PartialViewAsPdf("~/Views/invoices/Invoice_Print.cshtml", customer);
+                return report;
+            }
+        }
     }
 }

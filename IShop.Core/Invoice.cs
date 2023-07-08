@@ -22,13 +22,15 @@ namespace IShop.Core
         public String staff { get; set; }
 
         [Display(Name = "Invoice Status ")]
-
+        
         public int Invoice_Status { get; set; }
 
         public decimal VAT { get; set; }
 
         [Display(Name = "Invoice_Amount ")]
         public decimal Invoice_Amount { get; set; }
+
+        public int Inspection_id { get; set; }
 
     }
 }

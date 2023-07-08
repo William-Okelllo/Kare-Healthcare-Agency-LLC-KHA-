@@ -226,6 +226,40 @@
         </div>
 
         <hr />
+        <style>
+            .page-break {
+                page-break-before: always;
+            }
+        </style>
+        <div class="page-break"></div>
+
+        <style>
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+
+            .image-item {
+                width: 350px;
+                height: 250px;
+            }
+        </style>
+        <h4> Vehicle Images</h4>
+        <div class="image-grid">
+            @foreach (var item2 in ViewBag.CheckIn)
+            {
+
+                <img src="@item2.Path" class="image-item" />
+
+
+
+
+
+
+            }
+        </div>
+        <hr />
 
         <div style="text-align:center">
             <small>Thank you for your continued business and support, we value you so much.</small>

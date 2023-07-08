@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using static Antlr.Runtime.Tree.TreeWizard;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
@@ -38,7 +39,16 @@ namespace Ishop.Controllers
         }
             // GET: CheckIns/Details/5
             public ActionResult Details(int? id)
+
         {
+            filetab dbbb = new filetab();
+
+            var data11 = db.checkIns.FirstOrDefault(c => c.Id == id);
+
+            var data10 = dbbb.Files.Where(d => d.Uploaded_By == data11.Vehicle_Reg);
+            ViewBag.CheckIn = data10;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -61,6 +71,10 @@ namespace Ishop.Controllers
             var autopart = dbbb.makes.ToList();
             ViewBag.Make = new SelectList(autopart, "Make", "Make");
 
+            CoverContext CCC = new CoverContext();
+            var Insuarance = CCC.covers.ToList();
+            ViewBag.Insuarance = new SelectList(Insuarance, "Insuarance", "Insuarance");
+
             var Make = dbb.vehicles.Distinct().ToList();
             ViewBag.Model = new SelectList(Make, "Model", "Model");
             ViewBag.Type = new SelectList(Make, "Type", "Type");
@@ -72,7 +86,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Make,Model,Type,Vehicle_Reg,Description,Customer,Phone,staff")] CheckIn checkIn)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Make,Model,Type,Vehicle_Reg,Insuarance,Description,Customer,Phone,staff")] CheckIn checkIn)
         {
             if (ModelState.IsValid)
             {
@@ -166,7 +180,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Make,Model,Type,Vehicle_Reg,Description,Customer,staff")] CheckIn checkIn)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Make,Model,Type,Vehicle_Reg,Insuarance,Description,Customer,staff")] CheckIn checkIn)
         {
             if (ModelState.IsValid)
             {

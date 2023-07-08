@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using IShop.Core.Interface;
 using System.Numerics;
 using Ishop.Models;
+using System.Web.Http.Results;
 
 namespace Ishop.Controllers
 {
@@ -53,9 +54,19 @@ namespace Ishop.Controllers
                 return Json(autoParts, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
+        public ActionResult AutoCalculate (decimal Amount,decimal Discount,decimal Mark_Up)
+        {
+            Decimal result = 0;
+            decimal TAX = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["VAT"])*100;
+            decimal MarkUp = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["MarkUp"]) *Amount;
+            result = (Amount - Discount + Mark_Up)* TAX;
+            
+           
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
-
-
+        
 
 
         // GET: Autoparts/Create
