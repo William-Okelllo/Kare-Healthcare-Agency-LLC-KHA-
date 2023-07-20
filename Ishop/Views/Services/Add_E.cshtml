@@ -137,77 +137,92 @@
 
 
                     </div>
-                        <div class="row">
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
-                                @Html.EditorFor(model => model.Amount, new
+                    <div class="row">
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-wallet text-orange"></i>   @Html.LabelFor(model => model.Amount)</label>
+                            @Html.EditorFor(model => model.Amount, new
+                       {
+                           htmlAttributes = new
                            {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Amount",
-                                   @required = true,
-                               }
-                           })
-                            </div>
-                            <div class="form-group col-md-2" id="other">
-                                <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.VAT)</label>
-                                @{
-                                    List<SelectListItem> v = new List<SelectListItem>();
-                                    v.Add(new SelectListItem
-                                    {
-                                        Text = "ADD VAT",
-                                        Value = "True",
-                                    });
-                                    v.Add(new SelectListItem
-                                    {
-                                        Text = "NO VAT",
-                                        Value = "False",
-                                    });
-
-
-
-                                }@Html.DropDownListFor(model => model.VAT, v, "VAT", new { @class = "form-control form-control", @required = "required", })
-                            </div>
-                            <script>
-                                $(document).ready(function () {
-                                    // Get references to the dropdown and textboxes
-                                    var dropdown = $('#VAT');
-                                    var textBoxB = $('#Amount');
-                                    var textBoxC = $('#Total_Amount');
-
-                                    // Event handler for when the dropdown value changes
-                                    dropdown.on('change', function () {
-                                        // Get the selected value from the dropdown
-                                        var selectedValue = dropdown.val();
-
-                                        // Check if the selected value is "true"
-                                        if (selectedValue === "True") {
-                                            // Perform the calculation and set the result in TextBox C
-                                            var inputValue = parseFloat(textBoxB.val());
-
-                                            var result = inputValue + (inputValue * 0.16); // Multiply by 16%
-                                            textBoxC.val(result.toFixed(2)); // Set the result in TextBox C with 2 decimal places
-                                        } else if (selectedValue === "False") {
-                                            var result2 = parseFloat(textBoxB.val());
-                                            textBoxC.val(result2.toFixed(2));
-                                        }
-                                    });
-                                });
-                            </script>
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-circle-notch text-orange"></i>   @Html.LabelFor(model => model.Total_Amount)</label>
-                                @Html.EditorFor(model => model.Total_Amount, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Amount",
-                                   @Readonly = true,
-                               }
-                           })
-                            </div>
+                               @class = "form-control ",
+                               @Placeholder = "Amount",
+                               id = "Amount",
+                               onchange = "addCommas(this)",
+                               @required = true,
+                           }
+                       })
                         </div>
+                        <script>
+                            function addCommas(element) {
+                                var value = parseFloat(element.value.replace(/,/g, ''));
+                                element.value = value.toLocaleString('en-US');
+                            }
+                            $(function () {
+                                $('form').submit(function () {
+                                    var amountString = $('#Amount').val();
+                                    var amountWithoutCommas = amountString.replace(/,/g, '');
+                                    $('#Amount').val(amountWithoutCommas);
+
+
+                                });
+
+                            });
+                        </script>
+
+
+                        <div class="form-group col-md-2" id="other">
+                            <label><i class="fa fa-spinner text-orange"></i>   @Html.LabelFor(model => model.VAT)</label>
+                            @{
+                                List<SelectListItem> v = new List<SelectListItem>();
+                                v.Add(new SelectListItem
+                                {
+                                    Text = "ADD VAT",
+                                    Value = "True",
+                                });
+                                v.Add(new SelectListItem
+                                {
+                                    Text = "NO VAT",
+                                    Value = "False",
+                                });
+
+
+
+                            }@Html.DropDownListFor(model => model.VAT, v, "VAT", new { @class = "form-control form-control", @required = "required", @id = "VAT" })
+                        </div>
+                        <script>
+                            function calculateVAT() {
+                                var amount = parseFloat($("#Amount").val().replace(/,/g, ''));
+                                var VAT = $('#VAT').val();
+                                $.ajax({
+                                    url: '/Services/VAT', // Replace 'ControllerName' with the actual name of your controller.
+                                    type: 'GET',
+                                    data: { Amount: amount, VAT: VAT },
+                                    success: function (result) {
+                                        $('#Total_Amount').val(result);
+                                    },
+                                    error: function () {
+                                        alert('An error occurred while calculating VAT.');
+                                    }
+                                });
+                            }
+                            $(document).ready(function () {
+                                $('#VAT').on('change', calculateVAT);
+                            });
+                        </script>
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-circle-notch text-orange"></i>   @Html.LabelFor(model => model.Total_Amount)</label>
+                            @Html.EditorFor(model => model.Total_Amount, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "Amount",
+                               id = "Total_Amount",
+                               @Readonly = true,
+                           }
+                       })
+                        </div>
+                    </div>
 
 
                         <div class="dropdown-divider"></div>

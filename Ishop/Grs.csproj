@@ -1970,6 +1970,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\1.png" />
+    <Content Include="Images\bgw.jpg" />
     <Content Include="Images\co.gif" />
     <Content Include="Images\gg.ico" />
     <Content Include="Images\grs.png" />

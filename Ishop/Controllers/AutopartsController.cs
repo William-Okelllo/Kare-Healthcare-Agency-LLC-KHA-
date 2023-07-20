@@ -54,6 +54,27 @@ namespace Ishop.Controllers
                 return Json(autoParts, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult VAT(decimal Amount,string VAT)
+        {
+            if(VAT == "True")
+            {
+
+                decimal VATT = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["VAT"]);
+                decimal VAT_P = VATT / 100;
+                decimal Total_Amount = (Amount * VAT_P) + Amount;
+                return Json(Total_Amount, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+
+                decimal Total_Amount = (Amount * 0) + Amount;
+                return Json(Total_Amount, JsonRequestBehavior.AllowGet);
+            }
+
+            
+        }
+
         [HttpPost]
         public ActionResult AutoCalculate (decimal Amount,decimal Discount,decimal Mark_Up)
         {
