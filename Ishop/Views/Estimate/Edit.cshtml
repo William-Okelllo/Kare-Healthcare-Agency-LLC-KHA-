@@ -91,11 +91,10 @@
 <!-- /.card-header -->
 
 
-<div class="col d-flex justify-content-center">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
-            <div class="card-header" style="background-color: #076732; color: white; border-radius: 14px ">
-                <i class="fa fa-spinner"></i> Edit Estimate
+            <div class="card-header" style="background-color: #05254d; color: white; border-radius: 14px ">
+                <i class="fa fa-spinner"></i> Edit/Update Estimate
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
 
@@ -208,8 +207,8 @@
                         </div>
                         <div class="form-group col-md-2 " style="display:none">
                             <label><i class="fa fa-car text-orange"></i> @Html.LabelFor(model => model.Estimate)</label>
-                           
-                                <input id="Estimate" name="Estimate" type="number" value="@ViewBag.Estimate" class="form-control  form-control  " readonly />
+
+                            <input id="Estimate" name="Estimate" type="number" value="@ViewBag.Estimate" class="form-control  form-control  " readonly />
 
                         </div>
 
@@ -223,168 +222,184 @@
                         </h4>
 
                     </div>
-                    <div style="text-align:right">
-
-                        <a href="@Url.Action("Add_Auto", "Autoparts", new { id = Model.Booking_Id,idE=Model.Id })" class="btn-sm btn btn-warning btn"><i class="fa fa-cogs text-black"></i> Add Autoparts</a>
-
-                    </div>
-                    <p><i class="fa fa-cog text-orange"></i> Vehicle AutoParts</p>
-
-                    <div class="table-responsive" style="min-height: 100px">
-                        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
-
-
-                            <thead>
-                                <tr style="color:white">
-                                    <th style="background-color: #076732; "> Part Name</th>
-                                    <th style="background-color: #076732; "> Part Condition</th>
-                                    <th style="background-color: #076732; "> VAT</th>
-                                    <th style="background-color: #076732; "> Amount</th>
-                                    <th style="background-color: #076732; "> Total Amount</th>
-                                    <th style="background-color: #076732; "> Action</th>
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach (var item2 in ViewBag.Auto)
-                                {
-                                    <div>
-                                        @{
-                                            decimal difference = item2.Total_Amount - item2.Amount;
-                                        }
-                                    </div>
-
-                                    <tr data-widget="expandable-table" aria-expanded="false">
-
-                                        <td style="background-color:white">
-                                            <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
-                                        </td>
-                                        <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
-                                        <td style="background-color:white">
-                                            @if (item2.VAT == true)
-                                            {<b>Ksh @difference</b>}
-                                        else
-                                        {<b>Ksh @difference</b>}
-                                        </td>
-                                        <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
-                                        <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
-                                        <td style="background-color:ghostwhite">
-
-                                            <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove the Autopart?')) { window.location.href = '@Url.Action("Remove", "Autoparts", new { id = item2.Id, })'; }">
-                                                <i class="fa fa-times-circle text-black"></i> Remove Autopart
-                                            </a>
-                                            <script>
-                                                $(function () {
-                                                    $('#Deny').click(function () {
-                                                        if (confirm('Are you sure?')) {
-                                                            window.location.href = $(this).data('url');
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-
-
-                                        </td>
-                                    </tr>
-
-                                }
-
-                            </tbody>
-
-                        </table>
-                    </div>
                     <div class="dropdown-divider"></div>
-                    <div style="text-align:right">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-                        <a href="@Url.Action("Add_E", "Services", new { id = Model.Booking_Id,idE=Model.Id })" class="btn-sm btn btn-warning btn"><i class="fa fa-hands-wash text-black"></i> Add Services</a>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-cogs"></i>  Autoparts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-hands-wash"></i> Services</a>
+                        </li>
+                        
 
-                    </div>
-                    <p><i class="fa fa-hands-wash text-orange"></i> Repair Services</p>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <h5 style="text-align:center">  <i class="fa fa-cogs text-orange"></i> Repair Autoparts</h5>
+                            <br />
+                            <div style="text-align: left">
 
-                    <div class="table-responsive" style="min-height: 100px">
-                        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+                                <a href="@Url.Action("Add_Auto", "Autoparts", new { id = Model.Booking_Id,idE=Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-cogs text-black"></i> Add Autoparts</a>
 
-
-                            <thead>
-                                <tr style="color:white">
-                                    <th style="background-color: #076732; "> Service Name</th>
-
-                                    <th style="background-color: #076732; "> Amount</th>
-                                    <th style="background-color: #076732; "> VAT</th>
-                                    <th style="background-color: #076732; "> Total Amount</th>
-                                    <th style="background-color: #076732; "> Action</th>
+                            </div>
 
 
-                                </tr>
-                            </thead>
+                            <div class="table-responsive" style="min-height: 100px">
+                                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
 
-                            <tbody>
-                                @foreach (var item2 in ViewBag.Service)
-                                {
-                                    <div>
-                                        @{
-                                            decimal difference = item2.Total_Amount - item2.Amount;
+
+                                    <thead>
+                                        <tr style="color:white">
+                                            <th style="background-color: #05254d; "> Part Name</th>
+                                            <th style="background-color: #05254d; "> Part Condition</th>
+                                            <th style="background-color: #05254d; "> VAT</th>
+                                            <th style="background-color: #05254d; "> Amount</th>
+                                            <th style="background-color: #05254d; "> Total Amount</th>
+                                            <th style="background-color: #05254d; "> Action</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item2 in ViewBag.Auto)
+                                        {
+                                            <div>
+                                                @{
+                                                    decimal difference = item2.Total_Amount - item2.Amount;
+                                                }
+                                            </div>
+
+                                            <tr data-widget="expandable-table" aria-expanded="false">
+
+                                                <td style="background-color:white">
+                                                    <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
+                                                </td>
+                                                <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
+                                                <td style="background-color:white">
+                                                    @if (item2.VAT == true)
+                                                    {<b>Ksh @difference</b>}
+                                                else
+                                                {<b>Ksh @difference</b>}
+                                                </td>
+                                                <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                                <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                                <td style="background-color:ghostwhite">
+
+                                                    <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove the Autopart?')) { window.location.href = '@Url.Action("Remove", "Autoparts", new { id = item2.Id, })'; }">
+                                                        <i class="fa fa-times-circle text-black"></i> Remove Autopart
+                                                    </a>
+                                                    <script>
+                                                        $(function () {
+                                                            $('#Deny').click(function () {
+                                                                if (confirm('Are you sure?')) {
+                                                                    window.location.href = $(this).data('url');
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+
+
+                                                </td>
+                                            </tr>
+
                                         }
-                                    </div>
-                                    <tr data-widget="expandable-table" aria-expanded="false">
 
-                                        <td style="background-color:white">
-                                            <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
-                                        </td>
+                                    </tbody>
 
-                                        <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
-                                        <td style="background-color:white">
-                                            @if (item2.VAT == true)
-                                            {<b>Ksh @difference</b>}
-                                        else
-                                        {<b>Ksh @difference</b>}
-                                        </td>
-                                        <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
-                                        <td style="background-color:ghostwhite">
+                                </table>
+                            </div>
+                        </div>
 
-                                            <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove this service?')) { window.location.href = '@Url.Action("Remove", "Services", new { id = item2.Id, })'; }">
-                                                <i class="fa fa-times-circle text-black"></i> Remove Service
-                                            </a>
-                                            <script>
-                                                $(function () {
-                                                    $('#Deny').click(function () {
-                                                        if (confirm('Are you sure?')) {
-                                                            window.location.href = $(this).data('url');
-                                                        }
-                                                    });
-                                                });
-                                            </script>
+                        <div class="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <h5 style="text-align:center">  <i class="fa fa-hands-wash text-orange"></i> Repair Services</h5>
+                            <br />
+                            <div style="text-align:left">
+
+                                <a href="@Url.Action("Add_E", "Services", new { id = Model.Booking_Id,idE=Model.Id })" class="btn-sm btn btn-warning btn"><i class="fa fa-hands-wash text-black"></i> Add Services</a>
+
+                            </div>
 
 
-                                        </td>
-                                    </tr>
+                            <div class="table-responsive" style="min-height: 100px">
+                                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
 
 
-                                }
+                                    <thead>
+                                        <tr style="color:white">
+                                            <th style="background-color: #05254d; "> Service Name</th>
 
-                            </tbody>
+                                            <th style="background-color: #05254d; "> Amount</th>
+                                            <th style="background-color: #05254d; "> VAT</th>
+                                            <th style="background-color: #05254d; "> Total Amount</th>
+                                            <th style="background-color: #05254d; "> Action</th>
 
-                        </table>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item2 in ViewBag.Service)
+                                        {
+                                            <div>
+                                                @{
+                                                    decimal difference = item2.Total_Amount - item2.Amount;
+                                                }
+                                            </div>
+                                            <tr data-widget="expandable-table" aria-expanded="false">
+
+                                                <td style="background-color:white">
+                                                    <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
+                                                </td>
+
+                                                <td style="background-color:white">Ksh <b>@item2.Amount.ToString("#,##0.00")</b> </td>
+                                                <td style="background-color:white">
+                                                    @if (item2.VAT == true)
+                                                    {<b>Ksh @difference</b>}
+                                                else
+                                                {<b>Ksh @difference</b>}
+                                                </td>
+                                                <td style="background-color:white">Ksh <b>@item2.Total_Amount.ToString("#,##0.00")</b> </td>
+                                                <td style="background-color:ghostwhite">
+
+                                                    <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to remove this service?')) { window.location.href = '@Url.Action("Remove", "Services", new { id = item2.Id, })'; }">
+                                                        <i class="fa fa-times-circle text-black"></i> Remove Service
+                                                    </a>
+                                                    <script>
+                                                        $(function () {
+                                                            $('#Deny').click(function () {
+                                                                if (confirm('Are you sure?')) {
+                                                                    window.location.href = $(this).data('url');
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+
+
+                                                </td>
+                                            </tr>
+
+
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <div class="dropdown-divider"></div>
+                                    <input type="submit" name="action" value="Save" class="btn btn btn-info" style="color:white" onclick="return confirm('Are you sure you save this Quote?')" />
+                                    <input type="submit" name="action" value="SaveAndSubmit" class="btn btn btn-secondary" style="color:white" onclick="return confirm('Are you sure you submit this Quotation -No Edit allowed after?')" />
+
+
+                                    || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                                </div>
+                            </div>
+                        
                     </div>
-
-
-                    <div class="dropdown-divider"></div>
-
-                    <input type="submit" value="Save & Update Estimate" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to update this Estimate?')" />
-
-
-                    <script>
-                        $(function () {
-                            $('#Create').click(function () {
-                                if (confirm('Are you sure?')) {
-                                    window.location.href = $(this).data('url');
-                                }
-                            });
-                        });
-                    </script>
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-
-                }
+                        }
 
 

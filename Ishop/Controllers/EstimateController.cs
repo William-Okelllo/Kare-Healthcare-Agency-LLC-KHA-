@@ -126,9 +126,9 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff,Estimate,Estimate_Status")] Card card)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Insuarance,Description,Customer,staff,Estimate,Estimate_Status")] Card card, string action)
         {
-            card.Estimate_Status = 0;
+            if (action == "save") { card.Estimate_Status = 0; } else if (action == "SaveAndSubmit") { card.Estimate_Status = 1; }
 
             if (ModelState.IsValid)
             {
@@ -178,9 +178,9 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Description,Customer,staff,Estimate,Estimate_Status")] Card card)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Booking_Id,Vehicle,Vehicle_Reg,Phone,Insuarance,Description,Customer,staff,Estimate,Estimate_Status")] Card card, string action)
         {
-            card.Estimate_Status = 0;
+            if (action == "save") { card.Estimate_Status = 0; } else if (action == "SaveAndSubmit") { card.Estimate_Status = 1; }
             if (ModelState.IsValid)
             {
                 db.Entry(card).State = EntityState.Modified;
@@ -330,14 +330,25 @@ namespace Ishop.Controllers
         public ActionResult Approve(int? id)
         {
 
-            string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
-            SqlConnection sqlCon = new SqlConnection(strcon);
-            SqlCommand cmd = new SqlCommand("Estimate_approve", sqlCon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id", id);
-            sqlCon.Open();
-            cmd.ExecuteNonQuery();
-            sqlCon.Close();
+            var Quote = db.cards.Find(id);
+            if (Quote != null)
+            {
+                Quote.Estimate_Status = 2;
+                db.SaveChanges();
+            }
+            try
+            {
+                string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
+                SqlConnection sqlCon = new SqlConnection(strcon);
+                SqlCommand cmd = new SqlCommand("Inspection_capture", sqlCon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                sqlCon.Open();
+                cmd.ExecuteNonQuery();
+                sqlCon.Close();
+                
+            }
+            catch { }
             TempData["msg"] = "Estimate approved successfully";
 
             return RedirectToAction("Index", "Estimate");
@@ -345,14 +356,12 @@ namespace Ishop.Controllers
         public ActionResult Reject(int? id)
         {
 
-            string strcon = ConfigurationManager.ConnectionStrings["GRS"].ConnectionString;
-            SqlConnection sqlCon = new SqlConnection(strcon);
-            SqlCommand cmd = new SqlCommand("Estimate_reject", sqlCon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id", id);
-            sqlCon.Open();
-            cmd.ExecuteNonQuery();
-            sqlCon.Close();
+            var Quote = db.cards.Find(id);
+            if (Quote != null)
+            {
+                Quote.Estimate_Status = 999;
+                db.SaveChanges();
+            }
             TempData["msg"] = "Estimate rejected successfully";
 
             return RedirectToAction("Index", "Estimate");

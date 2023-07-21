@@ -49,39 +49,45 @@
             <i class="fa fa-book-reader"></i>
             Inspections
         </h3>
+        <div style="text-align: right; color: white ">
 
-        
+            @using (Html.BeginForm("Index", "Inspections", FormMethod.Get))
+            {
 
+                <a style="font-family: Calibri"> Registration No</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Reg No" })
+                <button type="submit" value="search" class="btn btn-sm btn-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+            }
 
+        </div>
 
     </div>
 
 
 
 
-
-
-    @if (TempData["Msg"] != null)
-    {<div class="row">
-            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                @TempData["Msg"]
+        @if (TempData["Msg"] != null)
+        {<div class="row">
+                <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @TempData["Msg"]
+                </div>
             </div>
-        </div>
-    }
+        }
 
-    <script>
-        window.setTimeout(function () {
-            $(".alert").fadeTo(500, 0).slideUp(500, function () {
-                $(this).remove();
-            });
-        }, 2000);
-    </script>
-
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+        </script>
 
 
-    <div>
 
+        <div>
 
 
 
@@ -90,185 +96,186 @@
 
 
 
-        <div class="table-responsive" style="min-height: 300px">
-            <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+
+            <div class="table-responsive" style="min-height: 300px">
+                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
 
 
-                <thead>
-                    <tr style="color:white">
-                        <th style="background-color: #001F3F; "> Added On</th>
-                        <th style="background-color: #001F3F; "> Vehicle Reg</th>
-                        <th style="background-color: #001F3F; "> Customer</th>
-                        <th style="background-color: #001F3F; ">Vehicle </th>
-                        <th style="background-color: #001F3F; ">Estimate Total </th>
-                        <th style="background-color: #001F3F; ">Inspection Total </th>
-                        <th style="background-color: #001F3F; ">Status </th>
-                        <th style="background-color: #001F3F; ">Actions </th>
-
-
-
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr data-widget="expandable-table" aria-expanded="false">
-
-                            <td style="background-color:white">
-                                <i class="fa fa-calendar-check text-orange"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")
-                            </td>
-                            <td style="background-color:white"><i class="fa fa-car text-orange"></i>  @item.Vehicle_Reg </td>
-                            <td style="background-color:white"><i class="fa fa-user-check text-orange"></i>  @item.Customer - <i class="fa fa-mobile text-orange"></i> @item.Phone </td>
-
-                            <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Vehicle </td>
-                            <td style="background-color:white">KSH  @item.Estimate.ToString("#,##0.00") </td>
-                            <td style="background-color:white">KSH  @item.Inspection_Total.ToString("#,##0.00") </td>
-                            <td style="background-color:white">
-                                @if (item.Inspection_Status == 0)
-                                {<p style="color:darkcyan"><i class="fa fa-clock text-cyan"></i> Pending</p>}
-                                else if (item.Inspection_Status == 1)
-                                { <p style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Completed</p>}
-                                else
-                                { <p style="color:darkred"><i class="fa fa-check-circle text-primary"></i> In progress</p>}
-                            </td>
-                            <td style="background-color: white">
-                                <div class="btn-group dropdown">
-                                    <button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-car"></i>  . Action
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-
-
-
-
-
-                                        @if (!(item.Inspection_Status == 1))
-                                        {
-                                            <div class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Inspect", "Inspections", new { Id = item.Id })" class="dropdown-item">
-                                                <i class="fa fa-clipboard-list text-info"></i> Inspect Vehicle
-                                            </a>
-                                        }
-                                        <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("Inspection_Print", "Inspections", new { Id = item.Id })" class="dropdown-item">
-                                            <i class="fa fa-file-pdf text-warning"></i> Print Inspection
-                                        </a>
-                                    </div>
-
-                                </div>
-
-
-
-
-
-
-                            </td>
-
-
-
-
-
+                    <thead>
+                        <tr style="color:white">
+                            <th style="background-color: #001F3F; "> Added On</th>
+                            <th style="background-color: #001F3F; "> Vehicle Reg</th>
+                            <th style="background-color: #001F3F; "> Customer</th>
+                            <th style="background-color: #001F3F; ">Vehicle </th>
+                            <th style="background-color: #001F3F; ">Estimate Total </th>
+                            <th style="background-color: #001F3F; ">Inspection Total </th>
+                            <th style="background-color: #001F3F; ">Status </th>
+                            <th style="background-color: #001F3F; ">Actions </th>
 
 
 
                         </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr data-widget="expandable-table" aria-expanded="false">
+
+                                <td style="background-color:white">
+                                    <i class="fa fa-calendar-check text-orange"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy")
+                                </td>
+                                <td style="background-color:white"><i class="fa fa-car text-orange"></i>  @item.Vehicle_Reg </td>
+                                <td style="background-color:white"><i class="fa fa-user-check text-orange"></i>  @item.Customer - <i class="fa fa-mobile text-orange"></i> @item.Phone </td>
+
+                                <td style="background-color:white"><i class="fa fa-cogs text-orange"></i>  @item.Vehicle </td>
+                                <td style="background-color:white">KSH  @item.Estimate.ToString("#,##0.00") </td>
+                                <td style="background-color:white">KSH  @item.Inspection_Total.ToString("#,##0.00") </td>
+                                <td style="background-color:white">
+                                    @if (item.Inspection_Status == 0)
+                                    {<p style="color:darkcyan"><i class="fa fa-clock text-cyan"></i> Pending</p>}
+                                    else if (item.Inspection_Status == 1)
+                                    { <p style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Completed</p>}
+                                    else
+                                    { <p style="color:darkred"><i class="fa fa-check-circle text-primary"></i> In progress</p>}
+                                </td>
+                                <td style="background-color: white">
+                                    <div class="btn-group dropdown">
+                                        <button type="button" class="btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-car"></i>  . Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
 
-                    }
-                </tbody>
-            </table>
-            @if (Model.Count() == 0)
-            {<div style="text-align:center">
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box bg-gradient-black">
-                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text"> <img src="~/Images/gg.ico" height="50" /> </span>
 
 
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 0%"></div>
+
+                                            @if (!(item.Inspection_Status == 1))
+                                            {
+                                                <div class="dropdown-divider"></div>
+                                                <a href="@Url.Action("Inspect", "Inspections", new { Id = item.Id })" class="dropdown-item">
+                                                    <i class="fa fa-clipboard-list text-info"></i> Inspect Vehicle
+                                                </a>
+                                            }
+                                            <div class="dropdown-divider"></div>
+                                            <a href="@Url.Action("Inspection_Print", "Inspections", new { Id = item.Id })" class="dropdown-item">
+                                                <i class="fa fa-file-pdf text-warning"></i> Print Inspection
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+                                </td>
+
+
+
+
+
+
+
+
+                            </tr>
+
+
+                        }
+                    </tbody>
+                </table>
+                @if (Model.Count() == 0)
+                {<div style="text-align:center">
+                        <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box bg-gradient-black">
+                                <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text"> <img src="~/Images/gg.ico" height="50" /> </span>
+
+
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        <i class="fa fa-calendar text-white nav-icon"></i>   No records Found
+                                    </span>
                                 </div>
-                                <span class="progress-description">
-                                    <i class="fa fa-calendar text-white nav-icon"></i>   No records Found
-                                </span>
+                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box-content -->
+                            <!-- /.info-box -->
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                </div>
-            }
-            <hr />
-            <style>
-                .ul.pagination {
-                    display: inline-block;
-                    padding: 1;
-                    margin: 1;
-                    border-radius: 0.5rem;
                 }
-
-                ul.pagination li {
-                    display: inline;
-                }
-
-                    ul.pagination li a {
-                        color: black;
-                        float: left;
-                        padding: 8px 16px;
-                        text-decoration: none;
-                        transition: background-color;
-                        background-color: #ddd;
-                        border-color: white;
+                <hr />
+                <style>
+                    .ul.pagination {
+                        display: inline-block;
+                        padding: 1;
+                        margin: 1;
                         border-radius: 0.5rem;
                     }
 
-                        ul.pagination li a.active {
-                            background-color: dodgerblue;
-                            color: white;
-                        }
+                    ul.pagination li {
+                        display: inline;
+                    }
 
-                        ul.pagination li a:hover:not(.active) {
-                            background-color: dodgerblue;
+                        ul.pagination li a {
+                            color: black;
+                            float: left;
+                            padding: 8px 16px;
+                            text-decoration: none;
+                            transition: background-color;
+                            background-color: #ddd;
+                            border-color: white;
                             border-radius: 0.5rem;
                         }
-            </style>
-            <div id="container" style="text-align:left">
 
-                <div class="pagination" style="text-align:left">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
-                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                            ul.pagination li a.active {
+                                background-color: dodgerblue;
+                                color: white;
+                            }
+
+                            ul.pagination li a:hover:not(.active) {
+                                background-color: dodgerblue;
+                                border-radius: 0.5rem;
+                            }
+                </style>
+                <div id="container" style="text-align:left">
+
+                    <div class="pagination" style="text-align:left">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                      , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                    </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
-
-
-
-    </div>
