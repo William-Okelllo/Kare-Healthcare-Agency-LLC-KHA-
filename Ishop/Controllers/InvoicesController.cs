@@ -198,9 +198,12 @@ namespace Ishop.Controllers
 
 
 
+            var Inn = db.invoices.Where(c => c.Id == id);
+            ViewBag.Innvv = Inn;
 
-
-
+            CheckInContext CCC = new CheckInContext();
+            var ChecKin = CCC.checkIns.Where(c => c.Id == card.Booking_Id);
+            ViewBag.Checkinfo = ChecKin;
 
 
             Inspections_partsContext Pd = new Inspections_partsContext();

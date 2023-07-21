@@ -57,6 +57,10 @@ namespace Ishop.Controllers
             Makes_context dbb = new Makes_context();
             var autopart = dbb.makes.ToList();
             ViewBag.Makes = new SelectList(autopart, "Make", "Make");
+
+
+
+
             return View();
         }
 
@@ -67,6 +71,7 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CreatedOn,Make,Model,Type")] Vehicle vehicle)
         {
+            vehicle.Model = vehicle.Model + ' ' + vehicle.Type;
             if (ModelState.IsValid)
             {
                 db.vehicles.Add(vehicle);
@@ -76,6 +81,7 @@ namespace Ishop.Controllers
 
             return View(vehicle);
         }
+       
 
         // GET: Vehicles/Edit/5
         public ActionResult Edit(int? id)

@@ -61,8 +61,8 @@ namespace Ishop.Controllers
             return View(checkIn);
         }
 
-       
 
+       
 
         // GET: CheckIns/Create
         public ActionResult Create()
@@ -71,22 +71,30 @@ namespace Ishop.Controllers
             var autopart = dbbb.makes.ToList();
             ViewBag.Make = new SelectList(autopart, "Make", "Make");
 
+            VehicleContext VVV = new VehicleContext();
+            var Make = VVV.vehicles.Distinct().ToList();
+            ViewBag.Model = new SelectList(Make, "Model", "Model");
+
             CoverContext CCC = new CoverContext();
             var Insuarance = CCC.covers.ToList();
             ViewBag.Insuarance = new SelectList(Insuarance, "Insuarance", "Insuarance");
 
-            var Make = dbb.vehicles.Distinct().ToList();
-            ViewBag.Model = new SelectList(Make, "Model", "Model");
-            ViewBag.Type = new SelectList(Make, "Type", "Type");
             return View();
         }
-
+        public ActionResult GetModelsByMake(string make)
+        {
+            using (var VVV = new VehicleContext())
+            {
+                var models = VVV.vehicles.Where(v => v.Make == make).Select(v => v.Model).Distinct().ToList();
+                return Json(models, JsonRequestBehavior.AllowGet);
+            }
+        }
         // POST: CheckIns/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Make,Model,Type,Vehicle_Reg,Insuarance,Description,Customer,Phone,staff")] CheckIn checkIn)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Make,Model,Vehicle_Reg,Insuarance,Description,Customer,Phone,staff")] CheckIn checkIn)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +115,7 @@ namespace Ishop.Controllers
                 + "\n" + "..."
                 + "\n" + "CheckIn Date : "+ checkIn.CreatedOn.ToString("dd-MMM-yyyy")
                 + "\n" + "Vehicle Reg : " + checkIn.Vehicle_Reg
-                + "\n" + "Vehicle : "+checkIn.Make +" "+checkIn.Type+" "+checkIn.Model
+                + "\n" + "Vehicle : "+checkIn.Make +" "+" "+checkIn.Model
                 + "\n" + "Regards , Receiption Desk ";
 
                 try 

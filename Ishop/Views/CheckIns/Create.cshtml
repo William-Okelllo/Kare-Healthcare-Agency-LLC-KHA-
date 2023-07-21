@@ -106,48 +106,80 @@
 
 
 
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</label>
-                                @Html.EditorFor(model => model.CreatedOn, new
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-calendar-day text-orange"></i> @Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
                            {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control ",
-                                   @placeholder = " Expense Date",
-                                   @Value = DateTime.Now,
-                                        @Readonly = true
-                               }
-                           })
-                            </div>
-
-                            <script type="text/javascript">
-                                $(function () {
-                                    $("#Make").chosen();
-                                    $("#Model").chosen();
-                                    $("#Type").chosen();
-                                    $("#Insuarance").chosen();
-                                    
-
-                                });
-                            </script>
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Make)</label>
-                                @Html.DropDownList("Make", ViewBag.Make as SelectList, "-- Select Make --",
-                              new { @class = "form-control ", @required = "required", data_live_search = "true" })
-                            </div>
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Model)</label>
-                                @Html.DropDownList("Model", ViewBag.Model as SelectList, "-- Select Model --",
-                              new { @class = "form-control ", @required = "required", data_live_search = "true" })
-                            </div>
-                            <div class="form-group col-md-3" id="other">
-                                <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Type)</label>
-                                @Html.DropDownList("Type", ViewBag.Type as SelectList, "-- Select Type --",
-                             new { @class = "form-control ", @required = "required", data_live_search = "true" })
-                            </div>
-                           
+                               @class = "form-control form-control ",
+                               @placeholder = " Expense Date",
+                               @Value = DateTime.Now,
+                                    @Readonly = true
+                           }
+                       })
                         </div>
+
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#MakeDtropdown").chosen();
+                                $("#MrodelDropdown").chosen();
+
+                                $("#Insuarance").chosen();
+
+
+                            });
+                        </script>
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-car text-orange"></i>   @Html.LabelFor(model => model.Make)</label>
+                            @Html.DropDownList("Make", ViewBag.Make as SelectList, "-- Select Make --",
+                          new { @class = "form-control ", @required = "required", data_live_search = "true", id = "Make", })
+                        </div>
+
+                       
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-car-battery text-orange"></i>   @Html.LabelFor(model => model.Model)</label>
+                            @Html.DropDownList("Model", Enumerable.Empty<SelectListItem>(), "-- No models found --", new { @class = "form-control", id = "ModelDropdown" })
+                        </div>
+
+
+
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            // Function to fetch models based on the selected make using AJAX
+                            $("#Make").change(function () {
+                                var selectedMake = $(this).val();
+                                var modelDropdown = $("#ModelDropdown");
+                                modelDropdown.empty(); // Clear previous options in the Model dropdown
+
+                                if (selectedMake !== "") {
+                                    $.ajax({
+                                        url: "/CheckIns/GetModelsByMake",
+                                        type: "GET",
+                                        data: { make: selectedMake },
+                                        dataType: "json",
+                                        success: function (data) {
+                                            $.each(data, function (index, model) {
+                                                modelDropdown.append($("<option>").val(model).text(model));
+                                            });
+                                        },
+
+                                        error: function () {
+                                            console.log("Error fetching models.");
+                                        }
+                                    });
+                                }
+                            });
+                        </script>
+                    </div>
+
+
+
+
+
+
                         <div class="row">
                             <div class="form-group col-md-3" id="other">
                                 <label><i class="fa fa-car text-orange"></i>   @Html.LabelFor(model => model.Vehicle_Reg)</label>
@@ -236,8 +268,8 @@
                         </script>
                         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
 
-                    }
-                </div>
+                        }
+                    </div>
                     </div>
         </div>
     </div>

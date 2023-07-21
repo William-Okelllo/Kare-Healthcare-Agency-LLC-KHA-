@@ -80,6 +80,24 @@
             font-weight: bold;
         }
     </style>
+    <style>
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #e20b0b;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        .badge2 {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #159423;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="invoice">
@@ -95,148 +113,172 @@
         </div>
 
         <div class="invoice-info" style="text-align: right; color: #803209">
+            @foreach (var item2 in ViewBag.Innvv)
+            {
 
+                <div>
+                     @if (item2.Invoice_Status == 1)
+                    {<span class="badge2">PAID</span>}
+                    else
+                    { <span class="badge">UNPAID</span>}
+                    </div>
+                }
+            <br />
             <div>Generated on : @DateTime.Now.ToString("dd-MMMM-yyyy")</div>
         </div>
         <h3 style="text-align: center; color: #803209"><u> INVOICE</u></h3>
+
+        <h4 style="text-align: left; color: #803209">
+            Cover :@foreach (var item2 in ViewBag.Checkinfo)
+            {<b>@item2.Insuarance</b>}
+        </h4>
+
         <h4 style="text-align: left; color: #803209">Vehicle Details</h4>
         <hr />
         <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
-            @foreach (var item2 in ViewBag.data20)
-            {
-                <tbody>
+
+            <tbody>
+                @foreach (var item2 in ViewBag.data20)
+                {
                 <td style="background-color:white">
                     <b> Client :</b> @item2.Customer
                 </td>
                 <td style="background-color:white">
                     <b>Phone Number :</b>  @item2.Phone
                 </td>
-                </tbody>
-                <tbody>
-                <td style="background-color:white">
-                    <b>  Date :</b>  @item2.CreatedOn.ToString("dd-MMMM-yyyy")
-                </td>
-                <td style="background-color:white">
-                    <b> Vehicle Reg :</b>  @item2.Vehicle_Reg
-                </td>
-                <td style="background-color:white">
-                    <b>Vehicle :</b>  @item2.Vehicle
-                </td>
-                </tbody>
             }
-        </table>
 
 
-
-        <hr />
-        <h5>Autoparts</h5>
-        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
-            <thead>
-                <tr style="color:white">
-                    <th style="background-color: #803209; "> Part Name</th>
-                    <th style="background-color: #803209; "> Part Condition</th>
-
-                    <th style="background-color: #803209; "> Amount</th>
-                    <th style="background-color: #803209; "> VAT</th>
-                    <th style="background-color: #803209; ">Estimate Amount</th>
-                    <th style="background-color: #803209; "> Final Amount</th>
-
-
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var item2 in ViewBag.Auto)
+                </tbody>
+                @foreach (var item2 in ViewBag.data20)
                 {
-                    <div>
-                        @{
-                            decimal difference1 = item2.Total_Amount - item2.Amount;
-                        }
-                    </div>
+                    <tbody>
 
-                    <tr data-widget="expandable-table" aria-expanded="false">
+                    <td style="background-color:white">
+                        <b>  Date :</b>  @item2.CreatedOn.ToString("dd-MMMM-yyyy")
+                    </td>
 
-                        <td style="background-color:white">
-                            <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
-                        </td>
-                        <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
+                    <td style="background-color:white">
+                        <b> Reg :</b>  @item2.Vehicle_Reg
+                    </td>
+                    <td style="background-color:white">
+                        <b>Vehicle :</b>  @item2.Vehicle
+                    </td>
+                    </tbody>
+                }
+            </table>
 
-                        <td style="background-color:white">@item2.Amount.ToString("#,##0.00")</td>
-                        <td style="background-color:white">
-                            @if (item2.VAT == true)
-                            {@difference1}
-                        else
-                        {@difference1.ToString("#,##0.00")}
-                        </td>
-                        <td style="background-color:white"> @item2.Estimate_Totals.ToString("#,##0.00") </td>
-                        <td style="background-color:white"> @item2.Total_Amount.ToString("#,##0.00") </td>
+
+
+            <hr />
+            <h5>Autoparts</h5>
+            <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+                <thead>
+                    <tr style="color:white">
+                        <th style="background-color: #803209; "> Part Name</th>
+                        <th style="background-color: #803209; "> Part Condition</th>
+
+                        <th style="background-color: #803209; "> Amount</th>
+                        <th style="background-color: #803209; "> VAT</th>
+                        <th style="background-color: #803209; ">Estimate Amount</th>
+                        <th style="background-color: #803209; "> Final Amount</th>
+
 
                     </tr>
+                </thead>
 
-                }
+                <tbody>
+                    @foreach (var item2 in ViewBag.Auto)
+                    {
+                        <div>
+                            @{
+                                decimal difference1 = item2.Total_Amount - item2.Amount;
+                            }
+                        </div>
 
-            </tbody>
+                        <tr data-widget="expandable-table" aria-expanded="false">
 
-        </table>
-        <hr />
-        <h5>Services</h5>
-        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+                            <td style="background-color:white">
+                                <i class="fa fa-cogs text-orange"></i> @item2.Part_Name
+                            </td>
+                            <td style="background-color:white"><i class="fa fa-spinner text-orange"></i>  @item2.Condition </td>
 
-            <thead>
-                <tr style="color:white">
-                    <th style="background-color: #803209; "> Service Name</th>
+                            <td style="background-color:white">@item2.Amount.ToString("#,##0.00")</td>
+                            <td style="background-color:white">
+                                @if (item2.VAT == true)
+                                {@difference1}
+                            else
+                            {@difference1.ToString("#,##0.00")}
+                            </td>
+                            <td style="background-color:white"> @item2.Estimate_Totals.ToString("#,##0.00") </td>
+                            <td style="background-color:white"> @item2.Total_Amount.ToString("#,##0.00") </td>
 
-                    <th style="background-color: #803209; "> Amount</th>
-                    <th style="background-color: #803209; "> VAT</th>
-                    <th style="background-color: #803209; ">Estimate Amount</th>
-                    <th style="background-color: #803209; "> Final Amount</th>
+                        </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+            <hr />
+            <h5>Services</h5>
+            <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
+
+                <thead>
+                    <tr style="color:white">
+                        <th style="background-color: #803209; "> Service Name</th>
+
+                        <th style="background-color: #803209; "> Amount</th>
+                        <th style="background-color: #803209; "> VAT</th>
+                        <th style="background-color: #803209; ">Estimate Amount</th>
+                        <th style="background-color: #803209; "> Final Amount</th>
 
 
-
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var item2 in ViewBag.Service)
-                {
-                    <div>
-                        @{
-                            decimal difference = item2.Total_Amount - item2.Amount;
-                        }
-                    </div>
-                    <tr data-widget="expandable-table" aria-expanded="false">
-
-                        <td style="background-color:white">
-                            <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
-                        </td>
-
-                        <td style="background-color:white">@item2.Amount.ToString("#,##0.00") </td>
-                        <td style="background-color:white">
-                            @if (item2.VAT == true)
-                            {@difference}
-                        else
-                        {@difference.ToString("#,##0.00")}
-                        </td>
-                        <td style="background-color:white"> @item2.Estimate_Totals.ToString("#,##0.00") </td>
-                        <td style="background-color:white">@item2.Total_Amount.ToString("#,##0.00") </td>
 
                     </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item2 in ViewBag.Service)
+                    {
+                        <div>
+                            @{
+                                decimal difference = item2.Total_Amount - item2.Amount;
+                            }
+                        </div>
+                        <tr data-widget="expandable-table" aria-expanded="false">
+
+                            <td style="background-color:white">
+                                <i class="fa fa-hands-wash text-orange"></i> @item2.Service_Name
+                            </td>
+
+                            <td style="background-color:white">@item2.Amount.ToString("#,##0.00") </td>
+                            <td style="background-color:white">
+                                @if (item2.VAT == true)
+                                {@difference}
+                            else
+                            {@difference.ToString("#,##0.00")}
+                            </td>
+                            <td style="background-color:white"> @item2.Estimate_Totals.ToString("#,##0.00") </td>
+                            <td style="background-color:white">@item2.Total_Amount.ToString("#,##0.00") </td>
+
+                        </tr>
 
 
-                }
+                    }
 
-            </tbody>
-        </table>
-        <div class="invoice-total" style="text-align: right ;color: #803209">
+                </tbody>
+            </table>
+            <div class="invoice-total" style="text-align: right ;color: #803209">
 
-            Total Amount: @Model.Inspection_Total.ToString("#,##0.00")
+                Total Amount: @Model.Inspection_Total.ToString("#,##0.00")
+            </div>
+
+            <hr />
+
+            <div style="text-align:center">
+                <small>Thank you for your continued business and support, we value you so much.</small>
+            </div>
         </div>
-
-        <hr />
-
-        <div style="text-align:center">
-            <small>Thank you for your continued business and support, we value you so much.</small>
-        </div>
-    </div>
 </body>
 </html>
