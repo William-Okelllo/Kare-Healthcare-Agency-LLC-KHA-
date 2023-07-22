@@ -50,7 +50,19 @@
             Invoices
         </h3>
 
+        <div style="text-align: right; color: white ">
 
+            @using (Html.BeginForm("Index", "invoices", FormMethod.Get))
+            {
+
+                <a style="font-family: Calibri"> Registration No</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Reg No" })
+                <button type="submit" value="search" class="btn btn-sm btn-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+            }
+
+        </div>
 
 
 

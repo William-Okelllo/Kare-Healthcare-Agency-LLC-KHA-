@@ -119,8 +119,8 @@
                 <div>
                      @if (item2.Invoice_Status == 1)
                     {<span class="badge2">PAID</span>}
-                    else
-                    { <span class="badge">UNPAID</span>}
+                     else if (item2.Invoice_Status == 0)
+                     { <span class="badge">UNPAID</span>}
                     </div>
                 }
             <br />
