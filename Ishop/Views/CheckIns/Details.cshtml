@@ -139,18 +139,7 @@
                                      }
                                  })
                             </div>
-                            <div class="col-6 col-md-3">
-                                <label><i class="fa fa-plus-circle text-orange"></i>   @Html.LabelFor(model => model.Type)</label>
-                                @Html.EditorFor(model => model.Type, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control ",
-                                   @Placeholder = "Vehicle_Reg",
-                                   @Readonly = true
-                               }
-                           })
-                            </div>
+                            
                             <div class="col-6 col-md-3">
                                 <label><i class="fa fa-car text-orange"></i>   @Html.LabelFor(model => model.Vehicle_Reg)</label>
                                 @Html.EditorFor(model => model.Vehicle_Reg, new
