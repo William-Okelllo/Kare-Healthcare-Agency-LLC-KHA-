@@ -87,7 +87,7 @@ namespace Ishop.Controllers
                 db.SaveChanges();
 
                 PeopleContext PPP = new PeopleContext();
-                var results = PPP.peoples.Where(c => c.Phone == confirm.Phone).FirstOrDefault();
+                var results = PPP.peoples.Where(c => c.Phone == confirm.Phone && c.Event_Id ==confirm.Event_Id).FirstOrDefault();
                     var Acc = PPP.peoples.Find(results.Id);
                     if (Acc != null)
                     {
@@ -114,7 +114,7 @@ namespace Ishop.Controllers
                     oMail.To = confirm.Email;
                     oMail.Subject = "Confirmed Attendance";
 
-                    var Body = "Hello , " + confirm.Name
+                    oMail.TextBody = "Hello , " + confirm.Name
 
 
                         + "\n"
@@ -122,10 +122,10 @@ namespace Ishop.Controllers
                    + "\n" + "see the event Details below"
                    + "\n" + "...... ......... ........"
                    + "\n" + "Event :" + result.Name
-                   + "\n" + "...... ......."
-                   + "\n" + "Event Date" + result.Event_date.ToString("dd-MMMM-yyyy")
-                    + "\n" + "...... ......."
-                   + "\n" + "Event Venue" + result.Venue
+                   + "\n" + ""
+                   + "\n" + "Event Date : " + result.Event_date.ToString("dd-MMMM-yyyy")
+                   + "\n" + ""
+                   + "\n" + "Event Venue : " + result.Venue
                    + "\n" + ""
                    + "\n" + "See you there"
                    + "\n" + "  -------------------------------- "

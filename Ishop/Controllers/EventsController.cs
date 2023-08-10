@@ -12,6 +12,7 @@ using PagedList;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private EventsContext db = new EventsContext();

@@ -89,7 +89,43 @@
                     <medium> <h6><i class="fa fa-circle-notch text-white"></i> Event Type : <span class="badge rounded-pill bg-secondary"><i class="fa fa-paper-plane text-white"></i>  @Model.Type </span></h6></medium>
 
 
+                    <div class="dropdown-divider"></div>
+                    <button class="btn-sm btn btn-primary btn" id="copy-link"><i class="fa fa-spin fa-circle-notch"></i> Copy Invite link</button>
 
+                    <script>
+                        // JavaScript to handle copying the action link
+                        document.getElementById("copy-link").addEventListener("click", function () {
+                            var currentUrl = window.location.href;
+                            var baseUrl = getBaseUrl();
+                            var parameter = currentUrl.split('/').pop(); // Get the last segment as parameter
+
+                            if (parameter && !isNaN(parameter)) {
+                                var controller = "Confirm"; // Replace with your controller name
+                                var action = "Accept";      // Replace with your action name
+
+                                var actionLink = baseUrl + "/" + controller + "/" + action + "/" + parameter;
+                                copyToClipboard(actionLink);
+                                alert("Action link copied to clipboard:\n" + actionLink);
+                            } else {
+                                alert("Invalid parameter in the URL.");
+                            }
+                        });
+
+                        function getBaseUrl() {
+                            var protocol = window.location.protocol;
+                            var host = window.location.host;
+                            return protocol + "//" + host;
+                        }
+
+                        function copyToClipboard(text) {
+                            var dummy = document.createElement("textarea");
+                            document.body.appendChild(dummy);
+                            dummy.value = text;
+                            dummy.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(dummy);
+                        }
+                    </script>
                 </div>
                 <div class="icon">
                     <i class="fa fa-10x fa-umbrella"></i>
@@ -206,7 +242,7 @@
                                     { <span class="badge badge-danger"><medium><i class="fa fa-times-circle"></i> NO</medium></span>}
                                 </td>
                                 <td style="background-color:white">
-                                    <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to drop attendee ')) { window.location.href = '@Url.Action("Delete", "Hotel", new { id = item2.Id, })'; }">
+                                    <a class="btn-xs btn btn-outline-danger" onclick="if (confirm('Are you sure you want to drop attendee ')) { window.location.href = '@Url.Action("Delete", "People", new { id = item2.Id, })'; }">
                                         <i class="fa fa-times-circle text-black"></i> Drop attendee
                                     </a>
                                     <script>
