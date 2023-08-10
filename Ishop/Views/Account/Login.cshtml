@@ -44,7 +44,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page" style="background-image: url('../../Images/bgw.jpg'); background-repeat: no-repeat; background-size: cover;">
+<body class="hold-transition login-page" style="background-image: url('../../Images/bgg.jpg'); background-repeat: no-repeat; background-size: cover;">
 
 
     
@@ -56,9 +56,9 @@
             {@Html.AntiForgeryToken()
             <!-- /.login-logo -->
 
-        <div class="card card-outline card-orange" style="background-color: rgb(255, 255, 255, 0.74); border-radius: 24px;">
+        <div class="card card-outline card-orange" style="background-color: rgb(0, 0, 0, 0.19); border-radius: 24px;">
             <div class="card-header" style="border-radius: 24px;">
-                <a style="text-align:center"><img src="~/Images/grs.png" height="70" /> </a>
+                <a style="text-align:center"><img src="~/Images/llogo.png" height="70" /> </a>
 
                 <hr />
 
@@ -98,23 +98,9 @@
                         </div>
                         <br />
 
-                        <div style="text-align:right">
-                            <small style="color: orange">
-                                <i class="fa fa-key
-               text-yellow"></i>
-
-                                <a href="@Url.Action("ForgotPassword", "Account")">
-                                    Forgot Password
-                                </a>
-                            </small>
-                        </div>
-
-                        <table class="table">
-
-                            <thead>
-                                <tr style="color:indigo">
-
-                                    <th style="text-align:left">
+                       
+                        <div class="dropdown-divider"></div>
+                       
                                         <button class="btn btn btn-warning btn-lg btn-block " type="submit" id="login-btn">
                                             <i class="glyphicon glyphicon-log-in" style="color:white"></i>
                                             <i class="fa fa-sign-in"></i> Login
@@ -150,18 +136,15 @@
 
 
 
-                                    </th>
+                                    
                                     <div style="text-align:center">
                                         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     </div>
-                                </tr>
+                              
 
 
-                            </thead>
-                            <tbody>
-                        </table>
                     </div>
                 </form>
 

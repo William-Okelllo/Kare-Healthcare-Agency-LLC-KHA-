@@ -71,10 +71,10 @@ namespace Ishop
                 }
             }
             
-            if (!roleManager.RoleExists("CheckIn"))
+            if (!roleManager.RoleExists("App_user"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "CheckIn";
+                role.Name = "App_user";
                 roleManager.Create(role);
 
             }

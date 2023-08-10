@@ -1,0 +1,188 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Events>
+
+@{
+    ViewBag.Title = "Events";
+}
+
+
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+</style>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.95);">
+
+
+    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: #071052; color: white; border-radius: 14px ">
+        <h4 class="card-title" style="color:white">
+            <i class="fa fa-umbrella"></i>
+            Events
+        </h4>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+    <div class="card-body">
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-12" style="border-radius: 27px ;outline-color:darkblue">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-navy" style="border-radius: 27px ">
+                        <div class="inner" style="border-radius: 27px ">
+                            <h5 style="color: white"><i class="fa fa-umbrella text-white"></i>  @item.Name  </h5>
+
+                            <medium> <h6><i class="fa fa-calendar text-white"></i> Date : <span class="badge rounded-pill bg-warning"> @item.Event_date.ToString("dd-MMM-yyyy") </span></h6></medium>
+                            <medium> <h6><i class="fa fa-map-marker text-white"></i> Venue : <span class="badge rounded-pill bg-primary"> @item.Venue </span></h6></medium>
+                            <medium> <h6><i class="fa fa-circle-notch text-white"></i> Event Type : <span class="badge rounded-pill bg-secondary"><i class="fa fa-paper-plane text-white"></i>  @item.Type </span></h6></medium>
+
+                            <div class="dropdown-divider"></div>
+
+
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-10x fa-umbrella"></i>
+                        </div>
+                        <a href="@Url.Action("Details", "Events", new { id = item.Id })" class="btn-sm btn btn-primary btn">
+                            <i class="fa fa-users text-white"></i> View Attendes
+                        </a>
+                        ||
+                        <a class="btn-sm btn btn-danger btn"
+                           onclick="if (confirm('Are you sure you want to this Event?')) { window.location.href = '@Url.Action("Delete", "Events", new { @item.Id})'; }">
+                            <i class="fa fa-trash text-white"></i> Drop Event
+                        </a>
+
+
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        @if (Model.Count() == 0)
+        {
+            <div style="text-align:center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"> <img src="~/Images/co.gif" height="50" /> </span>
+
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-description">
+                                <i class="fa fa-spin fa-circle-notch text-white nav-icon"></i>   No  Events found
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        }
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+</div>
+

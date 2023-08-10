@@ -37,9 +37,7 @@ namespace Ishop.Controllers
         public ActionResult Upload(FileUpload model, FormCollection form, HttpPostedFileBase file,int? id)
         {
 
-            CheckInContext dbbb = new CheckInContext();
-            var data10 = dbbb.checkIns.Where(d => d.Id == id);
-            ViewBag.CheckIn = data10;
+           
 
 
 

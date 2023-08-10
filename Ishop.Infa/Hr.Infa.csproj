@@ -53,38 +53,16 @@
   <ItemGroup>
     <Compile Include="AccessContext.cs" />
     <Compile Include="AccessRepo.cs" />
-    <Compile Include="AutoContext.cs" />
-    <Compile Include="AutoRepo.cs" />
-    <Compile Include="Cardcontext.cs" />
-    <Compile Include="CardRepo.cs" />
-    <Compile Include="CheckInContext.cs" />
-    <Compile Include="CheckInRepo.cs" />
-    <Compile Include="CoverContext.cs" />
+    <Compile Include="ConfigsContext.cs" />
+    <Compile Include="ConfirmContext.cs" />
+    <Compile Include="ConfirmRepo.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
-    <Compile Include="GarageContext.cs" />
-    <Compile Include="GarageRepo.cs" />
-    <Compile Include="InspectionContext.cs" />
-    <Compile Include="InspectionRepo.cs" />
-    <Compile Include="Inspections_partsContext.cs" />
-    <Compile Include="Inspection_partRepo.cs" />
-    <Compile Include="Inspec_serv_context.cs" />
-    <Compile Include="Inspec_serv_Repo.cs" />
-    <Compile Include="InsuaranceContext.cs" />
-    <Compile Include="InsuaranceRepo.cs" />
-    <Compile Include="Invoice_Context.cs" />
-    <Compile Include="Invoice_Repo.cs" />
-    <Compile Include="MakesRepo.cs" />
-    <Compile Include="Makes_context.cs" />
-    <Compile Include="PartContext.cs" />
-    <Compile Include="PartRepo.cs" />
+    <Compile Include="EventsContext.cs" />
+    <Compile Include="EventsRepo.cs" />
+    <Compile Include="PeopleContext.cs" />
+    <Compile Include="PeopleRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceContext.cs" />
-    <Compile Include="ServiceRepo.cs" />
-    <Compile Include="SevContext.cs" />
-    <Compile Include="SevRepo.cs" />
-    <Compile Include="VehicleContext.cs" />
-    <Compile Include="VehicleRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

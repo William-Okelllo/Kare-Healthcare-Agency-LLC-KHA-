@@ -1,0 +1,259 @@
+﻿@model IShop.Core.People
+
+@{
+    ViewBag.Title = "New Expense";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    form-rounded2 {
+        border-radius: 4rem;
+        border-color: orangered;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+    $(function () {
+        $("#datepicker9").datepicker();
+    });
+</script>
+
+
+
+
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #071052; color: white; border-radius: 14px ">
+                <i class="fa fa-spin fa-spinner"></i> Add Attendee
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                    <div class="form-row">
+
+                        <div class="col-9 col-md-4">
+                            <label> <i class="fa fa-user-tag text-navy"></i>      @Html.LabelFor(model => model.Name)</label>
+                            @Html.EditorFor(model => model.Name, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "example :Jane Doe",
+                               @Required = "true",
+                           }
+                       })
+                        </div>
+                        <div class="col-9 col-md-3">
+                            <label> <i class="fa fa-mobile text-navy"></i>      @Html.LabelFor(model => model.Phone)</label>
+                            @Html.EditorFor(model => model.Phone, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "example : 0727422197",
+                               id = "Phone",
+                               @Required = "true",
+                           }
+                       })
+                            <div id="errorMessage" style="display:none;color:red">
+                                <a href="#" style="color:red">
+                                    <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <span id="idNumberError" class="text-danger" style="display: none;">
+                                <small><i class="fa fa-times-circle"></i> Phone No should be 10 characters long -(e.g 0727422197).</small>
+                            </span>
+
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('#Phone').on('input', function () {
+                                        var inputValue = $(this).val();
+                                        var numericValue = inputValue.replace(/[^0-9]/g, '');
+                                        $(this).val(numericValue.substring(0, 10));
+                                    });
+                                });
+                            </script>
+                            <script>
+                                $(function () {
+                                    $('#Phone').on('input', function () {
+                                        var idNumber = $(this).val();
+                                        var errorSpan = $('#idNumberError');
+
+                                        if (idNumber.length < 10) {
+                                            errorSpan.show();
+                                        } else {
+                                            errorSpan.hide();
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div class="col-9 col-md-2" style="display:none">
+                            <label> <i class="fa fa-tag text-navy"></i>      @Html.LabelFor(model => model.Event_Id)</label>
+                            @Html.EditorFor(model => model.Event_Id, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Event_Id",
+                               @Value= ViewBag.Event_id,
+                           }
+                       })
+                        </div>
+                    </div>
+
+                        <small>Action</small>
+                        <div class="dropdown-divider"></div>
+
+
+
+                        <input type="submit" value="Add Attende" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure?')" />
+
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                        </script>
+                        <small>||</small>
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+
+
+
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

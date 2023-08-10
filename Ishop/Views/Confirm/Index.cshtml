@@ -1,0 +1,143 @@
+﻿@{Layout = null;}
+@model IEnumerable<IShop.Core.Confirm>
+
+
+@{
+    ViewBag.Title = " Attendance";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/")
+    <link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+    <!--Render the gauge item. Add these scripts only if your report contains the gauge report item.-->
+
+
+   
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/FrontEnd/plugins/summernote/summernote-bs4.min.css">
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
+</head>
+
+<body style="background-image: url('../../Images/bgg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;">
+    <a class="wrapper">
+
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="~/Images/llogo.png" height="100">
+            <br />
+            <h5 style="font-style:italic;color:navy">...loading...</h5>
+            <div class="row">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only"></span>
+                </div>...
+                <div class="spinner-grow text-secondary" role="status">
+                    <span class="sr-only"></span>
+                </div>...
+                <div class="spinner-grow text-success" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Main content -->
+
+
+
+
+
+
+        <br />  <br />  <br />  <br />  <br />
+        <div class="col d-flex justify-content-center">
+            <div class="col-md-9 col-sm-12 col-12">
+                <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+                    <div class="card-header" style="background-color: #071052; color: white; border-radius: 14px ">
+                        <i class="fa  fa-spinner"></i> Thank you
+                    </div>
+                    <div class="card-body" style="background-color: white;border-radius: 24px;">
+
+
+
+                        <p>Thank you for your confirming your attendance to the event.</p>
+
+                        <div class="dropdown-divider"></div>
+                        <small style="text-align:center">© 2022 -@DateTime.Now.Year</small>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </a>
+
+    
+    <!-- jQuery -->
+    <script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>$.widget.bridge('uibutton', $.ui.button)</script>
+    <!-- Bootstrap 4 -->
+    <script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/FrontEnd/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/FrontEnd/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/FrontEnd/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/FrontEnd/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/FrontEnd/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/FrontEnd/plugins/moment/moment.min.js"></script>
+    <script src="~/FrontEnd/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/FrontEnd/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/FrontEnd/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/FrontEnd/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/FrontEnd/dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/FrontEnd/dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="~/FrontEnd/dist/js/pages/dashboard.js"></script>
+    <script src="~/Scripts/chosen.jquery.js"></script>
+</body>
+</html>

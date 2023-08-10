@@ -23,18 +23,10 @@ namespace Ishop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<CheckInContext>(null);
-            Database.SetInitializer<Cardcontext>(null);
+            Database.SetInitializer<PeopleContext>(null);
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
-            Database.SetInitializer<AutoContext>(null);
-            Database.SetInitializer<Inspection_Context>(null);
-            Database.SetInitializer<Inspections_partsContext>(null);
-            Database.SetInitializer<Inspec_serv_context>(null);
-            Database.SetInitializer<Invoice_Context>(null);
-            Database.SetInitializer<Makes_context>(null);
-            Database.SetInitializer<GarageContext>(null);
-            Database.SetInitializer<CoverContext>(null);
+            
 
         }
     }

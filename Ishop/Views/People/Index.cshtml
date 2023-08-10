@@ -1,0 +1,251 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.People>
+
+@{
+    ViewBag.Title = "People";
+}
+
+
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+</style>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.95);">
+
+
+    <div class="card-header col-md-8 col-sm-10 col-10 col d-flex justify-content-center" style="background-color: #071052; color: white; border-radius: 14px ">
+        <h4 class="card-title" style="color:white">
+            <i class="fa fa-users"></i>
+            Attendees
+        </h4>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+    <div>
+
+
+
+
+
+
+
+
+
+        <div class="table-responsive" style="min-height: 400px">
+            <table class="table table-bordered table-hover  text-nowrap">
+
+
+                <thead>
+                    <tr style="color:white">
+
+                        <th style="background-color: #071052; ">Client </th>
+                        <th style="background-color: #071052; ">Attendee </th>
+                        <th style="background-color: #071052; ">Contact  </th>
+
+                        <th style="background-color: #071052; ">Actions</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-widget="expandable-table" aria-expanded="false">
+
+
+                            <td style="background-color:white">
+                                <i class="fa fa-user-circle text-orange"></i> @item.Id :  <i class="fa fa-id-card text-orange"></i> @item.Event_Id
+                            </td>
+
+                            <td style="background-color:white">
+                                <i class="fa fa-user-circle text-primary"></i> @item.Name
+
+                            </td>
+                            <td style="background-color:white">
+                                <i class="fa fa-mobile text-primary"></i> @item.Phone
+
+                            </td>
+                            <td style="background-color:ghostwhite">
+
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+
+                                        <div class="dropdown-divider"></div>
+                                        <a href="@Url.Action("Edit", "offerletters", new { id = item.Id })" class="dropdown-item">
+                                            <i class="fa fa-edit text-success"></i> Edit/Update  letter
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Approve -push to Accounts ')) { window.location.href = '@Url.Action("Accounts", "Offerletters", new { id = item.Id, })'; }">
+                                            <i class="fa fa-check-circle text-success"></i> Approve - Push to Accounts
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Drop Attendees ')) { window.location.href = '@Url.Action("Delete", "people", new { id = item.Id, })'; }">
+                                            <i class="fa fa-times-circle text-danger"></i> Drop  Attendees
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+
+
+                            </td>
+
+
+
+
+
+
+                        </tr>
+
+
+                    }
+                </tbody>
+            </table>
+            @if (Model.Count() == 0)
+            {
+                <div style="text-align:center">
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="info-box bg-gradient-black">
+                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text"> <img src="~/Images/co.gif" height="50" /> </span>
+
+
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    <i class="fa fa-calendar text-white nav-icon"></i>   No  Data found
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                </div>
+            }
+            <style>
+                .ul.pagination {
+                    display: inline-block;
+                    padding: 1;
+                    margin: 1;
+                    border-radius: 0.5rem;
+                }
+
+                ul.pagination li {
+                    display: inline;
+                }
+
+                    ul.pagination li a {
+                        color: black;
+                        float: left;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                        transition: background-color;
+                        background-color: #ddd;
+                        border-color: white;
+                        border-radius: 0.5rem;
+                    }
+
+                        ul.pagination li a.active {
+                            background-color: dodgerblue;
+                            color: white;
+                        }
+
+                        ul.pagination li a:hover:not(.active) {
+                            background-color: dodgerblue;
+                            border-radius: 0.5rem;
+                        }
+            </style>
+            <div id="container" style="text-align:left">
+
+                <div class="pagination" style="text-align:left">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+        @Html.ActionLink("Home-page", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
+        <hr class='dotted' />
+    </div>
+</div>
+

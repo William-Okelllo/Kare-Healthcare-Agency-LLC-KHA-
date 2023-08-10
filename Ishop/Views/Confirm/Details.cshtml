@@ -1,0 +1,90 @@
+﻿@model IShop.Core.Confirm
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Confirm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Event_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spouse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spouse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Children)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Children)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Children_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Children_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spouse_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spouse_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spouse_Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spouse_Phone)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

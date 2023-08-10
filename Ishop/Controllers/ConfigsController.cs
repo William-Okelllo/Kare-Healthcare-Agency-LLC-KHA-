@@ -8,18 +8,20 @@ using System.Net;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using Ishop.Infa;
 using Ishop.Models;
+using IShop.Core;
 
 namespace Ishop.Controllers
 {
     public class ConfigsController : Controller
     {
-        private Config_x11 db = new Config_x11();
+        private ConfigsContext db = new ConfigsContext();
 
         // GET: Configs
         public ActionResult Index()
         {
-            return View(db.Configs.ToList());
+            return View(db.configs.ToList());
         }
 
         // GET: Configs/Details/5
@@ -29,7 +31,7 @@ namespace Ishop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Config config = db.Configs.Find(id);
+            Configs config = db.configs.Find(id);
             if (config == null)
             {
                 return HttpNotFound();
@@ -48,11 +50,11 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Config config)
+        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Configs config)
         {
             if (ModelState.IsValid)
             {
-                db.Configs.Add(config);
+                db.configs.Add(config);
                 Configuration webConfigApp = WebConfigurationManager.OpenWebConfiguration("~");
                 //Modifying the AppKey from AppValue to AppValue1
                 webConfigApp.AppSettings.Settings["Email"].Value = config.Email;
@@ -78,7 +80,7 @@ namespace Ishop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Config config = db.Configs.Find(id);
+            Configs config = db.configs.Find(id);
             if (config == null)
             {
                 return HttpNotFound();
@@ -91,7 +93,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Config config)
+        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Configs config)
         {
             if (ModelState.IsValid)
             {
@@ -120,7 +122,7 @@ namespace Ishop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Config config = db.Configs.Find(id);
+            Configs config = db.configs.Find(id);
             if (config == null)
             {
                 return HttpNotFound();
@@ -133,8 +135,8 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Config config = db.Configs.Find(id);
-            db.Configs.Remove(config);
+            Configs config = db.configs.Find(id);
+            db.configs.Remove(config);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
