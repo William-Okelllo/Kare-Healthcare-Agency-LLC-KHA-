@@ -14,7 +14,7 @@ using System.Threading;
 using System.Timers;
 using System.Web.UI;
 
-[assembly: OwinStartupAttribute(typeof(Ishop.Startup))]
+
 namespace Ishop
 {
     public partial class Startup
@@ -71,13 +71,6 @@ namespace Ishop
                 }
             }
             
-            if (!roleManager.RoleExists("App_user"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "App_user";
-                roleManager.Create(role);
-
-            }
            
 
 

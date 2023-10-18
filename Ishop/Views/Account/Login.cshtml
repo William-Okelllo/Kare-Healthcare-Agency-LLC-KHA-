@@ -44,10 +44,8 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page" style="background-image: url('../../Images/bgg.jpg'); background-repeat: no-repeat; background-size: cover;">
+<body class="hold-transition login-page" style="background-image: url('../../Images/BG.jpg'); background-repeat: no-repeat; background-size: cover;">
 
-
-    
         <div class="login-box" style="float:right">
             <div class="login-logo">
 
@@ -56,109 +54,109 @@
             {@Html.AntiForgeryToken()
             <!-- /.login-logo -->
 
-        <div class="card card-outline card-orange" style="background-color: rgb(0, 0, 0, 0.19); border-radius: 24px;">
+        <div class="card card-outline card-primary" style="background-color: rgb(0, 0, 0, 0.19); border-radius: 24px;">
             <div class="card-header" style="border-radius: 24px;">
-                <a style="text-align:center"><img src="~/Images/llogo.png" height="70" /> </a>
+                <div class="row justify-content-center">
+                    <a style="text-align:center"><img src="~/Images/P.png" height="50" /> </a>
+                    </div>
+                    <div class="dropdown-divider"></div>
 
-                <hr />
+                    <form>
 
-                <form>
-
-                    <div class="form-group">
-                        <label style="color: black"> <span class="fa fa-user-circle text-orange"></span> Username</label>
-                        <div class="input-group mb-3">
-
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
-
-
-                        </div>
                         <div class="form-group">
-                            <label style="color: black"> <span class="fa fa-lock text-orange"></span> Password</label>
-                            <div class="input-group mb-2">
+                            <label style="color: black"> <span class="fa fa-user-circle text-primary"></span> Username</label>
+                            <div class="input-group mb-3">
 
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password", @autofocus = "" })
-
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
 
 
                             </div>
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-                                  rel="stylesheet" type="text/css" />
-                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
-                            <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-orange"> </p>
-                            <script type="text/javascript">
+                            <div class="form-group">
+                                <label style="color: black"> <span class="fa fa-lock text-primary"></span> Password</label>
+                                <div class="input-group mb-2">
+
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password", @autofocus = "" })
+
+                                </div>
+
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                                <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                                      rel="stylesheet" type="text/css" />
+                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
+                                <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-orange"> </p>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $("#toggle_pwd").click(function () {
+                                            $(this).toggleClass("fa-eye fa-eye-slash");
+                                            var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
+                                            $("[id*=Password]").attr("type", type);
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            <br />
+
+
+                            <div class="dropdown-divider"></div>
+
+                            <button class="btn btn btn-primary btn-lg btn-block " type="submit" id="login-btn">
+                                <i class="glyphicon glyphicon-log-in" style="color:white"></i>
+                                <i class="fa fa-sign-in"></i> Login
+                            </button>
+                            <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status"></span>
+                                <small> ..Verifing...</small>
+                            </button>
+                            <style>
+                                .hidden {
+                                    display: none;
+                                }
+                            </style>
+                            <script>
                                 $(function () {
-                                    $("#toggle_pwd").click(function () {
-                                        $(this).toggleClass("fa-eye fa-eye-slash");
-                                        var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
-                                        $("[id*=Password]").attr("type", type);
+                                    $('#login-btn').click(function () {
+                                        $(this).hide();
+
                                     });
                                 });
+
                             </script>
+                            <script>
+                                $(function () {
+                                    $('#login-btn').click(function () {
+                                        $('#hidden-button').removeClass('hidden');
+                                    });
+                                });
+
+                            </script>
+
+
+
+
+
+
+                            <div style="text-align:center">
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </div>
+
+
+
                         </div>
-                        <br />
+                    </form>
 
-                       
-                        <div class="dropdown-divider"></div>
-                       
-                                        <button class="btn btn btn-warning btn-lg btn-block " type="submit" id="login-btn">
-                                            <i class="glyphicon glyphicon-log-in" style="color:white"></i>
-                                            <i class="fa fa-sign-in"></i> Login
-                                        </button>
-                                        <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled>
-                                            <span class="spinner-border spinner-border-sm" role="status"></span>
-                                            <small> ..Verifing...</small>
-                                        </button>
-                                        <style>
-                                            .hidden {
-                                                display: none;
-                                            }
-                                        </style>
-                                        <script>
-                                            $(function () {
-                                                $('#login-btn').click(function () {
-                                                    $(this).hide();
+                </div>
 
-                                                });
-                                            });
+                <small style="text-align:center">Version 2.0.5</small>
+                <small style="text-align:center">© 2022 -@DateTime.Now.Year</small>
+                <small style="text-align:center"><b>Powered by Speculate Techs</b></small>
 
-                                        </script>
-                                        <script>
-                                            $(function () {
-                                                $('#login-btn').click(function () {
-                                                    $('#hidden-button').removeClass('hidden');
-                                                });
-                                            });
-
-                                        </script>
+                <!-- /.social-auth-links -->
 
 
-
-
-
-                                    
-                                    <div style="text-align:center">
-                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
-                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    </div>
-                              
-
-
-                    </div>
-                </form>
 
             </div>
-
-            <small style="text-align:center">Version 2.0.5</small>
-            <small style="text-align:center">© 2022 -@DateTime.Now.Year</small>
-            <small style="text-align:center"><b>Powered by Speculate Techs</b></small>
-
-            <!-- /.social-auth-links -->
-
-
-
-        </div>
             <!-- /.login-card-body -->
 
 

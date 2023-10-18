@@ -22,22 +22,11 @@ namespace Ishop.Controllers
         // GET: Data
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            UL db = new UL();
 
 
-            if (!(search == null))
-            {
-                return View(db.AspNetUsers.Where(c => c.UserName == search || c.UserName.StartsWith(search)).ToList().ToPagedList(page ?? 1, 7));
-
-            }
-            else 
-            {
-                return View(db.AspNetUsers.Where(c => c.UserName.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 6));
-            }
-
-           
 
 
+            return RedirectToAction("Index", "Data");
         }
 
         // GET: Data/Details/5

@@ -18,12 +18,7 @@ namespace Ishop.Controllers
     {
         public ActionResult Index()
         {
-            EventsContext EEE =new EventsContext();
-            var Data = EEE.events.Where(c=>c.staff ==User.Identity.Name);
-            var EventId =EEE.events.Where(c=>c.staff == User.Identity.Name).FirstOrDefault();
-            ViewBag.MyEvents = Data;
-            
-
+          
            
 
             return View();

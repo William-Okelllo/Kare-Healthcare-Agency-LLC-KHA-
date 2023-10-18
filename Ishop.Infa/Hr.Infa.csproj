@@ -54,14 +54,8 @@
     <Compile Include="AccessContext.cs" />
     <Compile Include="AccessRepo.cs" />
     <Compile Include="ConfigsContext.cs" />
-    <Compile Include="ConfirmContext.cs" />
-    <Compile Include="ConfirmRepo.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
-    <Compile Include="EventsContext.cs" />
-    <Compile Include="EventsRepo.cs" />
-    <Compile Include="PeopleContext.cs" />
-    <Compile Include="PeopleRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

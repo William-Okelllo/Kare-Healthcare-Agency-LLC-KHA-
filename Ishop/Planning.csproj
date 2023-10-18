@@ -430,26 +430,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\ConfirmController.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Controllers\EventsController.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PeopleController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Controllers\smsController.cs" />
     <Compile Include="Controllers\successController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\A.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>Userslist.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Config.cs">
       <DependentUpon>Config_x1.tt</DependentUpon>
     </Compile>
@@ -472,94 +463,9 @@
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmbedProperties.cs" />
-    <Compile Include="Models\File.cs">
-      <DependentUpon>filetab.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Files_.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Files_.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Files_.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Files_.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Files_.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Files_.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\filetab.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>filetab.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\filetab.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>filetab.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\filetab.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>filetab.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\FileUpload.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\R.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>R.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\R.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>R.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\R.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>R.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Report.cs">
-      <DependentUpon>R.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sms_conf.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sms_conf.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sms_conf.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sms_conf.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sms_conf.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sms_conf.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sms_configs.cs">
-      <DependentUpon>sms_conf.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Userslist.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Userslist.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Userslist.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Userslist.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Userslist.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Userslist.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1933,16 +1839,11 @@
     <Content Include="FrontEnd\plugins\uplot\uPlot.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\1.png" />
-    <Content Include="Images\bgg.jpg" />
-    <Content Include="Images\co.gif" />
-    <Content Include="Images\gg.ico" />
+    <Content Include="Images\BG.jpg" />
     <Content Include="Images\l.ico" />
-    <Content Include="Images\llogo.png" />
-    <Content Include="Images\s.ico" />
+    <Content Include="Images\P.png" />
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
-    <Content Include="Images\v3.jpg" />
     <Content Include="Images\whatsapp.ico" />
     <Content Include="Models\Config_x1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1953,56 +1854,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Config_x1.edmx</DependentUpon>
       <LastGenOutput>Config_x1.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Files_.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Files_.edmx</DependentUpon>
-      <LastGenOutput>Files_.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Files_.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Files_.edmx</DependentUpon>
-      <LastGenOutput>Files_.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\filetab.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>filetab.edmx</DependentUpon>
-      <LastGenOutput>filetab.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\filetab.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>filetab.edmx</DependentUpon>
-      <LastGenOutput>filetab.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\R.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>R.edmx</DependentUpon>
-      <LastGenOutput>R.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\R.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>R.edmx</DependentUpon>
-      <LastGenOutput>R.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\sms_conf.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sms_conf.edmx</DependentUpon>
-      <LastGenOutput>sms_conf.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\sms_conf.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sms_conf.edmx</DependentUpon>
-      <LastGenOutput>sms_conf.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Userslist.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Userslist.edmx</DependentUpon>
-      <LastGenOutput>Userslist.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Userslist.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Userslist.edmx</DependentUpon>
-      <LastGenOutput>Userslist.cs</LastGenOutput>
     </Content>
     <Content Include="MvcReportViewer.aspx" />
     <Content Include="MvcReportViewerErrorPage.html" />
@@ -2185,27 +2036,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <EntityDeploy Include="Models\Files_.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Files_.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Files_.edmx.diagram">
-      <DependentUpon>Files_.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\R.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>R.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\R.edmx.diagram">
-      <DependentUpon>R.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\Userslist.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Userslist.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Userslist.edmx.diagram">
-      <DependentUpon>Userslist.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
     <EntityDeploy Include="Models\Config_x1.edmx">
@@ -2216,20 +2046,6 @@
       <DependentUpon>Config_x1.edmx</DependentUpon>
     </Content>
     <Content Include="Images\tst.json" />
-    <EntityDeploy Include="Models\filetab.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>filetab.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\filetab.edmx.diagram">
-      <DependentUpon>filetab.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\sms_conf.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sms_conf.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sms_conf.edmx.diagram">
-      <DependentUpon>sms_conf.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -2986,7 +2802,6 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\New_Client.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -3002,12 +2817,8 @@
     <Content Include="Views\success\Index.cshtml" />
     <Content Include="Views\Data\Index.cshtml" />
     <Content Include="Views\Data\Delete_User.cshtml" />
-    <Content Include="Views\Files\My_Files.cshtml" />
-    <Content Include="Views\Files\Emp_Files.cshtml" />
     <Content Include="Views\Account\Register_Acc.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
-    <Content Include="Views\Files\Edit.cshtml" />
-    <Content Include="Views\Files\Upload.cshtml" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\Configuration\Index.cshtml" />
@@ -3017,11 +2828,6 @@
     <Content Include="Views\Configs\Edit.cshtml" />
     <Content Include="Views\Configs\Index.cshtml" />
     <Content Include="Views\Home\Dash.cshtml" />
-    <Content Include="Views\sms\Create.cshtml" />
-    <Content Include="Views\sms\Delete.cshtml" />
-    <Content Include="Views\sms\Details.cshtml" />
-    <Content Include="Views\sms\Edit.cshtml" />
-    <Content Include="Views\sms\Index.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
@@ -3030,32 +2836,6 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
-    <Content Include="Views\GarageConfig\Create.cshtml" />
-    <Content Include="Views\GarageConfig\Delete.cshtml" />
-    <Content Include="Views\GarageConfig\Details.cshtml" />
-    <Content Include="Views\GarageConfig\Edit.cshtml" />
-    <Content Include="Views\GarageConfig\Index.cshtml" />
-    <Content Include="Views\Cover\Create.cshtml" />
-    <Content Include="Views\Cover\Delete.cshtml" />
-    <Content Include="Views\Cover\Details.cshtml" />
-    <Content Include="Views\Cover\Edit.cshtml" />
-    <Content Include="Views\Cover\Index.cshtml" />
-    <Content Include="Views\People\Create.cshtml" />
-    <Content Include="Views\People\Delete.cshtml" />
-    <Content Include="Views\People\Details.cshtml" />
-    <Content Include="Views\People\Edit.cshtml" />
-    <Content Include="Views\People\Index.cshtml" />
-    <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Views\Events\Delete.cshtml" />
-    <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Events\Edit.cshtml" />
-    <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Confirm\Accept.cshtml" />
-    <Content Include="Views\Confirm\Delete.cshtml" />
-    <Content Include="Views\Confirm\Details.cshtml" />
-    <Content Include="Views\Confirm\Edit.cshtml" />
-    <Content Include="Views\Confirm\Index.cshtml" />
-    <Content Include="Views\Confirm\Present.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
