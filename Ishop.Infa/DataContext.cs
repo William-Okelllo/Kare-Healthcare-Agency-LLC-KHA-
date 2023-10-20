@@ -11,7 +11,7 @@ namespace Ishop.Infa
     public class DataContext : DbContext
     {
         public DataContext()
-           : base("Planning")
+           : base("Compassion")
         {
         }
         public DbSet<Data> D { get; set; }

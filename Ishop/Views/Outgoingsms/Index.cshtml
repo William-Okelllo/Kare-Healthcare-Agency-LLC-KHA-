@@ -1,0 +1,233 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Outgoingsms>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Outgoing Sms";
+}
+
+
+
+
+<style>
+   
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .limited-lines {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+    .limited-lines {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+</style>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.78);">
+
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
+        <h4 class="card-title" style="color:white">
+            <i class="fa fa-sms"></i>
+            OutgoingSms
+        </h4>
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "outgoingsms", FormMethod.Get))
+            {
+
+                <a style="font-family: Calibri"> Recepient</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Recepient" })
+                <button type="submit" value="search" class="btn btn-sm btn-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                @Html.ActionLink("Send Single Sms", "Index", "Children", null, new { @class = "btn btn-sm btn-default btn" })
+               <small>||</small>
+                @Html.ActionLink("Send Group Sms", "Group", "outgoingsms", null, new { @class = "btn btn-sm btn-default btn" })
+            }
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+    <div>
+
+
+
+
+
+
+
+
+
+        <div class="table-responsive" >
+            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                <thead>
+                    <tr style="color:white">
+
+                        <th style="background-color: #0656A5; font-size: medium; width: 15%">Recepient </th>
+                        <th style="background-color: #0656A5; font-size: medium; width: 55%">Message</th>
+                        <th style="background-color: #0656A5; font-size: medium; width: 30%">Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-widget="expandable-table" aria-expanded="false">
+
+                            <td style="background-color: white; width: 15% ">
+                                <h6> <span class="badge badge-primary"><i class="fa fa-clock"></i> @item.CreatedOn.ToString("dd-MMMM-yyyy|hh:mm tt")</span></h6>
+                                <span class="badge badge-secondary">
+                                    <medium>
+                                        @if (item.IsSent == false)
+                                        {<a> <i class="fa fa-spinner fa-spin text-white"></i> Pending</a> }
+                                        else
+                                        {<a><i class="fa fa-check-circle text-white"></i> Sent</a>}
+
+                                    </medium>
+                                </span>
+
+                            </td>
+                            <td style="background-color: whitesmoke; width: 55%">
+                                <p class="limited-lines"><small>@item.MessageText</small></p>
+                                <span class="badge badge-warning"><i class="fa fa-folder-open "></i> :Template : @item.Code</span>
+                            </td>
+                            <td style="background-color: white;width: 30%">
+                                <p class="limited-lines"><small>@item.Response</small></p>
+                                <div class="dropdown-divider"></div>
+                                <a>  <span class="badge badge-primary"> <i class="fa fa-circle-notch text-white"></i> Trials : @item.Trials </span></a>
+                            </td>
+                        </tr>
+                        <tr class="expandable-body">
+
+                            <td colspan="5" style="background-color: rgb(255, 255, 255, 0.00);">
+                                <medium>
+                                    <div class="col d-flex justify-content-left">
+                                        <div class="col-md-11 col-sm-11 col-12">
+                                            <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                                                <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
+
+                                                    <div><b><i class="fa fa-circle-notch text-primary"></i>   Recipient</b></div>
+                                                    <div class="divider"></div>
+
+                                                    <div>
+                                                        <small> @item.RecipientNumber</small>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </medium>
+
+
+
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+
+
+            <style>
+                .ul.pagination {
+                    display: inline-block;
+                    padding: 1;
+                    margin: 1;
+                    border-radius: 0.5rem;
+                }
+
+                ul.pagination li {
+                    display: inline;
+                }
+
+                    ul.pagination li a {
+                        color: black;
+                        float: left;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                        transition: background-color;
+                        background-color: #ddd;
+                        border-color: white;
+                        border-radius: 0.5rem;
+                    }
+
+                        ul.pagination li a.active {
+                            background-color: dodgerblue;
+                            color: white;
+                        }
+
+                        ul.pagination li a:hover:not(.active) {
+                            background-color: dodgerblue;
+                            border-radius: 0.5rem;
+                        }
+            </style>
+            <div id="container" style="text-align:left">
+
+                <div class="pagination" style="text-align:left">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+

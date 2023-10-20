@@ -31,7 +31,7 @@
 
 
 
-<div class="card-header" style="background-color: #001F3F ">
+<div class="card-header" style="background-color: #0656A5; border-radius: 11px">
     <h3 class="card-title" style="color:white">
         <i class="fa fa-home"></i>
         HomePage
@@ -41,139 +41,81 @@
 <div class="card" style="background-color:#ffffffc6">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4">
-                <!-- Widget: user widget style 2 -->
-                <div class="card card-widget widget-user-2" style="border-radius: 14px ">
-                    <div class="card-header" style="background-color: #001F3F;color:white; border-radius: 14px ">
-                        <i class="fa fa-user-circle text-white nav-icon"></i> Welcome @User.Identity.Name
+
+
+            <div class="col-xl-4">
+                <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+                    <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 11px ">
+                        <i class="fa fa-home"></i> Welcome
                     </div>
+                    <div class="card-body">
+                        <div class="col d-flex justify-content-center">
+                            <img src="~/Images/homee.png" height="30px" width="30px" class="circle-image" style="text-align:center">
 
-                    <div class="card-footer p-0">
-                        <div class="card-body">
-
-                            <div>
-
-                                <ul style="text-align:left">
-                                    <li>
-                                        <i class="fa fa-user-shield"></i> Access Level
-                                        @if (this.User.IsInRole("Admin"))
-                                        {<medium style="font-family:Calibri">
-                                                <i class="fa fa-user-check text-success"></i>:-Administrator
-                                            </medium>}
-
-
-                                        else if (this.User.IsInRole("Employee"))
-                                        { <medium style="font-family:Calibri">
-                                                :-Employee
-                                            </medium>}
-                                        else if (this.User.IsInRole("Staffing_Agency"))
-                                        { <medium style="font-family:Calibri">
-                                                :-Staffing Agency user
-                                            </medium>}
-
-                                        else if (this.User.IsInRole("Facility"))
-                                        { <medium style="font-family:Calibri">
-                                                Facility
-                                            </medium>}
-                                        else
-                                        { <medium style="font-family:Calibri">
-                                                unknown
-                                            </medium>}
-                                    </li>
-                                    <li>
-                                        @if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
-                                        {
-                                            <medium style="font-family:Calibri">
-                                                <i class="fa fa-cloud-sun text-orange"></i> :-Good Morning
-                                            </medium>
-                                        }
-                                        else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
-                                        {
-                                            <medium style="font-family:Calibri">
-                                                <i class="fa fa-sun text-orange"></i> :-Good Afternoon
-                                            </medium>
-                                        }
-                                        else
-                                        {
-                                            <medium style="font-family:Calibri">
-                                                <i class="fa fa-cloud-sun text-orange"></i> :-Good Evening
-                                            </medium>
-                                        }
-                                    </li>
-                                    <li><i class="fa fa-calendar text-success"></i> @DateTime.Now.ToString("dd-MMMM-yyyy")</li>
-                                </ul>
-
-
-
-                            </div>
+                            <h5 style="font-family:Calibri">
+                                @if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
+                                {<b><i class="fa fa-cloud-sun text-orange"></i> Good Morning , @User.Identity.Name!</b>
+                            }
+                            else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+                            {<b><i class="fa fa-sun text-orange"></i> Good Afternoon , @User.Identity.Name!</b> }
+                        else
+                        { <b><i class="fa fa-cloud-sun text-orange"></i> Good Evening , @User.Identity.Name!</b>}
+                            </h5>
 
                         </div>
-                        <!-- /.widget-user -->
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-8">
-
-                <!-- Widget: user widget style 2 -->
-                <div class="card card-widget widget-user-2" style="border-radius: 14px ">
-                    <div class="card-header" style="background-color: #001F3F;color:white; border-radius: 14px;text-align:center ">
-                        <i class="fa fa-spin fa-circle-notch text-white nav-icon"></i> Upcoming Events
-                    </div>
-
-
-                    <div class="container-fluid">
 
 
 
-                       
-                            <div class="table-responsive" style="min-height: 100px">
+                        <div style="text-align:center">
 
-                                <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
-
-
-
-                                    <thead>
-                                        <tr style="color:white">
-                                            <th style="background-color: #050a42; "> Event</th>
-                                            <th style="background-color: #050a42; "> Date</th>
-                                            <th style="background-color: #050a42; ">  Confirmed</th>
-
-                                        </tr>
-
-                                    </thead>
-                                    @foreach (var item2 in ViewBag.MyEvents)
-                                    {
-                                        <tbody style="line-height:30px;">
+                            <div class="dropdown-divider" style="color:forestgreen"></div>
+                            <h6>Welcome to your  dashboard.</h6>
+                            <h6><i class="fa fa-calendar-day text-primary"></i><b> @DateTime.Now.ToString("dddd,MMMM,dd,yyyy")</b> </h6>
 
 
 
-                                            <tr data-widget="expandable-table" aria-expanded="false">
-
-                                                <td style="background-color:white">
-                                                    <h5><i class="fa fa-umbrella text-orange"></i>  @item2.Name</h5>
-
-                                                </td>
-                                                <td style="background-color:white">
-                                                    <h5><i class="fa fa-users text-orange"></i> @item2.Event_date.ToString("dd-MMMM-yyyy")</h5>
-                                                </td>
-                                                <td style="background-color:white">
-                                                    <h5><i class="fa fa-umbrella"></i>  @item2.Type</h5>
-                                                </td>
-
-                                            </tr>
-
-
-
-                                        </tbody>
-                                    }
-                                    </table>
-
-
-                            </div>
-                        
                         </div>
+
+
+
+                    </div>
                 </div>
 
             </div>
+            <div class="col-lg-3 col-6 justify-content-end">
+                <!-- small box -->
+                <div class="small-box " style="background-color: #302f2f; border-radius: 11px;">
+                    <div class="inner">
+                        <h4 style="color:white"><span class="badge badge-primary"> @ViewBag.Children  </span> Children</h4>
+
+                        <p style="color:white"><i class="fa fa-users text-white"></i> Total Children Accounts</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 justify-content-end">
+                <!-- small box -->
+                <div class="small-box " style="background-color: #0656A5; border-radius: 11px;">
+                    <div class="inner">
+                        <h4 style="color:white">@ViewBag.Credit sms</h4>
+
+                        <p style="color:white"><i class="fa fa-spin fa-circle-notch text-white"></i> @ViewBag.Response</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-sms"></i>
+                    </div>
+
+                </div>
+            </div>
+            
         </div>
-    </div>
+
+
+                </div>
+            </div>
+
+
+

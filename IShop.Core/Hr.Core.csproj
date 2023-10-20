@@ -43,13 +43,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access.cs" />
+    <Compile Include="Child.cs" />
     <Compile Include="Configs.cs" />
     <Compile Include="Confirm.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Interface\IAccess.cs" />
+    <Compile Include="Interface\Ichild.cs" />
     <Compile Include="Interface\Idata.cs" />
+    <Compile Include="Interface\Isms_config.cs" />
+    <Compile Include="Interface\Itemplate.cs" />
+    <Compile Include="OutgoingEmails.cs" />
+    <Compile Include="Outgoingsms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sms_configs.cs" />
     <Compile Include="Staff.cs" />
+    <Compile Include="Template.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

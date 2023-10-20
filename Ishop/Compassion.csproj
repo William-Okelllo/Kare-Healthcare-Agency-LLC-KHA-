@@ -428,37 +428,25 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChildrenController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OutgoingEmailsController.cs" />
+    <Compile Include="Controllers\OutgoingsmsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
+    <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\A.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Config.cs">
-      <DependentUpon>Config_x1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Config_x1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Config_x1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Config_x1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Config_x1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Config_x1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Config_x1.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
@@ -1839,22 +1827,16 @@
     <Content Include="FrontEnd\plugins\uplot\uPlot.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\BG.jpg" />
+    <Content Include="Images\Ack.jpg" />
+    <Content Include="Images\cc.png" />
+    <Content Include="Images\homee.png" />
     <Content Include="Images\l.ico" />
+    <Content Include="Images\llo.png" />
+    <Content Include="Images\lloading.png" />
     <Content Include="Images\P.png" />
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
     <Content Include="Images\whatsapp.ico" />
-    <Content Include="Models\Config_x1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Config_x1.edmx</DependentUpon>
-      <LastGenOutput>Config_x1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Config_x1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Config_x1.edmx</DependentUpon>
-      <LastGenOutput>Config_x1.cs</LastGenOutput>
-    </Content>
     <Content Include="MvcReportViewer.aspx" />
     <Content Include="MvcReportViewerErrorPage.html" />
     <Content Include="ReportViewerWebForm.aspx" />
@@ -2038,13 +2020,6 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
-    <EntityDeploy Include="Models\Config_x1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Config_x1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Config_x1.edmx.diagram">
-      <DependentUpon>Config_x1.edmx</DependentUpon>
-    </Content>
     <Content Include="Images\tst.json" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
@@ -2836,6 +2811,26 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+    <Content Include="Views\OutgoingEmails\Index.cshtml" />
+    <Content Include="Views\OutgoingEmails\Send_email.cshtml" />
+    <Content Include="Views\Outgoingsms\Index.cshtml" />
+    <Content Include="Views\Outgoingsms\Send_sms.cshtml" />
+    <Content Include="Views\Children\Create.cshtml" />
+    <Content Include="Views\Children\Delete.cshtml" />
+    <Content Include="Views\Children\Details.cshtml" />
+    <Content Include="Views\Children\Edit.cshtml" />
+    <Content Include="Views\Children\Index.cshtml" />
+    <Content Include="Views\Outgoingsms\Group.cshtml" />
+    <Content Include="Views\sms_configs\Create.cshtml" />
+    <Content Include="Views\sms_configs\Delete.cshtml" />
+    <Content Include="Views\sms_configs\Details.cshtml" />
+    <Content Include="Views\sms_configs\Edit.cshtml" />
+    <Content Include="Views\sms_configs\Index.cshtml" />
+    <Content Include="Views\Templates\Create.cshtml" />
+    <Content Include="Views\Templates\Delete.cshtml" />
+    <Content Include="Views\Templates\Details.cshtml" />
+    <Content Include="Views\Templates\Edit.cshtml" />
+    <Content Include="Views\Templates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

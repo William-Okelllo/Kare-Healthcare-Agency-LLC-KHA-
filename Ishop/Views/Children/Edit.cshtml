@@ -1,0 +1,264 @@
+﻿@model IShop.Core.Child
+
+@{
+    ViewBag.Title = "Add Child";
+}
+
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-11 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white;border-radius:12px">
+                <i class="fa fa-user-plus text-white nav-icon"></i> Edit Child Info Update
+            </div>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="/resources/demos/style.css">
+            <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+            <script>
+                $(function () {
+                    $("#datepicker").datepicker();
+                });
+                $(function () {
+                    $("#datepicker2").datepicker();
+                });
+                $(function () {
+                    $("#datepicker9").datepicker();
+                });
+            </script>
+
+            <div class="card-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+
+
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-calendar text-primary"></i> @Html.LabelFor(model => model.Createdon)</label>
+                            @Html.EditorFor(model => model.Createdon, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+
+                               @Value = DateTime.Now,
+                               @Readonly = true
+
+                           }
+                       })
+
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>
+                                <i class="fa fa-id-card text-primary"></i>
+                                @Html.LabelFor(model => model.Project_No)
+                            </label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">KE 610</span>
+                                </div>
+                                @Html.TextBoxFor(m => m.Project_No, new { @class = "form-control form-control", @placeholder = "277", onchange = "addCommas(this)", @required = true, })
+                            </div>
+                            <div id="errorMessage" style="display:none;color:red">
+                                <a href="#" style="color:red">
+                                    <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>  Child Account already exists -Same Project No
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4" id="other">
+                            <label><i class="fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Fullnames)</label>
+                            @Html.EditorFor(model => model.Fullnames, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @Placeholder = "Fullnames",
+                               @required = true,
+                           }
+                       })
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-calendar-alt text-primary"></i>   @Html.LabelFor(model => model.DOB)</label>
+                            @Html.EditorFor(model => model.DOB, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Placeholder = "Date of Birth",
+                               id = "datepicker",
+                               @required = true,
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-mobile text-primary"></i>   @Html.LabelFor(model => model.PhoneNumber)</label>
+                            @Html.EditorFor(model => model.PhoneNumber, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Placeholder = "PhoneNumber",
+                               @required = true,
+                           }
+                       })
+                        </div>
+
+                        <div class="form-group col-md-3" id="other">
+                            <label><i class="fa fa-envelope text-primary"></i>   @Html.LabelFor(model => model.Email_Address)</label>
+                            @Html.EditorFor(model => model.Email_Address, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Placeholder = "Email Address",
+                               @required = true,
+                           }
+                       })
+                            <span id="emailValidationResult"></span>
+                        </div>
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+    $(document).ready(function () {
+        $("#Email_Address").on("input", function () {
+            var email = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("ValidateEmail", "Children")',
+                type: 'POST',
+                data: { email: email },
+                success: function (result) {
+                    if (result.isValid) {
+                        $("#emailValidationResult").text("Valid email address.").css("color", "green");
+                    } else {
+                        $("#emailValidationResult").text("Invalid email address.").css("color", "red");
+                    }
+                }
+            });
+        });
+    });
+                        </script>
+
+
+
+
+
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+
+
+                    <input type="submit" value="Submit data" class="btn btn btn-primary" style="color:white" onclick="return confirm('Proceed to Update Child data?')" />
+
+
+                    <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                    </script>
+
+
+                    <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                }
+
+                </form>
+

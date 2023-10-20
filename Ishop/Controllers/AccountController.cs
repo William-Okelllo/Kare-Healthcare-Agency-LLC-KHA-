@@ -216,51 +216,16 @@ namespace Ishop.Controllers
 
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackurl = Url.Action("confirmEmail", "Account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl + "\">here</a>");
+                   
 
                     TempData["msg"] = "✔  Account Created successfully ";
 
 
 
-                    try
-                    {
-                        
 
-                        SmtpMail oMail = new SmtpMail("TryIt");
-                        oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-                        var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                        var currentUser = manager.FindById(User.Identity.GetUserId());
-
-                        oMail.To = model.Email;
-                        oMail.Subject = "Welcome to MyJobsVilla";
-                        oMail.TextBody = "Hello there your account is set proceed to login with the provided credentials"
-                         + "\n" + " "
-                        + "\n" + "Username :- " + model.UserName
-                        + "\n" + "login password :- " + model.Password
-                        + "\n" + "..."
-                        + "\n" + "login link :- " + System.Configuration.ConfigurationManager.AppSettings["systemlink"].ToString();
+                    PushEmail(user.Email, "Confirm Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl, DateTime.Now);
 
 
-                        SmtpServer oServer = new SmtpServer(ConfigurationManager.AppSettings["smtp"].ToString());
-                        oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-                        oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
-
-                        oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
-                        oServer.Port = 587;
-                        SmtpClient oSmtp = new SmtpClient();
-                        SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
-
-                        sms_send(model.PhoneNumber, oMail.TextBody);
-                    }
-
-
-                    catch
-                    {
-                        TempData["msg"] = "error occured in creating account ";
-                        return RedirectToAction("Register_Acc", "Account");
-                    }
-
-                    
 
                     return RedirectToAction("login", "Account");
                 }
@@ -270,42 +235,44 @@ namespace Ishop.Controllers
             // If we got this far, something failed, redisplay form    
             return View();
         }
-        public void sms_send(string recipient, string message)
+        private string connectionString = ConfigurationManager.ConnectionStrings["Compassion"].ConnectionString;
+        public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)
         {
-            string APIkey1 = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
-            string apiUrl = System.Configuration.ConfigurationManager.AppSettings["APIUrl"].ToString();
-            string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
-            int partnerID1 = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString());
-
-            using (HttpClient client = new HttpClient())
+            string query = "INSERT INTO OutgoingEmails (Recipient,Subject,Body,Status,CreatedOn,Trials,Response) VALUES " +
+            "                                          (@Recipient,@Subject, @Body,0,@CreatedOn,@Trials,@Response)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // Prepare the request body
-                var requestBody = new
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    apikey = APIkey1,
-                    partnerID = partnerID1,
-                    message = message,
-                    shortcode = shortcode1,
-                    mobile = recipient
 
-                };
-                var json = JsonConvert.SerializeObject(requestBody);
-                try
-                {
-                    var response = client.PostAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json")).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        TempData["msg"] = "Account created successfully";
-                    }
-                    else
-                    {
-                        var errorResponse = response.Content.ReadAsStringAsync().Result;
-                        TempData["msg"] = "error  : ";
-                    }
+                    command.Parameters.AddWithValue("@Recipient", Recipient);
+                    command.Parameters.AddWithValue("@Subject", Subject);
+                    command.Parameters.AddWithValue("@Body", Body);
+                    command.Parameters.AddWithValue("@CreatedOn", CreatedOn);
+                    command.Parameters.AddWithValue("@Trials", 0);
+                    command.Parameters.AddWithValue("@Response", "--waiting--");
+                    command.ExecuteNonQuery();
                 }
-                catch (Exception ex)
+            }
+        }
+        public void PushSms(string Recipient, string Subject, DateTime CreatedOn)
+        {
+            string query = "INSERT INTO Outgoingsms (MessageText,IsSent,CreatedOn,RecipientNumber,Trials,Response) VALUES " +
+            "                                          (@MessageText,@IsSent,@CreatedOn,@RecipientNumber,@Trials,@Response)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    TempData["msg"] = "An error occurred while sending the SMS:";
+
+                    command.Parameters.AddWithValue("@MessageText", Subject);
+                    command.Parameters.AddWithValue("@IsSent", 0);
+                    command.Parameters.AddWithValue("@CreatedOn", CreatedOn);
+                    command.Parameters.AddWithValue("@RecipientNumber", Recipient);
+                    command.Parameters.AddWithValue("@Trials", 0);
+                    command.Parameters.AddWithValue("@Response", "--waiting--");
+                    command.ExecuteNonQuery();
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace Ishop.Infa
    public class AccessContext : DbContext
     {
         public AccessContext()
-           : base("Planning")
+           : base("Compassion")
         {
         }
         public DbSet<Access> Acesss { get; set; }

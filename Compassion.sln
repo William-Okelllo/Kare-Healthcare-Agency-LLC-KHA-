@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Core", "IShop.Core\Hr.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Infa", "Ishop.Infa\Hr.Infa.csproj", "{19E99617-6A61-4D71-B2D6-16FF9A9373A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planning", "Ishop\Planning.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compassion", "Ishop\Compassion.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compassion_service", "Compassion_service\Compassion_service.csproj", "{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,12 @@ Global
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

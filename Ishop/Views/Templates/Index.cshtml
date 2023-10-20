@@ -1,0 +1,225 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Template>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Templates";
+}
+
+
+
+
+<style>
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .limited-lines {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+
+    .limited-lines {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+</style>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.78);">
+
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
+        <h4 class="card-title" style="color:white">
+            <i class="fa fa-sms"></i>
+            Sms Templates
+        </h4>
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "Templates", FormMethod.Get))
+            {
+
+                <a style="font-family: Calibri"> Code Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Recepient" })
+                <button type="submit" value="search" class="btn btn-sm btn-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                @Html.ActionLink("New Sms Template", "Create", "Templates", null, new { @class = "btn btn-sm btn-default btn" })
+                
+            }
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+    <div>
+
+
+
+
+
+
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                <thead>
+                    <tr style="color:white">
+
+                        <th style="background-color: #0656A5; font-size: medium; width: 25%">Code Name </th>
+                        <th style="background-color: #0656A5; font-size: medium; width: 50%">Content</th>
+                        <th style="background-color: #0656A5; font-size: medium; width: 25%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td style="background-color: white; width: 25% ">
+                                <h5> <span class="badge badge-secondary"><i class="fa fa-clock"></i> @item.Code</span></h5>
+                                <span class="badge badge-secondary">
+
+                                    @item.CreatedOn.ToString("dd-MMMM-yyyy")
+
+                                </span>
+
+                            </td>
+                            <td style="background-color: whitesmoke; width: 50%;border-radius:12px">
+                                <p class="limited-lines"><small>@item.Content</small></p>
+
+                            </td>
+                            <td style="background-color:ghostwhite">
+
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                                        <div class="dropdown-divider"></div>
+                                        <a href="@Url.Action("Edit", "Templates", new { id = item.Id })" class="dropdown-item">
+                                            <i class="fa fa-pen-nib text-primary"></i> Update Template Info
+                                        </a>
+                                       
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this template ')) { window.location.href = '@Url.Action("Delete", "Templates", new { id = item.Id, })'; }">
+                                            <i class="fa fa-times-circle text-danger"></i> Delete Template 
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+
+
+
+            <style>
+                .ul.pagination {
+                    display: inline-block;
+                    padding: 1;
+                    margin: 1;
+                    border-radius: 0.5rem;
+                }
+
+                ul.pagination li {
+                    display: inline;
+                }
+
+                    ul.pagination li a {
+                        color: black;
+                        float: left;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                        transition: background-color;
+                        background-color: #ddd;
+                        border-color: white;
+                        border-radius: 0.5rem;
+                    }
+
+                        ul.pagination li a.active {
+                            background-color: dodgerblue;
+                            color: white;
+                        }
+
+                        ul.pagination li a:hover:not(.active) {
+                            background-color: dodgerblue;
+                            border-radius: 0.5rem;
+                        }
+            </style>
+            <div id="container" style="text-align:left">
+
+                <div class="pagination" style="text-align:left">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+

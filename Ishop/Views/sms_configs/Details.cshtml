@@ -1,0 +1,50 @@
+﻿@model Ishop.Models.sms_configs
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>sms_configs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.APIkey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APIkey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.partnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.partnerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shortcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shortcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APIUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APIUrl)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

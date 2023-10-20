@@ -14,11 +14,11 @@
     }
 </style>
 
-<div class="card " style="background-color: rgb(255, 255, 255, 0.41);">
+<div class="card " style="background-color: rgb(255, 255, 255, 0.84);">
 
 
 
-    <div class="card-header" style="background-color: #9b4309 ">
+    <div class="card-header" style="background-color: #0656A5 ">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-home"></i>
             Configurations Section
@@ -29,98 +29,60 @@
 
             <div class="col-xl-6">
                 <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                    <div class="card-header" style="background-color: #9b4309; color: white "><i class="fa fa-car"></i> Garage Configs </div>
+                    <div class="card-header" style="background-color: #0656A5; color: white "><i class="fa fa-envelope"></i> Mail Configs </div>
                     <div class="card-body text-left">
-
-                        
                         <div class="form-row">
-                            <div class="col-md-6 mb-6">
-                                <small><i class="fa fa-cogs text-orange"></i> <b>GARAGE NAME</b></small>
-                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Name"]" ReadOnly>
+                            <div class="col-md-7 mb-7">
+                                <small><i class="fa fa-envelope text-warning"></i> Sending Mail</small>
+                                <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Email"]" ReadOnly=true>
                             </div>
-                            <div class="col-md-6 mb-6">
-                                <small><i class="fa fa-map-marker text-orange"></i> <b>GARAGE LOCATION</b></small>
-                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["location"]" ReadOnly>
+                            <div class="col-md-3 mb-3">
+                                <small><i class="fa fa-key text-warning"></i> password</small>
+                                <input type="password" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Password"]" ReadOnly=true>
+                            </div>
+                            <div class="col-md-7 mb-7">
+                                <small><i class="fa fa-key text-warning"></i> SSRS Server</small>
+                                <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["SSRSReportsUrl"]" ReadOnly=true>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <small><i class="fa fa-key text-warning"></i> SMTP</small>
+                                <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["SMTP"]" ReadOnly=true>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-6">
-                                <small><i class="fa fa-mobile text-orange"></i> <b>GARAGE CONTACT</b></small>
-                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Phone"]" ReadOnly>
-                            </div>
-                            <div class="col-md-6 mb-6">
-                                <small><i class="fa fa-envelope text-orange"></i> <b>GARAGE EMAIL</b></small>
-                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Email"]" ReadOnly>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-4">
-                                <small><i class="fa fa-percentage text-orange"></i> <b>VAT %</b></small>
-                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["VAT"]" ReadOnly>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <small><i class="fa fa-percentage text-orange"></i> <b>MARK UP %</b></small>
-                                <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["MarkUp"]" ReadOnly>
-                            </div>
-
-
-
-                        </div>
-                        <a href="@Url.Action("Index", "garageconfig")" class="nav-link">
-                            <i class="fa fa-car"></i>  View/Update Configs 
+                        <a href="@Url.Action("Index", "Configs")" class="nav-link">
+                            View/Update Configs <span class="float-right badge bg-primary"><i class="fa fa-users"></i></span>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6">
-                <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                    <div class="card-header" style="background-color: #9b4309; color: white "><i class="fa fa-envelope"></i> Mail Configs </div>
-                    <div class="card-body text-left">
-                        <small><i class="fa fa-envelope text-warning"></i> Sending Mail</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Email"]" ReadOnly=true>
-                        <small><i class="fa fa-key text-warning"></i> password</small>
-                        <input type="password" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Password"]" ReadOnly=true>
-                        <small><i class="fa fa-key text-warning"></i> SSRS Server</small>
-                        <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["SSRSReportsUrl"]" ReadOnly=true>
-
-                        <div class="card-footer p-0" style="background-color:whitesmoke">
-                        </div>
-                    </div>
-                    <a href="@Url.Action("Index", "Configs")" class="nav-link">
-                        View/Update Configs <span class="float-right badge bg-primary"><i class="fa fa-users"></i></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <hr />
-            <div class="row">
+       
 
                 <div class="col-xl-6" style="border-radius: 14px;">
                     <div class="card mb- mb-xl-0" style="border-radius: 14px;">
-                        <div class="card-header" style="background-color: #9b4309; color: white "><i class="fa fa-sms"></i> Sms Configs </div>
+                        <div class="card-header" style="background-color: #0656A5; color: white "><i class="fa fa-sms"></i> Sms Configs </div>
                         <div class="card-body text-left">
                             <div class="form-row">
                                 <div class="col-md-7 mb-7">
                                     <small><i class="fa fa-envelope text-warning"></i> API Key</small>
-                                    <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["APIkey"]" ReadOnly>
+                                    <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["APIkey"]" ReadOnly>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <small><i class="fa fa-key text-warning"></i> Partner ID</small>
-                                    <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["partnerID"]" ReadOnly>
+                                    <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["partnerID"]" ReadOnly>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <small><i class="fa fa-key text-warning"></i> shortcode</small>
-                                    <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["shortcode"]" ReadOnly>
+                                    <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["shortcode"]" ReadOnly>
                                 </div>
                                 <div class="col-md-8 mb-8">
                                     <small><i class="fa fa-key text-warning"></i> APIUrl</small>
-                                    <input type="text" id="Email" name="Email" class="form-control" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["APIUrl"]" ReadOnly>
+                                    <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["APIUrl"]" ReadOnly>
                                     <div class="card-footer p-0" style="background-color:whitesmoke">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a href="@Url.Action("Index", "sms")" class="nav-link">
+                        <a href="@Url.Action("Index", "sms_configs")" class="nav-link">
                             View/Update Configs <span class="float-right badge bg-primary"><i class="fa fa-users"></i></span>
                         </a>
                     </div>

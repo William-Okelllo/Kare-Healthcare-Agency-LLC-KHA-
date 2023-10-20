@@ -1,0 +1,99 @@
+﻿@model IShop.Core.Sms_configs
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<br />
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-8 col-8">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #001F3F;color:white">
+                <i class="fa fa-paper-plane text-white nav-icon"></i> Sms Configs Set
+            </div>
+            <div class="card-body">
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label><i class="fa fa-link text-orange"></i> @Html.LabelFor(model => model.APIkey) </label>
+                            @Html.EditorFor(model => model.APIkey, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               placeholder = "APIkey",
+                               @required = "required",
+
+
+                           }
+                       })
+
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>
+                                <i class="fa fa-users text-orange"></i> @Html.LabelFor(model => model.partnerID)
+                            </label>
+                            @Html.TextBoxFor(model => model.partnerID, new
+                            {
+                                @class = "form-control form-control-sm",
+                                placeholder = "partnerID",
+                           @required = "required",
+                       })
+                            @Html.ValidationMessageFor(model => model.partnerID)
+
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <i class="fa fa-bookmark text-orange"></i> @Html.LabelFor(model => model.shortcode)
+                            </label>
+                            @Html.TextBoxFor(model => model.shortcode, new
+                            {
+                                @class = "form-control form-control-sm",
+                                placeholder = "Smtp",
+                           @required = "required",
+                       })
+                            @Html.ValidationMessageFor(model => model.shortcode)
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label><i class="fa fa-code-branch text-orange"></i> @Html.LabelFor(model => model.APIUrl) </label>
+                            @Html.EditorFor(model => model.APIUrl, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               placeholder = "APIUrl",
+                               @required = "required",
+
+
+                           }
+                       })
+
+                        </div>
+                        
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save " class="btn btn-warning" />
+                            || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
