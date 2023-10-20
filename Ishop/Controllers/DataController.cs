@@ -17,17 +17,17 @@ namespace Ishop.Controllers
 { [Authorize]
     public class DataController : Controller
     {
-        private DataContext db = new DataContext();
+        private Userstable db = new Userstable();
 
         // GET: Data
         public ActionResult Index(string searchBy, string search, int? page)
         {
 
+            return View(db.AspNetUsers.ToList().ToPagedList(page ?? 1, 11));
 
-
-
-            return RedirectToAction("Index", "Data");
         }
+
+
 
         // GET: Data/Details/5
 

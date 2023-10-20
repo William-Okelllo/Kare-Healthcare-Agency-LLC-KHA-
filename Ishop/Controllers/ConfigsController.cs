@@ -50,7 +50,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Configs config)
+        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp,Port")] Configs config)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace Ishop.Controllers
                 webConfigApp.AppSettings.Settings["smtp"].Value = config.Smtp;
                 webConfigApp.AppSettings.Settings["SSRSReportsUrl"].Value = config.SSRSReportsUrl;
                 webConfigApp.AppSettings.Settings["Businesssmail"].Value = config.Business_mail;
-                
+                webConfigApp.AppSettings.Settings["Port"].Value = config.port;
 
                 //Save the Modified settings of AppSettings.
                 webConfigApp.Save();
@@ -105,7 +105,7 @@ namespace Ishop.Controllers
                 webConfigApp.AppSettings.Settings["smtp"].Value = config.Smtp;
                 webConfigApp.AppSettings.Settings["SSRSReportsUrl"].Value = config.SSRSReportsUrl;
                 webConfigApp.AppSettings.Settings["Businesssmail"].Value = config.Business_mail;
-
+                webConfigApp.AppSettings.Settings["Port"].Value = config.port;
 
                 //Save the Modified settings of AppSettings.
                 webConfigApp.Save();

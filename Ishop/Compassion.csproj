@@ -447,6 +447,24 @@
     <Compile Include="Models\A.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>AspNetUsers-table.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers-table.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AspNetUsers-table.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers-table.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AspNetUsers-table.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers-table.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AspNetUsers-table.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Datapoint.cs" />
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
@@ -1837,6 +1855,16 @@
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
     <Content Include="Images\whatsapp.ico" />
+    <Content Include="Models\AspNetUsers-table.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AspNetUsers-table.edmx</DependentUpon>
+      <LastGenOutput>AspNetUsers-table.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AspNetUsers-table.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AspNetUsers-table.edmx</DependentUpon>
+      <LastGenOutput>AspNetUsers-table.cs</LastGenOutput>
+    </Content>
     <Content Include="MvcReportViewer.aspx" />
     <Content Include="MvcReportViewerErrorPage.html" />
     <Content Include="ReportViewerWebForm.aspx" />
@@ -2037,6 +2065,13 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\AspNetUsers-table.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AspNetUsers-table.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AspNetUsers-table.edmx.diagram">
+      <DependentUpon>AspNetUsers-table.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\Events.pubxml" />
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
