@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.ServiceProcess;
 
 namespace Ishop.Controllers
 {
@@ -57,7 +58,29 @@ namespace Ishop.Controllers
                 }
             }
 
-                return View();
+
+
+            ServiceController sc = new ServiceController("CompassionService");
+
+            try
+            {
+                string status = sc.Status.ToString();
+                ViewBag.status=status;
+            }
+            catch (InvalidOperationException)
+            {
+                // Handle exceptions if the service doesn't exist or there is an issue
+                ViewBag.status ="ServiceStatus Service not found or an error occurred.";
+            }
+
+
+
+
+
+
+
+
+            return View();
         }
 
         

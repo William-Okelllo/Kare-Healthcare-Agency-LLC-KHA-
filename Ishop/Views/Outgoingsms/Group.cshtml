@@ -97,7 +97,7 @@
 
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-9 col-sm-12 col-12">
+    <div class="col-md-10 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
                 <i class="fa fa-sms"></i> Send Group Sms
@@ -186,30 +186,29 @@
                                     });
                                 </script>
 
+                                
                                 <div class="form-row">
                                     <medium style="font-family:Calibri">
                                         <i class="fa fa-comment text-primary"></i>
                                         Message
                                     </medium>
-                                    <div class="form-row">
+                                    <hr />
+                                    @Html.TextAreaFor(model => model.MessageText, 6, 100, htmlAttributes: new
+                               {
+                                   style = "width: 100%; max-width:100%;",
+                                   @placeholder = "Your message",
+                                   id = "MessageText",
+                                   @autofocus = ""
+                                   ,
+                                   @Required = true,
+                                   @class = "form-control form-rounded2 "
 
-
-                                        @Html.TextAreaFor(model => model.MessageText, 6, 100, htmlAttributes: new
-                                   {
-                                       style = "width: 100%; max-width:100%;",
-                                       @placeholder = "Your message",
-                                       id = "MessageText",
-                                       @autofocus = ""
-                                       ,
-                                       @Required = true,
-                                       @class = "form-control form-rounded2 "
-
-                                   })
-                                    </div>
+                               })
+                                </div>
                                 </div>
                                 <br />
                                 <div class="dropdown-divider"></div>
-                                <input type="submit" value="Send Single Message" class="btn btn-warning" />
+                                <input type="submit" value="Send Group Message" class="btn btn-warning" />
                                 ||
                                 @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
                         </form>

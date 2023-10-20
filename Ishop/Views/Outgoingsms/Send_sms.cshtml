@@ -110,92 +110,90 @@
                         @Html.AntiForgeryToken()
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <form>
+                        <form>
 
-                        <h5 style="text-align:center">
-                            <i class=" fa fa-sms text-primary"></i>   Sending sms to  : @ViewBag.contact.Fullnames
-                        </h5>
-                        <div class="dropdown-divider"></div>
-                        <div class="form-row">
+                            <h5 style="text-align:center">
+                                <i class=" fa fa-sms text-primary"></i>   Sending sms to  : @ViewBag.contact.Fullnames
+                            </h5>
+                            <div class="dropdown-divider"></div>
+                            <div class="form-row">
 
-                            <div class="form-group col-md-3">
-                                <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
-                                @Html.EditorFor(model => model.CreatedOn, new
-                           {
-                               htmlAttributes = new
+                                <div class="form-group col-md-3">
+                                    <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                                    @Html.EditorFor(model => model.CreatedOn, new
                                {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Record",
-                                   @Value = DateTime.Now,
-                                   @ReadOnly = true,
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Record",
+                                       @Value = DateTime.Now,
+                                       @ReadOnly = true,
 
 
-                               }
-                           })
+                                   }
+                               })
 
-                            </div>
+                                </div>
 
-                            <div class="form-group col-md-4">
-                                <label><i class=" fa fa-mobile text-orange"></i>   @Html.LabelFor(model => model.RecipientNumber)</label>
-                                @Html.EditorFor(model => model.RecipientNumber, new
-                           {
-                               htmlAttributes = new
+                                <div class="form-group col-md-4">
+                                    <label><i class=" fa fa-mobile text-orange"></i>   @Html.LabelFor(model => model.RecipientNumber)</label>
+                                    @Html.EditorFor(model => model.RecipientNumber, new
                                {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "RecipientNumber",
-                                   @Value = ViewBag.contact.PhoneNumber,
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "RecipientNumber",
+                                       @Value = ViewBag.contact.PhoneNumber,
 
 
-                               }
-                           })
+                                   }
+                               })
 
-                            </div>
-                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+                                </div>
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 
-                            <script type="text/javascript">
-                                $(function () {
-                                    $("#Code").chosen();
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $("#Code").chosen();
 
-                                });
-                            </script>
-                            <div class="form-group col-md-3">
-                                <label><i class="fa fa-receipt text-primary"></i> @Html.LabelFor(model => model.Code)</label>
-                                @Html.DropDownList("Code", ViewBag.Temp as SelectList, "-- Select Template --",
-                                    new { @class = "form-control", id = "Code" })
-                            </div>
+                                    });
+                                </script>
+                                <div class="form-group col-md-3">
+                                    <label><i class="fa fa-receipt text-primary"></i> @Html.LabelFor(model => model.Code)</label>
+                                    @Html.DropDownList("Code", ViewBag.Temp as SelectList, "-- Select Template --",
+                                        new { @class = "form-control", id = "Code" })
+                                </div>
 
-                            <script>
-                                $(document).ready(function () {
-                                    $("#Code").change(function () {  // Change 'keyup' to 'change'
-                                        var Code = $(this).val();
-                                        $.ajax({
-                                            url: '/outgoingsms/GetDataName',
-                                            method: 'GET',
-                                            data: { Code: Code },
-                                            success: function (data) {
-                                                if (data) {
-                                                    $('#MessageText').val(data.Content);
-                                                } else {
-                                                    // Handle no data case if needed
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#Code").change(function () {  // Change 'keyup' to 'change'
+                                            var Code = $(this).val();
+                                            $.ajax({
+                                                url: '/outgoingsms/GetDataName',
+                                                method: 'GET',
+                                                data: { Code: Code },
+                                                success: function (data) {
+                                                    if (data) {
+                                                        $('#MessageText').val(data.Content);
+                                                    } else {
+                                                        // Handle no data case if needed
+                                                    }
+                                                },
+                                                error: function () {
+                                                    console.log('Error retrieving record data.');
                                                 }
-                                            },
-                                            error: function () {
-                                                console.log('Error retrieving record data.');
-                                            }
+                                            });
                                         });
                                     });
-                                });
-                            </script>
+                                </script>
 
-                            <div class="form-row">
-                                <medium style="font-family:Calibri">
-                                    <i class="fa fa-comment text-primary"></i>
-                                    Message
-                                </medium>
                                 <div class="form-row">
-
-
+                                    <medium style="font-family:Calibri">
+                                        <i class="fa fa-comment text-primary"></i>
+                                        Message
+                                    </medium>
+                                    <hr />
                                     @Html.TextAreaFor(model => model.MessageText, 6, 100, htmlAttributes: new
                                {
                                    style = "width: 100%; max-width:100%;",
@@ -214,7 +212,7 @@
                             <input type="submit" value="Send Single Message" class="btn btn-warning" />
                             ||
                             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-</form>
+                        </form>
                     }
                 </div>
             </div>
