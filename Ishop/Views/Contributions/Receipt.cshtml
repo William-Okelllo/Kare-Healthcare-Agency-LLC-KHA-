@@ -1,0 +1,150 @@
+﻿@model IShop.Core.Contribution
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .curved-table {
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+            .curved-table th,
+            .curved-table td {
+                padding: 10px;
+                border: 1px solid orange;
+            }
+
+        .invoice {
+            width: 800px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+            .invoice-header div {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+        .invoice-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+            .invoice-info div {
+                font-weight: bold;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+
+        .invoice-total {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            display: -webkit-box;
+            -webkit-line-clamp: 9;
+            -webkit-box-orient: vertical;
+            max-width: 700px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 96px;
+        }
+    </style>
+    <style>
+        .page-break {
+            page-break-before: always;
+        }
+        input[type="text"].field-name {
+            border: none;
+            border-bottom: dotted 1px #bebebe;
+            width: 200px;
+            margin: 10px;
+        }
+        input[type="text9"].field-name {
+            border: none;
+            border-bottom: dotted 1px #bebebe;
+            width: 300px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice">
+        <table class="table table-borderless table-hover  text-nowrap ">
+
+            <tbody>
+            <td style="background-color:white">
+                <div style="text-align:left">
+                    <img src="~/Images/llo.png" height="100" />
+                </div>
+            </td>
+            <td style="background-color:white">
+                <div class="invoice-total" style="text-align: right; color: #0656A5; font-family: Calibri">
+                    <h4>KE610 ACK CDC RONGAI</h4>
+                    <div class="dropdown-divider"></div>
+                    Phone No : +254 700 000 000
+                    <div class="dropdown-divider"></div>
+                    Location : Kenya, Nakuru , Rongai
+                    <div class="dropdown-divider"></div>
+                    Email Address : Ke610Ackcdc@gmail.com
+                </div>
+            </td>
+            </tbody>
+
+
+
+        </table>
+        <h3 style="text-align: center; color: #0656A5">PAYMENT RECEIPT</h3>
+        
+        <hr />
+
+        <h4>  <b style="color: #0656A5"> Child Name</b> :<input type="text" class="field-name" value=" @ViewBag.Childinfo.Fullnames" />               <b style="color: #0656A5"> Project Number</b> :<input type="text" class="field-name" value="KE6100 @ViewBag.Contributioninfo.Project_No" /></h4>
+
+        <h4><b style="color: #0656A5"> Paid Amount</b> :<input type="text" class="field-name" value=" @ViewBag.Contributioninfo.Paid.ToString("#,##0.00")" /> <b style="color: #0656A5"> Paid for Month</b> :<input type="text9" class="field-name" value=" @ViewBag.Contributioninfo.Month" /></h4>
+        <h4>
+            <b style="color: #0656A5"> Balance</b> :<input type="text" class="field-name" value=" @ViewBag.Contributioninfo.Balance.ToString("#,##0.00")" />
+            <b style="color: #0656A5"> Intial Amount</b> :<input type="text" class="field-name" value=" @ViewBag.Contributioninfo.Total.ToString("#,##0.00")" />
+        </h4>
+
+        <hr />
+
+        <p style="text-align: center; color: #0656A5"> Releasing children from poverty in Jesus' name</p>
+    </div>
+
+      
+
+
+        

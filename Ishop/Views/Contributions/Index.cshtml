@@ -1,10 +1,10 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
-@model IPagedList<IShop.Core.Child>
+@model IPagedList<IShop.Core.Contribution>
 @using Microsoft.AspNet.Identity
 
 @{
-    ViewBag.Title = "Children";
+    ViewBag.Title = "Contributions";
 }
 
 
@@ -18,7 +18,6 @@
         z-index: 999;
     }
 </style>
-
 <style>
     body {
         background-image: url(../../images/33.jpg);
@@ -54,21 +53,21 @@
 
     <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
         <h4 class="card-title" style="color:white">
-            <i class="fa fa-users"></i>
-            Children Data
+            <i class="fa fa-coins"></i>
+            Parents Contributions
         </h4>
 
         <div style="text-align: right; color: white ">
-            @using (Html.BeginForm("Index", "Children", FormMethod.Get))
+            @using (Html.BeginForm("Index", "contributions", FormMethod.Get))
             {
 
-                <a style="font-family: Calibri"> Child Name/ Project No</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Child Name/ Project No" })
+                <a style="font-family: Calibri">  Project No</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Project No" })
                 <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
 
-                @Html.ActionLink("Add Child ", "Create", "Children", null, new { @class = "btn btn-sm btn-default btn" })
+                @Html.ActionLink("Collect Contribution ", "Index", "Children", null, new { @class = "btn btn-sm btn-default btn" })
             }
 
         </div>
@@ -119,11 +118,11 @@
                     <tr style="color:white">
 
                         <th style="background-color: #0656A5">Project No</th>
-                        <th style="background-color: #0656A5 ">Fullnames</th>
-                        <th style="background-color: #0656A5 ">DOB</th>
-                        <th style="background-color: #0656A5 ">Email Address</th>
-                        <th style="background-color: #0656A5">Phone No</th>
-                        <th style="background-color: #0656A5">Contributions Balance</th>
+                        <th style="background-color: #0656A5 ">Paid</th>
+                        <th style="background-color: #0656A5 ">Balance | Intial  </th>
+                        <th style="background-color: #0656A5 ">Paid for Months</th>
+                       
+
                         <th style="background-color: #0656A5">Action</th>
                     </tr>
                 </thead>
@@ -133,13 +132,19 @@
                         <tr>
 
                             <td style="background-color: white"><span class="badge badge-warning"><i class="fa fa-bookmark text-white"></i>  KE 610</span>  <span class="badge badge-secondary"><b>@item.Project_No</b></span> </td>
-                            <td style="background-color: white"><i class="fa fa-user-circle text-primary"></i>  @item.Fullnames </td>
-                            <td style="background-color: white"><i class="fa fa-calendar-check text-primary"></i>  @item.DOB.ToString("dd-MMM-yyyy")</td>
-                            <td style="background-color: white"><i class="fa fa-envelope text-primary"></i>  @item.Email_Address</td>
-                            <td style="background-color: white"><i class="fa fa-mobile text-warning"></i>  @item.PhoneNumber</td>
+
+
                             <td style="background-color: white">
-                                <i class="fa fa-coins text-primary"></i>  @item.Balance.ToString("#,##0.00")
+                                <i class="fa fa-coins text-primary"></i>  @item.Paid.ToString("#,##0.00")
                             </td>
+                            <td style="background-color: white">
+                                <span class="badge badge-warning"><i class="fa fa-coins text-white"></i> Balance :  @item.Balance.ToString("#,##0.00") </span> ||
+                                <span class="badge badge-success"><i class="fa fa-coins text-white"></i> Intial :  @item.Total.ToString("#,##0.00") </span>
+                            </td>
+                            <td style="background-color: white">
+                                <i class="fa fa-clock text-primary"></i>  @item.Month
+                            </td>
+                            
                             <td style="background-color:ghostwhite">
 
                                 <div class="btn-group dropdown">
@@ -149,41 +154,14 @@
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                                         <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("Edit", "Children", new { id = item.Id })" class="dropdown-item">
-                                            <i class="fa fa-pen-nib text-primary"></i> Update Child Info
+                                        <a href="@Url.Action("Receipt", "contributions", new { id = item.Id })" class="dropdown-item">
+                                            <i class="fa fa-file-pdf text-primary"></i> Print Receipt
                                         </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("Send_sms", "outgoingsms", new { id = item.Id })" class="dropdown-item">
-                                            <i class="fa fa-sms text-primary"></i> Send an Sms
-                                        </a>
+                                        
 
 
 
-                                        @if (item.Balance != 0)
-
-                                        {
-                                            <div class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Collect", "contributions", new { id = item.Id })" class="dropdown-item">
-                                                <i class="fa fa-coins text-primary"></i> Collect Contributions
-                                            </a>
-
-                                        }
-
-
-
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete  ')) { window.location.href = '@Url.Action("Delete", "Children", new { id = item.Id, })'; }">
-                                            <i class="fa fa-times-circle text-danger"></i> Delete Child info
-                                        </a>
-                                        <script>
-                                            $(function () {
-                                                $('#Deny').click(function () {
-                                                    if (confirm('Are you sure?')) {
-                                                        window.location.href = $(this).data('url');
-                                                    }
-                                                });
-                                            });
-                                        </script>
+                                       
                                     </div>
                                 </div>
                             </td>

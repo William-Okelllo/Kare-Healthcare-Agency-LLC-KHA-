@@ -87,7 +87,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Project_No,Fullnames,DOB,Email_Address,PhoneNumber,Createdon")] Child child)
+        public ActionResult Create([Bind(Include = "Id,Project_No,Fullnames,DOB,Email_Address,PhoneNumber,Createdon,Balance")] Child child)
         {
             if (ModelState.IsValid)
             {
@@ -120,7 +120,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Project_No,Fullnames,DOB,Email_Address,PhoneNumber,Createdon")] Child child)
+        public ActionResult Edit([Bind(Include = "Id,Project_No,Fullnames,DOB,Email_Address,PhoneNumber,Createdon,Balance")] Child child)
         {
             if (ModelState.IsValid)
             {

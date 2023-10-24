@@ -1,7 +1,7 @@
 ﻿@model IShop.Core.Child
 
 @{
-    ViewBag.Title = "Add Child";
+    ViewBag.Title = "Update Child info";
 }
 
 
@@ -232,7 +232,18 @@
 
 
 
-
+                        <div class="form-group col-md-2" id="other">
+                            <label><i class="fa fa-coins text-primary"></i>   @Html.LabelFor(model => model.Balance)</label>
+                            @Html.EditorFor(model => model.Balance, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Placeholder = "0.0",
+                               @required = true,
+                           }
+                       })
+                        </div>
 
                     </div>
 
@@ -240,7 +251,7 @@
 
 
 
-                    <input type="submit" value="Submit data" class="btn btn btn-primary" style="color:white" onclick="return confirm('Proceed to Update Child data?')" />
+                    <input type="submit" value="Update Child Info" class="btn btn btn-primary" style="color:white" onclick="return confirm('Proceed to Update Child data?')" />
 
 
                     <script>

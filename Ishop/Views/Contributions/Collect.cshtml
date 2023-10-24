@@ -1,0 +1,331 @@
+﻿@model IShop.Core.Contribution
+
+@{
+    ViewBag.Title = "Collect";
+}
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white">
+                <i class="fa fa-coins text-white nav-icon"></i> Record Contribution
+            </div>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="/resources/demos/style.css">
+            <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+            <script>
+                $(function () {
+                    $("#datepicker").datepicker();
+                });
+                $(function () {
+                    $("#datepicker2").datepicker();
+                });
+                $(function () {
+                    $("#datepicker9").datepicker();
+                });
+            </script>
+
+            <div class="card-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="col-lg-5 col-6 justify-content-end">
+                        <!-- small box -->
+                        <div class="small-box " style="background-color: #0656A5; border-radius: 11px;">
+                            <div class="inner">
+                                <h4 style="color:white"><i class="fa fa-user-circle text-white"></i> @ViewBag.Childinfo.Fullnames</h4>
+                                
+                                <h6 style="color:white">
+                                    <span class="badge badge-warning"><i class="fa fa-bookmark text-white"></i>  KE 6100</span>  @ViewBag.Childinfo.Project_No
+                                    ||
+                                    <span class="badge badge-warning"><i class="fa fa-bookmark text-white"></i>  Phone Number</span>
+                                    @ViewBag.Childinfo.PhoneNumber
+                                </h6>
+                                
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-user-circle"></i>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="card-body" style="background-color: #f8f8f8; border-radius: 11px;">
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label><i class="fa fa-calendar text-primary"></i> @Html.LabelFor(model => model.CreatedOn)</label>
+                                @Html.EditorFor(model => model.CreatedOn, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+
+                                   @Value = DateTime.Now,
+                                   @Readonly = true
+
+                               }
+                           })
+
+                            </div>
+
+                            <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-user-tag text-primary"></i>   @Html.LabelFor(model => model.Project_No)</label>
+                                @Html.EditorFor(model => model.Project_No, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Fullnames",
+                                   @Value = ViewBag.Childinfo.Project_No,
+                                   @Readonly = true
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.ChildId)</label>
+                                @Html.EditorFor(model => model.ChildId, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Fullnames",
+                                   @Value = ViewBag.Childid,
+                                   @Readonly = true
+                               }
+                           })
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-coins text-primary"></i>   @Html.LabelFor(model => model.Paid)</label>
+                                @Html.EditorFor(model => model.Paid, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm ",
+                                   @Placeholder = "Paid Amount",
+                                   onchange = "addCommas(this)",
+                                   @required = true,
+                               }
+                           })
+                                <span id="paidError" style="color: red; display: none;">Paid amount cannot be greater than the Package Amount.</span>
+                            </div>
+                            <script>
+                                function addCommas(element) {
+                                    var value = parseFloat(element.value.replace(/,/g, ''));
+                                    element.value = value.toLocaleString('en-US');
+                                }
+                                $(function () {
+                                    $('form').submit(function () {
+
+
+                                        var amountString = $('#Paid').val();
+                                        var amountWithoutCommas = amountString.replace(/,/g, '');
+                                        $('#Paid').val(amountWithoutCommas);
+                                    });
+
+                                });
+                            </script>
+
+
+                            <script>
+                                $(document).ready(function () {
+                                    // this calculates values automatically
+                                    sum();
+
+                                    $("#Paid").on("change", function () {
+                                        sum();
+                                        validatePaidAmount();
+                                    });
+                                });
+
+                                function sum() {
+                                    var num1 = document.getElementById('Total').value;
+
+                                    var num2 = parseFloat($("#Paid").val().replace(/,/g, ''));
+                                    var result = parseFloat(num1) - parseFloat(num2);
+                                    if (!isNaN(result)) {
+                                        document.getElementById('Balance').value = result;
+                                    }
+                                }
+                                function validatePaidAmount() {
+                                    var totalAmount = parseFloat(document.getElementById('Total').value);
+                                    var paidAmount = parseFloat(document.getElementById('Paid').value);
+
+                                    if (paidAmount > totalAmount) {
+                                        document.getElementById('paidError').style.display = 'inline';
+
+                                    } else {
+                                        document.getElementById('paidError').style.display = 'none';
+                                    }
+                                }
+                            </script>
+
+
+
+
+
+
+
+                            <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-coins text-primary"></i>   @Html.LabelFor(model => model.Total)</label>
+                                @Html.EditorFor(model => model.Total, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm ",
+                                   @Placeholder = "Total",
+                                   @Value = ViewBag.Childinfo.Balance,
+                                   @Readonly = true
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-coins text-primary"></i>   @Html.LabelFor(model => model.Balance)</label>
+                                @Html.EditorFor(model => model.Balance, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm ",
+                                   @Placeholder = "Balance",
+                                   @Readonly = true
+                               }
+                           })
+                            </div>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $("#Month").chosen();
+                                });
+                            </script>
+                            <div class="form-group col-md-3" id="other">
+                                <label><i class="fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Month)</label>
+                                @Html.ListBoxFor(model => model.Month,
+                new SelectList(
+                    new List<string>
+                    {
+                        "January", "February", "March", "April",
+                        "May", "June", "July", "August",
+                        "September", "October", "November", "December"
+                    })
+                , new { id = "Month", multiple = "multiple", @class = "form-control", @required = true, })
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                        <div class="dropdown-divider"></div>
+
+
+
+                        <input type="submit" value="Record Contribution" class="btn btn btn-primary" style="color:white" onclick="return confirm('Proceed to record Contribution?')" />
+
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                        </script>
+
+
+                        <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                        }
+
+                        </form>
+

@@ -45,10 +45,11 @@
     <Compile Include="Access.cs" />
     <Compile Include="Child.cs" />
     <Compile Include="Configs.cs" />
-    <Compile Include="Confirm.cs" />
+    <Compile Include="Contribution.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Interface\IAccess.cs" />
     <Compile Include="Interface\Ichild.cs" />
+    <Compile Include="Interface\Icontri.cs" />
     <Compile Include="Interface\Idata.cs" />
     <Compile Include="Interface\Isms_config.cs" />
     <Compile Include="Interface\Itemplate.cs" />

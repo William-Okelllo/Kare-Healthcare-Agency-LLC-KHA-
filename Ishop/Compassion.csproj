@@ -432,6 +432,7 @@
     <Compile Include="Controllers\ChildrenController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\ContributionsController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -2867,6 +2868,12 @@
     <Content Include="Views\Templates\Details.cshtml" />
     <Content Include="Views\Templates\Edit.cshtml" />
     <Content Include="Views\Templates\Index.cshtml" />
+    <Content Include="Views\Contributions\Collect.cshtml" />
+    <Content Include="Views\Contributions\Delete.cshtml" />
+    <Content Include="Views\Contributions\Details.cshtml" />
+    <Content Include="Views\Contributions\Edit.cshtml" />
+    <Content Include="Views\Contributions\Index.cshtml" />
+    <Content Include="Views\Contributions\Receipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

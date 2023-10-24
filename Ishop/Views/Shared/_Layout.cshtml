@@ -56,15 +56,11 @@
             <br />
             <h5 style="font-style:italic;color:navy">...loading...</h5>
             <div class="row">
-                <div class="spinner-grow text-primary" role="status">
-                    <span class="sr-only"></span>
-                </div>...
-                <div class="spinner-grow text-secondary" role="status">
-                    <span class="sr-only"></span>
-                </div>...
-                <div class="spinner-grow text-success" role="status">
-                    <span class="sr-only"></span>
-                </div>
+                <h4>
+                    <i class="fa fa-spin fa-spinner text-primary"></i> ..
+                    <i class="fa fa-spin fa-spinner text-navy"></i> ..
+                    <i class="fa fa-spin fa-spinner text-success"></i>
+                </h4>
             </div>
         </div>
 
@@ -308,7 +304,30 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
 
+
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-coins text-orange"></i>
+                            <p style="color: black; font-family: Calibri">
+                               Parents' Contributions <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "contributions")" class="nav-link">
+
+                                    <i class="fa fa-book-reader text-orange nav-icon"></i>
+                                    <p style="color: black">
+                                        Contributions list
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-header"> <i class="fa fa-bookmark text-gray nav-icon"></i> Sms Module</li>
 
                     <li class="nav-item">
@@ -354,7 +373,7 @@
                     </li>
 
 
-                   
+
 
                     <li class="nav-item">
 
@@ -382,11 +401,11 @@
 
                                     <i class="fa fa-folder-open text-primary nav-icon"></i>
                                     <p style="color: black">
-                                       Templates
+                                        Templates
                                     </p>
                                 </a>
-                            
-                        </li>
+
+                            </li>
                         </ul>
                     </li>
 

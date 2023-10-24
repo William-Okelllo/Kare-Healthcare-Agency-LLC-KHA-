@@ -16,8 +16,8 @@ class program
             x.RunAsLocalSystem();
 
             x.SetServiceName("CompassionService");
-            x.SetDisplayName("Compassion Service version 1.1.1");
-            x.SetDescription("Compassion service version 1.1.1");
+            x.SetDisplayName("Compassion Service version 1.1.7");
+            x.SetDescription("Compassion service version 1.1.7");
         });
 
         int exitcodevalue = (int)Convert.ChangeType(exitcode, exitcode.GetTypeCode());

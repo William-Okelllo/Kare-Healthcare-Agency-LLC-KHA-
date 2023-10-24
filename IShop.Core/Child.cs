@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,10 @@ namespace IShop.Core
         
         public string Email_Address { get; set; }
 
+        [Display(Name = "Parents Contribution")]
+        public Decimal Balance { get; set; }
+
+        
         public int  PhoneNumber { get; set; }
     }
 }
