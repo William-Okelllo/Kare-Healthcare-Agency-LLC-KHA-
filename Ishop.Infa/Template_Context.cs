@@ -11,7 +11,7 @@ namespace Ishop.Infa
     public class Template_Context : DbContext
     {
         public Template_Context()
-           : base("Compassion")
+           : base("Planning")
         {
         }
         public DbSet<Template> templates { get; set; }

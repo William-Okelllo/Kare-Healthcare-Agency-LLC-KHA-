@@ -49,20 +49,8 @@ namespace Ishop.Web.Controllers
         public ActionResult Send_sms(int? id)
         {
 
-            Template_Context dbbb = new Template_Context();
-            var Temp = dbbb.templates.ToList();
-            ViewBag.Temp = new SelectList(Temp, "Code", "Code");
-
-            Child_Context CC = new Child_Context();
-            if (id != null)
-            {
-                var Childinfo = CC.children.Where(c => c.Id == id).FirstOrDefault();
-                ViewBag.contact = Childinfo;
-            }
-            else
-            {
-                ViewBag.contact = ""; // Set it to null or any other appropriate value for "empty."
-            }
+           
+            
 
             return View();
         }
@@ -95,13 +83,8 @@ namespace Ishop.Web.Controllers
             var Temp = dbbb.templates.ToList();
             ViewBag.Temp = new SelectList(Temp, "Code", "Code");
 
-            Child_Context CC = new Child_Context();
-            var Childinfo = CC.children.Select(c => c.PhoneNumber);
-            var phoneNumberString = string.Join(",", Childinfo);
-            var total = CC.children.Select(c => c.Id).Count();
            
-            ViewBag.contact = phoneNumberString;
-            ViewBag.recepients = total;
+           
             return View();
         }
 

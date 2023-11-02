@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace IShop.Core.Interface
 {
-    public interface Ichild
+    public interface Iindirect
     {
-        void Add(Child child);
-        void Edit(Child child);
+        void Add(InDirect inDirect);
+        void Edit(InDirect inDirect);
         void Remove(int Id);
-        IEnumerable GetChild(); Child FindById(int Id);
+        IEnumerable GetinDirect(); InDirect FindById(int Id);
     }
 }

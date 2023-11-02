@@ -53,13 +53,13 @@
   <ItemGroup>
     <Compile Include="AccessContext.cs" />
     <Compile Include="AccessRepo.cs" />
-    <Compile Include="Child_Context.cs" />
-    <Compile Include="Child_Repo.cs" />
     <Compile Include="ConfigsContext.cs" />
-    <Compile Include="Contribution_Context.cs" />
-    <Compile Include="Contribution_Repo.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
+    <Compile Include="Direct_Context.cs" />
+    <Compile Include="Direct_Repo.cs" />
+    <Compile Include="InDirect_Context.cs" />
+    <Compile Include="InDirect_Repo.cs" />
     <Compile Include="OutgoingEmailsContext.cs" />
     <Compile Include="OutgoingsmsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

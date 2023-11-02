@@ -235,7 +235,7 @@ namespace Ishop.Controllers
             // If we got this far, something failed, redisplay form    
             return View();
         }
-        private string connectionString = ConfigurationManager.ConnectionStrings["StartUpAfrica"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)
         {
             string query = "INSERT INTO OutgoingEmails (Recipient,Subject,Body,Status,CreatedOn,Trials,Response) VALUES " +

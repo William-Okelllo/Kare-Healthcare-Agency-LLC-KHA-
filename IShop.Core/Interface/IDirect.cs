@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace IShop.Core.Interface
 {
-    public interface Icontri
+    public interface IDirect
     {
-        void Add(Contribution contribution);
-        void Edit(Contribution contribution);
+        void Add(Direct direct);
+        void Edit(Direct direct);
         void Remove(int Id);
-        IEnumerable GetContributions(); Contribution FindById(int Id);
+        IEnumerable GetDirect(); Direct FindById(int Id);
     }
 }

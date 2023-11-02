@@ -43,14 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access.cs" />
-    <Compile Include="Child.cs" />
     <Compile Include="Configs.cs" />
-    <Compile Include="Contribution.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="Direct.cs" />
+    <Compile Include="InDirect.cs" />
     <Compile Include="Interface\IAccess.cs" />
-    <Compile Include="Interface\Ichild.cs" />
-    <Compile Include="Interface\Icontri.cs" />
     <Compile Include="Interface\Idata.cs" />
+    <Compile Include="Interface\IDirect.cs" />
+    <Compile Include="Interface\Iindirect.cs" />
     <Compile Include="Interface\Isms_config.cs" />
     <Compile Include="Interface\Itemplate.cs" />
     <Compile Include="OutgoingEmails.cs" />

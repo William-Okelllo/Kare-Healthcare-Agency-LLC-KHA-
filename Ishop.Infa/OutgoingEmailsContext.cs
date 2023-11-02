@@ -11,7 +11,7 @@ namespace Ishop.Infa
     public class OutgoingEmailsContext : DbContext
     {
         public OutgoingEmailsContext()
-           : base("Compassion")
+           : base("Planning")
         {
         }
         public DbSet<OutgoingEmails> outgoingEmails { get; set; }

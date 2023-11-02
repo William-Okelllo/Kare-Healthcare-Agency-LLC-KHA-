@@ -429,12 +429,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ChildrenController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\ContributionsController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\DirectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InDirectsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OutgoingEmailsController.cs" />
     <Compile Include="Controllers\OutgoingsmsController.cs" />
@@ -1847,14 +1847,9 @@
     <Content Include="FrontEnd\plugins\uplot\uPlot.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\Ack.jpg" />
-    <Content Include="Images\cc.png" />
-    <Content Include="Images\dff.jpg" />
-    <Content Include="Images\fgc.png" />
     <Content Include="Images\homee.png" />
     <Content Include="Images\l.ico" />
-    <Content Include="Images\llo.png" />
-    <Content Include="Images\lloading.png" />
+    <Content Include="Images\LKM.jpg" />
     <Content Include="Images\P.png" />
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
@@ -2876,6 +2871,16 @@
     <Content Include="Views\Contributions\Edit.cshtml" />
     <Content Include="Views\Contributions\Index.cshtml" />
     <Content Include="Views\Contributions\Receipt.cshtml" />
+    <Content Include="Views\Directs\Create.cshtml" />
+    <Content Include="Views\Directs\Delete.cshtml" />
+    <Content Include="Views\Directs\Details.cshtml" />
+    <Content Include="Views\Directs\Edit.cshtml" />
+    <Content Include="Views\Directs\Index.cshtml" />
+    <Content Include="Views\InDirects\Create.cshtml" />
+    <Content Include="Views\InDirects\Delete.cshtml" />
+    <Content Include="Views\InDirects\Details.cshtml" />
+    <Content Include="Views\InDirects\Edit.cshtml" />
+    <Content Include="Views\InDirects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

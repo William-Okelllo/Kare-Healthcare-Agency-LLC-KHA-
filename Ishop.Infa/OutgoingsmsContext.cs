@@ -12,7 +12,7 @@ namespace Ishop.Infa
     public class OutgoingsmsContext : DbContext
     {
         public OutgoingsmsContext()
-           : base("Compassion")
+           : base("Planning")
         {
         }
         public DbSet<Outgoingsms> outgoingsms { get; set; }

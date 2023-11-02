@@ -44,7 +44,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page" style="background-image: url('../../Images/Ack.jpg'); background-repeat: no-repeat; background-size: cover;">
+<body class="hold-transition login-page" style="background-image: url('../../Images/LKM.jpg'); background-repeat: no-repeat; background-size: cover;">
 
         <div class="login-box" style="float:right">
             <div class="login-logo">
@@ -54,20 +54,22 @@
             {@Html.AntiForgeryToken()
             <!-- /.login-logo -->
 
-        <div class="card card-outline card-primary" style="background-color: rgb(8, 0, 0, 0.65); border-radius: 24px;">
+        <div class="card card-outline card-primary" style="background-color: rgb(255, 255, 255, 0.35); border-radius: 24px;">
             <div class="card-header" style="border-radius: 24px;">
                 <div class="row justify-content-center">
-                    <a style="text-align:center"><img src="~/Images/cc.png" height="100" /> </a>
+                    <a style="text-align:center"><img src="~/Images/P.png" height="50" /> </a>
 
 
                 </div>
-                <h5 style="text-align:center;color:white;font-family:Cooper"><i class="fa fa-sign-in text-primary"></i> LOGIN  </h5>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
                 <div class="dropdown-divider"></div>
+                <h5 style="text-align: center; color: black; font-family: Montserrat"> LOGIN  </h5>
+
 
                 <form>
 
                     <div class="form-group">
-                        <label style="color: white"> <span class="fa fa-user-circle text-primary"></span> Username</label>
+                        <label style="color: black; font-family: Montserrat"> <span class="fa fa-user-circle text-primary"></span> Username</label>
                         <div class="input-group mb-3">
 
                             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
@@ -75,7 +77,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label style="color: white"> <span class="fa fa-lock text-primary"></span> Password</label>
+                            <label style="color: black; font-family: Montserrat "> <span class="fa fa-lock text-primary"></span> Password</label>
                             <div class="input-group mb-2">
 
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password", @autofocus = "" })
@@ -86,8 +88,8 @@
                             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
                                   rel="stylesheet" type="text/css" />
                             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
-                            
-                            <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-white"> </p>
+
+                            <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-black"> </p>
                             <script type="text/javascript">
                                 $(function () {
                                     $("#toggle_pwd").click(function () {
@@ -152,9 +154,9 @@
 
             </div>
 
-                <small style="text-align:center;color:white">Version 1.0.0</small>
-                <small style="text-align: center; color: white">© 2022 -@DateTime.Now.Year</small>
-                <small style="text-align: center; color: white"><b>Powered by Speculate Techs</b></small>
+                <small style="text-align: center; color: black; font-family: Montserrat ">Version 1.0.0</small>
+                <small style="text-align: center; color: black; font-family: Montserrat ">© 2022 -@DateTime.Now.Year</small>
+                <small style="text-align: center; color: black; font-family: Montserrat"><b>Powered by Speculate Techs</b></small>
 
                 <!-- /.social-auth-links -->
 
