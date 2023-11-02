@@ -1849,6 +1849,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\Ack.jpg" />
     <Content Include="Images\cc.png" />
+    <Content Include="Images\dff.jpg" />
+    <Content Include="Images\fgc.png" />
     <Content Include="Images\homee.png" />
     <Content Include="Images\l.ico" />
     <Content Include="Images\llo.png" />
@@ -1856,6 +1858,7 @@
     <Content Include="Images\P.png" />
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
+    <Content Include="Images\vp.jpg" />
     <Content Include="Images\whatsapp.ico" />
     <Content Include="Models\AspNetUsers-table.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2829,7 +2832,6 @@
     <Content Include="Views\success\Index.cshtml" />
     <Content Include="Views\Data\Index.cshtml" />
     <Content Include="Views\Data\Delete_User.cshtml" />
-    <Content Include="Views\Account\Register_Acc.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />

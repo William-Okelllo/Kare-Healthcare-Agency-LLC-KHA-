@@ -21,60 +21,11 @@ namespace Ishop.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private string apiKey = System.Configuration.ConfigurationManager.AppSettings["APIkey"].ToString();
-        private string apiUrl = System.Configuration.ConfigurationManager.AppSettings["BalanceUrl"].ToString();
-        private string shortcode1 = System.Configuration.ConfigurationManager.AppSettings["shortcode"].ToString();
-        private string partnerID = System.Configuration.ConfigurationManager.AppSettings["partnerID"].ToString();
+       
         public ActionResult Index()
         {
 
-            Child_Context CZ = new Child_Context();
-            var TotalChild = CZ.children.Select(c => c.Id).Count();
-            ViewBag.Children = TotalChild;
-
-            using (HttpClient httpClient = new HttpClient())
-            {
-                var Url = apiUrl;
-                httpClient.BaseAddress = new Uri(Url);
-
-               try
-                {
-                    var response = httpClient.GetAsync($"getbalance/?apikey={apiKey}&partnerID={partnerID}").Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var content = response.Content.ReadAsStringAsync().Result;
-                        var apiData = JsonConvert.DeserializeObject<ApiResponse>(content);
-
-                        ViewBag.Credit = apiData.Credit;
-                        ViewBag.Response = "API is active and responsive";
-                    }
-                }
-               catch (Exception ex)
-                
-                {
-                    ViewBag.Credit = 0;
-                    ViewBag.Response = "API is Inactive and Non-responsive " + ex.Message;
-
-                }
-            }
-
-
-
-            ServiceController sc = new ServiceController("CompassionService");
-
-            try
-            {
-                string status = sc.Status.ToString();
-                ViewBag.status=status;
-            }
-            catch (InvalidOperationException)
-            {
-                // Handle exceptions if the service doesn't exist or there is an issue
-                ViewBag.status ="ServiceStatus Service not found or an error occurred.";
-            }
-
-
-
+           
 
 
 

@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Core", "IShop.Core\Hr.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Infa", "Ishop.Infa\Hr.Infa.csproj", "{19E99617-6A61-4D71-B2D6-16FF9A9373A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compassion", "Ishop\Compassion.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartUpAfrica", "Ishop\StartUpAfrica.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compassion_service", "Compassion_service\Compassion_service.csproj", "{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartUp_Service", "Compassion_service\StartUp_Service.csproj", "{3535E1AC-2C8B-40A2-BC20-06FDAA77A46C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

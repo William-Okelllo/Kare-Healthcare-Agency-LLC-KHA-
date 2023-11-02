@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Timer = System.Timers.Timer;
 using Attachment = System.Net.Mail.Attachment;
 using System.Timers;
@@ -14,20 +13,20 @@ using Newtonsoft.Json;
 
 namespace Compassion_service
 {
-    public class Compassion
+    public class StartUpAfrica
     {
         private readonly Timer _timer;
 
-        public Compassion()
+        public StartUpAfrica()
         {
 
             _timer = new Timer(30000) { AutoReset = true };
             _timer.Elapsed += TimeElapsed;
         }
-        private string connectionString = "Data Source=.;Initial Catalog=Compassion; User ID=sa; Password=1234;Integrated Security=True;";
+        private string connectionString = "Data Source=.;Initial Catalog=StartUpAfrica; User ID=sa; Password=1234;Integrated Security=True;";
 
 
-        private string logFilePath = @"C:\Temp\Demos\CompassionService.log";
+        private string logFilePath = @"C:\Temp\Demos\StartUpAfricaService.log";
 
         private void TimeElapsed(object? sender, ElapsedEventArgs e)
         {

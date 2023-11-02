@@ -10,6 +10,7 @@
 
 
 
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/")
     <link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
@@ -48,6 +49,7 @@
 
 <title> @ViewBag.Title </title>
 
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <a class="wrapper">
 
@@ -66,7 +68,7 @@
 
 
 
-        <nav class="main-header navbar navbar-expand navbar-light navbar-dark"style="background-color: #302f2f; border-radius: 8px">
+        <nav class="main-header navbar navbar-expand navbar-light navbar-dark" style="background-color: #27074a; border-radius: 8px">
 
             <!-- Left navbar links -->
             <ul class="navbar-nav">
@@ -76,53 +78,11 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="@Url.Action("Index", "Home")" class="nav-link" style="color:white">Home</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Contact", "Home")" class="nav-link"style="color:white">
-                        Contact
 
-                    </a>
-                </li>
             </ul>
 
 
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-clock text-orange"></i>
-                        <span class="badge badge-light navbar-badge">@DateTime.Now.ToString("dddd :hh : mm tt")</span>
-                    </a>
-                    
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell text-orange"></i>
-                        <span class="badge badge-light navbar-badge">1</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/Images/grs.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        sms notifications<small style="color:blue"></small>
-                                        <span class="float-right text-sm text-orange">
-                                            <span class="float-right badge bg-gradient-orange">New</span>
-                                        </span>
-                                    </h3>
-                                    <p class="text-sm">Automated sms notifications added </p>
-
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-
-                    </div>
-                </li>
-            </ul>
 
 
 
@@ -153,9 +113,9 @@
                         </div>
                         <div style="text-align:center">
                             <i class="fa fa-spin fa-circle-notch text-primary nav-icon"></i>   @Html.Label("" + User.Identity.GetUserName()
- + "", null, htmlAttributes: new { title = "Manage" })
++ "", null, htmlAttributes: new { title = "Manage" })
                         </div>
-                        
+
                         <div class="dropdown-divider"></div>
 
                         <a href="@Url.Action("ChangePassword", "manage")" class="dropdown-item">
@@ -205,49 +165,49 @@
 
 
 
-
     <aside class="main-sidebar sidebar-light-primary elevation-4 ">
         <!-- Brand Logo -->
         <a href="@Url.Action("Index", "Home")" class="brand-link">
-            <img src="~/Images/llo.png" height="100">
+            <img src="~/Images/fgc.png" height="80">
 
         </a>
 
-        <div class="sidebar">
+        <div class="sidebar" style="background-color: #27074a; border-radius: 20px">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
-                <div class="info" style="font-family:Calibri">
-                    <a href="#" class="d-block" style="color: black">
-                        <i class="fa fa-grin-wink text-orange"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
+                <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
+                <div class="info" style="font-family: 'Alegreya Sans', sans-serif;">
+                    <a href="#" class="d-block" style="color: white">
+                        <i class="fa fa-grin-wink text-white"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                     </a>
-                    <a>
+                    <a style="color:white">
 
                         @if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
                         {
-                            <medium style="font-family:Calibri">
-                                <i class="fa fa-cloud-sun text-orange"></i> Good Morning
+                            <medium style="font-family:' Alegreya Sans', sans-serif;">
+                                <i class="fa fa-cloud-sun text-white"></i> Good Morning
                             </medium>
                         }
                         else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
                         {
-                            <medium style="font-family:Calibri">
-                                <i class="fa fa-sun text-orange"></i> : Good Afternoon
+                            <medium style="font-family: 'Alegreya Sans', sans-serif; ">
+                                <i class="fa fa-sun text-white"></i> : Good Afternoon
                             </medium>
                         }
                         else
                         {
-                            <medium style="font-family:Calibri">
-                                <i class="fa fa-cloud-sun text-orange"></i> : Good Evenning
+                            <medium style="font-family: 'Alegreya Sans', sans-serif">
+                                <i class="fa fa-cloud-sun text-white"></i> : Good Evenning
                             </medium>
                         }
 
 
 
                     </a>
-                    
-               
-            </div>
+
+
+                </div>
 
             </div>
 
@@ -256,28 +216,28 @@
             <nav class="mt-2" style="text-align:left">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                    with font-awesome or any other icon font library -->
 
 
 
 
 
                     <li class="nav-item menu-open">
-                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-primary">
-                            <i class="nav-icon fa fa-home text-white"></i>
-                            <p style="color:white">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link bg-white">
+                            <i class="nav-icon fa fa-home text-purple"></i>
+                            <p style="color: #27074a">
                                 Home-Page
 
                             </p>
                         </a>
                     </li>
-                    <li class="nav-header"> <i class="fa fa-bookmark text-gray nav-icon"></i> Children Module</li>
+                    <li class="nav-header" style="color:white"><i class="fa fa-bookmark text-white nav-icon"></i> Children Module</li>
                     <li class="nav-item">
 
 
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-users text-primary"></i>
-                            <p style="color: black; font-family: Calibri">
+                            <i class="nav-icon fa fa-users text-white"></i>
+                            <p style="color: white; font-family: Calibri">
                                 Children Data <i class="fas fa-angle-left right"></i>
 
 
@@ -287,8 +247,8 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("create", "Children")" class="nav-link">
 
-                                    <i class="fa fa-user-plus text-primary nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-user-plus text-white nav-icon"></i>
+                                    <p style="color: white">
                                         Add New Child
                                     </p>
                                 </a>
@@ -296,8 +256,8 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "Children")" class="nav-link">
 
-                                    <i class="fa fa-users text-primary nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-users text-white nav-icon"></i>
+                                    <p style="color: white">
                                         Children list
                                     </p>
                                 </a>
@@ -308,34 +268,34 @@
 
 
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-coins text-orange"></i>
-                            <p style="color: black; font-family: Calibri">
-                               Parents' Contributions <i class="fas fa-angle-left right"></i>
+                            <i class="nav-icon fa fa-coins text-white"></i>
+                            <p style="color: white; font-family: Calibri">
+                                Parents' Contributions <i class="fas fa-angle-left right"></i>
 
 
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                           
+
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "contributions")" class="nav-link">
 
-                                    <i class="fa fa-book-reader text-orange nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-book-reader text-white nav-icon"></i>
+                                    <p style="color: white">
                                         Contributions list
                                     </p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-header"> <i class="fa fa-bookmark text-gray nav-icon"></i> Sms Module</li>
+                    <li class="nav-header" style="color:white"> <i class="fa fa-bookmark text-white nav-icon"></i> Sms Module</li>
 
                     <li class="nav-item">
 
 
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-sms text-primary"></i>
-                            <p style="color: black; font-family: Calibri">
+                            <i class="nav-icon fa fa-sms text-white"></i>
+                            <p style="color: white; font-family: Calibri">
                                 Sms Module <i class="fas fa-angle-left right"></i>
 
 
@@ -345,8 +305,8 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "Children")" class="nav-link">
 
-                                    <i class="fa fa-sms text-primary nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-sms text-white nav-icon"></i>
+                                    <p style="color: white">
                                         Send Single Sms
                                     </p>
                                 </a>
@@ -354,8 +314,8 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("Group", "Outgoingsms")" class="nav-link">
 
-                                    <i class="fa fa-comment-dots text-primary nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-comment-dots text-white nav-icon"></i>
+                                    <p style="color: white">
                                         Send Group Sms
                                     </p>
                                 </a>
@@ -363,8 +323,8 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "Outgoingsms")" class="nav-link">
 
-                                    <i class="fa fa-spin fa-circle-notch text-primary nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-spin fa-circle-notch text-white nav-icon"></i>
+                                    <p style="color: white">
                                         OutgoingSms
                                     </p>
                                 </a>
@@ -379,8 +339,8 @@
 
 
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-folder-open text-primary"></i>
-                            <p style="color: black; font-family: Calibri">
+                            <i class="nav-icon fa fa-folder-open text-white"></i>
+                            <p style="color: white; font-family: Calibri">
                                 Templates <i class="fas fa-angle-left right"></i>
 
 
@@ -390,8 +350,8 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("Create", "Templates")" class="nav-link">
 
-                                    <i class="fa fa-folder text-primary nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-folder text-white nav-icon"></i>
+                                    <p style="color: white">
                                         New Template
                                     </p>
                                 </a>
@@ -399,8 +359,8 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "Templates")" class="nav-link">
 
-                                    <i class="fa fa-folder-open text-primary nav-icon"></i>
-                                    <p style="color: black">
+                                    <i class="fa fa-folder-open text-white nav-icon"></i>
+                                    <p style="color: white">
                                         Templates
                                     </p>
                                 </a>
@@ -425,15 +385,15 @@
 
 
 
-                    <li class="nav-header"> <i class="fa fa-bookmark text-gray nav-icon"></i> Admin Module</li>
+                    <li class="nav-header" style="color:white"> <i class="fa fa-bookmark text-white nav-icon"></i> Admin Module</li>
                     @if (this.User.IsInRole("Admin"))
                     {
                         <li class="nav-item">
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user-cog text-primary"></i>
-                                <p style="color: black; font-family: Calibri">
+                                <i class="nav-icon fa fa-user-cog text-white"></i>
+                                <p style="color: white; font-family: Calibri">
                                     Configs & Users <i class="fas fa-angle-left right"></i>
 
 
@@ -443,8 +403,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Data")" class="nav-link">
 
-                                        <i class="fa fa-users text-primary nav-icon"></i>
-                                        <p style="color: black">
+                                        <i class="fa fa-users text-white nav-icon"></i>
+                                        <p style="color: white">
                                             All users
                                         </p>
                                     </a>
@@ -452,8 +412,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Configuration")" class="nav-link">
 
-                                        <i class="fa fa-cogs text-primary nav-icon"></i>
-                                        <p style="color: black">
+                                        <i class="fa fa-cogs text-white nav-icon"></i>
+                                        <p style="color: white">
                                             Configurations
                                         </p>
                                     </a>
@@ -466,32 +426,35 @@
 
 
 
-
+                    <style>
+                        .nav-header {
+                            font-family: 'Genos', sans-serif;
+                            color: white;
+                        }
+                    </style>
+                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                    <link href="https://fonts.googleapis.com/css2?family=Genos&display=swap" rel="stylesheet">
 
                     <div class="dropdown-divider"></div>
-                    <li class="nav-header">
+                    <li class="nav-header" style="color:white">
                         Version 2.0.5
 
                     </li>
-                    <li>
-                        <small style="color:navy"><i class="fa fa-spin fa-spinner text-navy nav-icon"></i> Powered by</small><br />
-                        <img src="~/Images/spec_flat.png" height="40" />
 
-                    </li>
 
                 </ul>
 
-</nav>
+            </nav>
 
         </div>
 
     </aside>
-
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap" rel="stylesheet">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="background-image: url('../../Images/Ack.jpg');
         background-repeat: no-repeat;
-        background-size: cover;">
-
+        background-size: cover;
+        font-family: 'Alegreya Sans', sans-serif;">
 
 
 
@@ -503,7 +466,7 @@
 
     </div>
 
-   
+
     <!-- /.content-wrapper -->
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
