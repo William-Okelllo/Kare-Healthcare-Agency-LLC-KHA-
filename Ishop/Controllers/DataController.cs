@@ -31,19 +31,18 @@ namespace Ishop.Controllers
 
         // GET: Data/Details/5
 
-
+        
         // GET: Data/Create
-        public ActionResult Delete_User(Guid? id)
+        public ActionResult Delete_User(string id)
         {
+
+            var entityToDelete = db.AspNetUsers.Find(id);
+
+                
+                db.AspNetUsers.Remove(entityToDelete);
+                db.SaveChanges();
             
-            string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-            SqlConnection sqlCon = new SqlConnection(strcon);
-            SqlCommand cmd = new SqlCommand("Delete_User", sqlCon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Username", id);
-            sqlCon.Open();
-            cmd.ExecuteNonQuery();
-            sqlCon.Close();
+
             TempData["msg"] = "✔ Account deleted successfully";
 
             return RedirectToAction("Index", "Data");

@@ -1,4 +1,4 @@
-﻿@model IShop.Core.InDirect
+﻿@model IShop.Core.Project
 
 @{
     ViewBag.Title = "Create";
@@ -100,11 +100,11 @@
     <div class="col-md-9 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
-                <i class="fa fa-bookmark"></i> New InDirect Category
+                <i class="fa fa-bookmark"></i> New Project add
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
                 <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
-                    @using (Html.BeginForm("create", "InDirects", FormMethod.Post))
+                    @using (Html.BeginForm("create", "projects", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
 
@@ -130,6 +130,51 @@
                                })
 
                                 </div>
+
+                                <div class="form-group col-md-4">
+                                    <label><i class=" fa fa-folder-open text-primary"></i>   @Html.LabelFor(model => model.Project_Name)</label>
+                                    @Html.EditorFor(model => model.Project_Name, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Project_Name",
+                                       @Required = true,
+
+
+                                   }
+                               })
+
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label><i class=" fa fa-map-marker text-primary"></i>   @Html.LabelFor(model => model.location)</label>
+                                    @Html.EditorFor(model => model.location, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "location",
+                                       @Required = true,
+
+
+                                   }
+                               })
+                                    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyA-YqZINvC4zTP1wVxbTeEgmIsb5z0cQrQ"></script>
+                                    <script type="text/javascript">
+                                        google.maps.event.addDomListener(window, 'load', function () {
+                                            var places = new google.maps.places.Autocomplete(document.getElementById('location'));
+                                            google.maps.event.addListener(places, 'place_changed', function () {
+                                                var place = places.getPlace();
+                                                document.getElementById('Latitude').value = place.geometry.location.lat();
+                                                document.getElementById('Longitude').value = place.geometry.location.lng();
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
+                                    @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase--", new { @class = "form-control form-control-sm", @Required = true })
+                                </div>
                                 <div class="form-group col-md-2">
                                     <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.User)</label>
                                     @Html.EditorFor(model => model.User, new
@@ -146,23 +191,6 @@
                                })
 
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label><i class=" fa fa-folder-open text-primary"></i>   @Html.LabelFor(model => model.Name)</label>
-                                    @Html.EditorFor(model => model.Name, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Category Name",
-                                       @Required = true,
-
-
-                                   }
-                               })
-
-                                </div>
-
-
 
 
                             </div>

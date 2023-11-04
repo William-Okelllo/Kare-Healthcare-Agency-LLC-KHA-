@@ -70,8 +70,14 @@ namespace Ishop
 
                 }
             }
-            
-           
+            if (!roleManager.RoleExists("Employee"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Employee";
+                roleManager.Create(role);
+
+            }
+
 
 
         }

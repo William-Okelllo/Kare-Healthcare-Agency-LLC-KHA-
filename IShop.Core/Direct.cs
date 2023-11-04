@@ -13,5 +13,7 @@ namespace IShop.Core
         public DateTime CreatedOn { get; set; }
 
         public string Name { get; set; }
+
+        public string User { get; set; }
     }
 }

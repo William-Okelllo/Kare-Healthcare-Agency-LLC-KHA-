@@ -23,10 +23,11 @@ namespace Ishop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-         
+            Database.SetInitializer<InDirect_Context>(null);
+            Database.SetInitializer<Direct_Context>(null);
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
-           
+            Database.SetInitializer<Timesheet_Context>(null);
 
         }
     }

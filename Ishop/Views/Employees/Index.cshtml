@@ -1,9 +1,9 @@
 ﻿@using PagedList
 @using PagedList.Mvc;
-@model IPagedList<IShop.Core.InDirect>
+@model IPagedList<IShop.Core.Employee>
 
 @{
-    ViewBag.Title = "InDirect Categories";
+    ViewBag.Title = "Employee";
 }
 
 
@@ -46,21 +46,21 @@
 
     <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white;text-align:center">
-            <i class="fa fa-book-reader"></i>
-            InDirect Categories
+            <i class="fa fa-users"></i>
+            Employees list
         </h3>
 
         <div style="text-align: right; color: white ">
-            @using (Html.BeginForm("Index", "InDirect", FormMethod.Get))
+            @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
             {
 
-                <a style="font-family: Calibri"> Category Name</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Category" })
-                <button type="submit" value="search" class="btn btn-sm btn-secondary">
+                <a style="font-family: Calibri"> Employee Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Employee" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
 
-                @Html.ActionLink("New Category ", "Create", "InDirects", null, new { @class = "btn btn-sm btn-default btn" })
+                @Html.ActionLink("New Employee ", "Rspec007", "Account", null, new { @class = "btn btn-sm btn-default btn" })
 
             }
         </div>
@@ -100,8 +100,11 @@
                 <tr style="color:white">
 
                     <th style="background-color: #0656A5; font-size: medium; ">AddedOn </th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Category</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Added By</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Username</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Fullnames</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Contact</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Department</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Designation</th>
                     <th style="background-color: #0656A5; font-size: medium;">Action</th>
                 </tr>
             </thead>
@@ -113,16 +116,11 @@
                             <i class="fa fa-calendar-check"></i>  @item.CreatedOn.ToString("dd-MMMM-yyyy")
 
                         </td>
-                        <td style="background-color: white;">
-                            <i class="fa fa-bookmark text-primary"></i> @item.Name
-
-
-                        </td>
-                        <td style="background-color: white;  ">
-                            <i class="fa fa-user-circle"></i> @item.User
-
-
-                        </td>
+                        <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i> @item.Username</td>
+                        <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i> @item.Fullname</td>
+                        <td style="background-color: white;"> <i class="fa fa-mobile text-primary"></i> @item.Contact</td>
+                        <td style="background-color: white;"> <i class="fa fa-university text-primary"></i> @item.DprtName</td>
+                        <td style="background-color: white;"> <i class="fa fa-suitcase text-primary"></i> @item.Designation</td>
                         <td style="background-color:ghostwhite">
 
                             <div class="btn-group dropdown">
@@ -132,22 +130,22 @@
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                                     <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Edit", "InDirects", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-pen-nib text-primary"></i> Update Category Info
+                                    <a href="@Url.Action("Edit", "Employees", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-pen-nib text-primary"></i> Update Employe Info
                                     </a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Category ')) { window.location.href = '@Url.Action("Delete", "InDirects", new { id = item.Id, })'; }">
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Category ')) { window.location.href = '@Url.Action("Delete", "Employees", new { id = item.Id, })'; }">
                                         <i class="fa fa-times-circle text-danger"></i> Drop Category
                                     </a>
                                     <script>
-                                            $(function () {
-                                                $('#Deny').click(function () {
-                                                    if (confirm('Are you sure?')) {
-                                                        window.location.href = $(this).data('url');
-                                                    }
-                                                });
+                                        $(function () {
+                                            $('#Deny').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
                                             });
+                                        });
                                     </script>
                                 </div>
                             </div>

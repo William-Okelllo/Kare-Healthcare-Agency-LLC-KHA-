@@ -12,111 +12,128 @@ using PagedList;
 
 namespace Ishop.Controllers
 {
-    [Authorize]
-    public class DirectsController : Controller
+    public class ProjectsController : Controller
     {
-        private Direct_Context db = new Direct_Context();
+        private Project_Context db = new Project_Context();
 
-        // GET: Directs
+        // GET: Projects
         public ActionResult Index(string searchBy, string search, int? page)
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.directs.OrderByDescending(p => p.Id).Where(c => c.Name.StartsWith(search) || c.Name == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Id).Where(c => c.Name.StartsWith(search) || c.Name == search).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.directs.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.directs.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }
 
-        // GET: Directs/Details/5
+        // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Direct direct = db.directs.Find(id);
-            if (direct == null)
+            Project project = db.projects.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(direct);
+            return View(project);
         }
 
-        // GET: Directs/Create
+        // GET: Projects/Create
         public ActionResult Create()
         {
+
+            Direct_Context DC = new Direct_Context();
+            var DirectC = DC.directs.ToList();
+            ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
+
             return View();
         }
 
-        // POST: Directs/Create
+        // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Name,User")] Direct direct)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,Name,location,Status")] Project project)
         {
             if (ModelState.IsValid)
             {
-                db.directs.Add(direct);
+                db.projects.Add(project);
                 db.SaveChanges();
-                TempData["msg"] = "Category added successfully ";
                 return RedirectToAction("Index");
             }
 
-            return View(direct);
+            return View(project);
         }
 
-        // GET: Directs/Edit/5
+        // GET: Projects/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Direct direct = db.directs.Find(id);
-            if (direct == null)
+            Project project = db.projects.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(direct);
+            return View(project);
         }
 
-        // POST: Directs/Edit/5
+        // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Name,User")] Direct direct)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,Name,location,Status")] Project project)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(direct).State = EntityState.Modified;
+                db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["msg"] = "Category updated successfully ";
                 return RedirectToAction("Index");
             }
-            return View(direct);
+            return View(project);
         }
 
-        // GET: Directs/Delete/5
-        
-        public ActionResult Delete(int id)
+        // GET: Projects/Delete/5
+        public ActionResult Delete(int? id)
         {
-            Direct direct = db.directs.Find(id);
-            db.directs.Remove(direct);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.projects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
+        // POST: Projects/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Project project = db.projects.Find(id);
+            db.projects.Remove(project);
             db.SaveChanges();
-            TempData["msg"] = "Category deleted successfully ";
             return RedirectToAction("Index");
         }
 

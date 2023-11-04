@@ -56,17 +56,24 @@
     <Compile Include="ConfigsContext.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
+    <Compile Include="DepartmentContext.cs" />
     <Compile Include="Direct_Context.cs" />
     <Compile Include="Direct_Repo.cs" />
+    <Compile Include="Employee_Context.cs" />
+    <Compile Include="Employee_Repo.cs" />
     <Compile Include="InDirect_Context.cs" />
     <Compile Include="InDirect_Repo.cs" />
     <Compile Include="OutgoingEmailsContext.cs" />
     <Compile Include="OutgoingsmsContext.cs" />
+    <Compile Include="Project_Context.cs" />
+    <Compile Include="Project_Repo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sms_configs_Context.cs" />
     <Compile Include="Sms_config_Repo.cs" />
     <Compile Include="Template_Context.cs" />
     <Compile Include="Template_Repo.cs" />
+    <Compile Include="Timesheet_Context.cs" />
+    <Compile Include="Timesheet_Repo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

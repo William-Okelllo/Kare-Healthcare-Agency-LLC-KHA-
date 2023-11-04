@@ -179,63 +179,39 @@ namespace Ishop.Controllers
             bool exists = dbb.Users.Any(c => c.Email == Email);
             return Json(exists, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Register_Acc()
+        public ActionResult CheckUsername(string UserName)
         {
-            {
-                ViewBag.Name = new SelectList(context.Roles.Where(u => (!(u.Name == "Can_Post_Shift" || u.Name == "Can_Take_Shift" || u.Name == "Can_Approve_Shift" || u.Name == "Can_Delete_Shift"
-               || u.Name == "Can_View_Shift")))
-                                       .ToList(), "Name", "Name");
-                return View();
-            }
+            bool exists = dbb.Users.Any(c => c.UserName == UserName);
+            return Json(exists, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: /Account/Register
-        [HttpPost]
+       
 
-        [ValidateAntiForgeryToken]
-        // [Authorize(Roles = "System")]
-        public async Task<ActionResult> Register_Acc(RegisterViewModel model)
-        {
-            if (model.UserRoles == null)
-            {
-                TempData["msg"] = "Kindly select user account type";
-                return RedirectToAction("Register_Acc");
-            }
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email ,PhoneNumber=model.PhoneNumber};
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-
-
-                    // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    //Ends Here     
-
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackurl = Url.Action("confirmEmail", "Account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);
-                   
-
-                    TempData["msg"] = "✔  Account Created successfully ";
-
-
-
-
-                    PushEmail(user.Email, "Confirm Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl, DateTime.Now);
-
-
-
-                    return RedirectToAction("login", "Account");
-                }
-               
-            }
-
-            // If we got this far, something failed, redisplay form    
-            return View();
-        }
+            
+        
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+         public void EmpAcc(DateTime CreatedOn,string Username , string Contact,string Userid)
+        {
+            string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid) VALUES " +
+            "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CreatedOn", CreatedOn);
+                    command.Parameters.AddWithValue("@Username", Username);
+                    command.Parameters.AddWithValue("@Fullname", "---");
+                    command.Parameters.AddWithValue("@Contact", Contact);
+                    command.Parameters.AddWithValue("@DprtName", "---");
+                    command.Parameters.AddWithValue("@Designation", "---");
+                    command.Parameters.AddWithValue("@Userid", Userid);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)
         {
             string query = "INSERT INTO OutgoingEmails (Recipient,Subject,Body,Status,CreatedOn,Trials,Response) VALUES " +
@@ -296,14 +272,10 @@ namespace Ishop.Controllers
         // [Authorize(Roles = "System")]
         public async Task<ActionResult> Rspec007(RegisterViewModel model)
         {
-            if (model.UserRoles == null)
-            {
-                TempData["msg"] = "Kindly select user account type";
-                return RedirectToAction("Rspec007");
-            }
+           
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,PhoneNumber=model.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -314,15 +286,19 @@ namespace Ishop.Controllers
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here     
 
-                   
+                    
 
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackurl = Url.Action("confirmEmail", "Account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl + "\">here</a>");
+                    PushEmail(user.Email, "Confirm Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl, DateTime.Now);
+
+                    if(model.UserRoles == "Employee")
+
+                    {
+                        EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id);
+                    }
 
                     TempData["msg"] = "✔ Account Created successfully ,Confirmation sent to user account mail";
-                   
-
                    
                     return RedirectToAction("Index", "Data");
                 }
@@ -345,42 +321,7 @@ namespace Ishop.Controllers
         
 
 
-        public ActionResult C()
-        {
-
-            return View();
-
-        }
-
-        // POST: /Account/Register
-        [HttpPost]
-
-        [ValidateAntiForgeryToken]
-        // [Authorize(Roles = "System")]
-        public async Task<ActionResult> C(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-
-
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    //Ends Here     
-                    return RedirectToAction("Index", "Home");
-                }
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                          .ToList(), "Name", "Name");
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form    
-            return View();
-        }
+       
 
 
 

@@ -107,13 +107,17 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
+                        <br />
                         <div style="text-align:center">
                             <img src="~/Images/P.png" height="30" alt="User Avatar">
 
                         </div>
-                        <div style="text-align:center">
-                            <i class="fa fa-spin fa-circle-notch text-primary nav-icon"></i>   @Html.Label("" + User.Identity.GetUserName()
+                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
+                        <div style="text-align: center; font-family: 'Montserrat' ">
+                            <p style="font-family: 'Montserrat'">
+                                <i class="fa fa-spin fa-circle-notch text-primary nav-icon"></i>   @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
+                            </p>
                         </div>
 
                         <div class="dropdown-divider"></div>
@@ -126,7 +130,7 @@
                         <div class="dropdown-divider"></div>
 
 
-    </a>
+</a>
 
 
 
@@ -216,7 +220,7 @@
             <nav class="mt-2" style="text-align:left">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
 
 
 
@@ -231,7 +235,110 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> Timesheets  Module</li>
+                    <li class="nav-item">
+
+
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-balance-scale text-white"></i>
+                            <p style="color: white; font-family: Calibri">
+                                Timesheet <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("create", "Timesheet")" class="nav-link">
+
+                                    <i class="fa fa-plus text-white nav-icon"></i>
+                                    <p style="color: white">
+                                        Add Today's sheet
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
+
+                                    <i class="fa fa-balance-scale text-white nav-icon"></i>
+                                    <p style="color: white">
+                                        Current Week Timesheets
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> Projects  Module</li>
+
+                    <li class="nav-item">
+
+
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-suitcase text-white"></i>
+                            <p style="color: white; font-family: Calibri">
+                                Projects <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("create", "projects")" class="nav-link">
+
+                                    <i class="fa fa-plus-circle text-white nav-icon"></i>
+                                    <p style="color: white">
+                                        Add Project
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "projects")" class="nav-link">
+
+                                    <i class="fa fa-suitcase text-white nav-icon"></i>
+                                    <p style="color: white">
+                                        Project list
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
                     <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> Master Data Module</li>
+                    <li class="nav-item">
+
+
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-university text-white"></i>
+                            <p style="color: white; font-family: Calibri">
+                                Departments <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Departments")" class="nav-link">
+
+                                    <i class="fa fa-university text-white nav-icon"></i>
+                                    <p style="color: white">
+                                        Departments
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Employees")" class="nav-link">
+
+                                    <i class="fa fa-users text-white nav-icon"></i>
+                                    <p style="color: white">
+                                        Employees
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
 
 
@@ -257,7 +364,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="@Url.Action("create", "Children")" class="nav-link">
+                                        <a href="@Url.Action("create", "Directs")" class="nav-link">
 
                                             <i class="fa fa-plus-circle text-white nav-icon"></i>
                                             <p style="color: white">
@@ -266,7 +373,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Children")" class="nav-link">
+                                        <a href="@Url.Action("Index", "Directs")" class="nav-link">
 
                                             <i class="fa fa-bookmark text-white nav-icon"></i>
                                             <p style="color: white">
@@ -290,7 +397,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="@Url.Action("create", "Children")" class="nav-link">
+                                        <a href="@Url.Action("create", "InDirects")" class="nav-link">
 
                                             <i class="fa fa-plus-circle text-white nav-icon"></i>
                                             <p style="color: white">
@@ -299,7 +406,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Children")" class="nav-link">
+                                        <a href="@Url.Action("Index", "InDirects")" class="nav-link">
 
                                             <i class="fa fa-book-reader text-white nav-icon"></i>
                                             <p style="color: white">
@@ -311,7 +418,7 @@
 
                             </li>
                         </ul>
-                    
+
 
 
 
@@ -384,7 +491,7 @@
     </aside>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap" rel="stylesheet">
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="background-image: url('../../Images/Ack.jpg');
+    <div class="content-wrapper" style="background-image: url('../../Images/CX.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         font-family: 'Alegreya Sans', sans-serif;">
