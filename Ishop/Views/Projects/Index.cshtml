@@ -101,8 +101,9 @@
 
                     <th style="background-color: #0656A5; font-size: medium; ">AddedOn </th>
                     <th style="background-color: #0656A5; font-size: medium; ">Project Name</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Current Phase</th>
                     <th style="background-color: #0656A5; font-size: medium; ">location</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Budget</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Phases & Budgets</th>
                     <th style="background-color: #0656A5; font-size: medium;">Action</th>
                 </tr>
             </thead>
@@ -119,15 +120,15 @@
 
 
                         </td>
-                        <td style="background-color: white;  ">
-                            <i class="fa fa-hourglass text-primary"></i> @item.Name
 
-
-                        </td>
                         <td style="background-color: white;  ">
                             <i class="fa fa-map-marker text-danger"></i> @item.location
 
 
+                        </td>
+                        <td style="background-color:white"> <i class="fa fa-suitcase text-primary"></i> @item.Budget.ToString("#,##0.00")</td>
+                        <td style="background-color: white">
+                            <i class="fa fa-chart-line text-primary"></i> <a href="@Url.Action("Details", "projects" , new { id = item.Id})"> <b>Phases|Budgets</b> </a>
                         </td>
                         <td style="background-color:ghostwhite">
 

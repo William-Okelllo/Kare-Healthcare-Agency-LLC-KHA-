@@ -429,6 +429,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
@@ -437,9 +438,12 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InDirectsController.cs" />
+    <Compile Include="Controllers\leaves_TypesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OutgoingEmailsController.cs" />
     <Compile Include="Controllers\OutgoingsmsController.cs" />
+    <Compile Include="Controllers\PcategoriesController.cs" />
+    <Compile Include="Controllers\PhaseController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -2854,11 +2858,6 @@
     <Content Include="Views\OutgoingEmails\Send_email.cshtml" />
     <Content Include="Views\Outgoingsms\Index.cshtml" />
     <Content Include="Views\Outgoingsms\Send_sms.cshtml" />
-    <Content Include="Views\Children\Create.cshtml" />
-    <Content Include="Views\Children\Delete.cshtml" />
-    <Content Include="Views\Children\Details.cshtml" />
-    <Content Include="Views\Children\Edit.cshtml" />
-    <Content Include="Views\Children\Index.cshtml" />
     <Content Include="Views\Outgoingsms\Group.cshtml" />
     <Content Include="Views\sms_configs\Create.cshtml" />
     <Content Include="Views\sms_configs\Delete.cshtml" />
@@ -2870,12 +2869,6 @@
     <Content Include="Views\Templates\Details.cshtml" />
     <Content Include="Views\Templates\Edit.cshtml" />
     <Content Include="Views\Templates\Index.cshtml" />
-    <Content Include="Views\Contributions\Collect.cshtml" />
-    <Content Include="Views\Contributions\Delete.cshtml" />
-    <Content Include="Views\Contributions\Details.cshtml" />
-    <Content Include="Views\Contributions\Edit.cshtml" />
-    <Content Include="Views\Contributions\Index.cshtml" />
-    <Content Include="Views\Contributions\Receipt.cshtml" />
     <Content Include="Views\Directs\Create.cshtml" />
     <Content Include="Views\Directs\Delete.cshtml" />
     <Content Include="Views\Directs\Details.cshtml" />
@@ -2905,6 +2898,26 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\leaves_Types\Create.cshtml" />
+    <Content Include="Views\leaves_Types\Delete.cshtml" />
+    <Content Include="Views\leaves_Types\Details.cshtml" />
+    <Content Include="Views\leaves_Types\Edit.cshtml" />
+    <Content Include="Views\leaves_Types\Index.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Phase\Create.cshtml" />
+    <Content Include="Views\Phase\Delete.cshtml" />
+    <Content Include="Views\Phase\Details.cshtml" />
+    <Content Include="Views\Phase\Edit.cshtml" />
+    <Content Include="Views\Phase\Index.cshtml" />
+    <Content Include="Views\Pcategories\Create.cshtml" />
+    <Content Include="Views\Pcategories\Delete.cshtml" />
+    <Content Include="Views\Pcategories\Details.cshtml" />
+    <Content Include="Views\Pcategories\Edit.cshtml" />
+    <Content Include="Views\Pcategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

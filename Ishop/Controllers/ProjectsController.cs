@@ -21,7 +21,7 @@ namespace Ishop.Controllers
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.projects.OrderByDescending(p => p.Id).Where(c => c.Name.StartsWith(search) || c.Name == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Id).Where(c => c.Project_Name.StartsWith(search) || c.Project_Name == search).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
@@ -40,6 +40,12 @@ namespace Ishop.Controllers
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {
+
+            Phase_Context AA = new Phase_Context();
+            var Phase = AA.phases.Where(a => a.Project_id == id).ToList();
+            ViewBag.Phase = Phase;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -60,6 +66,14 @@ namespace Ishop.Controllers
             var DirectC = DC.directs.ToList();
             ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
 
+
+
+            PCategory_Context PC = new PCategory_Context();
+            var Category = PC.pcategories.ToList();
+            ViewBag.Category = new SelectList(Category, "Category", "Category");
+
+
+
             return View();
         }
 
@@ -68,12 +82,13 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,Name,location,Status")] Project project)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget")] Project project)
         {
             if (ModelState.IsValid)
             {
                 db.projects.Add(project);
                 db.SaveChanges();
+                TempData["msg"] = "✔   Project added successfully ";
                 return RedirectToAction("Index");
             }
 
@@ -100,12 +115,13 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,Name,location,Status")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget")] Project project)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["msg"] = "✔   Project updated successfully ";
                 return RedirectToAction("Index");
             }
             return View(project);

@@ -92,14 +92,14 @@
 
 
 
-
+<br /><br /><br />
 
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-10 col-sm-12 col-12">
+    <div class="col-md-8 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
-            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
-                <i class="fa fa-bookmark"></i> Todays Timesheet - @DateTime.Now.ToString("dddd - dd -MMMM")
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px;text-align:center ">
+                <i class="fa fa-bookmark"></i> New Timesheet 
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
                 <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
@@ -110,146 +110,60 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <form>
 
+                        <h5 style="text-align:center"><i class=" fa fa-calendar-check text-primary"></i>  @DateTime.Now.ToString("dddd - dd -MMMM -yyyy")</h5>
+                        
+                            <div class="form-row">
 
-                        <div class="form-row">
-
-                            <div class="form-group col-md-3">
-                                <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
-                                @Html.EditorFor(model => model.CreatedOn, new
-                           {
-                               htmlAttributes = new
+                                <div class="form-group col-md-3">
+                                    <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                                    @Html.EditorFor(model => model.CreatedOn, new
                                {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Record",
-                                   @Value = DateTime.Now,
-                                   @ReadOnly = true,
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Record",
+                                       @Value = DateTime.Now,
+                                       @ReadOnly = true,
 
 
-                               }
-                           })
+                                   }
+                               })
 
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Owner)</label>
-                                @Html.EditorFor(model => model.Owner, new
-                                {
-                                    htmlAttributes = new
-                                    {
-                                        @class = "form-control form-control-sm",
-                                        @Value = User.Identity.Name,
-                                        @Readonly = true,
-
-                                    }
-                                })
-                            </div>
-
-
-
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Project_Name) </label>
-                                @Html.DropDownList("Project_Name", ViewBag.Project as SelectList, "--Select Project --", new { @class = "form-control ", @Required = true })
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
-                                @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control ", @Required = true })
-                            </div>
-                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
-                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $("#Project_Name").chosen();
-                                    $("#Name").chosen();
-
-                                });
-                            </script>
-                            <div class="form-group col-md-2">
-                                <label><i class="fa fa-user-clock text-primary"></i> @Html.LabelFor(model => model.Hours)</label>
-                                @Html.EditorFor(model => model.Hours, new
-                                {
-                                    htmlAttributes = new
-                                    {
-                                        @class = "form-control form-control-sm",
-                                        @Placeholder = "No. of Hours",
-                                        @Required = true,
-                                        @id = "hoursInput" // Add an ID to the input field for easy access in JavaScript
-                                    }
-                                })
-                            </div>
-
-
-                            <!-- Add a notification element to display the message -->
-                            <div id="notification" style="display: none;">
-                                <div class="alert alert-danger">
-                                    The entered value should be less than or equal to 12 hours.
                                 </div>
+                                <div class="form-group col-md-3">
+                                    <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Owner)</label>
+                                    @Html.EditorFor(model => model.Owner, new
+                                    {
+                                        htmlAttributes = new
+                                        {
+                                            @class = "form-control form-control-sm",
+                                            @Value = User.Identity.Name,
+                                            @Readonly = true,
+
+                                        }
+                                    })
+                                </div>
+
+
                             </div>
+                            
+
+
+                            <div class="dropdown-divider"></div>
+                            <input type="submit" name="action" value="Proceed to Timesheet" class="btn btn-block btn btn-primary" style="color:white" onclick="return confirm('Are you sure you want to proceed to create Timesheet?')" />
+
 
                             <script>
-                                // Add an event listener to the input field
-                                document.getElementById('hoursInput').addEventListener('change', function () {
-                                    // Get the value entered in the input field
-                                    var enteredValue = parseFloat(this.value);
-
-                                    // Check if the value is greater than 12
-                                    if (enteredValue > 12) {
-                                        // Display the notification
-                                        document.getElementById('notification').style.display = 'block';
-                                    } else {
-                                        // Hide the notification if the value is within the limit
-                                        document.getElementById('notification').style.display = 'none';
-                                    }
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
                                 });
                             </script>
 
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Comments) </label>
-                        <div class="form-row">
-
-
-                            @Html.TextAreaFor(model => model.Comments, 4, 100, htmlAttributes: new
-                       {
-                           style = "width: 100%; max-width:100%;",
-                           @placeholder = "Additional information",
-                           @autofocus = ""
-                           ,
-                           @Required = true,
-                           @class = "form-control form-rounded2"
-
-                       })
-                        </div>
-                        <script>
-                            document.getElementById("Comments").addEventListener("paste", function (event) {
-                                // Prevent the default paste behavior
-                                event.preventDefault();
-
-                                // Get the pasted content as plain text
-                                var text = (event.clipboardData || window.clipboardData).getData("text/plain");
-
-                                // Insert the plain text into the textarea as HTML
-                                document.execCommand("insertHTML", false, text);
-                            });
-                        </script>
-                        <div class="dropdown-divider"></div>
-                        <input type="submit" name="action" value="Save" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this Timesheet?')" />
-                        <input type="submit" name="action" value="SaveAndSubmit" class="btn btn btn-warning" style="color:white" onclick="return confirm('Are you sure you submit this Timesheet -No Edit allowed after?')" />
-
-
-                        <script>
-                            $(function () {
-                                $('#Create').click(function () {
-                                    if (confirm('Are you sure?')) {
-                                        window.location.href = $(this).data('url');
-                                    }
-                                });
-                            });
-                        </script>
-
-                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                           
                     </form>
                     }
                 </div>

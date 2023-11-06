@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="AccessContext.cs" />
     <Compile Include="AccessRepo.cs" />
+    <Compile Include="Activities_Context.cs" />
+    <Compile Include="Activities_Repo.cs" />
     <Compile Include="ConfigsContext.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
@@ -63,8 +65,13 @@
     <Compile Include="Employee_Repo.cs" />
     <Compile Include="InDirect_Context.cs" />
     <Compile Include="InDirect_Repo.cs" />
+    <Compile Include="leaveTypesContext.cs" />
     <Compile Include="OutgoingEmailsContext.cs" />
     <Compile Include="OutgoingsmsContext.cs" />
+    <Compile Include="PCategory_Context.cs" />
+    <Compile Include="PCategory_Repo.cs" />
+    <Compile Include="Phase_Context.cs" />
+    <Compile Include="Phase_Repo.cs" />
     <Compile Include="Project_Context.cs" />
     <Compile Include="Project_Repo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

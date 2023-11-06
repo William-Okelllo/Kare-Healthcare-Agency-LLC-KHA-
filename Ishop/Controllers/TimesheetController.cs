@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using PagedList;
+using System.Web.UI.WebControls.WebParts;
 
 namespace Ishop
 {
@@ -23,21 +24,10 @@ namespace Ishop
 
 
 
-            Timesheet_Context context = new Timesheet_Context();
-            var Time = context.timesheets.Where(c => c.CreatedOn.DayOfWeek == DateTime.Now.DayOfWeek);
-            bool dataExists = Time.Any();
-            if (dataExists)
-            { ViewBag.Timesheet = "Todays' timesheet already submitted successfully"; }
-            else
-            {
-                ViewBag.Timesheet = "Todays' timesheet still pending for submission";
-            }
-
-
 
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Name == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
@@ -74,6 +64,16 @@ namespace Ishop
         // GET: Timesheet/Details/5
         public ActionResult Details(int? id)
         {
+            Activities_Context AA = new Activities_Context();
+            var Activities = AA.activities.Where(a=>a.TimesheetId ==id).ToList();
+            ViewBag.Activities = Activities;
+
+
+            
+            var SumHours = AA.activities.Where(c=>c.TimesheetId ==id).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
+            ViewBag.SumHours = SumHours;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -106,15 +106,15 @@ namespace Ishop
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,Name,hours,Comments,Status,Owner")] Timesheet timesheet, string action)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Owner")] Timesheet timesheet, string action)
         {
-            if (action == "save") { timesheet.Status = false; } else if (action == "SaveAndSubmit") { timesheet.Status = true; }
+           
             if (ModelState.IsValid)
             {
                 db.timesheets.Add(timesheet);
                 db.SaveChanges(); 
                 TempData["msg"] = "✔   Timesheet successfully captured";
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Timesheet", new { id = timesheet.Id });
             }
 
             return View(timesheet);

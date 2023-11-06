@@ -28,6 +28,10 @@ namespace Ishop
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
             Database.SetInitializer<Timesheet_Context>(null);
+            Database.SetInitializer<Activities_Context>(null);
+            Database.SetInitializer<Employee_Context>(null); 
+            Database.SetInitializer<Project_Context>(null);
+            Database.SetInitializer<Phase_Context>(null);
 
         }
     }

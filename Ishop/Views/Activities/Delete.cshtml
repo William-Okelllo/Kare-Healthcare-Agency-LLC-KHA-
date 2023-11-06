@@ -1,4 +1,4 @@
-﻿@model IShop.Core.Contribution
+﻿@model IShop.Core.Activities
 
 @{
     ViewBag.Title = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Contribution</h4>
+    <h4>Activities</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,43 +20,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ChildId)
+            @Html.DisplayNameFor(model => model.Project_Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ChildId)
+            @Html.DisplayFor(model => model.Project_Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Paid)
+            @Html.DisplayNameFor(model => model.User)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Paid)
+            @Html.DisplayFor(model => model.User)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Month)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Month)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Balance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Balance)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
     </dl>

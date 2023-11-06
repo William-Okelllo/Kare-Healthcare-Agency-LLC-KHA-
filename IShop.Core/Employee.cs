@@ -18,6 +18,7 @@ namespace IShop.Core
         public String Designation { get; set; }
         public String Userid { get; set; }
 
+        public decimal Rate { get; set; }
 
     }
 }

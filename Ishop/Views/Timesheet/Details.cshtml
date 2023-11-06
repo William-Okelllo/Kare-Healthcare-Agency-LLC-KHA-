@@ -4,63 +4,191 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<style>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-<div>
-    <h4>Timesheet</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid whitesmoke;
+        }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Project_Name)
-        </dt>
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px;text-align:center ">
+                <i class="fa fa-bookmark"></i> Timesheet Details
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+                    @using (Html.BeginForm("Details", "Timesheet", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.Project_Name)
-        </dd>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                        
+                        <div class="form-row">
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                            
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-gradient-navy"><i class="fa fa-user-circle"></i></span>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.hours)
-        </dt>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">CreatedOn</span>
+                                        <span class="info-box-number"><h5> @Model.CreatedOn.ToString("dd-MMMM-yyyy")</h5></span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-gradient-navy"><i class="fa fa-user-circle"></i></span>
 
-        <dd>
-            @Html.DisplayFor(model => model.hours)
-        </dd>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Staff Name</span>
+                                        <span class="info-box-number"><h5> @Model.Owner</h5></span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-gradient-navy"><i class="fa fa-user-clock"></i></span>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Comments)
-        </dt>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Total Hours</span>
+                                        <span class="info-box-number"><h5> @ViewBag.SumHours Hours</h5></span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Comments)
-        </dd>
+                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
 
-    </dl>
+                        <div class="dropdown-divider"></div>
+
+                      
+                        <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+
+                            <a href="@Url.Action("create", "Activities", new { id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-plus-circle text-black"></i> Add Acitvities</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="table-responsive" style="min-height: 100px">
+                                <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                    <thead style="font-family:Calibri">
+                                        <tr style="color:white">
+                                            <th style="background-color: #0656A5; "> Project</th>
+                                            <th style="background-color: #0656A5; "> Hours</th>
+
+
+                                            <th style="background-color: #0656A5; "> Comments</th>
+                                            <th style="background-color: #0656A5; "> Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody style="font-family:Calibri">
+                                        @foreach (var item2 in ViewBag.Activities)
+                                        {
+
+
+                                            <tr data-widget="expandable-table" aria-expanded="false">
+
+
+                                                <td style="background-color:white">
+                                                    <i class="fa fa-suitcase text-primary"></i> @item2.Project_Name
+                                                    <div class="dropdown-divider"></div>
+                                                    <h5>
+                                                        <span class="badge badge-primary"><medium><i class="fa fa-spinner text-white"></i> PHASE : @item2.Name </medium></span>
+                                                    </h5>
+                                                </td>
+                                                <td style="background-color:white">
+                                                    <h5>
+                                                        <span class="badge badge-success"><medium><i class="fa fa-user-clock text-white"></i> Hours : @item2.Hours </medium></span>
+
+                                                    </h5>
+                                                </td>
+
+                                                <td style="background-color: whitesmoke">
+                                                    <p class="limited-lines"><small>@item2.Comments</small></p>
+                                                </td>
+                                                <td style="background-color:ghostwhite">
+
+                                                    <div class="btn-group dropdown">
+                                                        <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fa fa-hashtag"></i>  . Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                                                            <div class="dropdown-divider"></div>
+                                                            <a href="@Url.Action("Edit", "InDirects", new { id = item2.Id })" class="dropdown-item">
+                                                                <i class="fa fa-pen-nib text-primary"></i> Update/Edit Activity
+                                                            </a>
+
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Activity ')) { window.location.href = '@Url.Action("Delete", "InDirects", new { id = item2.Id, })'; }">
+                                                                <i class="fa fa-times-circle text-danger"></i> Drop Activity
+                                                            </a>
+                                                            <script>
+                                                                $(function () {
+                                                                    $('#Deny').click(function () {
+                                                                        if (confirm('Are you sure?')) {
+                                                                            window.location.href = $(this).data('url');
+                                                                        }
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <input type="submit" name="action" value="Save" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this Timesheet?')" />
+                        
+
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                        </script>
+
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

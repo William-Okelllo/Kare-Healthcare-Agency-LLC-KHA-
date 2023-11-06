@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 
 namespace IShop.Core
 {
-    public class Timesheet
+    public class Pcategory
     {
         public int Id { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
-        [Display(Name = "Staff Name")]
-        public string Owner { get; set; }
+        public string Category { get; set; }
        
-
-        
     }
 }

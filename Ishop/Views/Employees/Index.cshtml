@@ -105,6 +105,7 @@
                     <th style="background-color: #0656A5; font-size: medium; ">Contact</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Department</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Designation</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Hourly Rate</th>
                     <th style="background-color: #0656A5; font-size: medium;">Action</th>
                 </tr>
             </thead>
@@ -121,7 +122,9 @@
                         <td style="background-color: white;"> <i class="fa fa-mobile text-primary"></i> @item.Contact</td>
                         <td style="background-color: white;"> <i class="fa fa-university text-primary"></i> @item.DprtName</td>
                         <td style="background-color: white;"> <i class="fa fa-suitcase text-primary"></i> @item.Designation</td>
-                        <td style="background-color:ghostwhite">
+                        <td style="background-color: white;"> KSH  @item.Rate.ToString("#,##0.00")</td>
+
+                          <td style="background-color:ghostwhite">
 
                             <div class="btn-group dropdown">
                                 <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

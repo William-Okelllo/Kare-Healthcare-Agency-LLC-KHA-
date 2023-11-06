@@ -1,0 +1,72 @@
+﻿@model IShop.Core.leaves_Types
+@{
+    ViewBag.Title = "Add leaves";
+}
+
+
+
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-8 col-8">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white">
+                <i class="fa fa-umbrella text-white nav-icon"></i> Set up leave Types
+            </div>
+            <div class="card-body">
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-calendar-check text-orange"></i> @Html.LabelFor(model => model.CreatedOn) </label>
+                        @Html.EditorFor(model => model.CreatedOn, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm ",
+
+                           @Value = DateTime.Now,
+                           @Readonly = true
+
+                       }
+                   })
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            <i class="fa fa-umbrella text-orange"></i> @Html.LabelFor(model => model.Type)
+                        </label>
+                        @Html.TextBoxFor(model => model.Type, new { @class = "form-control form-control-sm", placeholder = "leave Name" })
+                        @Html.ValidationMessageFor(model => model.Type)
+
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>
+                            <i class="fa fa-calendar text-orange"></i> @Html.LabelFor(model => model.Days)
+                        </label>
+                        @Html.TextBoxFor(model => model.Days, new { @class = "form-control form-control-sm", placeholder = "leave Days" })
+                        @Html.ValidationMessageFor(model => model.Type)
+
+                    </div>
+                </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add leave  " class="btn btn-warning" />
+                            || @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </div>
+
+                }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
