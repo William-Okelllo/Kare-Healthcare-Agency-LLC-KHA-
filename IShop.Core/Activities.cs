@@ -15,7 +15,7 @@ namespace IShop.Core
         public DateTime CreatedOn { get; set; }
         [Display(Name = "Project Name")]
         public string Project_Name { get; set; }
-
+        public string Day { get; set; }
         public string User { get; set; }
         [Display(Name = "Project Phase")]
         public string Name { get; set; }

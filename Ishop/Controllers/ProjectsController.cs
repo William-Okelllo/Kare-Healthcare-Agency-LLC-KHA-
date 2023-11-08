@@ -45,7 +45,9 @@ namespace Ishop.Controllers
             var Phase = AA.phases.Where(a => a.Project_id == id).ToList();
             ViewBag.Phase = Phase;
 
-
+            Team_Context T = new Team_Context();
+            var Team = T.teams.Where(a => a.Project_id == id).ToList();
+            ViewBag.Team = Team;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

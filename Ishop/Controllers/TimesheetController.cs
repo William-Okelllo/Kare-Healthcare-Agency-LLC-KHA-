@@ -10,6 +10,7 @@ using IShop.Core;
 using Ishop.Infa;
 using PagedList;
 using System.Web.UI.WebControls.WebParts;
+using System.Globalization;
 
 namespace Ishop
 {
@@ -19,27 +20,12 @@ namespace Ishop
         private Timesheet_Context db = new Timesheet_Context();
 
         // GET: Timesheet
-        public ActionResult Index(string searchBy, string search, int? page)
+        public ActionResult Index(int? page)
         {
 
 
-
-
-            if (!(search == null) && (!(search == "")))
-            {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search).ToList().ToPagedList(page ?? 1, 11));
-
-            }
-            else if (search == "")
-            {
-                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
-
-
-            }
-            else
-            {
-                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
-            }
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
+            
 
         }
 
@@ -106,7 +92,7 @@ namespace Ishop
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Owner")] Timesheet timesheet, string action)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Owner,Weekid,Sun,Mon,Tue,Wen,Thur,Fri,Sat,Tt")] Timesheet timesheet, string action)
         {
            
             if (ModelState.IsValid)
@@ -140,7 +126,7 @@ namespace Ishop
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,Name,hours,Comments,Status,Owner")] Timesheet timesheet)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Owner,Weekid,Sun,Mon,Tue,Wen,Thur,Fri,Sat")] Timesheet timesheet)
         {
             if (ModelState.IsValid)
             {
@@ -184,6 +170,82 @@ namespace Ishop
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void InsertTimesheet()
+        {
+            
+
+            
+                try
+                {
+                    Employee_Context Emp = new Employee_Context();
+                    List<Employee> employees = Emp.employees.ToList();
+
+                    // Calculate the week number for the current date
+                    int weekNumber = GetWeekNumber(DateTime.Now);
+
+                    foreach (var employee in employees)
+                    {
+                        // Create a new Timesheet record
+                        Timesheet timesheet = new Timesheet
+                        {
+                            CreatedOn = DateTime.Now,
+                            Owner = employee.Username,
+                            Weekid = weekNumber,
+                            // Set other day-specific values here
+                            Sun = 0,
+                            Mon = 0,
+                            Tue = 0,
+                            Wen = 0,
+                            Thur = 0,
+                            Fri = 0,
+                            Sat = 0,
+                            Tt = 0,
+                            Status = 0
+                        };
+
+                        // Insert the record into the "timesheet" table
+                        db.timesheets.Add(timesheet);
+                    }
+
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+
+                }
+            
+           
+        
+
+        }
+        private int GetWeekNumber(DateTime date)
+        {
+            CultureInfo ci = CultureInfo.InvariantCulture;
+            Calendar calendar = ci.Calendar;
+
+            // Determine the first day of the year and the first day of the week
+            DateTimeFormatInfo dfi = ci.DateTimeFormat;
+            DateTime jan1 = new DateTime(date.Year, 1, 1);
+            DayOfWeek jan1DayOfWeek = dfi.Calendar.GetDayOfWeek(jan1);
+
+            // Adjust the start of the week based on the specified calendar
+            int daysToFirstWeek = 7 - (int)jan1DayOfWeek;
+            int daysToFirstWeekIncl = daysToFirstWeek - 1;
+
+            // Calculate the day number of the current date
+            int dayOfYear = calendar.GetDayOfYear(date);
+
+            if (dayOfYear <= daysToFirstWeekIncl)
+            {
+                // The current date is in the first week of the year
+                return 1;
+            }
+
+            // Calculate the week number
+            int weekNumber = (dayOfYear - daysToFirstWeekIncl + 6) / 7;
+            return weekNumber;
         }
     }
 }

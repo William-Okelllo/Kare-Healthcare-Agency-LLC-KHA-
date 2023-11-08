@@ -75,8 +75,12 @@
     <Compile Include="Project_Context.cs" />
     <Compile Include="Project_Repo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportContext.cs" />
+    <Compile Include="ReportGroupContext.cs" />
     <Compile Include="Sms_configs_Context.cs" />
     <Compile Include="Sms_config_Repo.cs" />
+    <Compile Include="Team_Context.cs" />
+    <Compile Include="Team_Repo.cs" />
     <Compile Include="Template_Context.cs" />
     <Compile Include="Template_Repo.cs" />
     <Compile Include="Timesheet_Context.cs" />

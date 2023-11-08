@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Infa", "Ishop.Infa\Hr.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planning", "Ishop\Planning.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_Service", "App_Service\App_Service.csproj", "{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,12 @@ Global
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1898C6E0-33C0-4FE7-9964-756089EE1D4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

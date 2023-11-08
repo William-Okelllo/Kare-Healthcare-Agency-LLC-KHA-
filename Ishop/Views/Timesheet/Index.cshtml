@@ -33,37 +33,35 @@
         border-collapse: collapse;
         overflow: visible;
     }
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 7px;
+        overflow: hidden;
+    }
 
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border-radius: 7px;
+            border: 1px solid #00000033;
+        }
     .form-rounded2 {
         border-radius: 0.5rem;
         width: 20%;
-        border-color: white;
+        border-color: black;
     }
 </style>
 
-<div class="card " style="background-color: rgb(255, 255, 255, 0.94);">
+<div class="card " style="background-color: rgb(255, 255, 255);">
 
 
-    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
+    <div class="card-header col-md-7 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-suitcase"></i>
             My Timesheeets
         </h3>
 
-        <div style="text-align: right; color: white ">
-            @using (Html.BeginForm("Index", "projects", FormMethod.Get))
-            {
-
-                <a style="font-family: Calibri"> Category Name</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Projects" })
-                <button type="submit" value="search" class="btn btn-sm btn-warning">
-                    <i class="fas fa-search"></i>
-                </button>
-
-                @Html.ActionLink("Post Timesheet ", "Create", "Timesheet", null, new { @class = "btn btn-sm btn-default btn" })
-
-            }
-        </div>
+       
 
 
 
@@ -86,87 +84,125 @@
         }, 2000);
     </script>
 
-    <div id="calender">
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+        <thead>
+            <tr style="color:white">
+            <th style="background-color: #0656A5; font-size: medium; "> <i class="fa fa-user-circle"></i> Charles Muru </th>
+            </tr>
+            <tr style="color:white">
+
+                <th style="background-color: #263544; font-size: medium; "> WeekDays  </th>
+                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Sun</th>
+                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Mon</th>
+                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Tue</th>
+                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Wen</th>
+                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Thur</th>
+                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Fri</th>
+                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Sat</th>
+                <th style="background-color: #d76e09; font-size: medium; "><i class="fa fa-bookmark"></i> Total Hrs</th>
+                <th style="background-color: #0656A5; font-size: medium; "><i class="fa fa-circle-notch"></i> Status</th>
+                <th style="background-color: #263544; font-size: medium; ">  Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="background-color: #0656A5; color: white ">
+                      <i class="fa fa-circle-notch text-white"></i> Week No  @item.Weekid
+
+                    </td>
+                    <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i>  </medium></span>   <a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Sun" })"> @item.Sun Hrs</a> </td>
+                    <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i>  </medium></span>   <a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Mon" })"> @item.Mon Hrs</a> </td>
+                    <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i>  </medium></span>   <a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Tue" })"> @item.Tue Hrs</a> </td>
+                    <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i>  </medium></span>   <a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Wen" })"> @item.Wen Hrs</a> </td>
+                    <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i>  </medium></span>   <a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Thur" })"> @item.Thur Hrs</a> </td>
+                    <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i>  </medium></span>   <a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Fri" })"> @item.Fri Hrs</a> </td>
+                    <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i>  </medium></span>   <a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Sat" })"> @item.Sat Hrs</a> </td>
+                    <td style="background-color: white;"> <span class="badge badge-primary"><medium><i class="fa fa-user-clock"></i>  </medium></span>    @item.Tt Hrs </td>
+                    <td style="background-color: white;">
+
+                        @if (item.Status == 0)
+                        {<small> <b style="color:red"><i class="fa fa-circle-notch"></i> Pending Submission</b></small>}
+                        else if (item.Status == 1)
+                        {<small> <b style="color:green"><i class="fa fa-check-circle"></i> Submitted</b></small>}
+                   else { <small> <b style = "color:green" ><i class="fa fa-check-circle-o"></i> Approved </b></small>}
+
+                    </td>
+                    <td style="background-color: white; ">
+
+                        <div class="btn-group dropdown">
+                            <button type="button" class="btn btn-xs btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-hashtag"></i>  . Action
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+
+                                <a href="@Url.Action("Edit", "InDirects", new { id = item.Id })" class="dropdown-item">
+                                    <i class="fa fa-circle-notch text-primary"></i> Update Week'sheet
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="@Url.Action("Edit", "InDirects", new { id = item.Id })" class="dropdown-item">
+                                    <i class="fa fa-check-circle text-primary"></i> Submit Week' sheet
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+            </tbody>
+    </table>
 
 
 
-        <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
-        <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 
-        @section Scripts{
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-
-            <script>
-                $(document).ready(function () {
-                    var events = [];
-                    $.ajax({
-                        type: "GET",
-                        url: "/Timesheet/GetEvents",
-                        success: function (data) {
-                            $.each(data, function (i, v) {
-                                events.push({
-
-                                    title: "📚 :" + v.Owner + "\n" + "______ " + "\n" + "🕗  " + v.Hours + " Hours ",
-
-                                    start: moment(v.Start),
-                                    end: v.End != null ? moment(v.End) : null,
-                                    color: v.Color,
-                                    allDay: v.IsFullDay,
-                                    hhh: v.Covid_19,
-
-                                    start: moment(v.CreatedOn),
-                                });
-                            })
-
-                            GenerateCalender(events);
-                        },
-                        error: function (error) {
-                            alert('failed');
-                        }
-                    })
-
-                    function GenerateCalender(events) {
-                        $('#calender').fullCalendar('destroy');
-                        $('#calender').fullCalendar({
-                            contentHeight: 700,
-                            defaultDate: new Date(),
-                            timeFormat: 'h(:mm)a',
-                            header: {
-                                left: 'prev,next today',
-                                center: 'title',
-                                right: 'month,basicWeek,basicDay,agenda'
-                            },
-                            eventLimit: false,
-                            eventColor: "#070145",
-
-
-                            events: events,
-                            eventClick: function (calEvent, jsEvent, view) {
-                                $('#myModal #eventTitle').text(calEvent.title);
-                                var $description = $('<div/>');
-                                $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
-                                if (calEvent.end != null) {
-                                    $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
-                                }
-                                $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
-                                $('#myModal #pDetails').empty().html($description);
-
-                                $('#myModal').modal();
-                            }
-                        })
-                    }
-                })
-            </script>
+    <style>
+        .ul.pagination {
+            display: inline-block;
+            padding: 1;
+            margin: 1;
+            border-radius: 0.5rem;
         }
 
+        ul.pagination li {
+            display: inline;
+        }
+
+            ul.pagination li a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                transition: background-color;
+                background-color: #ddd;
+                border-color: white;
+                border-radius: 0.5rem;
+            }
+
+                ul.pagination li a.active {
+                    background-color: dodgerblue;
+                    color: white;
+                }
+
+                ul.pagination li a:hover:not(.active) {
+                    background-color: dodgerblue;
+                    border-radius: 0.5rem;
+                }
+    </style>
+    <div id="container" style="text-align:left">
+
+        <div class="pagination" style="text-align:left">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+          , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+        </div>
     </div>
 </div>
 
 
 
-
-
-
-   
-</div>

@@ -101,9 +101,9 @@
 
                     <th style="background-color: #0656A5; font-size: medium; ">AddedOn </th>
                     <th style="background-color: #0656A5; font-size: medium; ">Project Name</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">location</th>
+
                     <th style="background-color: #0656A5; font-size: medium; ">Budget</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Phases & Budgets</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">location</th>
                     <th style="background-color: #0656A5; font-size: medium;">Action</th>
                 </tr>
             </thead>
@@ -112,24 +112,27 @@
                 {
                     <tr>
                         <td style="background-color: white;">
-                            <i class="fa fa-calendar-check"></i>  @item.CreatedOn.ToString("dd-MMMM-yyyy")
+                            <i class="fa fa-calendar-check"></i>  @item.CreatedOn.ToString("dd-N-yyyy")
 
                         </td>
                         <td style="background-color: white;">
                             <i class="fa fa-bookmark text-primary"></i> @item.Project_Name
-
-
+                            <div class="dropdown-divider"></div>
+                            <h5>
+                                <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i> Category : @item.Category </medium></span> <small>||</small>
+                                <span class="badge badge-warning"><medium><i class="fa fa-circle-notch text-navy"></i> Status : @item.Status </medium></span>
+                            </h5>
                         </td>
 
-                        <td style="background-color: white;  ">
-                            <i class="fa fa-map-marker text-danger"></i> @item.location
 
+                        <td style="background-color:white">
+                            <i class="fa fa-suitcase text-primary"></i> @item.Budget.ToString("#,##0.00") <div class="dropdown-divider"></div>
+                            <h5>
+                                <span class="badge badge-primary"><medium><i class="fa fa-cash-register text-white"></i> Fee Budget : @item.Fee_Budget.ToString("#,##0.00") </medium></span>
+                            </h5>
 
                         </td>
-                        <td style="background-color:white"> <i class="fa fa-suitcase text-primary"></i> @item.Budget.ToString("#,##0.00")</td>
-                        <td style="background-color: white">
-                            <i class="fa fa-chart-line text-primary"></i> <a href="@Url.Action("Details", "projects" , new { id = item.Id})"> <b>Phases|Budgets</b> </a>
-                        </td>
+                        <td style="background-color: white;  "><i class="fa fa-map-marker text-danger"></i> @item.location </td>
                         <td style="background-color:ghostwhite">
 
                             <div class="btn-group dropdown">
@@ -139,8 +142,8 @@
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                                     <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Edit", "Projects", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-pen-nib text-primary"></i> Update Category Info
+                                    <a href="@Url.Action("Details", "Projects", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-book-reader text-primary"></i> Project Info
                                     </a>
 
                                     <div class="dropdown-divider"></div>

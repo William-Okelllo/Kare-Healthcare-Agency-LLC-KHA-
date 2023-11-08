@@ -1,0 +1,166 @@
+﻿@model IShop.Core.ReportGroup
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<style type="text/css">
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #a34608;
+        }
+
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+
+           
+
+
+                <div class="card card-widget widget-user-2" style="border-radius: 14px ">
+                    <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                        <i class="fa  fa-chart-pie text-white nav-icon"></i> Report Group : @Model.Description
+                    </div>
+                    <div class="card-body table-responsive">
+
+                        <table class="table table-bordered   text-nowrap table-condensed table-striped  sortable curved-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Reports Group</th>
+                                    <th>Reports Type</th>
+                                    <th>Group Menu Order</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> <i class="fa  fa-chart-pie text-orange nav-icon"></i> @Model.Description</td>
+                                    <td><i class="fa fa-chart-pie text-orange"></i> @Model.Type</td>
+                                    <td><i class="fa fa-clipboard-list text-orange"></i>  @Model.Menu_order</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="dropdown-divider"></div>
+                        <div class="col-md-8">
+                            <!-- Widget: user widget style 2 -->
+                            <div class="card card-widget widget-user-2" style="border-radius: 14px ">
+                                <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                                    <i class="fa fa-chart-line text-white nav-icon"></i> Reports
+                                </div>
+                                @if (ViewBag.ReportsData != null && ViewBag.ReportsData.Count > 0)
+                                {
+                                    <ul class="list-group">
+                                        @foreach (var item2 in ViewBag.ReportsData)
+                                        {
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                @item2.Report_Name
+                                                <span class="badge badge-secondary badge-pill">
+                                                    <a href="@Url.Action("Run", "Reports", new { Path = item2.Report_Path })" class="nav-link" style="color:white">
+                                                        <i class="fa fa-spin fa-circle-notch text-white"></i>  View Report
+                                                    </a>
+                                                </span>
+                                            </li>
+                                        }
+
+
+
+
+                                    </ul>
+
+                                }
+                                else
+                                {
+                                    <div class="card-body">
+                                        <br />
+                                        <span class="progress-description">
+                                            <i class="fa fa-spin fa-circle-notch text-navy nav-icon"></i>   No Reports Found
+                                        </span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="dropdown-divider">
+                        </div>
+                        @Html.ActionLink("Back to Reports", "Index", "Reports", null, new { @class = "btn btn-primary btn" })
+                    </div>
+                </div>
+            </div>

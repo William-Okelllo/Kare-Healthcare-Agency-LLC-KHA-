@@ -32,7 +32,8 @@ namespace Ishop
             Database.SetInitializer<Employee_Context>(null); 
             Database.SetInitializer<Project_Context>(null);
             Database.SetInitializer<Phase_Context>(null);
-
+            Database.SetInitializer<Team_Context>(null);
+            Database.SetInitializer<ConfigsContext>(null);
         }
     }
 }

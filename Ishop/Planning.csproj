@@ -445,10 +445,13 @@
     <Compile Include="Controllers\PcategoriesController.cs" />
     <Compile Include="Controllers\PhaseController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\ReportGroupController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2903,7 +2906,7 @@
     <Content Include="Views\leaves_Types\Details.cshtml" />
     <Content Include="Views\leaves_Types\Edit.cshtml" />
     <Content Include="Views\leaves_Types\Index.cshtml" />
-    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Add.cshtml" />
     <Content Include="Views\Activities\Delete.cshtml" />
     <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
@@ -2918,6 +2921,22 @@
     <Content Include="Views\Pcategories\Details.cshtml" />
     <Content Include="Views\Pcategories\Edit.cshtml" />
     <Content Include="Views\Pcategories\Index.cshtml" />
+    <Content Include="Views\Teams\Add.cshtml" />
+    <Content Include="Views\Teams\Delete.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
+    <Content Include="Views\Teams\Edit.cshtml" />
+    <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\ReportGroup\Create.cshtml" />
+    <Content Include="Views\ReportGroup\Delete.cshtml" />
+    <Content Include="Views\ReportGroup\Details.cshtml" />
+    <Content Include="Views\ReportGroup\Edit.cshtml" />
+    <Content Include="Views\ReportGroup\Index.cshtml" />
+    <Content Include="Views\Reports\Create.cshtml" />
+    <Content Include="Views\Reports\Delete.cshtml" />
+    <Content Include="Views\Reports\Details.cshtml" />
+    <Content Include="Views\Reports\Edit.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\Run.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

@@ -1,0 +1,268 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.ReportGroup>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+        overflow-y: auto;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+
+    <div class="card-header" style="background-color: #0656A5">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-chart-line"></i>
+            Report Groups
+        </h3>
+
+
+
+
+        <div style="text-align: right; color: white ">
+
+
+
+            @Html.ActionLink(" New Group", "Create", "ReportGroup", null, new { @class = "btn btn-sm btn-warning btn" })
+
+
+
+
+        </div>
+    </div>
+
+    @if (TempData["Msg2"] != null)
+    {<div class="row">
+            <div class="alert alert-danger col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg2"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 6000);
+    </script>
+
+
+
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 6000);
+    </script>
+
+
+
+
+
+
+
+
+
+    <div class="table-responsive" style="min-height: 400px">
+        <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable">
+
+
+
+            <thead>
+                <tr style="color:white">
+
+
+                    <th style="background-color: #0656A5; ">Description </th>
+                    <th style="background-color: #0656A5; ">Type </th>
+                    <th style="background-color: #0656A5;">Menu Order </th>
+                    <th style="background-color: #0656A5;">Reports </th>
+                    <th style="background-color: #0656A5; ">Actions </th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr data-widget="expandable-table" aria-expanded="false">
+
+
+
+                        <td style="background-color:white"><i class="fa fa-car text-primary"></i>  @item.Description</td>
+                        <td style="background-color:white"><i class="fa fa-shopping-basket text-primary"></i>  @item.Type</td>
+                        <td style="background-color:white"><i class="fa fa-shopping-basket text-primary"></i>  @item.Menu_order</td>
+                        <td style="background-color:white"> <i class="fa fa-chart-pie text-primary"></i> <a href="@Url.Action("Details", "ReportGroup", new { id = item.id} )"> Reports </a></td>
+                        <td style="background-color:ghostwhite">
+
+
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-file-invoice"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                    <a type="button" href="@Url.Action("Create", "Reports", new { id = item.id })" class="dropdown-item">
+                                        <i class="fa fa-chart-pie text-primary"></i> Add Report
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item" onclick="if (confirm('delete record?')) { window.location.href = '@Url.Action("Delete", "ReportGroup", new { id = item.id })'; }">
+                                        <i class="fa fa-times-circle text-danger"></i> Delete ReportGroup
+                                    </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Deny').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+
+                                </div>
+                            </div>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+        @if (Model.Count() == 0)
+        {
+            <div style="text-align:center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                        <div class="info-box-content">
+
+                            <span class="progress-description">
+                                <i class="fa fa-calendar text-white nav-icon"></i> <i class="fa fa-spin fa-circle-notch"></i>   No data records Found
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+                </div>

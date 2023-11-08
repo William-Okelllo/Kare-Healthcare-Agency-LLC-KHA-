@@ -11,9 +11,11 @@ namespace IShop.Core
     {
         public int Id { get; set; }
         public int Project_id { get; set; }
-        
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        [Display(Name = "Start Date ")]
+        public DateTime Start_Date { get; set; }
+
+        [Display(Name = "End Date ")]
+        public DateTime End_Date { get; set; }
 
         [Display(Name = "Phase ")]
         public string Name { get; set; }

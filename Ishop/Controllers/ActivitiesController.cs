@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using IShop.Core.Interface;
+using System.Reflection;
+using Ishop.Models;
+using System.EnterpriseServices.CompensatingResourceManager;
 
 namespace Ishop.Controllers
 {
@@ -25,6 +28,9 @@ namespace Ishop.Controllers
         // GET: Activities/Details/5
         public ActionResult Details(int? id)
         {
+
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,9 +44,10 @@ namespace Ishop.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Create(int Id)
+        public ActionResult Add(int Id,string id2)
         {
             ViewBag.Timesheetid = Id;
+            ViewBag.Weekday = id2;
 
             Direct_Context DC = new Direct_Context();
             var DirectC = DC.directs.ToList();
@@ -50,6 +57,18 @@ namespace Ishop.Controllers
             var Project = P.projects.ToList();
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
+
+            
+            var Activities = db.activities.Where(a => a.TimesheetId == Id && a.Day ==id2).ToList();
+            ViewBag.Activities = Activities;
+
+
+
+            var SumHours = db.activities.Where(c => c.TimesheetId == Id && c.Day == id2).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
+            ViewBag.SumHours = SumHours;
+
+
+
             return View();
         }
 
@@ -58,13 +77,42 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,TimesheetId,Hours,Comments")] Activities activities)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,TimesheetId,Hours,Comments,Day")] Activities activities)
         {
+
+            var SumHours = db.activities.Where(c => c.TimesheetId == activities.TimesheetId && c.Day == activities.Day).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
+            
+
             if (ModelState.IsValid)
             {
                 db.activities.Add(activities);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Timesheet", new { id = activities.TimesheetId });
+                Timesheet_Context Tc = new Timesheet_Context();
+                Timesheet check = Tc.timesheets.Find(activities.TimesheetId);
+                if (check != null)
+                {
+                    // Use reflection to update the specified day's column
+                    var property = check.GetType().GetProperty(activities.Day, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+                    if (property != null)
+                    {
+                        property.SetValue(check, activities.Hours + SumHours);
+
+                        // Save the changes to the database
+                        check.Tt = check.Sun + check.Mon + check.Tue + check.Wen + check.Thur + check.Fri + check.Sat;
+                        Tc.SaveChanges();
+                    }
+                    else
+                    {
+                        // Handle the case when the specified day doesn't exist as a column
+                        // You can throw an exception, log an error, or handle it according to your needs.
+                    }
+                }
+
+                    return RedirectToAction("Index", "Timesheet");
+
+
+
             }
 
             return View(activities);
@@ -102,29 +150,42 @@ namespace Ishop.Controllers
         }
 
         // GET: Activities/Delete/5
-        public ActionResult Delete(int? id)
+       
+       
+        public ActionResult Delete(int id,string Day)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Activities activities = db.activities.Find(id);
-            if (activities == null)
-            {
-                return HttpNotFound();
-            }
-            return View(activities);
-        }
 
-        // POST: Activities/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Activities activities = db.activities.Find(id);
+            var Act = db.activities.Where(c => c.Id ==id).Select(x => x.Hours);
+            var TimesheetId = db.activities.Where(c => c.Id == id).FirstOrDefault();
+            Timesheet_Context TC = new Timesheet_Context();
+
+
+
+
+            if (TC != null)
+            {
+                // Use reflection to update the specified day's column
+                var property = TC.GetType().GetProperty(Day, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+                if (property != null)
+                {
+                    property.SetValue(TC, Act);
+
+                    // Save the changes to the database
+                    TC.SaveChanges();
+                }
+                else
+                {
+                    // Handle the case when the specified day doesn't exist as a column
+                    // You can throw an exception, log an error, or handle it according to your needs.
+                }
+            }
             db.activities.Remove(activities);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            string returnUrl = Request.UrlReferrer.ToString();
+            TempData["msg"] = "✔   Activity dropped successfully ";
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)
