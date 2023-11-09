@@ -428,6 +428,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
@@ -2937,6 +2938,11 @@
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\Run.cshtml" />
+    <Content Include="Views\Accesses\Acc_Profile.cshtml" />
+    <Content Include="Views\Accesses\Details.cshtml" />
+    <Content Include="Views\Accesses\Edit.cshtml" />
+    <Content Include="Views\Accesses\Grant_Role.cshtml" />
+    <Content Include="Views\Accesses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

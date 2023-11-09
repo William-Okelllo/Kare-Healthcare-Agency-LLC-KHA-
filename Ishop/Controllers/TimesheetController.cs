@@ -11,6 +11,7 @@ using Ishop.Infa;
 using PagedList;
 using System.Web.UI.WebControls.WebParts;
 using System.Globalization;
+using Syncfusion.Pdf.Interactive;
 
 namespace Ishop
 {
@@ -71,6 +72,31 @@ namespace Ishop
             }
             return View(timesheet);
         }
+
+
+
+
+        public ActionResult Submit(int Id)
+        {
+           
+            Timesheet check = db.timesheets.Find(Id);
+            if (check != null)
+            {
+                check.Status = 1;
+                db.SaveChanges();
+            }
+            TempData["msg"] = "✔  Timesheet Submitted successfully";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
+
+
+
+
+
+
+
+
 
         // GET: Timesheet/Create
         public ActionResult Create()
@@ -247,5 +273,7 @@ namespace Ishop
             int weekNumber = (dayOfYear - daysToFirstWeekIncl + 6) / 7;
             return weekNumber;
         }
+
+       
     }
 }

@@ -77,7 +77,20 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Reports_Access"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Reports_Access";
+                roleManager.Create(role);
 
+            }
+            if (!roleManager.RoleExists("Master_Data"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Master_Data";
+                roleManager.Create(role);
+
+            }
 
 
         }

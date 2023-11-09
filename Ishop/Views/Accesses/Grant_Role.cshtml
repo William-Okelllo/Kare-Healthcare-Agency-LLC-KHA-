@@ -1,0 +1,192 @@
+﻿@model IShop.Core.Access
+
+@{
+    ViewBag.Title = "Role Grant";
+}
+
+<style>
+    image {
+        height: 100px;
+        width: 100px;
+    }
+</style>
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+
+
+
+
+
+<div class="row">
+    <div class="col-12">
+
+        @if (TempData["msg"] != null)
+        {<div class="row">
+                <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @TempData["msg"]
+                </div>
+            </div>
+        }
+
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+        </script>
+
+
+        
+            <br />
+            <div class="col d-flex justify-content-center">
+                <div class="col-md-9">
+                    <!-- Widget: user widget style 2 -->
+                    <div class="card card-widget widget-user-2" style="border-radius: 14px ">
+                        <div class="card-header" style="background-color: #001F3F;color:white; border-radius: 14px ">
+                            <i class="fa fa-user-circle text-white nav-icon"></i> Approve / Revoke Account Role
+                        </div>
+
+                        <div class="card-footer p-0">
+                            <div class="card-body text-left">
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-cogs"></i>  Assign Roles</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-users"></i> Assigned Roles</a>
+                                    </li>
+                                   
+
+                                </ul>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+                                        @using (Html.BeginForm())
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <form>
+                                            <div class="col justify-content-center">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-3">
+                                                        <label><i class="fa fa-user-circle text-warning"></i> User Id</label>
+                                                        <input id="Userid" name="Username" type="text" value="@ViewBag.Userinfo.UserName" class="form-control form-rounded form-control-sm" readonly />
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label><i class="fa fa-envelope text-warning"></i> Email Address</label>
+                                                        <input id="Userid" name="Username" type="text" value="@ViewBag.Userinfo.Email" class="form-control form-rounded form-control-sm" readonly />
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label><i class="fa fa-user-tag text-warning"></i> User Id</label>
+                                                        <input id="Userid" name="Username" type="text" value="@ViewBag.key" class="form-control form-rounded form-control-sm" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-divider"></div>
+                                            </div>
+                                                <div class="form-row">
+
+
+                                                    <div class="form-group col-md-4">
+                                                        <label><i class=" fa fa-spinner text-orange"></i> Access Roles</label>
+                                                        @Html.DropDownList("Role", ViewBag.role as SelectList, "-- Select Access  --",
+                                                   new { @class = "form-control form-control-sm", @required = "required", onchange = "updateTextboxC()" })
+
+                                                    </div>
+
+
+
+                                                    <div class="form-group col-md-3">
+                                                        <label><i class="fa fa-circle-notch text-warning"></i>  Action</label>
+                                                        @{
+                                                            List<SelectListItem> y = new List<SelectListItem>();
+                                                            y.Add(new SelectListItem
+                                                            {
+                                                                Text = "✔ Grant",
+                                                                Value = "1",
+                                                            });
+                                                            y.Add(new SelectListItem
+                                                            {
+                                                                Text = "❌Revoke",
+                                                                Value = "0",
+                                                            });
+
+                                                        }@Html.DropDownListFor(model => model.Status, y, "---Select action--", new { @class = "form-control form-control-sm", @required = "required" })
+                                                    </div>
+                                                </div>
+
+
+
+
+                                                <div class="form-group col-md-6">
+                                                    <input type="submit" value="Approve" class="btn btn-sm btn-primary" style="color:white" />
+
+                                                    ||@if (this.User.IsInRole("Admin"))
+                                                    {
+                                                        @Html.ActionLink("❌ Cancel Request", "Index", "Data", null, new { @class = "btn btn-warning btn-sm" })
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.ActionLink("❌ Cancel Request", "Index", "Data", null, new { @class = "btn btn-warning btn-sm" })
+                                                    }
+                                                </div>
+
+
+
+
+                                        </form>
+
+
+                                        }
+                                    </div>
+                                    <div class="tab-pane fade show " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                                        <br />
+                                        <div class="col justify-content-center">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <label><i class="fa fa-user-circle text-warning"></i> User Id</label>
+                                                    <input id="Userid" name="Username" type="text" value="@ViewBag.Userinfo.UserName" class="form-control form-rounded form-control-sm" readonly />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label><i class="fa fa-envelope text-warning"></i> Email Address</label>
+                                                    <input id="Userid" name="Username" type="text" value="@ViewBag.Userinfo.Email" class="form-control form-rounded form-control-sm" readonly />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label><i class="fa fa-user-tag text-warning"></i> User Id</label>
+                                                    <input id="Userid" name="Username" type="text" value="@ViewBag.key" class="form-control form-rounded form-control-sm" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <p style="color:coral"><b>@ViewBag.Result</b></p>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+                                </div>
+                </div>
+        </div>
+    </div>

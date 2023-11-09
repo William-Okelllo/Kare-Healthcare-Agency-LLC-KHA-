@@ -74,8 +74,8 @@
                             <th style="background-color: #0656A5"> <i class="fa fa-sort"></i> Phone No</th>
                             <th style="background-color: #0656A5"> <i class="fa fa-sort"></i> Email</th>
                             <th style="background-color: #0656A5">  Email-Confirmed</th>
+                            <th style="background-color: #0656A5">Access</th>
                             <th style="background-color: #0656A5">Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -107,6 +107,11 @@
 
 
                                 <td style="background-color:ghostwhite">
+                                    <a href="@Url.Action("Grant_Role", "Accesses", new { UserId = item.Id })">
+                                        <i class="fa fa-user-shield"></i> Manage Roles
+                                    </a>
+                                </td>
+                                <td style="background-color:ghostwhite">
                                     <div class="btn-group dropdown">
                                         <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-hourglass"></i>  . Action
@@ -114,13 +119,9 @@
                                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                                             <div class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Grant_Role", "Accesses", new { Id = item.Id })" class="dropdown-item">
-                                                <i class="fa fa-user-shield text-success"></i> Add Role
-                                            </a>
-
-                                            <div class="divider"></div>
+                                            
                                             <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this account?')) { window.location.href = '@Url.Action("Delete_User", "Data", new { id = item.Id })'; }">
-                                                <i class="fas fa-trash text-danger"></i> Delete Account
+                                                <i class="fas fa-times text-danger"></i> Delete Account
                                             </a>
                                             <script>
                                                 $(function () {
