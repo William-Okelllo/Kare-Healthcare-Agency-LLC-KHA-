@@ -36,7 +36,7 @@
     .curved-table {
         border-collapse: collapse;
         border-radius: 7px;
-        overflow: hidden;
+        overflow: visible;
     }
 
         .curved-table th,
@@ -173,7 +173,8 @@
                         else
                         { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Sat Hrs </medium></span>}
                         </td>
-                        <td style="background-color: #040148;color:white"> <span class="badge badge-warning"><medium><i class="fa fa-user-clock"></i>  </medium></span>    @item.Tt Hrs </td>
+                        <td style="background-color: #040148;color:white">
+                            <a href="@Url.Action("Details", "Timesheet", new {id =item.Id })"> <span class="badge badge-warning"><medium><i class="fa fa-clock"></i> @item.Tt Hrs  </medium></span> </a> </td>
                         <td style="background-color: white;">
 
                             @if (item.Status == 0)
@@ -181,7 +182,7 @@
                             else if (item.Status == 1)
                             {<small> <b style="color:green"><i class="fa fa-check-circle"></i> Submitted</b></small>}
                             else
-                            { <small> <b style="color:green"><i class="fa fa-check-circle-o"></i> Approved </b></small>}
+                            { <small> <b style="color:green"><i class="fa fa-check-double"></i> Approved </b></small>}
 
                         </td>
                         <td style="background-color: white; ">

@@ -112,10 +112,48 @@
 
                     </div>
                     <div class="form-group col-md-3">
-                        <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.RunTime) </label>
-                        @Html.TextBoxFor(model => model.RunTime, new { @type = "datetime-local", @class = "form-control form-control-sm" })
-
+                        <label><i class="fa fa-spinner text-orange"></i> @Html.LabelFor(model => model.RunTime) </label>
+                        @{
+                            List<SelectListItem> m = new List<SelectListItem>();
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Monday",
+                                Value = "Monday",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Tuesday",
+                                Value = "Tuesday",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Wednesday",
+                                Value = "Wednesday",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Thursday",
+                                Value = "Thursday",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Friday",
+                                Value = "Friday",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Saturday",
+                                Value = "Saturday",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Sunday",
+                                Value = "Sunday",
+                            });
+                        }
+                        @Html.DropDownListFor(model => model.RunTime, m, "---Timesheet RunDay---", new { @class = "form-control form-control-sm", @required = "required" })
                     </div>
+
                 </div>
                     <hr />
                     <div class="form-group">

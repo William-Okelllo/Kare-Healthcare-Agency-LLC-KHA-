@@ -39,24 +39,31 @@ namespace Ishop
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search && c.Status==1 || c.Status == 2).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Status == 1 || c.Status == 2).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Status == 1 || c.Status == 2).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }
 
         public ActionResult Details(int? id)
         {
+
+            Activities_Context AA = new Activities_Context();
+            var Act = AA.activities.Where(a => a.TimesheetId == id).ToList() ;
+            ViewBag.Activities = Act;
+            
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -143,7 +150,36 @@ namespace Ishop
         }
 
 
+        public ActionResult Approve(int Id)
+        {
+            var Owner = db.timesheets.Where(t => t.Id == Id).FirstOrDefault();
+            var U = UA.AspNetUsers.Where(t => t.UserName == Owner.Owner).FirstOrDefault();
+            string daytime;
+            if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
+            { daytime = "Good Morning"; }
+            else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+            { daytime = "Good Afternoon"; }
+            else
+            { daytime = "Good Evenning"; }
+            string Subject = "Timesheet Approved Successfully Week No " + Owner.Weekid;
+            string message = daytime + " ," + Owner.Owner
+            + "\n" + "Your timesheet has been Approved successfully  "
+            + "\n" + "thank you "
+            + "\n" + "Regards , HR-Team ";
 
+            PushEmail(U.Email, Subject, message, DateTime.Now);
+            PushSms(U.PhoneNumber, message, DateTime.Now);
+            Timesheet check = db.timesheets.Find(Id);
+            if (check != null)
+            {
+                check.Status = 2;
+                db.SaveChanges();
+            }
+
+            TempData["msg"] = "✔  Timesheet Approved successfully";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
 
 
 
@@ -169,8 +205,17 @@ namespace Ishop
         {
             DateTime currentDate = DateTime.Now;
             int daysInWeek = 7;
-            int daysPassed = DateTime.Now.Day - 1;
-            int weekNumber = (daysPassed / daysInWeek) + 1;
+
+            // Calculate the day of the week the month starts
+            DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+            int daysPassed = (int)firstDayOfMonth.DayOfWeek;
+
+            // Adjust daysPassed if the first day of the month is not Sunday (0)
+            daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
+
+            // Calculate the week number
+            int weekNumber = (currentDate.Day + daysPassed - 1) / daysInWeek + 1;
+
             string weekInfo = $"{weekNumber}{DateTime.Now.Month}{DateTime.Now.Year}";
             string joinedStringConcat = string.Concat(weekInfo);
             int.TryParse(joinedStringConcat, out int WeekNo);

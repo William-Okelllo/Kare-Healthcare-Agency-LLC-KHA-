@@ -14,8 +14,8 @@ namespace IShop.Core
         public string Smtp { get; set; }
         public string Email { get; set; }
 
-        [Display(Name = "Timesheet Setup Day & Time")]
-        public DateTime  RunTime { get; set; }
+        [Display(Name = "Timesheet Setup Day")]
+        public string RunTime { get; set; }
     public string Password { get; set; }
         public string SSRSReportsUrl { get; set; }
 

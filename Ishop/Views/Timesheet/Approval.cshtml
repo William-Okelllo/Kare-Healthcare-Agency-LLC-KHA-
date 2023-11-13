@@ -67,8 +67,8 @@
             @using (Html.BeginForm("Approval", "Timesheet", FormMethod.Get))
             {
 
-                <a style="font-family: Calibri"> Category Name</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Category" })
+                <a style="font-family: Calibri"> Employee Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Employee" })
                 <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
@@ -197,11 +197,12 @@
                             else if (item.Status == 1)
                             {<small> <b style="color:green"><i class="fa fa-check-circle"></i> Submitted</b></small>}
                             else
-                            { <small> <b style="color:green"><i class="fa fa-check-circle-o"></i> Approved </b></small>}
+                            { <small> <b style="color:green"><i class="fa fa-check-double"></i> Approved </b></small>}
 
                         </td>
                         <td style="background-color: white; ">
-                            <div class="btn-group dropdown">
+                            @if(item.Status == 3)
+                            {<div class="btn-group dropdown">
                                 <button type="button" class="btn btn-xs btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-hashtag"></i>  . Action
                                 </button>
@@ -227,13 +228,20 @@
                                         });
                                     </script>
                                     <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Submit", "Timesheet", new { id = item.Id })" class="dropdown-item">
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to approve this Timesheet  ')) { window.location.href = '@Url.Action("Approve", "Timesheet", new { id = item.Id, })'; }">
                                         <i class="fa fa-check-circle text-success"></i> Approve Timesheet
                                     </a>
                                 </div>
                             </div>
+                            }
+                            else
+                            {<div class="btn-group dropdown">
+                                <button type="button" class="btn btn-xs btn-outline-primary disabled dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-hashtag"></i>  . Action
+                                </button>
 
-
+                            </div>
+                            }
 
                         </td>
                     </tr>

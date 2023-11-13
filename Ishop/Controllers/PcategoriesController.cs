@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using PagedList;
 
 namespace Ishop.Controllers
 {
@@ -16,9 +17,24 @@ namespace Ishop.Controllers
         private PCategory_Context db = new PCategory_Context();
 
         // GET: Pcategories
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search, int? page)
         {
-            return View(db.pcategories.ToList());
+            if (!(search == null) && (!(search == "")))
+            {
+                return View(db.pcategories.OrderByDescending(p => p.Id).Where(c => c.Category.StartsWith(search) || c.Category == search).ToList().ToPagedList(page ?? 1, 11));
+
+            }
+            else if (search == "")
+            {
+                return View(db.pcategories.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+
+
+            }
+            else
+            {
+                return View(db.pcategories.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+            }
+
         }
 
         // GET: Pcategories/Details/5

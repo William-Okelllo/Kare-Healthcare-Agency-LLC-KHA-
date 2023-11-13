@@ -1,18 +1,24 @@
-﻿using EASendMail;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
+﻿using Dapper;
 using EASendMail;
 using Newtonsoft.Json;
-using Timer = System.Timers.Timer;
-using Attachment = System.Net.Mail.Attachment;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
+using System.Linq;
+using System.Net.Mail;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Web.Mvc;
+using SmtpClient = EASendMail.SmtpClient;
+using Timer = System.Timers.Timer;
+using Attachment = System.Net.Mail.Attachment;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using Ishop.Infa;
 using IShop.Core;
 using System.Globalization;
@@ -86,7 +92,7 @@ namespace App_Service
 
                 }
 
-                InsertTimesheetRecords();
+                CheckTimesheetDate();
 
             }
             catch (Exception ex)
@@ -364,6 +370,56 @@ namespace App_Service
         }
 
 
+        public void CheckTimesheetDate()
+        {
+
+            string query = "SELECT  Runtime FROM Configs";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string Runtime = reader["Runtime"].ToString();
+
+                            if (Enum.TryParse(Runtime, out DayOfWeek runtimeDayOfWeek))
+                            {
+                                DayOfWeek currentDayOfWeek = DateTime.Now.DayOfWeek;
+                                // Check if the runtime day is the same as today and the time is 12:00 AM
+                                if (DateTime.Now.DayOfWeek == runtimeDayOfWeek &&
+                                  DateTime.Now.TimeOfDay.Hours == 13 && // 1:00 PM
+                                  DateTime.Now.TimeOfDay.Minutes == 30)
+                                {
+                                    // Run your method or logic here
+                                    InsertTimesheetRecords();
+                                    Console.WriteLine("--success-- ");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("--Awaiting for " + Runtime +" 1:30 PM");
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+
+
+
+            }
+        }
+                             
+                                
+               
+        
+
+
 
         public void InsertTimesheetRecords()
         {
@@ -421,9 +477,7 @@ namespace App_Service
                 
             }
         }
-        public void vvv()
-        {
-        }
+       
 
 
             public void Start()
