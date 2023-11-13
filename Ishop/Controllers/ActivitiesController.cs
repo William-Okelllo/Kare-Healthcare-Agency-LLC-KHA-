@@ -77,8 +77,14 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,TimesheetId,Hours,Comments,Day")] Activities activities)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,TimesheetId,Hours,Comments,Day,Charge")] Activities activities)
         {
+
+            Employee_Context EE = new Employee_Context();
+            var Emp = EE.employees.Where(c => c.Username == activities.User).FirstOrDefault();
+
+            Decimal Charge = Emp.Rate * activities.Hours;
+            activities.Charge= Charge;
 
             var SumHours = db.activities.Where(c => c.TimesheetId == activities.TimesheetId && c.Day == activities.Day).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
             

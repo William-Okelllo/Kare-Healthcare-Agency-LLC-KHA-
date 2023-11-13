@@ -246,7 +246,8 @@
 
                                                     <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Name</td>
                                                     <td style="background-color:white"> <i class="fa fa-suitcase text-primary"></i> @item2.Budget.ToString("#,##0.00")</td>
-                                                    <td style="background-color:white"> <small><i class="fa fa-calendar-day text-primary"></i> @item2.Start_Date.ToString("dd-MMMM-yyyy")  --<i class="fa fa-calendar-day text-primary"></i> @item2.End_Date.ToString("dd-MMMM-yyyy")</small></td>
+                                                    <td style="background-color:white"> <small><i class="fa fa-calendar-day text-primary"></i>
+                                                        @item2.Start_Date.ToString("dd-MMMM-yyyy")  --<i class="fa fa-calendar-day text-primary"></i> @item2.End_Date.ToString("dd-MMMM-yyyy")</small></td>
 
                                                     <td style="background-color:ghostwhite">
 
@@ -345,25 +346,62 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show " id="pills-Performance" role="tabpanel" aria-labelledby="pills-Performance-tab">
+                                <div class="dropdown-divider"></div>
                                 <div class="table-responsive" style="min-height: 100px">
                                     <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
 
 
                                         <thead style="font-family:Calibri">
-                                            <tr style="color:navy">
-                                                <th style="background-color: #bababa; "> Staff</th>
-                                                <th style="background-color: #bababa; ">Approximate Hours </th>
-                                                <th style="background-color: #bababa; "> Action</th>
+                                            <tr style="color:white">
+                                                <th style="background-color: #263544; "><i class="fa fa-user-circle"></i>  Phase</th>
+                                                <th style="background-color: #263544; ">Budget & Balance </th>
+                                                <th style="background-color: #263544; ">logged Amount</th>
+                                               
                                             </tr>
                                         </thead>
-
                                         <tbody style="font-family:Calibri">
-                                        </tbody>
+                                            @foreach (var resultItem in ViewBag.ResultList)
+                                            {
 
-                                    </table>
-                                </div>
-                            </div>
-                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+
+                                                <tr data-widget="expandable-table" aria-expanded="false">
+
+                                                    <td style="background-color:white">
+                                                        <i class="fa fa-bookmark text-primary"></i> @resultItem.Phase
+                                                        <div class="dropdown-divider"></div>
+                                                        <small>  <b style="color:navy"><i class="fa fa-bookmark"></i>  @resultItem.Project_Name</b></small>
+                                                        <small>  <b style="color:dimgray">
+                                                      ( <i class="fa fa-calendar-day text-gray"></i> @resultItem.StartDate.ToString("dd-MMM-yyyy") 
+                                                   --<i class="fa fa-calendar-day text-gray"></i> @resultItem.End_Date.ToString("dd-MMM-yyyy") </b> )
+                                                        </small>
+                                                       
+                                                    </td>
+                                                    <td style="background-color:white">
+                                                        <span class="badge badge-success"><medium><i class="fa fa-bookmark text-white"></i> Allocated Budget : </medium></span> @resultItem.Budget.ToString("#,##0.00")
+                                                        <div class="dropdown-divider"></div>
+                                                        <span class="badge badge-secondary"><medium><i class="fa fa-bookmark text-white"></i> Balance : </medium></span> @resultItem.Balance.ToString("#,##0.00")
+
+                                                    </td>
+                                                    <td style="background-color:white">
+                                                        <i class="fa fa-suitcase text-primary"></i> @resultItem.logged.ToString("#,##0.00")
+                                                        <div class="dropdown-divider"></div>
+                                                        <small> 
+                                                            <a href="@Url.Action("Add", "teams", new {Project=Model.Project_Name, id = Model.Id })" class="btn-xs btn btn-warning btn"><i class="fa fa-chart-line"></i>  Drill-Down</a>
+                                                        </small>
+                                                    </td>
+                                                    
+                                                    
+
+                                                </tr>
+
+                                            }
+                                            </tbody>
+                                        </table>
+
+
+
+</div>
+                                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
 </form>
                     }
                 </div>

@@ -9,6 +9,10 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using PagedList;
+using Ishop.Models;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Ishop.Controllers
 {
@@ -41,9 +45,80 @@ namespace Ishop.Controllers
         public ActionResult Details(int? id)
         {
 
+            string strcon = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+            using (SqlConnection sqlCon = new SqlConnection(strcon))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_Project_details", sqlCon))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Projectid", id);
+
+                    sqlCon.Open();
+
+                    // Use SqlDataReader to read the result set
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Check if there are rows in the result set
+                        if (reader.HasRows)
+                        {
+                            // Create a list to store the results
+                            List<Muru> resultList = new List<Muru>();
+
+                            // Read each row in the result set
+                            while (reader.Read())
+                            {
+                                // Map the columns to properties in your model
+                                Muru resultItem = new Muru
+                                {
+                                    Project_Name = reader["Project_Name"].ToString(),
+                                    Budget = Convert.ToDecimal(reader["Budget"]),
+                                    Phase = reader["Phase"].ToString(),
+                                    logged = Convert.ToDecimal(reader["logged"]),
+                                    Balance = Convert.ToDecimal(reader["Balance"]),
+                                    StartDate = Convert.ToDateTime(reader["Start_Date"]),
+                                    End_Date = Convert.ToDateTime(reader["End_Date"])
+                                };
+
+                                // Add the result to the list
+                                resultList.Add(resultItem);
+                            }
+
+                            // Assign the list to ViewBag or ViewData
+                            ViewBag.ResultList = resultList;
+                        }
+                        else
+                        {
+                            ViewBag.ResultList = new List<Muru>();
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             Phase_Context AA = new Phase_Context();
             var Phase = AA.phases.Where(a => a.Project_id == id).ToList();
             ViewBag.Phase = Phase;
+
+            var Projectinfo = db.projects.Where(p => p.Id == id).FirstOrDefault();
+
+            Activities_Context AC = new Activities_Context();
+            var Activities = AC.activities.Where(c => c.Project_Name == Projectinfo.Project_Name).Select(d => d.Charge).DefaultIfEmpty(0).Sum();
+            ViewBag.Performnce = Activities;
+
+
 
             Team_Context T = new Team_Context();
             var Team = T.teams.Where(a => a.Project_id == id).ToList();

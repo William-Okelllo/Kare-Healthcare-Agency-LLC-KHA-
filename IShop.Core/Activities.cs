@@ -20,6 +20,6 @@ namespace IShop.Core
         [Display(Name = "Project Phase")]
         public string Name { get; set; }
         public string Comments { get; set; }
-        
+        public decimal Charge { get; set; }
     }
 }

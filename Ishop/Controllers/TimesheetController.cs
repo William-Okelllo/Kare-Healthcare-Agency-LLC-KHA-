@@ -39,18 +39,18 @@ namespace Ishop
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search && c.Status==1 || c.Status == 2).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search ).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Status == 1 || c.Status == 2).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Status == 1 || c.Status == 2).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }
