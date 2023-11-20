@@ -52,7 +52,7 @@
     }
 </style>
 
-<div class="card " style="background-color: rgb(255, 255, 255);">
+<div class="card " style="background-color: rgb(255, 255, 255, 0.82);">
 
 
     <div class="card-header col-md-7 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
@@ -86,131 +86,150 @@
 
 
 
-<div class="table-responsive">
-    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+    <div class="table-responsive" style="min-height: 300px">
+
+        <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
 
 
-        <thead>
-            <tr style="color:white">
-            <th style="background-color: #0656A5; font-size: medium; "> <i class="fa fa-user-circle"></i> Charles Muru </th>
-            </tr>
-            <tr style="color:white">
+            <thead>
+                <tr style="color:white">
+                    <th style="background-color: #0656A5; font-size: medium; ">
+                        <i class="fa fa-user-circle"></i> @ViewBag.userinfo.UserName
 
-                <th style="background-color: #263544; font-size: medium; "> WeekDays  </th>
-                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Sun</th>
-                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Mon</th>
-                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Tue</th>
-                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Wen</th>
-                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Thur</th>
-                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Fri</th>
-                <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Sat</th>
-                <th style="background-color: #d76e09; font-size: medium; "><i class="fa fa-bookmark"></i> Total Hrs</th>
-                <th style="background-color: #0656A5; font-size: medium; "><i class="fa fa-circle-notch"></i> Status</th>
-                <th style="background-color: #263544; font-size: medium; ">  Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    @if (item.Status == 0)
-                    {
-                        <td style="background-color: #0656A5; color: white ">
-                            <i class="fa fa-circle-notch text-white"></i> Week No  @item.Weekid
-
-                        </td>
-                    }
-                    else
-                    {
-                        <td style="background-color: #575757; color: white ">
-                            <i class="fa fa-circle-notch text-white"></i> Week No  @item.Weekid
-
-                        </td>
-                    }
-                    <td style="background-color: white;">
-                        @if (item.Status == 0)
-                        {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Sun" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Sun Hrs </medium></span></a>}
-                    else
-                    { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Sun Hrs </medium></span>}
-                    </td>
-                    <td style="background-color: white;">
-                        @if (item.Status == 0)
-                        {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Mon" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Mon Hrs </medium></span></a>}
-                    else
-                    { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Mon Hrs </medium></span>}
-                    </td>
-                    <td style="background-color: white;">
-                        @if (item.Status == 0)
-                        {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Tue" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Tue Hrs </medium></span> </a>}
-                    else
-                    { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Tue Hrs </medium></span>}
-                    </td>
-                    <td style="background-color: white;">
-                        @if (item.Status == 0)
-                        {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Wen" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Wen Hrs </medium></span> </a>}
-                    else
-                    { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Wen Hrs </medium></span>}
-                </td>
-                <td style="background-color: white;">
-                    @if (item.Status == 0)
-                    {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Thur" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Thur Hrs </medium></span> </a>}
-                else
-                { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Thur Hrs </medium></span>}
-                </td>
-                <td style="background-color: white;">
-                    @if (item.Status == 0)
-                    {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Fri" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Fri Hrs </medium></span> </a>}
-                else
-                { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Fri Hrs </medium></span>}
-                </td>
-                <td style="background-color: white;">
-                    @if (item.Status == 0)
-                    {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Sat" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Sat Hrs </medium></span> </a>}
-                else
-                { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Sat Hrs </medium></span>}
-                </td>
-                <td style="background-color: whitesmoke;"> <span class="badge badge-primary"><medium><i class="fa fa-user-clock"></i>  </medium></span>    @item.Tt Hrs </td>
-                <td style="background-color: white;">
-
-                    @if (item.Status == 0)
-                    {<small> <b style="color:red"><i class="fa fa-circle-notch"></i> Pending Submission</b></small>}
-                    else if (item.Status == 1)
-                    {<small> <b style="color:green"><i class="fa fa-check-circle"></i> Submitted</b></small>}
-                    else
-                    { <small> <b style="color:green"><i class="fa fa-check-circle-o"></i> Approved </b></small>}
-
-                </td>
-                <td style="background-color: white; ">
-                    @if (item.Status == 0)
-                    {<div class="btn-group dropdown">
-                            <button type="button" class="btn btn-xs btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-hashtag"></i>  . Action
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-
-                                <a href="@Url.Action("Submit", "Timesheet", new { id = item.Id })" class="dropdown-item">
-                                    <i class="fa fa-check-circle text-primary"></i> Submit Week' sheet
-                                </a>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {<div class="btn-group dropdown">
-                            <button type="button" class="btn btn-xs btn-outline-primary disabled dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-hashtag"></i>  . Action
-                            </button>
-
-                        </div>
-                    }
-                </td>
+                    </th>
                 </tr>
-            }
+                <tr style="color:white">
+
+                    <th style="background-color: #263544; font-size: medium; "> WeekDays  </th>
+                    <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Sun</th>
+                    <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Mon</th>
+                    <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Tue</th>
+                    <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Wen</th>
+                    <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Thur</th>
+                    <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Fri</th>
+                    <th style="background-color: #263544; font-size: medium; "><i class="fa fa-calendar-day"></i>  Sat</th>
+                    <th style="background-color: #040148; font-size: medium; "><i class="fa fa-bookmark"></i> Total Hrs</th>
+                    <th style="background-color: #040148; font-size: medium; "><i class="fa fa-circle-notch"></i> Status</th>
+                    <th style="background-color: #040148; font-size: medium; ">  Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (item.Status == 0)
+                        {
+                            <td style="background-color: #0656A5; color: white ">
+                                <i class="fa fa-circle-notch text-white"></i> Week No  @item.Weekid
+
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="background-color: #575757; color: white ">
+                                <i class="fa fa-circle-notch text-white"></i> Week No  @item.Weekid
+
+                            </td>
+                        }
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Sun" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Sun Hrs </medium></span></a>}
+                        else
+                        { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Sun Hrs </medium></span>}
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Mon" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Mon Hrs </medium></span></a>}
+                        else
+                        { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Mon Hrs </medium></span>}
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Tue" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Tue Hrs </medium></span> </a>}
+                        else
+                        { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Tue Hrs </medium></span>}
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Wen" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Wen Hrs </medium></span> </a>}
+                        else
+                        { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Wen Hrs </medium></span>}
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Thur" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Thur Hrs </medium></span> </a>}
+                        else
+                        { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Thur Hrs </medium></span>}
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Fri" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Fri Hrs </medium></span> </a>}
+                        else
+                        { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Fri Hrs </medium></span>}
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {<a href="@Url.Action("add", "Activities", new {id =item.Id, id2 = "Sat" })"> <span class="badge badge-primary"><medium><i class="fa fa-clock"></i> @item.Sat Hrs </medium></span> </a>}
+                        else
+                        { <span class="badge badge-secondary"><medium><i class="fa fa-clock"></i> @item.Sat Hrs </medium></span>}
+                        </td>
+                        <td style="background-color: #040148;color:white"> <span class="badge badge-warning"><medium><i class="fa fa-user-clock"></i>  </medium></span>    @item.Tt Hrs </td>
+                        <td style="background-color: white;">
+
+                            @if (item.Status == 0)
+                            {<small> <b style="color:red"><i class="fa fa-circle-notch"></i> Pending Submission</b></small>}
+                            else if (item.Status == 1)
+                            {<small> <b style="color:green"><i class="fa fa-check-circle"></i> Submitted</b></small>}
+                            else
+                            { <small> <b style="color:green"><i class="fa fa-check-circle-o"></i> Approved </b></small>}
+
+                        </td>
+                        <td style="background-color: white; ">
+                            @if (item.Status == 0)
+                            {<div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-xs btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                                        <a href="@Url.Action("Submit", "Timesheet", new { id = item.Id })" class="dropdown-item">
+                                            <i class="fa fa-check-circle text-primary"></i> Submit Week' sheet
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {<div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-xs btn-outline-primary disabled dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
 
             </tbody>
-    </table>
+        </table>
 
 
+        <div class="dropdown-divider"></div>
+        <div class="col d-flex justify-content-end">
 
+
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"><small><i class="fa fa-envelope"></i> @ViewBag.userinfo.Email</small></h5>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+
+
+            <!-- /.col -->
 
     <style>
         .ul.pagination {

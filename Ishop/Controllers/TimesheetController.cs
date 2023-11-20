@@ -11,56 +11,52 @@ using Ishop.Infa;
 using PagedList;
 using System.Web.UI.WebControls.WebParts;
 using System.Globalization;
-using Syncfusion.Pdf.Interactive;
+using Ishop.Models;
+using IShop.Core.Interface;
+using Microsoft.AspNet.SignalR.Hosting;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Ishop
 {
-    [Authorize]
+    
     public class TimesheetController : Controller
     {
+        private Userstable dbb = new Userstable();
         private Timesheet_Context db = new Timesheet_Context();
 
-        // GET: Timesheet
+        [Authorize]
         public ActionResult Index(int? page)
         {
 
+            var Userinfo = dbb.AspNetUsers.Where(a => a.UserName == User.Identity.Name).FirstOrDefault();
+            ViewBag.userinfo = Userinfo;
+            return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
-            
 
         }
-
-
-
-        public JsonResult GetEvents()
+        public ActionResult Approval(string searchBy, string search, int? page)
         {
-            using (Timesheet_Context dc = new Timesheet_Context())
+            if (!(search == null) && (!(search == "")))
             {
-                var events = dc.timesheets.ToList().Where(c => c.Owner == User.Identity.Name).ToList();
-                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search).ToList().ToPagedList(page ?? 1, 11));
+
             }
+            else if (search == "")
+            {
+                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+
+
+            }
+            else
+            {
+                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+            }
+
         }
 
-
-
-
-
-
-
-
-        // GET: Timesheet/Details/5
         public ActionResult Details(int? id)
         {
-            Activities_Context AA = new Activities_Context();
-            var Activities = AA.activities.Where(a=>a.TimesheetId ==id).ToList();
-            ViewBag.Activities = Activities;
-
-
-            
-            var SumHours = AA.activities.Where(c=>c.TimesheetId ==id).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
-            ViewBag.SumHours = SumHours;
-
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -76,15 +72,71 @@ namespace Ishop
 
 
 
+
+        public ActionResult Re_Open(int Id)
+        {
+            var Owner = db.timesheets.Where(t => t.Id == Id).FirstOrDefault();
+            var U = UA.AspNetUsers.Where(t => t.UserName == Owner.Owner).FirstOrDefault();
+
+            string daytime;
+            if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
+            { daytime = "Good Morning"; }
+            else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+            { daytime = "Good Afternoon"; }
+            else
+            { daytime = "Good Evenning"; }
+            string Subject = "Timesheet Re-Opened Week No " + Owner.Weekid;
+            string message = daytime + " ," + Owner.Owner
+            + "\n" + "Your timesheet has been re-opened by management "
+            + "\n" + "kindly login and fill in your timesheet details "
+            + "\n" + "Regards , HR-Team ";
+
+            PushEmail(U.Email, Subject, message, DateTime.Now);
+            PushSms(U.PhoneNumber, message, DateTime.Now);
+            Timesheet check = db.timesheets.Find(Id);
+            if (check != null)
+            {
+                check.Status = 0;
+                db.SaveChanges();
+            }
+            TempData["msg"] = "✔  Timesheet Re-Openned successfully - Employee Notified";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
+
+
+
+
+
+        private Userstable UA = new Userstable();
+        [Authorize]
         public ActionResult Submit(int Id)
         {
-           
+            var Owner = db.timesheets.Where(t => t.Id == Id).FirstOrDefault();
+            var U = UA.AspNetUsers.Where(t => t.UserName == Owner.Owner).FirstOrDefault();
+            string daytime;
+            if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
+            { daytime = "Good Morning"; }
+            else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+            { daytime = "Good Afternoon"; }
+            else
+            { daytime = "Good Evenning"; }
+            string Subject = "Timesheet Submitted Successfully Week No " + Owner.Weekid;
+            string message = daytime + " ," + Owner.Owner
+            + "\n" + "Your timesheet has been submitted successfully  "
+            + "\n" + "kindly note management team will notify you on the approvals via mail soon."
+            + "\n" + "thank you "
+            + "\n" + "Regards , HR-Team ";
+
+            PushEmail(U.Email, Subject, message, DateTime.Now);
+            PushSms(U.PhoneNumber, message, DateTime.Now);
             Timesheet check = db.timesheets.Find(Id);
             if (check != null)
             {
                 check.Status = 1;
                 db.SaveChanges();
             }
+
             TempData["msg"] = "✔  Timesheet Submitted successfully";
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
@@ -97,98 +149,7 @@ namespace Ishop
 
 
 
-
-        // GET: Timesheet/Create
-        public ActionResult Create()
-        {
-            Direct_Context DC = new Direct_Context();
-            var DirectC = DC.directs.ToList();
-            ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
-
-            Project_Context P = new Project_Context();
-            var Project = P.projects.ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
-
-
-            return View();
-        }
-
-        // POST: Timesheet/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Owner,Weekid,Sun,Mon,Tue,Wen,Thur,Fri,Sat,Tt")] Timesheet timesheet, string action)
-        {
-           
-            if (ModelState.IsValid)
-            {
-                db.timesheets.Add(timesheet);
-                db.SaveChanges(); 
-                TempData["msg"] = "✔   Timesheet successfully captured";
-                return RedirectToAction("Details", "Timesheet", new { id = timesheet.Id });
-            }
-
-            return View(timesheet);
-        }
-
-        // GET: Timesheet/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Timesheet timesheet = db.timesheets.Find(id);
-            if (timesheet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timesheet);
-        }
-
-        // POST: Timesheet/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Owner,Weekid,Sun,Mon,Tue,Wen,Thur,Fri,Sat")] Timesheet timesheet)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(timesheet).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(timesheet);
-        }
-
-        // GET: Timesheet/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Timesheet timesheet = db.timesheets.Find(id);
-            if (timesheet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timesheet);
-        }
-
-        // POST: Timesheet/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Timesheet timesheet = db.timesheets.Find(id);
-            db.timesheets.Remove(timesheet);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+        [Authorize]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -198,27 +159,39 @@ namespace Ishop
             base.Dispose(disposing);
         }
 
+        public bool TimesheetExists(int weekNumber, string employeeUsername)
+        {
+            return db.timesheets.Any(c => c.Weekid == weekNumber && c.Owner == employeeUsername);
+        }
+       
+
         public void InsertTimesheet()
         {
-            
+            DateTime currentDate = DateTime.Now;
+            int daysInWeek = 7;
+            int daysPassed = DateTime.Now.Day - 1;
+            int weekNumber = (daysPassed / daysInWeek) + 1;
+            string weekInfo = $"{weekNumber}{DateTime.Now.Month}{DateTime.Now.Year}";
+            string joinedStringConcat = string.Concat(weekInfo);
+            int.TryParse(joinedStringConcat, out int WeekNo);
+              
 
-            
-                try
+
+
+            Employee_Context Emp = new Employee_Context();
+                List<Employee> employees = Emp.employees.ToList();
+
+                foreach (var employee in employees)
                 {
-                    Employee_Context Emp = new Employee_Context();
-                    List<Employee> employees = Emp.employees.ToList();
-
-                    // Calculate the week number for the current date
-                    int weekNumber = GetWeekNumber(DateTime.Now);
-
-                    foreach (var employee in employees)
+                    // Check if the timesheet already exists for the current week and employee
+                    if (!TimesheetExists(WeekNo, employee.Username))
                     {
                         // Create a new Timesheet record
                         Timesheet timesheet = new Timesheet
                         {
                             CreatedOn = DateTime.Now,
                             Owner = employee.Username,
-                            Weekid = weekNumber,
+                            Weekid = WeekNo,
                             // Set other day-specific values here
                             Sun = 0,
                             Mon = 0,
@@ -231,49 +204,73 @@ namespace Ishop
                             Status = 0
                         };
 
-                        // Insert the record into the "timesheet" table
-                        db.timesheets.Add(timesheet);
-                    }
 
-                    db.SaveChanges();
+                    var timesheetsToUpdate = db.timesheets.Where(c => c.Weekid < WeekNo).ToList();
+
+                    foreach (var check in timesheetsToUpdate)
+                    {
+                        check.Status = 1;
+                        db.SaveChanges();
+                    }
+                    // Insert the record into the "timesheet" table
+                    db.timesheets.Add(timesheet);
+                        db.SaveChanges();
+                   
+                    }
+                    else
+                {
+                    
                 }
-                catch (Exception ex)
+
+            }
+            
+            
+        }
+        private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+        public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)
+        {
+            string query = "INSERT INTO OutgoingEmails (Recipient,Subject,Body,Status,CreatedOn,Trials,Response) VALUES " +
+            "                                          (@Recipient,@Subject, @Body,0,@CreatedOn,@Trials,@Response)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
 
+                    command.Parameters.AddWithValue("@Recipient", Recipient);
+                    command.Parameters.AddWithValue("@Subject", Subject);
+                    command.Parameters.AddWithValue("@Body", Body);
+                    command.Parameters.AddWithValue("@CreatedOn", CreatedOn);
+                    command.Parameters.AddWithValue("@Trials", 0);
+                    command.Parameters.AddWithValue("@Response", "--waiting--");
+                    command.ExecuteNonQuery();
                 }
-            
-           
-        
-
-        }
-        private int GetWeekNumber(DateTime date)
-        {
-            CultureInfo ci = CultureInfo.InvariantCulture;
-            Calendar calendar = ci.Calendar;
-
-            // Determine the first day of the year and the first day of the week
-            DateTimeFormatInfo dfi = ci.DateTimeFormat;
-            DateTime jan1 = new DateTime(date.Year, 1, 1);
-            DayOfWeek jan1DayOfWeek = dfi.Calendar.GetDayOfWeek(jan1);
-
-            // Adjust the start of the week based on the specified calendar
-            int daysToFirstWeek = 7 - (int)jan1DayOfWeek;
-            int daysToFirstWeekIncl = daysToFirstWeek - 1;
-
-            // Calculate the day number of the current date
-            int dayOfYear = calendar.GetDayOfYear(date);
-
-            if (dayOfYear <= daysToFirstWeekIncl)
-            {
-                // The current date is in the first week of the year
-                return 1;
             }
-
-            // Calculate the week number
-            int weekNumber = (dayOfYear - daysToFirstWeekIncl + 6) / 7;
-            return weekNumber;
         }
+        public void PushSms(string Recipient, string Subject, DateTime CreatedOn)
+        {
+            string query = "INSERT INTO Outgoingsms (MessageText,IsSent,CreatedOn,RecipientNumber,Trials,Response) VALUES " +
+            "                                          (@MessageText,@IsSent,@CreatedOn,@RecipientNumber,@Trials,@Response)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
 
-       
+                    command.Parameters.AddWithValue("@MessageText", Subject);
+                    command.Parameters.AddWithValue("@IsSent", 0);
+                    command.Parameters.AddWithValue("@CreatedOn", CreatedOn);
+                    command.Parameters.AddWithValue("@RecipientNumber", Recipient);
+                    command.Parameters.AddWithValue("@Trials", 0);
+                    command.Parameters.AddWithValue("@Response", "--waiting--");
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
-}
+
+
+
+
+ }
+

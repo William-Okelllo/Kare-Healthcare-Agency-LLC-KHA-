@@ -213,30 +213,24 @@
                                         }
                                     })
                                 </div>
-                                
-                               <!-- Add a notification element to display the message -->
-                                <div id="notification" style="display: none;">
-                                    <div class="alert alert-danger">
-                                        The entered value should be less than or equal to 12 hours.
-                                    </div>
-                                </div>
 
                                 <script>
                                     // Add an event listener to the input field
-                                    document.getElementById('hoursInput').addEventListener('change', function () {
-                                        // Get the value entered in the input field
-                                        var enteredValue = parseFloat(this.value);
+                                    document.getElementById("hoursInput").addEventListener("input", function () {
+                                        // Get the current value of the input field
+                                        var inputValue = this.value;
+
+                                        // Convert the input value to a number
+                                        var hours = parseFloat(inputValue);
 
                                         // Check if the value is greater than 12
-                                        if (enteredValue > 12) {
-                                            // Display the notification
-                                            document.getElementById('notification').style.display = 'block';
-                                        } else {
-                                            // Hide the notification if the value is within the limit
-                                            document.getElementById('notification').style.display = 'none';
+                                        if (hours > 12) {
+                                            // If greater than 12, set the value to 12
+                                            this.value = 12;
                                         }
                                     });
                                 </script>
+
 
                             </div>
                             <div class="dropdown-divider"></div>

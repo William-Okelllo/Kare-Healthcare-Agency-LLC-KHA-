@@ -50,7 +50,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp,Port")] Configs config)
+        public ActionResult Create([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp,Port,RunTime")] Configs config)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace Ishop.Controllers
                 webConfigApp.AppSettings.Settings["SSRSReportsUrl"].Value = config.SSRSReportsUrl;
                 webConfigApp.AppSettings.Settings["Businesssmail"].Value = config.Business_mail;
                 webConfigApp.AppSettings.Settings["Port"].Value = config.port;
-
+                webConfigApp.AppSettings.Settings["RunTime"].Value = config.RunTime.ToString();
                 //Save the Modified settings of AppSettings.
                 webConfigApp.Save();
                 db.SaveChanges();
@@ -93,7 +93,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp")] Configs config)
+        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp,RunTime")] Configs config)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace Ishop.Controllers
                 webConfigApp.AppSettings.Settings["SSRSReportsUrl"].Value = config.SSRSReportsUrl;
                 webConfigApp.AppSettings.Settings["Businesssmail"].Value = config.Business_mail;
                 webConfigApp.AppSettings.Settings["Port"].Value = config.port;
-
+                webConfigApp.AppSettings.Settings["RunTime"].Value = config.RunTime.ToString();
                 //Save the Modified settings of AppSettings.
                 webConfigApp.Save();
                 db.SaveChanges();

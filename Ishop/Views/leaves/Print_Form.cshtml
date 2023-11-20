@@ -1,0 +1,243 @@
+﻿@model IShop.Core.leave
+
+@{
+    ViewBag.Title = "leave letter";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LEAVE APPLICATION FORM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .curved-table {
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+            .curved-table th,
+            .curved-table td {
+                padding: 10px;
+                border: 1px solid orange;
+            }
+
+        .invoice {
+            width: 800px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+            .invoice-header div {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+        .invoice-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+            .invoice-info div {
+                font-weight: bold;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+
+        .invoice-total {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <style>
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #e20b0b;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+
+        input[type="text"].field-name {
+            border: none;
+            border-bottom: dotted 1px #bebebe;
+            width: 200px;
+            margin: 10px;
+        }
+        
+        input[type="text2"].field-name {
+            border: none;
+            border-bottom: dotted 1px #bebebe;
+            width: 150px;
+            margin: 10px;
+        }
+        input[type="text3"].field-name {
+            border: none;
+            border-bottom: dotted 1px #bebebe;
+            width: 100px;
+            margin: 10px;
+        }
+        input[type="text9"].field-name {
+            border: none;
+            border-bottom: dotted 1px #bebebe;
+            width: 300px;
+            margin: 100px;
+        }
+        .badge2 {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #656565;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+
+
+        }
+        .badge3 {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        .badge4 {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: red;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        .badge5 {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #08a299;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice">
+        <div style="text-align:center">
+            <img src="~/Images/header.png" height="100" width="800" />
+        </div>
+
+        <h2 style="text-align: right; font-family: Candara">
+
+
+
+            @if (Model.Status == "0")
+            {
+                <b class="badge2" style="color:white">AWATING  APPROVALS</b>
+            }
+            else if (Model.Status == "1")
+            {
+                <b class="badge5" style="color: white">AWATING FINAL APPROVALS</b>
+            }
+            else if (Model.Status == "2")
+            {
+                <b class="badge3" style="color: white">APPROVED</b>
+            }
+            else if (Model.Status == "99")
+            {
+                <b class="badge4" style="color: white">DECLINED</b>
+            }
+
+
+        </h2>
+
+        <h3 style="text-align: center; font-family: Candara"><u> LEAVE APPLICATION FORM</u></h3>
+        <h5 style="font-family:Calibri">
+            <b>NOTE :</b>
+            Application Forms duly completed should be sent to Human Resources Section/Head of Department
+            at least 14 days before leave commences.
+
+        </h5>
+        <h4 style="font-family:Calibri">PART I (TO BE COMPLETED BY APPLICANT)</h4>
+        <div style="text-align: left; font-family:Calibri">
+
+            <h4><b style="color:navy"> Name</b> :<input type="text" class="field-name" value="@ViewBag.Fullname" /><b style="color:navy">Designation</b> :  <u> @Model.Designation</u> </h4>
+            <h4><b style="color:navy"> PF NO:</b> :<input type="text" class="field-name" value="@Model.PF_NO" /><b style="color:navy">Department</b><input type="text" class="field-name" value="@Model.Department" /></h4>
+            <h4><b style="color:navy"> Number of days applied for</b> :<input type="text" class="field-name" value="@Model.Requested_Days" /><b style="color:navy">Nature of leave:</b><input type="text" class="field-name" value="@Model.Type" /></h4>
+            <h4><b style="color:navy"> From</b> :<input type="text2" class="field-name" value="@Model.From_Date.ToString("dd -MMMM-yyyy")" /><b style="color:navy"> To</b> :<input type="text2" class="field-name" value="@Model.To_Date.ToString("dd -MMMM-yyyy")" />  <b style="color:navy">Signature:</b><input type="text2" class="field-name" value="" /></h4>
+        </div>
+        <hr />
+        <h4 style="font-family:Calibri">
+            Reason(s) for the leave application : <br />
+            <small style="font-family:Calibri"> @Model.Message</small>
+        </h4>
+
+
+        <hr />
+       
+
+        <h4 style="font-family:Calibri">APPROVER REMARKS 1 </h4>
+        <h4 style="font-family:Calibri">
+        </h4>
+        @foreach (var item in ViewBag.F)
+        {
+            <p style="font-family:Calibri">@item.Approver_remarks</p>
+
+        }
+
+       
+
+        <hr />
+        <h4 style="font-family:Calibri">APPROVER REMARKS 2 </h4>
+
+
+        @foreach (var item in ViewBag.F2)
+        {
+            <p style="font-family:Calibri">@item.Approver_remarks</p>
+
+        }
+
+
+
+       
+        <hr />
+        <h4 style="font-family:Calibri">PART IV (FOR USE OF HUMAN RESOURCE SECTION ONLY)</h4>
+        @foreach (var item in ViewBag.leavedata)
+        {
+            <h4><b style="color:navy;font-family:Calibri"> @item.Type Entitlement Days:</b> :<input type="text3" class="field-name" value="@item.Total_leaves_per_year" />  <b style="color:navy;font-family:Calibri"> Days Requested:</b> :<input type="text3" class="field-name" value="@item.Requested_leaves" /><b style="color:navy;font-family:Calibri"> Balance<input type="text3" class="field-name" value="@item.Remaining_leaves" /> </b></h4>
+
+        }
+        <h4><b style="color:navy;font-family:Calibri">  Application to resume on duty on : <input type="text" class="field-name" value="@Model.Return_Date.ToString("dd -MMMM-yyyy")" /></b></h4>
+        <h4><b style="color:navy;font-family:Calibri"> Signature</b> :<input type="text2" class="field-name" value="" /> <b style="color:navy;font-family:Calibri"> Date</b> :<input type="text2" class="field-name" value="" /></h4>
+    </div>
+</body>
+</html>

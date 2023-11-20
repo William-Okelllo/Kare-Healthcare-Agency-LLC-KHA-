@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hr.Infa", "Ishop.Infa\Hr.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planning", "Ishop\Planning.csproj", "{1898C6E0-33C0-4FE7-9964-756089EE1D4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_Service", "App_Service\App_Service.csproj", "{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_Service", "App_Service\App_Service.csproj", "{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}"
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "App_Reports", "App_Reports\App_Reports.rptproj", "{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,14 @@ Global
 		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
 		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71CF4280-60D3-4B5B-9E15-84EA55B4FFE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.Debug|Any CPU.ActiveCfg = Debug
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.Debug|Any CPU.Build.0 = Debug
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.Debug|Any CPU.Deploy.0 = Debug
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.DebugLocal|Any CPU.Build.0 = DebugLocal
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.Release|Any CPU.ActiveCfg = Release
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.Release|Any CPU.Build.0 = Release
+		{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}.Release|Any CPU.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

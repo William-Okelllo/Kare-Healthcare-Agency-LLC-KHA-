@@ -4,7 +4,6 @@ using IShop.Core;
 using IShop.Core.Interface;
 using Microsoft.AspNet.SignalR.Hosting;
 using Newtonsoft.Json;
-using Syncfusion.DocIO.DLS;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

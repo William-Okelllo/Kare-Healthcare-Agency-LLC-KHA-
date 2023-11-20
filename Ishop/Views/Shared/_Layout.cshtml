@@ -54,14 +54,14 @@
     <a class="wrapper">
 
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="~/Images/P.png" height="60">
+            <img class="animation__shake" src="~/Images/A.gif" height="100">
             <br />
             <h5 style="font-style:italic;color:navy">...loading...</h5>
             <div class="row">
                 <h4>
-                    <i class="fa fa-spin fa-spinner text-primary"></i> ..
-                    <i class="fa fa-spin fa-spinner text-navy"></i> ..
-                    <i class="fa fa-spin fa-spinner text-success"></i>
+                    <i class="fa fa-spin fa-circle-notch text-primary"></i> ..
+                    <i class="fa fa-spin fa-circle-notch text-navy"></i> ..
+                    <i class="fa fa-spin fa-circle-notch text-success"></i>
                 </h4>
             </div>
         </div>
@@ -202,7 +202,7 @@
                         else
                         {
                             <medium style="font-family: 'Montserrat'">
-                                <i class="fa fa-cloud-sun text-white"></i> : Good Evenning
+                                <i class="fa fa-cloud-sun text-white"></i> : Good Evening
                             </medium>
                         }
 
@@ -260,7 +260,19 @@
                                         </p>
                                     </a>
                                 </li>
-                            </ul>
+                                @if (this.User.IsInRole("Timesheet_Approvals"))
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Approvals", "Timesheet")" class="nav-link">
+
+                                            <i class="fa fa-clipboard-list text-white nav-icon"></i>
+                                            <p style="color: white">
+                                                All Timesheets
+                                            </p>
+                                        </a>
+                                    </li>
+                                }
+                                </ul>
 
                         </li>
                         <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> leaves Module</li>
@@ -365,6 +377,15 @@
                                             <i class="fa fa-suitcase text-white nav-icon"></i>
                                             <p style="color: white">
                                                 Project list
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Pcategories")" class="nav-link">
+
+                                            <i class="fa fa-folder-open text-white nav-icon"></i>
+                                            <p style="color: white">
+                                                Project Categories
                                             </p>
                                         </a>
                                     </li>
@@ -555,6 +576,15 @@
                                             <i class="fa fa-cogs text-white nav-icon"></i>
                                             <p style="color: white">
                                                 Configurations
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Configuration")" class="nav-link">
+
+                                            <i class="fa fa-bell text-white nav-icon"></i>
+                                            <p style="color: white">
+                                                Notifications
                                             </p>
                                         </a>
                                     </li>

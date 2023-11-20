@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using PagedList;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
@@ -66,7 +67,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Rate")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Rate,Email")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -79,28 +80,26 @@ namespace Ishop.Controllers
         }
 
         // GET: Employees/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
-        }
+       
 
         // POST: Employees/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        private Userstable dbb = new Userstable();
+
+        public ActionResult Delete(int id)
         {
+            var Emp = db.employees.Where(emp => emp.Id == id).FirstOrDefault();
+            var Euser = dbb.AspNetUsers.Where(emp => emp.UserName == Emp.Username).FirstOrDefault();
+            AspNetUser u = dbb.AspNetUsers.Find(Euser.Id);
+            dbb.AspNetUsers.Remove(u);
+            dbb.SaveChanges();
+
             Employee employee = db.employees.Find(id);
             db.employees.Remove(employee);
-            db.SaveChanges();
+            db.SaveChanges(); 
+            TempData["msg"] = "✔ Employee Account deleted successfully";
+
+           
+
             return RedirectToAction("Index");
         }
 

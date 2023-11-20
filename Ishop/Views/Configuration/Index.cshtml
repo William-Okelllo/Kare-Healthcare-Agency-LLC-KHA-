@@ -40,13 +40,18 @@
                                 <small><i class="fa fa-key text-warning"></i> password</small>
                                 <input type="password" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Password"]" ReadOnly=true>
                             </div>
-                            <div class="col-md-7 mb-7">
+                            <div class="col-md-4 mb-4">
                                 <small><i class="fa fa-key text-warning"></i> SSRS Server</small>
                                 <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["SSRSReportsUrl"]" ReadOnly=true>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <small><i class="fa fa-key text-warning"></i> SMTP</small>
                                 <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["SMTP"]" ReadOnly=true>
+                            </div>
+                            <div class="col-md-5 mb-5">
+                                <small><i class="fa fa-cubes text-success"></i> Timesheet Setup Day & Time</small>
+                                <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["RunTime"]" ReadOnly=true>
+
                             </div>
                         </div>
                         <a href="@Url.Action("Index", "Configs")" class="nav-link">

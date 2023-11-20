@@ -65,6 +65,8 @@
     <Compile Include="Employee_Repo.cs" />
     <Compile Include="InDirect_Context.cs" />
     <Compile Include="InDirect_Repo.cs" />
+    <Compile Include="leaveContext.cs" />
+    <Compile Include="leaves_Days_trackContext.cs" />
     <Compile Include="leaveTypesContext.cs" />
     <Compile Include="OutgoingEmailsContext.cs" />
     <Compile Include="OutgoingsmsContext.cs" />

@@ -13,6 +13,8 @@ namespace IShop.Core
 
         public string Username { get; set; }
         public string Fullname { get; set; }
+
+        public string Email { get; set; }
         public String Contact { get; set; }
         public String DprtName { get; set; }
         public String Designation { get; set; }

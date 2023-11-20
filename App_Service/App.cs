@@ -29,7 +29,7 @@ namespace App_Service
             _timer = new Timer(30000) { AutoReset = true };
             _timer.Elapsed += TimeElapsed;
         }
-        private string connectionString = "Data Source=.;Initial Catalog=Planning; User ID=sa; Password=Pr$M!Er*23o2;Integrated Security=True;";
+        private string connectionString = "Data Source=.;Initial Catalog=Planning; User ID=sa; Password=1234;Integrated Security=True;";
 
 
         private string logFilePath = @"C:\Temp\Demos\AppService.log";
@@ -367,51 +367,66 @@ namespace App_Service
 
         public void InsertTimesheetRecords()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+
+
+
+            try
             {
-                connection.Open();
-                string query = "SELECT Business_mail FROM Configs";
-                SqlCommand command = new SqlCommand(query, connection);
-                string businessMail = (string)command.ExecuteScalar();
-
-                using (HttpClient client = new HttpClient())
+                string query = "SELECT Email, Password, SSRSReportsUrl, Business_mail,Smtp,port FROM Configs";
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    // Check if a valid businessMail was retrieved from the database
-                    if (!string.IsNullOrEmpty(businessMail))
-                    {
-                        // Set the base address of your web app
-                        client.BaseAddress = new Uri(businessMail);
+                    connection.Open();
 
-                        // Call the action method URL synchronously
-                        HttpResponseMessage response = client.GetAsync("/timesheet/InsertTimesheet").Result;
-
-                        // Check if the request was successful
-                        if (response.IsSuccessStatusCode)
-                        {
-                            // Read and handle the response content
-                            string responseBody = response.Content.ReadAsStringAsync().Result;
-                            string logLine = $"Date: {DateTime.Now.ToString()} | - - - - - ACTION EXECUTED SUCCESSFULLY - - - - -  ";
-                            File.AppendAllLines(logFilePath, new string[] { logLine });
-                        }
-                        else
-                        {
-                            
-                            string logLine = $"Date: {DateTime.Now.ToString()} |- - - - -  ACTION FAILED TO EXECUTE|- - - - - - - -|";
-                            File.AppendAllLines(logFilePath, new string[] { logLine });
-                        }
-                    }
-                    else
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        string logLine = $"Date: {DateTime.Now.ToString()} ------ No valid System Access link found in the database ------ ";
-                        File.AppendAllLines(logFilePath, new string[] { logLine });
-                        
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string Business_mail = reader["Business_mail"].ToString();
+
+
+
+
+                                using (HttpClient client = new HttpClient())
+                                {
+                                    // Set the base address of your web app
+                                    client.BaseAddress = new Uri(Business_mail);
+
+                                    // Call the action method URL synchronously
+                                    HttpResponseMessage response = client.GetAsync("/Timesheet/InsertTimesheet").Result;
+
+                                    if (response.IsSuccessStatusCode)
+                                    {
+                                        
+                                        string logLine = $"Date: {DateTime.Now.ToString()} |System Timesheet SetUp  | Status: Success | ";
+                                        File.AppendAllLines(logFilePath, new string[] { logLine });
+                                        
+                                    }
+                                    else
+                                    {
+                                        string logLine = $"Date: {DateTime.Now.ToString()} |System Timesheet SetUp  | Status: Success | ";
+                                        File.AppendAllLines(logFilePath, new string[] { logLine });
+                                    }
+                                }
+
+                            }
+                        }
                     }
                 }
+                
             }
+            catch
+            {
+                
+            }
+        }
+        public void vvv()
+        {
         }
 
 
-        public void Start()
+            public void Start()
         {
             _timer.Start();
         }

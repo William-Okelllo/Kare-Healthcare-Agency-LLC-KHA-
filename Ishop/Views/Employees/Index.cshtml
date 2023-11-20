@@ -100,8 +100,8 @@
                 <tr style="color:white">
 
                     <th style="background-color: #0656A5; font-size: medium; ">AddedOn </th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Username</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Fullnames</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Email Address</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Contact</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Department</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Designation</th>
@@ -114,17 +114,18 @@
                 {
                     <tr>
                         <td style="background-color: white;">
-                            <i class="fa fa-calendar-check"></i>  @item.CreatedOn.ToString("dd-MMMM-yyyy")
+                            <i class="fa fa-calendar-check text-primary"></i>  @item.CreatedOn.ToString("dd-MMM-yyyy")
 
                         </td>
-                        <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i> @item.Username</td>
+                       
                         <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i> @item.Fullname</td>
+                        <td style="background-color: white;"> <i class="fa fa-envelope text-primary"></i> @item.Email</td>
                         <td style="background-color: white;"> <i class="fa fa-mobile text-primary"></i> @item.Contact</td>
                         <td style="background-color: white;"> <i class="fa fa-university text-primary"></i> @item.DprtName</td>
                         <td style="background-color: white;"> <i class="fa fa-suitcase text-primary"></i> @item.Designation</td>
                         <td style="background-color: white;"> KSH  @item.Rate.ToString("#,##0.00")</td>
 
-                          <td style="background-color:ghostwhite">
+                        <td style="background-color:ghostwhite">
 
                             <div class="btn-group dropdown">
                                 <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -138,8 +139,8 @@
                                     </a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Category ')) { window.location.href = '@Url.Action("Delete", "Employees", new { id = item.Id, })'; }">
-                                        <i class="fa fa-times-circle text-danger"></i> Drop Category
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Employee Account ')) { window.location.href = '@Url.Action("Delete", "Employees", new { id = item.Id, })'; }">
+                                        <i class="fa fa-times-circle text-danger"></i> Drop Employee Account
                                     </a>
                                     <script>
                                         $(function () {

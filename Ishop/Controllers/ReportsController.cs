@@ -15,6 +15,7 @@ using PagedList;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class ReportsController : Controller
     {
         private ReportContext db = new ReportContext();

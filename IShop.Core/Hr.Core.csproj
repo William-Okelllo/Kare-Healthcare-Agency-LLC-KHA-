@@ -64,6 +64,7 @@
     <Compile Include="Interface\Itemplate.cs" />
     <Compile Include="Interface\Itimesheet.cs" />
     <Compile Include="leave.cs" />
+    <Compile Include="leaves_Days_track.cs" />
     <Compile Include="leaves_Types.cs" />
     <Compile Include="OutgoingEmails.cs" />
     <Compile Include="Outgoingsms.cs" />

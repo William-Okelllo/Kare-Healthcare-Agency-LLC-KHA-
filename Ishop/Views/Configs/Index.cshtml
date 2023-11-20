@@ -30,70 +30,88 @@
 
 
     <div class="col d-flex justify-content-center">
-        <div class="col-md-7" style="border-radius: 14px;">
-            <!-- Widget: user widget style 2 -->
-            <div class="card card-widget widget-user-2" style="border-radius: 14px;">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                @if (TempData["Msg"] != null)
-                {<div class="row">
-                        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            @TempData["Msg"]
+
+        <!-- Widget: user widget style 2 -->
+        
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            @if (TempData["Msg"] != null)
+            {<div class="row">
+                    <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        @TempData["Msg"]
+                    </div>
+                </div>
+            }
+
+            <script>
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(900, 0).slideUp(900, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            </script>
+
+
+
+            <div class="col-xl-8" style="border-radius: 14px;">
+                <div class="card-header" style="background-color: #001F3F; color: white "><i class="fa fa-envelope"></i> Mail Configs </div>
+                <div class="card-body text-left" style="background-color: white">
+
+                    <div class="row">
+                        <div class="col-md-5 mb-5">
+                            <small><i class="fa fa-envelope text-success"></i> Sending Mail</small>
+                            <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @item.Email" ReadOnly=true>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <small><i class="fa fa-envelope text-success"></i> Mail Server</small>
+                            <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["smtp"]" ReadOnly=true>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <small><i class="fa fa-circle-notch text-success"></i> Port</small>
+                            <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["port"]" ReadOnly=true>
                         </div>
                     </div>
-                }
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <small><i class="fa fa-cubes text-success"></i> Access Pwd</small>
+                            <input type="password" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Password"]" ReadOnly=true>
 
-                <script>
-                    window.setTimeout(function () {
-                        $(".alert").fadeTo(900, 0).slideUp(900, function () {
-                            $(this).remove();
-                        });
-                    }, 2000);
-                </script>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <small><i class="fa fa-cubes text-success"></i> System link</small>
+                            <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["Businesssmail"]" ReadOnly=true>
+
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <small><i class="fa fa-chart-line text-success"></i> SSRS Server</small>
+                            <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["SSRSReportsUrl"]" ReadOnly=true>
+                        </div>
 
 
-                <div class="card-outline card-primary card-body text-left" style="border-radius: 14px;">
-                    <h6>Email Addrress</h6>
-                    <div class="divider"></div>
-                    <medium>
-                        <i class="fa fa-envelope text-primary"></i>   @item.Email
-                    </medium>
-                    ||
-                    <medium>
-                        <i class="fa fa-key text-primary"></i>   *******
-                    </medium>
-                    ||
-                    <medium>
-                        <i class="fa fa-layer-group text-primary"></i>   @item.Smtp
-                    </medium>
-                    <div class="divider"></div>
-                    <hr />
-                    <h6>Business Mail</h6>
-                    <i class="fa fa-envelope text-primary"></i>   @item.Business_mail
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-5">
+                            <small><i class="fa fa-cubes text-success"></i> Timesheet Setup Day & Time</small>
+                            <input type="text" id="Email" name="Email" class="form-control form-control-sm" required="required" value=" @System.Configuration.ConfigurationManager.AppSettings["RunTime"]" ReadOnly=true>
 
-                    <h6>ssrs</h6>
-
-                    <medium>
-                        <i class="fa fa-link text-primary"></i>    @item.SSRSReportsUrl
-                    </medium>
-                    <hr />
-
-                    <div class="divider"></div>
+                        </div>
+                    </div>
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Update Configurations", "Edit", "Configs", new { id = item.Id }, new { @class = "btn btn-sm btn-success btn" })
+                        ||
+                        @Html.ActionLink("Back to  Configurations", "Index", "Configuration", null, new { @class = "btn btn-sm btn-primary btn" })
+                    </div>
                 </div>
-                <hr />
-                <div>
-                    @Html.ActionLink("Update Configurations", "Edit", "Configs", new { id = item.Id }, new { @class = "btn btn-sm btn-primary btn" })
-                </div>
-            </div>
         </div>
-    </div>
+
+
 
 
 
 }@if (Model.Count() == 0)
-{
+{<div class="card" style="background-color: #ffffffd9">
         <br /> <br /> <br />
-        <div class="card" style="background-color: #ffffff00">
+        <div class="card" style="background-color: #ffffffd9">
             <br />
             <div class="col d-flex justify-content-center">
                 <div class="col-md-6" style="border-radius: 14px;">
@@ -106,7 +124,7 @@
                                 <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text"> <img src="~/Images/spec_flat.png" height="50" /> </span>
+                                    <span class="info-box-text"> <img src="~/Images/grs.png" height="50" /> </span>
 
 
                                     <div class="progress">
@@ -125,5 +143,5 @@
                 </div>
             </div>
         </div>
-    
+    </div>
 }

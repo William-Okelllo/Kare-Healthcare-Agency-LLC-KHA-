@@ -111,10 +111,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td style="background-color: white;">
-                            <i class="fa fa-calendar-check"></i>  @item.CreatedOn.ToString("dd-N-yyyy")
-
-                        </td>
+                        <td style="background-color: white;"> <i class="fa fa-calendar-day text-primary"></i>  @item.CreatedOn.ToString("dd-MM-yyyy")</td>
                         <td style="background-color: white;">
                             <i class="fa fa-bookmark text-primary"></i> @item.Project_Name
                             <div class="dropdown-divider"></div>
