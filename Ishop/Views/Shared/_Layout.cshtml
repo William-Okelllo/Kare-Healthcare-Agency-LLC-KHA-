@@ -68,7 +68,7 @@
 
 
 
-        <nav class="main-header navbar navbar-expand navbar-light navbar-dark" style="background-color: #263544; border-radius: 8px">
+        <nav class="main-header navbar navbar-expand navbar-light navbar-dark" style="background-color: #192530; border-radius: 8px">
 
             <!-- Left navbar links -->
             <ul class="navbar-nav">
@@ -176,7 +176,7 @@
 
         </a>
 
-        <div class="sidebar" style="background-color: #263544; border-radius:">
+        <div class="sidebar" style="background-color: #192530; border-radius:">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
@@ -362,21 +362,22 @@
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("create", "projects")" class="nav-link">
-
-                                            <i class="fa fa-plus-circle text-white nav-icon"></i>
-                                            <p style="color: white">
-                                                Add Project
-                                            </p>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item">
                                         <a href="@Url.Action("Index", "projects")" class="nav-link">
 
                                             <i class="fa fa-suitcase text-white nav-icon"></i>
                                             <p style="color: white">
                                                 Project list
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Clients")" class="nav-link">
+
+                                            <i class="fa fa-users text-white nav-icon"></i>
+                                            <p style="color: white">
+                                                Clients list
                                             </p>
                                         </a>
                                     </li>

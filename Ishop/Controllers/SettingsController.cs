@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 
@@ -26,7 +23,7 @@ namespace Ishop.Controllers
                 webConfigApp.AppSettings.Settings["Password"].Value = "Password";
                 webConfigApp.AppSettings.Settings["FileSize"].Value = "FileSize";
                 webConfigApp.AppSettings.Settings["FileType"].Value = "FileType";
-               
+
                 //Save the Modified settings of AppSettings.
                 webConfigApp.Save();
             }

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ishop.Infa;
+using Ishop.Models;
+using IShop.Core;
+using PagedList;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IShop.Core;
-using Ishop.Infa;
-using PagedList;
-using Ishop.Models;
 
 namespace Ishop.Controllers
 {
@@ -80,7 +77,7 @@ namespace Ishop.Controllers
         }
 
         // GET: Employees/Delete/5
-       
+
 
         // POST: Employees/Delete/5
         private Userstable dbb = new Userstable();
@@ -95,10 +92,10 @@ namespace Ishop.Controllers
 
             Employee employee = db.employees.Find(id);
             db.employees.Remove(employee);
-            db.SaveChanges(); 
+            db.SaveChanges();
             TempData["msg"] = "✔ Employee Account deleted successfully";
 
-           
+
 
             return RedirectToAction("Index");
         }

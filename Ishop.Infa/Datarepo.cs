@@ -1,16 +1,12 @@
 ﻿using IShop.Core;
 using IShop.Core.Interface;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ishop.Infa
 {
     public class Datarepo : Idata
-    { 
+    {
         DataContext context = new DataContext();
 
         public void Add(Data d)
@@ -37,7 +33,7 @@ namespace Ishop.Infa
         public void Remove(int Id)
 
         {
-           Data d = context.D.Find(Id);
+            Data d = context.D.Find(Id);
             context.D.Remove(d); context.SaveChanges();
 
         }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IShop.Core
 {
@@ -27,7 +23,7 @@ namespace IShop.Core
         [Display(Name = "Total Hours")]
         public int Tt { get; set; }
 
-       
+
 
 
 

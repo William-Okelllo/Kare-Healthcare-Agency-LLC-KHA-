@@ -1,18 +1,7 @@
-﻿using Ishop.Infa;
-using Ishop.Models;
-using IShop.Core;
+﻿using Ishop.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
 using Owin;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading;
-using System.Timers;
-using System.Web.UI;
 
 
 namespace Ishop
@@ -25,7 +14,7 @@ namespace Ishop
 
             ConfigureAuth(app);
             createRolesandUsers();
-          
+
 
         }
 
@@ -105,4 +94,3 @@ namespace Ishop
     }
 
 }
-   

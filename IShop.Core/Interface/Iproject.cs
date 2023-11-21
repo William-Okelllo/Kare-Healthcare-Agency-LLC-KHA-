@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
 namespace IShop.Core.Interface
 {
@@ -13,6 +8,6 @@ namespace IShop.Core.Interface
         void Edit(Project project);
         void Remove(int Id);
         IEnumerable GetProject(); Project FindById(int Id);
-    
+
     }
 }

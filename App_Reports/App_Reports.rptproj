@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Employee Timesheet.rdl" />
+    <Report Include="Projects.rdl" />
+    <Report Include="Project_Child.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

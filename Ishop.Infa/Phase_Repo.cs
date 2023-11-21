@@ -1,11 +1,7 @@
-﻿using IShop.Core.Interface;
-using IShop.Core;
-using System;
+﻿using IShop.Core;
+using IShop.Core.Interface;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ishop.Infa
 {

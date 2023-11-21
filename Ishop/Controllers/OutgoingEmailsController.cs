@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using Ishop.Infa;
 using IShop.Core;
-using Ishop.Infa;
 using PagedList;
+using System.Data;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Ishop.Controllers
 {
@@ -42,7 +37,7 @@ namespace Ishop.Controllers
 
         public ActionResult Send_email()
         {
-           
+
             return View();
         }
 

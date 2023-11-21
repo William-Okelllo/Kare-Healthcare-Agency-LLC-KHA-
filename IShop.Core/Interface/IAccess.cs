@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
 namespace IShop.Core.Interface
 {
-   public interface IAccess
+    public interface IAccess
     {
         void Add(Access AI);
         void Edit(Access AI);

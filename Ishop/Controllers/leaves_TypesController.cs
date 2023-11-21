@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ishop.Infa;
+using IShop.Core;
+using PagedList;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IShop.Core;
-using Ishop.Infa;
-using PagedList;
 
 namespace Ishop.Controllers
 {
@@ -106,7 +103,7 @@ namespace Ishop.Controllers
         // GET: leaves_Types/Delete/5
         public ActionResult Delete(int? id)
         {
-             var llll = db.leaves_Types.Find(id);
+            var llll = db.leaves_Types.Find(id);
             db.leaves_Types.Remove(llll);
             db.SaveChanges();
 
@@ -115,7 +112,7 @@ namespace Ishop.Controllers
             return Redirect(returnUrl);
         }
 
-        
+
 
         protected override void Dispose(bool disposing)
         {

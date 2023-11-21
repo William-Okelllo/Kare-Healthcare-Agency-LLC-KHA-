@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI.WebControls;
 
 namespace Ishop.Models
 {
@@ -50,6 +47,6 @@ namespace Ishop.Models
         public IEnumerable<FileUpload> FileList { get; set; }
 
 
-      
+
     }
 }

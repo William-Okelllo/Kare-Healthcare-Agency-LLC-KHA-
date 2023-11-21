@@ -131,16 +131,52 @@
                     <tr>
                         @if (item.Status == 0)
                         {
+                            
                             <td style="background-color: #0656A5; color: white ">
-                                <i class="fa fa-circle-notch text-white"></i> Week No  @item.Weekid
 
+                                @{
+                                    string input = @item.Weekid.ToString(); // Your input string
+
+                                    // Assuming the format is Week{X},Month{Y},Year{Z}
+
+                                    // Extracting week, month, and year from the input string
+                                    int week = int.Parse(input.Substring(0, 1)); // Assuming week number is in the first position
+                                    int month = int.Parse(input.Substring(1, 2)); // Assuming month number is in the second and third positions
+                                    int year = int.Parse(input.Substring(3)); // Assuming year is in the last four positions
+
+                                    // Converting month number to month name
+                                    string monthName = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
+
+                                    // Formatted result string
+                                    string formattedDate = $": {week}, of {monthName},{year}";
+                                }
+
+                                <i class="fa fa-circle-notch text-white"></i> Week @formattedDate
                             </td>
                         }
                         else
                         {
-                            <td style="background-color: #575757; color: white ">
-                                <i class="fa fa-circle-notch text-white"></i> Week No  @item.Weekid
 
+                            <td style="background-color: #575757; color: white ">
+
+                                @{
+                                    string input = @item.Weekid.ToString(); // Your input string
+
+                                    // Assuming the format is Week{X},Month{Y},Year{Z}
+
+                                    // Extracting week, month, and year from the input string
+                                    int week = int.Parse(input.Substring(0, 1)); // Assuming week number is in the first position
+                                    int month = int.Parse(input.Substring(1, 2)); // Assuming month number is in the second and third positions
+                                    int year = int.Parse(input.Substring(3)); // Assuming year is in the last four positions
+
+                                    // Converting month number to month name
+                                    string monthName = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
+
+                                    // Formatted result string
+                                    string formattedDate = $": {week}, of {monthName},{year}";
+                                }
+
+                                <i class="fa fa-circle-notch text-white"></i> Week @formattedDate
                             </td>
                         }
                         <td style="background-color: #575757; color: white ">
@@ -201,8 +237,8 @@
 
                         </td>
                         <td style="background-color: white; ">
-                            
-                           <div class="btn-group dropdown">
+
+                            <div class="btn-group dropdown">
                                 <button type="button" class="btn btn-xs btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-hashtag"></i>  . Action
                                 </button>
@@ -236,7 +272,7 @@
 
                                 </div>
                             </div>
-                           
+
 
                         </td>
                     </tr>

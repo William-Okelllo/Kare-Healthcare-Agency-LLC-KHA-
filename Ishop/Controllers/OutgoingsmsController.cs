@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using Ishop.Infa;
 using IShop.Core;
-using Ishop.Infa;
 using PagedList;
+using System.Data;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Ishop.Web.Controllers
 {
@@ -40,7 +35,7 @@ namespace Ishop.Web.Controllers
         public ActionResult GetDataName(string Code)
         {
             Template_Context TT = new Template_Context();
-            
+
 
             var data = TT.templates.FirstOrDefault(d => d.Code == Code);
 
@@ -49,8 +44,8 @@ namespace Ishop.Web.Controllers
         public ActionResult Send_sms(int? id)
         {
 
-           
-            
+
+
 
             return View();
         }
@@ -83,8 +78,8 @@ namespace Ishop.Web.Controllers
             var Temp = dbbb.templates.ToList();
             ViewBag.Temp = new SelectList(Temp, "Code", "Code");
 
-           
-           
+
+
             return View();
         }
 

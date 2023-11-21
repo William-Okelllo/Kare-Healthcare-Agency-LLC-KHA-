@@ -1,25 +1,19 @@
-﻿using System;
+﻿using Ishop.Infa;
+using Ishop.Models;
+using IShop.Core;
+using PagedList;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
-using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IShop.Core;
-using Ishop.Infa;
-using PagedList;
-using System.Web.UI.WebControls.WebParts;
-using System.Globalization;
-using Ishop.Models;
-using IShop.Core.Interface;
-using Microsoft.AspNet.SignalR.Hosting;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Ishop
 {
-    
+
     public class TimesheetController : Controller
     {
         private Userstable dbb = new Userstable();
@@ -40,7 +34,7 @@ namespace Ishop
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search ).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
@@ -60,9 +54,9 @@ namespace Ishop
         {
 
             Activities_Context AA = new Activities_Context();
-            var Act = AA.activities.Where(a => a.TimesheetId == id).ToList() ;
+            var Act = AA.activities.Where(a => a.TimesheetId == id).ToList();
             ViewBag.Activities = Act;
-            
+
 
 
             if (id == null)
@@ -200,7 +194,7 @@ namespace Ishop
         {
             return db.timesheets.Any(c => c.Weekid == weekNumber && c.Owner == employeeUsername);
         }
-       
+
 
         public void InsertTimesheet()
         {
@@ -220,35 +214,35 @@ namespace Ishop
             string weekInfo = $"{weekNumber}{DateTime.Now.Month}{DateTime.Now.Year}";
             string joinedStringConcat = string.Concat(weekInfo);
             int.TryParse(joinedStringConcat, out int WeekNo);
-              
+
 
 
 
             Employee_Context Emp = new Employee_Context();
-                List<Employee> employees = Emp.employees.ToList();
+            List<Employee> employees = Emp.employees.ToList();
 
-                foreach (var employee in employees)
+            foreach (var employee in employees)
+            {
+                // Check if the timesheet already exists for the current week and employee
+                if (!TimesheetExists(WeekNo, employee.Username))
                 {
-                    // Check if the timesheet already exists for the current week and employee
-                    if (!TimesheetExists(WeekNo, employee.Username))
+                    // Create a new Timesheet record
+                    Timesheet timesheet = new Timesheet
                     {
-                        // Create a new Timesheet record
-                        Timesheet timesheet = new Timesheet
-                        {
-                            CreatedOn = DateTime.Now,
-                            Owner = employee.Username,
-                            Weekid = WeekNo,
-                            // Set other day-specific values here
-                            Sun = 0,
-                            Mon = 0,
-                            Tue = 0,
-                            Wen = 0,
-                            Thur = 0,
-                            Fri = 0,
-                            Sat = 0,
-                            Tt = 0,
-                            Status = 0
-                        };
+                        CreatedOn = DateTime.Now,
+                        Owner = employee.Username,
+                        Weekid = WeekNo,
+                        // Set other day-specific values here
+                        Sun = 0,
+                        Mon = 0,
+                        Tue = 0,
+                        Wen = 0,
+                        Thur = 0,
+                        Fri = 0,
+                        Sat = 0,
+                        Tt = 0,
+                        Status = 0
+                    };
 
 
                     var timesheetsToUpdate = db.timesheets.Where(c => c.Weekid < WeekNo).ToList();
@@ -260,17 +254,17 @@ namespace Ishop
                     }
                     // Insert the record into the "timesheet" table
                     db.timesheets.Add(timesheet);
-                        db.SaveChanges();
-                   
-                    }
-                    else
+                    db.SaveChanges();
+
+                }
+                else
                 {
-                    
+
                 }
 
             }
-            
-            
+
+
         }
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)
@@ -318,5 +312,5 @@ namespace Ishop
 
 
 
- }
+}
 

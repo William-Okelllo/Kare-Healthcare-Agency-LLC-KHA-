@@ -1,5 +1,5 @@
-﻿using Topshelf;
-using Planning_Backend_Service;
+﻿using Planning_Backend_Service;
+using Topshelf;
 class program
 {
     static void Main(String[] args)

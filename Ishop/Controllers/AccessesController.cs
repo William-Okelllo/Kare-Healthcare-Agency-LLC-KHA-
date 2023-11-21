@@ -1,15 +1,13 @@
-﻿using IShop.Core;
-using Ishop.Infa;
+﻿using Ishop.Infa;
 using Ishop.Models;
+using IShop.Core;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Data;
 
 namespace Ishop.Controllers
 {
@@ -78,10 +76,10 @@ namespace Ishop.Controllers
 
 
 
-                    return View();
+            return View();
         }
         private Userstable dbb = new Userstable();
-       
+
         // POST: Access/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

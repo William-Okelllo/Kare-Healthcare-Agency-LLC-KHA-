@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Ishop.Infa;
+using IShop.Core;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IShop.Core;
-using Ishop.Infa;
-using IShop.Core.Interface;
-using System.Data.SqlClient;
 
 namespace Ishop.Controllers
 {
@@ -25,20 +19,20 @@ namespace Ishop.Controllers
 
 
 
-       /** public ActionResult Checklimit(int HouseCount, string Project_Name)
-        {
-            Project_Context PP = new Project_Context();
-            var ProjectB  = PP.projects.Where(c => c.Project_Name == Project_Name).Select(d => d.Budget).DefaultIfEmpty(0).Sum();
+        /** public ActionResult Checklimit(int HouseCount, string Project_Name)
+         {
+             Project_Context PP = new Project_Context();
+             var ProjectB  = PP.projects.Where(c => c.Project_Name == Project_Name).Select(d => d.Budget).DefaultIfEmpty(0).Sum();
 
-            var Prjoectid = PP.projects.Where(c => c.Project_Name == Project_Name).FirstOrDefault();
+             var Prjoectid = PP.projects.Where(c => c.Project_Name == Project_Name).FirstOrDefault();
 
-            var PhasesB = db.phases.Where(c => c.Project_id == Prjoectid.Id).Select(d => d.Budget).DefaultIfEmpty(0).Sum();
+             var PhasesB = db.phases.Where(c => c.Project_id == Prjoectid.Id).Select(d => d.Budget).DefaultIfEmpty(0).Sum();
 
-            bool exists = HouseCount + Houses > HouseCount2.HousesCount;
-            return Json(exists, JsonRequestBehavior.AllowGet);
-        }
+             bool exists = HouseCount + Houses > HouseCount2.HousesCount;
+             return Json(exists, JsonRequestBehavior.AllowGet);
+         }
 
-        **/
+         **/
         // GET: Phase/Details/5
         public ActionResult Details(int? id)
         {

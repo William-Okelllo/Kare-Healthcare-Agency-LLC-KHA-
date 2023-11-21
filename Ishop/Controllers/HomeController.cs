@@ -1,26 +1,15 @@
 ﻿using Ishop.Infa;
-using Ishop.Models;
-using IShop.Core;
-using IShop.Core.Interface;
-using Microsoft.AspNet.SignalR.Hosting;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Net.Http;
-using System.Web;
 using System.Web.Mvc;
-using System.ServiceProcess;
 
 namespace Ishop.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-       
+
         public ActionResult Index()
         {
 
@@ -56,7 +45,7 @@ namespace Ishop.Controllers
             return View();
         }
 
-        
+
 
         public ActionResult Contact()
         {

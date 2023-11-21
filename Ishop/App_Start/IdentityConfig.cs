@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using Ishop.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Ishop.Models;
+using System;
+using System.Configuration;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Configuration;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace Ishop
 {

@@ -1,25 +1,15 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using Ishop.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Ishop.Models;
+using System;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Data;
-using System.Web.Mail;
-using EASendMail;
-using SmtpMail = EASendMail.SmtpMail;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
-using Ishop.Infa;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Ishop.Controllers
 {
@@ -64,7 +54,7 @@ namespace Ishop.Controllers
             }
         }
 
-       
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -173,7 +163,7 @@ namespace Ishop.Controllers
                     return View(model);
             }
         }
-        private ApplicationDbContext dbb = new ApplicationDbContext ();
+        private ApplicationDbContext dbb = new ApplicationDbContext();
         public ActionResult CheckValueExists(string Email)
         {
             bool exists = dbb.Users.Any(c => c.Email == Email);
@@ -185,12 +175,12 @@ namespace Ishop.Controllers
             return Json(exists, JsonRequestBehavior.AllowGet);
         }
 
-       
 
-            
-        
+
+
+
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
-         public void EmpAcc(DateTime CreatedOn,string Username , string Contact,string Userid, string Email)
+        public void EmpAcc(DateTime CreatedOn, string Username, string Contact, string Userid, string Email)
         {
             string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Rate,Email) VALUES " +
             "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid,@Rate,@Email)";
@@ -274,43 +264,43 @@ namespace Ishop.Controllers
         // [Authorize(Roles = "System")]
         public async Task<ActionResult> Rspec007(RegisterViewModel model)
         {
-           
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,PhoneNumber=model.PhoneNumber };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
 
 
-                   // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here     
 
-                    
+
 
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackurl = Url.Action("confirmEmail", "Account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);
                     PushEmail(user.Email, "Confirm Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl, DateTime.Now);
 
-                    if(model.UserRoles == "Employee")
+                    if (model.UserRoles == "Employee")
 
                     {
                         EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id, model.Email); ;
                     }
 
                     TempData["msg"] = "✔ Account Created successfully ,Confirmation sent to user account mail";
-                   
+
                     return RedirectToAction("Index", "Data");
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                           .ToList(), "Name", "Name");
 
-               
+
                 AddErrors(result);
 
-                
+
 
 
 
@@ -320,10 +310,10 @@ namespace Ishop.Controllers
             return View();
         }
 
-        
 
 
-       
+
+
 
 
 
@@ -338,7 +328,7 @@ namespace Ishop.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-      
+
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
@@ -368,8 +358,8 @@ namespace Ishop.Controllers
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 TempData["msg"] = "Password reset sent to provided mail ";
                 return RedirectToAction("ForgotPassword", "Account");
             }
@@ -616,7 +606,7 @@ namespace Ishop.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
-       
+
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

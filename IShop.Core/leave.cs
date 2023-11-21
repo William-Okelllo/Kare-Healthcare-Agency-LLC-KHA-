@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IShop.Core
 {
     public class leave
     {
-       
+
         public int Id { get; set; }
 
 
@@ -58,11 +54,11 @@ namespace IShop.Core
 
 
         [Display(Name = "PF NO")]
-        public string PF_NO{ get; set; }
+        public string PF_NO { get; set; }
 
-    public string Emp_Mail { get; set; }
+        public string Emp_Mail { get; set; }
 
-        
+
 
     }
 }

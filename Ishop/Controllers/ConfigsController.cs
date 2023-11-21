@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ishop.Infa;
+using IShop.Core;
 using System.Configuration;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using Ishop.Infa;
-using Ishop.Models;
-using IShop.Core;
 
 namespace Ishop.Controllers
 {

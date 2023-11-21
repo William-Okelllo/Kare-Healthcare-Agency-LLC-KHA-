@@ -1,27 +1,12 @@
-﻿using Dapper;
-using EASendMail;
+﻿using EASendMail;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
-using System.Globalization;
-using System.Linq;
-using System.Net.Mail;
 using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Timers;
-using System.Web.Mvc;
+using Attachment = System.Net.Mail.Attachment;
 using SmtpClient = EASendMail.SmtpClient;
 using Timer = System.Timers.Timer;
-using Attachment = System.Net.Mail.Attachment;
-using System.Data.Entity;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
-using Ishop.Infa;
-using IShop.Core;
-using System.Globalization;
 
 namespace Planning_Backend_Service
 {

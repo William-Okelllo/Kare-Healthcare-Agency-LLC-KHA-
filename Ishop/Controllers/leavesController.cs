@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using IShop.Core;
+﻿using EASendMail;
 using Ishop.Infa;
-using PagedList;
 using Ishop.Models;
+using IShop.Core;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Web.Mail;
-using EASendMail;
-using SmtpMail = EASendMail.SmtpMail;
+using PagedList;
 using Rotativa;
-using leaves_Types = IShop.Core.leaves_Types;
-using IShop.Core.Interface;
+using System;
+using System.Configuration;
+using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using SmtpMail = EASendMail.SmtpMail;
 
 namespace Ishop.Controllers
-{[Authorize]
+{
+    [Authorize]
     public class leavesController : Controller
     {
         private leaveContext db = new leaveContext();
@@ -30,11 +26,11 @@ namespace Ishop.Controllers
         // GET: leaves
         public ActionResult Index(string searchBy, string search, int? page)
         {
-          //  lleave_llog ll = new lleave_llog();
-          //  var data10 = ll.leaves_logs.ToList();
-           // ViewBag.F = data10;
+            //  lleave_llog ll = new lleave_llog();
+            //  var data10 = ll.leaves_logs.ToList();
+            // ViewBag.F = data10;
 
-           
+
 
             if (this.User.IsInRole("Leaves_Approval"))
             {
@@ -67,7 +63,7 @@ namespace Ishop.Controllers
                 }
             }
         }
-       
+
 
         // GET: leaves/Details/5
         public ActionResult Details(int? id)
@@ -95,8 +91,8 @@ namespace Ishop.Controllers
             ViewBag.Categories = new SelectList(categories, "Type", "Type");
 
             //leaves_t l2 = new leaves_t();
-           // var data12 = l2.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
-           // ViewBag.F2 = data12;
+            // var data12 = l2.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
+            // ViewBag.F2 = data12;
 
             Employee_Context K2 = new Employee_Context();
             var data13 = K2.employees.Where(c => c.Username == User.Identity.Name).ToList();
@@ -109,9 +105,9 @@ namespace Ishop.Controllers
 
 
             var data55 = K2.employees.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
-            if ( data55 == null || data55.DprtName == null )
+            if (data55 == null || data55.DprtName == null)
             {
-              
+
                 TempData["msg"] = "Non-qualified account for leaves applications";
                 return RedirectToAction("Index");
             }
@@ -119,7 +115,7 @@ namespace Ishop.Controllers
         }
 
 
-       
+
 
 
 
@@ -152,8 +148,8 @@ namespace Ishop.Controllers
 
             TimeSpan timeSpan = leave.From_Date - DateTime.Today;
             int days = timeSpan.Days;
-            int dd = Int16.Parse( System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
-            var ddd= Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
+            int dd = Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
+            var ddd = Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
             if (days < dd)
             { TempData["msg"] = "Kindly request leave  " + dd + "days from today's date"; }
             else
@@ -167,13 +163,13 @@ namespace Ishop.Controllers
 
                     var Ticko = leaveDays.Leaves_Days_Tracks.Find(leaveDaysId.Id);
 
-                    if(Ticko.Remaining_leaves < leave.Requested_Days)
+                    if (Ticko.Remaining_leaves < leave.Requested_Days)
                     {
                         TempData["msg"] = "Requested leaves greater than balance ";
                         return RedirectToAction("Index");
                     }
-                    
-                    
+
+
 
                 }
 
@@ -181,7 +177,7 @@ namespace Ishop.Controllers
 
                 {
                     leaveTypesContext LLS = new leaveTypesContext();
-                    var leaveNN= LLS.leaves_Types.FirstOrDefault(c => c.Type == leave.Type);
+                    var leaveNN = LLS.leaves_Types.FirstOrDefault(c => c.Type == leave.Type);
 
                     if (leaveNN.Days < weekendDays)
                     {
@@ -191,18 +187,18 @@ namespace Ishop.Controllers
                 }
 
 
-               if (ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    
+
 
                     int weekdays = totalDays - weekendDays; // Number of weekdays between from date and to date, excluding weekends
 
 
                     db.leave.Add(leave);
 
-                    
+
                     leave.Requested_Days = weekdays;
-                   
+
                     leave.Emp_Mail = currentUser.Email;
                     TempData["msg"] = "leave request posted successfully ";
                     db.SaveChanges();
@@ -210,7 +206,7 @@ namespace Ishop.Controllers
                     try
                     {
 
-                        
+
                         var To = leave.HR_Email;
                         var Subject = "New leave request";
                         var Subject2 = "leave Request Submitted";
@@ -224,7 +220,7 @@ namespace Ishop.Controllers
                         + "\n" + "Employee Additional Remarks"
                         + "\n"
                         + "\n" + leave.Message;
-                        
+
 
                         PushEmail(To, Subject, TextBody, DateTime.Now);
                         PushEmail(currentUser.Email, Subject2, TextBody, DateTime.Now);
@@ -363,7 +359,7 @@ namespace Ishop.Controllers
 
 
 
-        public ActionResult Approve_leave (int? id)
+        public ActionResult Approve_leave(int? id)
         {
             if (id == null)
             {
@@ -378,8 +374,8 @@ namespace Ishop.Controllers
 
 
 
-           // lleave_llog ll = new lleave_llog();
-           // var data10 = ll.leaves_logs.Where(c => c.leave_id == id).ToList();
+            // lleave_llog ll = new lleave_llog();
+            // var data10 = ll.leaves_logs.Where(c => c.leave_id == id).ToList();
             //ViewBag.F = data10;
             return View(leave);
         }
@@ -553,7 +549,7 @@ namespace Ishop.Controllers
             }
         }
 
-        public void leavesTrack(int Total_leaves_per_year,String Type,int Requested_leaves,int Remaining_leaves,string Username)
+        public void leavesTrack(int Total_leaves_per_year, String Type, int Requested_leaves, int Remaining_leaves, string Username)
         {
             string query = "INSERT INTO leaves_Days_track (Total_leaves_per_year,Type,Requested_leaves,Remaining_leaves,Username) VALUES " +
             "                                             (@Total_leaves_per_year,@Type,@Requested_leaves,@Remaining_leaves,@Username)";
@@ -590,11 +586,11 @@ namespace Ishop.Controllers
 
 
 
-               // lleave_llog ll = new lleave_llog();
-               // var data10 = ll.leaves_logs.Where(c => c.leave_id == id && c.Approver_status =="1").ToList();
+                // lleave_llog ll = new lleave_llog();
+                // var data10 = ll.leaves_logs.Where(c => c.leave_id == id && c.Approver_status =="1").ToList();
                 //var data11 = ll.leaves_logs.Where(c => c.leave_id == id && c.Approver_status == "2").ToList();
-               /// ViewBag.F = data10;
-               // ViewBag.F2 = data11;
+                /// ViewBag.F = data10;
+                // ViewBag.F2 = data11;
 
 
 
@@ -617,7 +613,7 @@ namespace Ishop.Controllers
 
 
 
-        
+
         public ActionResult Delete(int id)
         {
             leave leave = db.leave.Find(id);
@@ -638,7 +634,7 @@ namespace Ishop.Controllers
 
         public ActionResult Approve(int? id, leave leave)
         {
-            
+
 
 
             {
@@ -675,7 +671,7 @@ namespace Ishop.Controllers
                 sqlcmnd.ExecuteNonQuery();
                 sqlCon.Close();
 
-                
+
             }
             catch
             {

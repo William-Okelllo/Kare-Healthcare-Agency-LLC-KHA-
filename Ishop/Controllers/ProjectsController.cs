@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Ishop.Infa;
+using Ishop.Models;
+using IShop.Core;
+using PagedList;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IShop.Core;
-using Ishop.Infa;
-using PagedList;
-using Ishop.Models;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Ishop.Controllers
 {
+    [Authorize]  
     public class ProjectsController : Controller
     {
         private Project_Context db = new Project_Context();

@@ -1,18 +1,16 @@
-﻿using System;
+﻿using EASendMail;
+using Ishop.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Ishop.Models;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web.Mail;
-using EASendMail;
-using Microsoft.AspNet.Identity.EntityFramework;
 using SmtpMail = EASendMail.SmtpMail;
 
 namespace Ishop.Controllers

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IShop.Core
+﻿namespace IShop.Core
 {
     public class leaves_Days_track
     {

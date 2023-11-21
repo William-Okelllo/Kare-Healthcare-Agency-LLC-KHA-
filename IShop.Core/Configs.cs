@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace IShop.Core
 {
@@ -16,7 +11,7 @@ namespace IShop.Core
 
         [Display(Name = "Timesheet Setup Day")]
         public string RunTime { get; set; }
-    public string Password { get; set; }
+        public string Password { get; set; }
         public string SSRSReportsUrl { get; set; }
 
         [Display(Name = "System link")]

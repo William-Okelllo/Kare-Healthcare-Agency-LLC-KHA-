@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ishop.Infa;
+using IShop.Core;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IShop.Core;
-using Ishop.Infa;
 
 namespace Ishop.Controllers
 {
@@ -35,13 +31,13 @@ namespace Ishop.Controllers
             }
             return View(team);
         }
-        public ActionResult CheckValueExists(string Username,string Project_Name)
+        public ActionResult CheckValueExists(string Username, string Project_Name)
         {
-            bool exists = db.teams.Where(x=>x.Project_Name == Project_Name).Any(c => c.Username == Username);
+            bool exists = db.teams.Where(x => x.Project_Name == Project_Name).Any(c => c.Username == Username);
             return Json(exists, JsonRequestBehavior.AllowGet);
         }
         // GET: Teams/Create
-        public ActionResult Add(string Project,int Id)
+        public ActionResult Add(string Project, int Id)
         {
 
             Employee_Context Ep = new Employee_Context();
@@ -60,7 +56,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id")] Team team )
+        public ActionResult Add([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +69,7 @@ namespace Ishop.Controllers
             return View(team);
         }
 
-       
+
         public ActionResult Delete(int id)
         {
             Team team = db.teams.Find(id);

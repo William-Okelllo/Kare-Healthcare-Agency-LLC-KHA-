@@ -55,6 +55,8 @@
     <Compile Include="AccessRepo.cs" />
     <Compile Include="Activities_Context.cs" />
     <Compile Include="Activities_Repo.cs" />
+    <Compile Include="Client_context.cs" />
+    <Compile Include="Client_Repo.cs" />
     <Compile Include="ConfigsContext.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />

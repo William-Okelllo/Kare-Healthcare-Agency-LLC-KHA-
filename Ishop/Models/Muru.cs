@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Ishop.Models
 {
@@ -15,4 +12,4 @@ namespace Ishop.Models
         public DateTime StartDate { get; set; }
         public DateTime End_Date { get; set; }
     }
-}   
+}
