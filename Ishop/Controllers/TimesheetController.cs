@@ -35,6 +35,7 @@ namespace Ishop
 
 
         }
+        [Authorize]
         public ActionResult Approval(string searchBy, string search, int? page)
         {
             if (!(search == null) && (!(search == "")))

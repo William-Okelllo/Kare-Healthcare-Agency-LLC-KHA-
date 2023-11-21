@@ -116,123 +116,148 @@
                         @Html.AntiForgeryToken()
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <form>
+                    <form>
 
 
-                            <div class="form-row">
+                        <div class="form-row">
 
-                                <div class="form-group col-md-3" style="display:none">
-                                    <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
-                                    @Html.EditorFor(model => model.CreatedOn, new
+                            <div class="form-group col-md-3" style="display:none">
+                                <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                                @Html.EditorFor(model => model.CreatedOn, new
+                           {
+                               htmlAttributes = new
                                {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Record",
-                                       @Value = DateTime.Now,
-                                       @ReadOnly = true,
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Record",
+                                   @Value = DateTime.Now,
+                                   @ReadOnly = true,
 
 
-                                   }
-                               })
-
-                                </div>
-                                <div class="form-group col-md-2" style="display:none">
-                                    <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.TimesheetId)</label>
-                                    @Html.EditorFor(model => model.TimesheetId, new
-                                    {
-                                        htmlAttributes = new
-                                        {
-                                            @class = "form-control form-control-sm",
-                                            @Value = ViewBag.Timesheetid,
-                                            @Readonly = true,
-
-                                        }
-                                    })
-                                </div>
-                                <div class="form-group col-md-2" style="display:none">
-                                    <label><i class="fa fa-calendar-day text-primary"></i> @Html.LabelFor(model => model.Day)</label>
-                                    @Html.EditorFor(model => model.Day, new
-                                    {
-                                        htmlAttributes = new
-                                        {
-                                            @class = "form-control form-control-sm",
-                                            @Value = ViewBag.Weekday,
-                                            @Readonly = true,
-
-                                        }
-                                    })
-                                </div>
-                                <div class="form-group col-md-3" style="display:none">
-                                    <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.User)</label>
-                                    @Html.EditorFor(model => model.User, new
-                                    {
-                                        htmlAttributes = new
-                                        {
-                                            @class = "form-control form-control-sm",
-                                            @Value = User.Identity.Name,
-                                            @Readonly = true,
-
-                                        }
-                                    })
-                                </div>
-
-
+                               }
+                           })
 
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Project_Name) </label>
-                                    @Html.DropDownList("Project_Name", ViewBag.Project as SelectList, "--Select Project  --", new { @class = "form-control ", @Required = true })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
-                                    @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control ", @Required = true })
-                                </div>
-                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $("#Project_Name").chosen();
-                                        $("#Name").chosen();
-
-                                    });
-                                </script>
-                                <div class="form-group col-md-2">
-                                    <label><i class="fa fa-user-clock text-primary"></i> @Html.LabelFor(model => model.Hours)</label>
-                                    @Html.EditorFor(model => model.Hours, new
+                            <div class="form-group col-md-2" style="display:none">
+                                <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.TimesheetId)</label>
+                                @Html.EditorFor(model => model.TimesheetId, new
+                                {
+                                    htmlAttributes = new
                                     {
-                                        htmlAttributes = new
-                                        {
-                                            @class = "form-control form-control-sm",
-                                            @Placeholder = "No. of Hours",
-                                            @Required = true,
-                                            @id = "hoursInput" // Add an ID to the input field for easy access in JavaScript
-                                        }
-                                    })
-                                </div>
+                                        @class = "form-control form-control-sm",
+                                        @Value = ViewBag.Timesheetid,
+                                        @Readonly = true,
 
-                                <script>
-                                    // Add an event listener to the input field
-                                    document.getElementById("hoursInput").addEventListener("input", function () {
-                                        // Get the current value of the input field
-                                        var inputValue = this.value;
-
-                                        // Convert the input value to a number
-                                        var hours = parseFloat(inputValue);
-
-                                        // Check if the value is greater than 12
-                                        if (hours > 12) {
-                                            // If greater than 12, set the value to 12
-                                            this.value = 12;
-                                        }
-                                    });
-                                </script>
-
-
+                                    }
+                                })
                             </div>
+                            <div class="form-group col-md-2" style="display:none">
+                                <label><i class="fa fa-calendar-day text-primary"></i> @Html.LabelFor(model => model.Day)</label>
+                                @Html.EditorFor(model => model.Day, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm",
+                                        @Value = ViewBag.Weekday,
+                                        @Readonly = true,
+
+                                    }
+                                })
+                            </div>
+                            <div class="form-group col-md-3" style="display:none">
+                                <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.User)</label>
+                                @Html.EditorFor(model => model.User, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm",
+                                        @Value = User.Identity.Name,
+                                        @Readonly = true,
+
+                                    }
+                                })
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Project_Name) </label>
+                                @Html.DropDownList("Project_Name", ViewBag.Project as SelectList, "--Select Project  --", new { @class = "form-control ", @Required = true })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
+                                @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control ", @Required = true })
+                            </div>
+                            
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#Project_Name").chosen();
+                                    $("#Indirect").chosen();
+                                    $("#Name").chosen();
+
+                                });
+                            </script>
+                            <div class="form-group col-md-2">
+                                <label><i class="fa fa-user-clock text-primary"></i> @Html.LabelFor(model => model.Hours)</label>
+                                @Html.EditorFor(model => model.Hours, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm",
+                                        @Placeholder = "No. of Hours",
+                                        @Required = true,
+                                        @id = "hoursInput" // Add an ID to the input field for easy access in JavaScript
+                                    }
+                                })
+                            </div>
+
+                            <script>
+                                // Add an event listener to the input field
+                                document.getElementById("hoursInput").addEventListener("input", function () {
+                                    // Get the current value of the input field
+                                    var inputValue = this.value;
+
+                                    // Convert the input value to a number
+                                    var hours = parseFloat(inputValue);
+
+                                    // Check if the value is greater than 12
+                                    if (hours > 12) {
+                                        // If greater than 12, set the value to 12
+                                        this.value = 12;
+                                    }
+                                });
+                            </script>
+
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label><i class="fa fa-book-reader text-primary"></i> @Html.LabelFor(model => model.Indirect) </label>
+                                @Html.DropDownList("Indirect", ViewBag.InDirect as SelectList, "--Select InDirect  --", new { @class = "form-control ", })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class="fa fa-user-clock text-primary"></i> @Html.LabelFor(model => model.Indirect_Hours)</label>
+                                <input id="Indirect_Hours" name="Indirect_Hours" type="number"  class="form-control  form-control-sm" placeholder="Total Hours" />
+                            </div>
+                            <script>
+                                // Add an event listener to the input field
+                                document.getElementById("Indirect_Hours").addEventListener("input", function () {
+                                    // Get the current value of the input field
+                                    var inputValue2 = this.value;
+
+                                    // Convert the input value to a number
+                                    var hours2 = parseFloat(inputValue2);
+
+                                    // Check if the value is greater than 12
+                                    if (hours2 > 12) {
+                                        // If greater than 12, set the value to 12
+                                        this.value = 12;
+                                    }
+                                });
+                            </script>
+                        </div>
                             <div class="dropdown-divider"></div>
                             <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Comments) </label>
                             <div class="form-row">
@@ -278,7 +303,7 @@
                             </script>
 
                             <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
-                        </form>
+                    </form>
                     }
                     <br />
 
@@ -320,6 +345,12 @@
                                                     <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i> PHASE : @item2.Name </medium></span>
                                                     ||
                                                     <span class="badge badge-success"><medium><i class="fa fa-user-clock text-white"></i> Hours : @item2.Hours </medium></span>
+                                                </h5>
+                                                <div class="dropdown-divider"></div>
+                                                <h5>
+                                                    <span class="badge badge-secondary"><medium><i class="fa fa-bookmark text-white"></i> Indirect : @item2.Indirect </medium></span>
+                                                    ||
+                                                    <span class="badge badge-success"><medium><i class="fa fa-user-clock text-white"></i> Hours : @item2.Indirect_Hours </medium></span>
                                                 </h5>
                                             </td>
 

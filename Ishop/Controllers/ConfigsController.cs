@@ -93,7 +93,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp,RunTime")] Configs config)
+        public ActionResult Edit([Bind(Include = "id,Email,Password,SSRSReportsUrl,Business_mail,Smtp,RunTime,port")] Configs config)
         {
             if (ModelState.IsValid)
             {

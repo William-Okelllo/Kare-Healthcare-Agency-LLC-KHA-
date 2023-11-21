@@ -213,24 +213,27 @@
                                     </a>
                                     <div class="dropdown-divider"></div>
 
-
-
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Re-Open this Timesheet - ( Employee will be able to update/Edit timesheet data) ')) { window.location.href = '@Url.Action("Re_Open", "Timesheet", new { id = item.Id, })'; }">
-                                        <i class="fa fa-times-circle text-danger"></i> Re-Open Timesheet
-                                    </a>
-                                    <script>
-                                        $(function () {
-                                            $('#Deny').click(function () {
-                                                if (confirm('Are you sure?')) {
-                                                    window.location.href = $(this).data('url');
-                                                }
+                                    @if (item.Status == 1)
+                                    {<a class="dropdown-item" onclick="if (confirm('Are you sure you want to Re-Open this Timesheet - ( Employee will be able to update/Edit timesheet data) ')) { window.location.href = '@Url.Action("Re_Open", "Timesheet", new { id = item.Id, })'; }">
+                                            <i class="fa fa-times-circle text-danger"></i> Re-Open Timesheet
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
                                             });
-                                        });
-                                    </script>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to approve this Timesheet  ')) { window.location.href = '@Url.Action("Approve", "Timesheet", new { id = item.Id, })'; }">
-                                        <i class="fa fa-check-circle text-success"></i> Approve Timesheet
-                                    </a>
+                                        </script>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to approve this Timesheet  ')) { window.location.href = '@Url.Action("Approve", "Timesheet", new { id = item.Id, })'; }">
+                                            <i class="fa fa-check-circle text-success"></i> Approve Timesheet
+                                        </a>
+                                    }
+
+
+
                                 </div>
                             </div>
                            

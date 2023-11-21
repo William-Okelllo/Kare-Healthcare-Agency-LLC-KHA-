@@ -53,6 +53,11 @@ namespace Ishop.Controllers
             var DirectC = DC.directs.ToList();
             ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
 
+
+            InDirect_Context ID = new InDirect_Context();
+            var InDirect = ID.InDirects.ToList();
+            ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
+
             Project_Context P = new Project_Context();
             var Project = P.projects.ToList();
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
@@ -77,8 +82,9 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,TimesheetId,Hours,Comments,Day,Charge")] Activities activities)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,TimesheetId,Hours,Comments,Day,Charge,Indirect,Indirect_Hours")] Activities activities)
         {
+            if(activities.Indirect == null) { activities.Indirect = ""; }
 
             Employee_Context EE = new Employee_Context();
             var Emp = EE.employees.Where(c => c.Username == activities.User).FirstOrDefault();
@@ -102,7 +108,8 @@ namespace Ishop.Controllers
 
                     if (property != null)
                     {
-                        property.SetValue(check, activities.Hours + SumHours);
+                        int indirectHours = activities.Indirect_Hours != null ? activities.Indirect_Hours : 0;
+                        property.SetValue(check, activities.Hours + indirectHours + SumHours);
 
                         // Save the changes to the database
                         check.Tt = check.Sun + check.Mon + check.Tue + check.Wen + check.Thur + check.Fri + check.Sat;
