@@ -83,20 +83,11 @@ namespace Ishop.Controllers
         // GET: leaves/Create
 
 
+      
+
+
+
         public ActionResult Create()
-        {
-
-            
-
-
-            
-            return View();
-        }
-
-
-
-
-        public ActionResult CreateAndEdit()
         {
             Employee_Context K2 = new Employee_Context();
             var data13 = K2.employees.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
@@ -125,7 +116,7 @@ namespace Ishop.Controllers
               phone = data13.Contact,
               Designation=data13.DprtName,
               Approver_Remarks = "--",
-                Status = "0"
+              Status = 0
 
                 // Set other properties as needed
             };

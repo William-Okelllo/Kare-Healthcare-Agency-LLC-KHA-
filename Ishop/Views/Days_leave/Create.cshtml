@@ -63,11 +63,21 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
     $(function () {
-        $("#datepicker").datepicker();
-    });
+        $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0,
+            onSelect: function () {
+                calculateDays();
+            }
+        });
     $(function () {
-        $("#datepicker2").datepicker();
-    });
+        $("#datepicker2").datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0,
+            onSelect: function () {
+                calculateDays();
+            }
+        });
 
 </script>
 
@@ -109,83 +119,164 @@
                         @Html.AntiForgeryToken()
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <form>
+                    <form>
 
 
-                            <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label><i class=" fa fa-tag text-primary"></i>   @Html.LabelFor(model => model.Leave_Id)</label>
-                                    @Html.EditorFor(model => model.Leave_Id, new
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-tag text-primary"></i>   @Html.LabelFor(model => model.Leave_Id)</label>
+                                @Html.EditorFor(model => model.Leave_Id, new
+                           {
+                               htmlAttributes = new
                                {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Record",
-                                       @Value = ViewBag.leaveid,
-                                       @ReadOnly = true,
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Record",
+                                   @Value = ViewBag.leaveid,
+                                   @ReadOnly = true,
 
 
-                                   }
-                               })
+                               }
+                           })
 
-                                </div>
-
-
-                                <div class="form-group col-md-4">
-                                    <label> <i class="fa fa-umbrella-beach text-primary"></i> @Html.LabelFor(model => model.Type)</label>
-                                    @Html.DropDownList("Type", ViewBag.Categories as SelectList, "-- Select Leave Type --",
-                                   new { @class = "form-control ", @required = "required", data_live_search = "true" })
-                                </div>
-                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
-                                <script type="text/javascript">
-                                    $(function () {
-
-                                        $("#Type").chosen();
-
-
-                                    });
-                                </script>
-                                <div class="form-group col-md-3">
-                                    <label> <i class="fa fa-calendar-day text-primary"></i>    @Html.LabelFor(model => model.Leave_Day)</label>
-                                    @Html.EditorFor(model => model.Leave_Day, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @placeholder = "From_Date",
-                                       id = "datepicker",
-                                       @required = "required"
-
-
-                                   }
-                               })
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    <label><i class="fa fa-spinner text-orange"></i> @Html.LabelFor(model => model.Time) </label>
-                                    @{
-                                        List<SelectListItem> m = new List<SelectListItem>();
-                                        m.Add(new SelectListItem
-                                        {
-                                            Text = "🕝 FullDay leave",
-                                            Value = "1",
-                                        });
-                                        m.Add(new SelectListItem
-                                        {
-                                            Text = "☀ HalfDay leave",
-                                            Value = "2",
-                                        });
-
-                                    }@Html.DropDownListFor(model => model.Time, m, "---Leave Period---", new { @class = "form-control form-control-sm", @required = "required", })
-                                </div>
                             </div>
-                            <div class="dropdown-divider"></div>
-                            <input type="submit" value="Submit" class="btn btn-warning" />
 
-                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                        </form>
+
+                            <div class="form-group col-md-4">
+                                <label> <i class="fa fa-umbrella-beach text-primary"></i> @Html.LabelFor(model => model.Type)</label>
+                                @Html.DropDownList("Type", ViewBag.Categories as SelectList, "-- Select Leave Type --",
+                               new { @class = "form-control ", @required = "required", data_live_search = "true" })
+                            </div>
+
+                            <script type="text/javascript">
+                                $(function () {
+
+                                    $("#Type").chosen();
+
+
+                                });
+                            </script>
+
+                        </div>
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label><i class="fa fa-spinner text-orange"></i> @Html.LabelFor(model => model.Time) </label>
+                                @{
+                                    List<SelectListItem> m = new List<SelectListItem>();
+                                    m.Add(new SelectListItem
+                                    {
+                                        Text = "All Day leave",
+                                        Value = "1",
+                                    });
+                                    m.Add(new SelectListItem
+                                    {
+                                        Text = "Half day leave",
+                                        Value = "2",
+                                    });
+
+                                }@Html.DropDownListFor(model => model.Time, m, "---Leave Period---", new { @class = "form-control form-control-sm", @required = "required", @id = "Time" })
+                            </div>
+                            <!-- Include jQuery -->
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+                            <div class="form-group col-md-3">
+                                <label><i class="fa fa-calendar-day text-primary"></i> @Html.LabelFor(model => model.From_Date)</label>
+                                @Html.EditorFor(model => model.From_Date, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm datepicker",
+                                        @placeholder = "From_Date",
+                                        id = "datepicker",
+                                        @required = "required"
+                                    }
+                                })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label><i class="fa fa-calendar-day text-primary"></i> @Html.LabelFor(model => model.To_Date)</label>
+                                @Html.EditorFor(model => model.To_Date, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm datepicker",
+                                        @placeholder = "To Date",
+                                        id = "datepicker2",
+                                        @required = "required"
+                                    }
+                                })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class="fa fa-bookmark text-primary"></i> @Html.LabelFor(model => model.Days)</label>
+                                @Html.EditorFor(model => model.Days, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @placeholder = "Days",
+                                   @readonly = "readonly",
+                                   @Id = "Days"
+                               }
+                           })
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    // Attach datepicker to date fields
+                                    $(".datepicker").datepicker({
+                                        dateFormat: 'yy-mm-dd',
+                                        minDate: 0,
+                                        onSelect: function () {
+                                            // Trigger calculateDays on date selection
+                                            calculateDays();
+                                        }
+                                    });
+
+                                    // Trigger calculateDays when either From_Date or To_Date changes
+                                    $("#datepicker, #datepicker2, #Time").change(function () {
+                                        calculateDays();
+                                    });
+
+                                    // Calculate days function
+                                    function calculateDays() {
+                                        var fromDate = $("#datepicker").datepicker("getDate");
+                                        var toDate = $("#datepicker2").datepicker("getDate");
+                                        var timeDropdownValue = $("#Time").val();
+
+                                        if (fromDate && toDate) {
+                                            var timeDiff = toDate - fromDate;
+                                            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                                            // Adjust the days based on the selected value in the Time dropdown
+                                            if (timeDropdownValue === "2") { // "Half Day leave"
+                                                daysDiff /= 2;
+                                            }
+
+                                            // Set the calculated days to the Days textbox
+                                            $("#Days").val(daysDiff);
+
+                                            // Debugging statement
+                                            console.log("Days calculated:", daysDiff);
+                                        } else {
+                                            // Debugging statement
+                                            console.log("Invalid date range");
+                                        }
+                                    }
+
+                                    // Trigger calculateDays on the initial page load
+                                    calculateDays();
+                                });
+                            </script>
+
+
+
+
+
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <input type="submit" value="Submit" class="btn btn-warning" />
+
+                        <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+                    </form>
                     }
                 </div>
             </div>

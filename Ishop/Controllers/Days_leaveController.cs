@@ -36,7 +36,18 @@ namespace Ishop.Controllers
             return View(days_leave);
         }
 
-        // GET: Days_leave/Create
+        public JsonResult CalculateDays(DateTime fromDate, DateTime toDate)
+        {
+            var timeDiff = toDate - fromDate;
+            var daysDiff = (int)Math.Ceiling(timeDiff.TotalDays);
+
+            return Json(new { days = daysDiff });
+        }
+
+
+
+
+
         public ActionResult Create(int id)
         {
             leaveTypesContext dbb = new leaveTypesContext();
@@ -52,7 +63,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Leave_Id,Approved,Type,Leave_Day,Time")] Days_leave days_leave)
+        public ActionResult Create([Bind(Include = "Id,Leave_Id,Approved,Type,From_Date,To_Date,Days,Time")] Days_leave days_leave)
         {
             if (ModelState.IsValid)
             {
@@ -97,29 +108,15 @@ namespace Ishop.Controllers
         }
 
         // GET: Days_leave/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Days_leave days_leave = db.days_Leaves.Find(id);
-            if (days_leave == null)
-            {
-                return HttpNotFound();
-            }
-            return View(days_leave);
-        }
-
-        // POST: Days_leave/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        
+        public ActionResult Delete(int id)
         {
             Days_leave days_leave = db.days_Leaves.Find(id);
             db.days_Leaves.Remove(days_leave);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "✔  Days dropped successfully";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

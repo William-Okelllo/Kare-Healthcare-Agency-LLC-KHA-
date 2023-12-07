@@ -20,7 +20,7 @@ namespace IShop.Core
         public string Designation { get; set; }
         public string Employee { get; set; }
 
-        public string Status { get; set; }
+        public int Status { get; set; }
 
         
 

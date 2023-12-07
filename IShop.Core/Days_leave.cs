@@ -20,8 +20,13 @@ namespace IShop.Core
         [Required]
         public string Type { get; set; }
 
-        [Display(Name = "leave Day")]
-        public DateTime Leave_Day { get; set; }
+        [Display(Name = "From Date")]
+        public DateTime From_Date { get; set; }
+
+        [Display(Name = "To Date")]
+        public DateTime To_Date { get; set; }
+
+        public Decimal Days { get; set; }
 
         public int Time { get; set; }
     }
