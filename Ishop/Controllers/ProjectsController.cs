@@ -142,7 +142,9 @@ namespace Ishop.Controllers
             var DirectC = DC.directs.ToList();
             ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
 
-
+            Client_context CC = new Client_context();
+            var Clients = CC.clients.ToList();
+            ViewBag.Clients = new SelectList(Clients, "Name", "Name");
 
             PCategory_Context PC = new PCategory_Context();
             var Category = PC.pcategories.ToList();

@@ -86,21 +86,25 @@ namespace Ishop.Controllers
         public ActionResult Create()
         {
 
-            leaveTypesContext dbb = new leaveTypesContext();
-            var categories = dbb.leaves_Types.ToList();
-            ViewBag.Categories = new SelectList(categories, "Type", "Type");
+            
 
-            //leaves_t l2 = new leaves_t();
-            // var data12 = l2.leaves_Days_track.Where(c => c.Username == User.Identity.Name).ToList();
-            // ViewBag.F2 = data12;
 
+            
+            return View();
+        }
+
+
+
+
+        public ActionResult CreateAndEdit()
+        {
             Employee_Context K2 = new Employee_Context();
-            var data13 = K2.employees.Where(c => c.Username == User.Identity.Name).ToList();
+            var data13 = K2.employees.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
             ViewBag.EmpInfo = data13;
 
             DepartmentContext DD = new DepartmentContext();
             var data14 = K2.employees.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
-            var Depp = DD.departments.Where(c => c.DprtName == data14.DprtName);
+            var Depp = DD.departments.Where(c => c.DprtName == data14.DprtName).FirstOrDefault();
             ViewBag.Department = Depp;
 
 
@@ -111,139 +115,37 @@ namespace Ishop.Controllers
                 TempData["msg"] = "Non-qualified account for leaves applications";
                 return RedirectToAction("Index");
             }
-            return View();
-        }
+            var newLeave = new leave
+            { CreatedOn = DateTime.Now,
+              Employee= data13.Username,
+              Message="",
+              HR_Email = Depp.Email_Address,
+              Emp_Mail =data13.Email,
+              Department =Depp.DprtName,
+              phone = data13.Contact,
+              Designation=data13.DprtName,
+              Approver_Remarks = "--",
+                Status = "0"
 
-
-
-
-
-
-
-        // POST: leaves/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail,Requested_Days,Phone,PF_NO,Designation")] leave leave)
-        {
-
-            leave.Approver_Remarks = "--";
-            leave.Status = "0";
+                // Set other properties as needed
+            };
 
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(User.Identity.GetUserId());
 
-            int totalDays = (int)(leave.To_Date - leave.From_Date).TotalDays + 1; // Total number of days between from date and to date, including weekends
-            int weekendDays = 0;
-            for (DateTime date = leave.From_Date; date <= leave.To_Date; date = date.AddDays(1))
-            {
-                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    weekendDays++;
-                }
-            }
+            newLeave.Emp_Mail = currentUser.Email;
 
+            db.leave.Add(newLeave);
+            db.SaveChanges();
 
-
-            TimeSpan timeSpan = leave.From_Date - DateTime.Today;
-            int days = timeSpan.Days;
-            int dd = Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
-            var ddd = Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"]);
-            if (days < dd)
-            { TempData["msg"] = "Kindly request leave  " + dd + "days from today's date"; }
-            else
-            {
-
-                bool recordExists = leaveDays.Leaves_Days_Tracks.Any(c => c.Username == leave.Employee && c.Type == leave.Type);
-                if (recordExists)
-                {  //update leave numbers
-
-                    var leaveDaysId = leaveDays.Leaves_Days_Tracks.FirstOrDefault(c => c.Username == leave.Employee && c.Type == leave.Type);
-
-                    var Ticko = leaveDays.Leaves_Days_Tracks.Find(leaveDaysId.Id);
-
-                    if (Ticko.Remaining_leaves < leave.Requested_Days)
-                    {
-                        TempData["msg"] = "Requested leaves greater than balance ";
-                        return RedirectToAction("Index");
-                    }
-
-
-
-                }
-
-                else
-
-                {
-                    leaveTypesContext LLS = new leaveTypesContext();
-                    var leaveNN = LLS.leaves_Types.FirstOrDefault(c => c.Type == leave.Type);
-
-                    if (leaveNN.Days < weekendDays)
-                    {
-                        TempData["msg"] = "Requested leaves greater than leave days ";
-                        return RedirectToAction("Index");
-                    }
-                }
-
-
-                if (ModelState.IsValid)
-                {
-
-
-                    int weekdays = totalDays - weekendDays; // Number of weekdays between from date and to date, excluding weekends
-
-
-                    db.leave.Add(leave);
-
-
-                    leave.Requested_Days = weekdays;
-
-                    leave.Emp_Mail = currentUser.Email;
-                    TempData["msg"] = "leave request posted successfully ";
-                    db.SaveChanges();
-
-                    try
-                    {
-
-
-                        var To = leave.HR_Email;
-                        var Subject = "New leave request";
-                        var Subject2 = "leave Request Submitted";
-                        var TextBody = "Employee :" + leave.Employee
-                        + "\n"
-                        + "\n" + " leave Details  :"
-                        + "\n" + "Requested Days : " + leave.Requested_Days + " days"
-                        + "\n" + "From Date : " + leave.From_Date.ToString("dd-MMM-yyyy")
-                        + "\n" + "To Date : " + leave.To_Date.ToString("dd-MMM-yyyy")
-                        + "\n"
-                        + "\n" + "Employee Additional Remarks"
-                        + "\n"
-                        + "\n" + leave.Message;
-
-
-                        PushEmail(To, Subject, TextBody, DateTime.Now);
-                        PushEmail(currentUser.Email, Subject2, TextBody, DateTime.Now);
-                        PushSms(currentUser.PhoneNumber, TextBody, DateTime.Now);
-                        return RedirectToAction("Index");
-                    }
-                    catch
-                    {
-
-                    }
-
-                    return RedirectToAction("Index");
-                }
-            }
-            return View(leave);
+            return RedirectToAction("Add", new { id = newLeave.Id });
         }
 
 
 
 
 
-
-        private string connectionString2 = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+        private string connectionString2 = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)
         {
             string query = "INSERT INTO OutgoingEmails (Recipient,Subject,Body,Status,CreatedOn,Trials,Response) VALUES " +
@@ -320,8 +222,15 @@ namespace Ishop.Controllers
 
 
         // GET: leaves/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Add(int? id)
         {
+
+            IDays_leave_context AA = new IDays_leave_context();
+            var Phase = AA.days_Leaves.Where(a => a.Leave_Id == id).ToList();
+            ViewBag.days = Phase;
+
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -332,6 +241,10 @@ namespace Ishop.Controllers
                 return HttpNotFound();
             }
             return View(leave);
+
+
+
+
         }
 
         // POST: leaves/Edit/5
@@ -339,7 +252,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail,Designation")] leave leave)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation")] leave leave)
         {
             if (ModelState.IsValid)
             {
@@ -380,156 +293,8 @@ namespace Ishop.Controllers
             return View(leave);
         }
 
-        private leaves_Days_trackContext leaveDays = new leaves_Days_trackContext();
-        leaveTypesContext LLL = new leaveTypesContext();
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Approve_leave([Bind(Include = "Id,CreatedOn,From_Date,To_Date,Employee,Return_Date,Status,Department,Message,Type,HR_Email,Emp_Mail,Approver_Remarks,Requested_Days,Phone,PF_NO,Designation")] leave leave)
-        {
-            if (ModelState.IsValid)
-            {
-                if (leave.Status == "1")
-                {
-
-                    db.Entry(leave).State = EntityState.Modified;
-                    db.SaveChanges();
-                    InsertIntoTable(DateTime.Now, User.Identity.Name, leave.Status, leave.Approver_Remarks, leave.Id);
-
-
-
-
-                    return RedirectToAction("Index");
-                }
-                else if (leave.Status == "2")
-                {
-
-
-                    db.Entry(leave).State = EntityState.Modified;
-                    db.SaveChanges();
-                    InsertIntoTable(DateTime.Now, User.Identity.Name, leave.Status, leave.Approver_Remarks, leave.Id);
-
-
-                    bool recordExists = leaveDays.Leaves_Days_Tracks.Any(c => c.Username == leave.Employee && c.Type == leave.Type);
-
-                    if (recordExists)
-                    {  //update leave numbers
-
-                        var leaveDaysId = leaveDays.Leaves_Days_Tracks.FirstOrDefault(c => c.Username == leave.Employee && c.Type == leave.Type);
-
-                        var Ticko = leaveDays.Leaves_Days_Tracks.Find(leaveDaysId.Id);
-
-                        if (Ticko != null)
-                        {
-                            var TT = Ticko;
-
-                            var Requested = Ticko.Requested_leaves + leave.Requested_Days;
-                            var Balance = Ticko.Remaining_leaves - Ticko.Requested_leaves;
-
-
-                            Ticko.Requested_leaves = Requested;
-                            Ticko.Remaining_leaves = Balance;
-                            leaveDays.SaveChanges();
-
-
-                        }
-
-                    }
-
-                    else
-                    {
-                        //insert
-                        leaveTypesContext LLL = new leaveTypesContext();
-                        var leaveTT = LLL.leaves_Types.Where(c => c.Type == leave.Type).FirstOrDefault();
-
-
-                        leavesTrack(leaveTT.Days, leaveTT.Type, leave.Requested_Days, leaveTT.Days - leave.Requested_Days, leave.Employee);
-                        try
-                        {
-                            Employee_Context EE = new Employee_Context();
-                            var Employee = EE.employees.Where(e => e.Username == leave.Employee).FirstOrDefault();
-
-
-                            var To = leave.HR_Email;
-                            var Subject = "leave Approved Successfully";
-
-                            var TextBody = "Employee :" + leave.Employee
-                            + "\n"
-                            + "\n" + " leave Details  :"
-                            + "\n" + "Requested Days : " + leave.Requested_Days + " days"
-                            + "\n" + "From Date : " + leave.From_Date.ToString("dd-MMM-yyyy")
-                            + "\n" + "To Date : " + leave.To_Date.ToString("dd-MMM-yyyy")
-                            + "\n"
-                            + "\n" + "Approver Remarks"
-                            + "\n"
-                            + "\n" + leave.Approver_Remarks;
-
-
-                            PushEmail(To, Subject, TextBody, DateTime.Now);
-                            PushEmail(Employee.Email, Subject, TextBody, DateTime.Now);
-                            PushSms(Employee.Contact, TextBody, DateTime.Now);
-
-                            return RedirectToAction("Index");
-                        }
-
-                        catch (Exception ex) { }
-                    }
-
-                }
-
-                else if (leave.Status == "99")
-                {
-                    try
-                    {
-                        Employee_Context EE = new Employee_Context();
-                        var Employee = EE.employees.Where(e => e.Username == leave.Employee).FirstOrDefault();
-
-
-                        var To = leave.HR_Email;
-                        var Subject = "leave Request Denied ";
-
-                        var TextBody = "Employee :" + leave.Employee
-                        + "\n"
-                        + "\n" + " leave Details  :"
-                        + "\n" + "Requested Days : " + leave.Requested_Days + " days"
-                        + "\n" + "From Date : " + leave.From_Date.ToString("dd-MMM-yyyy")
-                        + "\n" + "To Date : " + leave.To_Date.ToString("dd-MMM-yyyy")
-                        + "\n"
-                        + "\n" + "Approver Remarks"
-                        + "\n"
-                        + "\n" + leave.Approver_Remarks;
-
-
-                        var leav = db.leave.Find(leave.Id);
-                        if (leav != null)
-                        {
-                            leav.Status = "99";
-                            db.SaveChanges();
-                        }
-
-                        PushEmail(To, Subject, TextBody, DateTime.Now);
-                        PushEmail(Employee.Email, Subject, TextBody, DateTime.Now);
-                        PushSms(Employee.Contact, TextBody, DateTime.Now);
-
-                        return RedirectToAction("Index");
-                    }
-
-                    catch (Exception ex) { }
-                }
-
-
-
-
-
-
-
-
-
-            }
-            return RedirectToAction("Index");
-        }
-
-
-        private string connectionString = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
+     
+        private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void InsertIntoTable(DateTime Datett, string Approver, string Approver_status, string Approver_remarks, int leave_id)
         {
             string query = "INSERT INTO leaves_logs (createdon,Approver,Approver_status,Approver_remarks,leave_id) VALUES " +

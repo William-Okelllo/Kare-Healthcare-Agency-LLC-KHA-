@@ -22,12 +22,28 @@ namespace Ishop
         [Authorize]
         public ActionResult Index(int? page)
         {
+            List<Holiday> holidays = new List<Holiday>
+        {
+            new Holiday { Name = "New Year's Day", Date = new DateTime(DateTime.Now.Year, 1, 1) },
+            new Holiday { Name = "Labour Day", Date = new DateTime(DateTime.Now.Year, 5, 1) },
+            // Add more holidays as needed
+        };
 
-            var Userinfo = dbb.AspNetUsers.Where(a => a.UserName == User.Identity.Name).FirstOrDefault();
-            ViewBag.userinfo = Userinfo;
-            return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
+            ViewBag.Holidays = holidays;
 
 
+
+
+
+
+
+
+
+
+
+
+
+            return View();
         }
         [Authorize]
         public ActionResult Approval(string searchBy, string search, int? page)
@@ -53,9 +69,7 @@ namespace Ishop
         public ActionResult Details(int? id)
         {
 
-            Activities_Context AA = new Activities_Context();
-            var Act = AA.activities.Where(a => a.TimesheetId == id).ToList();
-            ViewBag.Activities = Act;
+           
 
 
 
@@ -80,6 +94,45 @@ namespace Ishop
             var Owner = db.timesheets.Where(t => t.Id == Id).FirstOrDefault();
             var U = UA.AspNetUsers.Where(t => t.UserName == Owner.Owner).FirstOrDefault();
 
+            string input = Owner.Weekid.ToString(); // Your input string
+
+            int week;
+            int month;
+            int year;
+
+            if (input.Length == 7)
+            {
+                week = int.Parse(input.Substring(0, 1));
+                month = int.Parse(input.Substring(1, 2));
+                year = int.Parse(input.Substring(3));
+            }
+            else if (input.Length == 6)
+            {
+                week = int.Parse(input.Substring(0, 1));
+                month = int.Parse(input.Substring(1, 2));
+                year = int.Parse(input.Substring(3));
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input format");
+            }
+
+            int adjustedMonth = month % 12;
+            string monthName = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(adjustedMonth);
+
+            string formattedDate = $"week {week} of {monthName} {year}";
+
+
+
+
+
+
+
+
+
+
+
+
             string daytime;
             if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
             { daytime = "Good Morning"; }
@@ -87,7 +140,7 @@ namespace Ishop
             { daytime = "Good Afternoon"; }
             else
             { daytime = "Good Evenning"; }
-            string Subject = "Timesheet Re-Opened Week No " + Owner.Weekid;
+            string Subject = "Timesheet Re-Opened Week No " + formattedDate;
             string message = daytime + " ," + Owner.Owner
             + "\n" + "Your timesheet has been re-opened by management "
             + "\n" + "kindly login and fill in your timesheet details "
@@ -116,6 +169,35 @@ namespace Ishop
         {
             var Owner = db.timesheets.Where(t => t.Id == Id).FirstOrDefault();
             var U = UA.AspNetUsers.Where(t => t.UserName == Owner.Owner).FirstOrDefault();
+
+            string input = Owner.Weekid.ToString(); // Your input string
+
+            int week;
+            int month;
+            int year;
+
+            if (input.Length == 7)
+            {
+                week = int.Parse(input.Substring(0, 1));
+                month = int.Parse(input.Substring(1, 2));
+                year = int.Parse(input.Substring(3));
+            }
+            else if (input.Length == 6)
+            {
+                week = int.Parse(input.Substring(0, 1));
+                month = int.Parse(input.Substring(1, 2));
+                year = int.Parse(input.Substring(3));
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input format");
+            }
+
+            int adjustedMonth = month % 12;
+            string monthName = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(adjustedMonth);
+
+            string formattedDate = $"week {week} of {monthName} {year}";
+
             string daytime;
             if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
             { daytime = "Good Morning"; }
@@ -123,7 +205,7 @@ namespace Ishop
             { daytime = "Good Afternoon"; }
             else
             { daytime = "Good Evenning"; }
-            string Subject = "Timesheet Submitted Successfully Week No " + Owner.Weekid;
+            string Subject = "Timesheet Submitted Successfully Week No " + formattedDate;
             string message = daytime + " ," + Owner.Owner
             + "\n" + "Your timesheet has been submitted successfully  "
             + "\n" + "kindly note management team will notify you on the approvals via mail soon."
@@ -149,6 +231,33 @@ namespace Ishop
         {
             var Owner = db.timesheets.Where(t => t.Id == Id).FirstOrDefault();
             var U = UA.AspNetUsers.Where(t => t.UserName == Owner.Owner).FirstOrDefault();
+            string input = Owner.Weekid.ToString(); // Your input string
+
+            int week;
+            int month;
+            int year;
+
+            if (input.Length == 7)
+            {
+                week = int.Parse(input.Substring(0, 1));
+                month = int.Parse(input.Substring(1, 2));
+                year = int.Parse(input.Substring(3));
+            }
+            else if (input.Length == 6)
+            {
+                week = int.Parse(input.Substring(0, 1));
+                month = int.Parse(input.Substring(1, 2));
+                year = int.Parse(input.Substring(3));
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input format");
+            }
+
+            int adjustedMonth = month % 12;
+            string monthName = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(adjustedMonth);
+
+            string formattedDate = $"week {week} of {monthName} {year}";
             string daytime;
             if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
             { daytime = "Good Morning"; }
@@ -156,7 +265,7 @@ namespace Ishop
             { daytime = "Good Afternoon"; }
             else
             { daytime = "Good Evenning"; }
-            string Subject = "Timesheet Approved Successfully Week No " + Owner.Weekid;
+            string Subject = "Timesheet Approved Successfully Week No " + formattedDate;
             string message = daytime + " ," + Owner.Owner
             + "\n" + "Your timesheet has been Approved successfully  "
             + "\n" + "thank you "
@@ -195,11 +304,10 @@ namespace Ishop
             return db.timesheets.Any(c => c.Weekid == weekNumber && c.Owner == employeeUsername);
         }
 
-
+       
         public void InsertTimesheet()
         {
             DateTime currentDate = DateTime.Now;
-            int daysInWeek = 7;
 
             // Calculate the day of the week the month starts
             DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
@@ -208,10 +316,11 @@ namespace Ishop
             // Adjust daysPassed if the first day of the month is not Sunday (0)
             daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
 
-            // Calculate the week number
-            int weekNumber = (currentDate.Day + daysPassed - 1) / daysInWeek + 1;
+            // Calculate the week number based on the starting day of the month
+            int currentWeekNumber = GetCurrentWeekNumber(DateTime.Today);
+            int weekNumber = currentWeekNumber;
 
-            string weekInfo = $"{weekNumber}{DateTime.Now.Month}{DateTime.Now.Year}";
+            string weekInfo = $"{weekNumber:D2}{currentDate.Month:D2}{currentDate.Year}";
             string joinedStringConcat = string.Concat(weekInfo);
             int.TryParse(joinedStringConcat, out int WeekNo);
 
@@ -233,13 +342,7 @@ namespace Ishop
                         Owner = employee.Username,
                         Weekid = WeekNo,
                         // Set other day-specific values here
-                        Sun = 0,
-                        Mon = 0,
-                        Tue = 0,
-                        Wen = 0,
-                        Thur = 0,
-                        Fri = 0,
-                        Sat = 0,
+                       
                         Tt = 0,
                         Status = 0
                     };
@@ -265,6 +368,12 @@ namespace Ishop
             }
 
 
+        }
+        private int GetCurrentWeekNumber(DateTime date)
+        {
+            var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
+            int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return week;
         }
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)

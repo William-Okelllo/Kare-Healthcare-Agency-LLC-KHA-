@@ -65,6 +65,8 @@
     <Compile Include="Direct_Repo.cs" />
     <Compile Include="Employee_Context.cs" />
     <Compile Include="Employee_Repo.cs" />
+    <Compile Include="IDays_leave_context.cs" />
+    <Compile Include="Idays_Repo.cs" />
     <Compile Include="InDirect_Context.cs" />
     <Compile Include="InDirect_Repo.cs" />
     <Compile Include="leaveContext.cs" />

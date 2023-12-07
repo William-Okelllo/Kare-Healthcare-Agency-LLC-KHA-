@@ -119,6 +119,9 @@
     <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.2.2\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.v12.12.0.0.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
@@ -129,6 +132,9 @@
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcReportViewer, Version=0.8.5816.27247, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcReportViewer.0.8.3\lib\net45\MvcReportViewer.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -378,13 +384,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="ClientsController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\Days_leaveController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DirectsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -435,6 +442,7 @@
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmbedProperties.cs" />
     <Compile Include="Models\FileUpload.cs" />
+    <Compile Include="Models\Holiday.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Muru.cs" />
@@ -467,6 +475,10 @@
     <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fullcalendar.css" />
+    <Content Include="Content\fullcalendar.min.css" />
+    <Content Include="Content\fullcalendar.print.css" />
+    <Content Include="Content\fullcalendar.print.min.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\PagedList.css" />
@@ -1804,9 +1816,9 @@
     <Content Include="Images\P.png" />
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
-    <Content Include="Images\vp.jpg" />
     <Content Include="Images\whatsapp.ico" />
     <Content Include="Images\xc.png" />
+    <Content Include="Images\xxc.png" />
     <Content Include="Models\AspNetUsers-table.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AspNetUsers-table.edmx</DependentUpon>
@@ -2020,6 +2032,8 @@
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
     <None Include="Properties\PublishProfiles\Jobs_Villa.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
+    <Content Include="MvcReportViewer.aspx" />
+    <Content Include="MvcReportViewerErrorPage.html" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
@@ -2653,6 +2667,82 @@
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_ru.html" />
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_sk.html" />
     <Content Include="Scripts\dropdown.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Scripts\fullcalendar\gcal.js" />
+    <Content Include="Scripts\fullcalendar\gcal.min.js" />
+    <Content Include="Scripts\fullcalendar\locale-all.js" />
+    <Content Include="Scripts\fullcalendar\locale\af.js" />
+    <Content Include="Scripts\fullcalendar\locale\ar-dz.js" />
+    <Content Include="Scripts\fullcalendar\locale\ar-kw.js" />
+    <Content Include="Scripts\fullcalendar\locale\ar-ly.js" />
+    <Content Include="Scripts\fullcalendar\locale\ar-ma.js" />
+    <Content Include="Scripts\fullcalendar\locale\ar-sa.js" />
+    <Content Include="Scripts\fullcalendar\locale\ar-tn.js" />
+    <Content Include="Scripts\fullcalendar\locale\ar.js" />
+    <Content Include="Scripts\fullcalendar\locale\bg.js" />
+    <Content Include="Scripts\fullcalendar\locale\bs.js" />
+    <Content Include="Scripts\fullcalendar\locale\ca.js" />
+    <Content Include="Scripts\fullcalendar\locale\cs.js" />
+    <Content Include="Scripts\fullcalendar\locale\da.js" />
+    <Content Include="Scripts\fullcalendar\locale\de-at.js" />
+    <Content Include="Scripts\fullcalendar\locale\de-ch.js" />
+    <Content Include="Scripts\fullcalendar\locale\de.js" />
+    <Content Include="Scripts\fullcalendar\locale\el.js" />
+    <Content Include="Scripts\fullcalendar\locale\en-au.js" />
+    <Content Include="Scripts\fullcalendar\locale\en-ca.js" />
+    <Content Include="Scripts\fullcalendar\locale\en-gb.js" />
+    <Content Include="Scripts\fullcalendar\locale\en-ie.js" />
+    <Content Include="Scripts\fullcalendar\locale\en-nz.js" />
+    <Content Include="Scripts\fullcalendar\locale\es-do.js" />
+    <Content Include="Scripts\fullcalendar\locale\es-us.js" />
+    <Content Include="Scripts\fullcalendar\locale\es.js" />
+    <Content Include="Scripts\fullcalendar\locale\et.js" />
+    <Content Include="Scripts\fullcalendar\locale\eu.js" />
+    <Content Include="Scripts\fullcalendar\locale\fa.js" />
+    <Content Include="Scripts\fullcalendar\locale\fi.js" />
+    <Content Include="Scripts\fullcalendar\locale\fr-ca.js" />
+    <Content Include="Scripts\fullcalendar\locale\fr-ch.js" />
+    <Content Include="Scripts\fullcalendar\locale\fr.js" />
+    <Content Include="Scripts\fullcalendar\locale\gl.js" />
+    <Content Include="Scripts\fullcalendar\locale\he.js" />
+    <Content Include="Scripts\fullcalendar\locale\hi.js" />
+    <Content Include="Scripts\fullcalendar\locale\hr.js" />
+    <Content Include="Scripts\fullcalendar\locale\hu.js" />
+    <Content Include="Scripts\fullcalendar\locale\id.js" />
+    <Content Include="Scripts\fullcalendar\locale\is.js" />
+    <Content Include="Scripts\fullcalendar\locale\it.js" />
+    <Content Include="Scripts\fullcalendar\locale\ja.js" />
+    <Content Include="Scripts\fullcalendar\locale\ka.js" />
+    <Content Include="Scripts\fullcalendar\locale\kk.js" />
+    <Content Include="Scripts\fullcalendar\locale\ko.js" />
+    <Content Include="Scripts\fullcalendar\locale\lb.js" />
+    <Content Include="Scripts\fullcalendar\locale\lt.js" />
+    <Content Include="Scripts\fullcalendar\locale\lv.js" />
+    <Content Include="Scripts\fullcalendar\locale\mk.js" />
+    <Content Include="Scripts\fullcalendar\locale\ms-my.js" />
+    <Content Include="Scripts\fullcalendar\locale\ms.js" />
+    <Content Include="Scripts\fullcalendar\locale\nb.js" />
+    <Content Include="Scripts\fullcalendar\locale\nl-be.js" />
+    <Content Include="Scripts\fullcalendar\locale\nl.js" />
+    <Content Include="Scripts\fullcalendar\locale\nn.js" />
+    <Content Include="Scripts\fullcalendar\locale\pl.js" />
+    <Content Include="Scripts\fullcalendar\locale\pt-br.js" />
+    <Content Include="Scripts\fullcalendar\locale\pt.js" />
+    <Content Include="Scripts\fullcalendar\locale\ro.js" />
+    <Content Include="Scripts\fullcalendar\locale\ru.js" />
+    <Content Include="Scripts\fullcalendar\locale\sk.js" />
+    <Content Include="Scripts\fullcalendar\locale\sl.js" />
+    <Content Include="Scripts\fullcalendar\locale\sq.js" />
+    <Content Include="Scripts\fullcalendar\locale\sr-cyrl.js" />
+    <Content Include="Scripts\fullcalendar\locale\sr.js" />
+    <Content Include="Scripts\fullcalendar\locale\sv.js" />
+    <Content Include="Scripts\fullcalendar\locale\th.js" />
+    <Content Include="Scripts\fullcalendar\locale\tr.js" />
+    <Content Include="Scripts\fullcalendar\locale\uk.js" />
+    <Content Include="Scripts\fullcalendar\locale\vi.js" />
+    <Content Include="Scripts\fullcalendar\locale\zh-cn.js" />
+    <Content Include="Scripts\fullcalendar\locale\zh-tw.js" />
     <Content Include="Scripts\i18n\af.js" />
     <Content Include="Scripts\i18n\ar.js" />
     <Content Include="Scripts\i18n\az.js" />
@@ -2735,8 +2825,10 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\MvcReportViewer.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\url.js" />
     <Content Include="Views\Account\Rspec007.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -2865,9 +2957,8 @@
     <Content Include="Views\Accesses\Index.cshtml" />
     <Content Include="Views\leaves\Approve_leave.cshtml" />
     <Content Include="Views\leaves\Create.cshtml" />
-    <Content Include="Views\leaves\Delete.cshtml" />
     <Content Include="Views\leaves\Details.cshtml" />
-    <Content Include="Views\leaves\Edit.cshtml" />
+    <Content Include="Views\leaves\Add.cshtml" />
     <Content Include="Views\leaves\Index.cshtml" />
     <Content Include="Views\leaves\leaves_Requests.cshtml" />
     <Content Include="Views\leaves\Print_Form.cshtml" />
@@ -2887,6 +2978,11 @@
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Days_leave\Create.cshtml" />
+    <Content Include="Views\Days_leave\Delete.cshtml" />
+    <Content Include="Views\Days_leave\Details.cshtml" />
+    <Content Include="Views\Days_leave\Edit.cshtml" />
+    <Content Include="Views\Days_leave\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

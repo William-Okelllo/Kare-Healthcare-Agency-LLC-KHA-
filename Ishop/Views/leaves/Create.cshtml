@@ -98,10 +98,13 @@
 <div class="col d-flex justify-content-center">
     <div class="col-md-11 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
-           
-           
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                <i class="fa fa-bookmark"></i> New leave Request
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
 
-            <div class="card-outline card-navy card-body text-left" style="border-radius: 14px;">
+
+
 
                 @using (Html.BeginForm())
                 {
@@ -113,100 +116,46 @@
 
 
 
-                    <div class="col d-flex justify-content-center">
-                        <div class="form-row">
-
-                            <div style="text-align:left">
-                                Application Forms duly completed should be sent to Human Resources Section/Head of Department
-                                at least @System.Configuration.ConfigurationManager.AppSettings["Leave_pre_days"] days before leave commences.
-                            </div>
-
-                            <hr />
-
-                            <div class="form-group col-md-3">
-                                <label>@Html.LabelFor(model => model.CreatedOn)</label>
-                                @Html.EditorFor(model => model.CreatedOn, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm",
-                                   @placeholder = "Department Name",
-                                   @Value = DateTime.Now,
-                                        ReadOnly = true
 
 
 
-
-
-                               }
-                           })
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>@Html.LabelFor(model => model.Employee)</label>
-                                @Html.EditorFor(model => model.Employee, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm ",
-                                   @placeholder = "Contact Number",
-                                        @Value = User.Identity.Name,
-                                        ReadOnly = true
-
-
-
-
-                               }
-                           })
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        @foreach (var item in ViewBag.Department)
-                        {
-                            <div class="form-group col-md-3">
-                                <label>@Html.LabelFor(model => model.HR_Email)</label>
-                                <input id="HR_Email" name="HR_Email" type="text" value="@item.Email_Address" class="form-control form-control-sm" readonly />
-                            </div>
-                        }
-
-                        @foreach (var item in ViewBag.EmpInfo)
-                        {
-                            <div class="form-group col-md-3">
-                                <label>@Html.LabelFor(model => model.Emp_Mail)</label>
-                                <input id="Emp_Mail" name="Emp_Mail" type="text" value="@item.Email" class="form-control form-control-sm" readonly />
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>@Html.LabelFor(model => model.phone)</label>
-                                <input id="phone" name="phone" type="text" value="@item.Phone" class="form-control form-control-sm" readonly />
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>@Html.LabelFor(model => model.Department)</label>
-                                <input id="Department" name="Department" type="text" value="@item.Department" class="form-control form-control-sm" readonly />
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>@Html.LabelFor(model => model.Designation)</label>
-                                <input id="Designation" name="Designation" type="text" value="@item.Designation" class="form-control form-control-sm" readonly />
-                            </div>
-
-                        }
-                    </div>
                     <div class="form-row">
 
-                        <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.PF_NO)</label>
-                            @Html.EditorFor(model => model.PF_NO, new
+
+                        <div class="form-group col-md-3" style="display:none">
+                            <label>@Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
                        {
                            htmlAttributes = new
                            {
                                @class = "form-control form-control-sm",
-                               @placeholder = "PF_NO",
-                               @required = "required",
+                               @placeholder = "Department Name",
+                               @Value = DateTime.Now,
+                                    ReadOnly = true
 
 
+
+
+
+                           }
+                       })
+                        </div>
+                        
+
+
+                    </div>
+                
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label>@Html.LabelFor(model => model.Employee)</label>
+                            @Html.EditorFor(model => model.Employee, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Contact Number",
+                                    @Value = User.Identity.Name,
+                                    ReadOnly = true
 
 
 
@@ -216,6 +165,32 @@
 
 
                         </div>
+                       
+                            <div class="form-group col-md-3">
+                                <label>@Html.LabelFor(model => model.HR_Email)</label>
+                                <input id="HR_Email" name="HR_Email" type="text" value="@ViewBag.Department.Email_Address" class="form-control form-control-sm" readonly />
+                            </div>
+                        
+
+                       
+                            <div class="form-group col-md-3">
+                                <label>@Html.LabelFor(model => model.Emp_Mail)</label>
+                                <input id="Emp_Mail" name="Emp_Mail" type="text" value="@ViewBag.EmpInfo.Email" class="form-control form-control-sm" readonly />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>@Html.LabelFor(model => model.phone)</label>
+                                <input id="phone" name="phone" type="text" value="@ViewBag.EmpInfo.Contact" class="form-control form-control-sm" readonly />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>@Html.LabelFor(model => model.Department)</label>
+                                <input id="Department" name="Department" type="text" value="@ViewBag.EmpInfo.DprtName" class="form-control form-control-sm" readonly />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>@Html.LabelFor(model => model.Designation)</label>
+                                <input id="Designation" name="Designation" type="text" value="@ViewBag.EmpInfo.Designation" class="form-control form-control-sm" readonly />
+                            </div>
+
+                        
                         <script type="text/javascript">
                             $(function () {
 
@@ -224,174 +199,107 @@
 
                             });
                         </script>
-                        <div class="form-group col-md-3">
-                            <label> <i class="fa fa-user-circle text-orange"></i> @Html.LabelFor(model => model.Type)</label>
-                            @Html.DropDownList("Type", ViewBag.Categories as SelectList, "-- Select Leave Type --",
-                           new { @class = "form-control form-control-sm", @required = "required", data_live_search = "true" })
-                        </div>
-
-
-
-                        <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.From_Date)</label>
-                            @Html.EditorFor(model => model.From_Date, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @placeholder = "From_Date",
-                               id = "datepicker",
-                               @required = "required"
-
-
-
-
-
-
-                           }
-                       })
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.To_Date)</label>
-                            @Html.EditorFor(model => model.To_Date, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @placeholder = "To_Date ",
-                               id = "datepicker2",
-                               @required = "required"
-
-
-                           }
-                       })
-
-                        </div>
-
-                        <script>
-        $(document).ready(function () {
-            $('#@Html.IdFor(m => m.From_Date)').change(function () {
-                var date1 = new Date($('#@Html.IdFor(m => m.From_Date)').val());
-                var year = date1.getFullYear();
-                var month = date1.getMonth() + 1;
-                var day = date1.getDate();
-                var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
-                $('#@Html.IdFor(m => m.To_Date)').attr('min', formattedDate);
-            });
-        });
-                        </script>
-
-
-
-
-                        <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.Return_Date)</label>
-                            @Html.EditorFor(model => model.Return_Date, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @placeholder = "Return Date",
-                               id = "datepicker3",
-                               @required = "required"
-
-
-                           }
-                       })
-                        </div>
-
-                        <div class="form-group col-md-1" style="display:none">
-                            <label>@Html.LabelFor(model => model.Status)</label>
-                            @Html.EditorFor(model => model.Status, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Value = "0",
-
-
-
-                           }
-                       })
-                        </div>
-                        <div class="form-group col-md-1" style="display:none">
-                            <label>@Html.LabelFor(model => model.Approver_Remarks)</label>
-                            @Html.EditorFor(model => model.Approver_Remarks, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Value = "0",
-
-
-
-                           }
-                       })
-                        </div>
-
+                       
                     </div>
+                <div class="form-row">
 
 
-                    <label class="bwe">
-                        <i class="fa fa-comment text-yellow"></i>
-                        Reason(s) for the leave application
-                    </label>
-                    <div class="form-row">
 
 
-                        @Html.TextAreaFor(model => model.Message, 4, 70, htmlAttributes: new
+
+
+
+
+                    <div class="form-group col-md-1" style="display:none">
+                        <label>@Html.LabelFor(model => model.Status)</label>
+                        @Html.EditorFor(model => model.Status, new
                    {
-                       style = "width: 70%; max-width:70%;",
-                       @placeholder = "File Description ...information on thes uploaded file",
-                       @autofocus = ""
-                       ,
-                       @required = "required",
-                       @class = "form-control form-rounded7"
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Value = "0",
 
+
+
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-1" style="display:none">
+                        <label>@Html.LabelFor(model => model.Approver_Remarks)</label>
+                        @Html.EditorFor(model => model.Approver_Remarks, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Value = "0",
+
+
+
+                       }
                    })
                     </div>
 
-                    <div style="color:red">@Html.ValidationMessageFor(x => x.From_Date)</div>
-                    <div style="color:red">@Html.ValidationMessageFor(x => x.To_Date)</div>
-                    <div style="color: red">@Html.ValidationMessageFor(x => x.Return_Date)</div>
-                    <div style="color: red">@Html.ValidationMessageFor(x => x.Message)</div>
+                </div>
 
 
+                <label class="bwe">
+                    <i class="fa fa-comment text-yellow"></i>
+                    Reason(s) for the leave application
+                </label>
+                <div class="form-row">
 
-                    <hr />
-                    <table>
-                        <thead>
-                            <tr>
 
-                                <th><u>Actions</u></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <td style="text-align:left">
+                    @Html.TextAreaFor(model => model.Message, 4, 70, htmlAttributes: new
+               {
+                   style = "width: 70%; max-width:70%;",
+                   @placeholder = "File Description ...information on thes uploaded file",
+                   @autofocus = ""
+                   ,
+                   @required = "required",
+                   @class = "form-control form-rounded7"
 
-                            <input type="submit" value="Submit Request" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to submit request?')" />
+               })
+                </div>
 
-                            <script>
-                                $(function () {
-                                    $('#Create').click(function () {
-                                        if (confirm('Are you sure?')) {
-                                            window.location.href = $(this).data('url');
-                                        }
-                                    });
+                <div style="color: red">@Html.ValidationMessageFor(x => x.Message)</div>
+
+
+                <div class="dropdown-divider"></div>
+                <table>
+                    <thead>
+                        <tr>
+
+                            <th><u>Actions</u></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <td style="text-align:left">
+
+                        <input type="submit" value="Submit Request" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to submit request?')" />
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
                                 });
-                            </script>
-                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                            <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+                            });
+                        </script>
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
 
 
 
-                        </td>
-                        </tbody>
-                    </table>
+                    </td>
+                    </tbody>
+                </table>
 
-                }
 
-                </form>
+
+
+            }
+
 
 
 

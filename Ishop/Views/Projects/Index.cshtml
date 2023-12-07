@@ -116,18 +116,23 @@
                             
                                 <i class="fa fa-bookmark text-primary"></i> @item.Project_Name 
                                 <div class="dropdown-divider"></div>
-                                <h5>
-                                    <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i> Category : @item.Category </medium></span> <small>||</small>
-                                    <span class="badge badge-warning"><medium><i class="fa fa-circle-notch text-navy"></i> Status : @item.Status </medium></span>
-                                </h5>
+                                <small style="color:navy">
+                                    
+                                        <b>
+                                            <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i>   </medium> </span> @item.Client <small>||</small>
+                                            <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> @item.Category <small>||</small>
+                                            <span class="badge badge-warning"><medium><i class="fa fa-circle-notch text-navy"></i>   </medium>  </span> @item.Status
+                                        </b>
+                                    
+                                </small>
 </td>
 
 
                         <td style="background-color:white">
                             <i class="fa fa-suitcase text-primary"></i> @item.Budget.ToString("#,##0.00") <div class="dropdown-divider"></div>
-                            <h5>
+                            <h6>
                                 <span class="badge badge-primary"><medium><i class="fa fa-cash-register text-white"></i> Fee Budget : @item.Fee_Budget.ToString("#,##0.00") </medium></span>
-                            </h5>
+                            </h6>
 
                         </td>
                         <td style="background-color: white;  "><i class="fa fa-map-marker text-danger"></i> @item.location </td>

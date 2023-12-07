@@ -376,7 +376,7 @@ namespace Planning_Backend_Service
                                 DayOfWeek currentDayOfWeek = DateTime.Now.DayOfWeek;
                                 // Check if the runtime day is the same as today and the time is 12:00 AM
                                 if (DateTime.Now.DayOfWeek == runtimeDayOfWeek &&
-                                  DateTime.Now.TimeOfDay.Hours == 13 && // 1:00 PM
+                                  DateTime.Now.TimeOfDay.Hours == 01 && // 1:00 PM
                                   DateTime.Now.TimeOfDay.Minutes == 30)
                                 {
                                     // Run your method or logic here
@@ -385,7 +385,7 @@ namespace Planning_Backend_Service
                                 }
                                 else
                                 {
-                                    Console.WriteLine("--Awaiting for " + Runtime + " 1:30 PM");
+                                    Console.WriteLine("--Awaiting for " + Runtime + " 1:30 AM");
                                 }
                             }
                         }

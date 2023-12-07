@@ -1,0 +1,469 @@
+﻿@model IShop.Core.leave
+
+@{
+    ViewBag.Title = "leave request";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-rounded7 {
+        border-radius: 1rem;
+        border-color: darkblue;
+    }
+
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+    $(function () {
+        $("#datepicker3").datepicker();
+    });
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-11 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                <i class="fa fa-bookmark"></i> New leave Request
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group col-md-3" style="display:none">
+                            <label>@Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @placeholder = "Department Name",
+                               @Value = DateTime.Now,
+                                    ReadOnly = true
+
+
+
+
+
+                           }
+                       })
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label>@Html.LabelFor(model => model.Employee)</label>
+                            @Html.EditorFor(model => model.Employee, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Contact Number",
+
+                                    ReadOnly = true
+
+
+
+
+                           }
+                       })
+
+
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label>@Html.LabelFor(model => model.HR_Email)</label>
+                            @Html.EditorFor(model => model.HR_Email, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Contact Number",
+
+                                    ReadOnly = true
+                           }
+                       })
+
+
+                        </div>
+
+
+
+                        <div class="form-group col-md-3">
+                            <label>@Html.LabelFor(model => model.Emp_Mail)</label>
+                            @Html.EditorFor(model => model.Emp_Mail, new
+{
+htmlAttributes = new
+{
+   @class = "form-control form-control-sm ",
+   @placeholder = "Contact Number",
+
+        ReadOnly = true
+}
+})
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>@Html.LabelFor(model => model.phone)</label>
+                            @Html.EditorFor(model => model.phone, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>@Html.LabelFor(model => model.Department)</label>
+                            @Html.EditorFor(model => model.Department, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>@Html.LabelFor(model => model.Designation)</label>
+                            @Html.EditorFor(model => model.Designation, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
+
+
+                        <div class="form-group col-md-3" style="text-align:right">
+                            <label><i class="fa fa-bookmark text-primary"></i> Add leave Days</label>
+                            <div class="ui-menu-divider"></div>
+                            <a href="@Url.Action("create", "Days_leave", new { id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-plus-circle text-black"></i> Add leave Days</a>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+
+
+
+
+
+
+
+                        <div class="form-group col-md-1" style="display:none">
+                            <label>@Html.LabelFor(model => model.Status)</label>
+                            @Html.EditorFor(model => model.Status, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Value = "0",
+
+
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-1" style="display:none">
+                            <label>@Html.LabelFor(model => model.Approver_Remarks)</label>
+                            @Html.EditorFor(model => model.Approver_Remarks, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Value = "0",
+
+
+
+                           }
+                       })
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                        <thead style="font-family:Calibri">
+                            <tr style="color:white">
+                                <th style="background-color: #263544; "><i class="fa fa-receipt text-white"></i> Leave Type </th>
+
+                                <th style="background-color: #263544; "><i class="fa fa-calendar text-white"></i>  Date</th>
+                                <th style="background-color: #263544; "><i class="fa fa-clock text-white"></i> Period </th>
+                                <th style="background-color: #263544; "> Action</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-family: Calibri">
+                            @if (ViewBag.days != null && ViewBag.days.Count > 0)
+                            {
+                                foreach (var item2 in ViewBag.days)
+                                {
+                                    <tr data-widget="expandable-table" aria-expanded="false">
+                                        <td style="background-color: white"> <i class="fa fa-suitcase text-primary"></i> @item2.Type</td>
+                                        <td style="background-color: white">
+                                            <i class="fa fa-calendar-day text-primary"></i> @item2.Leave_Day.ToString("dd-dddd-MMMM-yyyy")
+                                        </td>
+                                        <td style="background-color: white">
+                                            @if (item2.Time == 2)
+                                            {
+                                                <b><i class="fa fa-cloud-sun text-warning"></i> HalfDay Leave</b>
+                                            }
+                                            else
+                                            {
+                                                <b><i class="fa fa-clock text-primary"></i> FullDay Leave</b>
+                                            }
+                                        </td>
+                                        <td style="background-color: ghostwhite">
+                                            <div class="btn-group dropdown">
+                                                <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-hashtag"></i> . Action
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Phase ')) { window.location.href = '@Url.Action("Delete", "InDirects", new { id = item2.Id, })'; }">
+                                                        <i class="fa fa-times-circle text-danger"></i> Drop Phase
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4"> <i class="fa fa-spin fa-circle-notch text-danger"></i>  No leave days added.</td>
+                                </tr>
+                            }
+                        </tbody>
+
+
+                    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <label class="bwe">
+                        <i class="fa fa-comment text-yellow"></i>
+                        Reason(s) for the leave application
+                    </label>
+                    <div class="form-row">
+
+
+                        @Html.TextAreaFor(model => model.Message, 4, 70, htmlAttributes: new
+                   {
+                       style = "width: 70%; max-width:70%;",
+                       @placeholder = "File Description ...information on thes uploaded file",
+                       @autofocus = ""
+                       ,
+                       @required = "required",
+                       @class = "form-control form-rounded7"
+
+                   })
+                    </div>
+
+                    <div style="color: red">@Html.ValidationMessageFor(x => x.Message)</div>
+
+
+                    <div class="dropdown-divider"></div>
+                    <table>
+                        <thead>
+                            <tr>
+
+                                <th><u>Actions</u></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <td style="text-align:left">
+
+                            <input type="submit" value="Submit Request" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to submit request?')" />
+
+                            <script>
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
+                            </script>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                            <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                        </td>
+                        </tbody>
+                    </table>
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+    </div>

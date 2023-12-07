@@ -13,16 +13,7 @@ namespace IShop.Core
         public DateTime CreatedOn { get; set; }
 
 
-        [Display(Name = "From Date ")]
-        public DateTime From_Date { get; set; }
-
-
-        [Display(Name = "To Date ")]
-        public DateTime To_Date { get; set; }
-
-        [Required]
-        [Display(Name = "Return Date ")]
-        public DateTime Return_Date { get; set; }
+        
 
         public string Department { get; set; }
 
@@ -31,9 +22,7 @@ namespace IShop.Core
 
         public string Status { get; set; }
 
-        [Display(Name = "Leave Type")]
-        [Required]
-        public string Type { get; set; }
+        
 
 
         public string Message { get; set; }
@@ -42,8 +31,6 @@ namespace IShop.Core
 
 
 
-        [Display(Name = "Days ")]
-        public int Requested_Days { get; set; }
         public string Approver_Remarks { get; set; }
 
 
@@ -52,9 +39,6 @@ namespace IShop.Core
         [Display(Name = "HOD Email")]
         public string HR_Email { get; set; }
 
-
-        [Display(Name = "PF NO")]
-        public string PF_NO { get; set; }
 
         public string Emp_Mail { get; set; }
 

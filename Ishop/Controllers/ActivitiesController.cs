@@ -1,4 +1,5 @@
 ﻿using Ishop.Infa;
+using Ishop.Models;
 using IShop.Core;
 using System;
 using System.Data;
@@ -39,10 +40,10 @@ namespace Ishop.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Add(int Id, string id2)
+        public ActionResult Add(DateTime Id)
         {
-            ViewBag.Timesheetid = Id;
-            ViewBag.Weekday = id2;
+
+            ViewBag.Date = Id;
 
             Direct_Context DC = new Direct_Context();
             var DirectC = DC.directs.ToList();
@@ -58,28 +59,52 @@ namespace Ishop.Controllers
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
 
+            DateTime currentDate = DateTime.Now;
+            
+            // Calculate the day of the week the month starts
+            DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+            int daysPassed = (int)firstDayOfMonth.DayOfWeek;
 
-            var Activities = db.activities.Where(a => a.TimesheetId == Id && a.Day == id2).ToList();
+            // Adjust daysPassed if the first day of the month is not Sunday (0)
+            daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
+
+            // Calculate the week number based on the starting day of the month
+            int currentWeekNumber = GetCurrentWeekNumber(DateTime.Today);
+            int weekNumber = currentWeekNumber;
+
+            string weekInfo = $"{weekNumber:D2}{currentDate.Month:D2}{currentDate.Year}";
+            string joinedStringConcat = string.Concat(weekInfo);
+            int.TryParse(joinedStringConcat, out int WeekNo);
+
+            ViewBag.Weekid = WeekNo;
+
+
+            var Activities = db.activities.Where(a => a.WeekId == WeekNo && a.Day_Date ==Id ).ToList();
             ViewBag.Activities = Activities;
-
-
-
-            var SumHours = db.activities.Where(c => c.TimesheetId == Id && c.Day == id2).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
+            var SumHours = db.activities.Where(c => c.WeekId == WeekNo && c.Day_Date == Id).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
+            var Chargable = db.activities.Where(c => c.WeekId == WeekNo && c.Day_Date == Id).Select(d => d.Charge).DefaultIfEmpty(0).Sum();
             ViewBag.SumHours = SumHours;
-
-
-
+            ViewBag.Chargable = Chargable;
             return View();
         }
+
+
+        private int GetCurrentWeekNumber(DateTime date)
+        {
+            var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
+            int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return week;
+        }
+
 
         // POST: Activities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,TimesheetId,Hours,Comments,Day,Charge,Indirect,Indirect_Hours")] Activities activities)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Project_Name,User,Name,Day_Date,Hours,direct_Comments,Indirect_Comments,Charge,Indirect,Indirect_Hours,WeekId")] Activities activities)
         {
-            if (activities.Indirect == null) { activities.Indirect = ""; }
+            
 
             Employee_Context EE = new Employee_Context();
             var Emp = EE.employees.Where(c => c.Username == activities.User).FirstOrDefault();
@@ -87,7 +112,8 @@ namespace Ishop.Controllers
             Decimal Charge = Emp.Rate * activities.Hours;
             activities.Charge = Charge;
 
-            var SumHours = db.activities.Where(c => c.TimesheetId == activities.TimesheetId && c.Day == activities.Day).Select(d => d.Hours).DefaultIfEmpty(0).Sum();
+
+            var SumHours = db.activities.Where(c => c.WeekId == activities.WeekId).Select(d => d.Hours + d.Indirect_Hours).DefaultIfEmpty(0).Sum();
 
 
             if (ModelState.IsValid)
@@ -95,26 +121,12 @@ namespace Ishop.Controllers
                 db.activities.Add(activities);
                 db.SaveChanges();
                 Timesheet_Context Tc = new Timesheet_Context();
-                Timesheet check = Tc.timesheets.Find(activities.TimesheetId);
+                var Timesheetid = Tc.timesheets.Where(t => t.Weekid == activities.WeekId).Select(x => x.Id).FirstOrDefault();
+                Timesheet check = Tc.timesheets.Find(Timesheetid);
                 if (check != null)
                 {
-                    // Use reflection to update the specified day's column
-                    var property = check.GetType().GetProperty(activities.Day, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
-
-                    if (property != null)
-                    {
-                        int indirectHours = activities.Indirect_Hours != null ? activities.Indirect_Hours : 0;
-                        property.SetValue(check, activities.Hours + indirectHours + SumHours);
-
-                        // Save the changes to the database
-                        check.Tt = check.Sun + check.Mon + check.Tue + check.Wen + check.Thur + check.Fri + check.Sat;
-                        Tc.SaveChanges();
-                    }
-                    else
-                    {
-                        // Handle the case when the specified day doesn't exist as a column
-                        // You can throw an exception, log an error, or handle it according to your needs.
-                    }
+                    check.Tt = check.Tt + activities.Indirect_Hours + activities.Hours;
+                    Tc.SaveChanges();
                 }
 
                 return RedirectToAction("Index", "Timesheet");
