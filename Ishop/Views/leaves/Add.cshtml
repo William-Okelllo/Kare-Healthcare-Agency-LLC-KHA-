@@ -157,7 +157,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.Employee)</label>
+                            <label><i class="fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Employee)</label>
                             @Html.EditorFor(model => model.Employee, new
                        {
                            htmlAttributes = new
@@ -177,7 +177,7 @@
                         </div>
 
                         <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.HR_Email)</label>
+                            <label><i class="fa fa-envelope text-primary"></i>  @Html.LabelFor(model => model.HR_Email)</label>
                             @Html.EditorFor(model => model.HR_Email, new
                        {
                            htmlAttributes = new
@@ -195,7 +195,7 @@
 
 
                         <div class="form-group col-md-3">
-                            <label>@Html.LabelFor(model => model.Emp_Mail)</label>
+                            <label><i class="fa fa-envelope text-primary"></i>   @Html.LabelFor(model => model.Emp_Mail)</label>
                             @Html.EditorFor(model => model.Emp_Mail, new
 {
 htmlAttributes = new
@@ -208,7 +208,7 @@ htmlAttributes = new
 })
                         </div>
                         <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.phone)</label>
+                            <label><i class="fa fa-mobile text-primary"></i>   @Html.LabelFor(model => model.phone)</label>
                             @Html.EditorFor(model => model.phone, new
 {
 htmlAttributes = new
@@ -221,7 +221,7 @@ ReadOnly = true
 })
                         </div>
                         <div class="form-group col-md-3">
-                            <label>@Html.LabelFor(model => model.Department)</label>
+                            <label><i class="fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
                             @Html.EditorFor(model => model.Department, new
 {
 htmlAttributes = new
@@ -234,7 +234,7 @@ ReadOnly = true
 })
                         </div>
                         <div class="form-group col-md-3">
-                            <label>@Html.LabelFor(model => model.Designation)</label>
+                            <label><i class="fa fa-hands-wash text-primary"></i>   @Html.LabelFor(model => model.Designation)</label>
                             @Html.EditorFor(model => model.Designation, new
 {
 htmlAttributes = new
@@ -247,6 +247,19 @@ ReadOnly = true
 })
                         </div>
 
+                        <div class="form-group col-md-1">
+                            <label><i class="fa fa-calendar-day text-primary"></i>    @Html.LabelFor(model => model.Days)</label>
+                            @Html.EditorFor(model => model.Days, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
 
                         <div class="form-group col-md-3" style="text-align:right">
                             <label><i class="fa fa-bookmark text-primary"></i> Add leave Days</label>

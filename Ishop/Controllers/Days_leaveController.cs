@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using IShop.Core.Interface;
 
 namespace Ishop.Controllers
 {
@@ -68,8 +69,21 @@ namespace Ishop.Controllers
             if (ModelState.IsValid)
             {
                 db.days_Leaves.Add(days_leave);
+                leaveContext leaveContext = new leaveContext();
+                leave check = leaveContext.leave.Find(days_leave.Leave_Id);
+                if (check != null)
+                {
+                    check.Days = check.Days + days_leave.Days;
+                    leaveContext.SaveChanges();
+                }
+
                 db.SaveChanges();
                 TempData["msg"] = "✔   Leave Day added successfully ";
+
+                
+
+
+
                 return RedirectToAction("Add", "leaves", new { id = days_leave.Leave_Id });
             }
 
@@ -114,6 +128,13 @@ namespace Ishop.Controllers
             Days_leave days_leave = db.days_Leaves.Find(id);
             db.days_Leaves.Remove(days_leave);
             db.SaveChanges();
+            leaveContext leaveContext = new leaveContext();
+            leave check = leaveContext.leave.Find(days_leave.Leave_Id);
+            if (check != null)
+            {
+                check.Days = check.Days - days_leave.Days;
+                leaveContext.SaveChanges();
+            }
             TempData["msg"] = "✔  Days dropped successfully";
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);

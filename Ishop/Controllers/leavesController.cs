@@ -26,30 +26,7 @@ namespace Ishop.Controllers
         // GET: leaves
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            //  lleave_llog ll = new lleave_llog();
-            //  var data10 = ll.leaves_logs.ToList();
-            // ViewBag.F = data10;
-
-
-
-            if (this.User.IsInRole("Leaves_Approval"))
-            {
-
-                if (!(search == null))
-                {
-                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == search).ToList().ToPagedList(page ?? 1, 6));
-
-                }
-                else
-                {
-                    return View(db.leave.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 6));
-
-
-                }
-
-            }
-            else
-            {
+            
                 if (!(search == null))
                 {
                     return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
@@ -61,13 +38,18 @@ namespace Ishop.Controllers
 
 
                 }
-            }
+            
         }
 
 
         // GET: leaves/Details/5
         public ActionResult Details(int? id)
         {
+            IDays_leave_context AA = new IDays_leave_context();
+            var Phase = AA.days_Leaves.Where(a => a.Leave_Id == id).ToList();
+            ViewBag.days = Phase;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -243,10 +225,11 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation")] leave leave)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days")] leave leave)
         {
             if (ModelState.IsValid)
             {
+                leave.Status = 1;
                 db.Entry(leave).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -13,7 +13,7 @@ namespace IShop.Core
         public DateTime CreatedOn { get; set; }
 
 
-        
+        public Decimal Days { get; set; }
 
         public string Department { get; set; }
 

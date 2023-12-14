@@ -4,79 +4,430 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
 
-<div>
-    <h4>leave</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
+    .form-rounded {
+        border-radius: 1rem;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.From)
-        </dt>
+    .form-rounded7 {
+        border-radius: 1rem;
+        border-color: darkblue;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.From)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.To)
-        </dt>
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.To)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Employee)
-        </dt>
+<!-- Main content -->
 
-        <dd>
-            @Html.DisplayFor(model => model.Employee)
-        </dd>
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: initial;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Message)
-        </dd>
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HR_Email)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HR_Email)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Emp_Mail)
-        </dt>
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
 
-        <dd>
-            @Html.DisplayFor(model => model.Emp_Mail)
-        </dd>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+    $(function () {
+        $("#datepicker3").datepicker();
+    });
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                <i class="fa fa-bookmark"></i>  leave Request
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group col-md-3" style="display:none">
+                            <label>@Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @placeholder = "Department Name",
+                               @Value = DateTime.Now,
+                                    ReadOnly = true
+
+
+
+
+
+                           }
+                       })
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Employee)</label>
+                            @Html.EditorFor(model => model.Employee, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Contact Number",
+
+                                    ReadOnly = true
+
+
+
+
+                           }
+                       })
+
+
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-envelope text-primary"></i>  @Html.LabelFor(model => model.HR_Email)</label>
+                            @Html.EditorFor(model => model.HR_Email, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Contact Number",
+
+                                    ReadOnly = true
+                           }
+                       })
+
+
+                        </div>
+
+
+
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-envelope text-primary"></i>   @Html.LabelFor(model => model.Emp_Mail)</label>
+                            @Html.EditorFor(model => model.Emp_Mail, new
+{
+htmlAttributes = new
+{
+   @class = "form-control form-control-sm ",
+   @placeholder = "Contact Number",
+
+        ReadOnly = true
+}
+})
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-mobile text-primary"></i>   @Html.LabelFor(model => model.phone)</label>
+                            @Html.EditorFor(model => model.phone, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
+                            @Html.EditorFor(model => model.Department, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-hands-wash text-primary"></i>   @Html.LabelFor(model => model.Designation)</label>
+                            @Html.EditorFor(model => model.Designation, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
+
+                        <div class="form-group col-md-1">
+                            <label><i class="fa fa-calendar-day text-primary"></i>    @Html.LabelFor(model => model.Days)</label>
+                            @Html.EditorFor(model => model.Days, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
+
+ReadOnly = true
+}
+})
+                        </div>
+                       
+
+                    </div>
+                    <div class="form-row">
+
+
+
+
+
+
+
+
+                        <div class="form-group col-md-1" style="display:none">
+                            <label>@Html.LabelFor(model => model.Status)</label>
+                            @Html.EditorFor(model => model.Status, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Value = "0",
+
+
+
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-1" style="display:none">
+                            <label>@Html.LabelFor(model => model.Approver_Remarks)</label>
+                            @Html.EditorFor(model => model.Approver_Remarks, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Value = "0",
+
+
+
+                           }
+                       })
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                        <thead style="font-family:Calibri">
+                            <tr style="color:white">
+                                <th style="background-color: #263544; "><i class="fa fa-receipt text-white"></i> Leave Type </th>
+
+                                <th style="background-color: #263544; "><i class="fa fa-calendar text-white"></i>  From Date</th>
+                                <th style="background-color: #263544; "><i class="fa fa-calendar text-white"></i>  To Date</th>
+                                <th style="background-color: #263544; "><i class="fa fa-clock text-white"></i> Period </th>
+                                <th style="background-color: #263544; "><i class="fa fa-clock text-white"></i> Days </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody style="font-family: Calibri">
+                            @if (ViewBag.days != null && ViewBag.days.Count > 0)
+                            {
+                                foreach (var item2 in ViewBag.days)
+                                {
+                                    <tr data-widget="expandable-table" aria-expanded="false">
+                                        <td style="background-color: white"> <i class="fa fa-suitcase text-primary"></i> @item2.Type</td>
+                                        <td style="background-color: white">
+                                            <i class="fa fa-calendar-day text-primary"></i> @item2.From_Date.ToString("dd-ddd-MMM-yyyy")
+                                        </td>
+                                        <td style="background-color: white">
+                                            <i class="fa fa-calendar-day text-primary"></i> @item2.To_Date.ToString("dd-ddd-MMM-yyyy")
+                                        </td>
+                                        <td style="background-color: white">
+                                            @if (item2.Time == 2)
+                                            {
+                                                <b><i class="fa fa-cloud-sun text-warning"></i> HalfDay Leave</b>
+                                            }
+                                            else
+                                            {
+                                                <b><i class="fa fa-clock text-primary"></i> FullDay Leave</b>
+                                            }
+                                        </td>
+                                        <td style="background-color: white">
+                                            <i class="fa fa-hourglass text-primary"></i> @item2.Days
+                                        </td>
+                                        
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4"> <i class="fa fa-spin fa-circle-notch text-danger"></i>  No leave days added.</td>
+                                </tr>
+                            }
+                        </tbody>
+
+
+                    </table>
+
+
+
+                    <div class="dropdown-divider"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <label class="bwe">
+                        <i class="fa fa-comment text-yellow"></i>
+                        Reason(s) for the leave application
+                    </label>
+                    <div class="form-row">
+
+
+                        @Html.TextAreaFor(model => model.Message, 3, 70, htmlAttributes: new
+                   {
+                       style = "width: 70%; max-width:70%;",
+                       @placeholder = "File Description ...information on thes uploaded file",
+                       @autofocus = ""
+                       ,
+                       ReadOnly = true,
+                       @class = "form-control form-rounded7"
+
+                   })
+                    </div>
+
+                    <div style="color: red">@Html.ValidationMessageFor(x => x.Message)</div>
+
+
+                    <div class="dropdown-divider"></div>
+                    <table>
+                        <thead>
+                            <tr>
+
+                                <th><u>Actions</u></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <td style="text-align:left">
+
+                            
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                            <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
+
+
+
+                        </td>
+                        </tbody>
+                    </table>
+
+
+
+
+                }
+
+
+
+

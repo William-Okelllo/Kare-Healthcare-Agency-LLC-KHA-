@@ -75,27 +75,32 @@
 
             <div class="col-lg-3 col-6" >
                 <!-- small box -->
-                <div class="small-box bg-gradient-navy" style="border-radius: 20px ">
-                    <div class="inner">
-                        <h5><span class="info-box-text text-wrap"><medium><i class="fa fa-umbrella-beach"></i>  @item.CreatedOn.ToString("dd-MMM-yyyy")</medium></span></h5>
+                <div class="small-box " style="border-radius: 20px; background: linear-gradient(to left, #000000b7, #000000) ">
+                    <div class="inner" style="color:white">
+                        <h5><span class="info-box-text text-wrap"><medium><i class="fa fa-umbrella-beach"></i>  @item.CreatedOn.ToString("dd-MMM-yyyy")</medium></span>   ~ <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i> Days : @item.Days </medium></span> </h5>
 
-                        @if(item.Status ==0)
-                        { <h6> <i class="fa fa-circle-notch"></i> InProgress</h6>}
+                        @if (item.Status == 0)
+                        {<h6> <i class="fa fa-circle-notch"></i> InProgress</h6>}
+                        else
+                        { <h6> <i class="fa fa-spin fa-circle-notch text-gray"></i> Submitted - Awating Approvals</h6>}
                     </div>
-                    <div class="icon">
-                        <i class="fa fa-calendar-day"></i>
-                    </div>
-                    <div class="btn-group dropdown dropright">
-                        <button type="button" class="btn-xs btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-paper-plane"></i>  . Action
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a href="@Url.Action("Delete", "Service", new { id = item.Id })" class="dropdown-item">
-                                <i class="fa fa-trash text-danger"></i> Drop Service
-                            </a>
 
-                        </div>
-                    </div>
+                    <div class="dropdown-divider"></div>
+
+                    <a href="@Url.Action("Add", "Leaves", new { id = item.Id })" class="btn-xs btn btn-primary">
+                        <i class="fa fa-circle-notch text-white"></i> Edit/Update
+                    </a>
+                    ||
+                    <a href="@Url.Action("Details", "Leaves", new { id = item.Id })" class="btn-xs btn btn-success">
+                        <i class="fa fa-eye text-white"></i> View leave
+                    </a>
+                    ||
+                    <a href="@Url.Action("Delete", "Leaves", new { id = item.Id })" class="btn-xs btn btn-danger">
+                        <i class="fa fa-trash text-white"></i> Drop leave
+                    </a>
+
+
+
                 </div>
             </div>
 
