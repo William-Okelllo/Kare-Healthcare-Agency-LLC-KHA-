@@ -394,6 +394,7 @@
     <Compile Include="Controllers\Days_leaveController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DirectsController.cs" />
+    <Compile Include="Controllers\Direct_ActivitiesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InDirectsController.cs" />
@@ -416,6 +417,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Indirect_ActivitiesController.cs" />
     <Compile Include="Models\A.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiResponse.cs" />
@@ -7981,6 +7983,16 @@
     <Content Include="Views\Days_leave\Details.cshtml" />
     <Content Include="Views\Days_leave\Edit.cshtml" />
     <Content Include="Views\Days_leave\Index.cshtml" />
+    <Content Include="Views\Direct_Activities\Add.cshtml" />
+    <Content Include="Views\Direct_Activities\Delete.cshtml" />
+    <Content Include="Views\Direct_Activities\Details.cshtml" />
+    <Content Include="Views\Direct_Activities\Edit.cshtml" />
+    <Content Include="Views\Direct_Activities\Index.cshtml" />
+    <Content Include="Views\Indirect_Activities\Add.cshtml" />
+    <Content Include="Views\Indirect_Activities\Delete.cshtml" />
+    <Content Include="Views\Indirect_Activities\Details.cshtml" />
+    <Content Include="Views\Indirect_Activities\Edit.cshtml" />
+    <Content Include="Views\Indirect_Activities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

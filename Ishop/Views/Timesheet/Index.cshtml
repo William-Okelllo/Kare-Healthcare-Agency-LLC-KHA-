@@ -22,26 +22,22 @@
         font-family: Calibri
     }
 
-    .table-hover > tbody > tr:hover {
-        background-color: #D2D2D2;
-    }
 
-    table {
-        border-collapse: collapse;
-        overflow: visible;
-    }
+
+
 
     .curved-table {
         border-collapse: collapse;
-        border-radius: 7px;
+        border-radius: 1px;
+        border: 1px solid #030000;
         overflow: visible;
     }
 
         .curved-table th,
         .curved-table td {
             padding: 10px;
-            border-radius: 7px;
-            border: 1px solid #00000033;
+            
+            border: 1px solid #030000;
         }
 
     .form-rounded2 {
@@ -85,118 +81,29 @@
 
 
 
+
     <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
     <script src="https://apis.google.com/js/api.js"></script>
-    <div id="calendar"></div>
-
-    @section scripts {
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-
-        <script>
-            var initialTimeZone = 'UTC';
+    <div id="calendar">
 
 
-    $(document).ready(function () {
-        $('#calendar').fullCalendar({
-            selectable: true,
-            contentHeight: 500,
-            timezone: initialTimeZone,
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" style="border-radius: 14px">
+                    <div class="modal-header" style="background-color: #192530;border-radius: 14px">
 
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            events: [
-                {
-                    title: 'Madaraka Day',
-                    start: '2023-06-01',
-                    color: 'red'
-                },
-                {
-                    title: 'Mashujaa Day',
-                    start: '2023-10-20',
-                    color: 'red'
-                },
-                // Other Holidays
-                {
-                    title: 'Christmas',
-                    start: '2023-12-25',
-                    color: 'green'
-                },
-                {
-                    title: 'Easter',
-                    start: '2023-04-09',
-                    color: 'purple'
-                }
-                // Add more holidays as needed
-            ],
-            // Add other FullCalendar options here
-            dayRender: function (date, cell) {
-                // Get the first and last day of the current week
-                var startOfWeek = moment().startOf('week');
-                var endOfWeek = moment().endOf('week');
+                        <h5 class="modal-title" style="color:white;text-align:left">  <i class="fa fa-bookmark text-white"></i>    Timesheet </h5>
+                    </div>
+                    <div class="modal-body">
 
-                // Check if the date is within the current week
-                if (date.isBetween(startOfWeek, endOfWeek, null, '[]')) {
-                    // Set background color for the current week to white
-                    cell.css('background-color', 'white');
-                } else {
-                    // Set background color for other weeks to whitesmoke
-                    cell.css('background-color', '#cfcfcf');
-                }
-
-                // Check if the date is the current date
-                if (date.isSame(moment(), 'day')) {
-                    // Set background color for the current date with a green gradient
-                    cell.css('background', 'linear-gradient(to right, #4CAF50, #81C784)');
-                    // Set additional styling for the current date (e.g., border)
-                    cell.css('border', '2px solid #4CAF50');
-
-                    // Add a span with badge and clock icon
-                    cell.append('<span class="badge badge-primary"><medium><i class="fa fa-clock"></i> Today </medium></span>');
-                }
-
-                // Add border-radius to all cells
-                cell.css('border-radius', '10px');
-
-            },
-            dayClick: function(date, jsEvent, view) {
-                // Get the selected date in the 'YYYY-MM-DD' format
-                var selectedDate = date.format();
-
-                // Get the first and last day of the current week
-                var startOfWeek = moment().startOf('week').format('YYYY-MM-DD');
-                var endOfWeek = moment().endOf('week').format('YYYY-MM-DD');
-
-                // Check if the selected date is within the current week
-                if (moment(selectedDate).isBetween(startOfWeek, endOfWeek, null, '[]')) {
-                    // Construct the URL using Url.Action
-                    var url = '@Url.Action("add", "Activities")' + '?id=' + selectedDate;
-
-                    // Redirect to the constructed URL
-                    window.location.href = url;
-                } else {
-                    // Alert or handle the case where the date is not within the current week
-                    alert('Please select a date within the current week.');
-                }
-            },
-            viewRender: function (view, element) {
-                // Customize the appearance of the week label section
-                $('.fc-day-header').css('background-color', '#192530');
-                $('.fc-day-header').css('color', 'white');
-                $('.fc-day-header').css('border-radius', '7px');
-                $('.fc-day-header').css('height', '35px'); // Adjust the height as needed
-                $('.fc-day-header').css('line-height', '35px'); // Center the text vertically
-            }
-        });
-    });
-        </script>
+                        <h5 style="text-align:center"><i class="fa fa-spin fa-circle-notch text-primary"></i>  Picked <a id="pDetails7"></a> </h5>
+                        <div class=" dropdown-divider"></div>
+                        <h5>  <i class="fa fa-bookmark text-primary"></i> Activities  Add </h5>
 
 
-    }
+
+                        </a>
 
 
 
@@ -204,26 +111,194 @@
 
 
 
-
-    <div class="dropdown-divider"></div>
-    <div class="col d-flex justify-content-end">
-
-
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"><small><i class="fa fa-envelope"></i> ggg</small></h5>
+                        <div class=" dropdown-divider"></div>
+                    </div>
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
+        <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" style="border-radius: 14px">
+                    <div class="modal-header" style="background-color: #aa0505;border-radius: 14px">
+
+                        <h5 class="modal-title" style="color:white;text-align:center">  <i class="fa fa-exclamation-circle text-white"></i>    Timesheet </h5>
+                    </div>
+                    <div class="modal-body">
+
+                        <h5 style="text-align:center"><i class="fa fa-exclamation-circle text-danger"></i> Date Error </h5>
+                        <div class=" dropdown-divider"></div>
+                        <p style="text-align:center"> Sorry you have selected a date that not in the current week ,kindly select a date within the current week.</p>
+
+
+
+                        <div class=" dropdown-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @section scripts {
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+            <script>
+                var initialTimeZone = 'UTC';
+
+
+                $(document).ready(function () {
+                    $('#calendar').fullCalendar({
+                        selectable: true,
+                        contentHeight: 400,
+                        timezone: 'Africa/Nairobi',
+
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        events: [
+                            {
+                                title: 'Madaraka Day',
+                                start: '2023-06-01',
+                                color: 'red'
+                            },
+                            {
+                                title: 'Mashujaa Day',
+                                start: '2023-10-20',
+                                color: 'red'
+                            },
+                            // Other Holidays
+                            {
+                                title: 'Christmas',
+                                start: '2023-12-25',
+                                color: 'green'
+                            },
+                            {
+                                title: 'Easter',
+                                start: '2023-04-09',
+                                color: 'purple'
+                            }
+                            // Add more holidays as needed
+                        ],
+                        // Add other FullCalendar options here
+                        dayRender: function (date, cell) {
+                            // Get the first and last day of the current week
+                            var startOfWeek = moment().startOf('week');
+                            var endOfWeek = moment().endOf('week');
+
+                            // Check if the date is within the current week
+                            if (date.isBetween(startOfWeek, endOfWeek, null, '[]')) {
+                                // Set background color for the current week to white
+                                cell.css('background-color', 'white');
+                            } else {
+                                // Set background color for other weeks to whitesmoke
+                                cell.css('background-color', '#cfcfcf');
+                            }
+
+                            // Check if the date is the current date
+                            if (date.isSame(moment(), 'day')) {
+                                // Set background color for the current date with a green gradient
+                                cell.css('background', 'linear-gradient(to right, #4CAF50, #81C784)');
+                                // Set additional styling for the current date (e.g., border)
+                                cell.css('border', '2px solid #4CAF50');
+
+                                // Add a span with badge and clock icon
+                                cell.append('<span class="badge badge-primary"><medium><i class="fa fa-clock"></i> Today </medium></span>');
+                            }
+
+                            // Add border-radius to all cells
+                            cell.css('border-radius', '10px');
+
+                        },
+                        dayClick: function (date, jsEvent, view) {
+                            // Get the selected date in the 'YYYY-MM-DD' format
+                            var selectedDate = date.format();
+
+                            // Get the first and last day of the current week
+                            var startOfWeek = moment().startOf('week').format('YYYY-MM-DD');
+                            var endOfWeek = moment().endOf('week').format('YYYY-MM-DD');
+
+                            // Check if the selected date is within the current week
+                            if (moment(selectedDate).isBetween(startOfWeek, endOfWeek, null, '[]')) {
+
+                                var formattedDate = moment(selectedDate).format("YYYY-MMMM-DD");
+
+                                $('#myModal').modal('show');
+
+                                // Populate the modal body with information
+                                $('#pDetails').text(selectedDate);
+                                $('#pDetails7').text(formattedDate);
+
+                            } else {
+                                // Alert or handle the case where the date is not within the current week
+                                $('#myModal2').modal('show');
+
+                            }
+                        },
+                        viewRender: function (view, element) {
+                            // Customize the appearance of the week label section
+                            $('.fc-day-header').css('background-color', '#192530');
+                            $('.fc-day-header').css('color', 'white');
+                            $('.fc-day-header').css('border-radius', '7px');
+                            $('.fc-day-header').css('height', '35px'); // Adjust the height as needed
+                            $('.fc-day-header').css('line-height', '35px'); // Center the text vertically
+                        }
+                    });
+                });
+            </script>
+
+
+        }
+
+
+
+
+
+
+
+
+        <div class="dropdown-divider"></div>
+        <div class="card-header col-md-7 col-sm-12 col-12 " style="background-color: #192530; color: white; border-radius: 2px ">
+            <h3 class="card-title" style="color:white;text-align:center">
+                <span class="badge badge-warning"><medium><i class="fa fa-spin fa-circle-notch text-black"></i>  </medium></span> <b><medium><b> Current Week </b></medium></b> <small><b style="color:dodgerblue">(DH) -Direct Hours </b> | <b style="color:greenyellow">(IH) -InDirect Hours</b></small>
+            </h3>
+        </div>
+
+        <table class="table table-bordered table-hover table-condensed table-striped table-hover sortable curved-table">
+            <thead>
+                <tr style="color: white;">
+                    @foreach (var item in ViewBag.Results)
+                    {
+                        <th style="background-color: #192530; font-size: medium;">
+                            @item.WeekdayName - <span class="badge badge-warning"><medium><i class="fa fa-user-clock text-black"></i>  </medium></span> <b><small><b> @item.Total_Hours Hrs</b></small></b>
+
+                            <div class="dropdown-divider"></div>
+                            <span class="badge badge-light"><medium><i class="fa fa-user-clock text-black"></i>  </medium></span> <b><small><a><b>DH :</b> @item.Direct_Hours Hrs</a></small></b>
+                            <div class="ui-menu-divider"></div>
+                            <span class="badge badge-primary"><medium><i class="fa fa-user-clock text-white"></i>  </medium></span> <b><small><a><b>IH :</b> @item.InDirect_Hours Hrs</a></small></b>
+
+                        </th>
+
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add your table body content here -->
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+        <!-- /.col -->
+
+
     </div>
-
-
-    <!-- /.col -->
-
-
-</div>
 
 
 

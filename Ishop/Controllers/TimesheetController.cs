@@ -31,7 +31,36 @@ namespace Ishop
 
             ViewBag.Holidays = holidays;
 
+            List<A> results = new List<A>();
+            string strcon = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+            using (SqlConnection sqlCon = new SqlConnection(strcon))
+            {
+                sqlCon.Open();
 
+                using (SqlCommand command = new SqlCommand("sp_Calendar_Activities", sqlCon))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Username", User.Identity.Name);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            A result = new A
+                            {
+                                WeekdayName = reader["WeekdayName"].ToString(),
+                                Direct_Hours = Convert.ToInt32(reader["Direct Hours"]),
+                                InDirect_Hours = Convert.ToInt32(reader["InDirect Hours"]),
+                                Total_Hours = Convert.ToInt32(reader["Total Hours"])
+                            };
+
+                            results.Add(result);
+                        }
+                    }
+                }
+            }
+
+            ViewBag.Results = results;
 
 
 

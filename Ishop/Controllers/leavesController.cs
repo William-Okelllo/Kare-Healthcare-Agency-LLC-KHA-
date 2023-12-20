@@ -1,7 +1,9 @@
-﻿using EASendMail;
+﻿using Antlr.Runtime.Misc;
+using EASendMail;
 using Ishop.Infa;
 using Ishop.Models;
 using IShop.Core;
+using IShop.Core.Interface;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
@@ -14,6 +16,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using SmtpMail = EASendMail.SmtpMail;
 
 namespace Ishop.Controllers
@@ -225,11 +228,27 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days")] leave leave)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days")] leave leave,string action)
         {
+            
             if (ModelState.IsValid)
             {
-                leave.Status = 1;
+                
+                
+                if (action == "Save_Request")
+                {
+                    leave.Status = 0;
+                }
+                else if (action == "Submit_Request")
+                {
+                    leave.Status = 1;
+                    var Subject = "leave Request Submitted ";
+                    var TextBody = "Hello ,your leave request has been submitted succesfully ,you will be notified upon approvals "
+                    + "\n" + " Requested Total Days " + leave.Days +
+                     "\n" + " thank you  :";
+                    CollectSms(TextBody, leave.phone);
+                    CollectEmail(TextBody, leave.Emp_Mail, Subject);
+                }
                 db.Entry(leave).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -242,12 +261,13 @@ namespace Ishop.Controllers
 
 
 
-
-
-
-
         public ActionResult Approve_leave(int? id)
         {
+            IDays_leave_context AA = new IDays_leave_context();
+            var Phase = AA.days_Leaves.Where(a => a.Leave_Id == id).ToList();
+            ViewBag.days = Phase;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -257,17 +277,142 @@ namespace Ishop.Controllers
             {
                 return HttpNotFound();
             }
-
-
-
-
-            // lleave_llog ll = new lleave_llog();
-            // var data10 = ll.leaves_logs.Where(c => c.leave_id == id).ToList();
-            //ViewBag.F = data10;
             return View(leave);
         }
 
-     
+        public ActionResult Approve_Deny(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Use using statement to properly dispose of the context
+            using (IDays_leave_context AA = new IDays_leave_context())
+            {
+                var Phase = AA.days_Leaves.Where(a => a.Leave_Id == id).ToList();
+                ViewBag.days = Phase;
+
+                leave leave = db.leave.Find(id);
+
+                if (leave == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(leave);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Approve_Deny([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days")] leave leave, string action)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                {
+                    var existingLeave = db.leave.Find(leave.Id);
+
+                    if (existingLeave != null)
+                    {
+                        if (action == "Approve_Request")
+                        {
+                            db.Entry(existingLeave).State = EntityState.Modified;
+                            existingLeave.Status = 2;
+                            var Subject = "leave Request Approved ";
+                            var TextBody = "Hello ,your leave request has been Approved. "
+                            + "\n" + "Reasons "
+                            + "\n"
+                            + "\n" + leave.Approver_Remarks +
+                             "\n" + " thank you  :";
+                            CollectSms(TextBody, leave.phone);
+                            CollectEmail(TextBody, leave.Emp_Mail, Subject);
+
+                            IDays_leave_context dv = new IDays_leave_context();
+                            var Dayss = dv.days_Leaves.Where(l => l.Leave_Id == leave.Id).FirstOrDefault();
+                            leaveTypesContext lv = new leaveTypesContext();
+                            var leaveType = lv.leaves_Types.Where(l=>l.Type == Dayss.Type).FirstOrDefault();
+
+                            leavesTrack(leaveType.Days, leaveType.Type, leave.Days, leaveType.Days - leave.Days, leave.Employee);
+
+
+
+                        }
+                        else if (action == "Reject_Request")
+                        {
+                            db.Entry(existingLeave).State = EntityState.Modified;
+                            existingLeave.Status = 99;
+                            var Subject = "leave Request Rejected ";
+                            var TextBody = "Hello ,your leave request has been rejected. "
+                            + "\n" + "Reasons " 
+                            +"\n" 
+                            +"\n"  + leave.Approver_Remarks +
+                             "\n" + " thank you  :";
+                            CollectSms(TextBody, leave.phone);
+                            CollectEmail(TextBody, leave.Emp_Mail, Subject);
+                        }
+
+                       
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        // Handle the case where the entity doesn't exist
+                        return HttpNotFound();
+                    }
+                }
+            }
+
+            return View(leave);
+        }
+
+        public void CollectSms(string Message, string Recepient)
+        {
+            Random random = new Random();
+            using (var context = new OutgoingsmsContext())
+            {
+                Outgoingsms outgoingsms = new Outgoingsms
+
+                {
+
+                    Id = random.Next(), // Using Guid for a unique identifier
+                    CreatedOn = DateTime.Now,
+                    MessageText=Message,
+                    RecipientNumber=Recepient,
+                    Response="--",
+                    Trials=0,
+                    IsSent=false,
+                };
+
+                context.outgoingsms.Add(outgoingsms);
+                context.SaveChanges();
+            }
+        }
+        public void CollectEmail(string Message, string Recepient, string subject)
+        {
+            Random random = new Random();
+            using (var context = new OutgoingEmailsContext())
+            {
+                OutgoingEmails outgoingEmails = new OutgoingEmails
+
+                {
+
+                    Id = random.Next(), // Using Guid for a unique identifier
+                    CreatedOn = DateTime.Now,
+                    Body = Message,
+                    Subject=subject,
+                    Recipient = Recepient,
+                    Response = "--",
+                    Trials = 0,
+                    Status = false,
+                };
+
+                context.outgoingEmails.Add(outgoingEmails);
+                context.SaveChanges();
+            }
+        }
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void InsertIntoTable(DateTime Datett, string Approver, string Approver_status, string Approver_remarks, int leave_id)
         {
@@ -288,7 +433,7 @@ namespace Ishop.Controllers
             }
         }
 
-        public void leavesTrack(int Total_leaves_per_year, String Type, int Requested_leaves, int Remaining_leaves, string Username)
+        public void leavesTrack(int Total_leaves_per_year, String Type, decimal Requested_leaves, decimal Remaining_leaves, string Username)
         {
             string query = "INSERT INTO leaves_Days_track (Total_leaves_per_year,Type,Requested_leaves,Remaining_leaves,Username) VALUES " +
             "                                             (@Total_leaves_per_year,@Type,@Requested_leaves,@Remaining_leaves,@Username)";
@@ -371,74 +516,8 @@ namespace Ishop.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Approve(int? id, leave leave)
-        {
-
-
-
-            {
-                TempData["msg"] = "✔ Leave request approved employee notified ";
-                SmtpMail oMail = new SmtpMail("TryIt");
-                oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-                oMail.To = leave.Emp_Mail;
-                oMail.Subject = "leave request approved";
-                oMail.TextBody = "Hello ,kindly login to the portal to check your approved requested leave. "
-                +
-                   "\n" + " thank you  :";
-                SmtpServer oServer = new SmtpServer("smtp.gmail.com");
-
-                oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-                oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
-
-                oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
-                oServer.Port = 587;
-                SmtpClient oSmtp = new SmtpClient();
-                SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
-                return RedirectToAction("leaves_Requests");
-            }
-        }
-        public ActionResult Deny(int? id, leave leave)
-        {
-            try
-            {
-                string strcon = ConfigurationManager.ConnectionStrings["Ishop"].ConnectionString;
-                SqlConnection sqlCon = new SqlConnection(strcon);
-                SqlCommand sqlcmnd = new SqlCommand("sp_markleave_denied", sqlCon);
-                sqlcmnd.CommandType = CommandType.StoredProcedure;
-                sqlcmnd.Parameters.AddWithValue("@Id", leave.Id);
-                sqlCon.Open();
-                sqlcmnd.ExecuteNonQuery();
-                sqlCon.Close();
-
-
-            }
-            catch
-            {
-                TempData["msg"] = "error occured in approving leave request ";
-                return RedirectToAction("leaves_Requests");
-            }
-            SmtpMail oMail = new SmtpMail("TryIt");
-            oMail.From = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-            oMail.To = leave.Emp_Mail;
-            oMail.Subject = "leave request Denied";
-            oMail.TextBody = "Hello ,kindly note your leave request has been denied. "
-            +
-               "\n" + " kindly check on the portal to check the denied leave, :" +
-                "\n" + " thank you. :";
-            SmtpServer oServer = new SmtpServer("smtp.gmail.com");
-
-            oServer.User = System.Configuration.ConfigurationManager.AppSettings["Email"].ToString();
-            oServer.Password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
-
-            oServer.ConnectType = SmtpConnectType.ConnectTryTLS;
-            oServer.Port = 587;
-            SmtpClient oSmtp = new SmtpClient();
-            SmtpClientAsyncResult oResult = oSmtp.BeginSendMail(oServer, oMail, null, null);
-
-            {
-                TempData["msg"] = "✔ Leave request approved employee notified ";
-                return RedirectToAction("leaves_Requests");
-            }
-        }
+        
+        
+       
     }
 }

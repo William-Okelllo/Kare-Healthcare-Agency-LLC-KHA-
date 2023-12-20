@@ -116,7 +116,7 @@
 
 
 
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("Add", "Leaves", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
@@ -140,7 +140,7 @@
                            {
                                @class = "form-control form-control-sm",
                                @placeholder = "Department Name",
-                               @Value = DateTime.Now,
+
                                     ReadOnly = true
 
 
@@ -430,17 +430,10 @@ ReadOnly = true
                         <tbody>
                         <td style="text-align:left">
 
-                            <input type="submit" value="Submit Request" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to submit request?')" />
+                            <input type="submit"name="action" value="Submit_Request" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to submit request?')" />
+                            <input type="submit" name="action"value="Save_Request" class="btn btn btn-warning" style="color:white" onclick="return confirm('Are you sure you want to save this request?')" />
 
-                            <script>
-                                $(function () {
-                                    $('#Create').click(function () {
-                                        if (confirm('Are you sure?')) {
-                                            window.location.href = $(this).data('url');
-                                        }
-                                    });
-                                });
-                            </script>
+                           
                             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
                             <input type="reset" value="Reset" class="btn btn-danger" style="color:white" />
 

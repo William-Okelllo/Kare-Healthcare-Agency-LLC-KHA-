@@ -87,7 +87,13 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("leave_Approvals"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "leave_Approvals";
+                roleManager.Create(role);
 
+            }
         }
 
 
