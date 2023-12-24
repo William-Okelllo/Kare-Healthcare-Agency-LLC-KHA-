@@ -36,7 +36,6 @@
         .curved-table th,
         .curved-table td {
             padding: 10px;
-            
             border: 1px solid #030000;
         }
 
@@ -103,11 +102,17 @@
 
 
 
-                        </a>
 
 
 
 
+                        <button id="addPhasesButton" class="btn-xs btn btn-primary ">
+                            <i class="fa fa-plus-circle text-black"></i> Add Direct Tasks
+                        </button>
+                        ||
+                        <button id="addPhasesButton2" class="btn-xs btn btn-warning ">
+                            <i class="fa fa-plus-circle text-black"></i> Add InDirect Tasks
+                        </button>
 
 
 
@@ -136,98 +141,89 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.min.js"></script>
+        <script>
+            moment.tz.setDefault('Africa/Nairobi');
+        </script>
+
 
         @section scripts {
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
             <script>
-                var initialTimeZone = 'UTC';
+    var initialTimeZone = 'UTC';
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            selectable: true,
+            contentHeight: 400,
+            timezone: 'Africa/Nairobi',
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: [
+                {
+                    title: 'Madaraka Day',
+                    start: '2023-06-01',
+                    color: 'red'
+                },
+                
+            ],
+            dayRender: function (date, cell) {
+                var startOfWeek = moment().startOf('week');
+                var endOfWeek = moment().endOf('week');
 
+                if (date.isBetween(startOfWeek, endOfWeek, null, '[]')) {
+                    cell.css('background-color', 'white');
+                } else {
+                    cell.css('background-color', '#cfcfcf');
+                }
 
-                $(document).ready(function () {
-                    $('#calendar').fullCalendar({
-                        selectable: true,
-                        contentHeight: 400,
-                        timezone: 'Africa/Nairobi',
+                if (date.isSame(moment(), 'day')) {
+                    cell.css('background', 'linear-gradient(to right, #4CAF50, #81C784)');
+                    cell.css('border', '2px solid #4CAF50');
+                    cell.append('<span class="badge badge-primary"><medium><i class="fa fa-clock"></i> Today </medium></span>');
+                }
 
-                        header: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'month,agendaWeek,agendaDay'
-                        },
-                        events: [
-                            {
-                                title: 'Madaraka Day',
-                                start: '2023-06-01',
-                                color: 'red'
-                            },
-                            {
-                                title: 'Mashujaa Day',
-                                start: '2023-10-20',
-                                color: 'red'
-                            },
-                            // Other Holidays
-                            {
-                                title: 'Christmas',
-                                start: '2023-12-25',
-                                color: 'green'
-                            },
-                            {
-                                title: 'Easter',
-                                start: '2023-04-09',
-                                color: 'purple'
-                            }
-                            // Add more holidays as needed
-                        ],
-                        // Add other FullCalendar options here
-                        dayRender: function (date, cell) {
-                            // Get the first and last day of the current week
-                            var startOfWeek = moment().startOf('week');
-                            var endOfWeek = moment().endOf('week');
+                cell.css('border-radius', '10px');
+            },
+            dayClick: function (date, jsEvent, view) {
+                var selectedDate = date.format();
+                var startOfWeek = moment().startOf('week').format('YYYY-MM-DD');
+                var endOfWeek = moment().endOf('week').format('YYYY-MM-DD');
 
-                            // Check if the date is within the current week
-                            if (date.isBetween(startOfWeek, endOfWeek, null, '[]')) {
-                                // Set background color for the current week to white
-                                cell.css('background-color', 'white');
-                            } else {
-                                // Set background color for other weeks to whitesmoke
-                                cell.css('background-color', '#cfcfcf');
-                            }
-
-                            // Check if the date is the current date
-                            if (date.isSame(moment(), 'day')) {
-                                // Set background color for the current date with a green gradient
-                                cell.css('background', 'linear-gradient(to right, #4CAF50, #81C784)');
-                                // Set additional styling for the current date (e.g., border)
-                                cell.css('border', '2px solid #4CAF50');
-
-                                // Add a span with badge and clock icon
-                                cell.append('<span class="badge badge-primary"><medium><i class="fa fa-clock"></i> Today </medium></span>');
-                            }
-
-                            // Add border-radius to all cells
-                            cell.css('border-radius', '10px');
-
-                        },
-                        dayClick: function (date, jsEvent, view) {
-                            // Get the selected date in the 'YYYY-MM-DD' format
-                            var selectedDate = date.format();
-
-                            // Get the first and last day of the current week
-                            var startOfWeek = moment().startOf('week').format('YYYY-MM-DD');
-                            var endOfWeek = moment().endOf('week').format('YYYY-MM-DD');
-
-                            // Check if the selected date is within the current week
-                            if (moment(selectedDate).isBetween(startOfWeek, endOfWeek, null, '[]')) {
+               if (moment(selectedDate).isBetween(startOfWeek, endOfWeek, null, '[]')) {
 
                                 var formattedDate = moment(selectedDate).format("YYYY-MMMM-DD");
-
+                   formattedDetails = "Details: " + formattedDate;
+                   $('#formattedDateField').val(formattedDate);
                                 $('#myModal').modal('show');
 
                                 // Populate the modal body with information
                                 $('#pDetails').text(selectedDate);
                                 $('#pDetails7').text(formattedDate);
+
+                $('#addPhasesButton').on('click', function () {
+                        var url = "@Url.Action("Add", "Direct_Activities", new { id = "__DATE__" })";
+                    url = url.replace("__DATE__", selectedDate);
+
+
+
+                        // Redirect to the updated URL
+                        window.location.href = url;
+                });
+                    $('#addPhasesButton2').on('click', function () {
+        var url = "@Url.Action("Add", "InDirect_Activities", new { id = "__DATE__" })";
+    url = url.replace("__DATE__", selectedDate);
+
+
+
+        // Redirect to the updated URL
+        window.location.href = url;
+    });
 
                             } else {
                                 // Alert or handle the case where the date is not within the current week
@@ -235,16 +231,18 @@
 
                             }
                         },
-                        viewRender: function (view, element) {
-                            // Customize the appearance of the week label section
-                            $('.fc-day-header').css('background-color', '#192530');
-                            $('.fc-day-header').css('color', 'white');
-                            $('.fc-day-header').css('border-radius', '7px');
-                            $('.fc-day-header').css('height', '35px'); // Adjust the height as needed
-                            $('.fc-day-header').css('line-height', '35px'); // Center the text vertically
-                        }
-                    });
-                });
+            viewRender: function (view, element) {
+                $('.fc-day-header').css('background-color', '#192530');
+                $('.fc-day-header').css('color', 'white');
+                $('.fc-day-header').css('border-radius', '7px');
+                $('.fc-day-header').css('height', '35px');
+                $('.fc-day-header').css('line-height', '35px');
+            }
+
+
+        });
+        
+    });
             </script>
 
 
@@ -266,7 +264,7 @@
 
         <table class="table table-bordered table-hover table-condensed table-striped table-hover sortable curved-table">
             <thead>
-                <tr style="color: white;">
+                <tr style="color: white;" id="openModalTrigger">
                     @foreach (var item in ViewBag.Results)
                     {
                         <th style="background-color: #192530; font-size: medium;">
@@ -282,10 +280,43 @@
                     }
                 </tr>
             </thead>
-            <tbody>
-                <!-- Add your table body content here -->
-            </tbody>
+
         </table>
+        <script>
+            // Wait for the document to be ready
+            $(document).ready(function () {
+                // Get the modal and the trigger element
+                var modal = $("#largeShoes");
+                var trigger = $("#openModalTrigger"); // Assuming you have an element with this ID as your trigger
+
+                // Event handler for clicking the trigger element
+                trigger.click(function () {
+                    // Open the modal
+                    modal.modal("show");
+                });
+            });
+        </script>
+
+
+
+
+
+        <div class="modal fade" id="largeShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="border-radius: 14px">
+                <div class="modal-content" style="background-color: rgba(255, 255, 255, 0.84);border-radius: 14px">
+                    <div class="modal-header" style="background-color: #192530;border-radius: 14px">
+                        <h6 style="color:white"><i class="fa fa-bookmark text-white"></i>   Day Activities</h6>
+                    </div>
+                    <div class="modal-body" style="height:400px;overflow-y:scroll;background-color: rgba(255, 0, 255, 0.00);">
+                        <div class="row">
+                            <div class="col-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -295,10 +326,6 @@
 
 
 
-        <!-- /.col -->
-
-
-    </div>
 
 
 

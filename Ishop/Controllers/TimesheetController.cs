@@ -20,16 +20,9 @@ namespace Ishop
         private Timesheet_Context db = new Timesheet_Context();
 
         [Authorize]
-        public ActionResult Index(int? page)
+        public ActionResult Index()
         {
-            List<Holiday> holidays = new List<Holiday>
-        {
-            new Holiday { Name = "New Year's Day", Date = new DateTime(DateTime.Now.Year, 1, 1) },
-            new Holiday { Name = "Labour Day", Date = new DateTime(DateTime.Now.Year, 5, 1) },
-            // Add more holidays as needed
-        };
-
-            ViewBag.Holidays = holidays;
+           
 
             List<A> results = new List<A>();
             string strcon = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
@@ -74,6 +67,27 @@ namespace Ishop
 
             return View();
         }
+
+
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Authorize]
         public ActionResult Approval(string searchBy, string search, int? page)
         {

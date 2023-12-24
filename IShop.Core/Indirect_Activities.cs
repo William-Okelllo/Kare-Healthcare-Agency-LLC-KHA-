@@ -11,7 +11,7 @@ namespace IShop.Core
     {
         public int Id { get; set; }
 
-        public int WeekId { get; set; }
+       
         public int Hours { get; set; }
         public DateTime Day_Date { get; set; }
         public DateTime CreatedOn { get; set; }

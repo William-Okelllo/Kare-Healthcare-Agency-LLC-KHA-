@@ -95,13 +95,7 @@
                             <i class="fa fa-circle-notch text-white"></i> Edit/Update
                         </a>}
 
-                    @if (this.User.IsInRole("leave_Approvals") && item.Status == 1)
-                    {
-
-                        <a href="@Url.Action("Approve_leave", "Leaves", new { id = item.Id })" class="btn-xs btn btn-primary">
-                            <i class="fa fa-check-circle text-white"></i> Approve Leave
-                        </a>
-                    }
+                    
 
                     <a href="@Url.Action("Details", "Leaves", new { id = item.Id })" class="btn-xs btn btn-success">
                         <i class="fa fa-eye text-white"></i> View leave
@@ -136,27 +130,22 @@
 
             @if (Model.Count() == 0)
             {
-                <div style="text-align:center">
-                    <div class="col-md-3 col-sm-6 col-12">
-                        <div class="info-box bg-gradient-black">
-                            <span class="info-box-icon"><i class="far fa-bed"></i></span>
+               <div class="col d-flex justify-content-center">
+                   <div class="col-md-3 col-sm-6 col-12">
+                       <div class="info-box bg-gradient-black">
+                           <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text"> <img src="~/Images/co.gif" height="50" /> </span>
+                           <div class="info-box-content">
 
-
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <span class="progress-description">
-                                    <i class="fa fa-calendar text-white nav-icon"></i>   No leaves requested
-                                </span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                </div>
+                               <span class="progress-description">
+                                   <i class="fa fa-spin fa-circle-notch"></i>  No leaves requested
+                               </span>
+                           </div>
+                           <!-- /.info-box-content -->
+                       </div>
+                       <!-- /.info-box -->
+                   </div>
+               </div>
             }
 
 

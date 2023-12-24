@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
 using Rotativa;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
@@ -43,7 +44,25 @@ namespace Ishop.Controllers
                 }
             
         }
+        public ActionResult All(string searchBy, string search, int? page)
+        {
+            if (!(search == null) && (!(search == "")))
+            {
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Department.StartsWith(search) || c.Department == search).ToList().ToPagedList(page ?? 1, 11));
 
+            }
+            else if (search == "")
+            {
+                return View(db.leave.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+
+
+            }
+            else
+            {
+                return View(db.leave.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+            }
+
+        }
 
         // GET: leaves/Details/5
         public ActionResult Details(int? id)
@@ -335,7 +354,7 @@ namespace Ishop.Controllers
                             var leaveType = lv.leaves_Types.Where(l=>l.Type == Dayss.Type).FirstOrDefault();
 
                             leavesTrack(leaveType.Days, leaveType.Type, leave.Days, leaveType.Days - leave.Days, leave.Employee);
-
+                            InsertDatesIntoTable(Dayss.From_Date, Dayss.To_Date, Dayss.Time, leave.Employee);
 
 
                         }
@@ -355,7 +374,7 @@ namespace Ishop.Controllers
 
                        
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("All");
                     }
                     else
                     {
@@ -367,6 +386,85 @@ namespace Ishop.Controllers
 
             return View(leave);
         }
+
+
+        public ActionResult GetDatesBetween()
+        {
+            DateTime startDate = new DateTime(2023, 12, 25, 0, 0, 0, 0);
+            DateTime endDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
+
+            List<string> datesInRange = new List<string>();
+
+            DateTime currentDate = startDate;
+
+            while (currentDate <= endDate)
+            {
+                datesInRange.Add(currentDate.ToString("yyyy-MM-dd"));
+                currentDate = currentDate.AddDays(1);
+            }
+
+            return View(datesInRange);
+
+
+        
+        }
+
+
+        public void InsertDatesIntoTable(DateTime startDate, DateTime endDate,int Type,string Employee)
+        {
+            Indirect_Activities_Context II = new Indirect_Activities_Context();
+            
+            List<DateTime> datesInRange = GetDatesInRange(startDate, endDate);
+            Random random = new Random();
+
+            int HoursOnleave;
+            if(Type==1) { HoursOnleave = 8; } else { HoursOnleave = 4; }
+
+
+            using (var Indirect_Activities_Context = new Indirect_Activities_Context())
+            {
+                foreach (var date in datesInRange)
+                {
+                    Indirect_Activities dateEntity = new Indirect_Activities
+                    {
+
+                        Id = random.Next(),
+                        Hours = HoursOnleave,
+                        CreatedOn = date,
+                        Day_Date = date,
+                        User= Employee,
+                        Comments="SYSTEM ASSIGNED",
+                        Name= "LEAVE"
+                    };
+
+                    Indirect_Activities_Context.indirect_Activities.Add(dateEntity);
+                    Indirect_Activities_Context.SaveChanges();
+                }
+
+                
+            }
+        }
+
+        private List<DateTime> GetDatesInRange(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> datesInRange = new List<DateTime>();
+
+            DateTime currentDate = startDate;
+
+            while (currentDate <= endDate)
+            {
+                datesInRange.Add(currentDate);
+                currentDate = currentDate.AddDays(1);
+            }
+
+            return datesInRange;
+        }
+
+
+
+
+
+
 
         public void CollectSms(string Message, string Recepient)
         {
@@ -500,9 +598,20 @@ namespace Ishop.Controllers
 
         public ActionResult Delete(int id)
         {
+            
+
             leave leave = db.leave.Find(id);
             db.leave.Remove(leave);
             db.SaveChanges();
+
+            IDays_leave_context dd = new IDays_leave_context();
+            Days_leave days_Leave = dd.days_Leaves.FirstOrDefault(l => l.Leave_Id == id);
+            if (days_Leave != null)
+            {
+                dd.days_Leaves.Remove(days_Leave);
+                dd.SaveChanges();
+            }
+
             TempData["msg"] = "Leave request deleted successfully ";
             return RedirectToAction("Index");
         }

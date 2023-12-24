@@ -85,15 +85,14 @@ namespace Ishop
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,WeekId,Hours,Day_Date,CreatedOn,User,Comments,Name")] Indirect_Activities indirect_Activities)
+        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,User,Comments,Name")] Indirect_Activities indirect_Activities)
         {
-            if (ModelState.IsValid)
-            {
+           
                 db.indirect_Activities.Add(indirect_Activities);
                 db.SaveChanges();
                 TempData["msg"] = "Activity added successfully ";
                 return RedirectToAction("Index", "Timesheet");
-            }
+            
 
             return View(indirect_Activities);
         }

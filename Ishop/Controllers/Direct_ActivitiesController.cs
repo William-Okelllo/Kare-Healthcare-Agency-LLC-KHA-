@@ -70,7 +70,7 @@ namespace Ishop.Controllers
             string weekInfo = $"{weekNumber:D2}{currentDate.Month:D2}{currentDate.Year}";
             string joinedStringConcat = string.Concat(weekInfo);
             int.TryParse(joinedStringConcat, out int WeekNo);
-
+            ViewBag.SelectedDate = Id;
             ViewBag.Weekid = WeekNo;
             return View();
         }
@@ -85,15 +85,14 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,WeekId,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge")] Direct_Activities direct_Activities)
+        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge")] Direct_Activities direct_Activities)
         {
-            if (ModelState.IsValid)
-            {
+            
                 db.direct_Activities.Add(direct_Activities);
                 db.SaveChanges();
                 TempData["msg"] = "Activity added successfully ";
                 return RedirectToAction("Index", "Timesheet");
-            }
+            
 
             return View(direct_Activities);
         }

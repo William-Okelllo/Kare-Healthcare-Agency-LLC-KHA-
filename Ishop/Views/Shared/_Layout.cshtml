@@ -77,7 +77,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                <li class="nav-item d-none d-sm-inline-block" style="background-color: #2c2c2c; border-radius: 10px;font-family:Calibri">
                     <a href="@Url.Action("Index", "Home")" class="nav-link" style="color:white"> <i class="fa fa-home"></i>  Home</a>
                 </li>
 
@@ -90,38 +90,38 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown" style="font-family:Calibri">
-                    <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
+                <li class="nav-item dropdown" style="background-color: #2c2c2c; border-radius: 10px;font-family:Calibri">
+                <a class="nav-link" data-toggle="dropdown" href="#" style="font-family:Calibri">
 
-                        <i class="fa fa-user-circle text-white">
-                            @Html.Label("" + User.Identity.GetUserName()
+                    <i class="fa fa-user-circle text-white">
+                        @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
-                        </i>
-                        <i class="fas fa-angle-down right"></i>
+                    </i>
+                    <i class="fas fa-angle-down right"></i>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
+                    <br />
+                    <div style="text-align:center">
+                        <img src="~/Images/P.png" height="30" alt="User Avatar">
+
+                    </div>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
+                    <div style="text-align: center; font-family: 'Montserrat' ">
+                        <p style="font-family: 'Montserrat'">
+                            <i class="fa fa-spin fa-circle-notch text-primary nav-icon"></i>   @Html.Label("" + User.Identity.GetUserName()
++ "", null, htmlAttributes: new { title = "Manage" })
+                        </p>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a href="@Url.Action("ChangePassword", "manage")" class="dropdown-item">
+                        <i class="fa fa-user-lock text-primary nav-icon"></i> Change Password
                     </a>
+                    <div class="dropdown-divider"></div>
 
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
-                        <br />
-                        <div style="text-align:center">
-                            <img src="~/Images/P.png" height="30" alt="User Avatar">
-
-                        </div>
-                        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
-                        <div style="text-align: center; font-family: 'Montserrat' ">
-                            <p style="font-family: 'Montserrat'">
-                                <i class="fa fa-spin fa-circle-notch text-primary nav-icon"></i>   @Html.Label("" + User.Identity.GetUserName()
-+ "", null, htmlAttributes: new { title = "Manage" })
-                            </p>
-                        </div>
-
-                        <div class="dropdown-divider"></div>
-
-                        <a href="@Url.Action("ChangePassword", "manage")" class="dropdown-item">
-                            <i class="fa fa-user-lock text-primary nav-icon"></i> Change Password
-                        </a>
-                        <div class="dropdown-divider"></div>
-
-                        <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
 
 
 </a>
@@ -170,7 +170,7 @@
 
         </a>
 
-        <div class="sidebar" style="background: linear-gradient(to bottom, #090446, #000000); border-radius: 14px">
+        <div class="sidebar" style="background-color:black; border-radius: 4px">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
@@ -222,7 +222,7 @@
 
                     <li class="nav-item menu-open">
                         <a href="@Url.Action("Index", "Home")" class="nav-link bg-white">
-                            <i class="nav-icon fa fa-home text-primary"></i>
+                            <i class="nav-icon fa fa-home text-black"></i>
                             <p style="color: black">
                                 Home-Page
 
@@ -298,6 +298,15 @@
                                         <i class="fa fa-umbrella-beach text-white nav-icon"></i>
                                         <p style="color: white">
                                             My leave Requests
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("All", "Leaves")" class="nav-link">
+
+                                        <i class="fa fa-clipboard-list text-white nav-icon"></i>
+                                        <p style="color: white">
+                                           All Leave Requests
                                         </p>
                                     </a>
                                 </li>

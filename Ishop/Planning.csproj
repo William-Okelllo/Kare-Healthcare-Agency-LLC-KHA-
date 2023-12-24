@@ -6350,7 +6350,6 @@
     <Content Include="Images\CX.jpg" />
     <Content Include="Images\f.svg" />
     <Content Include="Images\homee.png" />
-    <Content Include="Images\l.ico" />
     <Content Include="Images\P.png" />
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
@@ -7993,6 +7992,7 @@
     <Content Include="Views\Indirect_Activities\Details.cshtml" />
     <Content Include="Views\Indirect_Activities\Edit.cshtml" />
     <Content Include="Views\Indirect_Activities\Index.cshtml" />
+    <Content Include="Views\leaves\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
