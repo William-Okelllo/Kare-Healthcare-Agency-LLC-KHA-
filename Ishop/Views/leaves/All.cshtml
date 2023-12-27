@@ -119,10 +119,10 @@
                         </td>
                         <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i> @item.Employee</td>
                         <td style="background-color: white;"> <i class="fa fa-university text-primary"></i> @item.Department</td>
-                        <td style="background-color: white;"> <i class="fa fa-user-tag text-primary"></i> @item.Designation</td>
+                        <td style="background-color: white;"> <b style="color:navy"><i class="fa fa-user-tag text-primary"></i> @item.Designation</b></td>
                         <td style="background-color: white;">
                             @if (item.Status == 0)
-                            {<h6 style="color:deepskyblue"> <i class="fa fa-circle-notch"></i> <b>InProgress</b></h6>}
+                            {<h6 style="color:deepskyblue"> <i class="fa fa-spin fa-circle-notch"></i> <b>InProgress</b></h6>}
                             else if (item.Status == 1)
                             { <h6 style="color:gray">     <i class="fa fa-spin fa-circle-notch text-gray"></i> <b>Submitted - Awating Approvals</b></h6>}
                             else if (item.Status == 2)

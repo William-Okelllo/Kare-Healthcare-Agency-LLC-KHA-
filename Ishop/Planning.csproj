@@ -7871,7 +7871,6 @@
     <Content Include="Views\Configs\Details.cshtml" />
     <Content Include="Views\Configs\Edit.cshtml" />
     <Content Include="Views\Configs\Index.cshtml" />
-    <Content Include="Views\Home\Dash.cshtml" />
     <Content Include="Views\OutgoingEmails\Index.cshtml" />
     <Content Include="Views\OutgoingEmails\Send_email.cshtml" />
     <Content Include="Views\Outgoingsms\Index.cshtml" />
