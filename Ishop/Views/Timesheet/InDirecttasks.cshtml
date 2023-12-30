@@ -8,30 +8,33 @@
 <table class="table table-bordered table-hover  curved-table text-nowrap">
     <thead>
         <tr>
-            <th>WeekNo</th>
+            
             <th>Staff</th>
             <th>Activity Name</th>
 
             <th>Hours</th>
-
-            <th>Status</th>
+            <th>Comments</th>
+            
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr data-widget="expandable-table" aria-expanded="false">
-                <td style="background-color: white;">@item.WeekNo</td>
+                
                 <td style="background-color: white;"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User</td>
                 <td style="background-color: white;">@item.Name</td>
                 <td style="background-color: white;"> <span class="badge badge-primary"><medium><i class="fa fa-clock text-white"></i></medium></span> <b>@item.Hours</b> <small>Hrs</small></td>
+                <td style="background-color: white;" colspan="6">
+                    <p>@item.Comments</p>
 
-                <td style="background-color: white;">
+                    <div class="divider"></div>
                     @if (@item.Approved == true)
-                    {<small style="color:green"><i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </small>}
+                    {<p style="color:green;text-align:right">|<span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo  |   <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
                     else
-                    {<small style="color:orange"><i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </small>}
+                    {<p style="color: orange; text-align: right"> |<span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
                 </td>
+               
             </tr>
 
 
