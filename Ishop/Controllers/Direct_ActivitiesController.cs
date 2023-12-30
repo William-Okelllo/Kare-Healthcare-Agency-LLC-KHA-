@@ -54,23 +54,17 @@ namespace Ishop.Controllers
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
 
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = Id;
 
-            // Calculate the day of the week the month starts
-            DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-            int daysPassed = (int)firstDayOfMonth.DayOfWeek;
+            // Calculate the week number based on the current date
+            int currentWeekNumber = GetCurrentWeekNumber(currentDate); // Make sure to provide the correct date here
 
-            // Adjust daysPassed if the first day of the month is not Sunday (0)
-            daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
+            // Assign the week number directly
+            int WeekNo = currentWeekNumber;
 
-            // Calculate the week number based on the starting day of the month
-            int currentWeekNumber = GetCurrentWeekNumber(DateTime.Today);
-            int weekNumber = currentWeekNumber;
+            ViewBag.SelectedDate = currentDate;
+            ViewBag.Weekid = WeekNo;
 
-            string weekInfo = $"{weekNumber:D2}{currentDate.Month:D2}{currentDate.Year}";
-            string joinedStringConcat = string.Concat(weekInfo);
-            int.TryParse(joinedStringConcat, out int WeekNo);
-            ViewBag.SelectedDate = Id;
             ViewBag.Weekid = WeekNo;
             return View();
         }
@@ -85,7 +79,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge")] Direct_Activities direct_Activities)
+        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo")] Direct_Activities direct_Activities)
         {
             
                 db.direct_Activities.Add(direct_Activities);

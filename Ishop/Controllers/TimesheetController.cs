@@ -1,15 +1,23 @@
 ﻿using Ishop.Infa;
 using Ishop.Models;
 using IShop.Core;
+using IShop.Core.Interface;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Web.Configuration;
+using System.Web.Http.Results;
 using System.Web.Mvc;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Ishop
 {
@@ -22,7 +30,7 @@ namespace Ishop
         [Authorize]
         public ActionResult Index()
         {
-           
+
 
             List<A> results = new List<A>();
             string strcon = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
@@ -74,7 +82,7 @@ namespace Ishop
 
 
 
-       
+
 
 
 
@@ -89,45 +97,109 @@ namespace Ishop
 
 
         [Authorize]
-        public ActionResult Approval(string searchBy, string search, int? page)
+        public ActionResult Approval( int? page, string option, string startDate, string endDate)
         {
-            if (!(search == null) && (!(search == "")))
+            string strcon = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+            using (SqlConnection sqlCon = new SqlConnection(strcon))
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(search) || c.Owner == search).ToList().ToPagedList(page ?? 1, 11));
+                using (SqlCommand cmd = new SqlCommand("Employeeslist", sqlCon))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    
+                    sqlCon.Open();
+                    List<string> usernames = new List<string>();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usernames.Add(reader["Username"].ToString());
+                        }
+                    }
+
+                    sqlCon.Close();
+
+                    // Assign the usernames to ViewBag
+                    ViewBag.Usernames = usernames;
+
+                }
 
             }
-            else if (search == "")
+
+            
+
+            List<CombinedViewModel> timeSheets = new List<CombinedViewModel>(); // Create a list to store time sheet data
+
+            using (SqlConnection sqlCon = new SqlConnection(strcon))
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                using (SqlCommand cmd = new SqlCommand("Alltimesheets", sqlCon))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
 
+                    // Add parameters
+                    cmd.Parameters.AddWithValue("@UserName", option);
+                    cmd.Parameters.AddWithValue("@StartDate", startDate);
+                    cmd.Parameters.AddWithValue("@EndDate", endDate);
 
+                    sqlCon.Open();
+
+                    // Execute the stored procedure and get the result
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // You can process the result set here or pass it to the view
+                        while (reader.Read())
+                        {
+                            CombinedViewModel combinedViewModel = new CombinedViewModel
+                            {
+                                WeekNumber = Convert.ToInt32(reader["Week_Number"]),
+                                MonthName = reader["Month_Name"].ToString(),
+                                User = reader["User"].ToString(),
+                                IndirectHours = Convert.ToInt32(reader["Indirect Hours"]),
+                                DirectHours = Convert.ToInt32(reader["Direct Hours"]),
+                                TotalHours = Convert.ToInt32(reader["Total Hours"]),
+                                Status = reader["Status"].ToString()
+                            };
+
+                            timeSheets.Add(combinedViewModel);
+                        }
+                    }
+
+                    sqlCon.Close();
+                }
             }
-            else
-            {
-                return View(db.timesheets.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
-            }
 
+            int pageSize = 11; // Number of items per page
+            int pageNumber = page ?? 1; // If no page is specified, default to page 1
+
+            IPagedList<CombinedViewModel> pagedTimeSheets = timeSheets.ToPagedList(pageNumber, pageSize);
+
+            return View(pagedTimeSheets);
         }
 
-        public ActionResult Details(int? id)
+
+
+
+        // Helper function to get the week from a date
+
+
+
+        private Direct_Activities_Context DA = new Direct_Activities_Context();
+        private Indirect_Activities_Context IA = new Indirect_Activities_Context();
+        public ActionResult Directtasks(int id, int? page,string user)
         {
-
-           
-
-
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Timesheet timesheet = db.timesheets.Find(id);
-            if (timesheet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timesheet);
+            var data =DA.direct_Activities.Where(c => c.User == user && c.WeekNo == id).ToList().ToPagedList(page ?? 1, 11).ToList();
+            ViewBag.user = user;
+            ViewBag.weeNo = id;
+            return PartialView("Directtasks", data);
         }
+        public ActionResult InDirecttasks(int id, int? page, string user)
+        {
+            var data = IA.indirect_Activities.Where(c => c.User == user && c.WeekNo == id).ToList().ToPagedList(page ?? 1, 11).ToList();
 
+            ViewBag.user = user;
+            ViewBag.weeNo = id;
+            return PartialView("InDirecttasks", data);
+        }
 
 
 

@@ -1,1 +1,409 @@
-﻿
+﻿@model PagedList.IPagedList<Ishop.Models.CombinedViewModel>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Approval";
+}
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+    .form-rounded3 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 14%;
+        border-color: white;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #192530; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-suitcase"></i>
+            All TImesheets
+        </h3>
+
+        <div style="text-align: right; color: white ">
+
+
+
+
+
+            @using (Html.BeginForm("Approval", "Timesheet", FormMethod.Get))
+            {
+                <button type="button" onclick="clearAndReload()" class="btn btn-sm btn-warning">
+                    <i class="fas fa-filter"></i> 
+                </button>
+                <script>
+                    function clearAndReload() {
+                        // Reset the dropdown selection
+                        document.getElementById("option").selectedIndex = 0;
+
+                        // Clear the datepicker values
+                        document.getElementById("datepicker").value = "";
+                        document.getElementById("datepicker2").value = "";
+                        document.getElementById("Approval").submit();
+                    }
+
+                </script>
+
+                <small> ||</small>
+
+                <a style="font-family: Calibri"> <i class="fa fa-user-circle text-white"></i>  Staff</a>
+                <select class="form-rounded2" name="option" id="option">
+                    @foreach (var userName in ViewBag.Usernames)
+                    {
+                        <option id="userName" , value="@userName">@userName</option>
+                    }
+                </select>
+
+                <!-- Date Inputs for StartDate and EndDate -->
+
+                @Html.TextBox("startDate", null, new { @class = "form-rounded2 datepicker", @placeholder = "Start Date", id = "datepicker", })
+
+
+                @Html.TextBox("endDate", null, new { @class = "form-rounded2 datepicker", @placeholder = "End Date", id = "datepicker2", })
+
+
+
+
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+
+            }
+        </div>
+
+
+
+    </div>
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+            <thead>
+                <tr style="color:white">
+
+                    <th style="background-color: #192530; font-size: medium; ">Week No </th>
+                    <th style="background-color: #192530; font-size: medium; "> Month</th>
+
+                    <th style="background-color: #192530; font-size: medium; ">Staff</th>
+                    <th style="background-color: #192530; font-size: medium; ">Direct Hrs</th>
+                    <th style="background-color: #192530; font-size: medium; ">InDirect Hrs</th>
+                    <th style="background-color: #192530; font-size: medium; ">Total Hrs</th>
+                    <th style="background-color: #192530; font-size: medium; ">Status</th>
+
+                    <th style="background-color: #192530; font-size: medium;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="background-color: white;"> <i class="fa fa-calendar-day text-primary"></i>  @item.WeekNumber</td>
+                        <td style="background-color: white;"> <i class="fa fa-bookmark text-primary"></i>  @item.MonthName</td>
+                        <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i>  @item.User</td>
+                        <td style="background-color: white;">
+                            <span class="badge badge-primary"><medium><i class="fa fa-clock text-white"></i></medium></span> <b>@item.DirectHours</b> <small>Hrs</small>
+                            <div class="dropdown-divider"></div>
+                            <a class="viewTasksLink" href="#" data-week-number="@item.WeekNumber" data-user="@item.User" data-toggle="modal" data-target="#exampleModalCenter_@item.WeekNumber">
+                                <i class="fa fa-clipboard-list text-primary"></i> <small><b>View Tasks</b></small>
+                            </a>
+                            <div class="modal fade" id="exampleModalCenter_@item.WeekNumber" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Direct Tasks</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="modalContent"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <style>
+                                /* Custom class for wider modal */
+                                .custom-modal-width {
+                                    max-width: 80%; /* Adjust the percentage as needed */
+                                }
+                            </style>
+
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1Z1U3ZlMnfybT8lPj9lOIq6u8eTNCtWlq/0=" crossorigin="anonymous"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha256-bNVT/99KoIu9P0Eu3gW+ioTZq+Nq+ENJZ5e9dz+qDEU=" crossorigin="anonymous"></script>
+
+                            <script>
+           $(document).ready(function () {
+    $(".viewTasksLink").on("click", function (e) {
+        e.preventDefault(); // Prevent the default link behavior
+
+        var weekNumber = $(this).data("week-number");
+        var user = $(this).data("user");
+        var modalId = $(this).data("target"); // Get the modal ID dynamically
+
+        // Make an AJAX request to your controller action
+        $.ajax({
+            url: "@Url.Action("Directtasks", "Timesheet")",
+            type: "GET",
+            data: { id: weekNumber, user: user },
+            success: function (result) {
+                console.log("Ajax request made");
+                $(modalId + " .modal-content #modalContent").html(result); // Update modal content
+            },
+            error: function () {
+                console.log("Error in Ajax request");
+                alert("Error occurred while fetching data");
+            }
+        });
+    });
+
+    // Close the modal when the close button is clicked
+    $(".close").on("click", function () {
+        $(".modal").modal("hide");
+    });
+
+    // Close the modal when the modal background is clicked
+    $(document).on("click", function (e) {
+        if ($(e.target).hasClass("modal")) {
+            $(".modal").modal("hide");
+        }
+    });
+});
+                            </script>
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.IndirectHours == 0)
+                            {<span class="badge badge-warning"><medium><i class="fa fa-clock text-white"></i></medium></span> <b> @item.IndirectHours</b> <small>Hrs</small> }
+                        else
+                        {<span class="badge badge-warning"><medium><i class="fa fa-clock text-white"></i></medium></span> <b> @item.IndirectHours</b> <small>Hrs</small>
+                        <div class="dropdown-divider"></div>
+                        <a class="viewTasksLinkk" href="#" data-week-number="@item.WeekNumber" data-user="@item.User" data-toggle="modal" data-target="#eexampleModalCenter_@item.WeekNumber">
+                            <i class="fa fa-clipboard-list text-primary"></i> <small><b>View Tasks</b></small>
+                        </a>
+                        <div class="modal fade" id="eexampleModalCenter_@item.WeekNumber" tabindex="-1" role="dialog" aria-labelledby="eexampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="eexampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Indirect  Tasks</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="modalContent"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <style>
+                            /* Custom class for wider modal */
+                            .custom-modal-width {
+                                max-width: 80%; /* Adjust the percentage as needed */
+                            }
+                        </style>
+
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1Z1U3ZlMnfybT8lPj9lOIq6u8eTNCtWlq/0=" crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha256-bNVT/99KoIu9P0Eu3gW+ioTZq+Nq+ENJZ5e9dz+qDEU=" crossorigin="anonymous"></script>
+
+                        <script>
+           $(document).ready(function () {
+    $(".viewTasksLinkk").on("click", function (e) {
+        e.preventDefault(); // Prevent the default link behavior
+
+        var weekNumber = $(this).data("week-number");
+        var user = $(this).data("user");
+        var modalId = $(this).data("target"); // Get the modal ID dynamically
+
+        // Make an AJAX request to your controller action
+        $.ajax({
+            url: "@Url.Action("InDirecttasks", "Timesheet")",
+            type: "GET",
+            data: { id: weekNumber, user: user },
+            success: function (result) {
+                console.log("Ajax request made");
+                $(modalId + " .modal-content #modalContent").html(result); // Update modal content
+            },
+            error: function () {
+                console.log("Error in Ajax request");
+                alert("Error occurred while fetching data");
+            }
+        });
+    });
+
+    // Close the modal when the close button is clicked
+    $(".close").on("click", function () {
+        $(".modal").modal("hide");
+    });
+
+    // Close the modal when the modal background is clicked
+    $(document).on("click", function (e) {
+        if ($(e.target).hasClass("modal")) {
+            $(".modal").modal("hide");
+        }
+    });
+});
+                        </script>
+                    }
+                        </td>
+
+                        <td style="background-color: white;"> <span class="badge badge-success"><medium><i class="fa fa-clock text-white"></i></medium></span> <b>@item.TotalHours</b> <small>Hrs</small></td>
+                        <td style="background-color: white;">
+                            @if (@item.Status == "Completed")
+                            {<b style="color:green"><i class="fa fa-check-circle"></i>  @item.Status </b>}
+                        else
+                        {<b style="color:orange"><i class="fa fa-spin fa-circle-notch"></i>  @item.Status </b>}
+                        </td>
+
+
+                        <td style="background-color:ghostwhite">
+
+                            <div class="btn-group dropdown">
+
+                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-hashtag"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Details", "Projects", new { id = item.WeekNumber })" class="dropdown-item">
+                                        <i class="fa fa-book-reader text-primary"></i> Project Info
+                                    </a>
+
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <!-- Modal to display the result -->
+
+        
+
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Approval", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+

@@ -183,7 +183,19 @@
                                 }
                             })
                         </div>
-                       
+                        <div class="form-group col-md-1">
+                            <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.WeekNo)</label>
+                            @Html.EditorFor(model => model.WeekNo, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = " WeekNo",
+                               @Readonly = true,
+                               @Value = ViewBag.Weekid
+                           }
+                       })
+                        </div>
                         <div class="form-group col-md-4">
                             <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
                             @Html.DropDownList("Name", ViewBag.InDirect as SelectList, "--Select Phase --", new { @class = "form-control ", })
@@ -212,7 +224,7 @@
                         </script>
                         <script type="text/javascript">
                             $(function () {
-                               
+
                                 $("#Indixrect").chosen();
                                 $("#Name").chosen();
 
@@ -221,7 +233,7 @@
 
 
 
-                    
+
                         <div class="form-group col-md-2">
                             <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Hours)</label>
                             @Html.EditorFor(model => model.Hours, new
@@ -234,8 +246,8 @@
                                 }
                             })
                         </div>
-                       
-                       
+
+
                     </div>
                     <script>
                                 // Add an event listener to the input field

@@ -11,7 +11,7 @@ namespace IShop.Core
     {
         public int Id { get; set; }
 
-       
+        public int WeekNo { get; set; }
         public int Hours { get; set; }
         public DateTime Day_Date { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -22,6 +22,9 @@ namespace IShop.Core
 
         [Display(Name = "Activity")]
         public string Name { get; set; }
+
+        [Display(Name = "Approved ?")]
+        public bool Approved { get; set; }
 
     }
 }

@@ -53,23 +53,14 @@ namespace Ishop
             var Project = P.projects.ToList();
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
+            DateTime currentDate = Id;
+            int currentWeekNumber = GetCurrentWeekNumber(currentDate); // Make sure to provide the correct date here
 
-            DateTime currentDate = DateTime.Now;
+            // Assign the week number directly
+            int WeekNo = currentWeekNumber;
 
-            // Calculate the day of the week the month starts
-            DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-            int daysPassed = (int)firstDayOfMonth.DayOfWeek;
-
-            // Adjust daysPassed if the first day of the month is not Sunday (0)
-            daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
-
-            // Calculate the week number based on the starting day of the month
-            int currentWeekNumber = GetCurrentWeekNumber(DateTime.Today);
-            int weekNumber = currentWeekNumber;
-
-            string weekInfo = $"{weekNumber:D2}{currentDate.Month:D2}{currentDate.Year}";
-            string joinedStringConcat = string.Concat(weekInfo);
-            int.TryParse(joinedStringConcat, out int WeekNo);
+            ViewBag.SelectedDate = currentDate;
+            ViewBag.Weekid = WeekNo;
 
             ViewBag.Weekid = WeekNo;
             return View();
@@ -85,7 +76,7 @@ namespace Ishop
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,User,Comments,Name")] Indirect_Activities indirect_Activities)
+        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,User,Comments,Name,WeekNo")] Indirect_Activities indirect_Activities)
         {
            
                 db.indirect_Activities.Add(indirect_Activities);

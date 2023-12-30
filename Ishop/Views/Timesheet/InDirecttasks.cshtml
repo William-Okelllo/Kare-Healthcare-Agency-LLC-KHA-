@@ -1,0 +1,46 @@
+﻿@model List<IShop.Core.Indirect_Activities>
+@{
+    ViewBag.Title = "InDirecttasks";
+}
+<style>
+</style>
+
+<table class="table table-bordered table-hover  curved-table text-nowrap">
+    <thead>
+        <tr>
+            <th>WeekNo</th>
+            <th>Staff</th>
+            <th>Activity Name</th>
+
+            <th>Hours</th>
+
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-widget="expandable-table" aria-expanded="false">
+                <td style="background-color: white;">@item.WeekNo</td>
+                <td style="background-color: white;"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User</td>
+                <td style="background-color: white;">@item.Name</td>
+                <td style="background-color: white;"> <span class="badge badge-primary"><medium><i class="fa fa-clock text-white"></i></medium></span> <b>@item.Hours</b> <small>Hrs</small></td>
+
+                <td style="background-color: white;">
+                    @if (@item.Approved == true)
+                    {<small style="color:green"><i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </small>}
+                    else
+                    {<small style="color:orange"><i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </small>}
+                </td>
+            </tr>
+
+
+
+        }
+    </tbody>
+</table>
+
+<div class="dropdown-divider"></div>
+<div style="text-align:center">
+    <a href="@Url.Action("Approvals", "Phase", new { id = ViewBag.weeNo,user=ViewBag.user })" class="btn btn btn-primary btn" onclick="return confirm('Are you sure you want to approve staff timesheet?')"><i class="fa fa-check-circle text-black"></i> Approve Week Timesheet</a>
+</div>

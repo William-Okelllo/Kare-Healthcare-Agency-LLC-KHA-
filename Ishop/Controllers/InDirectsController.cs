@@ -61,7 +61,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Name,User")] InDirect inDirect)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Name,User,Approved")] InDirect inDirect)
         {
             if (ModelState.IsValid)
             {
