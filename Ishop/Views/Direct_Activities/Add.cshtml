@@ -261,7 +261,7 @@
 
                                 });
                             </script>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2" style="display: none">
                                 <label><i class="fa fa-cash-register text-primary"></i> @Html.LabelFor(model => model.Charge)</label>
                                 @Html.EditorFor(model => model.Charge, new
                            {
@@ -310,49 +310,59 @@
                             <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Comments) </label>
                             <div class="form-row">
 
-
                                 @Html.TextAreaFor(model => model.Comments, 4, 70, htmlAttributes: new
-         {
-             style = "width: 70%; max-width:70%;",
-             @placeholder = "Additional information",
-             @autofocus = "",
-             @class = "form-control form-rounded2",
-             @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
-         })
+ {
+     id = "Comments", // Make sure the ID matches the one in getElementById
+     style = "width: 70%; max-width:70%;",
+     @placeholder = "Additional information",
+     @autofocus = "",
+     @class = "form-control form-rounded2",
+     @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+ })
                                 @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-                            </div>
-                            <script>
-                                document.getElementById("Comments").addEventListener("paste", function (event) {
-                                    // Prevent the default paste behavior
-                                    event.preventDefault();
 
-                                    // Get the pasted content as plain text
-                                    var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+                                <script>
+                                    document.getElementById("Comments").addEventListener("paste", function (event) {
+                                        // Prevent the default paste behavior
+                                        event.preventDefault();
 
-                                    // Insert the plain text into the textarea as HTML
-                                    document.execCommand("insertHTML", false, text);
-                                });
-                            </script>
+                                        // Get the pasted content as plain text
+                                        var text = (event.clipboardData || window.clipboardData).getData("text/plain");
 
+                                        // Sanitize the pasted content (you may use a library for this)
+                                        var sanitizedText = sanitizeFunction(text);
 
-
-                            <div class="dropdown-divider"></div>
-                            <input type="submit" name="action" value="Add Activity" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this Timesheet?')" />
-
-
-                            <script>
-                                $(function () {
-                                    $('#Create').click(function () {
-                                        if (confirm('Are you sure?')) {
-                                            window.location.href = $(this).data('url');
-                                        }
+                                        // Insert the sanitized plain text into the textarea as HTML
+                                        document.execCommand("insertHTML", false, sanitizedText);
                                     });
-                                });
-                            </script>
 
-                            <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+                                    function sanitizeFunction(input) {
+                                        // Implement your own sanitization logic or use a library
+                                        // to ensure that the pasted content is safe.
+                                        // Example: Implement a function to escape HTML entities.
+                                        return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    }
+                                </script>
 
-                        </div>
+                            </div>
+
+                                <div class="dropdown-divider"></div>
+                                <input type="submit" name="action" value="Add Activity" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this Timesheet?')" />
+
+
+                                <script>
+                                    $(function () {
+                                        $('#Create').click(function () {
+                                            if (confirm('Are you sure?')) {
+                                                window.location.href = $(this).data('url');
+                                            }
+                                        });
+                                    });
+                                </script>
+
+                                <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+
+                            </div>
                     </div>
                 
 

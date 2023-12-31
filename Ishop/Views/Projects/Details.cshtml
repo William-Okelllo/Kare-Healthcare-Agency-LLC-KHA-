@@ -299,8 +299,9 @@
                                         <thead style="font-family:Calibri">
                                             <tr style="color:white">
                                                 <th style="background-color: #0656A5; "><i class="fa fa-user-circle"></i>  AddedOn</th>
-                                                <th style="background-color: #0656A5; ">Team Member </th>
                                                 <th style="background-color: #0656A5; ">Project Name </th>
+                                                <th style="background-color: #0656A5; ">Team Member </th>
+                                                <th style="background-color: #0656A5; ">Allocated Hours </th>
                                                 <th style="background-color: #0656A5; "> Action</th>
                                             </tr>
                                         </thead>
@@ -310,8 +311,9 @@
                                             {
                                             <tr data-widget="expandable-table" aria-expanded="false">
                                                 <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.CreatedOn.ToString("dd-MMM-yyyy") </td>
-                                                <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Username</td>
                                                 <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Project_Name</td>
+                                                <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Username</td>
+                                                <td style="background-color:white"> <i class="fa fa-clock text-primary"></i> @item2.Hours <small><b>Hrs</b></small></td>
                                                 <td style="background-color:ghostwhite">
 
                                                     <div class="btn-group dropdown">
@@ -338,7 +340,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                </tr>
+                                            </tr>
                                                 }
 </tbody>
 

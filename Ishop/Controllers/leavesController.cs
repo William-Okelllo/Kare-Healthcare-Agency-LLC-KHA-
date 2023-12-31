@@ -388,26 +388,7 @@ namespace Ishop.Controllers
         }
 
 
-        public ActionResult GetDatesBetween()
-        {
-            DateTime startDate = new DateTime(2023, 12, 25, 0, 0, 0, 0);
-            DateTime endDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
-
-            List<string> datesInRange = new List<string>();
-
-            DateTime currentDate = startDate;
-
-            while (currentDate <= endDate)
-            {
-                datesInRange.Add(currentDate.ToString("yyyy-MM-dd"));
-                currentDate = currentDate.AddDays(1);
-            }
-
-            return View(datesInRange);
-
-
-        
-        }
+       
 
 
         public void InsertDatesIntoTable(DateTime startDate, DateTime endDate,int Type,string Employee)
@@ -423,14 +404,24 @@ namespace Ishop.Controllers
 
             using (var Indirect_Activities_Context = new Indirect_Activities_Context())
             {
+
                 foreach (var date in datesInRange)
                 {
+                    DateTime currentDate = date;
+                    int currentWeekNumber = GetCurrentWeekNumber(currentDate);
+                    int WeekNo = currentWeekNumber;
+                    ViewBag.SelectedDate = currentDate;
+                    var Weekid = WeekNo;
+
                     Indirect_Activities dateEntity = new Indirect_Activities
                     {
+                       
+
 
                         Id = random.Next(),
                         Hours = HoursOnleave,
                         CreatedOn = date,
+                        WeekNo=Weekid,
                         Day_Date = date,
                         User= Employee,
                         Comments="SYSTEM ASSIGNED",
@@ -444,8 +435,13 @@ namespace Ishop.Controllers
                 
             }
         }
-
-        private List<DateTime> GetDatesInRange(DateTime startDate, DateTime endDate)
+    private int GetCurrentWeekNumber(DateTime date)
+    {
+        var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
+        int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        return week;
+    }
+    private List<DateTime> GetDatesInRange(DateTime startDate, DateTime endDate)
         {
             List<DateTime> datesInRange = new List<DateTime>();
 

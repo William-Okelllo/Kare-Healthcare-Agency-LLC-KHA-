@@ -49,8 +49,8 @@ namespace Ishop.Controllers
             var InDirect = ID.InDirects.ToList();
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
 
-            Project_Context P = new Project_Context();
-            var Project = P.projects.ToList();
+            Team_Context P = new Team_Context();
+            var Project = P.teams.ToList();
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
 

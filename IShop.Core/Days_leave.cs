@@ -20,10 +20,12 @@ namespace IShop.Core
         [Required]
         public string Type { get; set; }
 
-        [Display(Name = "From Date")]
+        [Display(Name = "Commence on")]
         public DateTime From_Date { get; set; }
 
-        [Display(Name = "To Date")]
+        [Display(Name = "Date of Return")]
+        public DateTime Return_Date { get; set; }
+        [Display(Name = "End Date")]
         public DateTime To_Date { get; set; }
 
         public Decimal Days { get; set; }

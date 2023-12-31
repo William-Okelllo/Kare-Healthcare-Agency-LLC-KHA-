@@ -6,42 +6,47 @@
 </style>
 
 <table class="table table-bordered table-hover ">
-    <thead>
-        <tr>
-           
-           
-            <th>Project Name</th>
-            
-            <th>Hours</th>
-            <th>Estimate Charge</th>
-            <th>Comments</th>
+    <thead style="border-radius: 14px">
+        <tr style="border-radius: 14px">
+
+            <th style="background-color: #192530;color:white"> <i class="fa fa-calendar-check text-white"></i> Week Day</th>
+            <th> <i class="fa fa-suitcase text-primary"></i>  Project Name</th>
+
+
+            <th> <i class="fa fa-comment text-primary"></i> Comments</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr data-widget="expandable-table" aria-expanded="false">
-              
-                
-                <td style="background-color:white;"width="30%">
+
+                <td style="background-color:white;" width="15%">
+                    <span class="badge badge-primary"><medium><i class="fa fa-calendar-check text-white"></i> </medium></span>  <b>@item.Day_Date.ToString("dd-ddd-MMM-yyyy")</b>
+                    <div class="dropdown-divider"></div>
+                     <h2 style="color:green"> <b> @item.Hours <small>Hrs</small></b>  </h2>
+                </td>
+                <td style="background-color:white;" width="25%">
                     @item.Project_Name
                     <div class="dropdown-divider"></div>
                     <span class="badge badge-primary"><medium><i class="fa fa-folder-open text-white"></i> PHASE</medium></span>  @item.Name
+                    <div class="dropdown-divider"></div>
+
+                    <span class="badge badge-success"><medium><i class="fa fa-coins text-white"></i> Estimate Charge </medium></span> <b> @item.Charge.ToString("#,##0.00")
                 </td>
-               
-                <td style="background-color: white;"width="10%"> <span class="badge badge-primary"><medium><i class="fa fa-clock text-white"></i></medium></span> <b>@item.Hours</b> <small>Hrs</small></td>
-                <td style="background-color: white;"width="10%"><span class="badge badge-warning"><medium><i class="fa fa-coins text-white"></i></medium></span> <b>@item.Charge.ToString("#,##0.00") </b> </td>
-               
-                <td style="background-color: white;" width="50%" >
+
+
+
+                <td style="background-color: white;" width="60%">
                     <p>@item.Comments</p>
 
-                    <div class="divider"></div>
+                    <div class="dropdown-divider"></div>
                     @if (@item.Approved == true)
-                    {    <p style="color:green;text-align:right"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |  <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo  |     <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
-                    else
-                    {<p style="color: orange; text-align: right"> <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |<span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo  |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
+                    {<p style="color:green;text-align:right"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |  <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |     <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
+                else
+                {<p style="color: orange; text-align: right"> <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |   <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
                 </td>
-               
+
             </tr>
 
 

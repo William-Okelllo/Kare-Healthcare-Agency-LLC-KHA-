@@ -22,7 +22,7 @@
         {
             <tr data-widget="expandable-table" aria-expanded="false">
                 
-                <td style="background-color: white;"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User</td>
+                <td style="background-color: white;"><span class="badge badge-primary"><medium><i class="fa fa-day text-white"></i></medium></span>  @item.Day_Date.ToString("dd-ddd-MMM-yyyy")</td>
                 <td style="background-color: white;">@item.Name</td>
                 <td style="background-color: white;"> <span class="badge badge-primary"><medium><i class="fa fa-clock text-white"></i></medium></span> <b>@item.Hours</b> <small>Hrs</small></td>
                 <td style="background-color: white;" colspan="6">
@@ -30,9 +30,9 @@
 
                     <div class="divider"></div>
                     @if (@item.Approved == true)
-                    {<p style="color:green;text-align:right">|<span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo  |   <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
+                    {<p style="color:green;text-align:right"> <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User   |<span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo  |   <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
                     else
-                    {<p style="color: orange; text-align: right"> |<span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
+                    {<p style="color: orange; text-align: right"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User |<span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i>WeekNo</medium></span>  @item.WeekNo |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
                 </td>
                
             </tr>

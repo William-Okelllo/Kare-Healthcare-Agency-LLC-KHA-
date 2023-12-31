@@ -45,7 +45,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white;  ">
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #192530; color: white; ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-bookmark"></i>
             Staff's leaves Requests
@@ -57,7 +57,7 @@
 
                 <a style="font-family: Calibri"> Staff Name</a>
                 @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Staff Name" })
-                <button type="submit" value="search" class="btn btn-sm btn-secondary">
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
 
@@ -100,13 +100,13 @@
             <thead>
                 <tr style="color:white">
 
-                    <th style="background-color: #0656A5; font-size: medium; ">AddedOn </th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Staff Member</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Department</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Designation</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">leave Status</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Days</th>
-                    <th style="background-color: #0656A5; font-size: medium;">Action</th>
+                    <th style="background-color: #192530; font-size: medium; ">AddedOn </th>
+                    <th style="background-color: #192530; font-size: medium; ">Staff Member</th>
+                    <th style="background-color: #192530; font-size: medium; ">Department</th>
+                    <th style="background-color: #192530; font-size: medium; ">Designation</th>
+                    <th style="background-color: #192530; font-size: medium; ">leave Status</th>
+                    <th style="background-color: #192530; font-size: medium; ">Days</th>
+                    <th style="background-color: #192530; font-size: medium;">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -128,7 +128,7 @@
                             else if (item.Status == 2)
                             { <h6 style="color:green"> <i class="fa  fa-check-circle text-success"></i> <b>APPROVED</b></h6>}
                         </td>
-                        <td style="background-color: white;">  <h5><b>@item.Days</b> Days </h5>  </td>
+                        <td style="background-color: white;">  <h5><b>@item.Days</b> <small>Days</small> </h5>  </td>
 
 
                         <td style="background-color:ghostwhite">

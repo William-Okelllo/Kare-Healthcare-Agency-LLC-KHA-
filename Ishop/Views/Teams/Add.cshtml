@@ -153,7 +153,10 @@
 
                             </div>
 
-                            <div class="form-group col-md-5">
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
                                 <label><i class="fa fa-users text-primary"></i> @Html.LabelFor(model => model.Username) </label>
                                 @Html.DropDownList("Username", ViewBag.Employee as SelectList, "--Select Team members --", new { @class = "form-control  form-control-sm", @Required = true })
                             </div>
@@ -166,18 +169,36 @@
                             </script>
 
 
-                            <div id="errorMessage" style="display:none;color:red">
-                                <a href="#" style="color:red">
-                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>  Team member already in assigned on project
-                                </a>
+
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Hours)</label>
+                                @Html.EditorFor(model => model.Hours, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Allocated Hrs",
+
+                                   @Required = true,
+
+
+                               }
+                           })
+
                             </div>
+                        </div>
+                        <div id="errorMessage" style="display:none;color:red">
+                            <a href="#" style="color:red">
+                                <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>  Team member already in assigned on project
+                            </a>
+                        </div>
 
 
 
 
-                            <script>
+                        <script>
 $(document).ready(function () {
     $("#Username").change(function () {
         var Username = $(this).val();
@@ -197,13 +218,13 @@ $(document).ready(function () {
         });
     });
 });
-                            </script>
-                        </div>
-                            <div class="dropdown-divider"></div>
-                            <input type="submit" value="Submit" class="btn btn-warning" />
-                            <small>||</small>
-                            <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
-</form>
+                        </script>
+
+                        <div class="dropdown-divider"></div>
+                        <input type="submit" value="Submit" class="btn btn-warning" />
+                        <small>||</small>
+                        <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+                    </form>
                     }
                 </div>
             </div>

@@ -82,16 +82,16 @@
                 </div>
 
             </div>
-            <div class="col-xl-2"></div>
-            <div class="col-xl-6">
+            <div class="col-xl-1"></div>
+            <div class="col-xl-7">
 
 
-                <div class="row">
-                    <div class="col-md-5 col-sm-4 col-9">
-                        <div class="info-box" style="border-radius: 14px; background-color: white ">
-                            <span><i class="fa fa-user-clock text-navy"></i></span>
+                <div class="row justify-content-end">
+                    <div class="col-md-4 col-sm-4 col-9">
+                        <div class="info-box" style="border-radius: 14px; background-color:#080348 ">
+                            <span><i class="fa fa-user-clock text-white"></i></span>
 
-                            <div class="info-box-content" style="color: navy">
+                            <div class="info-box-content" style="color: white">
                                 <span class="info-box-text">Today InDirect Hours</span>
                                 <span class="info-box-number">11 <small><b>Hours</b></small></span>
                             </div>
@@ -100,12 +100,24 @@
                         <!-- /.info-box -->
                     </div>
 
-                    <div class="col-md-5 col-sm-4 col-9">
-                        <div class="info-box" style="border-radius: 14px; background-color: white ">
-                            <span><i class="fa fa-user-clock text-navy"></i></span>
+                    <div class="col-md-4 col-sm-4 col-9">
+                        <div class="info-box" style="border-radius: 14px; background-color: #03421a ">
+                            <span><i class="fa fa-user-clock text-white"></i></span>
 
-                            <div class="info-box-content" style="color: navy">
+                            <div class="info-box-content" style="color: white">
                                 <span class="info-box-text">Today Direct Hours</span>
+                                <span class="info-box-number">11 <small><b>Hours</b></small></span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-9">
+                        <div class="info-box" style="border-radius: 14px; background-color: #423404 ">
+                            <span><i class="fa fa-user-clock text-white"></i></span>
+
+                            <div class="info-box-content" style="color: white">
+                                <span class="info-box-text">Total  Hours</span>
                                 <span class="info-box-number">11 <small><b>Hours</b></small></span>
                             </div>
                             <!-- /.info-box-content -->
@@ -114,25 +126,57 @@
                     </div>
                 </div>
 
-                <div class="small-box bg-navy" style="border-radius: 15px">
-                    <div class="inner">
+                <div class="container">
+                    <div class="row justify-content-end">
+                        <div class="col-lg-8 col-11">
+                            <!-- small card -->
+                            <div class="small-box bg-gradient-navy" style="border-radius: 15px">
+                                <div class="inner">
 
-
-                        <h5> <b><i class="fa  fa-bell"></i> Notifications/Updates</b></h5>
-                        <h5><b><span class="badge badge-dark">  12 </span></b> <small> Houses vacant</small></h5>
-                        <h5><b><span class="badge badge-dark"> 11</span></b> <small> Houses Occupied</small></h5>
+                                    <h4> <i class="fa fa-umbrella-beach"></i><b> leave Request</b></h4>
+                                    <h6>View staff members on leave ,requested leaves </h6>
+                                    <small><i class="fa fa-spin fa-circle-notch"></i> Click view  to view the leave module</small>
+                                </div>
+                                <div class="icon"> <i class="fa fa-umbrella-beach"></i></div>
+                                <a href="@Url.Action("All", "Leaves")" class="small-box-footer" style="background-color: black; color: white;border-radius:10px;">
+                                    <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
+                                </a>
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="icon">
-                        <i class="fa fa-home"></i>
-                    </div>
-
                 </div>
-            </div>
 
             </div>
 
             <div class="dropdown-divider"></div>
+
+
+
+            <div class="col-xl-5">
+                <div class="col-lg-11 col-11">
+                    <!-- small card -->
+                    <div class="small-box bg-warning" style="border-radius: 15px">
+                        <div class="inner">
+
+
+                            <h4> <i class="fa fa-chart-pie"></i><b> System Reports</b></h4>
+                            <h6>Report analysis estimates,invoices data</h6>
+                            <small><i class="fa fa-spin fa-circle-notch"></i> Click view  to view the reports module</small>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-chart-bar"></i>
+                        </div>
+                        <a href="@Url.Action("Index", "Reports")" class="small-box-footer" style="background-color: black; color: white;border-radius:10px;">
+                            <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+            
 
 
         </div>

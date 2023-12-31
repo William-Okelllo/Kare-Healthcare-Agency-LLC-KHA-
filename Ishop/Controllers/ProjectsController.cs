@@ -113,8 +113,8 @@ namespace Ishop.Controllers
 
             var Projectinfo = db.projects.Where(p => p.Id == id).FirstOrDefault();
 
-            Activities_Context AC = new Activities_Context();
-            var Activities = AC.activities.Where(c => c.Project_Name == Projectinfo.Project_Name).Select(d => d.Charge).DefaultIfEmpty(0).Sum();
+            Direct_Activities_Context AC = new Direct_Activities_Context();
+            var Activities = AC.direct_Activities.Where(c => c.Project_Name == Projectinfo.Project_Name && c.Approved ==true).Select(d => d.Charge).DefaultIfEmpty(0).Sum();
             ViewBag.Performnce = Activities;
 
 

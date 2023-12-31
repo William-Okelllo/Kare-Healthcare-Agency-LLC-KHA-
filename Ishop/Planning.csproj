@@ -387,7 +387,6 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
@@ -6352,6 +6351,7 @@
     <Content Include="Images\CX.jpg" />
     <Content Include="Images\f.svg" />
     <Content Include="Images\homee.png" />
+    <Content Include="Images\mme.png" />
     <Content Include="Images\P.png" />
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\uu.ico" />
@@ -7919,11 +7919,6 @@
     <Content Include="Views\leaves_Types\Details.cshtml" />
     <Content Include="Views\leaves_Types\Edit.cshtml" />
     <Content Include="Views\leaves_Types\Index.cshtml" />
-    <Content Include="Views\Activities\Add.cshtml" />
-    <Content Include="Views\Activities\Delete.cshtml" />
-    <Content Include="Views\Activities\Details.cshtml" />
-    <Content Include="Views\Activities\Edit.cshtml" />
-    <Content Include="Views\Activities\Index.cshtml" />
     <Content Include="Views\Phase\Create.cshtml" />
     <Content Include="Views\Phase\Delete.cshtml" />
     <Content Include="Views\Phase\Details.cshtml" />

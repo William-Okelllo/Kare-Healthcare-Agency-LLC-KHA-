@@ -39,7 +39,7 @@ namespace IShop.Core
         [Display(Name = "HOD Email")]
         public string HR_Email { get; set; }
 
-
+        [Display(Name = "Employee Email")]
         public string Emp_Mail { get; set; }
 
 

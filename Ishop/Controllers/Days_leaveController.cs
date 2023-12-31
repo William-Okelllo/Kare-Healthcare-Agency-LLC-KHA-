@@ -64,7 +64,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Leave_Id,Approved,Type,From_Date,To_Date,Days,Time")] Days_leave days_leave)
+        public ActionResult Create([Bind(Include = "Id,Leave_Id,Approved,Type,From_Date,To_Date,Days,Time,Return_Date")] Days_leave days_leave)
         {
             if (ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Leave_Id,Approved,Type,Leave_Day,Time")] Days_leave days_leave)
+        public ActionResult Add([Bind(Include = "Id,Leave_Id,Approved,Type,Leave_Day,Time,Return_Date")] Days_leave days_leave)
         {
             if (ModelState.IsValid)
             {

@@ -78,7 +78,14 @@
                 calculateDays();
             }
         });
-
+        $(function () {
+            $("#datepicker3").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function () {
+                    calculateDays();
+                }
+            });
 </script>
 
 
@@ -156,9 +163,6 @@
                                 });
                             </script>
 
-                        </div>
-                        <div class="form-row">
-
                             <div class="form-group col-md-3">
                                 <label><i class="fa fa-spinner text-orange"></i> @Html.LabelFor(model => model.Time) </label>
                                 @{
@@ -178,6 +182,10 @@
                             </div>
                             <!-- Include jQuery -->
                             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        </div>
+                        <div class="form-row">
+
+
 
                             <div class="form-group col-md-3">
                                 <label><i class="fa fa-calendar-day text-primary"></i> @Html.LabelFor(model => model.From_Date)</label>
@@ -205,6 +213,19 @@
                                     }
                                 })
                             </div>
+                            <div class="form-group col-md-3">
+                                <label><i class="fa fa-calendar-day text-primary"></i> @Html.LabelFor(model => model.Return_Date)</label>
+                                @Html.EditorFor(model => model.Return_Date, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm datepicker",
+                                        @placeholder = "To Date",
+                                        id = "datepicker3",
+                                        @required = "required"
+                                    }
+                                })
+                            </div>
                             <div class="form-group col-md-2">
                                 <label><i class="fa fa-bookmark text-primary"></i> @Html.LabelFor(model => model.Days)</label>
                                 @Html.EditorFor(model => model.Days, new
@@ -218,7 +239,6 @@
                                }
                            })
                             </div>
-
                             <script>
                                 $(document).ready(function () {
                                     // Attach datepicker to date fields
@@ -243,8 +263,7 @@
                                         var timeDropdownValue = $("#Time").val();
 
                                         if (fromDate && toDate) {
-                                            var timeDiff = toDate - fromDate;
-                                            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                                            var daysDiff = calculateWeekdays(fromDate, toDate);
 
                                             // Adjust the days based on the selected value in the Time dropdown
                                             if (timeDropdownValue === "2") { // "Half Day leave"
@@ -262,10 +281,27 @@
                                         }
                                     }
 
+                                    // Calculate weekdays function (excluding weekends)
+                                    function calculateWeekdays(fromDate, toDate) {
+                                        var daysDiff = 0;
+                                        var currentDate = new Date(fromDate);
+
+                                        while (currentDate <= toDate) {
+                                            var dayOfWeek = currentDate.getDay();
+                                            if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Exclude Sunday (0) and Saturday (6)
+                                                daysDiff++;
+                                            }
+                                            currentDate.setDate(currentDate.getDate() + 1);
+                                        }
+
+                                        return daysDiff;
+                                    }
+
                                     // Trigger calculateDays on the initial page load
                                     calculateDays();
                                 });
                             </script>
+
 
 
 

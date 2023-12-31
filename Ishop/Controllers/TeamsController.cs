@@ -56,7 +56,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id")] Team team)
+        public ActionResult Add([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id,Hours")] Team team)
         {
             if (ModelState.IsValid)
             {
