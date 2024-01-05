@@ -50,9 +50,11 @@ namespace Ishop
                             A result = new A
                             {
                                 WeekdayName = reader["WeekdayName"].ToString(),
+                                DateValue = ((DateTime)reader["DateValue"]).Date,
                                 Direct_Hours = Convert.ToInt32(reader["Direct Hours"]),
                                 InDirect_Hours = Convert.ToInt32(reader["InDirect Hours"]),
-                                Total_Hours = Convert.ToInt32(reader["Total Hours"])
+                                Total_Hours = Convert.ToInt32(reader["Total Hours"]),
+                                WeekNumber = Convert.ToInt32(reader["WeekNumber"]),
                             };
 
                             results.Add(result);
@@ -190,6 +192,10 @@ namespace Ishop
             var data =DA.direct_Activities.Where(c => c.User == user && c.WeekNo == id).ToList().ToPagedList(page ?? 1, 11).ToList();
             ViewBag.user = user;
             ViewBag.weeNo = id;
+            var TotalTime = DA.direct_Activities.Where(c => c.User == user && c.WeekNo == id).Select(c=>c.Hours).DefaultIfEmpty(0).Sum(); ;
+            ViewBag.TotalTime = TotalTime;
+            var TotalCharge = DA.direct_Activities.Where(c => c.User == user && c.WeekNo == id).Select(c => c.Charge).DefaultIfEmpty(0).Sum(); ;
+            ViewBag.TotalCharge=TotalCharge;
             return PartialView("Directtasks", data);
         }
         public ActionResult InDirecttasks(int id, int? page, string user)
@@ -204,21 +210,62 @@ namespace Ishop
 
 
 
-        
 
 
 
 
 
-       
 
 
-        public  void  ApproveTimesheet(int Id,string user)
+
+        private Userstable ddb = new Userstable();
+        public ActionResult ApproveTimesheet(int Id,string user)
         {
            var DirectActivitiestasks = DA.direct_Activities.ToList();
            var IndirectActivitiestasks =IA.indirect_Activities.ToList();
             
+
+            // Assuming you have a model with a property named "Id" and "User" in both direct and indirect activities
+            foreach (var task in DirectActivitiestasks.Where(t => t.WeekNo == Id && t.User == user))
+            {
+                // Update the status of the direct activity
+                task.Approved = true;
+                DA.SaveChanges();
+            }
+
+            foreach (var task in IndirectActivitiestasks.Where(t => t.WeekNo == Id && t.User == user))
+            {
+                // Update the status of the indirect activity
+                task.Approved = true;
+                IA.SaveChanges();
+            }
+
+            // Save changes to the database
+            int currentYear = DateTime.Now.Year;
+            int weekNumber = Id;
+            DateTime jan1 = new DateTime(currentYear, 1, 1);
+            DateTime specifiedWeekStart = jan1.AddDays((weekNumber - 1) * 7 - (int)jan1.DayOfWeek + (int)DayOfWeek.Monday);
+            string monthName = specifiedWeekStart.ToString("MMMM", CultureInfo.InvariantCulture);
+            string daytime;
+            if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
+            { daytime = "Good Morning"; }
+            else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+            { daytime = "Good Afternoon"; }
+            else
+            { daytime = "Good Evenning"; }
+            string Subject = "Timesheet Approved Successfully Week No " + Id;
+            string message = daytime + " ," + user
+            + "\n" + "Your timesheet for Week Number " + Id +" of month " + monthName + " has been Approved successfully  "
+            + "\n" + "thank you "
+            + "\n" + "Regards , HR-Team ";
+            var usser = ddb.AspNetUsers.Where(t => t.UserName == user).FirstOrDefault();
+            PushEmail(usser.Email, Subject, message, DateTime.Now);
+            PushSms(usser.PhoneNumber, message, DateTime.Now);
+            TempData["msg"] = "Timesheet apporved successfully - WeekNo" + Id  + "-Staff  "+ user;
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
+    
 
 
 

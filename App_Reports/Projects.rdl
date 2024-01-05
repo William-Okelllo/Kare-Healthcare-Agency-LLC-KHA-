@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.7.34018.315</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2023-11-22T06:12:32.8508222Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-01-04T20:02:34.3102536Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -21,31 +21,6 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ProjectAdditional">
-      <Query>
-        <DataSourceName>Additional</DataSourceName>
-        <QueryParameters>
-          <QueryParameter Name="@Category">
-            <Value>=Parameters!Category.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Status">
-            <Value>=Parameters!Status.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>Sp_Projects_adds</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="Total_Budget">
-          <DataField>Total Budget</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Projects">
-          <DataField>Projects</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
     <DataSet Name="Categories">
       <Query>
         <DataSourceName>Additional</DataSourceName>
@@ -80,51 +55,133 @@ ORDER BY SortOrder, Status;
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="Data">
+    <DataSet Name="sp_Projectlist">
       <Query>
         <DataSourceName>Additional</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Category">
-            <Value>=Parameters!Category.Value</Value>
+          <QueryParameter Name="@TimeFilter">
+            <Value>=Parameters!TimeFilter.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@Status">
             <Value>=Parameters!Status.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@Category">
+            <Value>=Parameters!Category.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Project">
+            <Value>=Parameters!Project.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
-        <CommandText>Sp_Projects</CommandText>
+        <CommandText>sp_Projectlist</CommandText>
       </Query>
       <Fields>
-        <Field Name="CreatedOn">
-          <DataField>CreatedOn</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
         <Field Name="Project_Name">
           <DataField>Project_Name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="location">
-          <DataField>location</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Budget">
-          <DataField>Budget</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Category">
-          <DataField>Category</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Fee_Budget">
-          <DataField>Fee_Budget</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Client">
-          <DataField>Client</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="Id">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Status">
           <DataField>Status</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FEE_PLANNED">
+          <DataField>FEE PLANNED</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="FEE_LOGGED">
+          <DataField>FEE LOGGED</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PROFIT">
+          <DataField>PROFIT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ProjectAdditional">
+      <Query>
+        <DataSourceName>Additional</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@TimeFilter">
+            <Value>=Parameters!TimeFilter.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Status">
+            <Value>=Parameters!Status.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Category">
+            <Value>=Parameters!Category.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Project">
+            <Value>=Parameters!Project.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>sp_rpt_projectview</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="PROJECT">
+          <DataField>PROJECT</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FEE_PLANNED">
+          <DataField>FEE PLANNED</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="FEE_LOGGED">
+          <DataField>FEE LOGGED</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PROFIT">
+          <DataField>PROFIT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Timefilter">
+      <Query>
+        <DataSourceName>Additional</DataSourceName>
+        <CommandText>select 'All' as TimeFilterType
+union
+SELECT
+    TimeFilterType
+FROM
+    (VALUES ('ThisWeek'), ('LastWeek'), ('ThisMonth'), ('LastMonth'), ('1stQuarter'), ('2ndQuarter'), ('3rdQuarter'), ('4thQuarter')) AS TimeFilters(TimeFilterType);</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="TimeFilterType">
+          <DataField>TimeFilterType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Projectlist">
+      <Query>
+        <DataSourceName>Additional</DataSourceName>
+        <CommandText>select 'All' as Project
+union
+SELECT
+    Project_Name [Project]
+FROM Projects</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Project">
+          <DataField>Project</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -134,226 +191,148 @@ ORDER BY SortOrder, Status;
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox1">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>PROJECT REPORT MONITOR</Value>
-                    <Style>
-                      <FontFamily>CALibri</FontFamily>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.06944in</Top>
+          <Line Name="Line1">
+            <Top>5.34028in</Top>
             <Left>0.12028in</Left>
-            <Height>0.25in</Height>
-            <Width>2.79167in</Width>
+            <Height>0in</Height>
+            <Width>10.23612in</Width>
             <Style>
               <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Tablix Name="Tablix1">
-            <TablixBody>
-              <TablixColumns>
-                <TablixColumn>
-                  <Width>2.00694in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.97917in</Width>
-                </TablixColumn>
-              </TablixColumns>
-              <TablixRows>
-                <TablixRow>
-                  <Height>0.39583in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Projects">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Projects.Value</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>20pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>       Projects</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <Color>DarkGreen</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Projects</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>White</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>White</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Total_Budget">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value xml:space="preserve"> </Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <Color>DarkGreen</Color>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>=Fields!Total_Budget.Value</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>20pt</FontSize>
-                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value xml:space="preserve"> </Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>20pt</FontSize>
-                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>          Total Budgets</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <Color>DarkGreen</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Total_Budget</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>White</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>White</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-              </TablixRows>
-            </TablixBody>
-            <TablixColumnHierarchy>
-              <TablixMembers>
-                <TablixMember />
-                <TablixMember />
-              </TablixMembers>
-            </TablixColumnHierarchy>
-            <TablixRowHierarchy>
-              <TablixMembers>
-                <TablixMember>
-                  <Group Name="Details" />
-                </TablixMember>
-              </TablixMembers>
-            </TablixRowHierarchy>
-            <DataSetName>ProjectAdditional</DataSetName>
-            <Top>0.72917in</Top>
-            <Left>0.12028in</Left>
-            <Height>0.39583in</Height>
-            <Width>4.98611in</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
-          </Tablix>
+          </Line>
           <Tablix Name="Tablix2">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.14583in</Width>
+                  <Width>2.84723in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.09028in</Width>
+                  <Width>2.00694in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.51389in</Width>
+                  <Width>1.75471in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.05556in</Width>
+                  <Width>1.72917in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.54861in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.61806in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>1.89807in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.32639in</Height>
+                  <Height>0.30556in</Height>
                   <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>PROJECT</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#100f40</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>STATUS</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#100f40</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>FEE PLANNED</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#100f40</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox9">
@@ -363,7 +342,7 @@ ORDER BY SortOrder, Status;
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Added On</Value>
+                                  <Value>FEE LOGGED</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
@@ -381,7 +360,7 @@ ORDER BY SortOrder, Status;
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>#283537</BackgroundColor>
+                            <BackgroundColor>#100f40</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -399,7 +378,7 @@ ORDER BY SortOrder, Status;
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Project Name</Value>
+                                  <Value>PROFIT</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
@@ -417,187 +396,7 @@ ORDER BY SortOrder, Status;
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>#283537</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox13">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Category</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox13</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#283537</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox17">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Status</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox17</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#283537</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox19">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Construction Budget</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox19</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#283537</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox26">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Fee Budget</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox26</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#283537</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox30">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Client</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox30</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#283537</BackgroundColor>
+                            <BackgroundColor>#100f40</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -609,41 +408,8 @@ ORDER BY SortOrder, Status;
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.31944in</Height>
+                  <Height>0.25in</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="CreatedOn">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!CreatedOn.Value</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <Format>d MMM yyyy</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>CreatedOn</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Project_Name">
@@ -656,8 +422,10 @@ ORDER BY SortOrder, Status;
                                   <Value>=Fields!Project_Name.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>DarkBlue</Color>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                    <Color>MidnightBlue</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -671,46 +439,14 @@ ORDER BY SortOrder, Status;
                                 <Drillthrough>
                                   <ReportName>Project_Child</ReportName>
                                   <Parameters>
-                                    <Parameter Name="ProjectName">
-                                      <Value>=Fields!Project_Name.Value</Value>
+                                    <Parameter Name="Projectid">
+                                      <Value>=Fields!Id.Value</Value>
                                     </Parameter>
                                   </Parameters>
                                 </Drillthrough>
                               </Action>
                             </Actions>
                           </ActionInfo>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Category">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Category.Value</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Category</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -736,6 +472,12 @@ ORDER BY SortOrder, Status;
                                   <Value>=Fields!Status.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>=SWITCH(Fields!Status.Value= "Active","Green",
+Fields!Status.Value ="Proposed" , "BLUE",
+Fields!Status.Value ="Opposed", "Blue",
+Fields!Status.Value ="Cancelled", "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -758,26 +500,25 @@ ORDER BY SortOrder, Status;
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Budget">
+                        <Textbox Name="FEE_PLANNED">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Budget.Value</Value>
+                                  <Value>=Fields!FEE_PLANNED.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
                                     <Format>''#,0.00;('Ksh'#,0.00)</Format>
-                                    <Color>DarkGreen</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Budget</rd:DefaultName>
+                          <rd:DefaultName>FEE_PLANNED</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -793,26 +534,25 @@ ORDER BY SortOrder, Status;
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Budget3">
+                        <Textbox Name="FEE_PLANNED2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Fee_Budget.Value</Value>
+                                  <Value>=Fields!FEE_LOGGED.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
                                     <Format>''#,0.00;('Ksh'#,0.00)</Format>
-                                    <Color>#283537</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Budget</rd:DefaultName>
+                          <rd:DefaultName>FEE_PLANNED</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -828,23 +568,25 @@ ORDER BY SortOrder, Status;
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Client">
+                        <Textbox Name="FEE_PLANNED3">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Client.Value</Value>
+                                  <Value>=Fields!PROFIT.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Client</rd:DefaultName>
+                          <rd:DefaultName>FEE_PLANNED</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -865,39 +607,6 @@ ORDER BY SortOrder, Status;
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox21">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox21</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="Textbox22">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -905,9 +614,10 @@ ORDER BY SortOrder, Status;
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Total</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -920,7 +630,6 @@ ORDER BY SortOrder, Status;
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -941,6 +650,7 @@ ORDER BY SortOrder, Status;
                                   <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -953,7 +663,6 @@ ORDER BY SortOrder, Status;
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -971,10 +680,11 @@ ORDER BY SortOrder, Status;
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total</Value>
+                                  <Value>=Sum(Fields!FEE_PLANNED.Value)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -987,7 +697,6 @@ ORDER BY SortOrder, Status;
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1005,12 +714,11 @@ ORDER BY SortOrder, Status;
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Budget.Value)</Value>
+                                  <Value>=Sum(Fields!FEE_LOGGED.Value)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>''#,0.00;('Ksh'#,0.00)</Format>
-                                    <Color>DarkGreen</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1023,7 +731,6 @@ ORDER BY SortOrder, Status;
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1034,65 +741,30 @@ ORDER BY SortOrder, Status;
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox27">
+                        <Textbox Name="Textbox26">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Fee_Budget.Value)</Value>
+                                  <Value>=Sum(Fields!PROFIT.Value)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>''#,0.00;('Ksh'#,0.00)</Format>
-                                    <Color>#283537</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox25</rd:DefaultName>
+                          <rd:DefaultName>Textbox26</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox32">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox32</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1107,8 +779,6 @@ ORDER BY SortOrder, Status;
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
-                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -1129,11 +799,361 @@ ORDER BY SortOrder, Status;
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>Data</DataSetName>
-            <Top>4.20833in</Top>
+            <DataSetName>sp_Projectlist</DataSetName>
+            <Top>5.45834in</Top>
             <Left>0.12028in</Left>
-            <Height>0.89583in</Height>
-            <Width>9.97223in</Width>
+            <Height>0.80556in</Height>
+            <Width>10.23612in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Tablix Name="Tablix4">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>2.03473in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.88194in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.90972in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.75in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.32639in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox42">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>PROJECTS</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox42</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#ebeaec</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox44">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>FEE PLANNED</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox44</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#ebeaec</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox46">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>FEE LOGGED</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox46</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#ebeaec</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox48">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>PROFIT</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox48</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#ebeaec</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.29861in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PROJECT">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!PROJECT.Value</Value>
+                                  <Style>
+                                    <FontFamily>CALibri</FontFamily>
+                                    <FontSize>14pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value xml:space="preserve"> </Value>
+                                  <Style />
+                                </TextRun>
+                                <TextRun>
+                                  <Value>PROJECTS</Value>
+                                  <Style>
+                                    <FontFamily>CAlibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>DarkGreen</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>PROJECT</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FEE_PLANNED1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!FEE_PLANNED.Value</Value>
+                                  <Style>
+                                    <FontFamily>CAlibri</FontFamily>
+                                    <FontSize>14pt</FontSize>
+                                    <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>FEE_PLANNED1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FEE_PLANNED4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!FEE_LOGGED.Value</Value>
+                                  <Style>
+                                    <FontFamily>CALibri</FontFamily>
+                                    <FontSize>14pt</FontSize>
+                                    <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>FEE_PLANNED1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FEE_PLANNED5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!PROFIT.Value</Value>
+                                  <Style>
+                                    <FontFamily>CALibri</FontFamily>
+                                    <FontSize>14pt</FontSize>
+                                    <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>FEE_PLANNED1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>ProjectAdditional</DataSetName>
+            <Top>0.18055in</Top>
+            <Left>0.12028in</Left>
+            <Height>0.625in</Height>
+            <Width>7.57639in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1141,18 +1161,6 @@ ORDER BY SortOrder, Status;
               </Border>
             </Style>
           </Tablix>
-          <Line Name="Line1">
-            <Top>4.09028in</Top>
-            <Left>0.12028in</Left>
-            <Height>0in</Height>
-            <Width>9.97223in</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
           <Chart Name="Chart1">
             <ChartCategoryHierarchy>
               <ChartMembers>
@@ -1167,21 +1175,6 @@ ORDER BY SortOrder, Status;
                       <Value>=Fields!Project_Name.Value</Value>
                     </SortExpression>
                   </SortExpressions>
-                  <ChartMembers>
-                    <ChartMember>
-                      <Group Name="Chart1_CategoryGroup1">
-                        <GroupExpressions>
-                          <GroupExpression>=Fields!Budget.Value</GroupExpression>
-                        </GroupExpressions>
-                      </Group>
-                      <SortExpressions>
-                        <SortExpression>
-                          <Value>=Fields!Budget.Value</Value>
-                        </SortExpression>
-                      </SortExpressions>
-                      <Label>=Fields!Budget.Value</Label>
-                    </ChartMember>
-                  </ChartMembers>
                   <Label>=Fields!Project_Name.Value</Label>
                 </ChartMember>
               </ChartMembers>
@@ -1189,20 +1182,29 @@ ORDER BY SortOrder, Status;
             <ChartSeriesHierarchy>
               <ChartMembers>
                 <ChartMember>
-                  <Label>Budget</Label>
+                  <Label>FEE PLANNED</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>FEE LOGGED</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartSeriesHierarchy>
             <ChartData>
               <ChartSeriesCollection>
-                <ChartSeries Name="Budget">
+                <ChartSeries Name="FEE_PLANNED">
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Fields!Budget.Value)</Y>
+                        <Y>=Sum(Fields!FEE_PLANNED.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
-                        <Style />
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
                       </ChartDataLabel>
                       <Style />
                       <ChartMarker>
@@ -1211,8 +1213,46 @@ ORDER BY SortOrder, Status;
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Shape</Type>
-                  <Subtype>Doughnut</Subtype>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="FEE_LOGGED">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!FEE_LOGGED.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
+                          <Color>DarkGreen</Color>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -1241,7 +1281,9 @@ ORDER BY SortOrder, Status;
                         <Color>Gainsboro</Color>
                         <Style>None</Style>
                       </Border>
+                      <FontFamily>calibri</FontFamily>
                       <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                       <Color>#5c5c5c</Color>
                     </Style>
                     <ChartAxisTitle>
@@ -1355,7 +1397,7 @@ ORDER BY SortOrder, Status;
                         <Style>None</Style>
                       </Border>
                       <FontSize>8pt</FontSize>
-                      <Color>#5c5c5c</Color>
+                      <Color>DarkGreen</Color>
                     </Style>
                     <ChartAxisTitle>
                       <Caption />
@@ -1398,6 +1440,7 @@ ORDER BY SortOrder, Status;
                     <CrossAt>NaN</CrossAt>
                     <Minimum>NaN</Minimum>
                     <Maximum>NaN</Maximum>
+                    <LabelsAutoFitDisabled>true</LabelsAutoFitDisabled>
                     <ChartAxisScaleBreak>
                       <Style />
                     </ChartAxisScaleBreak>
@@ -1468,8 +1511,11 @@ ORDER BY SortOrder, Status;
               <ChartLegend Name="Default">
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>calibri</FontFamily>
                   <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
                 </Style>
+                <Position>TopLeft</Position>
                 <ChartLegendTitle>
                   <Caption />
                   <Style>
@@ -1484,7 +1530,7 @@ ORDER BY SortOrder, Status;
             </ChartLegends>
             <ChartTitles>
               <ChartTitle Name="Default">
-                <Caption />
+                <Caption>PROJECT BASED CHARTS</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
                   <FontSize>9pt</FontSize>
@@ -1498,7 +1544,7 @@ ORDER BY SortOrder, Status;
             </ChartTitles>
             <Palette>Pacific</Palette>
             <ChartBorderSkin>
-              <ChartBorderSkinType>Emboss</ChartBorderSkinType>
+              <ChartBorderSkinType>Sunken</ChartBorderSkinType>
               <Style>
                 <BackgroundColor>Gray</BackgroundColor>
                 <BackgroundGradientType>None</BackgroundGradientType>
@@ -1514,347 +1560,36 @@ ORDER BY SortOrder, Status;
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </ChartNoDataMessage>
-            <DataSetName>Data</DataSetName>
-            <Top>3.10416in</Top>
-            <Left>10.57638in</Left>
-            <Height>2in</Height>
-            <Width>4.68056in</Width>
+            <DataSetName>sp_Projectlist</DataSetName>
+            <Top>1.40277in</Top>
+            <Left>0.12028in</Left>
+            <Height>3.88195in</Height>
+            <Width>10.23612in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Color>LightGrey</Color>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+              <BackgroundHatchType>None</BackgroundHatchType>
+            </Style>
+          </Chart>
+          <Line Name="Line2">
+            <Top>1.22222in</Top>
+            <Left>0.12028in</Left>
+            <Height>0in</Height>
+            <Width>10.23612in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
-                <Color>LightGrey</Color>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
-              <BackgroundColor>White</BackgroundColor>
-              <BackgroundGradientType>None</BackgroundGradientType>
             </Style>
-          </Chart>
-          <Chart Name="Chart2">
-            <ChartCategoryHierarchy>
-              <ChartMembers>
-                <ChartMember>
-                  <Group Name="ChartGroup" />
-                  <Label />
-                </ChartMember>
-              </ChartMembers>
-            </ChartCategoryHierarchy>
-            <ChartSeriesHierarchy>
-              <ChartMembers>
-                <ChartMember>
-                  <Label />
-                </ChartMember>
-              </ChartMembers>
-            </ChartSeriesHierarchy>
-            <ChartData>
-              <ChartSeriesCollection>
-                <ChartSeries Name="EmptySeriesName">
-                  <ChartDataPoints>
-                    <ChartDataPoint>
-                      <ChartDataPointValues />
-                    </ChartDataPoint>
-                  </ChartDataPoints>
-                  <Style />
-                </ChartSeries>
-              </ChartSeriesCollection>
-            </ChartData>
-            <ChartAreas>
-              <ChartArea Name="Default">
-                <ChartCategoryAxes>
-                  <ChartAxis Name="Primary">
-                    <Style>
-                      <Border>
-                        <Color>Gainsboro</Color>
-                        <Style>None</Style>
-                      </Border>
-                      <FontSize>8pt</FontSize>
-                      <Color>#5c5c5c</Color>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption />
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <Color>#5c5c5c</Color>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Enabled>False</Enabled>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                  <ChartAxis Name="Secondary">
-                    <Style>
-                      <Border>
-                        <Color>Gainsboro</Color>
-                        <Style>None</Style>
-                      </Border>
-                      <FontSize>8pt</FontSize>
-                      <Color>#5c5c5c</Color>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption />
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <Color>#5c5c5c</Color>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Enabled>False</Enabled>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Location>Opposite</Location>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                </ChartCategoryAxes>
-                <ChartValueAxes>
-                  <ChartAxis Name="Primary">
-                    <Style>
-                      <Border>
-                        <Color>Gainsboro</Color>
-                        <Style>None</Style>
-                      </Border>
-                      <FontSize>8pt</FontSize>
-                      <Color>#5c5c5c</Color>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption />
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <Color>#5c5c5c</Color>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                  <ChartAxis Name="Secondary">
-                    <Style>
-                      <Border>
-                        <Color>Gainsboro</Color>
-                        <Style>None</Style>
-                      </Border>
-                      <FontSize>8pt</FontSize>
-                      <Color>#5c5c5c</Color>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption />
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <Color>#5c5c5c</Color>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Location>Opposite</Location>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                </ChartValueAxes>
-                <Style>
-                  <BackgroundColor>#00ffffff</BackgroundColor>
-                  <BackgroundGradientType>None</BackgroundGradientType>
-                </Style>
-              </ChartArea>
-            </ChartAreas>
-            <ChartLegends>
-              <ChartLegend Name="Default">
-                <Style>
-                  <BackgroundGradientType>None</BackgroundGradientType>
-                  <FontSize>8pt</FontSize>
-                </Style>
-                <Position>TopLeft</Position>
-                <ChartLegendTitle>
-                  <Caption />
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </ChartLegendTitle>
-                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
-                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
-              </ChartLegend>
-            </ChartLegends>
-            <ChartTitles>
-              <ChartTitle Name="Default">
-                <Caption>Chart Title</Caption>
-                <Style>
-                  <BackgroundGradientType>None</BackgroundGradientType>
-                  <FontSize>9pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <TextAlign>Left</TextAlign>
-                  <VerticalAlign>Top</VerticalAlign>
-                  <Color>#a6a6a6</Color>
-                </Style>
-                <Position>TopLeft</Position>
-              </ChartTitle>
-            </ChartTitles>
-            <Palette>Pacific</Palette>
-            <ChartBorderSkin>
-              <Style>
-                <BackgroundColor>Gray</BackgroundColor>
-                <BackgroundGradientType>None</BackgroundGradientType>
-                <Color>White</Color>
-              </Style>
-            </ChartBorderSkin>
-            <ChartNoDataMessage Name="NoDataMessage">
-              <Caption>No Data Available</Caption>
-              <Style>
-                <BackgroundGradientType>None</BackgroundGradientType>
-                <FontWeight>Bold</FontWeight>
-                <TextAlign>General</TextAlign>
-                <VerticalAlign>Top</VerticalAlign>
-              </Style>
-            </ChartNoDataMessage>
-            <Top>1.19444in</Top>
-            <Left>0.12028in</Left>
-            <Height>2.56944in</Height>
-            <Width>9.97223in</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Color>LightGrey</Color>
-                <Style>None</Style>
-              </Border>
-              <BackgroundColor>White</BackgroundColor>
-              <BackgroundGradientType>None</BackgroundGradientType>
-            </Style>
-          </Chart>
+          </Line>
         </ReportItems>
-        <Height>5.74306in</Height>
+        <Height>7.36806in</Height>
         <Style>
           <Border>
             <Color>White</Color>
@@ -1863,7 +1598,7 @@ ORDER BY SortOrder, Status;
           <BackgroundColor>White</BackgroundColor>
         </Style>
       </Body>
-      <Width>15.25694in</Width>
+      <Width>12.48611in</Width>
       <Page>
         <PageHeader>
           <Height>0.69667in</Height>
@@ -1884,12 +1619,46 @@ ORDER BY SortOrder, Status;
                 </Border>
               </Style>
             </Image>
+            <Textbox Name="Textbox1">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>PROJECTS PLANNED REVENUE (FEES) VS ACTUAL COST LOGGED</Value>
+                      <Style>
+                        <FontFamily>CALibri</FontFamily>
+                        <FontSize>20pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.25in</Top>
+              <Left>2.10416in</Left>
+              <Height>0.33333in</Height>
+              <Width>7.38194in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <BackgroundColor>LightGrey</BackgroundColor>
+            <BackgroundColor>White</BackgroundColor>
           </Style>
         </PageHeader>
         <PageFooter>
@@ -1911,20 +1680,55 @@ ORDER BY SortOrder, Status;
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="Category">
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateAdd("d",-(Day(today)-1), Today)</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Start Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Today.AddDays(1-Today.Day).AddMonths(1).AddDays(-1)</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>End Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TimeFilter">
       <DataType>String</DataType>
       <DefaultValue>
         <DataSetReference>
-          <DataSetName>Categories</DataSetName>
-          <ValueField>Catetogy</ValueField>
+          <DataSetName>Timefilter</DataSetName>
+          <ValueField>TimeFilterType</ValueField>
         </DataSetReference>
       </DefaultValue>
-      <Prompt>Category</Prompt>
+      <Prompt>Time Filter</Prompt>
       <ValidValues>
         <DataSetReference>
-          <DataSetName>Categories</DataSetName>
-          <ValueField>Catetogy</ValueField>
-          <LabelField>Catetogy</LabelField>
+          <DataSetName>Timefilter</DataSetName>
+          <ValueField>TimeFilterType</ValueField>
+          <LabelField>TimeFilterType</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="Project">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Projectlist</DataSetName>
+          <ValueField>Project</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Project</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Projectlist</DataSetName>
+          <ValueField>Project</ValueField>
+          <LabelField>Project</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
@@ -1945,6 +1749,23 @@ ORDER BY SortOrder, Status;
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
+    <ReportParameter Name="Category">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Categories</DataSetName>
+          <ValueField>Catetogy</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Category</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Categories</DataSetName>
+          <ValueField>Catetogy</ValueField>
+          <LabelField>Catetogy</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1952,14 +1773,34 @@ ORDER BY SortOrder, Status;
       <NumberOfRows>2</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>TimeFilter</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Status</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Category</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Project</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Category</ParameterName>
+          <ParameterName>StartDate</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Status</ParameterName>
+          <ParameterName>EndDate</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

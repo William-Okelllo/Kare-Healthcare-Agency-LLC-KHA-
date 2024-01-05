@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using PagedList;
+using Microsoft.Owin;
 
 namespace Ishop.Controllers
 {
@@ -22,6 +24,36 @@ namespace Ishop.Controllers
         }
 
         // GET: Direct_Activities/Details/5
+
+
+
+
+
+       
+
+
+        public ActionResult Directtasksview(string id, int WeekNo, int? page)
+        {
+            var data = db.direct_Activities.Where(b=>b.Day_Date.ToString("dddd") == id && b.WeekNo == WeekNo).ToList().ToPagedList(page ?? 1, 11);
+ 
+            return PartialView("Directtasksview", data);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public ActionResult Details(int? id)
         {
             if (id == null)

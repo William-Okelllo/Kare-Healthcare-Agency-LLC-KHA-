@@ -170,7 +170,7 @@
 
         </a>
 
-        <div class="sidebar" style="background-color:black; border-radius: 4px">
+        <div class="sidebar" style="background: linear-gradient(to bottom, #030a41, #000000); border-radius: 4px">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
@@ -327,15 +327,23 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("create", "leaves_Types")" class="nav-link">
+                                    <a href="@Url.Action("index", "OutgoingEmails")" class="nav-link">
 
-                                        <i class="fa fa-plus-circle text-white nav-icon"></i>
+                                        <i class="fa fa-envelope text-white nav-icon"></i>
                                         <p style="color: white">
-                                            Add leave Type
+                                            Outgoing Emails
                                         </p>
                                     </a>
                                 </li>
-                               
+                                <li class="nav-item">
+                                    <a href="@Url.Action("index", "outgoingsms")" class="nav-link">
+
+                                        <i class="fa fa-sms text-white nav-icon"></i>
+                                        <p style="color: white">
+                                            Outgoing Sms
+                                        </p>
+                                    </a>
+                                </li>
                             </ul>
 
                         </li>
