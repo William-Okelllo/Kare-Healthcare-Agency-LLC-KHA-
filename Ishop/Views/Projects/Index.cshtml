@@ -44,7 +44,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #192530; color: white; border-radius: 14px ">
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0C54A0; color: white; border-radius: 14px ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-suitcase"></i>
             Projects list
@@ -93,41 +93,43 @@
 
 
     <div class="table-responsive">
-        <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+        <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
 
 
             <thead>
                 <tr style="color:white">
 
-                    <th style="background-color: #192530; font-size: medium; ">AddedOn </th>
-                    <th style="background-color: #192530; font-size: medium; ">Project Name</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Project Name</th>
 
-                    <th style="background-color: #192530; font-size: medium; ">Budget</th>
-                    <th style="background-color: #192530; font-size: medium; ">location</th>
-                    <th style="background-color: #192530; font-size: medium;">Action</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Budget</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">location</th>
+                    <th style="background-color: #0C54A0; font-size: medium;">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td style="background-color: white;"> <i class="fa fa-calendar-day text-primary"></i>  @item.CreatedOn.ToString("dd-MM-yyyy")</td>
+
                         <td style="background-color: white;">
-                            
-                                <i class="fa fa-bookmark text-primary"></i> @item.Project_Name 
-                                <div class="dropdown-divider"></div>
-                                <small style="color:navy">
-                                    
-                                        <b>
-                                            <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i>   </medium> </span> @item.Client <small>||</small>
-                                            <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> @item.Category <small>||</small>
-                                            <span class="badge badge-warning"><medium><i class="fa fa-circle-notch text-navy"></i>   </medium>  </span> @item.Status
-                                        </b>
-                                    
-                                </small>
-</td>
 
+                            <i class="fa fa-bookmark text-primary"></i> @item.Project_Name
+                            <div class="dropdown-divider"></div>
+                            <small style="color:navy">
 
+                                <b>
+                                    <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i>   </medium> </span> @item.Client <small>||</small>
+                                    <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> @item.Category <small>||</small>
+                                   
+                                </b>
+
+                            </small>
+                        </td>
+
+                        <td style="background-color:white"> @if (item.Status == "Active")
+
+                        { <h5 style="color:green">@item.Status</h5> } else if (item.Status == "Proposed"){ <h5 style="color:gray">@item.Status</h5>} </td>
                         <td style="background-color:white">
                             <i class="fa fa-suitcase text-primary"></i> @item.Budget.ToString("#,##0.00") <div class="dropdown-divider"></div>
                             <h6>

@@ -33,6 +33,7 @@ namespace Ishop
             Database.SetInitializer<IDays_leave_context>(null);
             Database.SetInitializer<Direct_Activities_Context>(null);
             Database.SetInitializer<Indirect_Activities_Context>(null);
+            Database.SetInitializer<leaveTypesContext>(null);
         }
     }
 }

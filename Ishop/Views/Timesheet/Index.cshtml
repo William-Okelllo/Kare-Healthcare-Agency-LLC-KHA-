@@ -221,7 +221,7 @@
                             }
                         },
             viewRender: function (view, element) {
-                $('.fc-day-header').css('background-color', '#192530');
+                $('.fc-day-header').css('background-color', '#0C54A0');
                 $('.fc-day-header').css('color', 'white');
                 $('.fc-day-header').css('border-radius', '7px');
                 $('.fc-day-header').css('height', '35px');
@@ -245,25 +245,40 @@
 
 
         <div class="dropdown-divider"></div>
-        <div class="card-header col-md-7 col-sm-12 col-12 " style="background-color: #192530; color: white; border-radius: 2px ">
+        <div class="card-header col-md-7 col-sm-12 col-12 " style="background-color: #0C54A0; color: white; border-radius: 2px ">
             <h3 class="card-title" style="color:white;text-align:center">
-                <span class="badge badge-warning"><medium><i class="fa fa-spin fa-circle-notch text-black"></i>  </medium></span> <b><medium><b> Current Week </b></medium></b> <small><b style="color:dodgerblue">(DH) -Direct Hours </b> | <b style="color:greenyellow">(IH) -InDirect Hours</b></small>
+                <span class="badge badge-warning"><medium><i class="fa fa-spin fa-circle-notch text-black"></i>  </medium></span> <b><medium><b> Current Week </b></medium></b> <small><b style="color:white">(DH) -Direct Hours </b> | <b style="color: white">(IH) -InDirect Hours</b></small>
             </h3>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-condensed table-striped table-hover sortable curved-table">
+            <table class="table table-bordered curved-table">
                 <thead>
                     <tr style="color: white;">
                         @foreach (var item in ViewBag.Results)
                         {
-                            <th style="background-color: #192530; font-size: medium;text-align:left">
-                               <b> @item.WeekdayName  </b> -
-                                <span class="badge badge-warning"><medium><i class="fa fa-clock text-black"></i></medium></span>
-                                <b><small><b> @item.Total_Hours Hrs</b> </small></b>
+                            <th style="background-color: #0C54A0; font-size: medium; text-align: left ">
+                                <b> @item.WeekdayName  </b> 
+                                <b style="font-size:x-large"> @item.Total_Hours <small><b>Hrs</b></small></b>
 
-                                <div class="dropdown-divider"></div>
 
-                                <button class="btn btn-lg btn-light openModalTrigger"
+                            </th>
+
+                           
+
+
+
+                        }
+
+                    </tr>
+                </thead>
+                <thead>
+                    <tr style="color: white;">
+                        @foreach (var item in ViewBag.Results)
+                        {
+                            <th style="background-color: #192530; font-size: medium; text-align: left ">
+                               
+
+                                <button class="btn btn-sm btn-lg btn-light openModalTrigger"
                                         data-datev="@item.DateValue.ToString("dddd")" data-WeekNo="@item.WeekNumber"
                                         data-url="@Url.Action("Directtasksview", "Direct_Activities")"
                                         data-target="#exampleModalCenter">
@@ -363,7 +378,7 @@
 
 
                         }
-                       
+
                     </tr>
                 </thead>
                 <thead>
@@ -372,12 +387,12 @@
                         {
                             <th style="background-color: #192530; font-size: medium;text-align:left">
 
-                                <button class="btn btn-lg btn-warning openModalTrigger2" data-datev="@item.DateValue" data-url="@Url.Action("Directtasks", "Direct_Activitsies")" data-target="#eexampleModalCenter"> <small> <b><i class="fa fa-clock text-dark"></i> INDIRECT HRS</b></small></button>
+                                <button class="btn btn-sm btn-warning openModalTrigger2" data-datev="@item.DateValue" data-url="@Url.Action("Directtasks", "Direct_Activitsies")" data-target="#eexampleModalCenter"> <small> <b><i class="fa fa-clock text-dark"></i> INDIRECT HRS</b></small></button>
                                 <b>@item.InDirect_Hours Hrs</b>
                             </th>
 
                             <!-- Include jQuery -->
-                          
+
 
 
 

@@ -127,6 +127,8 @@
                             { <h6 style="color:gray">     <i class="fa fa-spin fa-circle-notch text-gray"></i> <b>Submitted - Awating Approvals</b></h6>}
                             else if (item.Status == 2)
                             { <h6 style="color:green"> <i class="fa  fa-check-circle text-success"></i> <b>APPROVED</b></h6>}
+                            else if (item.Status == 99)
+                            { <h6 style="color:darkred"> <i class="fa  fa-times-circle text-danger"></i> <b>DENIED</b></h6>}
                         </td>
                         <td style="background-color: white;">  <h5><b>@item.Days</b> <small>Days</small> </h5>  </td>
 

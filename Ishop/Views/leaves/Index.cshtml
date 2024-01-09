@@ -8,26 +8,23 @@
 
 
 <style>
-    body {
-        background-image: url(../../images/33.jpg);
-        background-size: cover;
-        font-family: Calibri
-    }
-
-    .table-hover > tbody > tr:hover {
-        background-color: #D2D2D2;
-    }
-
-    table {
+    .curved-table {
         border-collapse: collapse;
-        overflow: visible;
+        border-radius: 10px;
+        overflow: hidden;
     }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid grey;
+        }
 </style>
 
 <div class="card " style="background-color: rgb(255, 255, 255, 0.90);">
 
 
-    <div class="card-header" style="background: linear-gradient(to left, #192530, #000000)">
+    <div class="card-header" style="background-color: #0656A5">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-umbrella"></i>
             Requested leaves
@@ -38,8 +35,8 @@
             {
 
 
-                @Html.ActionLink("Request leave ", "Create", "leaves", null, new { @class = "btn btn-sm btn-default btn" })
-
+              
+                @Html.ActionLink("Request leave ", "Create", "leaves", null, new { @class = "btn btn-sm btn-default btn " })
 
             }
 
@@ -64,135 +61,191 @@
     </script>
 
 
-
-
     <div class="card-body">
 
-    <div class="row">
-        @foreach (var item in Model)
-        {
+        <div style="text-align:right">
+            <button type="button" class="btn btnsm btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fa fa-umbrella text-white"></i>  View  Balances
+            </button>
+        </div>
 
-
-            <div class="col-lg-3 col-6" >
-                <!-- small box -->
-                <div class="small-box " style="border-radius: 20px; background: linear-gradient(to bottom, #061042, #030000ce) ">
-                    <div class="inner" style="color:white">
-                        <h5><span class="info-box-text text-wrap"><medium><i class="fa fa-umbrella-beach"></i>  @item.CreatedOn.ToString("dd-MMM-yyyy")</medium></span>   ~ <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i> Days : @item.Days </medium></span> </h5>
-                        <h6> <i class="fa fa-user-circle text-primary"></i> Staff - @item.Employee</h6>
-                        @if (item.Status == 0)
-                        {<h6> <i class="fa fa-circle-notch"></i> InProgress</h6>}
-                        else if (item.Status == 1)
-                        { <h6> <i class="fa fa-spin fa-circle-notch text-gray"></i> Submitted - Awating Approvals</h6>}
-                        else if (item.Status == 2)
-                        { <h6> <i class="fa  fa-check-circle text-success"></i> APPROVED</h6>}
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> leaves Balances - Account - @User.Identity.Name</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body">
 
-                    <div class="ui-menu-divider"></div>
-
-                    @if (item.Status == 0)
-                    {<a href="@Url.Action("Add", "Leaves", new { id = item.Id })" class="btn-xs btn btn-primary">
-                            <i class="fa fa-circle-notch text-white"></i> Edit/Update
-                        </a>}
-
-                    
-
-                    <a href="@Url.Action("Details", "Leaves", new { id = item.Id })" class="btn-xs btn btn-success">
-                        <i class="fa fa-eye text-white"></i> View leave
-                    </a>
-                   @if (item.Status != 2)
-                           {
-                    
-<a href = "@Url.Action("Delete", "Leaves", new { id = item.Id })" class="btn-xs btn btn-danger">
-    <i class="fa fa-trash text-white"></i> Drop leave
-</a>
-                }
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
 
 
+                                <thead>
+                                    <tr style="color:white">
 
+                                        <th style="background-color: #0656A5; font-size: medium; ">Leave Type </th>
+                                        <th style="background-color: #0656A5; font-size: medium; ">Total Leave a yr</th>
+                                        <th style="background-color: #0656A5; font-size: medium; ">Total Requested</th>
+                                        <th style="background-color: #0656A5; font-size: medium; ">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.leavebalance)
+                                    {
+                                        <tr>
+
+                                            <td style="background-color: white;"> <i class="fa fa-umbrella text-primary"></i> @item.Type</td>
+                                            <td style="background-color: white;"> <h5><b>@item.Total_leaves_per_year</b> <small>Days</small> </h5></td>
+                                            <td style="background-color: white;"> <h5><b>@item.Requested_leaves</b> <small>Days</small> </h5></td>
+                                            <td style="background-color: white;"> <h5><b>@item.Remaining_leaves</b> <small>Days</small> </h5></td>
+
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
                 </div>
-                </div>
+            </div>
+        </div>
 
 
 
 
-
-
-
-                    }
-                </div>
-
-
-
-
-
-
-
-            @if (Model.Count() == 0)
+        <div class="row">
+            @foreach (var item in Model)
             {
-               <div class="col d-flex justify-content-center">
-                   <div class="col-md-3 col-sm-6 col-12">
-                       <div class="info-box bg-gradient-black">
-                           <span class="info-box-icon"><i class="far fa-bed"></i></span>
 
-                           <div class="info-box-content">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-navy" style="border-radius: 20px">
+                        <div class="inner">
+                            <h3>@item.Days <b style="font-size:large">Days</b> </h3>
+                            <h5></h5>
+                            @if (item.Status == 0)
+                            {<h6> <i class="fa fa-circle-notch"></i> InProgress</h6>}
+                            else if (item.Status == 1)
+                            { <h6> <i class="fa fa-spin fa-circle-notch text-gray"></i> Submitted - Awating Approvals</h6>}
+                            else if (item.Status == 2)
+                            { <h6> <i class="fa  fa-check-circle text-success"></i> APPROVED</h6>}
+                            else if (item.Status ==99)
+                            { <h6> <i class="fa fa-times-circle text-danger"></i> DENIED</h6>}
 
-                               <span class="progress-description">
-                                   <i class="fa fa-spin fa-circle-notch"></i>  No leaves requested
-                               </span>
-                           </div>
-                           <!-- /.info-box-content -->
-                       </div>
-                       <!-- /.info-box -->
-                   </div>
-               </div>
+                            <small><b>AddedOn</b> @item.CreatedOn.ToString("dd-MMM-yyyy") || <i class="fa fa-user-circle text-white"></i> Staff - @item.Employee </small>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-umbrella"></i>
+                        </div>
+                        <div class="ui-menu-divider"></div>
+
+
+                        @if (item.Status == 0)
+                        {<a href="@Url.Action("Add", "Leaves", new { id = item.Id })" class="btn-xs btn btn-primary">
+                                <i class="fa fa-circle-notch text-white"></i> Edit/Update
+                            </a>}
+
+
+
+                        <a href="@Url.Action("Details", "Leaves", new { id = item.Id })" class="btn-xs btn btn-success">
+                            <i class="fa fa-eye text-white"></i> View leave
+                        </a>
+                        @if (item.Status ==0)
+                        {
+
+                            <a href="@Url.Action("Delete", "Leaves", new { id = item.Id })" class="btn-xs btn btn-danger">
+                                <i class="fa fa-trash text-white"></i> Drop leave
+                            </a>
+                        }
+                    </div>
+                </div>
+
+
+
+            }
+        </div>
+
+
+
+
+
+
+
+        @if (Model.Count() == 0)
+        {
+            <div class="col d-flex justify-content-center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                        <div class="info-box-content">
+
+                            <span class="progress-description">
+                                <i class="fa fa-spin fa-circle-notch"></i>  No leaves requested
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        }
+
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
             }
 
+            ul.pagination li {
+                display: inline;
+            }
 
-            <style>
-                .ul.pagination {
-                    display: inline-block;
-                    padding: 1;
-                    margin: 1;
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
                     border-radius: 0.5rem;
                 }
 
-                ul.pagination li {
-                    display: inline;
-                }
-
-                    ul.pagination li a {
-                        color: black;
-                        float: left;
-                        padding: 8px 16px;
-                        text-decoration: none;
-                        transition: background-color;
-                        background-color: #ddd;
-                        border-color: white;
-                        border-radius: 0.5rem;
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
                     }
 
-                        ul.pagination li a.active {
-                            background-color: dodgerblue;
-                            color: white;
-                        }
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
 
-                        ul.pagination li a:hover:not(.active) {
-                            background-color: dodgerblue;
-                            border-radius: 0.5rem;
-                        }
-            </style>
-            <div id="container" style="text-align:left">
-
-                <div class="pagination" style="text-align:left">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
-                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
-                </div>
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
             </div>
-
-
-
         </div>
 
-        
+
+
+    </div>
+
+
 

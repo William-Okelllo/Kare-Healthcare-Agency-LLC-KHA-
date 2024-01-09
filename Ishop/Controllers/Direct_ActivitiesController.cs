@@ -82,7 +82,7 @@ namespace Ishop.Controllers
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
 
             Team_Context P = new Team_Context();
-            var Project = P.teams.ToList();
+            var Project = P.teams.Where(c=>c.Username ==User.Identity.Name).ToList();
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
 

@@ -30,7 +30,12 @@ namespace Ishop.Controllers
         // GET: leaves
         public ActionResult Index(string searchBy, string search, int? page)
         {
-            
+
+            leaves_Days_trackContext LL = new leaves_Days_trackContext();
+            var leavebalances = LL.Leaves_Days_Tracks.Where(c => c.Username == User.Identity.Name).ToList();
+            ViewBag.leavebalance = leavebalances;
+
+
                 if (!(search == null))
                 {
                     return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
@@ -388,7 +393,25 @@ namespace Ishop.Controllers
         }
 
 
-       
+
+        public void leavesTrack(Decimal Total_leaves_per_year, String Type, decimal Requested_leaves, decimal Remaining_leaves, string Username)
+        {
+            string query = "INSERT INTO leaves_Days_track (Total_leaves_per_year,Type,Requested_leaves,Remaining_leaves,Username) VALUES " +
+            "                                             (@Total_leaves_per_year,@Type,@Requested_leaves,@Remaining_leaves,@Username)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Total_leaves_per_year", Total_leaves_per_year);
+                    command.Parameters.AddWithValue("@Type", Type);
+                    command.Parameters.AddWithValue("@Requested_leaves", Requested_leaves);
+                    command.Parameters.AddWithValue("@Remaining_leaves", Remaining_leaves);
+                    command.Parameters.AddWithValue("@Username", Username);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
 
         public void InsertDatesIntoTable(DateTime startDate, DateTime endDate,int Type,string Employee)
@@ -527,25 +550,7 @@ namespace Ishop.Controllers
             }
         }
 
-        public void leavesTrack(int Total_leaves_per_year, String Type, decimal Requested_leaves, decimal Remaining_leaves, string Username)
-        {
-            string query = "INSERT INTO leaves_Days_track (Total_leaves_per_year,Type,Requested_leaves,Remaining_leaves,Username) VALUES " +
-            "                                             (@Total_leaves_per_year,@Type,@Requested_leaves,@Remaining_leaves,@Username)";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Total_leaves_per_year", Total_leaves_per_year);
-                    command.Parameters.AddWithValue("@Type", Type);
-                    command.Parameters.AddWithValue("@Requested_leaves", Requested_leaves);
-                    command.Parameters.AddWithValue("@Remaining_leaves", Remaining_leaves);
-                    command.Parameters.AddWithValue("@Username", Username);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
+      
 
 
 
