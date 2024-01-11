@@ -1,7 +1,7 @@
-﻿@model List<IShop.Core.Direct_Activities>
+﻿@model List<IShop.Core.Indirect_Activities>
 
 @{
-    ViewBag.Title = "Directtasks";
+    ViewBag.Title = "Indirect Tasks";
 }
 
 <style>
@@ -36,12 +36,12 @@
 </style>
 
 
-<table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table2">
+<table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table2">
     <thead>
         <tr style="border-radius: 14px">
 
             <th style="background-color: #0C54A0; color: white "> <i class="fa fa-calendar-check text-white"></i> Week Day</th>
-            <th style="background-color: #0C54A0; color: white "> <i class="fa fa-suitcase text-primary"></i>  Project Name</th>
+            <th style="background-color: #0C54A0; color: white "> <i class="fa fa-suitcase text-primary"></i>  Activity</th>
 
 
             <th style="background-color: #0C54A0; color: white "> <i class="fa fa-comment text-primary"></i> Comments</th>
@@ -59,12 +59,11 @@
                     <h2 style="color:green"> <b> @item.Hours <small>Hrs</small></b>  </h2>
                 </td>
                 <td style="background-color:white;" width="30%">
-                    <b style="font-size:x-large"> @item.Project_Name</b>
+                    <b style="font-size:x-large"> @item.Name</b>
                     <div class="dropdown-divider"></div>
                     <span class="badge badge-primary"><medium><i class="fa fa-folder-open text-white"></i> PHASE</medium></span>  @item.Name
                     <div class="dropdown-divider"></div>
 
-                    <span class="badge badge-success"><medium><i class="fa fa-coins text-white"></i> Estimate Charge </medium></span> <b> @item.Charge.ToString("#,##0.00")
                 </td>
 
 
@@ -78,8 +77,9 @@
                 else
                 {<p style="color: orange; text-align: right"> <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |   <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
                 </td>
-                <td style="background-color:ghostwhite">
 
+
+                <td style="background-color:ghostwhite">
                     <div class="btn-group dropdown">
                         <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-hashtag"></i>  . Action
@@ -87,22 +87,22 @@
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                             <div class="dropdown-divider"></div>
-                            <a href="@Url.Action("Edit", "direct_Activities", new { id = item.Id })" class="dropdown-item">
+                            <a href="@Url.Action("Edit", "Indirect_Activities", new { id = item.Id })" class="dropdown-item">
                                 <i class="fa fa-pen-nib text-primary"></i> Edit/Update  Info
                             </a>
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this task ')) { window.location.href = '@Url.Action("Delete", "direct_Activities", new { id = item.Id, })'; }">
+                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this task ')) { window.location.href = '@Url.Action("Delete", "indirect_Activities", new { id = item.Id, })'; }">
                                 <i class="fa fa-times-circle text-danger"></i> Drop Task
                             </a>
                             <script>
-                    $(function () {
-                        $('#Deny').click(function () {
-                            if (confirm('Are you sure?')) {
-                                window.location.href = $(this).data('url');
-                            }
-                        });
-                    });
+                                $(function () {
+                                    $('#Deny').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
                             </script>
                         </div>
                     </div>

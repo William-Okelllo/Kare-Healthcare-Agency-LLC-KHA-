@@ -10,6 +10,7 @@ using IShop.Core;
 using Ishop.Infa;
 using PagedList;
 using Microsoft.Owin;
+using IShop.Core.Interface;
 
 namespace Ishop.Controllers
 {
@@ -32,24 +33,30 @@ namespace Ishop.Controllers
        
 
 
-        public ActionResult Directtasksview(string id, int WeekNo, int? page)
+        public ActionResult Directtasksview(DateTime Weekday, int? page)
         {
-            var data = db.direct_Activities.Where(b=>b.Day_Date.ToString("dddd") == id && b.WeekNo == WeekNo).ToList().ToPagedList(page ?? 1, 11);
- 
-            return PartialView("Directtasksview", data);
+            try
+            {
+               
+        
+           
+                DateTime currentDate = Weekday;
+                DayOfWeek dayOfWeek = currentDate.DayOfWeek;
+
+                var data = db.direct_Activities.Where(p => p.User == User.Identity.Name && p.Day_Date ==currentDate ).ToList().ToPagedList(page ?? 1, 11).ToList();
+                              
+
+                // Handle or return data as needed
+                return PartialView("Directtasksview", data);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                Console.WriteLine($"Error in controller action: {ex.Message}");
+                var data = ex.Message;
+                return PartialView("Directtasksview", data);
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -142,6 +149,19 @@ namespace Ishop.Controllers
 
         public ActionResult Edit(int? id)
         {
+            Direct_Context DC = new Direct_Context();
+            var DirectC = DC.directs.ToList();
+            ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
+
+
+            InDirect_Context ID = new InDirect_Context();
+            var InDirect = ID.InDirects.ToList();
+            ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
+
+            Team_Context P = new Team_Context();
+            var Project = P.teams.Where(c => c.Username == User.Identity.Name).ToList();
+            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -165,35 +185,21 @@ namespace Ishop.Controllers
             {
                 db.Entry(direct_Activities).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["msg"] = "Activity updated successfully ";
+                return RedirectToAction("Index", "Timesheet");
             }
             return View(direct_Activities);
         }
 
-        // GET: Direct_Activities/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Direct_Activities direct_Activities = db.direct_Activities.Find(id);
-            if (direct_Activities == null)
-            {
-                return HttpNotFound();
-            }
-            return View(direct_Activities);
-        }
-
-        // POST: Direct_Activities/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        
+        public ActionResult Delete(int id)
         {
             Direct_Activities direct_Activities = db.direct_Activities.Find(id);
             db.direct_Activities.Remove(direct_Activities);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Activity dropped successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

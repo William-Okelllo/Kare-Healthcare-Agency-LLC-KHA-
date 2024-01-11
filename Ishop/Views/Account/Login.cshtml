@@ -131,98 +131,100 @@
                         </div>
                         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                         {@Html.AntiForgeryToken()
-                        <form>
+                    <form>
 
-                            <div class="input-group custom">
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
+                        <div class="input-group custom">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
 
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text">
-                                        <i class="icon-copy dw dw-user1"></i>
-                                    </span>
+                            <div class="input-group-append custom">
+                                <span class="input-group-text">
+                                    <i class="icon-copy dw dw-user1"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="input-group custom">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control password-field", @placeholder = "password", @autofocus = "", @id = "Password" })
+                            <div class="input-group-append custom">
+                                <span class="input-group-text">
+                                    <i class="dw dw-padlock1"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row pb-30">
+
+                            <div class="col-6">
+                                <div class="forgot-password">
+                                    <a href="@Url.Action("ForgotPassword", "Account")"><i class="dw dw-unlock"></i>  Forgot Password</a>
                                 </div>
                             </div>
-                            <div class="input-group custom">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control password-field", @placeholder = "password", @autofocus = "", @id = "Password" })
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text">
-                                        <i class="dw dw-padlock1"></i>
-                                    </span>
-                                </div>
+                        </div>
+
+
+
+                        <div class="form-group col-md-6">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="viewPasswords">
+                                <small class="form-check-label" for="viewPasswords">View Passwords</small>
                             </div>
-
-                            <div class="row pb-30">
-
-                                <div class="col-6">
-                                    <div class="forgot-password">
-                                        <a href="@Url.Action("ForgotPassword", "Account")"><i class="dw dw-unlock"></i>  Forgot Password</a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="form-group col-md-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="viewPasswords">
-                                    <small class="form-check-label" for="viewPasswords">View Passwords</small>
-                                </div>
-                            </div>
-                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                            <script>
-                                $(document).ready(function () {
-                                    $('#viewPasswords').change(function () {
-                                        var passwordFields = $('.password-field, .confirm-password-field');
-                                        if (this.checked) {
-                                            passwordFields.attr('type', 'text');
-                                        } else {
-                                            passwordFields.attr('type', 'password');
-                                        }
-                                    });
+                        </div>
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#viewPasswords').change(function () {
+                                    var passwordFields = $('.password-field, .confirm-password-field');
+                                    if (this.checked) {
+                                        passwordFields.attr('type', 'text');
+                                    } else {
+                                        passwordFields.attr('type', 'password');
+                                    }
                                 });
-                            </script>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="input-group mb-0">
-                                        <button class="btn btn btn-primary btn-lg btn-block " type="submit" id="login-btn">
-                                            <i class="glyphicon glyphicon-log-in" style="color:white"></i>
-                                            <i class="fa fa-sign-in"></i> Login
-                                        </button>
-                                        <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled>
-                                            <span class="spinner-border spinner-border-sm" role="status"></span>
-                                            <small> ..Verifing Credentials...</small>
-                                        </button>
-                                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                                        <script>
-                                            $(document).ready(function () {
-                                                // Hide the second button by default
-                                                $('#hidden-button').hide();
+                            });
+                        </script>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-group mb-0">
+                                    <button class="btn btn btn-primary btn-lg btn-block " type="submit" id="login-btn">
+                                        <i class="glyphicon glyphicon-log-in" style="color:white"></i>
+                                        <i class="fa fa-sign-in"></i> Login
+                                    </button>
+                                    <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                                        <small> ..Verifing Credentials...</small>
+                                    </button>
+                                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            // Hide the second button by default
+                                            $('#hidden-button').hide();
 
-                                                // Add click event to the first button
-                                                $('#login-btn').click(function () {
-                                                    // Hide the first button
-                                                    $(this).hide();
-                                                    // Show the second button
-                                                    $('#hidden-button').show();
-                                                });
+                                            // Add click event to the first button
+                                            $('#login-btn').click(function () {
+                                                // Hide the first button
+                                                $(this).hide();
+                                                // Show the second button
+                                                $('#hidden-button').show();
                                             });
-                                        </script>
-                                    </div>
-
+                                        });
+                                    </script>
                                 </div>
+
                             </div>
 
-                          
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <small style="text-align:center">Copyright © @DateTime.Now.Year Planning Systems. All rights reserved</small>
 
 
-                            <div style="text-align:center">
-                                <small>
-                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
-                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                </small>
-                            </div>
-                        </form>
+
+                        <div style="text-align:center">
+                            <small>
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </small>
+                        </div>
+                    </form>
                     }
                     </div>
                 </div>
@@ -233,7 +235,7 @@
 
                     
                     <div style="text-align:right">
-                        <img src="~/Images/f.svg" height="500" width="500" />
+                        <img src="~/Images/Logg.png" height="900" width="900" />
                         <div class="ui-menu-divider"></div>
                         <img src="~/Images/mme.png" height="100" width="100" />
                         <div class="ui-menu-divider"></div>

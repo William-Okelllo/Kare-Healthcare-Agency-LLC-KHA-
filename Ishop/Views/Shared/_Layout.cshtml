@@ -81,7 +81,10 @@
                 <li class="nav-item d-none d-sm-inline-block" style="background-color: #ffffff; border-radius: 10px; font-family: Calibri">
                     <a href="@Url.Action("Index", "Home")" class="nav-link" style="color: #0C54A0 "> <i class="fa fa-home"></i>  Home</a>
                 </li>
-
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item d-none d-sm-inline-block" style="background-color: #ffffff; border-radius: 10px; font-family: Calibri">
+                    <a href="@Url.Action("Contact", "Home")" class="nav-link" style="color: #0C54A0 "> <i class="fa fa-headphones"></i>  Support</a>
+                </li>
             </ul>
 
 
@@ -145,7 +148,7 @@
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {@Html.AntiForgeryToken()
     <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">
-        <i class="fa fa-sign-in-alt  text-success"></i>
+        <i class="fa fa-sign-in-alt  text-primary"></i>
         Logout
     </a>}
     <div class="dropdown-divider"> </div></div>
@@ -171,13 +174,13 @@
 
         </a>
 
-        <div class="sidebar" style="background: linear-gradient(to bottom, #000000, #000000); border-radius: 4px ">
+        <div class="sidebar" style="background: linear-gradient(to top, #f1f1f1, #ffffff); border-radius: 4px ">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
                 <div class="info" style="font-family: 'Montserrat';font-size:15px">
-                    <a href="#" class="d-block" style="color: white">
-                        <i class="fa fa-smile text-white"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
+                    <a href="#" class="d-block" style="color: #0C54A0">
+                        <i class="fa fa-smile text-primary"></i>  Hello  : @Html.Label("" + User.Identity.GetUserName()
 + "", null, htmlAttributes: new { title = "Manage" })
                     </a>
                    
@@ -208,13 +211,13 @@
                     </li>
                     @if (this.User.IsInRole("Employee"))
                     {
-                        <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> Timesheets  Module</li>
+                        <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-primary nav-icon"></i> <b>Timesheets  Module</b></li>
                         <li class="nav-item">
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-balance-scale text-white"></i>
-                                <p style="color: white; font-family: Calibri">
+                                <i class="nav-icon fa fa-balance-scale text-primary"></i>
+                                <p style="color: #060440; font-family: Calibri">
                                     Timesheet <i class="fas fa-angle-left right"></i>
 
 
@@ -225,8 +228,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
 
-                                        <i class="fa fa-balance-scale text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-balance-scale text-primary nav-icon"></i>
+                                        <p style="color: #060440">
                                             My Timesheets
                                         </p>
                                     </a>
@@ -236,8 +239,8 @@
                                     <li class="nav-item">
                                         <a href="@Url.Action("Approval", "Timesheet")" class="nav-link">
 
-                                            <i class="fa fa-clipboard-list text-white nav-icon"></i>
-                                            <p style="color: white">
+                                            <i class="fa fa-clipboard-list text-primary nav-icon"></i>
+                                            <p style="color: #060440">
                                                 All Timesheets
                                             </p>
                                         </a>
@@ -246,14 +249,14 @@
                             </ul>
 
                         </li>
-                        <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> leaves Module</li>
+                        <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-primary nav-icon"></i> <b>leaves Module</b></li>
 
                         <li class="nav-item">
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-umbrella-beach text-white"></i>
-                                <p style="color: white; font-family: Calibri">
+                                <i class="nav-icon fa fa-umbrella-beach text-primary"></i>
+                                <p style="color: #060440; font-family: Calibri">
                                     leaves <i class="fas fa-angle-left right"></i>
 
 
@@ -263,8 +266,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("create", "Leaves")" class="nav-link">
 
-                                        <i class="fa fa-plus text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-plus text-primary nav-icon"></i>
+                                        <p style="color: #060440">
                                             Request leave
                                         </p>
                                     </a>
@@ -272,8 +275,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Leaves")" class="nav-link">
 
-                                        <i class="fa fa-umbrella-beach text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-umbrella-beach text-primary nav-icon"></i>
+                                        <p style="color: #060440">
                                             My leave Requests
                                         </p>
                                     </a>
@@ -281,8 +284,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("All", "Leaves")" class="nav-link">
 
-                                        <i class="fa fa-clipboard-list text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-clipboard-list text-primary nav-icon"></i>
+                                        <p style="color: #060440">
                                             All Leave Requests
                                         </p>
                                     </a>
@@ -295,15 +298,15 @@
 
                     @if (this.User.IsInRole("Reports_Access"))
                     {
-                        <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> Reports  Module</li>
+                        <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-primary nav-icon"></i> <b>Reports  Module</b></li>
 
 
                         <li class="nav-item">
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-chart-line text-white"></i>
-                                <p style="color: white; font-family: Calibri">
+                                <i class="nav-icon fa fa-chart-line text-primary"></i>
+                                <p style="color: #060440; font-family: Calibri ">
                                     Reports <i class="fas fa-angle-left right"></i>
 
 
@@ -313,8 +316,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Reports")" class="nav-link">
 
-                                        <i class="fa fa-chart-line text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-chart-line text-primary nav-icon"></i>
+                                        <p style="color: #060440">
                                             Reports
                                         </p>
                                     </a>
@@ -330,13 +333,13 @@
                     @if (this.User.IsInRole("Master_Data"))
                     {
 
-                        <li class="nav-header" style="color: white; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-white nav-icon"></i> Master Data Module</li>
+                        <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-primary nav-icon"></i> <b>Master Data Module</b></li>
                         <li class="nav-item">
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-suitcase text-white"></i>
-                                <p style="color: white; font-family: Calibri">
+                                <i class="nav-icon fa fa-suitcase text-primary"></i>
+                                <p style="color: #060440; font-family: Calibri">
                                     Projects <i class="fas fa-angle-left right"></i>
 
 
@@ -347,8 +350,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "projects")" class="nav-link">
 
-                                        <i class="fa fa-suitcase text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-suitcase text-primary nav-icon"></i>
+                                        <p style="color: #060440 ">
                                             Project list
                                         </p>
                                     </a>
@@ -356,8 +359,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Clients")" class="nav-link">
 
-                                        <i class="fa fa-users text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-users text-primary nav-icon"></i>
+                                        <p style="color: #060440 ">
                                             Clients list
                                         </p>
                                     </a>
@@ -365,8 +368,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Pcategories")" class="nav-link">
 
-                                        <i class="fa fa-folder-open text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-folder-open text-primary nav-icon"></i>
+                                        <p style="color: #060440 ">
                                             Project Categories
                                         </p>
                                     </a>
@@ -378,8 +381,8 @@
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-university text-white"></i>
-                                <p style="color: white; font-family: Calibri">
+                                <i class="nav-icon fa fa-university text-primary"></i>
+                                <p style="color: #060440; font-family: Calibri ">
                                     Departments <i class="fas fa-angle-left right"></i>
 
 
@@ -391,8 +394,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Departments")" class="nav-link">
 
-                                        <i class="fa fa-university text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-university text-primary nav-icon"></i>
+                                        <p style="color: #060440 ">
                                             Departments
                                         </p>
                                     </a>
@@ -400,8 +403,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Employees")" class="nav-link">
 
-                                        <i class="fa fa-users text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-users text-primary nav-icon"></i>
+                                        <p style="color: #060440 ">
                                             Employees
                                         </p>
                                     </a>
@@ -412,8 +415,8 @@
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-database text-white"></i>
-                                <p style="color: white; font-family: Calibri">
+                                <i class="nav-icon fa fa-database text-primary"></i>
+                                <p style="color: #060440; font-family: Calibri ">
                                     Master Data <i class="fas fa-angle-left right"></i>
 
 
@@ -424,8 +427,8 @@
 
 
                                     <a href="#" class="nav-link">
-                                        <i class="nav-icon fa fa-bookmark text-white"></i>
-                                        <p style="color: white; font-family: Calibri">
+                                        <i class="nav-icon fa fa-bookmark text-primary"></i>
+                                        <p style="color: #060440; font-family: Calibri ">
                                             Direct Categories <i class="fas fa-angle-left right"></i>
 
 
@@ -435,8 +438,8 @@
                                         <li class="nav-item">
                                             <a href="@Url.Action("create", "Directs")" class="nav-link">
 
-                                                <i class="fa fa-plus-circle text-white nav-icon"></i>
-                                                <p style="color: white">
+                                                <i class="fa fa-plus-circle text-primary nav-icon"></i>
+                                                <p style="color: #060440 ">
                                                     Add Category
                                                 </p>
                                             </a>
@@ -444,8 +447,8 @@
                                         <li class="nav-item">
                                             <a href="@Url.Action("Index", "Directs")" class="nav-link">
 
-                                                <i class="fa fa-bookmark text-white nav-icon"></i>
-                                                <p style="color: white">
+                                                <i class="fa fa-bookmark text-primary nav-icon"></i>
+                                                <p style="color: #060440 ">
                                                     Direct Categories list
                                                 </p>
                                             </a>
@@ -457,8 +460,8 @@
 
 
                                     <a href="#" class="nav-link">
-                                        <i class="nav-icon fa fa-book-reader text-white"></i>
-                                        <p style="color: white; font-family: Calibri">
+                                        <i class="nav-icon fa fa-book-reader text-primary"></i>
+                                        <p style="color: #060440; font-family: Calibri ">
                                             InDirect Categories <i class="fas fa-angle-left right"></i>
 
 
@@ -468,8 +471,8 @@
                                         <li class="nav-item">
                                             <a href="@Url.Action("create", "InDirects")" class="nav-link">
 
-                                                <i class="fa fa-plus-circle text-white nav-icon"></i>
-                                                <p style="color: white">
+                                                <i class="fa fa-plus-circle text-primary nav-icon"></i>
+                                                <p style="color: #060440 ">
                                                     Add Category
                                                 </p>
                                             </a>
@@ -477,8 +480,8 @@
                                         <li class="nav-item">
                                             <a href="@Url.Action("Index", "InDirects")" class="nav-link">
 
-                                                <i class="fa fa-book-reader text-white nav-icon"></i>
-                                                <p style="color: white">
+                                                <i class="fa fa-book-reader text-primary nav-icon"></i>
+                                                <p style="color: #060440 ">
                                                     InDirect Categories list
                                                 </p>
                                             </a>
@@ -491,8 +494,8 @@
 
 
                                     <a href="#" class="nav-link">
-                                        <i class="nav-icon fa fa-umbrella text-white"></i>
-                                        <p style="color: white; font-family: Calibri">
+                                        <i class="nav-icon fa fa-umbrella text-navy"></i>
+                                        <p style="color: #060440; font-family: Calibri ">
                                             Leaves Types <i class="fas fa-angle-left right"></i>
 
 
@@ -502,8 +505,8 @@
                                         <li class="nav-item">
                                             <a href="@Url.Action("create", "leaves_Types")" class="nav-link">
 
-                                                <i class="fa fa-plus-circle text-white nav-icon"></i>
-                                                <p style="color: white">
+                                                <i class="fa fa-plus-circle text-navy nav-icon"></i>
+                                                <p style="color: #060440 ">
                                                     Add leave Type
                                                 </p>
                                             </a>
@@ -511,8 +514,8 @@
                                         <li class="nav-item">
                                             <a href="@Url.Action("Index", "leaves_Types")" class="nav-link">
 
-                                                <i class="fa fa-umbrella text-white nav-icon"></i>
-                                                <p style="color: white">
+                                                <i class="fa fa-umbrella text-navy nav-icon"></i>
+                                                <p style="color: #060440 ">
                                                     Leave Types list
                                                 </p>
                                             </a>
@@ -530,15 +533,15 @@
 
 
 
-                    <li class="nav-header" style="color: white; font-family: Montserrat;font-size:12px"> <i class="fa fa-bookmark text-white nav-icon"></i> Admin Module</li>
+                    
                     @if (this.User.IsInRole("Admin"))
-                    {
+                    {<li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "> <i class="fa fa-bookmark text-primary nav-icon"></i> <b>Admin Module</b></li>
                         <li class="nav-item">
 
 
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user-cog text-white"></i>
-                                <p style="color: white; font-family: Calibri">
+                                <i class="nav-icon fa fa-user-cog text-primary"></i>
+                                <p style="color: #060440; font-family: Calibri ">
                                     Configs & Users <i class="fas fa-angle-left right"></i>
 
 
@@ -548,8 +551,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Data")" class="nav-link">
 
-                                        <i class="fa fa-users text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-users text-primary nav-icon"></i>
+                                        <p style="color: #0C54A0">
                                             All users
                                         </p>
                                     </a>
@@ -557,8 +560,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Configuration")" class="nav-link">
 
-                                        <i class="fa fa-cogs text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-cogs text-primary nav-icon"></i>
+                                        <p style="color: #0C54A0">
                                             Configurations
                                         </p>
                                     </a>
@@ -566,8 +569,8 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Configuration")" class="nav-link">
 
-                                        <i class="fa fa-bell text-white nav-icon"></i>
-                                        <p style="color: white">
+                                        <i class="fa fa-bell text-primary nav-icon"></i>
+                                        <p style="color: #0C54A0">
                                             Notifications
                                         </p>
                                     </a>
@@ -590,7 +593,7 @@
                     <link href="https://fonts.googleapis.com/css2?family=Genos&display=swap" rel="stylesheet">
 
                     <div class="dropdown-divider"></div>
-                    <li class="nav-header" style="color:white">
+                    <li class="nav-header" style="color: #0C54A0">
                         Version 2.0.5
 
                     </li>

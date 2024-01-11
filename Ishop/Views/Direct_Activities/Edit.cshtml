@@ -1,93 +1,378 @@
 ﻿@model IShop.Core.Direct_Activities
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Direct_Activities</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+    .form-rounded {
+        border-radius: 1rem;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.WeekId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WeekId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.WeekId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Hours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Hours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Hours, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Day_Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Day_Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Day_Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project_Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project_Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<!-- Main content -->
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Charge, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Charge, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Charge, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+
+    curved-table {
+        border-collapse: collapse;
+        border-radius: 11px;
+        overflow: hidden;
+    }
+
+    .curved-table th,
+    .curved-table td {
+        padding: 10px;
+        border-radius: 11px;
+        border: 1px solid #00000033;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+
+<div class="card-body">
+
+
+
+    @using (Html.BeginForm("Edit", "Direct_Activities", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <form>
+            <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+                <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+
+                    <i class="fa fa-bookmark"></i>  Direct Tasks  
+                </div>
+                <div class="card-body" style="background-color: white;border-radius: 24px;">
+
+
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-3" style="display:none">
+                            <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Record",
+                               
+                               @ReadOnly = true,
+
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2" style="display: none">
+                            <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Day_Date)</label>
+                            @Html.EditorFor(model => model.Day_Date, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    
+                                    @Readonly = true,
+
+                                }
+                            })
+                        </div>
+
+
+
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-1" style="display:nowne">
+                            <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.User)</label>
+                            @Html.EditorFor(model => model.User, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @Value = User.Identity.Name,
+                                    @Readonly = true,
+
+                                }
+                            })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Project_Name) </label>
+                            @Html.DropDownList("Project_Name", ViewBag.Project as SelectList, "--Select Project  --", new { @class = "form-control ", })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
+                            @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control ", })
+                        </div>
+                        <script>
+                                $(document).ready(function () {
+                                    // Hook up change event for the dropdown
+                                    $("#Project_Name").change(function () {
+                                        toggleCommentsValidation();
+                                    });
+
+                                    // Toggle validation on initial load
+                                    toggleCommentsValidation();
+                                });
+
+                                function toggleCommentsValidation() {
+                                    // Get the selected value from the dropdown
+                                    var selectedValue = $("#Project_Name").val();
+
+                                    // Get the textarea element
+                                    var commentsTextArea = $("textarea[name='direct_Comments']");
+
+                                    // Set or remove 'required' attribute based on the selected value
+                                    commentsTextArea.prop("required", selectedValue !== "");
+                                }
+                        </script>
+                        <script type="text/javascript">
+                                $(function () {
+                                    $("#Project_Name").chosen();
+                                    $("#Indixrect").chosen();
+                                    $("#Name").chosen();
+
+                                });
+                        </script>
+
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Hours)</label>
+                            @Html.EditorFor(model => model.Hours, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @Placeholder = "No. of Hours",
+                                    id = "Hours" // Add an ID to the input field for easy access in JavaScript
+                                }
+                            })
+                        </div>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                                $(document).ready(function () {
+                                    $("#Hours").on("input", function () {
+                                        var id = $(this).val();
+                                        $.ajax({
+                                            url: '/Direct_Activities/GetCharge',
+                                            method: 'GET',
+                                            data: { id: id },
+                                            success: function (data) {
+                                                if (data) {
+                                                    $("#Charge").val(data);
+                                                } else {
+                                                    // Handle the case where data is empty
+                                                }
+                                            },
+                                            error: function () {
+                                                console.log('Error retrieving record data.');
+                                            }
+                                        });
+                                    });
+
+                                    // Function to format a number with commas for thousands
+
+                                });
+                        </script>
+                        <div class="form-group col-md-2" style="display: none">
+                            <label><i class="fa fa-cash-register text-primary"></i> @Html.LabelFor(model => model.Charge)</label>
+                            @Html.EditorFor(model => model.Charge, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = " Estimate Charge",
+                               @Readonly = true,
+                               id = "Charge",
+                               // Add an ID to the input field for easy access in JavaScript
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.WeekNo)</label>
+                            @Html.EditorFor(model => model.WeekNo, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = " WeekNo",
+                               @Readonly = true,
+                           }
+                       })
+                        </div>
+                    </div>
+                    <script>
+                                // Add an event listener to the input field
+                                document.getElementById("Hours").addEventListener("input", function () {
+                                    // Get the current value of the input field
+                                    var inputValue = this.value;
+
+                                    // Convert the input value to a number
+                                    var hours = parseFloat(inputValue);
+
+                                    // Check if the value is greater than 12
+                                    if (hours > 24) {
+                                        // If greater than 12, set the value to 12
+                                        this.value = 24;
+                                    }
+                                });
+                    </script>
+
+                    <div class="dropdown-divider"></div>
+                    <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Comments) </label>
+                    <div class="form-row">
+
+                        @Html.TextAreaFor(model => model.Comments, 4, 70, htmlAttributes: new
+{
+id = "Comments", // Make sure the ID matches the one in getElementById
+style = "width: 70%; max-width:70%;",
+@placeholder = "Additional information",
+@autofocus = "",
+@class = "form-control form-rounded2",
+@data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+})
+                        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+
+                        <script>
+                                    document.getElementById("Comments").addEventListener("paste", function (event) {
+                                        // Prevent the default paste behavior
+                                        event.preventDefault();
+
+                                        // Get the pasted content as plain text
+                                        var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+
+                                        // Sanitize the pasted content (you may use a library for this)
+                                        var sanitizedText = sanitizeFunction(text);
+
+                                        // Insert the sanitized plain text into the textarea as HTML
+                                        document.execCommand("insertHTML", false, sanitizedText);
+                                    });
+
+                                    function sanitizeFunction(input) {
+                                        // Implement your own sanitization logic or use a library
+                                        // to ensure that the pasted content is safe.
+                                        // Example: Implement a function to escape HTML entities.
+                                        return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    }
+                        </script>
+
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+                    <input type="submit" name="action" value="Update/Save Activity" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this Task?')" />
+
+
+                    <script>
+                                    $(function () {
+                                        $('#Create').click(function () {
+                                            if (confirm('Are you sure?')) {
+                                                window.location.href = $(this).data('url');
+                                            }
+                                        });
+                                    });
+                    </script>
+
+                    <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+
+                </div>
+            </div>
+
+
+
+
+
+        </form>
+
+
+
+    }
+
+
 </div>

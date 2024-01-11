@@ -31,7 +31,7 @@
 
 
 
-<div class="card-header" style="background: linear-gradient(to right, #030a41, #0C54A0); border-radius: 11px">
+<div class="card-header" style="background: linear-gradient(to right, #030a41, #0C54A0); border-radius: 1px">
     <h3 class="card-title" style="color:white">
         <i class="fa fa-home"></i>
         HomePage
@@ -88,49 +88,49 @@
 
                 <div class="row justify-content-end">
                     <div class="col-md-4 col-sm-4 col-9">
-                        <div class="info-box" style="border-radius: 14px; background-color:#080348 ">
-                            <span><i class="fa fa-user-clock text-white"></i></span>
+                        <div class="info-box" style="border-radius: 14px; background-color:white ">
+                            <span><i class="fa fa-bookmark text-primary"></i></span>
 
-                            <div class="info-box-content" style="color: white">
-                                <span class="info-box-text">Today InDirect Hours</span>
-                                <span class="info-box-number">11 <small><b>Hours</b></small></span>
+                            <div class="info-box-content" style="color:black">
+                                <span class="info-box-text"><b>Today InDirect Hours</b></span>
+                                <span class="info-box-number"> <b style="font-size:x-large">@ViewBag.InDirectHours </b><small><b>Hours</b></small></span>
                             </div>
-                            <!-- /.info-box-content -->
+                           
                         </div>
-                        <!-- /.info-box -->
+                        
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-9">
-                        <div class="info-box" style="border-radius: 14px; background-color: #03421a ">
+                        <div class="info-box" style="border-radius: 14px; background-color: #0C54A0 ">
                             <span><i class="fa fa-user-clock text-white"></i></span>
 
                             <div class="info-box-content" style="color: white">
                                 <span class="info-box-text">Today Direct Hours</span>
-                                <span class="info-box-number">11 <small><b>Hours</b></small></span>
+                                <span class="info-box-number"><b style="font-size:x-large">@ViewBag.DirectHours</b> <small><b>Hours</b></small></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
                         <!-- /.info-box -->
                     </div>
                     <div class="col-md-4 col-sm-4 col-9">
-                        <div class="info-box" style="border-radius: 14px; background-color: #423404 ">
+                        <div class="info-box" style="border-radius: 14px; background-color: #333338 ">
                             <span><i class="fa fa-user-clock text-white"></i></span>
 
                             <div class="info-box-content" style="color: white">
                                 <span class="info-box-text">Total  Hours</span>
-                                <span class="info-box-number">11 <small><b>Hours</b></small></span>
+                                <span class="info-box-number"><b style="font-size:x-large">@ViewBag.TotalHours</b> <small><b>Hours</b></small></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
                         <!-- /.info-box -->
                     </div>
                 </div>
-
+                <div class="dropdown-divider"></div>
                 <div class="container">
                     <div class="row justify-content-end">
                         <div class="col-lg-8 col-11">
                             <!-- small card -->
-                            <div class="small-box bg-gradient-navy" style="border-radius: 15px">
+                            <div class="small-box bg-gradient-white" style="border-radius: 15px">
                                 <div class="inner">
 
                                     <h4> <i class="fa fa-umbrella-beach"></i><b> leave Request</b></h4>
@@ -138,7 +138,7 @@
                                     <small><i class="fa fa-spin fa-circle-notch"></i> Click view  to view the leave module</small>
                                 </div>
                                 <div class="icon"> <i class="fa fa-umbrella-beach"></i></div>
-                                <a href="@Url.Action("All", "Leaves")" class="small-box-footer" style="background-color: black; color: white;border-radius:10px;">
+                                <a href="@Url.Action("All", "Leaves")" class="small-box-footer" style="background-color: #0C54A0; color: white;border-radius:10px;">
                                     <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
                                 </a>
                             </div>
@@ -153,26 +153,7 @@
 
 
 
-            <div class="col-xl-5">
-                <div class="col-lg-11 col-11">
-                    <!-- small card -->
-                    <div class="small-box bg-warning" style="border-radius: 15px">
-                        <div class="inner">
-
-
-                            <h4> <i class="fa fa-chart-pie"></i><b> System Reports</b></h4>
-                            <h6>Report analysis estimates,invoices data</h6>
-                            <small><i class="fa fa-spin fa-circle-notch"></i> Click view  to view the reports module</small>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-chart-bar"></i>
-                        </div>
-                        <a href="@Url.Action("Index", "Reports")" class="small-box-footer" style="background-color: black; color: white;border-radius:10px;">
-                            <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+           
 
         </div>
 

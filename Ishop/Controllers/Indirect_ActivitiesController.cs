@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using PagedList;
 
 namespace Ishop
 {
@@ -91,6 +92,24 @@ namespace Ishop
         // GET: Indirect_Activities/Edit/5
         public ActionResult Edit(int? id)
         {
+            Direct_Context DC = new Direct_Context();
+            var DirectC = DC.directs.ToList();
+            ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
+
+
+            InDirect_Context ID = new InDirect_Context();
+            var InDirect = ID.InDirects.ToList();
+            ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
+
+            Project_Context P = new Project_Context();
+            var Project = P.projects.ToList();
+            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
+
+            
+
+
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,35 +133,22 @@ namespace Ishop
             {
                 db.Entry(indirect_Activities).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["msg"] = "Activity updated successfully ";
+                
             }
-            return View(indirect_Activities);
+            return RedirectToAction("Index", "Timesheet");
         }
 
         // GET: Indirect_Activities/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Indirect_Activities indirect_Activities = db.indirect_Activities.Find(id);
-            if (indirect_Activities == null)
-            {
-                return HttpNotFound();
-            }
-            return View(indirect_Activities);
-        }
-
-        // POST: Indirect_Activities/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        
+        public ActionResult Delete(int id)
         {
             Indirect_Activities indirect_Activities = db.indirect_Activities.Find(id);
             db.indirect_Activities.Remove(indirect_Activities);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Activity dropped successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)
@@ -152,6 +158,32 @@ namespace Ishop
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        public ActionResult InDirecttasksview(DateTime Weekday, int? page)
+        {
+            try
+            {
+
+
+
+                DateTime currentDate = Weekday;
+                DayOfWeek dayOfWeek = currentDate.DayOfWeek;
+
+                var data = db.indirect_Activities.Where(p => p.User == User.Identity.Name && p.Day_Date == currentDate).ToList().ToPagedList(page ?? 1, 11).ToList();
+
+
+                // Handle or return data as needed
+                return PartialView("InDirecttasksview", data);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                Console.WriteLine($"Error in controller action: {ex.Message}");
+                var data = ex.Message;
+                return PartialView("InDirecttasksview", data);
+            }
         }
     }
 }

@@ -39,7 +39,14 @@ namespace Ishop.Controllers
             }
 
 
-
+            Direct_Activities_Context DA = new Direct_Activities_Context();
+            Indirect_Activities_Context IDA = new Indirect_Activities_Context();
+            DateTime currentDate = DateTime.Now.Date;
+            var DirectA = DA.direct_Activities.Where(p => p.Day_Date == currentDate && p.User ==User.Identity.Name).Select(f=>f.Hours).DefaultIfEmpty(0).Sum();
+            var InDirectA = IDA.indirect_Activities.Where(p => p.Day_Date == currentDate && p.User == User.Identity.Name).Select(f => f.Hours).DefaultIfEmpty(0).Sum();
+            ViewBag.DirectHours = DirectA;
+            ViewBag.InDirectHours = InDirectA;
+            ViewBag.TotalHours = DirectA + InDirectA;
 
 
             return View();
