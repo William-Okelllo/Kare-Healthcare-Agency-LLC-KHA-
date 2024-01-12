@@ -148,7 +148,6 @@
             <thead>
                 <tr style="color:white">
 
-                    <th style="background-color: #0C54A0; font-size: medium; ">Week No </th>
                     <th style="background-color: #0C54A0; font-size: medium; "> Month</th>
 
                     <th style="background-color: #0C54A0; font-size: medium; ">Staff</th>
@@ -164,8 +163,12 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td style="background-color: white;"> <i class="fa fa-calendar-day text-primary"></i>  @item.WeekNumber</td>
-                        <td style="background-color: white;"> <i class="fa fa-bookmark text-primary"></i>  @item.MonthName</td>
+                       
+                        <td style="background-color: white;">
+                            <i class="fa fa-bookmark text-primary"></i>  @item.MonthName
+                            <div class="dropdown-divider"></div>
+                            <span class="badge badge-primary"><medium><i class="fa fa-calendar text-white"></i> Week No </medium></span> @item.WeekNumber
+                        </td>
                         <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i>  @item.User</td>
                         <td style="background-color: white;">
                             <span class="badge badge-primary"><medium><i class="fa fa-clock text-white"></i></medium></span> <b>@item.DirectHours</b> <small>Hrs</small>

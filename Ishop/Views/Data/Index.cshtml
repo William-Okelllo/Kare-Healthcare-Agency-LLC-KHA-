@@ -84,17 +84,17 @@
                         {
                             <tr data-widget="expandable-table" aria-expanded="false">
 
-                                <td style="background-color: rgba(255, 255, 255, 0.60)">
+                                <td style="background-color: white">
                                     <i class="fa fa-user-circle text-primary"></i>  @item.UserName
                                 </td>
-                                <td style="background-color: rgba(255, 255, 255, 0.60)">
+                                <td style="background-color:white">
                                     @item.PhoneNumber
                                 </td>
 
-                                <td style="background-color: rgba(255, 255, 255, 0.60)">
-                                    <i class="fa fa-envelope text-info"></i>   @item.Email
+                                <td style="background-color: white">
+                                    <i class="fa fa-envelope text-primary"></i>   <small style="color:blue">@item.Email</small>
                                 </td>
-                                <td style="background-color: rgba(255, 255, 255, 0.60)">
+                                <td style="background-color: white">
                                     @if (@item.EmailConfirmed == true)
                                     {
                                         <i class="fa fa-check-circle text-success"></i><medium>  Yes</medium>

@@ -1,5 +1,6 @@
 ﻿using Ishop.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
@@ -267,11 +268,26 @@ namespace Ishop.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber  };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                var usernamename = user.UserName;
+                var Passworduser = model.Password;
+                var SubjectTopic = "Welcome to Timenex";
+                var TextBody = "Hello there 👋,"
+                + "\n" + "The following are your login credentials to Timenex timesheet management system"
+                + "\n" + "_____________________________ "
+                + "\n" + " "
+                + "\n" + "Username : " + model.UserName
+                + "\n" + "Password : " + model.Password
+                + "\n" + " "
+                + "\n" + "_____________________________ "
+                + "\n" + "The provided password is a default password that you can be able to change once you access the system."
+                + "\n" + "System link : " + System.Configuration.ConfigurationManager.AppSettings["Businesssmail"].ToString() + "\n" + "";
+                PushEmail(model.Email, SubjectTopic, TextBody, DateTime.Now);
                 if (result.Succeeded)
                 {
-
+                    
 
                     // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -280,28 +296,27 @@ namespace Ishop.Controllers
 
 
 
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackurl = Url.Action("confirmEmail", "Account", new { userid = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    PushEmail(user.Email, "Confirm Account", "Kindly confirm your account via clicking the link<a href=\"" + callbackurl, DateTime.Now);
 
                     if (model.UserRoles == "Employee")
 
-                    {
-                        EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id, model.Email); ;
-                    }
+                    { EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id, model.Email); ;}
 
                     TempData["msg"] = "✔ Account Created successfully ,Confirmation sent to user account mail";
 
+
+
+
+
+                    
                     return RedirectToAction("Index", "Data");
                 }
+                
+
+
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                           .ToList(), "Name", "Name");
 
-
                 AddErrors(result);
-
-
-
 
 
             }
