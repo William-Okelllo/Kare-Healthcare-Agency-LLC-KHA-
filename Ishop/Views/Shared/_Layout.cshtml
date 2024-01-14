@@ -56,16 +56,11 @@
     <a class="wrapper">
 
         <div class="preloader flex-column justify-content-center align-items-center">
+            <img src="~/Images/2D.png" alt="" height="160">
             <img class="animation__shake" src="~/Images/A.gif" height="100">
             <br />
             <h5 style="font-style:italic;color:navy">...loading...</h5>
-            <div class="row">
-                <h4>
-                    <i class="fa fa-spin fa-circle-notch text-primary"></i> ..
-                    <i class="fa fa-spin fa-circle-notch text-navy"></i> ..
-                    <i class="fa fa-spin fa-circle-notch text-success"></i>
-                </h4>
-            </div>
+            
         </div>
 
 
@@ -106,10 +101,7 @@
 
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-centre">
                     <br />
-                    <div style="text-align:center">
-                        <img src="~/Images/P.png" height="30" alt="User Avatar">
-
-                    </div>
+                   
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
                     <div style="text-align: center; font-family: 'Montserrat' ">
                         <p style="font-family: 'Montserrat'">
@@ -169,7 +161,7 @@
 
     <aside class="main-sidebar sidebar-light-primary elevation-4 ">
         <!-- Brand Logo -->
-        <a href="@Url.Action("Index", "Home")" class="brand-link">
+        <a href="@Url.Action("Index", "Home")" class="brand-link" style="text-align:center">
             <img src="~/Images/P.png" height="40">
 
         </a>
@@ -227,6 +219,15 @@
 
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Timesheet")" class="nav-link">
+
+                                        <i class="fa fa-plus-circle text-blue nav-icon"></i>
+                                        <p style="color: #060440">
+                                            Add Tasks
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Mine", "Timesheet")" class="nav-link">
 
                                         <i class="fa fa-book-reader text-blue nav-icon"></i>
                                         <p style="color: #060440">
@@ -586,6 +587,7 @@
 
                   
                     <div class="dropdown-divider"></div>
+                    
                     <li class="nav-header" style="color: #0C54A0;font-size:smaller">
                         <b>Version 2.0.5</b>
 
@@ -612,10 +614,12 @@
         @RenderBody()
 
 
-
+       
 
     </div>
-
+    
+        
+    
 
     <!-- /.content-wrapper -->
     <!-- Control Sidebar -->

@@ -6368,6 +6368,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\1717.jpg" />
+    <Content Include="Images\2D.png" />
     <Content Include="Images\A.gif" />
     <Content Include="Images\CX.jpg" />
     <Content Include="Images\f.svg" />
@@ -8018,6 +8019,7 @@
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\Indirect_Activities\InDirecttasksview.cshtml" />
+    <Content Include="Views\Timesheet\Mine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

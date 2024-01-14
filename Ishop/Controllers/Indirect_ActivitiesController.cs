@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using PagedList;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Ishop
 {
@@ -81,13 +82,35 @@ namespace Ishop
         {
            
                 db.indirect_Activities.Add(indirect_Activities);
-                db.SaveChanges();
+            CaptureRecord(indirect_Activities.Hours, indirect_Activities.User, indirect_Activities.Day_Date);
+            db.SaveChanges();
+               
                 TempData["msg"] = "Activity added successfully ";
                 return RedirectToAction("Index", "Timesheet");
             
 
-            return View(indirect_Activities);
+           
         }
+
+
+        public void CaptureRecord(int time, string Staff, DateTime datecheck)
+        {
+            Timesheet_Context TT = new Timesheet_Context();
+            var Sheet = TT.timesheets.Where(i => i.Owner == Staff && datecheck >= i.From_Date && datecheck <= i.End_Date).FirstOrDefault();
+
+            if (Sheet != null)
+            {
+                Sheet.Tt = Sheet.Tt + time;
+                Sheet.InDirect_Hours = Sheet.InDirect_Hours + time;
+                TT.SaveChanges();
+            }
+        }
+
+
+
+
+
+
 
         // GET: Indirect_Activities/Edit/5
         public ActionResult Edit(int? id)
@@ -145,12 +168,26 @@ namespace Ishop
         {
             Indirect_Activities indirect_Activities = db.indirect_Activities.Find(id);
             db.indirect_Activities.Remove(indirect_Activities);
+            RemoveCaptureRecord(indirect_Activities.Hours, indirect_Activities.User, indirect_Activities.Day_Date);
             db.SaveChanges();
             TempData["msg"] = "Activity dropped successfully ";
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
         }
 
+
+        public void RemoveCaptureRecord(int time, string Staff, DateTime datecheck)
+        {
+            Timesheet_Context TT = new Timesheet_Context();
+            var Sheet = TT.timesheets.Where(i => i.Owner == Staff && datecheck >= i.From_Date && datecheck <= i.End_Date).FirstOrDefault();
+
+            if (Sheet != null)
+            {
+                Sheet.Tt = Sheet.Tt -  time;
+                Sheet.InDirect_Hours = Sheet.InDirect_Hours- time;
+                TT.SaveChanges();
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

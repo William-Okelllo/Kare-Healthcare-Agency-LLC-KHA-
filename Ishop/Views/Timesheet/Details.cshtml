@@ -17,94 +17,166 @@
             border: 1px solid whitesmoke;
         }
 </style>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card mb- mb-xl-0" style="border-radius: 24px;">
-        <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px;text-align:center ">
-            <i class="fa fa-bookmark"></i> Timesheet Details
-        </div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
-               
-
-                <thead style="font-family:Calibri">
-                    <tr style="color:white">
-                        <th style="background-color: #0656A5; "> Project</th>
-                        <th style="background-color: #0656A5; "> DayOfWeek</th>
-                        <th style="background-color: #0656A5; "> Comments</th>
-                       
-                    </tr>
-                </thead>
-
-                <tbody style="font-family:Calibri">
-                    @foreach (var item2 in ViewBag.Activities)
-                    {
-
-
-                        <tr data-widget="expandable-table" aria-expanded="false">
-
-
-                            <td style="background-color: white; width: 30% ">
-                                <i class="fa fa-suitcase text-primary"></i> @item2.Project_Name
-                                <div class="dropdown-divider"></div>
-                                <h5>
-                                    <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i> PHASE : @item2.Name </medium></span>
-                                    ||
-                                    <span class="badge badge-success"><medium><i class="fa fa-user-clock text-white"></i> Hours : @item2.Hours </medium></span>
-                                </h5>
-                            </td>
-                            <td style="background-color: white; width: 15% ">
-
-                                @if (item2.Day == "Sun")
-                                {
-                                    <p style="color:navy"><i class="fa fa-user-clock text-navy"></i> Sunday</p>
-                                }
-                                else if (item2.Day == "Mon")
-                                {
-                                    <p style="color:navy"><i class="fa fa-user-clock text-navy"></i> Monday</p>
-
-                                }
-                                else if (item2.Day == "Tue")
-                                {
-                                    <p style="color:navy"><i class="fa fa-user-clock text-navy"></i> Tuesday</p>
-
-                                }
-                                else if (item2.Day == "Wen")
-                                {
-                                    <p style="color:navy"><i class="fa fa-user-clock text-navy"></i> Wednesday</p>
-
-                                }
-                                else if (item2.Day == "Thur")
-                                {
-                                    <p style="color:navy"><i class="fa fa-user-clock text-navy"></i> Thursday</p>
-
-                                }
-                                else if (item2.Day == "Fri")
-                                {
-                                <p style="color:navy"><i class="fa fa-user-clock text-navy"></i> Friday</p>
-                                    
-                                }
-                                else
-                                {
-                            <p style="color:navy"><i class="fa fa-user-clock text-navy"></i> Saturday</p>
-                                }
-
-                            </td>
-
-                            <td style="background-color: whitesmoke; width: 55% ">
-                                <p class="limited-lines"><small>@item2.Comments</small></p>
-                            </td>
-                           
-                        </tr>
-
-                    }
-
-                </tbody>
-
-            </table>
-        </div>
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0C54A0; color: white; ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-suitcase"></i>
+            Timesheet Details
+        </h3>
+    </div>
 </div>
+<div class="row justify-content-center">
+    <div class="col-xl-10">
+
+        <div class="card-body" style="background-color: white;border-radius: 24px;">
 
 
-                        
-                        
+
+            <div class="form-row">
+
+                <div class="form-group col-md-3">
+                    <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                    @Html.EditorFor(model => model.CreatedOn, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Record",
+
+                       @ReadOnly = true,
+
+
+                   }
+               })
+
+                </div>
+                <div class="form-group col-md-3">
+                    <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Owner)</label>
+                    @Html.EditorFor(model => model.Owner, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Record",
+
+                       @ReadOnly = true,
+
+
+                   }
+               })
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label><i class=" fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
+                    @Html.EditorFor(model => model.Department, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Record",
+
+                       @ReadOnly = true,
+
+
+                   }
+               })
+
+                </div>
+            </div>
+            <div class="form-row">
+
+                <div class="form-group col-md-3">
+                    <label><span class="badge badge-primary"> <i class=" fa fa-calendar-day text-white"></i></span>   @Html.LabelFor(model => model.From_Date)</label>
+                    @Html.EditorFor(model => model.From_Date, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Record",
+
+                       @ReadOnly = true,
+
+
+                   }
+               })
+
+                </div>
+                <div class="form-group col-md-3">
+                    <label><span class="badge badge-primary"> <i class=" fa fa-calendar-day text-white"></i></span>   @Html.LabelFor(model => model.End_Date)</label>
+                    @Html.EditorFor(model => model.End_Date, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Record",
+
+                       @ReadOnly = true,
+
+
+                   }
+               })
+
+                </div>
+
+
+            </div>
+            <div class="dropdown-divider"></div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-9">
+                    <div class="info-box" style="border-radius: 14px; background-color: #0C54A0 ">
+                        <span><i class="fa fa-user-clock text-white"></i></span>
+
+                        <div class="info-box-content" style="color: white">
+                            <span class="info-box-text">Total  Hours</span>
+                            <h4><span class="info-box-number">@Model.Tt <small><b>Hours</b></small></span></h4>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <div class="col-md-3 col-sm-4 col-9">
+                    <div class="info-box" style="border-radius: 14px; background-color:#01520d ">
+                        <span><i class="fa fa-user-clock text-white"></i></span>
+
+                        <div class="info-box-content" style="color: white">
+                            <span class="info-box-text">Direct Hours</span>
+                            <h4><span class="info-box-number">@Model.Direct_Hours </span></h4>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <div class="col-md-3 col-sm-4 col-9">
+                    <div class="info-box" style="border-radius: 14px; background-color:#444343 ">
+                        <span><i class="fa fa-user-clock text-white"></i></span>
+
+                        <div class="info-box-content" style="color: white">
+                            <span class="info-box-text">InDirect Hours</span>
+                            <h4><span class="info-box-number">@Model.InDirect_Hours </span></h4>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+
+            @if (@Model.Status == 0)
+            {
+                <b style="color: green; font-size: medium">   PENDING  </b>}
+            else
+            {<b style="color: orange; font-size: medium "><i class="fa fa-spin fa-circle-notch"></i> APPROVED </b>
+            }
+            <div class="ui-menu-divider"></div><br />
+                                               <div style="text-align:center">
+                                                   <a href="@Url.Action("ApproveTimesheet", "Timesheet", new { id = ViewBag.weeNo,user=ViewBag.user })" class="btn btn btn-primary btn" onclick="return confirm('Are you sure you want to approve staff timesheet?')"><i class="fa fa-check-circle text-black"></i> Approve Week Timesheet</a>
+                                                   ||
+                                                   <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+                                               </div>
+           
+        </div>
+    </div>
+</div>

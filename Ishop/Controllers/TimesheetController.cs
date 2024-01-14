@@ -78,10 +78,30 @@ namespace Ishop
             return View();
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Timesheet timesheet = db.timesheets.Find(id);
+            if (timesheet == null)
+            {
+                return HttpNotFound();
+            }
+            return View(timesheet);
+        }
 
 
+        [Authorize]
+        public ActionResult Mine (string searchBy, string search, int? page)
+        {
+              
+          return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
-
+                
+           
+        }
 
 
 
@@ -101,81 +121,30 @@ namespace Ishop
         [Authorize]
         public ActionResult Approval( int? page, string option, string startDate, string endDate)
         {
-            string strcon = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
-            using (SqlConnection sqlCon = new SqlConnection(strcon))
+            var Employ = db.timesheets.Select(t => t.Owner).Distinct().ToList();
+            ViewBag.Usernames = Employ;
+
+
+            DepartmentContext DD = new DepartmentContext();
+            var Depart = DD.departments.Where(D => D.Manager == User.Identity.Name).Select(d => d.DprtName).FirstOrDefault();
+
+            if (!(option == null) && (!(option == "")))
             {
-                using (SqlCommand cmd = new SqlCommand("Employeeslist", sqlCon))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    
-                    sqlCon.Open();
-                    List<string> usernames = new List<string>();
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            usernames.Add(reader["Username"].ToString());
-                        }
-                    }
-
-                    sqlCon.Close();
-
-                    // Assign the usernames to ViewBag
-                    ViewBag.Usernames = usernames;
-
-                }
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(option) || c.Owner == option && c.Department ==Depart).ToList().ToPagedList(page ?? 1, 11));
 
             }
+            else if (option == "")
+            {
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c=>c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
 
+
+            }
+            else
+            {
+                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
+            }
             
 
-            List<CombinedViewModel> timeSheets = new List<CombinedViewModel>(); // Create a list to store time sheet data
-
-            using (SqlConnection sqlCon = new SqlConnection(strcon))
-            {
-                using (SqlCommand cmd = new SqlCommand("Alltimesheets", sqlCon))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    // Add parameters
-                    cmd.Parameters.AddWithValue("@UserName", option);
-                    cmd.Parameters.AddWithValue("@StartDate", startDate);
-                    cmd.Parameters.AddWithValue("@EndDate", endDate);
-
-                    sqlCon.Open();
-
-                    // Execute the stored procedure and get the result
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        // You can process the result set here or pass it to the view
-                        while (reader.Read())
-                        {
-                            CombinedViewModel combinedViewModel = new CombinedViewModel
-                            {
-                                WeekNumber = Convert.ToInt32(reader["Week_Number"]),
-                                MonthName = reader["Month_Name"].ToString(),
-                                User = reader["User"].ToString(),
-                                IndirectHours = Convert.ToInt32(reader["Indirect Hours"]),
-                                DirectHours = Convert.ToInt32(reader["Direct Hours"]),
-                                TotalHours = Convert.ToInt32(reader["Total Hours"]),
-                                Status = reader["Status"].ToString()
-                            };
-
-                            timeSheets.Add(combinedViewModel);
-                        }
-                    }
-
-                    sqlCon.Close();
-                }
-            }
-
-            int pageSize = 11; // Number of items per page
-            int pageNumber = page ?? 1; // If no page is specified, default to page 1
-
-            IPagedList<CombinedViewModel> pagedTimeSheets = timeSheets.ToPagedList(pageNumber, pageSize);
-
-            return View(pagedTimeSheets);
         }
 
 
@@ -281,9 +250,10 @@ namespace Ishop
             base.Dispose(disposing);
         }
 
-        public bool TimesheetExists(int weekNumber, string employeeUsername)
+        public bool TimesheetExists(DateTime from_Date , string employeeUsername)
         {
-            return db.timesheets.Any(c => c.Weekid == weekNumber && c.Owner == employeeUsername);
+            
+            return db.timesheets.Any(c => c.From_Date == from_Date && c.Owner == employeeUsername);
         }
 
        
@@ -311,33 +281,28 @@ namespace Ishop
 
             Employee_Context Emp = new Employee_Context();
             List<Employee> employees = Emp.employees.ToList();
-
+            DateTime currentDatee = DateTime.Now.Date;
+            DateTime from_Date = currentDatee;
+            DateTime end_Date = currentDate.AddDays((DayOfWeek.Saturday - currentDate.DayOfWeek + 7) % 7);
             foreach (var employee in employees)
             {
                 // Check if the timesheet already exists for the current week and employee
-                if (!TimesheetExists(WeekNo, employee.Username))
+                if (!TimesheetExists(from_Date, employee.Username))
                 {
                     // Create a new Timesheet record
                     Timesheet timesheet = new Timesheet
                     {
                         CreatedOn = DateTime.Now,
+                        Department =employee.DprtName,
+                        From_Date= from_Date,
+                        End_Date= end_Date,
                         Owner = employee.Username,
-                        Weekid = WeekNo,
-                        // Set other day-specific values here
-                       
                         Tt = 0,
+                        Direct_Hours=0,
+                        InDirect_Hours=0,
                         Status = 0
                     };
 
-
-                    var timesheetsToUpdate = db.timesheets.Where(c => c.Weekid < WeekNo).ToList();
-
-                    foreach (var check in timesheetsToUpdate)
-                    {
-                        check.Status = 1;
-                        db.SaveChanges();
-                    }
-                    // Insert the record into the "timesheet" table
                     db.timesheets.Add(timesheet);
                     db.SaveChanges();
 

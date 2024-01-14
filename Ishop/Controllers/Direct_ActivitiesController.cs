@@ -123,7 +123,8 @@ namespace Ishop.Controllers
             
                 db.direct_Activities.Add(direct_Activities);
                 db.SaveChanges();
-                TempData["msg"] = "Activity added successfully ";
+            CaptureRecord(direct_Activities.Hours, direct_Activities.User, direct_Activities.Day_Date);
+             TempData["msg"] = "Activity added successfully ";
                 return RedirectToAction("Index", "Timesheet");
             
 
@@ -131,7 +132,18 @@ namespace Ishop.Controllers
         }
 
 
+        public void CaptureRecord(int time, string Staff, DateTime datecheck)
+        {
+            Timesheet_Context TT = new Timesheet_Context();
+            var Sheet = TT.timesheets.Where(i => i.Owner == Staff && datecheck >= i.From_Date && datecheck <= i.End_Date).FirstOrDefault();
 
+            if (Sheet != null)
+            {
+                Sheet.Tt = Sheet.Tt + time;
+                Sheet.InDirect_Hours = Sheet.InDirect_Hours + time;
+                TT.SaveChanges();
+            }
+        }
 
         public ActionResult GetCharge(int id)
         {
@@ -196,12 +208,24 @@ namespace Ishop.Controllers
         {
             Direct_Activities direct_Activities = db.direct_Activities.Find(id);
             db.direct_Activities.Remove(direct_Activities);
+            RemoveCaptureRecord(direct_Activities.Hours, direct_Activities.User, direct_Activities.Day_Date);
             db.SaveChanges();
             TempData["msg"] = "Activity dropped successfully ";
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
         }
+        public void RemoveCaptureRecord(int time, string Staff, DateTime datecheck)
+        {
+            Timesheet_Context TT = new Timesheet_Context();
+            var Sheet = TT.timesheets.Where(i => i.Owner == Staff && datecheck >= i.From_Date && datecheck <= i.End_Date).FirstOrDefault();
 
+            if (Sheet != null)
+            {
+                Sheet.Tt = Sheet.Tt - time;
+                Sheet.InDirect_Hours = Sheet.InDirect_Hours - time;
+                TT.SaveChanges();
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
