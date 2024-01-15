@@ -433,7 +433,6 @@
     <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
-    <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

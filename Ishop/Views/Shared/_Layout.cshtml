@@ -186,7 +186,7 @@
             <nav class="mt-2" style="text-align:left;font-family: 'Montserrat';font-size:13px" ">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
 
 
 
@@ -401,16 +401,17 @@
                                         </p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Employees")" class="nav-link">
 
-                                        <i class="fa fa-users text-blue nav-icon"></i>
-                                        <p style="color: #060440 ">
-                                            Employees
-                                        </p>
-                                    </a>
-                                </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Employees")" class="nav-link">
+
+                                <i class="fa fa-users text-blue nav-icon"></i>
+                                <p style="color: #060440 ">
+                                    Employees <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
 
@@ -544,21 +545,13 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-user-cog text-navy"></i>
                                 <p style="color: #060440;  ">
-                                    Configs & Users <i class="fas fa-angle-left right"></i>
+                                    Configs <i class="fas fa-angle-left right"></i>
 
 
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Data")" class="nav-link">
-
-                                        <i class="fa fa-users text-navy nav-icon"></i>
-                                        <p style="color: #0C54A0">
-                                            All users
-                                        </p>
-                                    </a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Configuration")" class="nav-link">
 
@@ -568,15 +561,7 @@
                                         </p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Configuration")" class="nav-link">
-
-                                        <i class="fa fa-bell text-primary nav-icon"></i>
-                                        <p style="color: #0C54A0">
-                                            Notifications
-                                        </p>
-                                    </a>
-                                </li>
+                               
                             </ul>
 
                         </li>
@@ -585,14 +570,18 @@
 
 
 
-                  
+
                     <div class="dropdown-divider"></div>
-                    
+
                     <li class="nav-header" style="color: #0C54A0;font-size:smaller">
                         <b>Version 2.0.5</b>
 
                     </li>
+                    <li class="nav-header" style="color: #000000;font-size:smaller">
 
+                        <div class="ui-menu-divider"></div>
+                        <b>Copyright © @DateTime.Now.Year Planning Systems.<div class="ui-menu-divider"></div>  All rights reserved</b>
+                    </li>
 
                 </ul>
 

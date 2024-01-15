@@ -106,6 +106,7 @@
                     <th style="background-color: #0656A5; font-size: medium; ">Department</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Designation</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Hourly Rate</th>
+                    <th style="background-color: #0656A5; font-size: medium; "> Access</th>
                     <th style="background-color: #0656A5; font-size: medium;">Action</th>
                 </tr>
             </thead>
@@ -117,14 +118,18 @@
                             <i class="fa fa-calendar-check text-primary"></i>  @item.CreatedOn.ToString("dd-MMM-yyyy")
 
                         </td>
-                       
+
                         <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i> @item.Fullname</td>
                         <td style="background-color: white;font-size:small;color:dodgerblue"> <i class="fa fa-envelope text-primary"></i> @item.Email</td>
                         <td style="background-color: white;"> <i class="fa fa-mobile text-primary"></i> @item.Contact</td>
                         <td style="background-color: white;"> <i class="fa fa-university text-primary"></i> @item.DprtName</td>
                         <td style="background-color: white;"> <i class="fa fa-suitcase text-primary"></i> @item.Designation</td>
                         <td style="background-color: white;"> KSH  @item.Rate.ToString("#,##0.00")</td>
-
+                        <td style="background-color:ghostwhite">
+                            <a href="@Url.Action("Grant_Role", "Accesses", new { UserId = item.Userid })">
+                                <i class="fa fa-user-shield"></i> Manage Roles
+                            </a>
+                        </td>
                         <td style="background-color:ghostwhite">
 
                             <div class="btn-group dropdown">

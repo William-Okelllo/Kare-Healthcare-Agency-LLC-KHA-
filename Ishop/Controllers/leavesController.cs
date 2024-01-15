@@ -38,12 +38,12 @@ namespace Ishop.Controllers
 
                 if (!(search == null))
                 {
-                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name && c.Status !=0).ToList().ToPagedList(page ?? 1, 6));
 
                 }
                 else
                 {
-                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name).ToList().ToPagedList(page ?? 1, 6));
+                    return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Employee == User.Identity.Name && c.Status != 0).ToList().ToPagedList(page ?? 1, 6));
 
 
                 }
@@ -53,18 +53,18 @@ namespace Ishop.Controllers
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Department.StartsWith(search) || c.Department == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Department.StartsWith(search) && c.Status != 0).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.leave.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c=>c.Status != 0).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.leave.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Status != 0).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }
@@ -261,7 +261,7 @@ namespace Ishop.Controllers
                 
                 if (action == "Save_Request")
                 {
-                    leave.Status = 0;
+                    leave.Status = 66;
                 }
                 else if (action == "Submit_Request")
                 {

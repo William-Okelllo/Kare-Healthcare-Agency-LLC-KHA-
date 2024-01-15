@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Ishop.Models
@@ -69,6 +70,10 @@ namespace Ishop.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        public string Fullname { get; set; }
+        public decimal Rate { get; set; }
+        public string Designation { get; set; }
+        public String DprtName { get; set; }
         [Required]
         [Display(Name = "UserRoles")]
         public string UserRoles { get; set; }

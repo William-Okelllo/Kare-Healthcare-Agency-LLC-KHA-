@@ -157,7 +157,7 @@
                         <td style="background-color: white;">
                             <i class="fa fa-bookmark text-primary"></i>  @item.CreatedOn.ToString("MMMM")
                             <div class="dropdown-divider"></div>
-                            <small style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b>To</b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.CreatedOn.ToString("dd-MMM-yyyy")</b></small>
+                            <small style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b>To</b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></small>
                         </td>
                         <td style="background-color: white;">
                             <span class="badge badge-primary"><i class="fa fa-user-circle text-white"></i></span>  @item.Owner
@@ -175,13 +175,15 @@
                                 DateTime from_Date = currentDate;
                                 DateTime end_Date = currentDate.AddDays((DayOfWeek.Saturday - currentDate.DayOfWeek + 7) % 7);
                             }
+
                             @if (item.CreatedOn >= from_Date && item.CreatedOn <= end_Date)
                             {
                                 <div class="spinner-border spinner-border-sm text-success" role="status">
                                     <span class="sr-only">Loading...</span>
                                 </div>
-                                <small style="font-size:small;color:forestgreen"><b>INPROGRESS</b></small>
+                                <small style="font-size: small; color: forestgreen"><b>IN PROGRESS</b></small>
                             }
+
                             else
                             {
                                 <small style="font-size:medium;color:dimgray"><b><i class="fa fa-check-circle text-gray"></i> CLOSED</b></small>

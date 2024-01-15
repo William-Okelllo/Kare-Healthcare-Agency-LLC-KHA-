@@ -77,33 +77,39 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                <div class="col-lg-3 col-6" style="border-radius: 27px ">
-                    <!-- small box -->
-                    <div class="small-box " style="border-radius: 27px; background-color: #0656A5 ">
-                        <div class="inner" style="border-radius: 27px ">
 
-                            <h4 style="color:white"><span class="info-box-text text-wrap"><medium><i class="fa fa-book-reader"></i>  .@item.Category</medium></span></h4>
-                            <div class="dropdown-divider"></div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-navy" style="border-radius: 20px">
+                        <div class="inner">
+                            <h3> <i class="fa fa-bookmark"></i> @item.Category </h3>
+                           
+
                         </div>
                         <div class="icon">
-                            <i class="fa  fa-10x fa-book-reader"></i>
+                            <i class="ion ion-umbrella"></i>
                         </div>
                         <div class="btn-group dropdown dropright">
                             <button type="button" class="btn-xs btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-paper-plane"></i>  . Action
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <a href="@Url.Action("Delete", "Service", new { id = item.Id })" class="dropdown-item">
-                                    <i class="fa fa-trash text-danger"></i> Drop Service
+                                <a href="@Url.Action("Delete", "Pcategories", new { id = item.Id })" class="dropdown-item">
+                                    <i class="fa fa-trash text-danger"></i> Drop Category
                                 </a>
 
                             </div>
                         </div>
                     </div>
+                    </div>
+                        }
+                    </div>
                 </div>
 
 
-            }
+
+               
+
         </div>
         <style>
             .ul.pagination {

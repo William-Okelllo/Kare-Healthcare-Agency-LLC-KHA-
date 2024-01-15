@@ -103,30 +103,15 @@ namespace Ishop.Controllers
             return View(pcategory);
         }
 
-        // GET: Pcategories/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pcategory pcategory = db.pcategories.Find(id);
-            if (pcategory == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pcategory);
-        }
-
-        // POST: Pcategories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+       
+        public ActionResult Delete(int id)
         {
             Pcategory pcategory = db.pcategories.Find(id);
             db.pcategories.Remove(pcategory);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Category dropped successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

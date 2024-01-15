@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -97,23 +98,11 @@ namespace Ishop
         public ActionResult Mine (string searchBy, string search, int? page)
         {
               
-          return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
+          return View(db.timesheets.OrderBy(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
                 
            
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -130,18 +119,18 @@ namespace Ishop
 
             if (!(option == null) && (!(option == "")))
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Owner.StartsWith(option) || c.Owner == option && c.Department ==Depart).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderBy(p => p.Id).Where(c => c.Owner.StartsWith(option) || c.Owner == option && c.Department ==Depart).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (option == "")
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c=>c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderBy(p => p.Id).Where(c=>c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.timesheets.OrderByDescending(p => p.Id).Where(c => c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets.OrderBy(p => p.Id).Where(c => c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
             }
             
 
@@ -188,33 +177,34 @@ namespace Ishop
 
 
         private Userstable ddb = new Userstable();
-        public ActionResult ApproveTimesheet(int Id,string user)
+        public ActionResult ApproveTimesheet(int id ,string user,DateTime From_Date ,DateTime End_Date)
         {
            var DirectActivitiestasks = DA.direct_Activities.ToList();
            var IndirectActivitiestasks =IA.indirect_Activities.ToList();
             
-
-            // Assuming you have a model with a property named "Id" and "User" in both direct and indirect activities
-            foreach (var task in DirectActivitiestasks.Where(t => t.WeekNo == Id && t.User == user))
+            foreach (var task in DirectActivitiestasks.Where(t=>t.Day_Date >= From_Date && t.Day_Date <= End_Date && t.User==user))
             {
                 // Update the status of the direct activity
                 task.Approved = true;
                 DA.SaveChanges();
             }
 
-            foreach (var task in IndirectActivitiestasks.Where(t => t.WeekNo == Id && t.User == user))
+            foreach (var task in IndirectActivitiestasks.Where(t => t.Day_Date >= From_Date && t.Day_Date <= End_Date && t.User == user))
             {
                 // Update the status of the indirect activity
                 task.Approved = true;
                 IA.SaveChanges();
             }
 
-            // Save changes to the database
-            int currentYear = DateTime.Now.Year;
-            int weekNumber = Id;
-            DateTime jan1 = new DateTime(currentYear, 1, 1);
-            DateTime specifiedWeekStart = jan1.AddDays((weekNumber - 1) * 7 - (int)jan1.DayOfWeek + (int)DayOfWeek.Monday);
-            string monthName = specifiedWeekStart.ToString("MMMM", CultureInfo.InvariantCulture);
+
+            Timesheet check = db.timesheets.Find(id);
+            if (check != null)
+            {
+                check.Status = 7;
+                db.SaveChanges();
+            }
+
+            var Times = db.timesheets.Where(c => c.Id == id).FirstOrDefault();
             string daytime;
             if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
             { daytime = "Good Morning"; }
@@ -222,15 +212,15 @@ namespace Ishop
             { daytime = "Good Afternoon"; }
             else
             { daytime = "Good Evenning"; }
-            string Subject = "Timesheet Approved Successfully Week No " + Id;
+            string Subject = "Timesheet Approved Successfully  Month : " + Times.CreatedOn.ToString("MMMM") + "Duration : " + Times.From_Date.ToString("dd-MMMM-yyyy")  + " To " + Times.End_Date.ToString("dd-MMMM-yyyy");
             string message = daytime + " ," + user
-            + "\n" + "Your timesheet for Week Number " + Id +" of month " + monthName + " has been Approved successfully  "
+            + "\n" + "Your timesheet  Month: " + Times.CreatedOn.ToString("MMMM") + "Duration: " + Times.From_Date.ToString("dd - MMMM - yyyy")  + " To " + Times.End_Date.ToString("dd - MMMM - yyyy") +  " has been Approved successfully  "
             + "\n" + "thank you "
             + "\n" + "Regards , HR-Team ";
             var usser = ddb.AspNetUsers.Where(t => t.UserName == user).FirstOrDefault();
             PushEmail(usser.Email, Subject, message, DateTime.Now);
             PushSms(usser.PhoneNumber, message, DateTime.Now);
-            TempData["msg"] = "Timesheet apporved successfully - WeekNo" + Id  + "-Staff  "+ user;
+            TempData["msg"] = "Timesheet apporved successfully  -Staff  "+ user;
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
         }
@@ -292,7 +282,7 @@ namespace Ishop
                     // Create a new Timesheet record
                     Timesheet timesheet = new Timesheet
                     {
-                        CreatedOn = DateTime.Now,
+                        CreatedOn = from_Date.AddDays(1),
                         Department =employee.DprtName,
                         From_Date= from_Date,
                         End_Date= end_Date,

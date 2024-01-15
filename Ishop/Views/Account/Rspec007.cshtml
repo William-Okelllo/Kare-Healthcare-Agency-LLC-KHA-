@@ -72,11 +72,9 @@
     <br />
 
 
-    <br />
-    <br />
     <div class="col d-flex justify-content-center">
         
-                <div class="col-md-9 col-sm-12 col-12">
+                <div class="col-md-11 col-sm-12 col-12">
                     <div class="card mb- mb-xl-0" style="border-radius: 24px;">
                         <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
                             <i class="fa fa-bookmark"></i> New Account.
@@ -90,9 +88,23 @@
 
 
                                     <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label style="color:darkblue"> <i class="fa fa-user-circle"></i>  Fullnames</label>
+                                            @Html.EditorFor(model => model.Fullname, new
+                                       {
+                                           htmlAttributes = new
+                                           {
+                                               @class = "form-control form-control-sm",
+                                               @Placeholder = "Fullname",
+                                               @Required = true,
 
-                                        <div class="form-group col-md-4">
-                                            <label style="color:darkblue">Username</label>
+
+                                           }
+                                       })
+
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label style="color:darkblue"><i class="fa fa-user-tag"></i>   Username</label>
                                             @Html.EditorFor(model => model.UserName, new
                                        {
                                            htmlAttributes = new
@@ -102,7 +114,7 @@
                                                @required = "required"
                                            }
                                        })  @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                                    <div id="errorMessage" style="display:none;color:red">
+                                    <div id="errorMessage2" style="display:none;color:red">
                                         <a href="#" style="color:red">
                                             <div class="spinner-grow spinner-grow-sm text-danger" role="status">
                                                 <span class="sr-only">Loading...</span>
@@ -122,10 +134,10 @@ $(document).ready(function () {
             data: { UserName: UserName },
             success: function (data) {
                 if (data) {
-                    $("#errorMessage").show();
+                    $("#errorMessage2").show();
                     $("#myButton").hide();
                 } else {
-                    $("#errorMessage").hide();
+                    $("#errorMessage2").hide();
                     $("#myButton").show();
                 }
             }
@@ -140,7 +152,7 @@ $(document).ready(function () {
 
 
                                 <div class="form-group col-md-3">
-                                    <label style="color:darkblue">Phone No</label>
+                                    <label style="color:darkblue"><i class="fa fa-mobile"></i>  Phone No</label>
                                     @Html.EditorFor(model => model.PhoneNumber, new
                                {
                                    htmlAttributes = new
@@ -150,33 +162,33 @@ $(document).ready(function () {
                                        @required = "required"
                                    }
                                })  @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label style="color:darkblue">Email Address</label>
-                            @Html.EditorFor(model => model.Email, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control  form-control-sm",
-                               @PlaceHolder = "Email Address",
-                               @required = "required"
-                           }
-                       })  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })<span id="emailValidationResult"></span>
-                    <div id="errorMessage" style="display:none;color:red">
-                        <a href="#" style="color:red">
-                            <div class="spinner-border spinner-border-sm text-danger" role="status">
-                                <span class="sr-only">Loading...</span>
                             </div>
-                            <div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>  Email already in use
-                        </a>
-                    </div>
+                            <div class="form-group col-md-3">
+                                <label style="color:darkblue"><i class="fa fa-envelope"></i>   Email Address</label>
+                                @Html.EditorFor(model => model.Email, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control  form-control-sm",
+                                   @PlaceHolder = "Email Address",
+                                   @required = "required"
+                               }
+                           })  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })<span id="emailValidationResult"></span>
+                            <div id="errorMessage" style="display:none;color:red">
+                                <a href="#" style="color:red">
+                                    <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>  Email already in use
+                                </a>
+                            </div>
 
 
 
 
-                    <script>
+                            <script>
 $(document).ready(function () {
     $("#Email").keyup(function () {
         var Email = $(this).val();
@@ -195,11 +207,11 @@ $(document).ready(function () {
         });
     });
 });
-                    </script>
-                </div>
+                            </script>
+                            </div>
 
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
     $(document).ready(function () {
         $("#Email").on("input", function () {
             var email = $(this).val();
@@ -218,70 +230,119 @@ $(document).ready(function () {
             });
         });
     });
-                </script>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label style="color:darkblue">Password </label>
-                    @Html.EditorFor(model => model.Password, new
-               {
-                   htmlAttributes = new
-                   {
-                       @class = "form-control form-control-sm ",
-                       @PlaceHolder = "Password",
-                       @required = "required"
+                            </script>
+                            </div>
 
-                   }
-               })  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-md-3">
-                <label style="color:darkblue">Confirm Password </label>
-                @Html.EditorFor(model => model.ConfirmPassword, new
-           {
-               htmlAttributes = new
-               {
-                   @class = "form-control form-control-sm ",
-                   @PlaceHolder = "Confirm Password",
-                   @required = "required"
-
-               }
-           })  @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group col-md-4">
-
-                <label style="color:darkblue"> Select Account Role</label>
-
-                @Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, "-Account Type- ", new { @class = "form-control form-control-sm", @required = "required" })
-                @Html.ValidationMessageFor(model => model.UserRoles, "", new { @class = "text-danger" })
-            </div>
-
-
-            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
-
-            <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-primary"> </p>
-            <small>Show password</small>
-            <script type="text/javascript">
-                $(function () {
-                    $("#toggle_pwd").click(function () {
-                        $(this).toggleClass("fa-eye fa-eye-slash");
-                        var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
-                        $("[id*=Password]").attr("type", type);
-                    });
-                });
-            </script>
-
-
-            </div>
-            <div class="dropdown-divider"></div>
-
-            <input type="submit" value="Add New Account" class="btn btn-success" /> <small>||</small>
-            <input type="Reset" value="Reset" class="btn btn-danger" /> <small>||</small>
-            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary btn" })
+                            <div class="dropdown-divider"></div>
 
 
 
 
-        }
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label style="color:darkblue">Password </label>
+                                    @Html.EditorFor(model => model.Password, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm ",
+                                       @PlaceHolder = "Password",
+                                       @required = "required"
+
+                                   }
+                               })  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="color:darkblue">Confirm Password </label>
+                                @Html.EditorFor(model => model.ConfirmPassword, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm ",
+                                   @PlaceHolder = "Confirm Password",
+                                   @required = "required"
+
+                               }
+                           })  @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="color:darkblue"><i class="fa fa-user-check"></i> Designation </label>
+                                @Html.EditorFor(model => model.Designation, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Designation",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label style="color:darkblue"><i class="fa fa-university"></i> Department </label>
+                                @Html.DropDownList("DprtName", ViewBag.Department as SelectList, "--Select Department--", new { @class = "form-control form-control-sm", @Required = true })
+                            </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="form-row">
+
+                                
+
+                                <script type="text/javascript">
+                                    $(function () {
+
+                                        $("#DprtName").chosen();
+                                        $("#UsesrRoles").chosen();
+
+                                    });
+                                </script>
+                                <div class="form-group col-md-2">
+
+                                    <label style="color:darkblue"><i class="fa fa-tags"></i>   Account </label>
+                                    @Html.EditorFor(model => model.UserRoles, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Designation",
+                                       @Value = "Employee",
+                                       @Readonly = true,
+
+
+                                   }
+                               })
+
+                                </div>
+
+
+                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
+
+                                <p id="toggle_pwd" class="fa fa-fw fa-eye field_icon text-primary"> </p>
+                                <small>Show password</small>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $("#toggle_pwd").click(function () {
+                                            $(this).toggleClass("fa-eye fa-eye-slash");
+                                            var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
+                                            $("[id*=Password]").attr("type", type);
+                                        });
+                                    });
+                                </script>
+
+
+                            </div>
+                            <div class="dropdown-divider"></div>
+
+                            <input type="submit" value="Add New Account" class="btn btn-success" /> <small>||</small>
+                            <input type="Reset" value="Reset" class="btn btn-danger" /> <small>||</small>
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary btn" })
+
+
+
+
+                        }
 
                             </form>
 

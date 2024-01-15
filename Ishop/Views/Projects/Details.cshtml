@@ -217,9 +217,10 @@
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-
                                 <div style="text-align:right">
                                     <a href="@Url.Action("create", "Phase", new { id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-plus-circle text-black"></i> Add Phases</a>
+                                    ||
+                                    <a href="@Url.Action("Edit", "Projects", new { id = Model.Id })" class="btn-sm btn btn-warning btn"><i class="fa fa-pen-nib text-black"></i> Update Project Info </a>
                                 </div>
 
                                 <div class="dropdown-divider"></div>
@@ -246,8 +247,12 @@
 
                                                     <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Name</td>
                                                     <td style="background-color:white"> <i class="fa fa-suitcase text-primary"></i> @item2.Budget.ToString("#,##0.00")</td>
-                                                    <td style="background-color:white"> <small><i class="fa fa-calendar-day text-primary"></i>
-                                                        @item2.Start_Date.ToString("dd-MMMM-yyyy")  --<i class="fa fa-calendar-day text-primary"></i> @item2.End_Date.ToString("dd-MMMM-yyyy")</small></td>
+                                                    <td style="background-color:white">
+                                                        <small>
+                                                            <i class="fa fa-calendar-day text-primary"></i>
+                                                            @item2.Start_Date.ToString("dd-MMMM-yyyy")  --<i class="fa fa-calendar-day text-primary"></i> @item2.End_Date.ToString("dd-MMMM-yyyy")
+                                                        </small>
+                                                    </td>
 
                                                     <td style="background-color:ghostwhite">
 

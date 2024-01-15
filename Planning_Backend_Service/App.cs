@@ -374,10 +374,9 @@ namespace Planning_Backend_Service
                             if (Enum.TryParse(Runtime, out DayOfWeek runtimeDayOfWeek))
                             {
                                 DayOfWeek currentDayOfWeek = DateTime.Now.DayOfWeek;
-                                // Check if the runtime day is the same as today and the time is 12:00 AM
                                 if (DateTime.Now.DayOfWeek == runtimeDayOfWeek &&
-                                  DateTime.Now.TimeOfDay.Hours == 01 && // 1:00 PM
-                                  DateTime.Now.TimeOfDay.Minutes == 30)
+                                  DateTime.Now.TimeOfDay.Hours == 23 && //11 PM
+                                  DateTime.Now.TimeOfDay.Minutes == 58)
                                 {
                                     // Run your method or logic here
                                     InsertTimesheetRecords();
@@ -385,7 +384,7 @@ namespace Planning_Backend_Service
                                 }
                                 else
                                 {
-                                    Console.WriteLine("--Awaiting for " + Runtime + " 1:30 AM");
+                                    Console.WriteLine("--Awaiting for " + Runtime + " 11:58 PM");
                                 }
                             }
                         }

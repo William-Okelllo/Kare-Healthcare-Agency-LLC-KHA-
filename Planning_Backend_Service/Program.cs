@@ -16,8 +16,8 @@ class program
             x.RunAsLocalSystem();
 
             x.SetServiceName("BackendService");
-            x.SetDisplayName("Backend Service version 7.7.7 - Planning");
-            x.SetDescription("Backend service version 7.7.7 - Planning");
+            x.SetDisplayName("Backend Service version 7.7.8 - Planning");
+            x.SetDescription("Backend service version 7.7.8 - Planning");
         });
 
         int exitcodevalue = (int)Convert.ChangeType(exitcode, exitcode.GetTypeCode());

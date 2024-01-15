@@ -1,4 +1,5 @@
-﻿using Ishop.Models;
+﻿using Ishop.Infa;
+using Ishop.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -167,8 +168,8 @@ namespace Ishop.Controllers
         private ApplicationDbContext dbb = new ApplicationDbContext();
         public ActionResult CheckValueExists(string Email)
         {
-            bool exists = dbb.Users.Any(c => c.Email == Email);
-            return Json(exists, JsonRequestBehavior.AllowGet);
+            bool exists2 = dbb.Users.Any(c => c.Email == Email);
+            return Json(exists2, JsonRequestBehavior.AllowGet);
         }
         public ActionResult CheckUsername(string UserName)
         {
@@ -181,10 +182,10 @@ namespace Ishop.Controllers
 
 
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
-        public void EmpAcc(DateTime CreatedOn, string Username, string Contact, string Userid, string Email)
+        public void EmpAcc(DateTime CreatedOn, string Username, string Contact, string Userid, string Email,string Fullname ,string DprtName,string Designation)
         {
-            string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Rate,Email) VALUES " +
-            "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid,@Rate,@Email)";
+            string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Email,Rate) VALUES " +
+            "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid,@Email,@Rate)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -192,13 +193,14 @@ namespace Ishop.Controllers
                 {
                     command.Parameters.AddWithValue("@CreatedOn", CreatedOn);
                     command.Parameters.AddWithValue("@Username", Username);
-                    command.Parameters.AddWithValue("@Fullname", "---");
+                    command.Parameters.AddWithValue("@Fullname", Fullname);
                     command.Parameters.AddWithValue("@Contact", Contact);
-                    command.Parameters.AddWithValue("@DprtName", "---");
-                    command.Parameters.AddWithValue("@Designation", "---");
+                    command.Parameters.AddWithValue("@DprtName", DprtName);
+                    command.Parameters.AddWithValue("@Designation", Designation);
                     command.Parameters.AddWithValue("@Userid", Userid);
-                    command.Parameters.AddWithValue("@Rate", 0);
                     command.Parameters.AddWithValue("@Email", Email);
+                    command.Parameters.AddWithValue("@Rate", 0);
+                    
                     command.ExecuteNonQuery();
                 }
             }
@@ -252,6 +254,10 @@ namespace Ishop.Controllers
         public ActionResult Rspec007()
         {
             {
+                DepartmentContext DC = new DepartmentContext();
+                var Department = DC.departments.ToList();
+                ViewBag.Department = new SelectList(Department, "DprtName", "DprtName");
+
                 ViewBag.Name = new SelectList(context.Roles.Where(u => (!(u.Name == "Can_Post_Shift")))
                                        .ToList(), "Name", "Name");
                 return View();
@@ -276,12 +282,12 @@ namespace Ishop.Controllers
                 var SubjectTopic = "Welcome to Timenex";
                 var TextBody = "Hello there 👋,"
                 + "\n" + "The following are your login credentials to Timenex timesheet management system"
-                + "\n" + "_____________________________ "
+                + "\n" + "__ "
                 + "\n" + " "
                 + "\n" + "Username : " + model.UserName
                 + "\n" + "Password : " + model.Password
                 + "\n" + " "
-                + "\n" + "_____________________________ "
+                + "\n" + "__ "
                 + "\n" + "The provided password is a default password that you can be able to change once you access the system."
                 + "\n" + "System link : " + System.Configuration.ConfigurationManager.AppSettings["Businesssmail"].ToString() + "\n" + "";
                 PushEmail(model.Email, SubjectTopic, TextBody, DateTime.Now);
@@ -299,7 +305,7 @@ namespace Ishop.Controllers
 
                     if (model.UserRoles == "Employee")
 
-                    { EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id, model.Email); ;}
+                    { EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id, model.Email,model.Fullname,model.DprtName,model.Designation); ;}
 
                     TempData["msg"] = "✔ Account Created successfully ,Confirmation sent to user account mail";
 
@@ -308,7 +314,7 @@ namespace Ishop.Controllers
 
 
                     
-                    return RedirectToAction("Index", "Data");
+                    return RedirectToAction("Index", "Employees");
                 }
                 
 

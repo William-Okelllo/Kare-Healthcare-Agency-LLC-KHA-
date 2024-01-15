@@ -1,6 +1,7 @@
 ﻿using Ishop.Infa;
 using Ishop.Models;
 using IShop.Core;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace Ishop.Controllers
 {
@@ -160,7 +162,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget")] Project project)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget,User")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -176,6 +178,20 @@ namespace Ishop.Controllers
         // GET: Projects/Edit/5
         public ActionResult Edit(int? id)
         {
+           
+
+            PCategory_Context LL = new PCategory_Context();
+            var Category = LL.pcategories.ToList();
+            string selectedValue = db.projects.Where(l => l.Id == id).Select(l => l.Category).FirstOrDefault();
+            ViewBag.Category = new SelectList(Category, "category", "category", selectedValue);
+
+
+            Client_context CC = new Client_context();
+            var Name = CC.clients.ToList();
+            string clientname = db.projects.Where(l => l.Id == id).Select(l => l.Client).FirstOrDefault();
+            ViewBag.Clients = new SelectList(Name, "Name", "Name", clientname);
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -193,7 +209,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget,User")] Project project)
         {
             if (ModelState.IsValid)
             {

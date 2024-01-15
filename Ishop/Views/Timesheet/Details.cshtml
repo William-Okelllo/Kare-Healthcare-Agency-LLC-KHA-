@@ -172,7 +172,7 @@
             }
             <div class="ui-menu-divider"></div><br />
                                                <div style="text-align:center">
-                                                   <a href="@Url.Action("ApproveTimesheet", "Timesheet", new { id = ViewBag.weeNo,user=ViewBag.user })" class="btn btn btn-primary btn" onclick="return confirm('Are you sure you want to approve staff timesheet?')"><i class="fa fa-check-circle text-black"></i> Approve Week Timesheet</a>
+                                                   <a href="@Url.Action("ApproveTimesheet", "Timesheet", new {Id=Model.Id, user = Model.Owner,From_Date=Model.From_Date,End_Date=Model.End_Date })" class="btn btn btn-primary btn" onclick="return confirm('Are you sure you want to approve staff timesheet?')"><i class="fa fa-check-circle text-black"></i> Approve Week Timesheet</a>
                                                    ||
                                                    <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
                                                </div>
