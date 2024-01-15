@@ -416,6 +416,7 @@
     <Compile Include="Controllers\DirectsController.cs" />
     <Compile Include="Controllers\Direct_ActivitiesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\HODsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InDirectsController.cs" />
     <Compile Include="Controllers\leavesController.cs" />
@@ -8019,6 +8020,11 @@
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\Indirect_Activities\InDirecttasksview.cshtml" />
     <Content Include="Views\Timesheet\Mine.cshtml" />
+    <Content Include="Views\HODs\Add.cshtml" />
+    <Content Include="Views\HODs\Delete.cshtml" />
+    <Content Include="Views\HODs\Details.cshtml" />
+    <Content Include="Views\HODs\Edit.cshtml" />
+    <Content Include="Views\HODs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

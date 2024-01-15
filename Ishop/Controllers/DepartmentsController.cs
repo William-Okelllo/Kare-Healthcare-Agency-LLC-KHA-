@@ -36,6 +36,11 @@ namespace Ishop.Controllers
         // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {
+
+            HodContext HH = new HodContext();
+            var Hmenbers = HH.hODs.Where(c => c.Department_Id == id).ToList();
+            ViewBag.Hmenbers = Hmenbers;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -67,7 +72,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DprtName,Contact,Manager,Department,Email_Address")] Department department)
+        public ActionResult Create([Bind(Include = "Id,DprtName,Contact,Department,Email_Address")] Department department)
         {
 
 
@@ -107,7 +112,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DprtName,Contact,Manager,Department,Email_Address")] Department department)
+        public ActionResult Edit([Bind(Include = "Id,DprtName,Contact,Department,Email_Address")] Department department)
         {
             if (ModelState.IsValid)
             {

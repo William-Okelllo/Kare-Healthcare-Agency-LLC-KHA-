@@ -133,7 +133,7 @@
                             <div class="small-box bg-gradient-white" style="border-radius: 15px">
                                 <div class="inner">
 
-                                    <h4> <i class="fa fa-umbrella-beach"></i><b> leave Request</b></h4>
+                                    <h4> <i class="fa fa-umbrella-beach"></i><b> Leave Request</b></h4>
                                     <h6>View staff members on leave ,requested leaves </h6>
                                     <small><i class="fa fa-spin fa-circle-notch"></i> Click view  to view the leave module</small>
                                 </div>
@@ -152,7 +152,7 @@
             <div class="dropdown-divider"></div>
             @if (this.User.IsInRole("Timesheet_Approvals"))
             {
-                <div class="col-xl-6">
+                <div class="col-xl-5">
                     <div class="dropdown-divider"></div>
 
 
@@ -167,8 +167,7 @@
                                 <thead>
                                     <tr style="color:black">
                                         <th style="font-size: medium;"><i class="fa fa-university text-primary"></i> Department</th>
-                                        <th style="font-size: medium;">Contact</th>
-                                        <th style="font-size: medium;">Mail</th>
+                                     
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -176,8 +175,8 @@
                                     {
                                         <tr>
                                             <td style="background-color: white;"><i class="fa fa-university text-primary"></i> @item.DprtName </td>
-                                            <td style="background-color: white;"><i class="fa fa-mobile text-navy"></i> @item.Contact </td>
-                                            <td style="background-color: white;"><a style="color:dodgerblue"><i class="fa fa-envelope text-primary"></i> @item.Email_Address </a></td>
+                                          
+                                            
                                         </tr>
                                     }
                                 </tbody>

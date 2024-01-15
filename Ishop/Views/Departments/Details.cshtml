@@ -4,47 +4,157 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Department</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DprtName)
-        </dt>
+<div class="col-md-12 col-sm-12 col-12">
+    <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+        <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+            <i class="fa fa-bookmark"></i> Project Details
+        </div>
+        <div class="card-body" style="background-color: white;border-radius: 24px;">
+            <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+                @using (Html.BeginForm("", "", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.DprtName)
-        </dd>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Contact)
-        </dt>
+                        <h3><i class=" fa fa-bookmark text-primary"></i>   @Model.DprtName</h3>
+                        <div class="dropdown-divider"></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label><i class=" fa fa-tags text-primary"></i>   @Html.LabelFor(model => model.Id)</label>
+                                @Html.EditorFor(model => model.Id, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Record",
 
-        <dd>
-            @Html.DisplayFor(model => model.Contact)
-        </dd>
+                                   @ReadOnly = true,
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Manager)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Manager)
-        </dd>
+                               }
+                           })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email_Address)
-        </dt>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.Contact)</label>
+                                @Html.EditorFor(model => model.Contact, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Record",
 
-        <dd>
-            @Html.DisplayFor(model => model.Email_Address)
-        </dd>
+                                   @ReadOnly = true,
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+                               }
+                           })
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-envelope text-primary"></i>   @Html.LabelFor(model => model.Email_Address)</label>
+                                @Html.EditorFor(model => model.Email_Address, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Record",
+
+                                   @ReadOnly = true,
+
+
+                               }
+                           })
+
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="dropdown-divider"></div>
+
+                       
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                <div style="text-align:right">
+                                    <a href="@Url.Action("Add", "Hods", new { id = Model.Id,Name= Model.DprtName })" class="btn-sm btn btn-primary btn"><i class="fa fa-plus-circle text-black"></i> Add HODs</a>
+                                    ||
+                                    <a href="@Url.Action("Edit", "Departments", new { id = Model.Id })" class="btn-sm btn btn-warning btn"><i class="fa fa-pen-nib text-black"></i> Update Departments Info </a>
+                                </div>
+
+                                <div class="dropdown-divider"></div>
+                                <div class="table-responsive" style="min-height: 100px">
+                                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                        <thead style="font-family:Calibri">
+                                            <tr style="color:white">
+                                                <th style="background-color: #0656A5; "><i class="fa fa-bookmark text-white"></i>  Member</th>
+                                                <th style="background-color: #0656A5; "><i class="fa fa-receipt text-white"></i> Department</th>
+                                                <th style="background-color: #0656A5; "> Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody style="font-family:Calibri">
+                                            @foreach (var item2 in ViewBag.Hmenbers)
+                                            {
+                                                <tr data-widget="expandable-table" aria-expanded="false">
+
+
+                                                    <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Staff</td>
+                                                    <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.DprtName</td>
+
+                                                    <td style="background-color:ghostwhite">
+
+                                                        <div class="btn-group dropdown">
+                                                            <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fa fa-hashtag"></i>  . Action
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                                                                <div class="dropdown-divider"></div>
+                                                                <a href="@Url.Action("Edit", "InDirects", new { id = item2.Id })" class="dropdown-item">
+                                                                    <i class="fa fa-pen-nib text-primary"></i> Update/Edit Phase
+                                                                </a>
+
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this HOD ')) { window.location.href = '@Url.Action("Delete", "Hods", new { id = item2.Id, })'; }">
+                                                                    <i class="fa fa-times-circle text-danger"></i> Drop HOD
+                                                                </a>
+                                                                <script>
+                                                                    $(function () {
+                                                                        $('#Deny').click(function () {
+                                                                            if (confirm('Are you sure?')) {
+                                                                                window.location.href = $(this).data('url');
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                </script>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+
+                                    </table>
+
+
+
+
+                                    
+                                </div>
+
+                                </div >
+
+
+</div >
+
+</form >
+                                            }

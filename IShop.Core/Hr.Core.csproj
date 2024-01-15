@@ -52,6 +52,7 @@
     <Compile Include="Direct.cs" />
     <Compile Include="Direct_Activities.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="HOD.cs" />
     <Compile Include="InDirect.cs" />
     <Compile Include="Indirect_Activities.cs" />
     <Compile Include="Interface\IAccess.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Interface\IDirect.cs" />
     <Compile Include="Interface\Idirect_act.cs" />
     <Compile Include="Interface\IEmployee.cs" />
+    <Compile Include="Interface\Ihod.cs" />
     <Compile Include="Interface\Iindirect.cs" />
     <Compile Include="Interface\ICategory.cs" />
     <Compile Include="Interface\Iindirect_act.cs" />

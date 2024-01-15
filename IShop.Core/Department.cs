@@ -15,9 +15,7 @@ namespace IShop.Core
         [Display(Name = "Phone Number ")]
         public String Contact { get; set; }
 
-        [Required]
-        [Display(Name = "Head Of Department ")]
-        public String Manager { get; set; }
+        
 
         [Required]
         [Display(Name = "Email Address ")]

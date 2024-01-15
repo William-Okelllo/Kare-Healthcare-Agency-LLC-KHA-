@@ -85,7 +85,7 @@
                             <th style="background-color: #0656A5; "> Department Name</th>
                             <th style="background-color: #0656A5; ">Phone Number </th>
                             <th style="background-color: #0656A5; ">Email Address </th>
-                            <th style="background-color: #0656A5; ">Manager</th>
+                            <th style="background-color: #0656A5; ">Management</th>
 
                             <th style="background-color: #0656A5; ">Actions</th>
 
@@ -97,13 +97,13 @@
                         {
                             <tr data-widget="expandable-table" aria-expanded="false">
 
-                                <td style="background-color:white"><i class="fa fa-home text-primary"></i> <a href="@Url.Action("Edit", "Departments" , new { id = item.Id})"> @item.DprtName </a></td>
-                                <td style="background-color:white"><i class="fa fa-phone text-primary"></i> @item.Contact</td>
+                                <td style="background-color:white"><i class="fa fa-university text-primary"></i> <a href="@Url.Action("Edit", "Departments" , new { id = item.Id})"> @item.DprtName </a></td>
+                                <td style="background-color:white"><i class="fa fa-mobile text-primary"></i> @item.Contact</td>
                                 <td style="background-color:white"><i class="fa fa-envelope text-primary"></i> @item.Email_Address</td>
-                                <td style="background-color:white"><i class="fa fa-user-shield text-primary"></i> @item.Manager</td>
+                                <td style="background-color:white"><i class="fa fa-user-shield text-primary"></i><a href="@Url.Action("Details", "Departments" , new { id = item.Id})"> Management </a></td>
                                 <td style="background-color:ghostwhite">
                                     <div class="btn-group dropdown">
-                                        <button type="button" class="btn btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button type="button" class="btn btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-university"></i>  . Action
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

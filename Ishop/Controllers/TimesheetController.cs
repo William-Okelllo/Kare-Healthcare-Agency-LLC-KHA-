@@ -114,27 +114,36 @@ namespace Ishop
             ViewBag.Usernames = Employ;
 
 
-            DepartmentContext DD = new DepartmentContext();
-            var Depart = DD.departments.Where(D => D.Manager == User.Identity.Name).Select(d => d.DprtName).FirstOrDefault();
+             HodContext DD = new HodContext();
+            var Depart = DD.hODs.Where(D => D.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
 
             if (!(option == null) && (!(option == "")))
             {
-                return View(db.timesheets.OrderBy(p => p.Id).Where(c => c.Owner.StartsWith(option) || c.Owner == option && c.Department ==Depart).ToList().ToPagedList(page ?? 1, 11));
-
+                return View(db.timesheets
+                    .OrderBy(p => p.Id)
+                    .Where(c => c.Owner.StartsWith(option) || c.Owner == option && Depart.Contains(c.Department))
+                    .ToList()
+                    .ToPagedList(page ?? 1, 11));
             }
             else if (option == "")
             {
-                return View(db.timesheets.OrderBy(p => p.Id).Where(c=>c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
-
-
+                return View(db.timesheets
+                    .OrderBy(p => p.Id)
+                    .Where(c => Depart.Contains(c.Department))
+                    .ToList()
+                    .ToPagedList(page ?? 1, 11));
             }
             else
             {
-                return View(db.timesheets.OrderBy(p => p.Id).Where(c => c.Department == Depart).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.timesheets
+                    .OrderBy(p => p.Id)
+                    .Where(c => Depart.Contains(c.Department))
+                    .ToList()
+                    .ToPagedList(page ?? 1, 11));
             }
-            
-
         }
+
+    
 
 
 

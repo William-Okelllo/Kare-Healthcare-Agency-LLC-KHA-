@@ -14,8 +14,8 @@ namespace Ishop.Controllers
         {
 
 
-           DepartmentContext DD = new DepartmentContext();
-           var Depart = DD.departments.Where(d => d.Manager == User.Identity.Name).ToList();
+           HodContext DD = new HodContext();
+           var Depart = DD.hODs.Where(d => d.Staff == User.Identity.Name).ToList();
            ViewBag.Departmentt = Depart;
 
 
