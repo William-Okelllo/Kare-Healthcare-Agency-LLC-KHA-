@@ -1,5 +1,6 @@
 ﻿using Ishop.Infa;
 using IShop.Core;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -70,6 +71,7 @@ namespace Ishop.Controllers
             if (ModelState.IsValid)
             {
                 db.phases.Add(phase);
+                Budgetsum(phase.Project_id, phase.Budget);
                 db.SaveChanges();
                 TempData["msg"] = "✔   Phase added successfully ";
                 return RedirectToAction("Details", "projects", new { id = phase.Project_id });
@@ -78,9 +80,23 @@ namespace Ishop.Controllers
             return View(phase);
         }
 
-        // GET: Phase/Edit/5
+        public void Budgetsum(int Projectid, decimal Budget)
+        {
+            Project_Context TT = new Project_Context();
+            var Sheet = TT.projects.Where(c=>c.Id == Projectid).FirstOrDefault();
+
+            if (Sheet != null)
+            {
+                Sheet.Budget = Sheet.Budget + Budget;
+                TT.SaveChanges();
+            }
+        }
         public ActionResult Edit(int? id)
         {
+            Direct_Context DC = new Direct_Context();
+            var DirectC = DC.directs.ToList();
+            ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -98,41 +114,56 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Project_id,Start,End,Name,Budget")] Phase phase)
+        public ActionResult Edit([Bind(Include = "Id,Budget,Project_id,Name,Start_Date,End_Date")] Phase phase)
         {
+           
             if (ModelState.IsValid)
             {
                 db.Entry(phase).State = EntityState.Modified;
+                Budgetb4update(phase.Project_id, phase.Budget, phase.Id);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["msg"] = "✔   Phase updated successfully ";
+                return RedirectToAction("Details", "projects", new { id = phase.Project_id });
             }
             return View(phase);
         }
 
-        // GET: Phase/Delete/5
-        public ActionResult Delete(int? id)
+        public void Budgetb4update(int Projectid, decimal Budget, int Phase)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Phase phase = db.phases.Find(id);
-            if (phase == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phase);
-        }
+            Project_Context TT = new Project_Context();
+            var Sheet = TT.projects.Where(c => c.Id == Projectid).FirstOrDefault();
 
-        // POST: Phase/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+            Phase_Context PC = new Phase_Context();
+            var Phas = PC.phases.Where(c => c.Id == Phase).FirstOrDefault();
+
+            if (Sheet != null)
+            {
+                Sheet.Budget = Sheet.Budget - Phas.Budget;
+                Sheet.Budget = Sheet.Budget + Budget;
+                TT.SaveChanges();
+            }
+        }
+        public ActionResult Delete(int id)
         {
             Phase phase = db.phases.Find(id);
             db.phases.Remove(phase);
+            Budgetdrop(phase.Project_id, phase.Budget);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Phase dropped successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
+
+        public void Budgetdrop(int Projectid, decimal Budget)
+        {
+            Project_Context TT = new Project_Context();
+            var Sheet = TT.projects.Where(c => c.Id == Projectid).FirstOrDefault();
+
+            if (Sheet != null)
+            {
+                Sheet.Budget = Sheet.Budget - Budget;
+                TT.SaveChanges();
+            }
         }
 
         protected override void Dispose(bool disposing)

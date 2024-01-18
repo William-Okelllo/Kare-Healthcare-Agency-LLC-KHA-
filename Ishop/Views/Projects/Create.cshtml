@@ -169,10 +169,23 @@
 
 
 
-
-
-
                             <div class="form-group col-md-2" id="other">
+                                <label><i class="fa fa-file-invoice text-primary"></i>   @Html.LabelFor(model => model.Fee_Budget)</label>
+                                @Html.EditorFor(model => model.Fee_Budget, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Amount",
+                                   id = "Fee_Budget",
+                                   onchange = "addCommas(this)",
+                                   @required = true,
+                               }
+                           })
+                            </div>
+
+
+                            <div class="form-group col-md-2" id="other" style="display:none">
                                 <label><i class="fa fa-wallet text-primary"></i>   @Html.LabelFor(model => model.Budget)</label>
                                 @Html.EditorFor(model => model.Budget, new
                            {
@@ -180,9 +193,9 @@
                                {
                                    @class = "form-control form-control-sm",
                                    @Placeholder = "Amount",
-                                   id = "Budget",
-                                   onchange = "addCommas(this)",
-                                   @required = true,
+                                   @Value = 0,
+                                   @Readonly=true,
+                                   
                                }
                            })
                             </div>
@@ -289,20 +302,7 @@
                                 <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Client) </label>
                                 @Html.DropDownList("Client", ViewBag.Clients as SelectList, "--Select Client --", new { @class = "form-control  form-control-sm", @Required = true })
                             </div>
-                            <div class="form-group col-md-2" id="other">
-                                <label><i class="fa fa-file-invoice text-primary"></i>   @Html.LabelFor(model => model.Fee_Budget)</label>
-                                @Html.EditorFor(model => model.Fee_Budget, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Amount",
-                                   id = "Fee_Budget",
-                                   onchange = "addCommas(this)",
-                                   @required = true,
-                               }
-                           })
-                            </div>
+                           
 
                         </div>
 

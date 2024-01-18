@@ -16,5 +16,8 @@ namespace IShop.Core
         [Display(Name = "Added on ")]
         public DateTime CreatedOn { get; set; }
         public string Username { get; set; }
+
+        [Display(Name = "Phase")]
+        public string Name { get; set; }
     }
 }

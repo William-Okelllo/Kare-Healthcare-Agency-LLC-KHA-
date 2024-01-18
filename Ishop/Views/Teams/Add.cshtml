@@ -97,7 +97,7 @@
 
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-9 col-sm-12 col-12">
+    <div class="col-md-10 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
                 <i class="fa fa-users"></i> Add Project Team members
@@ -135,7 +135,7 @@
 
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label><i class=" fa fa-suitcase text-primary"></i>   @Html.LabelFor(model => model.Project_Name)</label>
                                 @Html.EditorFor(model => model.Project_Name, new
                            {
@@ -160,13 +160,19 @@
                                 <label><i class="fa fa-users text-primary"></i> @Html.LabelFor(model => model.Username) </label>
                                 @Html.DropDownList("Username", ViewBag.Employee as SelectList, "--Select Team members --", new { @class = "form-control  form-control-sm", @Required = true })
                             </div>
+
+                            <div class="form-group col-md-4">
+                                <label><i class="fa fa-briefcase text-primary"></i> @Html.LabelFor(model => model.Name) </label>
+                                @Html.DropDownList("Name", ViewBag.Phase as SelectList, "--Select  Phase --", new { @class = "form-control  form-control-sm", @Required = true })
+                            </div>
                             <script type="text/javascript">
                                 $(function () {
 
                                     $("#Username").chosen();
-
+                                    $("#Name").chosen();
                                 });
                             </script>
+
 
 
 
@@ -194,7 +200,10 @@
                                 </div>  Team member already in assigned on project
                             </a>
                         </div>
-
+                        <div id="phaseList" style="display:none;">
+                            <!-- Placeholder for the list of phases -->
+                            <ul id="phaseListItems"></ul>
+                        </div>
 
 
 
@@ -203,21 +212,47 @@ $(document).ready(function () {
     $("#Username").change(function () {
         var Username = $(this).val();
         var Project_Name = $('#Project_Name').val();
+
+        // Show the spinner during the AJAX request
+        $("#errorMessage").show().find('.spinner-grow').show();
+        $("#phaseList").hide();
+
         $.ajax({
             url: "@Url.Action("CheckValueExists", "teams")",
             data: { Username: Username, Project_Name: Project_Name },
             success: function (data) {
-                if (data) {
-                    $("#errorMessage").show();
+                // Hide the spinner after the AJAX request completes
+                $("#errorMessage").find('.spinner-grow').hide();
+
+                if (data.Message) {
+                    // If there is a message, display it
+                    $("#errorMessage a").text(data.Message);
                     $("#myButton").hide();
                 } else {
+                    // If there is data, hide the error message and show the button
                     $("#errorMessage").hide();
                     $("#myButton").show();
+
+                    // Check if the data is a list of phases
+                    if (Array.isArray(data) && data.length > 0) {
+                        // Display the list of phases
+                        $("#phaseListItems").empty();
+                        $.each(data, function (index, item) {
+                            $("#phaseListItems").append("<li> <b>Phase</b>  : " + item.Name + "  :  <b>Assigned Hrs</b>  " + item.Hours +" </li>");
+                        });
+                        $("#phaseList").show();
+                    }
                 }
+            },
+            error: function () {
+                // Hide the spinner in case of an error
+                $("#errorMessage").hide();
+                console.log("Error occurred during the AJAX request.");
             }
         });
     });
 });
+
                         </script>
 
                         <div class="dropdown-divider"></div>

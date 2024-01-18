@@ -2,6 +2,7 @@
 using Ishop.Models;
 using IShop.Core;
 using IShop.Core.Interface;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -313,6 +314,13 @@ namespace Ishop
 
             }
 
+            string Subject = "Timesheets Set successfully ";
+            string message = "Hello Admin"
+            + "\n" + "This is a system notification to let you know that coming week timesheet are set ,Duration From Date " + from_Date.ToString("MMMM") + " To Date: " + end_Date.ToString("dd - MMMM - yyyy") 
+            + "\n" + "thank you "
+            + "\n" + "Regards , HR-Team ";
+            var emaill = "murucharls@gmail.com";
+            PushEmail(emaill, Subject, message, DateTime.Now);
 
         }
         private int GetCurrentWeekNumber(DateTime date)

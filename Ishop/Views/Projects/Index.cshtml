@@ -102,7 +102,6 @@
                     <th style="background-color: #0C54A0; font-size: medium; ">Project Name</th>
 
                     <th style="background-color: #0C54A0; font-size: medium; ">Budget</th>
-                    <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">location</th>
                     <th style="background-color: #0C54A0; font-size: medium;">Action</th>
                 </tr>
@@ -113,32 +112,40 @@
                     <tr>
 
                         <td style="background-color: white;">
-
-                            <i class="fa fa-bookmark text-primary"></i> @item.Project_Name
+                            <h6>
+                                <i class="fa fa-bookmark text-primary"></i> @item.Project_Name
+                            </h6>
                             <div class="dropdown-divider"></div>
-                            <small style="color:navy">
+                            <h7 style="color:navy">
 
                                 <b>
-                                    <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i>   </medium> </span> @item.Client <small>||</small>
-                                    <span class="badge badge-primary"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> @item.Category <small>||</small>
-                                   
+                                    <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i>   </medium> </span><B style="color:dimgray"> CLIENT</B>  :   @item.Client <small></small>
+
+
                                 </b>
 
-                            </small>
+                            </h7>
                         </td>
 
-                        <td style="background-color:white"> @if (item.Status == "Active")
-
-                        { <h5 style="color:green">@item.Status</h5> } else if (item.Status == "Proposed"){ <h5 style="color:gray">@item.Status</h5>} </td>
+                       
                         <td style="background-color:white">
-                            <i class="fa fa-suitcase text-primary"></i> @item.Budget.ToString("#,##0.00") <div class="dropdown-divider"></div>
-                            <h6>
-                                <span class="badge badge-primary"><medium><i class="fa fa-cash-register text-white"></i> Fee Budget : @item.Fee_Budget.ToString("#,##0.00") </medium></span>
-                            </h6>
+                            <h6> <span class="badge badge-success"><medium><i class="fa fa-credit-card text-white"></i>  </medium></span> <b style="font-size:medium"> BUDGET</b>  : @item.Budget.ToString("#,##0.00")</h6> <div class="dropdown-divider"></div>
+                              <h6><span class="badge badge-warning"><medium><i class="fa fa-coins text-white"></i>  </medium></span> <b style="font-size:medium">FEE BUDGET</b> : @item.Fee_Budget.ToString("#,##0.00") </h6>
 
                         </td>
-                        <td style="background-color: white;  "><i class="fa fa-map-marker text-danger"></i> @item.location </td>
-                        <td style="background-color:ghostwhite">
+                        <td style="background-color: white;  ">
+                            <i class="fa fa-map-marker text-danger"></i> @item.location
+                            <div class="dropdown-divider"></div>
+
+                            <span class="badge badge-warning"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> <B style="color:dimgray">CATEGORY</B> :   @item.Category   |
+
+                            <B style="color:dimgray">STATUS</B> :
+                            @if (item.Status == "Active")
+                            {<B style="color:green"> <i class="fa fa-check-circle"></i>  @item.Status</B> }
+                        else if (item.Status == "Proposed")
+                        { <B style="color:gray">@item.Status</B>}
+                        </td>
+                        <td style="background-color:white">
 
                             <div class="btn-group dropdown">
                                 <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,7 +159,7 @@
                                     </a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Project ')) { window.location.href = '@Url.Action("Delete", "Projects", new { id = item.Id, })'; }">
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Project   - Note this cannot be undone you will lose all data related to this project ')) { window.location.href = '@Url.Action("Delete", "Projects", new { id = item.Id, })'; }">
                                         <i class="fa fa-times-circle text-danger"></i> Drop  Project
 
                                     </a>
