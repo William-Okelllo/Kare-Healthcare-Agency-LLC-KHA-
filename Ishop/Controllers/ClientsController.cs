@@ -12,6 +12,7 @@ using PagedList;
 
 namespace Ishop
 {
+    [Authorize]
     public class ClientsController : Controller
     {
         private Client_context db = new Client_context();

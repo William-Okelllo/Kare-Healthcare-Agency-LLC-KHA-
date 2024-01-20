@@ -13,6 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Ishop
 {
+    [Authorize]
     public class Indirect_ActivitiesController : Controller
     {
         private Indirect_Activities_Context db = new Indirect_Activities_Context();

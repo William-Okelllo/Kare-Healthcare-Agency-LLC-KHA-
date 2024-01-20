@@ -18,5 +18,7 @@ namespace IShop.Core
         [Display(Name = "Phase ")]
         public string Name { get; set; }
         public decimal Budget { get; set; }
+
+        public int Step { get; set; }
     }
 }

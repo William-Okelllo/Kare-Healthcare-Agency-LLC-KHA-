@@ -119,105 +119,74 @@
                         @Html.AntiForgeryToken()
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <form>
-                        <div class="card-body" style="background-color: #eeeeee;border-radius: 14px;">
-                            <h3><i class=" fa fa-bookmark text-primary"></i>   @Model.Project_Name</h3>
-                            <hr />
-                            <div class="form-row">
+                <form>
+                    <div class="card-body" style="background-color: #eeeeee;border-radius: 14px;">
+                        <h3><i class=" fa fa-bookmark text-primary"></i>   @Model.Project_Name</h3>
+                        <hr />
+                        <div class="form-row">
+                            <div class="col-lg-4 col-12">
+                                <!-- small card -->
+                                <div class="small-box bg-gradient-white" style="border-radius: 15px">
+                                    <div class="inner">
 
-                                <div class="form-group col-md-2">
-                                    <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
-                                    @Html.EditorFor(model => model.CreatedOn, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Record",
-
-                                       @ReadOnly = true,
-
-
-                                   }
-                               })
+                                        <h4> <i class="fa fa-coins"></i><b> Budget</b></h4>
+                                        <h2> @Model.Budget.ToString("#,##0.00") <b style="font-size:medium">Ksh</b></h2>
+                                        <small><i class="fa fa-spin fa-circle-notch"></i> Auto calculated based on Phases</small>
+                                    </div>
+                                    <div class="icon"> <i class="fa fa-coins"></i></div>
 
                                 </div>
-
-                                <div class="form-group col-md-3">
-                                    <label><i class=" fa fa-folder-open text-primary"></i>   @Html.LabelFor(model => model.Project_Name)</label>
-                                    @Html.EditorFor(model => model.Project_Name, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Project_Name",
-                                       @ReadOnly = true,
-
-
-                                   }
-                               })
-
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label><i class=" fa fa-folder-open text-primary"></i>   @Html.LabelFor(model => model.Budget)</label>
-                                    @Html.EditorFor(model => model.Budget, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Project_Name",
-                                       @ReadOnly = true,
-
-
-                                   }
-                               })
-
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label><i class=" fa fa-map-marker text-primary"></i>   @Html.LabelFor(model => model.location)</label>
-                                    @Html.EditorFor(model => model.location, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "location",
-                                       @ReadOnly = true,
-
-
-                                   }
-                               })
-                                    <script type="text/javascript">
-                                        google.maps.event.addDomListener(window, 'load', function () {
-                                            var places = new google.maps.places.Autocomplete(document.getElementById('location'));
-                                            google.maps.event.addListener(places, 'place_changed', function () {
-                                                var place = places.getPlace();
-                                                document.getElementById('Latitude').value = place.geometry.location.lat();
-                                                document.getElementById('Longitude').value = place.geometry.location.lng();
-                                            });
-                                        });
-                                    </script>
-                                </div>
-
-
-
-
                             </div>
+                            <div class="col-lg-4 col-12">
+                                <!-- small card -->
+                                <div class="small-box bg-gradient-white" style="border-radius: 15px">
+                                    <div class="inner">
+
+                                        <h4> <i class="fa fa-circle-notch text-success"></i><b> Status</b></h4>
+                                        <h4><b style="font-size:medium">Status</b>  @Model.Status</h4>
+                                        <h4><b style="font-size:medium"><i class="fa fa-folder-open text-primary"></i>  Category</b>  @Model.Category</h4>
+
+                                    </div>
+                                    <div class="icon"> <i class="fa fa-circle-notch"></i></div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-12">
+                                <!-- small card -->
+                                <div class="small-box bg-gradient-white" style="border-radius: 15px">
+                                    <div class="inner">
+
+                                        <h4> <i class="fa fa-map-marker text-danger"></i><b> Location</b></h4>
+                                        <h6><i class="fa fa-calendar-check text-primary"></i> <b style="font-size:medium">Added On</b>  @Model.CreatedOn.ToString("dd-MMMM-yyyy") </h6>
+                                        <h6><i class="fa fa-map-marker"></i>  @Model.location</h6>
+
+                                    </div>
+                                    <div class="icon"> <i class="fa fa-map-marker"></i></div>
+
+                                </div>
+                            </div>
+
+
+
                         </div>
-                       
-                            <div class="dropdown-divider"></div>
+                    </div>
 
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <div class="dropdown-divider"></div>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-cogs"></i>  Phases</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-users"></i> Assigned Team</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-Performance-tab" data-toggle="pill" href="#pills-Performance" role="tab" aria-controls="pills-Performance" aria-selected="false"><i class="fa fa-chart-line"></i> Performance</a>
-                                </li>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-cogs"></i>  Phases</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-users"></i> Assigned Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Performance-tab" data-toggle="pill" href="#pills-Performance" role="tab" aria-controls="pills-Performance" aria-selected="false"><i class="fa fa-chart-line"></i> Performance</a>
+                        </li>
+
+                    </ul>
+                    
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                                     <div style="text-align:right">
@@ -227,7 +196,7 @@
                                     </div>
 
                                     <div class="dropdown-divider"></div>
-                                   
+                                    <div class="table-responsive">
                                         <div class="table-responsive" style="min-height: 100px">
                                             <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
 
@@ -249,7 +218,10 @@
                                                         <tr data-widget="expandable-table" aria-expanded="false">
 
 
-                                                            <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Name</td>
+                                                            <td style="background-color:white">
+                                                                <i class="fa fa-bookmark text-primary"></i> @item2.Name |
+                                                                <span class="badge badge-primary"><medium><i class="fa fa-circle-notch text-white"></i>  </medium></span> - <span class="badge badge-warning"><medium>  @item2.Step  </medium></span>
+                                                            </td>
                                                             <td style="background-color:white"> <i class="fa fa-suitcase text-primary"></i> @item2.Budget.ToString("#,##0.00")</td>
                                                             <td style="background-color:white">
                                                                 <small>
@@ -296,13 +268,13 @@
                                             </table>
                                         </div>
                                     </div>
-                                    
+                                </div>
 
                                     <div class="tab-pane fade show " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <div style="text-align:right">
                                             <a href="@Url.Action("Add", "teams", new {Project=Model.Project_Name, id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-users text-black"></i> Add Team members</a>
                                         </div>
-                                        <div class="table-responsive" >
+                                        <div class="table-responsive">
                                             <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
 
 
@@ -321,7 +293,9 @@
                                                     {
                                                         <tr data-widget="expandable-table" aria-expanded="false">
                                                             <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.CreatedOn.ToString("dd-MMM-yyyy") </td>
-                                                            <td style="background-color:white"> <i class="fa fa-clipboard-list text-primary"></i> @item2.Name</td>
+                                                            <td style="background-color:white"> <i class="fa fa-clipboard-list text-primary"></i> @item2.Name | 
+                                                            <span class="badge badge-primary"><medium><i class="fa fa-circle-notch text-white"></i>  </medium></span> - <span class="badge badge-warning"><medium>  @item2.Step  </medium></span>
+                                                            </td>
                                                             <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Username</td>
                                                             <td style="background-color:white"> <i class="fa fa-clock text-primary"></i> @item2.Hours <small><b>Hrs</b></small></td>
                                                             <td style="background-color:ghostwhite">
@@ -402,37 +376,81 @@
                                                             <td style="background-color:white">
                                                                 <i class="fa fa-suitcase text-primary"></i> @resultItem.logged.ToString("#,##0.00")
                                                                 <div class="dropdown-divider"></div>
-                                                                <small>
-                                                                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
-                                                                        Drill-Down
-                                                                    </button>
-                                                                </small>
 
-
-
-                                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <a class="viewTasksLink btn btn-xs btn-warning btn" href="#" data-week-number="@resultItem.Project_Name" data-user="@resultItem.Phase" data-toggle="modal" data-target="#exampleModalCenter_@resultItem.Id">
+                                                                    <i class="fa fa-chart-bar "></i> <small><b> Drill Down</b></small>
+                                                                </a>
+                                                                <div class="modal fade" id="exampleModalCenter_@resultItem.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLongTitle">Drill Down Section</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Performance Drill Down</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                               
-                                                                                <p style="text-align:center">Kindly note that we are working on the drill-down section to enable visibility into 
-                                                                                the actual drill-down of every phase based on the budgeted amount vs the logged amount from the staff members respectively.</p>
-                                                                                <p>thank you </p>
-
-                                                                                <div class="dropdown-divider"></div>
-                                                                                <b style="text-align:center;color:forestgreen"><i class="fa fa-spin fa-circle-notch"></i>  DEVELOPMENT MODE ACTIVE -SEC [PHASE DRILL-DOWN]</b>
+                                                                                <div id="modalContent"></div>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+
+                                                                <style>
+                                                                    /* Custom class for wider modal */
+                                                                    .custom-modal-width {
+                                                                        max-width: 80%; /* Adjust the percentage as needed */
+                                                                    }
+                                                                </style>
+
+                                                                <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1Z1U3ZlMnfybT8lPj9lOIq6u8eTNCtWlq/0=" crossorigin="anonymous"></script>
+                                                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha256-bNVT/99KoIu9P0Eu3gW+ioTZq+Nq+ENJZ5e9dz+qDEU=" crossorigin="anonymous"></script>
+                                                                <script>
+    $(document).ready(function () {
+        var drillDownUrl = "@Url.Action("DrillDown", "Projects")";
+
+        $(".viewTasksLink").on("click", function (e) {
+            e.preventDefault();
+
+            var weekNumber = $(this).data("week-number");
+            var user = $(this).data("user");
+            var modalId = $(this).data("target");
+
+            $.ajax({
+                url: drillDownUrl,
+                type: "GET",
+                data: { projectName: weekNumber, Phase: user },
+                success: function (result) {
+                    console.log("Ajax request successful");
+                    console.log("Result:", result); // Log the result
+
+                    // Check if the result is what you expect before loading it
+                    if (result && result.length > 0) {
+                        $(modalId + " .modal-content #modalContent").html(result);
+                    } else {
+                        console.log("Empty or unexpected result. Not updating modal content.");
+                    }
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error in Ajax request");
+                    console.log("Status: ", status);
+                    
+                   
+                }
+            });
+        });
+
+    });
+                                                                </script>
+
+
+
+
+
                                                             </td>
 
 
@@ -445,8 +463,8 @@
 
                                         </div>
 
-                                        </div>
-                                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                                    </div>
+                                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
 </form>
                     }
                 </div>

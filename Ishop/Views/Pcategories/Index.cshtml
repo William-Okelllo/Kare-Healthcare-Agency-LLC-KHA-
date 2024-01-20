@@ -74,36 +74,32 @@
             @Html.ActionLink("Add Categories", "Create", "Pcategories", null, new { @class = "btn btn-primary btn" })
         </div>
 
-        <div class="row">
+        <div class="form-row">
             @foreach (var item in Model)
             {
-
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-gradient-navy" style="border-radius: 20px">
+                <div class="col-lg-4 col-12">
+                    <!-- small card -->
+                    <div class="small-box bg-gradient-white" style="border-radius: 15px">
                         <div class="inner">
-                            <h3> <i class="fa fa-bookmark"></i> @item.Category </h3>
-                           
 
+                            
+                            <h4> <i class="fa fa-bookmark text-primary"></i>   @item.Category</h4>
+                            <small><i class="fa fa-tags text-warning"></i> @item.Id | <i class="fa fa-folder-open text-primary"></i><b> Category</b></small>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-umbrella"></i>
-                        </div>
-                        <div class="btn-group dropdown dropright">
-                            <button type="button" class="btn-xs btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-paper-plane"></i>  . Action
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <a href="@Url.Action("Delete", "Pcategories", new { id = item.Id })" class="dropdown-item">
-                                    <i class="fa fa-trash text-danger"></i> Drop Category
-                                </a>
+                        <div class="icon"> <i class="fa fa-folder-open"></i></div>
+                        <div class="dropdown-divider"></div>
+                        <a href="@Url.Action("Delete", "Pcategories", new { id = item.Id })" class="small-box-footer" style="background-color: #071058; color: white;border-radius:10px;">
+                            <b style="color:white">Drop Category</b> <i class="fas fa-arrow-circle-right text-white"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+            }
+            </div>
+           
 
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                        }
-                    </div>
+                
+        </div>
                 </div>
 
 

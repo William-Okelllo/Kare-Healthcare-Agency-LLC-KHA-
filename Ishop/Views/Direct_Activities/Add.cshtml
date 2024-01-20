@@ -180,14 +180,73 @@
                                     }
                                 })
                             </div>
-                            <div class="form-group col-md-3">
-                                <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Project_Name) </label>
-                                @Html.DropDownList("Project_Name", ViewBag.Project as SelectList, "--Select Project  --", new { @class = "form-control ", })
-                            </div>
                             <div class="form-group col-md-4">
-                                <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
-                                @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control ", })
+                                <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Project_Name) </label>
+                                @Html.DropDownList("Project_Name", ViewBag.Project as SelectList, "--Select Project  --", new { @class = "form-control ", @required = "required" })
+                                <span class="text-danger" id="projectNameValidationMessage"></span>
                             </div>
+                            <script>
+                                $(document).ready(function () {
+                                    // Add a change event listener to the dropdown
+                                    $("#Project_Name").change(function () {
+                                        // Check if a value is selected
+                                        if ($(this).val() === "") {
+                                            // If not, show the validation message
+                                            $("#projectNameValidationMessage").text("Please fill out this field.");
+                                        } else {
+                                            // If a value is selected, clear the validation message
+                                            $("#projectNameValidationMessage").text("");
+                                        }
+                                    });
+                                });
+                            </script>
+                            <div class="form-group col-md-4 " id="Name">
+                                <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Name) </label>
+                                @Html.DropDownList("Name", new SelectList(new List<string>(), "Name"), "--Select Phase --", new { @class = "form-control", id = "assignedNamesDropdown", @required = "required" })
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                            <script>
+        $(document).ready(function () {
+            $("#Project_Name").change(function () {
+                var selectedProject = $(this).val();
+
+                // Make an AJAX request to get assigned names for the selected project
+                $.ajax({
+                    url: '@Url.Action("GetAssignedNames", "Direct_Activities")',
+                    type: 'GET',
+                    data: { projectName: selectedProject },
+                    success: function (result) {
+                        // Update the "Name" dropdown with the retrieved names
+                        var assignedNamesDropdown = $("#assignedNamesDropdown");
+                        assignedNamesDropdown.empty();
+
+                        $.each(result, function (index, name) {
+                            assignedNamesDropdown.append('<option value="' + name + '">' + name + '</option>');
+                        });
+                    },
+                    error: function () {
+                        console.error('Error fetching assigned names');
+                    }
+                });
+            });
+        });
+                            </script>
+
+
+
+
+
+
                             <script>
                                 $(document).ready(function () {
                                     // Hook up change event for the dropdown
@@ -214,7 +273,7 @@
                                 $(function () {
                                     $("#Project_Name").chosen();
                                     $("#Indixrect").chosen();
-                                    $("#Name").chosen();
+                                    $("#d").chosen();
 
                                 });
                             </script>
@@ -226,14 +285,15 @@
                             <div class="form-group col-md-2">
                                 <label><i class="fa fa-clock text-primary"></i> @Html.LabelFor(model => model.Hours)</label>
                                 @Html.EditorFor(model => model.Hours, new
-                                {
-                                    htmlAttributes = new
-                                    {
-                                        @class = "form-control form-control-sm",
-                                        @Placeholder = "No. of Hours",
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "No. of Hours",
+                                   @required = "required",
                                         id = "Hours" // Add an ID to the input field for easy access in JavaScript
-                                    }
-                                })
+                               }
+                           })
                             </div>
                             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                             <script>

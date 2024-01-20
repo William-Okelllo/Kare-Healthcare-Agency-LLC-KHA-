@@ -12,6 +12,7 @@ using IShop.Core.Interface;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class Days_leaveController : Controller
     {
         private IDays_leave_context db = new IDays_leave_context();

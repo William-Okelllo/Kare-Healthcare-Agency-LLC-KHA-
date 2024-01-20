@@ -23,7 +23,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Ishop
 {
-
+    [Authorize]
     public class TimesheetController : Controller
     {
         private Userstable dbb = new Userstable();

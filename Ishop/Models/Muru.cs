@@ -4,6 +4,7 @@ namespace Ishop.Models
 {
     public class Muru
     {
+        public int Id { get; set; }
         public string Project_Name { get; set; }
         public string Phase { get; set; }
         public Decimal Budget { get; set; }

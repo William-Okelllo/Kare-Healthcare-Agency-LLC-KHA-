@@ -12,6 +12,7 @@ using Ishop.Models;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class HODsController : Controller
     {
         private HodContext db = new HodContext();

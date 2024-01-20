@@ -24,13 +24,13 @@ namespace Ishop.Controllers
             }
             else if (search == "")
             {
-                return View(db.directs.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.directs.OrderBy(p => p.Step).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.directs.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.directs.OrderBy(p => p.Step).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }
@@ -61,7 +61,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Name,User")] Direct direct)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Name,User,Step")] Direct direct)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Name,User")] Direct direct)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Name,User,Step")] Direct direct)
         {
             if (ModelState.IsValid)
             {

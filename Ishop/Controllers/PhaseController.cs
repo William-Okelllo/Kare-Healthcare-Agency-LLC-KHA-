@@ -48,6 +48,13 @@ namespace Ishop.Controllers
             }
             return View(phase);
         }
+        private Direct_Context dbb = new Direct_Context();
+        public ActionResult GetPhaseId(string Name)
+        {
+            var data = dbb.directs.FirstOrDefault(d => d.Name == Name);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: Phase/Create
         public ActionResult Create(int id)
@@ -66,7 +73,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Project_id,Start_Date,End_Date,Name,Budget")] Phase phase)
+        public ActionResult Create([Bind(Include = "Id,Project_id,Start_Date,End_Date,Name,Budget,Step")] Phase phase)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +121,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Budget,Project_id,Name,Start_Date,End_Date")] Phase phase)
+        public ActionResult Edit([Bind(Include = "Id,Budget,Project_id,Name,Start_Date,End_Date,Step")] Phase phase)
         {
            
             if (ModelState.IsValid)

@@ -1,0 +1,95 @@
+﻿@model List<Ishop.Models.Drilldown_Model>
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+
+
+
+
+
+    <div class="table-responsive">
+        @if (Model != null && Model.Any())
+        {
+            <table class="table table-bordered table-hover table-condensed table-striped table-hover text-nowrap">
+                <thead>
+                    <tr style="color:white">
+                        <th style="background-color: #0656A5; font-size: medium; ">Team Member </th>
+                        <th style="background-color: #0656A5; font-size: medium; ">Phase</th>
+                        <th style="background-color: #0656A5; font-size: medium; ">Logged Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-widget="expandable-table" aria-expanded="false">
+                            <td style="background-color:white">
+                                <i class="fa fa-user-circle text-primary"></i>  @item.User
+                                <div class="dropdown-divider"></div>
+                                <h2> <b>@item.Hours </b> <b style="font-size:large">Hrs</b></h2>
+                            </td>
+                            <td style="background-color:white">
+                                <i class="fa fa-circle-notch text-primary"></i>  @item.Phase
+                                <div class="dropdown-divider"></div>
+                                <small>
+                                    <span class="badge badge-success">
+                                        <medium><i class="fa fa-calendar-check text-white"></i>  </medium>
+                                    </span>
+                                    <b style="font-size:small">Start Date</b> : @ViewBag.Phas.Start_Date.ToString("dd-MMM-yyyy")
+                                </small> -
+                                <small>
+                                    <span class="badge badge-warning">
+                                        <medium><i class="fa fa-calendar-check text-white"></i>  </medium>
+                                    </span>
+                                    <b style="font-size:small">End Date</b> : @ViewBag.Phas.End_Date.ToString("dd-MMM-yyyy")
+                                </small>
+                            </td>
+                            <td style="background-color:white"><i class="fa fa-coins text-warning"></i>  @item.Logged.ToString("#,##0.00") </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+    <div class="col d-flex justify-content-center">
+        <div class="col-lg-4 col-12">
+            <!-- small card -->
+            <div class="small-box bg-gradient-white" style="border-radius: 15px">
+                <div class="inner">
+
+                    <h4> <img src="~/Images/P.png" height="40" /></h4>
+                    <div class="dropdown-divider"></div>
+                    <h6><i class="fa fa-spin fa-circle-notch text-success "></i>   No  Data logged under current phase</h6>
+
+                </div>
+                
+            </div>
+        </div>
+        
+       
+    </div>
+ 
+        }
+    </div>

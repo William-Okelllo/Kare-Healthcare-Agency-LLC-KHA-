@@ -61,7 +61,23 @@
                         <div class="form-group col-md-4">
                             <label><i class="fa fa-bookmark text-primary"></i> @Html.LabelFor(model => model.Category) </label>
                             @Html.DropDownList("Category", ViewBag.Category as SelectList, "--Select Category --", new { @class = "form-control  form-control-sm", @Required = true })
+                            <span class="text-danger" id="Categoryy"> </span>
                         </div>
+                        <script>
+                            $(document).ready(function () {
+                                // Add a change event listener to the dropdown
+                                $("#Category").change(function () {
+                                    // Check if a value is selected
+                                    if ($(this).val() === "") {
+                                        // If not, show the validation message
+                                        $("#Categoryy").text("Please fill out this field.");
+                                    } else {
+                                        // If a value is selected, clear the validation message
+                                        $("#Categoryy").text("");
+                                    }
+                                });
+                            });
+                        </script>
 
                         <script type="text/javascript">
                             $(function () {
@@ -197,7 +213,23 @@
                             <div class="form-group col-md-4">
                                 <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Client) </label>
                                 @Html.DropDownList("Client", ViewBag.Clients as SelectList, "--Select Client --", new { @class = "form-control  form-control-sm", @Required = true })
+                                <span class="text-danger" id="projectNameValidationMessage"></span>
                             </div>
+                            <script>
+                                $(document).ready(function () {
+                                    // Add a change event listener to the dropdown
+                                    $("#Client").change(function () {
+                                        // Check if a value is selected
+                                        if ($(this).val() === "") {
+                                            // If not, show the validation message
+                                            $("#projectNameValidationMessage").text("Please fill out this field.");
+                                        } else {
+                                            // If a value is selected, clear the validation message
+                                            $("#projectNameValidationMessage").text("");
+                                        }
+                                    });
+                                });
+                            </script>
                             <div class="form-group col-md-2" id="other">
                                 <label><i class="fa fa-file-invoice text-primary"></i>   @Html.LabelFor(model => model.Fee_Budget)</label>
                                 @Html.EditorFor(model => model.Fee_Budget, new

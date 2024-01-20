@@ -59,6 +59,13 @@ namespace Ishop.Controllers
         }
 
 
+        public JsonResult GetAssignedNames(string projectName)
+        {
+            Team_Context P = new Team_Context();
+            var assignedNames = P.teams.Where(c => c.Project_Name == projectName && c.Username ==User.Identity.Name).Select(c => c.Name).ToList();
+
+            return Json(assignedNames, JsonRequestBehavior.AllowGet);
+        }
 
 
         public ActionResult Details(int? id)
@@ -79,17 +86,10 @@ namespace Ishop.Controllers
         public ActionResult Add(DateTime Id)
         {
             ViewBag.Date = Id;
-            Direct_Context DC = new Direct_Context();
-            var DirectC = DC.directs.ToList();
-            ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
-
-
-            InDirect_Context ID = new InDirect_Context();
-            var InDirect = ID.InDirects.ToList();
-            ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
+          
 
             Team_Context P = new Team_Context();
-            var Project = P.teams.Where(c=>c.Username ==User.Identity.Name).ToList();
+            var Project = P.teams.Where(c=>c.Username ==User.Identity.Name).Distinct().ToList();
             ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
 

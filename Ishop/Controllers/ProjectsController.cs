@@ -16,7 +16,7 @@ using System.Xml.Linq;
 
 namespace Ishop.Controllers
 {
-    [Authorize]  
+    [Authorize]
     public class ProjectsController : Controller
     {
         private Project_Context db = new Project_Context();
@@ -41,6 +41,41 @@ namespace Ishop.Controllers
             }
 
         }
+
+
+
+
+        public ActionResult DrillDown(string projectName, string Phase, int? page)
+        {
+            Direct_Activities_Context DA = new Direct_Activities_Context();
+
+            var data = DA.direct_Activities
+                .Where(da => da.Project_Name == projectName && da.Name == Phase)
+                .GroupBy(da => new { da.User, da.Name })
+                .Select(group => new Drilldown_Model
+                {
+                    User = group.Key.User,
+                    Phase = group.Key.Name,
+                    Logged = group.Sum(da => da.Charge),
+                    Hours = group.Sum(da => da.Hours)
+                })
+                .Distinct()
+                .ToList();
+
+            var Projectid = db.projects.Where(p => p.Project_Name == projectName).FirstOrDefault();
+            Phase_Context PC = new Phase_Context();
+            var Phas = PC.phases.Where(da => da.Project_id == Projectid.Id && da.Name == Phase).FirstOrDefault();
+            ViewBag.Phas = Phas;
+            return PartialView("DrillDown", data);
+        }
+
+
+
+
+
+
+
+
 
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
@@ -74,6 +109,7 @@ namespace Ishop.Controllers
                                     Project_Name = reader["Project_Name"].ToString(),
                                     Budget = Convert.ToDecimal(reader["Budget"]),
                                     Phase = reader["Phase"].ToString(),
+                                    Id = Convert.ToInt32(reader["Id"]),
                                     logged = Convert.ToDecimal(reader["logged"]),
                                     Balance = Convert.ToDecimal(reader["Balance"]),
                                     StartDate = Convert.ToDateTime(reader["Start_Date"]),
@@ -110,7 +146,7 @@ namespace Ishop.Controllers
 
 
             Phase_Context AA = new Phase_Context();
-            var Phase = AA.phases.Where(a => a.Project_id == id).ToList();
+            var Phase = AA.phases.OrderBy(p => p.Step).Where(a => a.Project_id == id).ToList();
             ViewBag.Phase = Phase;
 
             var Projectinfo = db.projects.Where(p => p.Id == id).FirstOrDefault();
@@ -122,7 +158,7 @@ namespace Ishop.Controllers
 
 
             Team_Context T = new Team_Context();
-            var Team = T.teams.Where(a => a.Project_id == id).ToList();
+            var Team = T.teams.OrderBy(p => p.Step).Where(a => a.Project_id == id).ToList();
             ViewBag.Team = Team;
             if (id == null)
             {

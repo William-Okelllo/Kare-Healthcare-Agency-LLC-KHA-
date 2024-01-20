@@ -461,6 +461,7 @@
     </Compile>
     <Compile Include="Models\CombinedViewModel.cs" />
     <Compile Include="Models\Datapoint.cs" />
+    <Compile Include="Models\Drilldown_Model.cs" />
     <Compile Include="Models\E.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\EmbedProperties.cs" />
@@ -8025,6 +8026,7 @@
     <Content Include="Views\HODs\Details.cshtml" />
     <Content Include="Views\HODs\Edit.cshtml" />
     <Content Include="Views\HODs\Index.cshtml" />
+    <Content Include="Views\Projects\DrillDown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

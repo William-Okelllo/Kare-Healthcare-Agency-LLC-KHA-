@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class leaves_TypesController : Controller
     {
         private leaveTypesContext db = new leaveTypesContext();

@@ -47,6 +47,19 @@ namespace Ishop.Controllers
             }
         }
 
+
+
+
+
+        private Direct_Context dbb = new Direct_Context();
+        public ActionResult GetPhaseId(string Name)
+        {
+            var data = dbb.directs.FirstOrDefault(d => d.Name == Name);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
         // GET: Teams/Create
         public ActionResult Add(string Project, int Id)
         {
@@ -71,7 +84,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id,Hours,Name")] Team team)
+        public ActionResult Add([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id,Hours,Name,Step")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +125,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id,Hours,Name")] Team team)
+        public ActionResult Edit([Bind(Include = "Id,Project_Name,Username,CreatedOn,Project_id,Hours,Name,Step")] Team team)
         {
             if (ModelState.IsValid)
             {

@@ -101,6 +101,7 @@
 
                         <th style="background-color: #0656A5; font-size: medium; ">AddedOn </th>
                         <th style="background-color: #0656A5; font-size: medium; ">Category</th>
+                        <th style="background-color: #0656A5; font-size: medium; ">Order</th>
                         <th style="background-color: #0656A5; font-size: medium; ">Added By</th>
                         <th style="background-color: #0656A5; font-size: medium;">Action</th>
                     </tr>
@@ -110,7 +111,7 @@
                     {
                         <tr>
                             <td style="background-color: white;">
-                               <i class="fa fa-calendar-check"></i>  @item.CreatedOn.ToString("dd-MMMM-yyyy")
+                                <i class="fa fa-calendar-check"></i>  @item.CreatedOn.ToString("dd-MMMM-yyyy")
 
                             </td>
                             <td style="background-color: white;">
@@ -118,6 +119,10 @@
 
 
                             </td>
+                            <td style="background-color: white;">
+                                <span class="badge badge-primary"><medium><i class="fa fa-circle-notch text-white"></i>  </medium></span> - <span class="badge badge-warning"><medium>  @item.Step  </medium></span> </td>
+
+
                             <td style="background-color: white;  ">
                                 <i class="fa fa-user-circle"></i> @item.User
 

@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace Ishop.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

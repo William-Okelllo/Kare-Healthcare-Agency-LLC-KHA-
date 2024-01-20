@@ -6,6 +6,8 @@ namespace IShop.Core
     {
         public int Id { get; set; }
 
+        public int Step { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string Name { get; set; }
