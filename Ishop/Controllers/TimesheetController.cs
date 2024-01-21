@@ -99,7 +99,7 @@ namespace Ishop
         public ActionResult Mine (string searchBy, string search, int? page)
         {
               
-          return View(db.timesheets.OrderBy(p => p.Id).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
+          return View(db.timesheets.OrderByDescending(p => p.CreatedOn).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
                 
            
@@ -121,15 +121,15 @@ namespace Ishop
             if (!(option == null) && (!(option == "")))
             {
                 return View(db.timesheets
-                    .OrderBy(p => p.Id)
-                    .Where(c => c.Owner.StartsWith(option) || c.Owner == option && Depart.Contains(c.Department))
+                    .OrderByDescending(p => p.CreatedOn)
+                    .Where(c => Depart.Contains(c.Department) && c.Owner ==(option) )
                     .ToList()
                     .ToPagedList(page ?? 1, 11));
             }
             else if (option == "")
             {
                 return View(db.timesheets
-                    .OrderBy(p => p.Id)
+                    .OrderByDescending(p => p.CreatedOn)
                     .Where(c => Depart.Contains(c.Department))
                     .ToList()
                     .ToPagedList(page ?? 1, 11));
@@ -137,7 +137,7 @@ namespace Ishop
             else
             {
                 return View(db.timesheets
-                    .OrderBy(p => p.Id)
+                    .OrderByDescending(p => p.CreatedOn)
                     .Where(c => Depart.Contains(c.Department))
                     .ToList()
                     .ToPagedList(page ?? 1, 11));
@@ -256,34 +256,23 @@ namespace Ishop
             return db.timesheets.Any(c => c.From_Date == from_Date && c.Owner == employeeUsername);
         }
 
-       
+
         public void InsertTimesheet()
         {
             DateTime currentDate = DateTime.Now;
-
-            // Calculate the day of the week the month starts
             DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
             int daysPassed = (int)firstDayOfMonth.DayOfWeek;
-
-            // Adjust daysPassed if the first day of the month is not Sunday (0)
             daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
-
-            // Calculate the week number based on the starting day of the month
-            int currentWeekNumber = GetCurrentWeekNumber(DateTime.Today);
-            int weekNumber = currentWeekNumber;
-
-            string weekInfo = $"{weekNumber:D2}{currentDate.Month:D2}{currentDate.Year}";
-            string joinedStringConcat = string.Concat(weekInfo);
-            int.TryParse(joinedStringConcat, out int WeekNo);
-
-
-
 
             Employee_Context Emp = new Employee_Context();
             List<Employee> employees = Emp.employees.ToList();
-            DateTime currentDatee = DateTime.Now.Date;
-            DateTime from_Date = currentDatee;
-            DateTime end_Date = currentDate.AddDays((DayOfWeek.Saturday - currentDate.DayOfWeek + 7) % 7);
+
+            // Set from_Date to the Sunday of the current week
+            DateTime from_Date = currentDate.Date.AddDays(-((int)currentDate.DayOfWeek));
+
+            // Set end_Date to the next Saturday from the current day
+            DateTime end_Date = from_Date.AddDays(6);
+
             foreach (var employee in employees)
             {
                 // Check if the timesheet already exists for the current week and employee
@@ -293,36 +282,34 @@ namespace Ishop
                     Timesheet timesheet = new Timesheet
                     {
                         CreatedOn = from_Date.AddDays(1),
-                        Department =employee.DprtName,
-                        From_Date= from_Date,
-                        End_Date= end_Date,
+                        Department = employee.DprtName,
+                        From_Date = from_Date,
+                        End_Date = end_Date,
                         Owner = employee.Username,
                         Tt = 0,
-                        Direct_Hours=0,
-                        InDirect_Hours=0,
+                        Direct_Hours = 0,
+                        InDirect_Hours = 0,
                         Status = 0
                     };
 
                     db.timesheets.Add(timesheet);
                     db.SaveChanges();
-
                 }
                 else
                 {
-
+                    Console.WriteLine($"Timesheet already exists for {employee.Username} in the week starting from {from_Date.ToString("MMMM dd, yyyy")}");
                 }
-
             }
 
             string Subject = "Timesheets Set successfully ";
             string message = "Hello Admin"
-            + "\n" + "This is a system notification to let you know that coming week timesheet are set ,Duration From Date " + from_Date.ToString("MMMM") + " To Date: " + end_Date.ToString("dd - MMMM - yyyy") 
-            + "\n" + "thank you "
-            + "\n" + "Regards , HR-Team ";
+                + "\n" + "This is a system notification to let you know that coming week timesheet are set, Duration From Date " + from_Date.ToString("MMMM") + " To Date: " + end_Date.ToString("dd - MMMM - yyyy")
+                + "\n" + "thank you "
+                + "\n" + "Regards, HR-Team ";
             var emaill = "murucharls@gmail.com";
             PushEmail(emaill, Subject, message, DateTime.Now);
-
         }
+
         private int GetCurrentWeekNumber(DateTime date)
         {
             var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;

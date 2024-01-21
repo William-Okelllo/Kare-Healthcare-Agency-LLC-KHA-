@@ -63,156 +63,156 @@
             <i class="fa fa-suitcase"></i>
             My Timesheets
         </h3>
+        <div style="text-align: right; color: white ">
+            @Html.ActionLink("Add Timesheet Tasks ", "Index", "Timesheet", null, new { @class = "btn btn-sm btn-warning btn " })
 
-      
-
-
-    </div>
-
-    @if (TempData["Msg"] != null)
-    {<div class="row">
-            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                @TempData["Msg"]
             </div>
         </div>
-    }
 
-    <script>
-        window.setTimeout(function () {
-            $(".alert").fadeTo(500, 0).slideUp(500, function () {
-                $(this).remove();
-            });
-        }, 2000);
-    </script>
+        @if (TempData["Msg"] != null)
+        {<div class="row">
+                <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @TempData["Msg"]
+                </div>
+            </div>
+        }
 
-
-
-
-
-
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
-
-
-            <thead>
-                <tr style="color:white">
-
-                    <th style="background-color: #0C54A0; font-size: medium; "> Month</th>
-
-                    <th style="background-color: #0C54A0; font-size: medium; ">Staff</th>
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+        </script>
 
 
-                    <th style="background-color: #0C54A0; font-size: medium; ">InDirect Hrs</th>
-                    <th style="background-color: #0C54A0; font-size: medium; ">Direct Hrs</th>
-                    <th style="background-color: #0C54A0; font-size: medium; ">Total Hours</th>
-                    <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-
-                        <td style="background-color: white;">
-                            <i class="fa fa-bookmark text-primary"></i>  @item.CreatedOn.ToString("MMMM")
-                            <div class="dropdown-divider"></div>
-                            <small style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b>To</b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.CreatedOn.ToString("dd-MMM-yyyy")</b></small>
-                        </td>
-                        <td style="background-color: white;">
-                            <span class="badge badge-primary"><i class="fa fa-user-circle text-white"></i></span>  @item.Owner
-                            <div class="dropdown-divider"></div>
-                            <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span>  @item.Department
-                        </td>
-
-                        <td style="background-color: white;"> <h4 style="color:navy">  @item.InDirect_Hours <b style="font-size:large">Hrs</b></h4></td>
-                        <td style="background-color: white;"> <h4 style="color:green">  @item.Direct_Hours <b style="font-size:large">Hrs</b></h4></td>
-                        <td style="background-color: white;"> <h1>  @item.Tt <b style="font-size:large">Hrs</b></h1></td>
-
-                        <td style="background-color: white;">
-                            @{
-                                DateTime currentDate = DateTime.Now.Date;
-                                DateTime from_Date = currentDate;
-                                DateTime end_Date = currentDate.AddDays((DayOfWeek.Saturday - currentDate.DayOfWeek + 7) % 7);
-                            }
-                            @if (item.CreatedOn >= from_Date && item.CreatedOn <= end_Date)
-                            {
-                                <div class="spinner-border spinner-border-sm text-success" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                                <small style="font-size:small;color:forestgreen"><b>INPROGRESS</b></small>
-                            }
-                            else
-                            {
-                                <small style="font-size:medium;color:dimgray"><b><i class="fa fa-check-circle text-gray"></i> CLOSED</b></small>
-                                <div class="dropdown-divider"></div>  <b style="font-size: small"><i class="fa fa-certificate text-green"></i>  APPROVALS :</b>
-                                if (@item.Status == 0)
-                                {
-                                    <b style="color: green; font-size: small"> PENDING  </b>}
-                                else
-                                {<b style="color: orange; font-size: small "><i class="fa fa-spin fa-circle-notch"></i> APPROVED </b>
-                                }
-                            }
-
-                        </td>
-                        
 
 
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+                <thead>
+                    <tr style="color:white">
+
+                        <th style="background-color: #0C54A0; font-size: medium; "> Month</th>
+
+                        <th style="background-color: #0C54A0; font-size: medium; ">Staff</th>
+
+
+                        <th style="background-color: #0C54A0; font-size: medium; ">InDirect Hrs</th>
+                        <th style="background-color: #0C54A0; font-size: medium; ">Direct Hrs</th>
+                        <th style="background-color: #0C54A0; font-size: medium; ">Total Hours</th>
+                        <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
 
-                }
-            </tbody>
-        </table>
-        <!-- Modal to display the result -->
+                            <td style="background-color: white;">
+                                <i class="fa fa-bookmark text-primary"></i>  @item.CreatedOn.ToString("MMMM")
+                                <div class="dropdown-divider"></div>
+                                <small style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b>To</b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></small>
+                            </td>
+                            <td style="background-color: white;">
+                                <span class="badge badge-primary"><i class="fa fa-user-circle text-white"></i></span>  @item.Owner
+                                <div class="dropdown-divider"></div>
+                                <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span>  @item.Department
+                            </td>
+
+                            <td style="background-color: white;"> <h4 style="color:navy">  @item.InDirect_Hours <b style="font-size:large">Hrs</b></h4></td>
+                            <td style="background-color: white;"> <h4 style="color:green">  @item.Direct_Hours <b style="font-size:large">Hrs</b></h4></td>
+                            <td style="background-color: white;"> <h1>  @item.Tt <b style="font-size:large">Hrs</b></h1></td>
+
+                            <td style="background-color: white;">
+                                @{
+                                    DateTime currentDate = DateTime.Now.Date;
+                                    DateTime from_Date = currentDate;
+                                    DateTime end_Date = currentDate.AddDays((DayOfWeek.Saturday - currentDate.DayOfWeek + 7) % 7);
+                                }
+                                @if (item.CreatedOn >= from_Date && item.CreatedOn <= end_Date)
+                                {
+                                    <div class="spinner-border spinner-border-sm text-success" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <small style="font-size:small;color:forestgreen"><b>INPROGRESS</b></small>
+                                }
+                                else
+                                {
+                                    <small style="font-size:medium;color:dimgray"><b><i class="fa fa-check-circle text-gray"></i> CLOSED</b></small>
+                                    <div class="dropdown-divider"></div> <b style="font-size: small"><i class="fa fa-certificate text-green"></i>  APPROVALS :</b>
+                                    if (@item.Status == 0)
+                                    {
+                                        <b style="color: green; font-size: small"> PENDING  </b>}
+                                    else
+                                    {<b style="color: orange; font-size: small "><i class="fa fa-spin fa-circle-notch"></i> APPROVED </b>
+                                    }
+                                }
+
+                            </td>
+
+
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            <!-- Modal to display the result -->
 
 
 
 
-        <style>
-            .ul.pagination {
-                display: inline-block;
-                padding: 1;
-                margin: 1;
-                border-radius: 0.5rem;
-            }
-
-            ul.pagination li {
-                display: inline;
-            }
-
-                ul.pagination li a {
-                    color: black;
-                    float: left;
-                    padding: 8px 16px;
-                    text-decoration: none;
-                    transition: background-color;
-                    background-color: #ddd;
-                    border-color: white;
+            <style>
+                .ul.pagination {
+                    display: inline-block;
+                    padding: 1;
+                    margin: 1;
                     border-radius: 0.5rem;
                 }
 
-                    ul.pagination li a.active {
-                        background-color: dodgerblue;
-                        color: white;
-                    }
+                ul.pagination li {
+                    display: inline;
+                }
 
-                    ul.pagination li a:hover:not(.active) {
-                        background-color: dodgerblue;
+                    ul.pagination li a {
+                        color: black;
+                        float: left;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                        transition: background-color;
+                        background-color: #ddd;
+                        border-color: white;
                         border-radius: 0.5rem;
                     }
-        </style>
-        <div id="container" style="text-align:left">
 
-            <div class="pagination" style="text-align:left">
-                @Html.PagedListPager(Model, page => Url.Action("Approval", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
-              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                        ul.pagination li a.active {
+                            background-color: dodgerblue;
+                            color: white;
+                        }
+
+                        ul.pagination li a:hover:not(.active) {
+                            background-color: dodgerblue;
+                            border-radius: 0.5rem;
+                        }
+            </style>
+            <div id="container" style="text-align:left">
+
+                <div class="pagination" style="text-align:left">
+                    @Html.PagedListPager(Model, page => Url.Action("Approval", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
+                  , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                </div>
             </div>
         </div>
+
+
     </div>
-
-
-</div>
 
 </div>
 

@@ -182,6 +182,8 @@
                                     <span class="sr-only">Loading...</span>
                                 </div>
                                 <small style="font-size: small; color: forestgreen"><b>IN PROGRESS</b></small>
+                                <div class="dropdown-divider"></div>
+                                <small style="font-size: x-small; color: forestgreen"><b><i class="fa fa-spin fa-circle-notch"></i>  CURRENT WEEK</b></small>
                             }
 
                             else
@@ -190,33 +192,42 @@
                                 <div class="dropdown-divider"></div> <b style="font-size: small"><i class="fa fa-certificate text-green"></i>  APPROVALS :</b>
                                 if (@item.Status == 0)
                                 {
-                                    <b style="color: green; font-size: small"> PENDING  </b>}
+                                    <b style="color: green; font-size: small"> PENDING  </b>
+                                }
                                 else
-                                {<b style="color: orange; font-size: small "><i class="fa fa-spin fa-circle-notch"></i> APPROVED </b>
+                                {<b style="color: orange; font-size: small "><i class="fa  fa-circle-notch"></i> APPROVED </b>
                                 }
                             }
 
                         </td>
 
                         <td style="background-color:ghostwhite">
-
-                            <div class="btn-group dropdown">
-
-                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (item.CreatedOn >= from_Date && item.CreatedOn <= end_Date)
+                            {
+                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-hashtag"></i>  . Action
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                    @if (@item.Status == 0)
-                                    {
-                                    <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Details", "Timesheet", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-check-circle text-primary"></i> Approve || <i class="fa fa-times-circle text-danger"></i> Reject
-                                    </a>
-                                    }
+                            }
+                            else
+                            {
+                                <div class="btn-group dropdown">
+
+                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                        @if (@item.Status == 0)
+                                        {
+                                            <div class="dropdown-divider"></div>
+                                            <a href="@Url.Action("Details", "Timesheet", new { id = item.Id })" class="dropdown-item">
+                                                <i class="fa fa-check-circle text-primary"></i> Approve || <i class="fa fa-times-circle text-danger"></i> Reject
+                                            </a>
+                                        }
 
 
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         </td>
 
                     </tr>
@@ -271,6 +282,31 @@
         </div>
     </div>
 
+    @if (Model.Count() == 0)
+    {
+                <div class="col d-flex justify-content-center">
+                    
+                            <div class="col-md-3 col-sm-12 col-12">
+                                <div class="info-box bg-gradient-black">
+                                   
+                                    <div class="info-box-content">
+                                       
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 0%"></div>
+                                        </div>
+                                        <span class="progress-description">
+                                            <i class="fa fa-spin fa-circle-notch text-danger nav-icon"></i>  No data found
+                                        </span>
+                                        
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                        </div>
+                    
+           
+    }
 
 </div>
 

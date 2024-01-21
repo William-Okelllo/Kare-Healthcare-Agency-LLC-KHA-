@@ -1,12 +1,19 @@
 ﻿using EASendMail;
+using IShop.Core;
+using Ishop.Infa;
 using Newtonsoft.Json;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SqlClient; 
 using System.Text;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore;
 using System.Timers;
 using Attachment = System.Net.Mail.Attachment;
 using SmtpClient = EASendMail.SmtpClient;
 using Timer = System.Timers.Timer;
+using Dapper;
+using IShop.Core.Interface;
+using Azure;
 
 namespace Planning_Backend_Service
 {
@@ -17,7 +24,7 @@ namespace Planning_Backend_Service
         public App()
         {
 
-            _timer = new Timer(30000) { AutoReset = true };
+            _timer = new Timer(3000) { AutoReset = true };
             _timer.Elapsed += TimeElapsed;
         }
         private string connectionString = "Data Source=.;Initial Catalog=Planning; User ID=sa; Password=1234;Integrated Security=True;";
@@ -354,6 +361,7 @@ namespace Planning_Backend_Service
             }
         }
 
+       
 
         public void CheckTimesheetDate()
         {
@@ -376,15 +384,28 @@ namespace Planning_Backend_Service
                                 DayOfWeek currentDayOfWeek = DateTime.Now.DayOfWeek;
                                 if (DateTime.Now.DayOfWeek == runtimeDayOfWeek &&
                                   DateTime.Now.TimeOfDay.Hours == 23 && //11 PM
-                                  DateTime.Now.TimeOfDay.Minutes == 58)
+                                  DateTime.Now.TimeOfDay.Minutes == 30)
                                 {
                                     // Run your method or logic here
+
                                     InsertTimesheetRecords();
+                                    DateTime currentDate = DateTime.Now;
+                                    DateTime nextSunday = currentDate.Date.AddDays(1); // Next day (Sunday)
+                                    int daysPassed = (int)nextSunday.DayOfWeek;
+                                    daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
+                                    DateTime from_Date = nextSunday.Date.AddDays(-daysPassed); // Previous Sunday or same day if it's already Sunday
+                                    DateTime end_Date = from_Date.AddDays(6); // Following Saturday
+
+                                    Console.WriteLine("Current Date: " + currentDate);
+                                    Console.WriteLine("From Date: " + from_Date);
+                                    Console.WriteLine("End Date: " + end_Date);
                                     Console.WriteLine("--success-- ");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("--Awaiting for " + Runtime + " 11:58 PM");
+                                    Console.WriteLine("--Awaiting for " + Runtime + " 11:30 PM  ");
+                                    
+                                }
                                 }
                             }
                         }
@@ -397,74 +418,159 @@ namespace Planning_Backend_Service
 
 
             }
-        }
 
 
 
 
-
-
-
-        public void InsertTimesheetRecords()
+        public bool TimesheetExists(DateTime from_Date, string employeeUsername)
         {
-
-
+            bool exists = false;
 
             try
             {
-                string query = "SELECT Email, Password, SSRSReportsUrl, Business_mail,Smtp,port FROM Configs";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
+
+                    string query = "SELECT 1 FROM Timesheets WHERE From_Date = @From_Date AND Owner = @Owner";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@From_Date", from_Date);
+                        command.Parameters.AddWithValue("@Owner", employeeUsername);
+                        exists = (command.ExecuteScalar() != null);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking timesheet existence: {ex.Message}");
+            }
+
+            return exists;
+        }
+
+        public List<Employee> GetEmployees()
+        {
+            List<Employee> employees = new List<Employee>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT Id, Username, Fullname, DprtName, Designation, Email FROM Employees";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
+                            while (reader.Read())
                             {
-                                string Business_mail = reader["Business_mail"].ToString();
-
-
-
-
-                                using (HttpClient client = new HttpClient())
+                                Employee employee = new Employee
                                 {
-                                    // Set the base address of your web app
-                                    client.BaseAddress = new Uri(Business_mail);
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    Username = reader["Username"].ToString(),
+                                    Fullname = reader["Fullname"].ToString(),
+                                    DprtName = reader["DprtName"].ToString(),
+                                    Designation = reader["Designation"].ToString(),
+                                    Email = reader["Email"].ToString()
+                                    // Add other properties as needed
+                                };
 
-                                    // Call the action method URL synchronously
-                                    HttpResponseMessage response = client.GetAsync("/Timesheet/InsertTimesheet").Result;
-
-                                    if (response.IsSuccessStatusCode)
-                                    {
-
-                                        string logLine = $"Date: {DateTime.Now.ToString()} |System Timesheet SetUp  | Status: Success | ";
-                                        File.AppendAllLines(logFilePath, new string[] { logLine });
-
-                                    }
-                                    else
-                                    {
-                                        string logLine = $"Date: {DateTime.Now.ToString()} |System Timesheet SetUp  | Status: Success | ";
-                                        File.AppendAllLines(logFilePath, new string[] { logLine });
-                                    }
-                                }
-
+                                employees.Add(employee);
                             }
                         }
                     }
                 }
-
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine($"Error retrieving employees: {ex.Message}");
             }
+
+            return employees;
         }
 
 
 
-        public void Start()
+        public void InsertTimesheetRecords()
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime nextSunday = currentDate.Date.AddDays(1); // Next day (Sunday)
+            int daysPassed = (int)nextSunday.DayOfWeek;
+            daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
+            DateTime from_Date = nextSunday.Date.AddDays(-daysPassed); // Previous Sunday or same day if it's already Sunday
+            DateTime end_Date = from_Date.AddDays(6); // Following Saturday
+
+            Console.WriteLine("Current Date: " + currentDate);
+            Console.WriteLine("From Date: " + from_Date);
+            Console.WriteLine("End Date: " + end_Date);
+
+
+
+            try
+            {
+                // Get the list of employees
+                List<Employee> employees = GetEmployees();
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    foreach (var employee in employees)
+                    {
+                        // Check if the timesheet already exists for the current week and employee
+                        if (!TimesheetExists(from_Date, employee.Username))
+                        {
+                            // Create a new Timesheet record
+                            string insertQuery = @"
+                        INSERT INTO Timesheets (CreatedOn, From_Date, End_Date, Department, Owner, Tt, Direct_Hours, InDirect_Hours, Status)
+                        VALUES (@CreatedOn, @From_Date, @End_Date, @Department, @Owner, @Tt, @Direct_Hours, @InDirect_Hours, @Status)";
+
+                            using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@CreatedOn", from_Date.AddDays(1));
+                                insertCommand.Parameters.AddWithValue("@From_Date", from_Date);
+                                insertCommand.Parameters.AddWithValue("@End_Date", end_Date);
+                                insertCommand.Parameters.AddWithValue("@Department", employee.DprtName);
+                                insertCommand.Parameters.AddWithValue("@Owner", employee.Username);
+                                insertCommand.Parameters.AddWithValue("@Tt", 0);
+                                insertCommand.Parameters.AddWithValue("@Direct_Hours", 0);
+                                insertCommand.Parameters.AddWithValue("@InDirect_Hours", 0);
+                                insertCommand.Parameters.AddWithValue("@Status", 0);
+
+                                // Execute the SQL command to insert the new Timesheet record
+                                insertCommand.ExecuteNonQuery();
+
+                                string logLine = $"Timesheet Set :  | From Date  {from_Date} | End Date  {end_Date} | Employee Account  {employee.Username} | Department  {employee.DprtName} ";
+                                File.AppendAllLines(logFilePath, new string[] { logLine });
+                            }
+                        }
+                        else
+                        {
+                            string logLine = $"Timesheet Already Exists :  |  Employee Account  {employee.Username} | Department  {employee.DprtName} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                    }
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                string logLine = $"ERROR : Inserting Timesheet  :   |  {ex.Message}";
+                File.AppendAllLines(logFilePath, new string[] { logLine });
+                Console.WriteLine($"Error inserting timesheets: {ex.Message}");
+            }
+        }
+
+
+   
+ 
+
+
+    public void Start()
         {
             _timer.Start();
         }
