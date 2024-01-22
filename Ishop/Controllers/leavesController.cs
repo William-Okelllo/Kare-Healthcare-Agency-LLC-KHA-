@@ -103,8 +103,7 @@ namespace Ishop.Controllers
             ViewBag.EmpInfo = data13;
 
             DepartmentContext DD = new DepartmentContext();
-            var data14 = K2.employees.Where(c => c.Username == User.Identity.Name).FirstOrDefault();
-            var Depp = DD.departments.Where(c => c.DprtName == data14.DprtName).FirstOrDefault();
+            var Depp = DD.departments.Where(c => c.DprtName == data13.DprtName).FirstOrDefault();
             ViewBag.Department = Depp;
 
 
@@ -121,7 +120,7 @@ namespace Ishop.Controllers
               Message="",
               HR_Email = Depp.Email_Address,
               Emp_Mail =data13.Email,
-              Department =Depp.DprtName,
+              Department = data13.DprtName,
               phone = data13.Contact,
               Designation=data13.DprtName,
               Approver_Remarks = "--",

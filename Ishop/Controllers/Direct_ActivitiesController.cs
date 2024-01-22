@@ -86,11 +86,18 @@ namespace Ishop.Controllers
         public ActionResult Add(DateTime Id)
         {
             ViewBag.Date = Id;
-          
+
 
             Team_Context P = new Team_Context();
-            var Project = P.teams.Where(c=>c.Username ==User.Identity.Name).Distinct().ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
+
+            var projects = P.teams
+                .Where(c => c.Username == User.Identity.Name)
+                .GroupBy(c => c.Project_Name)
+                .Select(group => group.FirstOrDefault())
+                .ToList();
+
+            ViewBag.Project = new SelectList(projects, "Project_Name", "Project_Name");
+
 
 
             DateTime currentDate = Id;
@@ -123,7 +130,7 @@ namespace Ishop.Controllers
             
                 db.direct_Activities.Add(direct_Activities);
                 db.SaveChanges();
-            CaptureRecord(direct_Activities.Hours, direct_Activities.User, direct_Activities.Day_Date);
+              CaptureRecord(direct_Activities.Hours, direct_Activities.User, direct_Activities.Day_Date);
              TempData["msg"] = "Activity added successfully ";
                 return RedirectToAction("Index", "Timesheet");
             
@@ -140,7 +147,7 @@ namespace Ishop.Controllers
             if (Sheet != null)
             {
                 Sheet.Tt = Sheet.Tt + time;
-                Sheet.InDirect_Hours = Sheet.InDirect_Hours + time;
+                Sheet.Direct_Hours = Sheet.Direct_Hours + time;
                 TT.SaveChanges();
             }
         }

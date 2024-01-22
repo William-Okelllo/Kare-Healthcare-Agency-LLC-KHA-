@@ -26,7 +26,7 @@ namespace Ishop.Controllers
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.projects.OrderByDescending(p => p.Id).Where(c => c.Project_Name.StartsWith(search) || c.Project_Name == search).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Id).Where(c => c.Project_Name.StartsWith(search) || c.Project_Name == search || c.Project_Name.Contains(search)).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
@@ -49,6 +49,24 @@ namespace Ishop.Controllers
         {
             Direct_Activities_Context DA = new Direct_Activities_Context();
 
+            var Projectinfo = db.projects.Where(c => c.Project_Name == projectName).FirstOrDefault();
+            ViewBag.Project = Projectinfo;
+            Phase_Context phase_Context = new Phase_Context();
+            var Phaseinfo = phase_Context.phases.Where(c => c.Project_id == Projectinfo.Id && c.Name == Phase).FirstOrDefault();
+
+            ViewBag.Phasedetail = Phaseinfo;
+            var data2 = DA.direct_Activities
+                .Where(da => da.Project_Name == projectName && da.Name == Phase).Select(c => c.Charge).DefaultIfEmpty(0).Sum(); ;
+
+            ViewBag.Total = data2;
+            ViewBag.Balance = (Phaseinfo.Budget - data2);
+
+            var Projectid = db.projects.Where(p => p.Project_Name == projectName).FirstOrDefault();
+            Phase_Context PC = new Phase_Context();
+            var Phas = PC.phases.Where(da => da.Project_id == Projectid.Id && da.Name == Phase).FirstOrDefault();
+            ViewBag.Phas = Phas;
+
+
             var data = DA.direct_Activities
                 .Where(da => da.Project_Name == projectName && da.Name == Phase)
                 .GroupBy(da => new { da.User, da.Name })
@@ -62,11 +80,9 @@ namespace Ishop.Controllers
                 .Distinct()
                 .ToList();
 
-            var Projectid = db.projects.Where(p => p.Project_Name == projectName).FirstOrDefault();
-            Phase_Context PC = new Phase_Context();
-            var Phas = PC.phases.Where(da => da.Project_id == Projectid.Id && da.Name == Phase).FirstOrDefault();
-            ViewBag.Phas = Phas;
-            return PartialView("DrillDown", data);
+            
+            
+            return View("DrillDown", data);
         }
 
 

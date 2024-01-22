@@ -26,6 +26,8 @@ namespace IShop.Core
 
 
         public string Message { get; set; }
+
+        [Display(Name = "Phone")]
         public string phone { get; set; }
 
 
