@@ -98,8 +98,16 @@ namespace Ishop
         [Authorize]
         public ActionResult Mine (string searchBy, string search, int? page)
         {
-              
-          return View(db.timesheets.OrderByDescending(p => p.CreatedOn).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
+
+
+            DateTime currentDate = DateTime.Now;
+            DateTime sunday = currentDate.AddDays(-(int)currentDate.DayOfWeek);
+            DateTime saturday = sunday.AddDays(6);
+
+            ViewBag.Sunday = sunday;
+            ViewBag.Saturday = saturday ;
+
+            return View(db.timesheets.OrderByDescending(p => p.CreatedOn).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
                 
            
@@ -111,6 +119,19 @@ namespace Ishop
         [Authorize]
         public ActionResult Approval( int? page, string option, string startDate, string endDate)
         {
+            DateTime currentDate = DateTime.Now;
+            DateTime sunday = currentDate.AddDays(-(int)currentDate.DayOfWeek);
+            DateTime saturday = sunday.AddDays(6);
+
+            ViewBag.Sunday = sunday;
+            ViewBag.Saturday = saturday;
+
+
+
+
+
+
+
             var Employ = db.timesheets.Select(t => t.Owner).Distinct().ToList();
             ViewBag.Usernames = Employ;
 

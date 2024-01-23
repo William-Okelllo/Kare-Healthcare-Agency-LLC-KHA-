@@ -170,13 +170,9 @@
                         <td style="background-color: white;"> <h1>  @item.Tt <b style="font-size:large">Hrs</b></h1></td>
 
                         <td style="background-color: white;">
-                            @{
-                                DateTime currentDate = DateTime.Now.Date;
-                                DateTime from_Date = currentDate;
-                                DateTime end_Date = currentDate.AddDays((DayOfWeek.Saturday - currentDate.DayOfWeek + 7) % 7);
-                            }
+                            
 
-                            @if (item.CreatedOn >= from_Date && item.CreatedOn <= end_Date)
+                            @if (item.CreatedOn >= ViewBag.Sunday && item.CreatedOn <= ViewBag.Saturday)
                             {
                                 <div class="spinner-border spinner-border-sm text-success" role="status">
                                     <span class="sr-only">Loading...</span>
@@ -202,7 +198,7 @@
                         </td>
 
                         <td style="background-color:ghostwhite">
-                            @if (item.CreatedOn >= from_Date && item.CreatedOn <= end_Date)
+                            @if (item.CreatedOn >= ViewBag.Sunday && item.CreatedOn <= ViewBag.Saturday)
                             {
                                 <button type="button" class="btn btn-sm btn-warning dropdown-toggle disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-hashtag"></i>  . Action
