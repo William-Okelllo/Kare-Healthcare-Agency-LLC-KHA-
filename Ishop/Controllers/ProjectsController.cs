@@ -26,18 +26,18 @@ namespace Ishop.Controllers
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.projects.OrderByDescending(p => p.Id).Where(c => c.Project_Name.StartsWith(search) || c.Project_Name == search || c.Project_Name.Contains(search)).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderBy(p => p.Id).Where(c => c.Project_Name.StartsWith(search) || c.Project_Name == search || c.Project_Name.Contains(search)).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.projects.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderBy(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.projects.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderBy(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }

@@ -118,8 +118,8 @@
                             <div class="dropdown-divider"></div>
                             <h7 style="color:navy">
 
-                                <b>
-                                    <span class="badge badge-primary"><medium><i class="fa fa-users text-white"></i>   </medium> </span><B style="color:dimgray"> CLIENT</B>  :   @item.Client <small></small>
+                                <b style="font-size:small">
+                                    <span class="badge badge-warning"><medium><i class="fa fa-users text-white"></i>   </medium> </span><B style="color:dimgray"> Client</B>  :   @item.Client <small></small>
 
 
                                 </b>
@@ -129,19 +129,19 @@
 
                        
                         <td style="background-color:white">
-                            <h6> <span class="badge badge-success"><medium><i class="fa fa-credit-card text-white"></i>  </medium></span> <b style="font-size:medium"> BUDGET</b>  : @item.Budget.ToString("#,##0.00")</h6> <div class="dropdown-divider"></div>
-                              <h6><span class="badge badge-warning"><medium><i class="fa fa-coins text-white"></i>  </medium></span> <b style="font-size:medium">FEE BUDGET</b> : @item.Fee_Budget.ToString("#,##0.00") </h6>
+                            <h6> <span class="badge badge-success"><medium><i class="fa fa-credit-card text-white"></i>  </medium></span> <b style="font-size:medium"> Budget</b>  : @item.Budget.ToString("#,##0.00")</h6> <div class="dropdown-divider"></div>
+                              <h6><span class="badge badge-warning"><medium><i class="fa fa-coins text-white"></i>  </medium></span> <b style="font-size:medium">Fee Budget</b> : @item.Fee_Budget.ToString("#,##0.00") </h6>
 
                         </td>
                         <td style="background-color: white;  ">
                             <i class="fa fa-map-marker text-danger"></i> @item.location
                             <div class="dropdown-divider"></div>
 
-                            <span class="badge badge-warning"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> <B style="color:dimgray">CATEGORY</B> :   @item.Category   |
+                            <span class="badge badge-warning"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> <B style="color:dimgray;font-size:small">Category</B> :   @item.Category   |
 
-                            <B style="color:dimgray">STATUS</B> :
+                            <B style="color: dimgray; font-size: small">Status</B> :
                             @if (item.Status == "Active")
-                            {<B style="color:green"> <i class="fa fa-check-circle"></i>  @item.Status</B> }
+                            {<B style="color: green; font-size: small"> <i class="fa fa-check-circle"></i>  @item.Status</B> }
                         else if (item.Status == "Proposed")
                         { <B style="color:gray">@item.Status</B>}
                         </td>
