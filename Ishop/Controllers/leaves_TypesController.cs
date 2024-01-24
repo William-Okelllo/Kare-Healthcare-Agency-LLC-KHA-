@@ -21,12 +21,12 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.leaves_Types.OrderByDescending(p => p.Id).Where(c => c.Type == search).ToList().ToPagedList(page ?? 1, 12));
+                return View(db.leaves_Types.OrderBy(p => p.Steps).Where(c => c.Type == search).ToList().ToPagedList(page ?? 1, 12));
 
             }
             else
             {
-                return View(db.leaves_Types.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 12));
+                return View(db.leaves_Types.OrderBy(p => p.Steps).ToList().ToPagedList(page ?? 1, 12));
 
 
             }
@@ -58,7 +58,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Type,Days")] leaves_Types leaves_Types)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Type,Days,Steps")] leaves_Types leaves_Types)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Type,Days")] leaves_Types leaves_Types)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Type,Days,Steps")] leaves_Types leaves_Types)
         {
             if (ModelState.IsValid)
             {

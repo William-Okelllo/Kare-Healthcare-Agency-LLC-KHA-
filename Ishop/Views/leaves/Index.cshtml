@@ -27,7 +27,7 @@
     <div class="card-header" style="background-color: #0656A5">
         <h3 class="card-title" style="color:white">
             <i class="fa fa-umbrella"></i>
-            Requested leaves
+            Requested Leave
         </h3>
 
         <div style="text-align: right; color: white ">
@@ -36,7 +36,7 @@
 
 
               
-                @Html.ActionLink("Request leave ", "Create", "leaves", null, new { @class = "btn btn-sm btn-default btn " })
+                @Html.ActionLink("Request Leave ", "Create", "leaves", null, new { @class = "btn btn-sm btn-default btn " })
 
             }
 
@@ -65,7 +65,7 @@
 
         <div style="text-align:right">
             <button type="button" class="btn btnsm btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                <i class="fa fa-umbrella text-white"></i>  View  Balances
+                <i class="fa fa-umbrella text-white"></i>    View Leave Balance
             </button>
         </div>
 
@@ -74,7 +74,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Leaves Balances - Account - @User.Identity.Name</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Leave Balance - Account - @User.Identity.Name</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
