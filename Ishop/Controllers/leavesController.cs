@@ -51,6 +51,7 @@ namespace Ishop.Controllers
         }
         public ActionResult All(string searchBy, string search, int? page)
         {
+
             if (!(search == null) && (!(search == "")))
             {
                 return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Department.StartsWith(search) && c.Status != 0).ToList().ToPagedList(page ?? 1, 11));
@@ -116,7 +117,7 @@ namespace Ishop.Controllers
             }
             var newLeave = new leave
             { CreatedOn = DateTime.Now,
-              Employee= data13.Username,
+              Employee = data13.Username,
               Message="",
               HR_Email = Depp.Email_Address,
               Emp_Mail =data13.Email,
@@ -124,8 +125,12 @@ namespace Ishop.Controllers
               phone = data13.Contact,
               Designation=data13.DprtName,
               Approver_Remarks = "--",
-              Status = 0
-
+              Status = 0,
+              Days= 0,
+               From_Date = DateTime.Now,
+                To_Date = DateTime.Now,
+                Return_Date = DateTime.Now,
+                Type = "____",
                 // Set other properties as needed
             };
 
@@ -251,7 +256,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days")] leave leave,string action)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days,From_Date,To_Date,Return_Date,Type")] leave leave,string action)
         {
             
             if (ModelState.IsValid)
@@ -329,7 +334,7 @@ namespace Ishop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Approve_Deny([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days")] leave leave, string action)
+        public ActionResult Approve_Deny([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days,From_Date,To_Date,Return_Date,Type")] leave leave, string action)
         {
             if (ModelState.IsValid)
             {

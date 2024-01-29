@@ -24,7 +24,7 @@ namespace Planning_Backend_Service
         public App()
         {
 
-            _timer = new Timer(3000) { AutoReset = true };
+            _timer = new Timer(10000) { AutoReset = true };
             _timer.Elapsed += TimeElapsed;
         }
         private string connectionString = "Data Source=.;Initial Catalog=Planning; User ID=sa; Password=1234;Integrated Security=True;";

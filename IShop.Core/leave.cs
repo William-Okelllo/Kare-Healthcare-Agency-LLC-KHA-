@@ -35,7 +35,9 @@ namespace IShop.Core
 
         public string Approver_Remarks { get; set; }
 
-
+        [Display(Name = "Leave Type")]
+        [Required]
+        public string Type { get; set; }
 
 
         [Display(Name = "HOD Email")]
@@ -43,6 +45,16 @@ namespace IShop.Core
 
         [Display(Name = "Employee Email")]
         public string Emp_Mail { get; set; }
+
+
+
+        [Display(Name = "Commence on")]
+        public DateTime From_Date { get; set; }
+
+        [Display(Name = "Date of Return")]
+        public DateTime Return_Date { get; set; }
+        [Display(Name = "End Date")]
+        public DateTime To_Date { get; set; }
 
 
 

@@ -57,6 +57,15 @@ namespace Ishop.Controllers
             ViewBag.Categories = new SelectList(categories, "Type", "Type");
             ViewBag.leaveid = id;
 
+
+            bool CheckExisting = db.days_Leaves.Any(c => c.Leave_Id == id);
+           if(CheckExisting ==true)
+            {
+                TempData["msg"] = "✔   Note you already have a leave added , to change drop the exisiting leave first ";
+                return RedirectToAction("Add", "Leaves", new { id = id});
+            }
+
+
             return View();
         }
 
@@ -75,6 +84,10 @@ namespace Ishop.Controllers
                 if (check != null)
                 {
                     check.Days = check.Days + days_leave.Days;
+                    check.From_Date = days_leave.From_Date;
+                    check.To_Date = days_leave.To_Date;
+                    check.Return_Date= days_leave.Return_Date;
+                    check.Type= days_leave.Type;
                     leaveContext.SaveChanges();
                 }
 
@@ -134,6 +147,10 @@ namespace Ishop.Controllers
             if (check != null)
             {
                 check.Days = check.Days - days_leave.Days;
+                check.From_Date = DateTime.Now;
+                check.To_Date = DateTime.Now;
+                check.Return_Date = DateTime.Now;
+                check.Type = "---";
                 leaveContext.SaveChanges();
             }
             TempData["msg"] = "✔  Days dropped successfully";

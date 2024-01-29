@@ -86,11 +86,11 @@
 
 
                         <button id="addPhasesButton" class="btn-xs btn btn-primary ">
-                            <i class="fa fa-plus-circle text-black"></i> Add Direct Tasks
+                            <i class="fa fa-plus-circle text-black"></i> Add Project Time
                         </button>
                         ||
                         <button id="addPhasesButton2" class="btn-xs btn btn-warning ">
-                            <i class="fa fa-plus-circle text-black"></i> Add InDirect Tasks
+                            <i class="fa fa-plus-circle text-black"></i> Add Non-Project Time
                         </button>
 
 
@@ -136,7 +136,7 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                right: 'month'
             },
             events: [
                 {
@@ -296,7 +296,7 @@
                                         data-datev="@item.DateValue"
                                         data-url="@Url.Action("Directtasksview", "direct_Activities")"
                                         data-target="#exampleModalCenter">
-                                    <small><b><i class="fa fa-clock text-navy"></i> DIRECT HRS    </b></small>
+                                    <small><b><i class="fa fa-clock text-navy"></i> Project Hrs    </b></small>
                                 </button>
 
 
@@ -390,7 +390,7 @@
                                         data-datev="@item.DateValue"
                                         data-url="@Url.Action("InDirecttasksview", "indirect_Activities")"
                                         data-target="#exampleModalCenter">
-                                    <small><b><i class="fa fa-clock text-navy"></i> INDIRECT HRS    </b></small>
+                                    <small><b><i class="fa fa-clock text-navy"></i> Non-Project Hrs    </b></small>
                                 </button>
 
 

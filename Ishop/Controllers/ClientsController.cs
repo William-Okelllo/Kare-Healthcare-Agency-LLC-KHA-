@@ -109,27 +109,12 @@ namespace Ishop
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Client client = db.clients.Find(id);
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
-            return View(client);
-        }
-
-        // POST: Clients/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
             Client client = db.clients.Find(id);
             db.clients.Remove(client);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Client dropped successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

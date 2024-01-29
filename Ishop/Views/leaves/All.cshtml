@@ -103,7 +103,6 @@
                     <th style="background-color: #0656A5; font-size: medium; ">Added On </th>
                     <th style="background-color: #0656A5; font-size: medium; ">Staff Member</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Department</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Designation</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Leave Status</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Days</th>
                     <th style="background-color: #0656A5; font-size: medium;">Action</th>
@@ -115,11 +114,22 @@
                     <tr>
                         <td style="background-color: white;">
                             <i class="fa fa-calendar-check text-primary"></i>  @item.CreatedOn.ToString("dd-MMMM-yyyy")
+                        <div class="dropdown-divider"></div>
+                            <small style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>Start</b> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b>To</b></small> 
+                            <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b> Ends</b>  <b>@item.To_Date.ToString("dd-MMM-yyyy")</b></small>
 
                         </td>
-                        <td style="background-color: white;"> <i class="fa fa-user-circle text-primary"></i> @item.Employee</td>
-                        <td style="background-color: white;"> <small><i class="fa fa-university text-primary"></i> @item.Department</small></td>
-                        <td style="background-color: white;"> <small><b style="color:navy"><i class="fa fa-user-tag text-primary"></i> @item.Designation</b></small></td>
+                        <td style="background-color: white;">
+                            <i class="fa fa-user-circle text-primary"></i> @item.Employee
+                            <div class="dropdown-divider"></div>
+                            <small>  <a style="color:navy"><i class="fa fa-envelope text-primary"></i>     @item.Emp_Mail</a></small>
+                        </td>
+                        <td style="background-color: white;">
+                            <small><i class="fa fa-university text-primary"></i> @item.Department</small>
+                            <div class="dropdown-divider"></div>
+                            <small>  <b style="color:navy"><i class="fa fa-user-tag text-primary"></i> Designation :    @item.Designation</b></small>
+                        </td>
+                      
                         <td style="background-color: white;">
                             @if (item.Status == 66)
                             {<h6 style="color:deepskyblue"> <i class="fa fa-spin fa-circle-notch"></i> <b>InProgress</b></h6>}
@@ -130,7 +140,11 @@
                             else if (item.Status == 99)
                             { <h6 style="color:darkred"> <i class="fa  fa-times-circle text-danger"></i> <b>DENIED</b></h6>}
                         </td>
-                        <td style="background-color: white;">  <h5><b>@item.Days</b> <small>Days</small> </h5>  </td>
+                        <td style="background-color: white;">
+                            <h5><b>@item.Days</b> <small>Days</small> </h5>
+                            <div class="dropdown-divider"></div>
+                         <i class="fa fa-bookmark"></i>   @item.Type
+                        </td>
 
 
                         <td style="background-color:ghostwhite">
