@@ -49,11 +49,14 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
+    <DataSource Include="Live.rds" />
     <DataSource Include="Report.rds" />
   </ItemGroup>
   <ItemGroup>
     <Report Include="Employee Timesheet.rdl" />
+    <Report Include="NonProjectTime Timesheet Breakdown .rdl" />
     <Report Include="Projects.rdl" />
+    <Report Include="ProjectTime Timesheet Breakdown .rdl" />
     <Report Include="Project_Child.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

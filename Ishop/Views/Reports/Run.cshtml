@@ -4,12 +4,12 @@
     ViewBag.Title = "Report";
 }
 
+@if (ViewBag.ReportViewer != null)
+{
 
     <style>
-
-
         iframe {
-            border: none;
+            
             width: 100%;
             height: 100%;
         }
@@ -17,7 +17,18 @@
 
 
 
-    
-    <div style="Width=" 100%" Height="700px">
-        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+    <div class="card-header" style="background-color: #0C54A0">
+        <h3 class="card-title" style="color:white">
+            <i class="fa fa-chart-pie"></i>
+            Report
+        </h3>
+
+        <div style="text-align:right">
+            @Html.ActionLink("Back to Reports", "Index", "Reports", null, new { @class = "btn btn-xs btn-warning btn" })
+        </div>
     </div>
+    
+        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+    
+
+}

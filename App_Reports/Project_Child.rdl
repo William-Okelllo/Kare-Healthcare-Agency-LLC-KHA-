@@ -7,9 +7,9 @@
     </am:CreatedBy>
     <am:UpdatedBy>
       <am:Name>SSDTRS</am:Name>
-      <am:Version>17.7.34018.315</am:Version>
+      <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-01-04T23:55:17.0324196Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-02-12T12:57:24.6910928Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -415,7 +415,6 @@ FROM Projects</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -829,6 +828,8 @@ FROM Projects</CommandText>
                                 <TextRun>
                                   <Value>PROJECT </Value>
                                   <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -863,6 +864,8 @@ FROM Projects</CommandText>
                                 <TextRun>
                                   <Value>FEE PLANNED</Value>
                                   <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -897,6 +900,8 @@ FROM Projects</CommandText>
                                 <TextRun>
                                   <Value>FEE LOGGED</Value>
                                   <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -931,7 +936,8 @@ FROM Projects</CommandText>
                                 <TextRun>
                                   <Value>BALANCE</Value>
                                   <Style>
-                                    <FontFamily>Arial</FontFamily>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -971,7 +977,7 @@ FROM Projects</CommandText>
                                   <Value>=Fields!Project_Name.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1004,7 +1010,7 @@ FROM Projects</CommandText>
                                   <Value>=Fields!FEE_PLANNED.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                     <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
                                   </Style>
                                 </TextRun>
@@ -1038,7 +1044,7 @@ FROM Projects</CommandText>
                                   <Value>=Fields!FEE_LOGGED.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                     <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
                                   </Style>
                                 </TextRun>
@@ -1072,7 +1078,7 @@ FROM Projects</CommandText>
                                   <Value>=Fields!Balance.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                     <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
                                   </Style>
                                 </TextRun>
