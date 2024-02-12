@@ -74,6 +74,7 @@
     <Compile Include="Interface\Iteam.cs" />
     <Compile Include="Interface\Itemplate.cs" />
     <Compile Include="Interface\Itimesheet.cs" />
+    <Compile Include="Interface\Itime_cat.cs" />
     <Compile Include="leave.cs" />
     <Compile Include="leaves_Days_track.cs" />
     <Compile Include="leaves_Types.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Team.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="Timesheet.cs" />
+    <Compile Include="Time_cat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -383,7 +383,7 @@ namespace Planning_Backend_Service
                             {
                                 DayOfWeek currentDayOfWeek = DateTime.Now.DayOfWeek;
                                 if (DateTime.Now.DayOfWeek == runtimeDayOfWeek &&
-                                  DateTime.Now.TimeOfDay.Hours == 22 && //10 PM
+                                  DateTime.Now.TimeOfDay.Hours == 10 && //10 PM
                                   DateTime.Now.TimeOfDay.Minutes == 00)
                                 {
                                     // Run your method or logic here

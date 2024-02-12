@@ -184,8 +184,8 @@ namespace Ishop.Controllers
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void EmpAcc(DateTime CreatedOn, string Username, string Contact, string Userid, string Email,string Fullname ,string DprtName,string Designation)
         {
-            string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Email,Rate) VALUES " +
-            "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid,@Email,@Rate)";
+            string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Email,Rate,Active) VALUES " +
+            "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid,@Email,@Rate,@Active)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -200,7 +200,7 @@ namespace Ishop.Controllers
                     command.Parameters.AddWithValue("@Userid", Userid);
                     command.Parameters.AddWithValue("@Email", Email);
                     command.Parameters.AddWithValue("@Rate", 0);
-                    
+                    command.Parameters.AddWithValue("@Active", true);
                     command.ExecuteNonQuery();
                 }
             }

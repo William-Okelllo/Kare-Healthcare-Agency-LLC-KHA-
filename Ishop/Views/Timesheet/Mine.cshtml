@@ -102,8 +102,8 @@
                     <th style="background-color: #0C54A0; font-size: medium; ">Staff</th>
 
 
-                    <th style="background-color: #0C54A0; font-size: medium; ">InDirect Hrs</th>
-                    <th style="background-color: #0C54A0; font-size: medium; ">Direct Hrs</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Non Project Time</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Project Time</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Total Hours</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Action</th>
@@ -267,7 +267,7 @@
         <div id="container" style="text-align:left">
 
             <div class="pagination" style="text-align:left">
-                @Html.PagedListPager(Model, page => Url.Action("Approval", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
+                @Html.PagedListPager(Model, page => Url.Action("Mine", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
               , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
             </div>
         </div>

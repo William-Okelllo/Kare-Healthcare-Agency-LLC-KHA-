@@ -26,18 +26,18 @@ namespace Ishop.Controllers
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.projects.OrderBy(p => p.Id).Where(c => c.Project_Name.StartsWith(search) || c.Project_Name == search || c.Project_Name.Contains(search)).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Project_RegNo).Where(c => c.Project_Name.StartsWith(search) || c.Project_Name == search || c.Project_Name.Contains(search)).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.projects.OrderBy(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Project_RegNo).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.projects.OrderBy(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.projects.OrderByDescending(p => p.Project_RegNo).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }
@@ -214,7 +214,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget,User")] Project project)
+        public ActionResult Create([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget,User,Project_RegNo")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -261,7 +261,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget,User")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Project_Name,location,Status,Budget,Category,Client,Fee_Budget,User,Project_RegNo")] Project project)
         {
             if (ModelState.IsValid)
             {

@@ -421,6 +421,7 @@
     <Compile Include="Controllers\InDirectsController.cs" />
     <Compile Include="Controllers\leavesController.cs" />
     <Compile Include="Controllers\leaves_TypesController.cs" />
+    <Compile Include="Controllers\leave_BalanceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OutgoingEmailsController.cs" />
     <Compile Include="Controllers\OutgoingsmsController.cs" />
@@ -434,6 +435,7 @@
     <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Controllers\Time_catController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -8041,6 +8043,16 @@
     <Content Include="Views\Reopen\Edit.cshtml" />
     <Content Include="Views\Reopen\Index.cshtml" />
     <Content Include="Views\Reopen\Requests.cshtml" />
+    <Content Include="Views\leave_Balance\Create.cshtml" />
+    <Content Include="Views\leave_Balance\Delete.cshtml" />
+    <Content Include="Views\leave_Balance\Details.cshtml" />
+    <Content Include="Views\leave_Balance\Edit.cshtml" />
+    <Content Include="Views\leave_Balance\Index.cshtml" />
+    <Content Include="Views\Time_cat\Create.cshtml" />
+    <Content Include="Views\Time_cat\Delete.cshtml" />
+    <Content Include="Views\Time_cat\Details.cshtml" />
+    <Content Include="Views\Time_cat\Edit.cshtml" />
+    <Content Include="Views\Time_cat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

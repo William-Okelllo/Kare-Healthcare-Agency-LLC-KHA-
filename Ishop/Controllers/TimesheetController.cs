@@ -212,14 +212,13 @@ namespace Ishop
 
 
 
+            HodContext DD = new HodContext();
+            var Depart = DD.hODs.Where(D => D.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
 
 
-            var Employ = db.timesheets.Select(t => t.Owner).Distinct().ToList();
+            var Employ = db.timesheets.Where(c =>  Depart.Contains(c.Department)).Select(t => t.Owner).Distinct().ToList();
             ViewBag.Usernames = Employ;
 
-
-             HodContext DD = new HodContext();
-            var Depart = DD.hODs.Where(D => D.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
 
             if (!(option == null) && (!(option == "")))
             {

@@ -18,6 +18,8 @@ namespace IShop.Core
         [Display(Name = "Project Name")]
         public string Project_Name { get; set; }
 
+        [Display(Name = "Time Category")]
+        public string Category { get; set; }
         public string User { get; set; }
         public string Comments { get; set; }
         public decimal Charge { get; set; }

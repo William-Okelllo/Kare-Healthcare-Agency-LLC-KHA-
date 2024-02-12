@@ -81,12 +81,22 @@ namespace Ishop.Controllers
             }
             return View(direct_Activities);
         }
+        private Time_cat_context TC = new Time_cat_context();
+        public ActionResult Getinfo(string Part)
+        {
 
-        // GET: Direct_Activities/Create
+
+            var data = TC.time_Cats.FirstOrDefault(d => d.Name == Part);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Add(DateTime Id)
         {
             ViewBag.Date = Id;
 
+            Time_cat_context TC = new Time_cat_context();
+            var Timecategory = TC.time_Cats.ToList();
+            ViewBag.Timec = new SelectList(Timecategory, "Name", "Name");
 
             Team_Context P = new Team_Context();
 
@@ -125,7 +135,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo")] Direct_Activities direct_Activities)
+        public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo,Category")] Direct_Activities direct_Activities)
         {
             
                 db.direct_Activities.Add(direct_Activities);
@@ -144,6 +154,9 @@ namespace Ishop.Controllers
         {
             ViewBag.Date = Id;
 
+            Time_cat_context TC = new Time_cat_context();
+            var Timecategory = TC.time_Cats.ToList();
+            ViewBag.Timec = new SelectList(Timecategory, "Name", "Name");
 
             Team_Context P = new Team_Context();
 
@@ -182,7 +195,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add2([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo")] Direct_Activities direct_Activities)
+        public ActionResult Add2([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo,,Category")] Direct_Activities direct_Activities)
         {
 
             db.direct_Activities.Add(direct_Activities);

@@ -7,6 +7,8 @@ namespace IShop.Core
     {
         public int Id { get; set; }
 
+        [Display(Name = "Project No")]
+        public int Project_RegNo  { get; set; }
         public DateTime CreatedOn { get; set; }
 
         [Display(Name = "Project Name")]
