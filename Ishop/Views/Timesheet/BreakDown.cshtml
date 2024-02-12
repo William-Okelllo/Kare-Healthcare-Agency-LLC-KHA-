@@ -1,0 +1,264 @@
+﻿
+@{
+    ViewBag.Title = "DataView";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    form-rounded2 {
+        border-radius: 4rem;
+        border-color: orangered;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+</style>
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+
+
+
+<div class="col-md-12 col-sm-12 col-12">
+    <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+        <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+            <i class="fa fa-bookmark"></i> Timesheet Breakdown Details
+        </div>
+        <div class="card-body" style="background-color: white;border-radius: 24px;">
+
+
+
+            <form>
+
+                <h5>
+                    <i class="fa fa-user-circle text-primary"></i> @ViewBag.user
+                </h5>
+                <h6> <i class="fa fa-calendar-check text-primary"></i>   @ViewBag.FromDate.ToString("ddd-dd-MMMM-yyyy")   <b>TO</b>  @ViewBag.EndDate.ToString("ddd-dd-MMMM-yyyy") </h6>
+                <div class="dropdown-divider"></div>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-book-reader"></i>  Non Project Time </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-bookmark"></i>  Project Time </a>
+                    </li>
+
+                </ul>
+                <div class="table-responsive">
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+
+                            <div class="table-responsive">
+                                <div class="table-responsive" style="min-height: 100px">
+                                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                        <thead>
+                                            <tr style="border-radius: 14px">
+
+                                                <th style="background-color: #0C54A0; color: white "> <i class="fa fa-calendar-check text-white"></i> Week Day</th>
+                                                <th style="background-color: #0C54A0; color: white "> <i class="fa fa-suitcase text-white"></i>  Activity</th>
+
+
+                                                <th style="background-color: #0C54A0; color: white "> <i class="fa fa-comment text-white"></i> Comments</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody style="font-family:Calibri">
+                                            @foreach (var item in ViewBag.IndirectActivities)
+                                            {
+
+
+                                                <tr data-widget="expandable-table" aria-expanded="false">
+
+                                                    <td style="background-color:white;" width="20%">
+                                                        <span class="badge badge-primary"><medium><i class="fa fa-calendar-check text-white"></i> </medium></span>  <b>@item.Day_Date.ToString("dd-ddd-MMM-yyyy")</b>
+                                                        <div class="dropdown-divider"></div>
+                                                        <h2 style="color:green"> <b> @item.Hours <small>Hrs</small></b>  </h2>
+                                                    </td>
+                                                    <td style="background-color:white;" width="30%">
+                                                        <b style="font-size:large"> @item.Name</b>
+                                                        <div class="dropdown-divider"></div>
+
+
+                                                    </td>
+
+
+
+                                                    <td style="background-color: white;" width="50%">
+                                                        <p>@item.Comments</p>
+
+                                                        <div class="dropdown-divider"></div>
+                                                        @if (@item.Approved == true)
+                                                        {<p style="color:green;text-align:right"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |  <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |     <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
+                                                    else
+                                                    {<p style="color: orange; text-align: right"> <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |   <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
+                                                    </td>
+
+                                                </tr>
+
+                                            }
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+
+
+                            <div class="table-responsive">
+                                <div class="table-responsive" style="min-height: 100px">
+                                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                        <thead style="border-radius: 14px">
+                                            <tr style="color:white">
+
+                                                <th style="background-color: #0656A5"> <i class="fa fa-calendar-check text-white"></i> Week Day</th>
+                                                <th style="background-color: #0656A5"><i class="fa fa-suitcase text-white"></i>  Project Name</th>
+
+
+                                                <th style="background-color: #0656A5"><i class="fa fa-comment text-white"></i> Comments</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.direct_Activities)
+                                            {
+                                                <tr>
+
+                                                    <td style="background-color:white;" width="20%">
+                                                        <span class="badge badge-primary"><medium><i class="fa fa-calendar-check text-white"></i> </medium></span>  <b>@item.Day_Date.ToString("dd-ddd-MMM-yyyy")</b>
+                                                        <div class="dropdown-divider"></div>
+                                                        <h2 style="color:green"> <b> @item.Hours <small>Hrs</small></b>  </h2>
+                                                    </td>
+                                                    <td style="background-color:white;" width="30%">
+                                                        <b> @item.Project_Name</b>
+                                                        <div class="dropdown-divider"></div>
+                                                        <span class="badge badge-primary"><medium><i class="fa fa-folder-open text-white"></i> PHASE</medium></span>  @item.Name
+                                                        <div class="dropdown-divider"></div>
+
+
+                                                    </td>
+
+
+
+                                                    <td style="background-color: white;" width="50%">
+                                                        <p>@item.Comments</p>
+
+                                                        <div class="dropdown-divider"></div>
+                                                        @if (@item.Approved == true)
+                                                        {<p style="color:green;text-align:right"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |  <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |     <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
+                                                    else
+                                                    {<p style="color: orange; text-align: right"> <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |   <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
+                                                    </td>
+
+                                                </tr>
+
+
+
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="dropdown-divider"></div>
+                    <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>

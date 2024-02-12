@@ -1,0 +1,407 @@
+﻿@model IShop.Core.Reopen
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .form-rounded {
+        border-radius: 1rem;
+    }
+
+    form-rounded2 {
+        border-radius: 4rem;
+        border-color: orangered;
+    }
+
+    .form-rounded1 {
+        border-radius: 1rem;
+        border-color: red;
+    }
+
+    .form-control:focus {
+        border-color: #0faa09;
+    }
+    .curved-table2 {
+        border-collapse: collapse;
+        border-radius: 50px;
+        border: 1px solid #0C54A0;
+        overflow: visible;
+    }
+
+        .curved-table2 th,
+        .curved-table2 td {
+            padding: 10px;
+            border-radius: 4px;
+            border: 0px solid #0C54A0;
+        }
+</style>
+
+
+<!-- Main content -->
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    hr {
+        border: none;
+        color: black;
+        background-color: greenyellow;
+        height: 1px;
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+    $(function () {
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+
+
+@if (TempData["Msg"] != null)
+{<div class="row">
+        <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @TempData["Msg"]
+        </div>
+    </div>
+}
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>
+<!-- /.card-header -->
+
+
+
+
+
+
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                <i class="fa fa-bookmark"></i> Timesheet re-open request  
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+                    @using (Html.BeginForm("Re_quest", "reopen", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form>
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3"style="display:none">
+                                <label><i class=" fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.Status)</label>
+                                @Html.EditorFor(model => model.Status, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Timesheet_id",
+                                   @Readonly = true,
+                                   @Value = 0,
+
+                               }
+                           })
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                                @Html.EditorFor(model => model.CreatedOn, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Timesheet_id",
+                                   @Readonly = true,
+                                   @Value = DateTime.Now,
+
+                               }
+                           })
+
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Timesheet_id)</label>
+                                @Html.EditorFor(model => model.Timesheet_id, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Timesheet_id",
+                                   @Id = "Timesheet_id",
+                                   @Readonly = true,
+
+
+                               }
+                           })
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
+                                @Html.EditorFor(model => model.Department, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Department",
+                                   @Required = true,
+
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Staff)</label>
+                                @Html.EditorFor(model => model.Staff, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Department",
+                                   @Value = User.Identity.Name,
+                                   @Readonly = true,
+
+
+
+                               }
+                           })
+
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-sm  btn-warning " data-toggle="modal" data-target="#exampleModalCenter"> <i class="fa fa-spin fa-circle-notch text-black"></i> Select Timesheet</a>
+                        <style>
+                            /* Custom class for wider modal */
+                            .custom-modal-width {
+                                max-width: 90%; /* Adjust the percentage as needed */
+                            }
+                        </style>
+                        <div class="modal fade custom-modal-width" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
+                                <div class="modal-content" style="border-radius:15px">
+                                    <div class="modal-header" style="border-radius:15px;background-color:whitesmoke">
+                                        <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-clipboard-list text-black"></i></span>   Select Timesheet</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+                                                <thead>
+                                                    <tr style="color:white">
+
+                                                        <th style="background-color: #0C54A0; font-size: medium; "> Month</th>
+
+                                                        <th style="background-color: #0C54A0; font-size: medium; ">Dates</th>
+
+
+                                                        <th style="background-color: #0C54A0; font-size: medium; ">InDirect Hrs</th>
+                                                        <th style="background-color: #0C54A0; font-size: medium; ">Direct Hrs</th>
+                                                        <th style="background-color: #0C54A0; font-size: medium; ">Total Hours</th>
+                                                        <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
+                                                        <th style="background-color: #0C54A0; font-size: medium; ">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in ViewBag.Tiemsheets)
+                                                    {
+                                                        <tr>
+
+                                                            <td style="background-color: white;">
+                                                                <i class="fa fa-bookmark text-primary"></i>  @item.CreatedOn.ToString("MMMM")
+
+                                                            </td>
+                                                            <td style="background-color: white;">
+                                                                <medium style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></medium> <medium> <b>To</b></medium> <medium style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></medium>
+
+                                                            </td>
+
+
+                                                            <td style="background-color: white;"> <h4 style="color:navy">  @item.InDirect_Hours <b style="font-size: small">Hrs</b></h4></td>
+                                                            <td style="background-color: white;"> <h4 style="color:green">  @item.Direct_Hours <b style="font-size: small">Hrs</b></h4></td>
+                                                            <td style="background-color: white;"> <h4>  @item.Tt <b style="font-size: small">Hrs</b></h4></td>
+
+                                                            <td style="background-color: white;">
+
+                                                                @if (item.Locked == false)
+                                                                {
+
+                                                                    <small style="font-size:small;color:forestgreen"><b><i class="fa fa-lock-open text-success"></i>  OPEN</b></small>
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small style="font-size:medium;color:dimgray"><b><i class="fa fa-lock text-gray"></i> CLOSED</b></small>
+
+                                                                }
+
+                                                            </td>
+
+                                                            <td style="background-color: white;">
+                                                                <a href="#" class="btn btn-sm btn-warning select-timesheet" data-timesheet-id="@item.Id" data-timesheet-Department="@item.Department">
+                                                                    <i class="fa fa-book-reader text-bg-dark"></i> <b>Select</b>
+                                                                </a>
+                                                            </td>
+
+
+
+
+
+
+                                                        </tr>
+
+                                                    }
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $(".select-timesheet").click(function (e) {
+                                    e.preventDefault(); // Prevent the default behavior of the anchor tag
+
+                                    var recordId = $(this).data('timesheet-id');
+                                    
+
+                                    $.ajax({
+                                        url: '/reopen/Setid',
+                                        method: 'GET',
+                                        data: { TimesheetId: recordId },
+                                        success: function (data) {
+                                            if (data) {
+                                                $('#Timesheet_id').val(data.Id);
+                                                $('#Department').val(data.Department);
+                                                console.log('Clicked.');
+                                                $('#exampleModalCenter').modal('hide');
+
+                                               
+
+
+                                            } else {
+                                                // Handle the case when no data is returned
+                                            }
+                                        },
+                                        error: function () {
+                                            console.log('Error retrieving record data.');
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+
+
+
+
+
+
+                        <div class="dropdown-divider"></div>
+                        <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Reason) </label>
+                        <div class="form-row">
+
+                            @Html.TextAreaFor(model => model.Reason, 4, 70, htmlAttributes: new
+                       {
+                           id = "Reason", // Make sure the ID matches the one in getElementById
+                           style = "width: 70%; max-width:70%;",
+                           @placeholder = "Additional information",
+                           @autofocus = "",
+                           @Required = true,
+                           @class = "form-control form-rounded2",
+                           @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+                       })
+                            @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+
+                            <script>
+                                document.getElementById("Comments").addEventListener("paste", function (event) {
+                                    // Prevent the default paste behavior
+                                    event.preventDefault();
+
+                                    // Get the pasted content as plain text
+                                    var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+
+                                    // Sanitize the pasted content (you may use a library for this)
+                                    var sanitizedText = sanitizeFunction(text);
+
+                                    // Insert the sanitized plain text into the textarea as HTML
+                                    document.execCommand("insertHTML", false, sanitizedText);
+                                });
+
+                                function sanitizeFunction(input) {
+                                    // Implement your own sanitization logic or use a library
+                                    // to ensure that the pasted content is safe.
+                                    // Example: Implement a function to escape HTML entities.
+                                    return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                }
+                            </script>
+
+                        </div>
+
+
+
+
+
+                        <div class="dropdown-divider"></div>
+                        <input type="submit" value="Submit" class="btn btn-warning" />
+
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

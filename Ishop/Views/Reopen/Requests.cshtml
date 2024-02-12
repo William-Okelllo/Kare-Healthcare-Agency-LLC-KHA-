@@ -1,0 +1,171 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Reopen>
+@{
+    ViewBag.Title = "Requests";
+}
+
+<style>
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 50px;
+        border: 0px solid grey;
+        overflow: visible;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border-radius: 4px;
+            border: 0px solid grey;
+        }
+
+    .curved-table2 {
+        border-collapse: collapse;
+        border-radius: 50px;
+        border: 1px solid #0C54A0;
+        overflow: visible;
+    }
+
+        .curved-table2 th,
+        .curved-table2 td {
+            padding: 10px;
+            border-radius: 4px;
+            border: 0px solid #0C54A0;
+        }
+</style>
+
+
+
+
+
+
+<div class="card " style="background-color:white; border-radius: 14px ">
+
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0C54A0; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-bookmark"></i>
+            All Requests
+        </h3>
+
+
+
+    </div>
+
+    <div class="card-body">
+
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-12">
+                    <!-- small card -->
+                   <div class="small-box bg-gradient-gray-dark" style="border-radius: 15px">
+                       <div class="inner">
+
+                           <h4> <i class="fa fa-unlock"></i><b> Timesheet Re-Open Request</b></h4>
+                           <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span> <a style="color:white"> @item.Department</a>
+                           <div class="dropdown-divider"></div>
+                           <h6 style="color:white"> <span class="badge badge-warning"> <i class="fa fa-comment-dots text-black"></i></span> Message</h6>
+                           <p class="sms-text">@item.Reason.</p>
+                           <div style="text-align:right">
+                               @if (item.Status == 0)
+                               {<span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white">
+                                       @item.CreatedOn.ToString("dd-MMM-yyyy")
+                                   </a>
+
+                               }
+                               else if (item.Status == 1)
+                               {<span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white"> @item.CreatedOn.ToString("dd-MMM-yyyy")</a>
+
+                           }
+                           else
+                           {<span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white"> @item.CreatedOn.ToString("dd-MMM-yyyy")</a>
+
+                       }
+
+
+                           </div>
+
+
+                       </div>
+                       <div class="icon"> <i class="fa fa-bookmark"></i></div>
+                       <div class="ui-menu-divider"></div>
+
+                       @if (this.User.IsInRole("Timesheet_Approvals"))
+                       {
+                           <div class="ui-menu-divider"></div>
+
+                           if (item.Status == 0)
+                           {<a href="@Url.Action("Re_open", "reopen", new { id = item.Timesheet_id ,Requestid=item.Id})" class="btn-sm btn btn-primary">
+
+                                   <i class="fa fa-check-circle text-white"></i> Approve
+                               </a>
+                               <small>|</small>
+                               <a href="@Url.Action("Deny", "reopen", new { id = item.Timesheet_id ,Requestid=item.Id})" class="btn-sm btn btn-danger">
+
+                                   <i class="fa fa-times-circle text-white"></i> Deny
+                               </a>
+                           }
+                       }
+
+                       @if (item.Status == 0)
+                       {<a href="#" class="small-box-footer" style="background-color: #0C54A0; color: white;border-radius:15px;">
+                               <span class="badge badge-warning"> <i class="fa fa-spin fa-circle-notch text-black"></i></span> <b style="color:white"> Awaiting Approvals </b>
+                           </a>
+                       }
+                       else if (item.Status == 1)
+                       { <a href="#" class="small-box-footer" style="background-color: #087227; color: white;border-radius:15px;">
+                               <span class="badge badge-warning"> <i class="fa  fa-check-circle text-black"></i></span> <b style="color:white">  Approved  </b>
+                           </a>
+                       }
+                       else
+                       { <a href="#" class="small-box-footer" style="background-color: #850b0b; color: white;border-radius:15px;">
+                               <span class="badge badge-danger"> <i class="fa  fa-times-circle text-black"></i></span> <b style="color:white">  Denied  </b>
+                           </a>
+                       }
+                   </div>
+                </div>
+            }
+        </div>
+
+
+
+
+
+
+
+
+
+        @if (Model.Count() == 0)
+        {
+            <div class="col d-flex justify-content-center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="fa fa-bookmark"></i></span>
+
+                        <div class="info-box-content">
+
+                            <span class="progress-description">
+                                <i class="fa fa-spin fa-circle-notch"></i>  No Data Found
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+
+
+
+
+
+

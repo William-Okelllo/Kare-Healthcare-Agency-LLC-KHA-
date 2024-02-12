@@ -383,8 +383,8 @@ namespace Planning_Backend_Service
                             {
                                 DayOfWeek currentDayOfWeek = DateTime.Now.DayOfWeek;
                                 if (DateTime.Now.DayOfWeek == runtimeDayOfWeek &&
-                                  DateTime.Now.TimeOfDay.Hours == 23 && //11 PM
-                                  DateTime.Now.TimeOfDay.Minutes == 30)
+                                  DateTime.Now.TimeOfDay.Hours == 22 && //10 PM
+                                  DateTime.Now.TimeOfDay.Minutes == 00)
                                 {
                                     // Run your method or logic here
 
@@ -403,7 +403,7 @@ namespace Planning_Backend_Service
                                 }
                                 else
                                 {
-                                    Console.WriteLine("--Awaiting for " + Runtime + " 11:30 PM  ");
+                                    Console.WriteLine("--Awaiting for " + Runtime + " 10:00 PM  ");
                                     
                                 }
                                 }
@@ -498,11 +498,9 @@ namespace Planning_Backend_Service
         public void InsertTimesheetRecords()
         {
             DateTime currentDate = DateTime.Now;
-            DateTime nextSunday = currentDate.Date.AddDays(1); // Next day (Sunday)
-            int daysPassed = (int)nextSunday.DayOfWeek;
-            daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
-            DateTime from_Date = nextSunday.Date.AddDays(-daysPassed); // Previous Sunday or same day if it's already Sunday
-            DateTime end_Date = from_Date.AddDays(6); // Following Saturday
+            int daysUntilMonday = ((int)DayOfWeek.Monday - (int)currentDate.DayOfWeek + 7) % 7;
+            DateTime from_Date = currentDate.Date.AddDays(daysUntilMonday);
+            DateTime end_Date = from_Date.AddDays(6);
 
             Console.WriteLine("Current Date: " + currentDate);
             Console.WriteLine("From Date: " + from_Date);
@@ -526,8 +524,8 @@ namespace Planning_Backend_Service
                         {
                             // Create a new Timesheet record
                             string insertQuery = @"
-                        INSERT INTO Timesheets (CreatedOn, From_Date, End_Date, Department, Owner, Tt, Direct_Hours, InDirect_Hours, Status)
-                        VALUES (@CreatedOn, @From_Date, @End_Date, @Department, @Owner, @Tt, @Direct_Hours, @InDirect_Hours, @Status)";
+                        INSERT INTO Timesheets (CreatedOn, From_Date, End_Date, Department, Owner, Tt, Direct_Hours, InDirect_Hours, Status,Locked)
+                        VALUES (@CreatedOn, @From_Date, @End_Date, @Department, @Owner, @Tt, @Direct_Hours, @InDirect_Hours, @Status,@Locked)";
 
                             using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection))
                             {
@@ -540,7 +538,7 @@ namespace Planning_Backend_Service
                                 insertCommand.Parameters.AddWithValue("@Direct_Hours", 0);
                                 insertCommand.Parameters.AddWithValue("@InDirect_Hours", 0);
                                 insertCommand.Parameters.AddWithValue("@Status", 0);
-
+                                insertCommand.Parameters.AddWithValue("@Locked", false);
                                 // Execute the SQL command to insert the new Timesheet record
                                 insertCommand.ExecuteNonQuery();
 
@@ -554,7 +552,7 @@ namespace Planning_Backend_Service
                             File.AppendAllLines(logFilePath, new string[] { logLine });
                         }
                     }
-                   
+                    Locking();
                 }
             }
             catch (Exception ex)
@@ -565,12 +563,53 @@ namespace Planning_Backend_Service
             }
         }
 
+        public void Locking()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT Business_mail FROM Configs";
+                string baseAddress = connection.QueryFirstOrDefault<string>(query);
 
-   
- 
+                // Assuming you have a base address for the HttpClient
+                using (HttpClient client = new HttpClient())
+                {
+                    if (Uri.TryCreate(baseAddress, UriKind.Absolute, out Uri uri))
+                    {
+                        client.BaseAddress = uri;
+
+                        HttpResponseMessage response = client.GetAsync("Timesheet/InsertTimesheet").Result;
+
+                        // Check if the request was successful
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Read and handle the response content
+                            string responseBody = response.Content.ReadAsStringAsync().Result;
+                            string logLine = $"Date: {DateTime.Now.ToString()} | - - - - - Old Timesheets locked - - - - - | {responseBody} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                        else
+                        {
+                            Console.WriteLine("Request failed with status: " + response.StatusCode);
+                            string logLine = $"Date: {DateTime.Now.ToString()} |- - - - - Error locking Old Timesheets - - - - - - - -| {response} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid URL format: " + baseAddress);
+                    }
+                }
+            }
+        }
 
 
-    public void Start()
+
+
+
+
+
+        public void Start()
         {
             _timer.Start();
         }

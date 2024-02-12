@@ -64,7 +64,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Rate,Email")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Rate,Email,Active")] Employee employee)
         {
             if (ModelState.IsValid)
             {

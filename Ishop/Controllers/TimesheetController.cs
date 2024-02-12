@@ -19,11 +19,13 @@ using System.Net;
 using System.Web.Configuration;
 using System.Web.Http.Results;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Ishop
 {
-    [Authorize]
+    
     public class TimesheetController : Controller
     {
         private Userstable dbb = new Userstable();
@@ -32,6 +34,21 @@ namespace Ishop
         [Authorize]
         public ActionResult Index()
         {
+
+
+            DateTime currentDate = DateTime.Now;
+
+            // Set Monday to the Monday of the current week
+            DateTime Monday = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday);
+
+            // Set Sunday to the next Sunday from the current day
+            DateTime Sunday = Monday.AddDays(6);
+
+            ViewBag.Monday = Monday;
+            ViewBag.Sunday = Sunday;
+            var Sheet = db.timesheets.Where(i => i.Owner == User.Identity.Name &&  i.From_Date ==Monday && i.End_Date==Sunday).FirstOrDefault();
+            ViewBag.Sheet= Sheet;
+
 
 
             List<A> results = new List<A>();
@@ -82,11 +99,33 @@ namespace Ishop
 
         public ActionResult Details(int? id)
         {
+
+
+            Timesheet timesheet = db.timesheets.Find(id);
+
+            DateTime startDate = timesheet.From_Date;
+            DateTime endDate = timesheet.End_Date;
+
+            // Generate dates between start and end dates
+            List<DateTime> dateRange = Enumerable.Range(0, 1 + endDate.Subtract(startDate).Days)
+                .Select(offset => startDate.AddDays(offset))
+                .ToList();
+
+            // Group dates by weekday
+            var groupedDates = dateRange.GroupBy(date => date.DayOfWeek)
+                .ToDictionary(group => group.Key, group => group.ToList());
+
+            // Pass the grouped dates to the view using ViewBag
+            ViewBag.GroupedDates = groupedDates;
+
+
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Timesheet timesheet = db.timesheets.Find(id);
+           
             if (timesheet == null)
             {
                 return HttpNotFound();
@@ -95,17 +134,56 @@ namespace Ishop
         }
 
 
+        public ActionResult Approval(int? id)
+        {
+
+
+            Timesheet timesheet = db.timesheets.Find(id);
+
+            DateTime startDate = timesheet.From_Date;
+            DateTime endDate = timesheet.End_Date;
+
+            // Generate dates between start and end dates
+            List<DateTime> dateRange = Enumerable.Range(0, 1 + endDate.Subtract(startDate).Days)
+                .Select(offset => startDate.AddDays(offset))
+                .ToList();
+
+            // Group dates by weekday
+            var groupedDates = dateRange.GroupBy(date => date.DayOfWeek)
+                .ToDictionary(group => group.Key, group => group.ToList());
+
+            // Pass the grouped dates to the view using ViewBag
+            ViewBag.GroupedDates = groupedDates;
+
+
+
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (timesheet == null)
+            {
+                return HttpNotFound();
+            }
+            return View(timesheet);
+        }
+
         [Authorize]
         public ActionResult Mine (string searchBy, string search, int? page)
         {
 
-
             DateTime currentDate = DateTime.Now;
-            DateTime sunday = currentDate.AddDays(-(int)currentDate.DayOfWeek);
-            DateTime saturday = sunday.AddDays(6);
 
-            ViewBag.Sunday = sunday;
-            ViewBag.Saturday = saturday ;
+            // Set Monday to the Monday of the current week
+            DateTime Monday = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday);
+
+            // Set Sunday to the next Sunday from the current day
+            DateTime Sunday = Monday.AddDays(6);
+
+            ViewBag.Monday = Monday;
+            ViewBag.Sunday = Sunday;
 
             return View(db.timesheets.OrderByDescending(p => p.CreatedOn).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
@@ -117,14 +195,18 @@ namespace Ishop
 
 
         [Authorize]
-        public ActionResult Approval( int? page, string option, string startDate, string endDate)
+        public ActionResult All( int? page, string option, string startDate, string endDate)
         {
             DateTime currentDate = DateTime.Now;
-            DateTime sunday = currentDate.AddDays(-(int)currentDate.DayOfWeek);
-            DateTime saturday = sunday.AddDays(6);
 
-            ViewBag.Sunday = sunday;
-            ViewBag.Saturday = saturday;
+            // Set Monday to the Monday of the current week
+            DateTime Monday = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday);
+
+            // Set Sunday to the next Sunday from the current day
+            DateTime Sunday = Monday.AddDays(6);
+
+            ViewBag.Monday = Monday;
+            ViewBag.Sunday = Sunday;
 
 
 
@@ -255,7 +337,59 @@ namespace Ishop
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
         }
-    
+
+
+
+
+
+
+       
+        public ActionResult DataView(DateTime selectedDate,string user)
+        {
+            ViewBag.SelectedDate = selectedDate;
+            ViewBag.user = user;
+
+            DateTime endDate = selectedDate.Date.AddDays(1).AddMinutes(-1);
+            DateTime endDate2 = selectedDate.Date.AddDays(1).AddMinutes(-1);
+            var data = IA.indirect_Activities.Where(c => c.User == user && c.Day_Date >= selectedDate && c.Day_Date < endDate).ToList();
+            ViewBag.IndirectActivities=data;
+            var data2 = DA.direct_Activities.Where(c => c.User == user && c.Day_Date >= selectedDate && c.Day_Date < endDate2).ToList();
+            ViewBag.direct_Activities = data2;
+
+            var returnUrl = Url.Action("DataView", "Timesheet");
+
+            return View("DataView");
+        }
+
+
+
+        public ActionResult BreakDown(DateTime FromDate, DateTime EndDate, string user)
+        {
+            ViewBag.FromDate = FromDate;
+            ViewBag.EndDate = EndDate;
+            ViewBag.user = user;
+
+            var data = IA.indirect_Activities.Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
+            ViewBag.IndirectActivities = data;
+            var data2 = DA.direct_Activities.Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
+            ViewBag.direct_Activities = data2;
+
+            var returnUrl = Url.Action("BreakDown", "Timesheet");
+
+            return View("BreakDown");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -278,65 +412,63 @@ namespace Ishop
         }
 
 
-        public void InsertTimesheet()
+
+        public ActionResult Re_submit(int id)
         {
-            DateTime currentDate = DateTime.Now;
-            DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-            int daysPassed = (int)firstDayOfMonth.DayOfWeek;
-            daysPassed = (daysPassed == 0) ? 0 : 7 - daysPassed;
 
-            Employee_Context Emp = new Employee_Context();
-            List<Employee> employees = Emp.employees.ToList();
+            var Sheet = db.timesheets.Find(id);
 
-            // Set from_Date to the Sunday of the current week
-            DateTime from_Date = currentDate.Date.AddDays(-((int)currentDate.DayOfWeek));
-
-            // Set end_Date to the next Saturday from the current day
-            DateTime end_Date = from_Date.AddDays(6);
-
-            foreach (var employee in employees)
+            if (Sheet != null)
             {
-                // Check if the timesheet already exists for the current week and employee
-                if (!TimesheetExists(from_Date, employee.Username))
-                {
-                    // Create a new Timesheet record
-                    Timesheet timesheet = new Timesheet
-                    {
-                        CreatedOn = from_Date.AddDays(1),
-                        Department = employee.DprtName,
-                        From_Date = from_Date,
-                        End_Date = end_Date,
-                        Owner = employee.Username,
-                        Tt = 0,
-                        Direct_Hours = 0,
-                        InDirect_Hours = 0,
-                        Status = 0
-                    };
+                Sheet.Locked = true;
+                Sheet.Status = 0;
+                db.SaveChanges();
+            }
+            string Subject = "Timesheets Re-Submitted  ";
+            string message = "Hello " + Sheet.Owner
+                + "\n" + "Kindly note your  timesheet. has been resubmitted and its now locked "
+                + "\n" + "Timesheet Details "
+                + "\n" + "  _   _   _  _ "
+                + "\n" + "From Date " + Sheet.From_Date.ToString("dd - MMMM - yyyy") + " To Date " + Sheet.End_Date.ToString("dd - MMMM - yyyy") + " "
+                + "\n" + "Project Time " + Sheet.Direct_Hours
+                + "\n" + "Non Project Time " + Sheet.InDirect_Hours
+                + "\n" + "Total Time  " + Sheet.Tt
+                + "\n" + "Regards, HR-Team ";
 
-                    db.timesheets.Add(timesheet);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    Console.WriteLine($"Timesheet already exists for {employee.Username} in the week starting from {from_Date.ToString("MMMM dd, yyyy")}");
-                }
+            Employee_Context EM = new Employee_Context();
+            var Empl = EM.employees.Where(c => c.Username == Sheet.Owner).FirstOrDefault();
+            PushEmail(Empl.Email, Subject, message, DateTime.Now);
+            TempData["msg"] = "Timesheet Re-submitted successfully  -   Staff : " + Sheet.Owner + " From Date " + Sheet.From_Date.ToString("dd - MMMM - yyyy") + " To Date " + Sheet.End_Date.ToString("dd - MMMM - yyyy");
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
+
+        
+
+
+
+
+
+
+
+
+
+       public void InsertTimesheet()
+        {
+            DateTime currentDate = DateTime.Now.Date;
+            List<Timesheet> timesheetsToUpdate = db.timesheets.Where(c => c.CreatedOn <= currentDate).ToList();
+
+            foreach (var timesheet in timesheetsToUpdate)
+            {
+                timesheet.Locked = true;
             }
 
-            string Subject = "Timesheets Set successfully ";
-            string message = "Hello Admin"
-                + "\n" + "This is a system notification to let you know that coming week timesheet are set, Duration From Date " + from_Date.ToString("MMMM") + " To Date: " + end_Date.ToString("dd - MMMM - yyyy")
-                + "\n" + "thank you "
-                + "\n" + "Regards, HR-Team ";
-            var emaill = "murucharls@gmail.com";
-            PushEmail(emaill, Subject, message, DateTime.Now);
+            db.SaveChanges();
+
+            
         }
 
-        private int GetCurrentWeekNumber(DateTime date)
-        {
-            var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
-            int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-            return week;
-        }
+        
         private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
         public void PushEmail(string Recipient, string Subject, string Body, DateTime CreatedOn)
         {

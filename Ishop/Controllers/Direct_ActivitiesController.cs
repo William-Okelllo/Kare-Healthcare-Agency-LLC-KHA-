@@ -139,6 +139,97 @@ namespace Ishop.Controllers
         }
 
 
+
+        public ActionResult Add2(DateTime Id)
+        {
+            ViewBag.Date = Id;
+
+
+            Team_Context P = new Team_Context();
+
+            var projects = P.teams
+                .Where(c => c.Username == User.Identity.Name)
+                .GroupBy(c => c.Project_Name)
+                .Select(group => group.FirstOrDefault())
+                .ToList();
+
+            ViewBag.Project = new SelectList(projects, "Project_Name", "Project_Name");
+
+
+
+            DateTime currentDate = Id;
+
+            // Calculate the week number based on the current date
+            int currentWeekNumber = GetCurrentWeekNumber2(currentDate); // Make sure to provide the correct date here
+
+            // Assign the week number directly
+            int WeekNo = currentWeekNumber;
+
+            ViewBag.SelectedDate = currentDate;
+            ViewBag.Weekid = WeekNo;
+
+            ViewBag.Weekid = WeekNo;
+            return View();
+        }
+        private int GetCurrentWeekNumber2(DateTime date)
+        {
+            var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
+            int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return week;
+        }
+        // POST: Direct_Activities/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add2([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo")] Direct_Activities direct_Activities)
+        {
+
+            db.direct_Activities.Add(direct_Activities);
+            db.SaveChanges();
+            CaptureRecord(direct_Activities.Hours, direct_Activities.User, direct_Activities.Day_Date);
+            TempData["msg"] = "Activity added successfully ";
+            return RedirectToAction("DataView", "Timesheet", new { selectedDate = direct_Activities.Day_Date.ToString("yyyy-MM-dd") ,User= direct_Activities.User });
+
+
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void CaptureRecord(int time, string Staff, DateTime datecheck)
         {
             Timesheet_Context TT = new Timesheet_Context();
@@ -210,7 +301,52 @@ namespace Ishop.Controllers
             return View(direct_Activities);
         }
 
-        
+
+        public ActionResult Edit2(int? id)
+        {
+            Direct_Context DC = new Direct_Context();
+            var DirectC = DC.directs.ToList();
+            ViewBag.Direct = new SelectList(DirectC, "Name", "Name");
+
+
+            InDirect_Context ID = new InDirect_Context();
+            var InDirect = ID.InDirects.ToList();
+            ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
+
+            Team_Context P = new Team_Context();
+            var Project = P.teams.Where(c => c.Username == User.Identity.Name).ToList();
+            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Direct_Activities direct_Activities = db.direct_Activities.Find(id);
+            if (direct_Activities == null)
+            {
+                return HttpNotFound();
+            }
+            return View(direct_Activities);
+        }
+
+        // POST: Direct_Activities/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit2([Bind(Include = "Id,WeekId,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge")] Direct_Activities direct_Activities)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(direct_Activities).State = EntityState.Modified;
+                db.SaveChanges();
+                TempData["msg"] = "Activity updated successfully ";
+                return RedirectToAction("DataView", "Timesheet", new { selectedDate = direct_Activities.Day_Date.ToString("yyyy-MM-dd"), User = direct_Activities.User });
+            }
+            return View(direct_Activities);
+        }
+
+
         public ActionResult Delete(int id)
         {
             Direct_Activities direct_Activities = db.direct_Activities.Find(id);

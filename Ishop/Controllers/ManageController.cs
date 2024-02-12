@@ -176,7 +176,7 @@ namespace Ishop.Controllers
 
             }
 
-            return RedirectToAction("Acc_Profile", "Accesses");
+            return RedirectToAction("Index", "Home");
         }
 
         //

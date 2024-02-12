@@ -472,6 +472,7 @@
     <Compile Include="Models\Muru.cs" />
     <Compile Include="Models\TimesheetView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\ReopenController.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\TimesheetController.cs" />
   </ItemGroup>
@@ -7984,7 +7985,7 @@
     <Content Include="Views\leaves\Index.cshtml" />
     <Content Include="Views\leaves\leaves_Requests.cshtml" />
     <Content Include="Views\leaves\Print_Form.cshtml" />
-    <Content Include="Views\Timesheet\Approval.cshtml" />
+    <Content Include="Views\Timesheet\All.cshtml" />
     <Content Include="Views\Clients\Create.cshtml" />
     <Content Include="Views\Clients\Delete.cshtml" />
     <Content Include="Views\Clients\Details.cshtml" />
@@ -8027,6 +8028,19 @@
     <Content Include="Views\HODs\Edit.cshtml" />
     <Content Include="Views\HODs\Index.cshtml" />
     <Content Include="Views\Projects\DrillDown.cshtml" />
+    <Content Include="Views\Timesheet\DataView.cshtml" />
+    <Content Include="Views\Direct_Activities\Add2.cshtml" />
+    <Content Include="Views\Indirect_Activities\Add2.cshtml" />
+    <Content Include="Views\Timesheet\BreakDown.cshtml" />
+    <Content Include="Views\Indirect_Activities\Edit2.cshtml" />
+    <Content Include="Views\Direct_Activities\Edit2.cshtml" />
+    <Content Include="Views\Timesheet\Approval.cshtml" />
+    <Content Include="Views\Reopen\Re_quest.cshtml" />
+    <Content Include="Views\Reopen\Delete.cshtml" />
+    <Content Include="Views\Reopen\Details.cshtml" />
+    <Content Include="Views\Reopen\Edit.cshtml" />
+    <Content Include="Views\Reopen\Index.cshtml" />
+    <Content Include="Views\Reopen\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

@@ -1,4 +1,4 @@
-﻿@model IShop.Core.Timesheet
+﻿﻿@model IShop.Core.Timesheet
 @{
     ViewBag.Title = "Timesheet ";
 }
@@ -138,6 +138,7 @@
                 center: 'title',
                 right: 'month'
             },
+            firstDay: 1,
             events: [
                 {
                     title: 'Madaraka Day',
@@ -147,8 +148,9 @@
 
             ],
             dayRender: function (date, cell) {
-                var startOfWeek = moment().startOf('week');
-                var endOfWeek = moment().endOf('week');
+                var today = moment();
+                var startOfWeek = today.clone().startOf('isoWeek'); // ISO week starts on Monday
+                var endOfWeek = today.clone().endOf('isoWeek');
 
                 if (date.isBetween(startOfWeek, endOfWeek, null, '[]')) {
                     cell.css('background-color', 'white');
@@ -156,48 +158,46 @@
                     cell.css('background-color', '#cfcfcf');
                 }
 
-                if (date.isSame(moment(), 'day')) {
+                if (date.isSame(today, 'day')) {
                     cell.css('background', 'linear-gradient(to right, #4CAF50, #81C784)');
-                    cell.css('border', '2px solid #4CAF50');
+                    cell.css('border', '0px solid #4CAF50');
                     cell.append('<span class="badge badge-primary"><medium><i class="fa fa-clock"></i> Today </medium></span>');
                 }
 
                 cell.css('border-radius', '10px');
             },
+
+
             dayClick: function (date, jsEvent, view) {
-                var selectedDate = date.format();
-                var startOfWeek = moment().startOf('week').format('YYYY-MM-DD');
-                var endOfWeek = moment().endOf('week').format('YYYY-MM-DD');
+    var selectedDate = date.format();
+    var startOfWeek = moment().startOf('isoWeek').format('YYYY-MM-DD');
+    var endOfWeek = moment().endOf('isoWeek').format('YYYY-MM-DD');
 
-               if (moment(selectedDate).isBetween(startOfWeek, endOfWeek, null, '[]')) {
+    if (moment(selectedDate).isBetween(startOfWeek, endOfWeek, null, '[]')) {
+        var formattedDate = moment(selectedDate).format("YYYY-MMMM-DD");
+        formattedDetails = "Details: " + formattedDate;
+        $('#formattedDateField').val(formattedDate);
+        $('#myModal').modal('show');
 
-                                var formattedDate = moment(selectedDate).format("YYYY-MMMM-DD");
-                   formattedDetails = "Details: " + formattedDate;
-                   $('#formattedDateField').val(formattedDate);
-                                $('#myModal').modal('show');
+        // Populate the modal body with information
+        $('#pDetails').text(selectedDate);
+        $('#pDetails7').text(formattedDate);
 
-                                // Populate the modal body with information
-                                $('#pDetails').text(selectedDate);
-                                $('#pDetails7').text(formattedDate);
+        $('#addPhasesButton').on('click', function () {
+            var url = "@Url.Action("Add", "Direct_Activities", new { id = "__DATE__" })";
+            url = url.replace("__DATE__", selectedDate);
 
-                $('#addPhasesButton').on('click', function () {
-                        var url = "@Url.Action("Add", "Direct_Activities", new { id = "__DATE__" })";
-                    url = url.replace("__DATE__", selectedDate);
+            // Redirect to the updated URL
+            window.location.href = url;
+        });
 
+        $('#addPhasesButton2').on('click', function () {
+            var url = "@Url.Action("Add", "InDirect_Activities", new { id = "__DATE__" })";
+            url = url.replace("__DATE__", selectedDate);
 
-
-                        // Redirect to the updated URL
-                        window.location.href = url;
-                });
-                    $('#addPhasesButton2').on('click', function () {
-        var url = "@Url.Action("Add", "InDirect_Activities", new { id = "__DATE__" })";
-    url = url.replace("__DATE__", selectedDate);
-
-
-
-        // Redirect to the updated URL
-        window.location.href = url;
-    });
+            // Redirect to the updated URL
+            window.location.href = url;
+        });
 
                             } else {
                                 // Alert or handle the case where the date is not within the current week
@@ -220,14 +220,126 @@
             </script> }
 
 
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-8">
+            <div class="info-box" style="border-left: 6px solid #F0AB15;border-radius:15px">
+                <span class="info-box-icon bg-warning" style="border-radius:15px"><i class="fa fa-user-clock"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"><b style="color: #F0AB15"> NON PROJECT TIME</b></span>
+                    <span class="info-box-number">
+                        @if (ViewBag.Sheet != null)
+                        {
+                            <span class="info-box-number"><b>@ViewBag.Sheet.InDirect_Hours<small> . <b>Hrs</b></small></b></span>
+                        }
+                        else
+                        {
+                            <span class="info-box-number"> . <b>N/A<small> <b>Hrs</b></small></b></span>
+                        }
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-8">
+            <div class="info-box" style="border-left: 6px solid #28A745; border-radius: 15px">
+                <span class="info-box-icon bg-success" style="border-radius:15px"><i class="fa fa-user-clock"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"><b style="color: #28A745"> PROJECT TIME</b></span>
+                    <span class="info-box-number">
+                        <span class="info-box-number">
+
+                            @if (ViewBag.Sheet != null)
+                            {
+                                <span class="info-box-number"><b>@ViewBag.Sheet.Direct_Hours<small> . <b>Hrs</b></small></b></span>
+                            }
+                            else
+                            {
+                                <span class="info-box-number"> . <b>N/A <small><b>Hrs</b></small></b></span>
+                            }
+                        </span>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-9">
+            <div class="info-box" style="border-left: 6px solid #0C54A0; border-radius: 15px ">
+                <span class="info-box-icon bg" style="border-radius: 15px; background-color: #0C54A0"><i class="fa fa-user-clock text-white"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"><b style="color: #0C54A0"> TOTAL WEEK TIME</b></span>
+                    <span class="info-box-number">
+
+                        @if (ViewBag.Sheet != null)
+                        {
+                            <span class="info-box-number"><b>@ViewBag.Sheet.Tt<small> . <b>Hrs</b> </small></b></span>
+                        }
+                        else
+                        {
+                            <span class="info-box-number"> . <b>N/A<small><b>Hrs</b></small></b></span>
+                        }
+                    </span>
+                </div>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-10">
+            <div class="info-box" style="border-left: 6px solid #0C54A0; border-radius: 15px ">
+
+                <div class="info-box-content"> 
+                    <span class="info-box-number"> . <b><span class="badge badge-warning"> <i class="fa fa-question-circle text-black"></i></span>  How to  fill in past timesheet </span>
+                    <span class="info-box-number">  <a href="#" data-toggle="modal" data-target="#knowledge">learn more</a> </span>
+                </div>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+
+
+        <div class="modal fade" id="knowledge" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" style="border-radius:15px">
+                    <div class="modal-header" style="border-radius:15px;background-color:whitesmoke">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-clipboard-list text-black"></i></span>   Past Timesheets</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="dropdown-divider"></div>
+                        <p>Have you missed any crucial timesheet information or need to rectify past entries? </p>
+                        <small>   If so, please submit a request to your Head of Department (HOD). Your HOD possesses the authority to reopen past timesheets, granting you the opportunity to make necessary amendments or log any missed clock-ins.</small>
+
+                        <small>Utilize the 'Timesheet Re-open' tab to submit your request through the system. <br />
+                        Thank you for your cooperation.</small>
+
+                        <br />
+
+                        @Html.ActionLink("Request Re-Open ", "Re_quest", "reopen", null, new { @class = "btn btn-sm btn-primary btn " })
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
 
 
 
 
-        <div class="dropdown-divider"></div>
-        
+
+    </div>
+    
         <div class="table-responsive">
             <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
                 <thead>
@@ -476,19 +588,3 @@
             </table>
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -267,6 +267,20 @@
                            })
 
                             </div>
+                            <div class="form-group col-md-2">
+                                <h6 class="form-check" style="color:midnightblue;">
+
+                                    @Html.EditorFor(model => model.Active, new
+                               {
+                                   htmlAttributes = new
+                                   { @class = "coupon_question", onclick = "Geeeee()" }
+                               })
+                                    <label>@Html.LabelFor(model => model.Active)</label>
+
+
+
+                                </h6>
+                            </div>
                         </div>
                             <div class="dropdown-divider"></div>
                             <input type="submit" value="Update/Save" class="btn btn-warning" />
