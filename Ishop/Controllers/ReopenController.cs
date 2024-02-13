@@ -27,14 +27,20 @@ namespace Ishop
             return View(db.reopens.OrderByDescending(p => p.CreatedOn).Where(c => c.Staff == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
 
         }
-        public ActionResult Requests (string searchBy, string search, int? page)
+        public ActionResult Requests(string searchBy, string search, int? page)
         {
             HodContext DD = new HodContext();
-            var Depart = DD.hODs.Where(D => D.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
+            var userDepartments = DD.hODs.Where(D => D.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
 
-            return View(db.reopens.OrderByDescending(p => p.CreatedOn).Where(c => c.Department.Contains(c.Department)).ToList().ToPagedList(page ?? 1, 11));
+            // Assuming 'Department' is the property in 'reopens' that holds the department information
+            var filteredRequests = db.reopens
+                .OrderByDescending(p => p.CreatedOn)
+                .Where(c => userDepartments.Contains(c.Department))
+                .ToList();
 
+            return View(filteredRequests.ToPagedList(page ?? 1, 11));
         }
+
 
 
 

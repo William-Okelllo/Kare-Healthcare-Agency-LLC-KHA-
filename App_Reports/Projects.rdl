@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-12T12:57:07.8045453Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-02-13T10:57:13.3125191Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -1205,6 +1205,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
+                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -1232,7 +1233,6 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                         <Style>
                           <FontWeight>Bold</FontWeight>
                           <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
-                          <Color>Yellow</Color>
                         </Style>
                         <UseValueAsLabel>true</UseValueAsLabel>
                         <Visible>true</Visible>
@@ -1244,6 +1244,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
+                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -1282,6 +1283,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
+                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />

@@ -1,4 +1,4 @@
-﻿
+﻿@model IShop.Core.Timesheet
 @{
     ViewBag.Title = "DataView";
 }
@@ -123,7 +123,14 @@
                 </h5>
                 <h6> <i class="fa fa-calendar-check text-primary"></i>   @ViewBag.FromDate.ToString("ddd-dd-MMMM-yyyy")   <b>TO</b>  @ViewBag.EndDate.ToString("ddd-dd-MMMM-yyyy") </h6>
                 <div class="dropdown-divider"></div>
-
+                <style>
+                    .nav-tabs .nav-item.show .nav-link,
+                    .nav-tabs .nav-link.active {
+                        background-color: #0656A5;
+                        color: white;
+                        border-radius: 5px
+                    }
+                </style>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                     <li class="nav-item">
@@ -132,6 +139,10 @@
                     <li class="nav-item">
                         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-bookmark"></i>  Project Time </a>
                     </li>
+                    
+                      
+
+
 
                 </ul>
                 <div class="table-responsive">
@@ -258,7 +269,10 @@
                                 </div>
                             </div>
                         </div>
+
+                       
+
                     </div>
                 </div>
-                    <div class="dropdown-divider"></div>
-                    <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+                <div class="dropdown-divider"></div>
+                <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>

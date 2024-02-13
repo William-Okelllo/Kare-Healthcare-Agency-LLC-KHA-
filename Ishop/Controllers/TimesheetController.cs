@@ -364,6 +364,13 @@ namespace Ishop
 
         public ActionResult BreakDown(DateTime FromDate, DateTime EndDate, string user)
         {
+
+                
+                
+
+
+
+
             ViewBag.FromDate = FromDate;
             ViewBag.EndDate = EndDate;
             ViewBag.user = user;

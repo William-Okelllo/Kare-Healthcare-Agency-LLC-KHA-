@@ -76,28 +76,126 @@
                         <div class="inner">
 
                             <h4> <i class="fa fa-unlock"></i><b> Timesheet Re-Open Request</b></h4>
-                            <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span> <a style="color:white"> @item.Department</a>
+                            <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span> <a style="color:white"> @item.Department</a> || <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i></span> <a style="color:white"> @item.Staff</a>
                             <div class="dropdown-divider"></div>
-                            <h6 style="color:white"> <span class="badge badge-warning"> <i class="fa fa-comment-dots text-black"></i></span> Message</h6>
-                            <p class="sms-text">@item.Reason.</p>
-                            <div style="text-align:right">
-                                @if (item.Status == 0)
-                                {<span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white">
-                                        @item.CreatedOn.ToString("dd-MMM-yyyy")
-                                    </a>
-                                    
-                                }
-                                else if (item.Status == 1)
-                                {<span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white"> @item.CreatedOn.ToString("dd-MMM-yyyy")</a>
-                                
-                            }
-                            else
-                            {<span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white"> @item.CreatedOn.ToString("dd-MMM-yyyy")</a>
-                            
-                        }
+                            <button type="button" class="btn btn-xs btn-outline-light set-reg-no-btn"
+                                    data-toggle="modal" data-target="#exampleModalCenter"
+                                    data-object-id2="@item.Id" , data-object-id="@item.Reason">
+                                <i class="fa fa-spin fa-circle-notch"></i> View Message
+                            </button>
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+                            <!-- Your script goes here -->
+                            <script>
+                                $(document).ready(function () {
+                                    var objectId; // Variable to store the object ID
+
+                                    // Capture object ID when "Set Reg No" button is clicked
+                                    $('.set-reg-no-btn').click(function () {
+                                        objectId = $(this).data('object-id');
+                                    });
+
+                                    // Triggered when the modal is about to be shown
+                                    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+                                        // Update the "Account Id" input in the modal with the captured object ID
+                                        $('#AccountId').val(objectId);
+                                    });
+
+                                    // Triggered when the modal is hidden
+                                    $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
+                                        // Clear the objectId when the modal is closed
+                                        objectId = null;
+                                    });
+                                });
+                            </script>
+
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 14px ">
+                                    <div class="modal-content" style="border-radius: 14px ">
+                                        <div class="modal-header" style="background-color: #0C54A0; color: white; border-radius: 14px ">
+                                            <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-bookmark text-primary"></i>   Reasons For Re-openning</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row text-center">
+                                                <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 300px; height: 50px;"></textarea>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    var objectId; // Variable to store the object ID
+
+                                    // Capture object ID when "Set Reg No" button is clicked
+                                    $('.set-reg-no-btn').click(function () {
+                                        objectId = $(this).data('object-id');
+                                    });
+
+                                    // Triggered when the modal is about to be shown
+                                    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+                                        // Update the "Account Id" input in the modal with the captured object ID
+                                        $('#AccountId').val(objectId);
+                                        // Hide the success message when the modal is shown
+                                        $('#successMessage').css('display', 'none');
+                                    });
+
+                                    // Triggered when the modal is hidden
+                                    $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
+                                        // Clear the objectId when the modal is closed
+                                        objectId = null;
+                                    });
+
+                                    // Triggered when "Save changes" button is clicked
+                                    $('#SaveChanges').click(function () {
+                                        saveChanges();
+                                    });
+
+                                    // Function to handle saving changes
+                                    function saveChanges() {
+                                        // Fetch values from the modal inputs
+                                        var accountId = $('#AccountId').val();
+                                        var regNo = $('#RegNo').val();
+
+                                        // Make an AJAX request to the controller endpoint
+                                        $.ajax({
+                                            url: '/invoices/SaveReg',
+                                            type: 'POST',
+                                            data: { accountId: accountId, regNo: regNo },
+                                            success: function (data) {
+                                                // Handle success (if needed)
+                                                console.log('Changes saved successfully!');
+                                                location.reload();
+
+                                            },
+                                            error: function (xhr, status, error) {
+                                                // Handle error (if needed)
+                                                console.error('Error saving changes:', error);
+                                            }
+                                        });
+                                    }
+                                });
+                            </script>
+
+                            <br /> <br />
+                            <div style="text-align:left">
+                                <span class="badge badge-warning"> <i class="fa fa-tags text-black"></i></span> <a style="color:white">
+                                    -Timesheet Id @item.Timesheet_id
+                                </a>
+                                |
+                                <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white"> @item.CreatedOn.ToString("dd-MMM-yyyy")</a>
 
                             </div>
+
 
                         </div>
                         <div class="icon"> <i class="fa fa-bookmark"></i></div>

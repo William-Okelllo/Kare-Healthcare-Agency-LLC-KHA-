@@ -69,15 +69,15 @@
 
 
 
+        <div class="card-body">
+            <div class="row">
+                
+                    @foreach (var item in Model)
+                    {
 
-        <div class="row">
-            @foreach (var item in Model)
-            {
 
 
 
-                <div class="card-body">
-                    <div class="row">
                         <div class="card" style="width:25rem; border-radius: 14px;">
                             <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px; "><i class="fa fa-chart-line"></i> @item.Description   <span class="badge badge-warning"><medium><i class="fa fa-server"></i> @item.Menu_order</medium></span></div>
 
@@ -85,11 +85,12 @@
                                 <a><span class="badge badge-secondary"><medium><i class="fa fa-chart-line text-white"></i></medium></span> Group Type : @item.Type  </a>
 
                                 <div class="dropdown-divider"></div>
-                                <h6>     <i class="fa  fa-chart-pie text-primary"></i> <a href="@Url.Action("Details", "ReportGroup", new { id = item.id} )">View Reports </a></h6>
+                                <h6>     <i class="fa  fa-chart-pie text-primary"></i> <a href="@Url.Action("Details", "ReportGroup", new { id = item.id })">View Reports </a></h6>
                             </div>
 
                         </div>
-
+                        <div class="dropdown-divider"></div>
+                    }
                     </div>
                 </div>
-            }
+            

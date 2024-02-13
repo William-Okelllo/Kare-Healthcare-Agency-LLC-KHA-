@@ -9,16 +9,13 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-12T20:51:42.8180961Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-02-13T12:30:11.0753512Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="Direct_Activities">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=.;Initial Catalog=Planning</ConnectString>
-      </ConnectionProperties>
+      <DataSourceReference>Live</DataSourceReference>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>d340b869-34aa-4d04-aa0a-4db9a514243c</rd:DataSourceID>
     </DataSource>
@@ -80,9 +77,9 @@
         <DataSourceName>Direct_Activities</DataSourceName>
         <CommandText>select 'All' as Staff ,'All' as Fullname 
 union
-select E.Username [Staff],E.Fullname  from Direct_Activities D
-inner join  Employees E on D.[User] =E.Username
-</CommandText>
+select E.Username [Staff],E.Fullname  from Indirect_Activities D
+inner join  Employees E on D.[User] =E.Username</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
         <Field Name="Staff">

@@ -44,31 +44,49 @@ public class ReportsController : Controller
 
         return View(reports);
     }
-
     public ActionResult Run(string Path)
     {
-       
+        try
+        {
             string ssrsUrl = ConfigurationManager.AppSettings["SSRSReportsUrl"].ToString();
             ReportViewer viewer = new ReportViewer();
 
+            // Set SSRS server URL
             viewer.ProcessingMode = ProcessingMode.Remote;
-            viewer.SizeToReportContent = false;
-            viewer.AsyncRendering = true;
             viewer.ServerReport.ReportServerUrl = new Uri(ssrsUrl);
+
+            // Report settings
+            viewer.ServerReport.ReportPath = Path;
             viewer.ZoomMode = ZoomMode.PageWidth;
+            viewer.SizeToReportContent = false;
+
+            // Viewer appearance settings
             viewer.Width = Unit.Percentage(100);
-            viewer.Height = Unit.Pixel(1050);
+            viewer.Height = Unit.Pixel(900);
             viewer.BackColor = System.Drawing.Color.White;
             viewer.BorderColor = System.Drawing.Color.White;
             viewer.DocumentMapWidth = Unit.Percentage(100);
             viewer.SplitterBackColor = System.Drawing.Color.White;
 
+            // Async rendering
+            viewer.AsyncRendering = true;
+
+            // Adjust the width of the parameter area (in pixels)
+            viewer.ServerReport.ReportServerUrl = new Uri(ssrsUrl);
             viewer.ServerReport.ReportPath = Path;
+
+            viewer.ServerReport.Refresh();
+
             ViewBag.ReportViewer = viewer;
             return View();
         }
-       
-    
+        catch (Exception ex)
+        {
+            // Handle/report any exceptions
+            ViewBag.ErrorMessage = $"An error occurred: {ex.Message}";
+            return View("Error");
+        }
+    }
 
 
 }
