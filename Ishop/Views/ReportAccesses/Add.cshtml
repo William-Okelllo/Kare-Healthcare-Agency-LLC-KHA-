@@ -1,0 +1,169 @@
+﻿@model IShop.Core.ReportAccess
+
+@{
+    ViewBag.Title = "Grant Access";
+}
+<br />
+<br />
+<br />
+
+<style>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9 col-sm-9 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white">
+                <i class="fa fa-chart-line text-white nav-icon"></i> Report Access 
+            </div>
+            <div class="card-body">
+
+                <h4><i class="fa fa-chart-line text-navy nav-icon"></i> <b>Report :</b>   @ViewBag.Report</h4>
+
+                <div class="dropdown-divider"></div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-3" style="display:nsone">
+                            <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.GrantedOn)</label>
+                            @Html.EditorFor(model => model.GrantedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Record",
+                               @Value = DateTime.Now,
+                               @ReadOnly = true,
+
+
+                           }
+                       })
+
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-bookmark text-primary"></i> @Html.LabelFor(model => model.Report) </label>
+                            @Html.EditorFor(model => model.Report, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Value = ViewBag.Report,
+                               @Readonly = true,
+
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-bookmark text-primary"></i> @Html.LabelFor(model => model.GroupId) </label>
+                            @Html.EditorFor(model => model.GroupId, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @Value = ViewBag.ReportId,
+                               @Readonly = true,
+
+
+                           }
+                       })
+
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Staff) </label>
+                            @Html.DropDownList("Staff", ViewBag.Employee as SelectList, "--Select Team members --", new { @class = "form-control  form-control-sm", @Required = true })
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+
+                                $("#Staff").chosen();
+
+                            });
+                        </script>
+                    </div>
+
+
+
+
+
+                    <div class="dropdown-divider"></div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save " class="btn btn-warning" />
+                            || @Html.ActionLink("Back to List", "Index", "ReportGroup", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </div>
+
+                }
+
+                <div class="dropdown-divider"></div>
+                <h6> <i class="fa fa-check-circle text-primary"></i> Granted users access to report</h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+                        <thead style="font-family:Calibri">
+                            <tr style="color:white">
+                                <th style="background-color: #0656A5; "><i class="fa fa-user-circle"></i>  Granted On</th>
+                                <th style="background-color: #0656A5; "><i class="fa fa-chart-line"></i>  Report </th>
+                                <th style="background-color: #0656A5; "><i class="fa fa-tags"></i>  Report Group Id </th>
+                                <th style="background-color: #0656A5; "><i class="fa fa-users"></i>  Staff </th>
+                                <th style="background-color: #0656A5; "> Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody style="font-family:Calibri">
+                            @foreach (var item2 in ViewBag.Accessteam)
+                            {
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                    <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.GrantedOn.ToString("dd-MMM-yyyy") </td>
+                                    <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> @item2.Report</td>
+                                    <td style="background-color:white"> <i class="fa fa-clock text-primary"></i> @item2.GroupId </td>
+                                    <td style="background-color:white"> <i class="fa fa-clock text-primary"></i> @item2.Staff </td>
+                                    <td style="background-color:ghostwhite">
+
+                                                <a class="btn btn-sm btn-outline-danger" onclick="if (confirm('Are you sure you want to revoke access? ')) { window.location.href = '@Url.Action("Delete", "ReportAccesses", new { id = item2.Id, })'; }">
+                                                    <i class="fa fa-times-circle text-danger"></i> Revoke Access
+                                                </a>
+                                                <script>
+                                                    $(function () {
+                                                        $('#Deny').click(function () {
+                                                            if (confirm('Are you sure?')) {
+                                                                window.location.href = $(this).data('url');
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                            
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

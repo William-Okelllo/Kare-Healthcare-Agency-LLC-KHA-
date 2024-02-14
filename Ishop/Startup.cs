@@ -80,6 +80,13 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Leaves_Management"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Leaves_Management";
+                roleManager.Create(role);
+
+            }
             if (!roleManager.RoleExists("Timesheet_Approvals"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();

@@ -13,13 +13,20 @@ using System.Configuration;
 using System.Web.UI.WebControls;
 using PagedList;
 
+
+[Authorize]
 public class ReportsController : Controller
 {
     private ReportContext db = new ReportContext();
     private ReportGroupContext dbb = new ReportGroupContext();
     public ActionResult Index(string searchBy, string search, int? page)
     {
-        return View(dbb.ReportGroups.OrderByDescending(p => p.Menu_order).ToList().ToPagedList(page ?? 1, 20));
+
+            ReportAccess_context DD = new ReportAccess_context();
+            var userDepartments = DD.reportAccesses.Where(D => D.Staff == User.Identity.Name).Select(d => d.GroupId).ToList();
+
+
+        return View(dbb.ReportGroups.OrderByDescending(p => p.Menu_order).Where(c => userDepartments.Contains(c.id)).ToList().ToPagedList(page ?? 1, 20));
     }
     public ActionResult Create(int id)
     {

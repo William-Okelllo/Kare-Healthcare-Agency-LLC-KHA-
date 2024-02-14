@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-12T12:57:24.6910928Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-02-14T20:49:27.5747607Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -522,6 +522,7 @@ FROM Projects</CommandText>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
                                     <Color>#601808</Color>
                                   </Style>
                                 </TextRun>
@@ -557,6 +558,7 @@ FROM Projects</CommandText>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -575,6 +577,7 @@ FROM Projects</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

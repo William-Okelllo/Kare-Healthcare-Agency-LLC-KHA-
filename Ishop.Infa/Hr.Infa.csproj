@@ -87,6 +87,8 @@
     <Compile Include="Project_Context.cs" />
     <Compile Include="Project_Repo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportAccess_context.cs" />
+    <Compile Include="ReportAccess_repo.cs" />
     <Compile Include="ReportContext.cs" />
     <Compile Include="ReportGroupContext.cs" />
     <Compile Include="Re_open_context.cs" />

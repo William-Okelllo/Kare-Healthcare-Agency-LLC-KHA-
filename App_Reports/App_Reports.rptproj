@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://vii:8080/ReportServer</TargetServerURL>
+    <TargetServerURL>http://108.181.156.63/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -57,6 +57,7 @@
     <Report Include="NonProjectTime Timesheet Breakdown .rdl" />
     <Report Include="Projects.rdl" />
     <Report Include="ProjectTime Timesheet Breakdown .rdl" />
+    <Report Include="ProjectTime Timesheet Breakdown_Acc .rdl" />
     <Report Include="Project_Child.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

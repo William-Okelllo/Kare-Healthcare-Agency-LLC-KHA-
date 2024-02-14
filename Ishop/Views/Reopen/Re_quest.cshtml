@@ -127,7 +127,7 @@
 
 
                         <div class="form-row">
-                            <div class="form-group col-md-3"style="display:none">
+                            <div class="form-group col-md-3" style="display:none">
                                 <label><i class=" fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.Status)</label>
                                 @Html.EditorFor(model => model.Status, new
                            {
@@ -160,21 +160,19 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Timesheet_id)</label>
+                                <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Timesheet_id)</label>
                                 @Html.EditorFor(model => model.Timesheet_id, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Timesheet_id",
-                                   @Id = "Timesheet_id",
-                                   @Readonly = true,
-
-
-                               }
-                           })
-
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm",
+                                        @placeholder = "Timesheet_id",
+                                        @id = "Timesheet_id",
+                                        @readonly = "readonly", // Corrected attribute name
+                                    }
+                                })
                             </div>
+
 
                             <div class="form-group col-md-3">
                                 <label><i class=" fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
@@ -210,7 +208,15 @@
 
                             </div>
                         </div>
-                        <a href="#" class="btn btn-sm  btn-warning " data-toggle="modal" data-target="#exampleModalCenter"> <i class="fa fa-spin fa-circle-notch text-black"></i> Select Timesheet</a>
+
+                        <a href="#" class="btn btn-xs  btn-warning " data-toggle="modal" data-target="#exampleModalCenter"> <i class="fa fa-spin fa-circle-notch text-black"></i> <b>Select Timesheet</b></a>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<a id="Properties" style="display:none;text-align:right"> <medium style="color:darkgreen"><i class=" fa fa-check-circle text-success"></i> <b>Success</b> - successfully selected timesheet</medium></a>
+                        <div class="dropdown-divider"></div>
+                        <span id="Duration" style="font-size: small;color:darkgreen; font-weight: bold"> </span>
+                        <span id="NonProject" style="font-size: small; color: darkgreen; font-weight: bold"> </span>
+                        <span id="Project" style="font-size: small; color: darkgreen; font-weight: bold"> </span>
+                        &nbsp;&nbsp;
+                        <span id="Tt" style="font-size: medium; color: brown; font-weight: bold"> </span>
                         <style>
                             /* Custom class for wider modal */
                             .custom-modal-width {
@@ -226,6 +232,9 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
+
+
+
                                     <div class="modal-body">
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
@@ -315,7 +324,7 @@
                                     e.preventDefault(); // Prevent the default behavior of the anchor tag
 
                                     var recordId = $(this).data('timesheet-id');
-                                    
+
 
                                     $.ajax({
                                         url: '/reopen/Setid',
@@ -328,7 +337,7 @@
                                                 console.log('Clicked.');
                                                 $('#exampleModalCenter').modal('hide');
 
-                                               
+
 
 
                                             } else {
@@ -339,9 +348,56 @@
                                             console.log('Error retrieving record data.');
                                         }
                                     });
+                                    $.ajax({
+                                        url: '/reopen/GetTimesheet',
+                                        method: 'GET',
+                                        data: { Part: recordId },
+                                        success: function (data) {
+                                            if (data) {
+                                                $("#Duration").text("From Date: " + formatDate(data.From_Date) + " To Date: " + formatDate(data.End_Date));
+
+                                                function formatDate(dateString) {
+                                                    // Extract the timestamp from the "/Date(1707080400000)/" format
+                                                    var timestamp = parseInt(dateString.replace(/\/Date\((\d+)\)\//, '$1'));
+
+                                                    // Convert the timestamp to a Date object
+                                                    var date = new Date(timestamp);
+
+                                                    // Format the date as "dd-mm-yyyy"
+                                                    var day = date.getDate();
+                                                    var month = date.getMonth() + 1; // Months are zero-based
+                                                    var year = date.getFullYear();
+
+                                                    // Pad single-digit day or month with a leading zero
+                                                    if (day < 10) {
+                                                        day = '0' + day;
+                                                    }
+                                                    if (month < 10) {
+                                                        month = '0' + month;
+                                                    }
+
+                                                    return day + '-' + month + '-' + year;
+                                                }
+
+
+                                                $("#NonProject").text("Non Project Time: " + data.InDirect_Hours);
+                                                $("#Project").text("Project Time: " + data.Direct_Hours);
+                                                $("#Tt").text("Total Time: " + data.Tt);
+                                                $('#Properties').slideDown(300); // Show the properties
+                                            } else {
+                                                $('#div').slideDown(300);
+                                            }
+                                        },
+                                        error: function () {
+                                            console.log('Error retrieving record data.');
+                                        }
+                                    });
                                 });
                             });
+
                         </script>
+
+
 
 
 

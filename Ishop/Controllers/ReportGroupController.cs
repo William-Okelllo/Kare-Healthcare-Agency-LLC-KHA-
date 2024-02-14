@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class ReportGroupController : Controller
     {
         private ReportGroupContext db = new ReportGroupContext();

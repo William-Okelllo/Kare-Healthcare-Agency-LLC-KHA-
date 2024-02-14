@@ -425,6 +425,7 @@
     <Compile Include="Controllers\PcategoriesController.cs" />
     <Compile Include="Controllers\PhaseController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\ReportAccessesController.cs" />
     <Compile Include="Controllers\ReportGroupController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -8050,6 +8051,11 @@
     <Content Include="Views\Time_cat\Details.cshtml" />
     <Content Include="Views\Time_cat\Edit.cshtml" />
     <Content Include="Views\Time_cat\Index.cshtml" />
+    <Content Include="Views\ReportAccesses\Add.cshtml" />
+    <Content Include="Views\ReportAccesses\Delete.cshtml" />
+    <Content Include="Views\ReportAccesses\Details.cshtml" />
+    <Content Include="Views\ReportAccesses\Edit.cshtml" />
+    <Content Include="Views\ReportAccesses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

@@ -15,6 +15,7 @@ using System.Data.SqlClient;
 
 namespace Ishop
 {
+    [Authorize]
     public class ReopenController : Controller
     {
         private Timesheet_Context ddb = new Timesheet_Context();
@@ -237,7 +238,15 @@ namespace Ishop
             return View(reopen);
         }
 
+        private Timesheet_Context TT = new Timesheet_Context();
+        public ActionResult GetTimesheet(int Part)
+        {
 
+
+            var data = TT.timesheets.FirstOrDefault(d => d.Id == Part);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
 
 
@@ -295,26 +304,11 @@ namespace Ishop
         // GET: Reopen/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Reopen reopen = db.reopens.Find(id);
-            if (reopen == null)
-            {
-                return HttpNotFound();
-            }
-            return View(reopen);
-        }
-
-        // POST: Reopen/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
+           
             Reopen reopen = db.reopens.Find(id);
             db.reopens.Remove(reopen);
             db.SaveChanges();
+            TempData["msg"] = " Request  dropped  successfully ";
             return RedirectToAction("Index");
         }
 

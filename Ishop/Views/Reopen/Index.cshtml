@@ -78,27 +78,52 @@
                             <h4> <i class="fa fa-unlock"></i><b> Timesheet Re-Open Request</b></h4>
                             <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span> <a style="color:white"> @item.Department</a> || <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i></span> <a style="color:white"> @item.Staff</a>
                             <div class="dropdown-divider"></div>
-                            <button type="button" class="btn btn-xs btn-outline-light set-reg-no-btn"
+                            <button type="button" class="btn btn-sm btn-outline-light set-reg-no-btn"
                                     data-toggle="modal" data-target="#exampleModalCenter"
-                                    data-object-id2="@item.Id" , data-object-id="@item.Reason">
+                                    data-object-id2="@item.Staff" , data-object-id="@item.Reason">
                                 <i class="fa fa-spin fa-circle-notch"></i> View Message
                             </button>
+                            @if (item.Status == 0)
+                            {
+                                <small>|</small>
+                                <a class="btn btn-sm btn-danger" onclick="if (confirm('Are you sure you want to drop  this request   ')) { window.location.href = '@Url.Action("Delete", "reopen", new { id = item.Id, })'; }">
+                                    <i class="fa fa-times-circle text"></i> Drop Request
+
+                                </a>
+                                <script>
+                                    $(function () {
+                                        $('#Deny').click(function () {
+                                            if (confirm('Are you sure?')) {
+                                                window.location.href = $(this).data('url');
+                                            }
+                                        });
+                                    });
+                                </script>
+                            }
+
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+                            <!-- Your script goes here -->
+
+
                             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
                             <!-- Your script goes here -->
                             <script>
                                 $(document).ready(function () {
                                     var objectId; // Variable to store the object ID
-
+                                    var objectId2;
                                     // Capture object ID when "Set Reg No" button is clicked
                                     $('.set-reg-no-btn').click(function () {
                                         objectId = $(this).data('object-id');
+                                        objectId2 = $(this).data('object-id2');
                                     });
 
                                     // Triggered when the modal is about to be shown
                                     $('#exampleModalCenter').on('show.bs.modal', function (event) {
                                         // Update the "Account Id" input in the modal with the captured object ID
                                         $('#AccountId').val(objectId);
+                                        $('#staff').val(objectId2);
                                     });
 
                                     // Triggered when the modal is hidden
@@ -113,18 +138,25 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 14px ">
                                     <div class="modal-content" style="border-radius: 14px ">
                                         <div class="modal-header" style="background-color: #0C54A0; color: white; border-radius: 14px ">
-                                            <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-bookmark text-primary"></i>   Reasons For Re-openning</h6>
+                                            <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-bookmark text-warning"></i>   Reasons For Re-openning</h6>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            <div class="row text-center">
-                                                <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 300px; height: 50px;"></textarea>
+                                        <div class="modal-body ">
+
+                                            <h6 style="color:navy"><i class="fa fa-comment-dots text-primary"></i> <b>Reason</b></h6>
+                                            <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 100%; height: 100px;"></textarea>
+
+                                            <div class="row">
+                                                <div class="form-group col-md-3 text-right">
+                                                    <input id="staff" name="staff" type="text" class="form-control form-control-sm" readonly style="border: none;" />
+                                                </div>
                                             </div>
 
 
                                         </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>

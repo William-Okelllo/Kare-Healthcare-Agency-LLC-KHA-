@@ -125,6 +125,7 @@
                     <th style="background-color: #0656A5; ">Type </th>
                     <th style="background-color: #0656A5;">Menu Order </th>
                     <th style="background-color: #0656A5;">Reports </th>
+                    <th style="background-color: #0656A5;">Access </th>
                     <th style="background-color: #0656A5; ">Actions </th>
 
 
@@ -138,20 +139,25 @@
 
 
 
-                        <td style="background-color:white"><i class="fa fa-car text-primary"></i>  @item.Description</td>
-                        <td style="background-color:white"><i class="fa fa-shopping-basket text-primary"></i>  @item.Type</td>
+                        <td style="background-color:white"><i class="fa fa-bookmark text-primary"></i>  @item.Description</td>
+                        <td style="background-color:white"><i class="fa fa-chart-line text-primary"></i>  @item.Type</td>
                         <td style="background-color:white"><i class="fa fa-shopping-basket text-primary"></i>  @item.Menu_order</td>
                         <td style="background-color:white"> <i class="fa fa-chart-pie text-primary"></i> <a href="@Url.Action("Details", "ReportGroup", new { id = item.id} )"> Reports </a></td>
+                        <td style="background-color:white"> <i class="fa fa-book-reader text-primary"></i> <a href="@Url.Action("Add", "ReportAccesses", new { id = item.id,Report=item.Description} )"> Access </a></td>
                         <td style="background-color:ghostwhite">
 
 
                             <div class="btn-group dropdown">
-                                <button type="button" class="btn-sm btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn-sm btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-file-invoice"></i>  . Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                     <a type="button" href="@Url.Action("Create", "Reports", new { id = item.id })" class="dropdown-item">
                                         <i class="fa fa-chart-pie text-primary"></i> Add Report
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a type="button" href="@Url.Action("Edit", "ReportGroup", new { id = item.id })" class="dropdown-item">
+                                        <i class="fa fa-pen-nib text-primary"></i> Update/Edit Group
                                     </a>
                                     <div class="dropdown-divider"></div>
 

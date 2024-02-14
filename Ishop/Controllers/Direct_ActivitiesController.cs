@@ -14,6 +14,7 @@ using IShop.Core.Interface;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class Direct_ActivitiesController : Controller
     {
         private Direct_Activities_Context db = new Direct_Activities_Context();

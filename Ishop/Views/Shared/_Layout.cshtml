@@ -316,7 +316,15 @@
                             </ul>
 
                         </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "leave_Balance")" class="nav-link">
 
+                                <i class="fa fa-landmark text-blue nav-icon"></i>
+                                <p style="color: #060440">
+                                     Leave Management  <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                        </li>
                     }
 
                     @if (this.User.IsInRole("Reports_Access"))
@@ -503,7 +511,7 @@
 
                                         <i class="fa fa-book-reader text-blue nav-icon"></i>
                                         <p style="color: #060440 ">
-                                            Time Categories 
+                                            Time Categories
                                         </p>
                                     </a>
                                 </li>
@@ -585,11 +593,11 @@
 
 
                     <div class="dropdown-divider"></div>
-                    <img src="https://timenex.planning-kenya.com/Images/2D.png" height="50" width="80"/>
+                    <img src="https://timenex.planning-kenya.com/Images/2D.png" height="50" width="80" />
                     <li class="nav-header" style="color: #0C54A0;font-size:smaller">
                         <p style="color:darkslategrey">  Version 2.0.10     <br />    Copyright © @DateTime.Now.Year Planning Systems. <br /> All rights reserved  </p>
                     </li>
-                   
+
                 </ul>
 
             </nav>
