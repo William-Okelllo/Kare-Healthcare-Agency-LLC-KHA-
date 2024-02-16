@@ -10,29 +10,6 @@
 
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Log in</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="~/FrontEnd/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition login-page" style="background-image: url('../../Images/login.png');
-        background-repeat: no-repeat;
-        background-size: cover;">
-
-
-
-
 
 
     <style>
@@ -62,46 +39,156 @@
     <br />  <br />
     <br />
     <div class="col d-flex justify-content-center">
-        <div class="col-md-5" style="border-radius: 14px;">
-            <!-- Widget: user widget style 2 -->
-            <div class="card card-widget widget-user-2" style="border-radius: 14px;">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header" style="background-color: black ">
-                    <div class="widget-user-image">
-                        <img src="~/Images/logo7.png" height="150" alt="User Avatar">
-                    </div>
-                    <!-- /.widget-user-image -->
-                    <h5 class="widget-user-username" style="color:white"></h5>
-
-
+        <div class="col-md-7 col-sm-12 col-12">
+            <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+                <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                    <i class="fa fa-bookmark"></i> Opps
                 </div>
-                <div class="card-body text-left">
+                <div class="card-body" style="background-color: white; border-radius: 24px;">
+                    <div class="card-body">
+
+                        <table>
+                            <thead>
+                                <tr>
+
+                                    <td>
+
+                                        <h5 class="text-danger">Oops! Something's not quite right here.</h5>
+                                        <p>
+                                            <i class="fa fa-question-circle text-success"></i> Give it another shot, and if the issue persists, use the button below to report it to our development team. <br />
+                                            <b>Thanks for your patience!</b>
+                                        </p>
+                                       
+                                       
+                                        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#knowledge"> <i class="fa fa-comment-dots "></i> Report </button>
+
+
+                                        <div class="modal fade" id="knowledge" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content" style="border-radius:15px">
+                                                    <div class="modal-header" style="border-radius:15px;background-color:whitesmoke">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-paper-plane text-black"></i></span>  System Glitch Report</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-8">
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name" class="col-form-label"><i class="fa fa-link text-orange"></i> Requested Url</label>
+                                                                    @{
+                                                                        string currentUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+                                                                    }
+                                                                    <input type="text" placeholder="Mark-Up : 500" class="form-control form-control-sm" id="Message" value="@currentUrl" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name" class="col-form-label"><i class="fa fa-user-circle text-orange"></i> User</label>
+
+                                                                    <input type="text" placeholder="Mark-Up : 500" class="form-control form-control-sm" id="user" value="@User.Identity.Name" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
 
 
 
-                    <h3 class="text-danger"> Error.</h3>
-                    <h5 class="text-danger">An error occurred while processing your request.</h5>
-                    <div class="spinner-border spinner-border-sm text-warning" role="status">
-                        <span class="sr-only">Loading...</span>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" id="SaveChanges" class="btn btn-primary"> <i class="fa fa-paper-plane text-white"></i> Send</button>
+                                                        </div>
+
+
+                                                        <div id="successMessage" style="display: none; color: green;"><i class="fa fa-check-circle"></i>  Glitch report sent successfully!</div>
+                                                        <div id="Error" style="display: none; color: red;"><i class="fa fa-exclamation-triangle"></i> Error sending Glitch report!</div>
+
+                                                        <!-- Include jQuery -->
+                                                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
+                                                        <script>
+                                                            $(document).ready(function () {
+                                                                // Triggered when "Save changes" button is clicked
+                                                                $('#SaveChanges').click(function () {
+                                                                    console.log('Save changes button clicked');
+                                                                    saveChanges();
+                                                                });
+
+                                                                // Function to handle saving changes
+                                                                function saveChanges() {
+                                                                    // Fetch values from the modal inputs
+                                                                    var user = $('#user').val();
+                                                                    var message = $('#Message').val();
+
+                                                                    // Make an AJAX request to the controller endpoint
+                                                                    $.ajax({
+                                                                        url: '/Home/Glitch', // Replace 'ControllerName' with your actual controller name
+                                                                        type: 'POST',
+                                                                        data: { user: user, Message: message },
+                                                                        success: function (data) {
+                                                                            // Handle success
+                                                                            console.log('Changes saved successfully!');
+                                                                            showSuccessMessage();
+                                                                            location.reload();
+                                                                            $('#successMessage').text('Glitch report sent successfully!').slideDown();
+                                                                            setTimeout(function () {
+                                                                                $('#successMessage').slideUp();
+                                                                            }, 3000); // Display for 3 seconds, adjust as needed
+                                                                        },
+                                                                        error: function (xhr, status, error) {
+                                                                            // Handle error (if needed)
+                                                                            console.error('Error saving changes:', error);
+                                                                            $('#Error').text('Error sending Glitch report!').slideDown();
+                                                                            setTimeout(function () {
+                                                                                $('#Error').slideUp();
+                                                                            }, 3000); // Display for 3 seconds, adjust as needed
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        </script>
+
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </td>
+                                    <td>
+                                        <img src="~/Images/sad.gif" height="150" style="margin-right: 20px;" />
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        
+
+                        <div class="spinner-border spinner-border-sm text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <hr />
+                        <div class="divider"></div>
+
+                            <p style="color:darkslategrey;font-size:smaller">     Copyright © @DateTime.Now.Year Planning Systems. <br /> All rights reserved  </p>
+                       
+
                     </div>
-                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <hr />
-                    <div class="divider"></div>
-
-                    @Html.ActionLink("Click Here to Reload", "Index", "Home", null, new { @class = "btn btn  btn-primary btn" })
-
-
-
-
-
-
                 </div>
+
+
             </div>
+
+
         </div>
-
-
-    </div>
 </body>
 </html>
