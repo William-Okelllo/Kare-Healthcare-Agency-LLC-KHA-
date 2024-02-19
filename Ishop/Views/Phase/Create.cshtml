@@ -37,15 +37,87 @@
                             <div class="form-row">
                                 <div class="form-group col-md-5">
                                     <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Name) </label>
-                                    @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control  form-control-sm", @Required = true })
+                                    @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control  form-control-sm", @Id = "Name", @Required = true })
                                 </div>
                                 <script type="text/javascript">
                                     $(function () {
 
                                         $("#Name").chosen();
-                                       
+
                                     });
                                 </script>
+                                <div class="form-group col-md-2" style="display:snone">
+                                    <label><i class=" fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Step)</label>
+                                    @Html.EditorFor(model => model.Step, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Step No",
+                                       @Id = "Step",
+                                       @Readonly = true,
+
+
+                                   }
+                               })
+
+                                </div>
+                                <div class="form-group col-md-2" style="display:None">
+                                    <label><i class=" fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Collected)</label>
+                                    @Html.EditorFor(model => model.Collected, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Step No",
+                                       @Value = 0,
+                                       @Readonly = true,
+
+
+                                   }
+                               })
+
+                                </div>
+                                <div class="form-group col-md-2" id="other">
+                                    <label><i class="fa fa-tag text-primary"></i>   @Html.LabelFor(model => model.Project_id)</label>
+                                    @Html.EditorFor(model => model.Project_id, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Amount",
+                                       @Value = ViewBag.Projectid,
+                                       @Readonly = true,
+                                   }
+                               })
+                                </div>
+
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                <script>
+                                    // Wait for the DOM to be ready
+                                    $(function () {
+                                        // Function to fetch models based on the selected make using AJAX
+                                        $("#Name").change(function () {
+                                            var Project_Name = $(this).val();
+
+                                            if (Project_Name !== "") {
+                                                $.ajax({
+                                                    url: "/Phase/GetPhaseId",
+                                                    type: "GET",
+                                                    data: { Name: Project_Name },
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        $('#Step').val(data.Step);
+                                                    },
+                                                    error: function () {
+                                                        console.log("Error fetching Plots.");
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    });
+                                </script>
+
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">
@@ -90,103 +162,54 @@
                                    }
                                })
                                 </div>
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script>
-                                    // Function to fetch models based on the selected make using AJAX
-                                    $("#Name").change(function () {
-                                        var Project_Name = $(this).val();
-
-                                        if (Project_Name !== "") {
-                                            $.ajax({
-                                                url: "/teams/GetPhaseId",
-                                                type: "GET",
-                                                data: { Name: Project_Name },
-                                                dataType: "json",
-                                                success: function (data) {
-                                                    $('#Step').val(data.Step);
-                                                },
-
-                                                error: function () {
-                                                    console.log("Error fetching Plots.");
-                                                }
-                                            });
-                                        }
-                                    });
-                                </script>
-
-                                <div class="form-group col-md-2" style="display:none">
-                                    <label><i class=" fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Step)</label>
-                                    @Html.EditorFor(model => model.Step, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Allocated Hrs",
-
-                                       @Required = true,
 
 
-                                   }
-                               })
 
-                                </div>
-                                <div class="form-group col-md-2" id="other">
-                                    <label><i class="fa fa-tag text-primary"></i>   @Html.LabelFor(model => model.Project_id)</label>
-                                    @Html.EditorFor(model => model.Project_id, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Amount",
-                                       @Value = ViewBag.Projectid,
-                                       @Readonly = true,
-                                   }
-                               })
-                                </div>
-                                <script>
-                                    function addCommas(element) {
-                                        var value = parseFloat(element.value.replace(/,/g, ''));
-                                        element.value = value.toLocaleString('en-US');
-                                    }
-                                    $(function () {
-                                        $('form').submit(function () {
-                                            var amountString = $('#Budget').val();
-                                            var amountWithoutCommas = amountString.replace(/,/g, '');
-                                            $('#Budget').val(amountWithoutCommas);
-
-
-                                        });
-
-                                    });
-                                </script>
                             </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $("#Direct").chosen();
-
-
-                                });
-                            </script>
-                            <div class="dropdown-divider"></div>
-
-
-                            <div class="dropdown-divider"></div>
-                            <input type="submit" name="action" value="Add Phase" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this Phase?')" />
-
-
+                            
                             <script>
+                                function addCommas(element) {
+                                    var value = parseFloat(element.value.replace(/,/g, ''));
+                                    element.value = value.toLocaleString('en-US');
+                                }
                                 $(function () {
-                                    $('#Create').click(function () {
-                                        if (confirm('Are you sure?')) {
-                                            window.location.href = $(this).data('url');
-                                        }
+                                    $('form').submit(function () {
+                                        var amountString = $('#Budget').val();
+                                        var amountWithoutCommas = amountString.replace(/,/g, '');
+                                        $('#Budget').val(amountWithoutCommas);
+
+
                                     });
+
                                 });
                             </script>
+                    
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#Direct").chosen();
 
-                            <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
-                        </form>
-                    }
+
+                        });
+                    </script>
+                    <div class="dropdown-divider"></div>
+
+
+                    <input type="submit" name="action" value="Add Phase" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this Phase?')" />
+
+
+                    <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                    </script>
+
+                    <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+                    </form>
+                }
                 </div>
             </div>
         </div>

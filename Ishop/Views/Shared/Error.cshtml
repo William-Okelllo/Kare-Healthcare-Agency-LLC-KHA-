@@ -131,12 +131,13 @@
                                                                         success: function (data) {
                                                                             // Handle success
                                                                             console.log('Changes saved successfully!');
-                                                                            showSuccessMessage();
-                                                                            location.reload();
+                                                                            
+                                                                           
                                                                             $('#successMessage').text('Glitch report sent successfully!').slideDown();
                                                                             setTimeout(function () {
                                                                                 $('#successMessage').slideUp();
                                                                             }, 3000); // Display for 3 seconds, adjust as needed
+                                                                            location.reload();
                                                                         },
                                                                         error: function (xhr, status, error) {
                                                                             // Handle error (if needed)

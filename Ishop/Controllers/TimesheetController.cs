@@ -171,7 +171,7 @@ namespace Ishop
         }
 
         [Authorize]
-        public ActionResult Mine (string searchBy, string search, int? page)
+        public ActionResult Mine (string searchBy, string search, int? page, string Duration)
         {
 
             DateTime currentDate = DateTime.Now;
@@ -182,10 +182,43 @@ namespace Ishop
             // Set Sunday to the next Sunday from the current day
             DateTime Sunday = Monday.AddDays(6);
 
-            ViewBag.Monday = Monday;
-            ViewBag.Sunday = Sunday;
+            // Determine date range based on Duration parameter
+            DateTime startRange, endRange;
 
-            return View(db.timesheets.OrderByDescending(p => p.CreatedOn).Where(c => c.Owner == User.Identity.Name).ToList().ToPagedList(page ?? 1, 11));
+            switch (Duration)
+            {
+                case "thisWeek":
+                    startRange = Monday;
+                    endRange = Sunday;
+                    break;
+
+                case "lastWeek":
+                    startRange = Monday.AddDays(-7);
+                    endRange = Sunday.AddDays(-7);
+                    break;
+
+                case "thisMonth":
+                    startRange = new DateTime(currentDate.Year, currentDate.Month, 1);
+                    endRange = new DateTime(currentDate.Year, currentDate.Month, DateTime.DaysInMonth(currentDate.Year, currentDate.Month));
+                    break;
+
+                case "lastMonth":
+                    startRange = new DateTime(currentDate.Year, currentDate.Month - 1, 1);
+                    endRange = new DateTime(currentDate.Year, currentDate.Month, 1).AddDays(-1);
+                    break;
+
+                default:
+                    // Use the default date range for other cases
+                    startRange = Monday;
+                    endRange = Sunday;
+                    break;
+            }
+
+            ViewBag.StartDate = startRange;
+            ViewBag.EndDate = endRange;
+
+            return View(db.timesheets.OrderByDescending(p => p.CreatedOn).Where(c => c.Owner == User.Identity.Name &&
+            (Duration == null || Duration == "" || (c.From_Date >= startRange && c.From_Date <= endRange))).ToList().ToPagedList(page ?? 1, 11));
 
                 
            
@@ -195,7 +228,8 @@ namespace Ishop
 
 
         [Authorize]
-        public ActionResult All( int? page, string option, string startDate, string endDate)
+
+        public ActionResult All(int? page, string option, string startDate, string endDate, string Duration)
         {
             DateTime currentDate = DateTime.Now;
 
@@ -205,49 +239,55 @@ namespace Ishop
             // Set Sunday to the next Sunday from the current day
             DateTime Sunday = Monday.AddDays(6);
 
-            ViewBag.Monday = Monday;
-            ViewBag.Sunday = Sunday;
+            // Determine date range based on Duration parameter
+            DateTime startRange, endRange;
 
+            switch (Duration)
+            {
+                case "thisWeek":
+                    startRange = Monday;
+                    endRange = Sunday;
+                    break;
 
+                case "lastWeek":
+                    startRange = Monday.AddDays(-7);
+                    endRange = Sunday.AddDays(-7);
+                    break;
 
+                case "thisMonth":
+                    startRange = new DateTime(currentDate.Year, currentDate.Month, 1);
+                    endRange = new DateTime(currentDate.Year, currentDate.Month, DateTime.DaysInMonth(currentDate.Year, currentDate.Month));
+                    break;
 
+                case "lastMonth":
+                    startRange = new DateTime(currentDate.Year, currentDate.Month - 1, 1);
+                    endRange = new DateTime(currentDate.Year, currentDate.Month, 1).AddDays(-1);
+                    break;
+
+                default:
+                    // Use the default date range for other cases
+                    startRange = Monday;
+                    endRange = Sunday;
+                    break;
+            }
+
+            ViewBag.StartDate = startRange;
+            ViewBag.EndDate = endRange;
 
             HodContext DD = new HodContext();
             var Depart = DD.hODs.Where(D => D.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
 
-
-            var Employ = db.timesheets.Where(c =>  Depart.Contains(c.Department)).Select(t => t.Owner).Distinct().ToList();
+            var Employ = db.timesheets.Where(c => Depart.Contains(c.Department)).Select(t => t.Owner).Distinct().ToList();
             ViewBag.Usernames = Employ;
 
-
-            if (!(option == null) && (!(option == "")))
-            {
-                return View(db.timesheets
-                    .OrderByDescending(p => p.CreatedOn)
-                    .Where(c => Depart.Contains(c.Department) && c.Owner ==(option) )
-                    .ToList()
-                    .ToPagedList(page ?? 1, 11));
-            }
-            else if (option == "")
-            {
-                return View(db.timesheets
-                    .OrderByDescending(p => p.CreatedOn)
-                    .Where(c => Depart.Contains(c.Department))
-                    .ToList()
-                    .ToPagedList(page ?? 1, 11));
-            }
-            else
-            {
-                return View(db.timesheets
-                    .OrderByDescending(p => p.CreatedOn)
-                    .Where(c => Depart.Contains(c.Department))
-                    .ToList()
-                    .ToPagedList(page ?? 1, 11));
-            }
+            return View(db.timesheets
+                .OrderByDescending(p => p.CreatedOn)
+                .Where(c => Depart.Contains(c.Department) &&
+                            (option == null || option == "" || c.Owner == (option)) && // If option is not provided, don't filter by owner
+                            (Duration == null || Duration == "" || (c.From_Date >= startRange && c.From_Date <= endRange)))
+                .ToList()
+                .ToPagedList(page ?? 1, 11));
         }
-
-    
-
 
 
 

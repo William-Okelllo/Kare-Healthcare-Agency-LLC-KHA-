@@ -9,16 +9,13 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-14T15:34:40.7466059Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-02-19T08:36:40.6837139Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="Direct_Activities">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=.;Initial Catalog=Planning</ConnectString>
-      </ConnectionProperties>
+      <DataSourceReference>Live</DataSourceReference>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>d340b869-34aa-4d04-aa0a-4db9a514243c</rd:DataSourceID>
     </DataSource>
@@ -733,25 +730,13 @@ Fields!Approved.Value ="NO" , "Red")</Color>
                                   <Value>=Fields!Hours.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value xml:space="preserve"> </Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>Hrs</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>DarkGreen</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Hours</rd:DefaultName>
@@ -853,7 +838,7 @@ Fields!Approved.Value ="NO" , "Red")</Color>
       <Width>17.21304in</Width>
       <Page>
         <PageHeader>
-          <Height>0.8125in</Height>
+          <Height>0.63194in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>

@@ -71,7 +71,7 @@
 
 
 
-            @using (Html.BeginForm("Approval", "Timesheet", FormMethod.Get))
+            @using (Html.BeginForm("All", "Timesheet", FormMethod.Get))
             {
                 <button type="button" onclick="clearAndReload()" class="btn btn-sm btn-warning">
                     <i class="fas fa-filter"></i>
@@ -84,6 +84,17 @@
                     }
                 </script>
 
+                <a style="font-family: Calibri"><i class="fa fa-calendar-day text-white"></i> Duration</a>
+                <select class="form-rounded2" name="Duration" id="Duration">
+                    
+                        <option value="">Select Duration</option>
+                        <option value="thisWeek">This Week</option>
+                        <option value="lastWeek">Last Week</option>
+                        <option value="thisMonth">This Month</option>
+                        <option value="lastMonth">Last Month</option>
+                 
+
+                </select>
                 <small> ||</small>
 
                 <a style="font-family: Calibri"><i class="fa fa-user-circle text-white"></i> Staff</a>
@@ -176,7 +187,7 @@
 
                                 <small style="font-size:small;color:forestgreen"><b><i class="fa fa-lock-open text-success"></i>  OPEN</b></small>
                                 <div class="dropdown-divider"></div>
-                                if (item.CreatedOn >= ViewBag.Monday && item.CreatedOn <= ViewBag.Sunday)
+                                if (item.CreatedOn >= ViewBag.StartDate && item.CreatedOn <= ViewBag.EndDate)
                                 {
                                     <small style="font-size: small; color: forestgreen"><b><i class="fa fa-spin fa-circle-notch"></i>  CURRENT WEEK</b></small>
                                 }

@@ -383,7 +383,7 @@ namespace Planning_Backend_Service
                             {
                                 DayOfWeek currentDayOfWeek = DateTime.Now.DayOfWeek;
                                 if (DateTime.Now.DayOfWeek == runtimeDayOfWeek &&
-                                  DateTime.Now.TimeOfDay.Hours == 10 && //10 PM
+                                  DateTime.Now.TimeOfDay.Hours == 10 && //10 AM
                                   DateTime.Now.TimeOfDay.Minutes == 00)
                                 {
                                     // Run your method or logic here
@@ -403,7 +403,7 @@ namespace Planning_Backend_Service
                                 }
                                 else
                                 {
-                                    Console.WriteLine("--Awaiting for " + Runtime + " 10:00 PM  ");
+                                    Console.WriteLine("--Awaiting for " + Runtime + " 10:00 AM  ");
                                     
                                 }
                                 }
@@ -460,7 +460,9 @@ namespace Planning_Backend_Service
                 {
                     connection.Open();
 
-                    string query = "SELECT Id, Username, Fullname, DprtName, Designation, Email FROM Employees";
+                    string query = "SELECT Id, Username, Fullname, DprtName, Designation, Email " +
+                          "FROM Employees " +
+                          "WHERE Active = 1";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {

@@ -38,16 +38,11 @@ namespace Ishop.Controllers
         {
             try
             {
-               
-        
-           
                 DateTime currentDate = Weekday;
                 DayOfWeek dayOfWeek = currentDate.DayOfWeek;
 
                 var data = db.direct_Activities.Where(p => p.User == User.Identity.Name && p.Day_Date ==currentDate ).ToList().ToPagedList(page ?? 1, 11).ToList();
-                              
-
-                // Handle or return data as needed
+                 
                 return PartialView("Directtasksview", data);
             }
             catch (Exception ex)

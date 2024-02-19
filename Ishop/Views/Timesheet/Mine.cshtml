@@ -64,7 +64,42 @@
             My Timesheets
         </h3>
         <div style="text-align: right; color: white ">
-            @Html.ActionLink("Add Timesheet Tasks ", "Index", "Timesheet", null, new { @class = "btn btn-sm btn-warning btn " })
+
+
+
+
+            @using (Html.BeginForm("Mine", "Timesheet", FormMethod.Get))
+            {
+
+                <a style="font-family: Calibri"><i class="fa fa-calendar-day text-white"></i> Duration</a>
+                <select class="form-rounded2" name="Duration" id="Duration">
+
+                    <option value="">Select Duration</option>
+                    <option value="thisWeek">This Week</option>
+                    <option value="lastWeek">Last Week</option>
+                    <option value="thisMonth">This Month</option>
+                    <option value="lastMonth">Last Month</option>
+
+
+                </select>
+
+
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                <small>|</small>
+
+
+                @Html.ActionLink("Add Timesheet Tasks ", "Index", "Timesheet", null, new { @class = "btn btn-sm btn-warning btn " })
+            }
+
+
+
+
+
+
+
 
         </div>
     </div>
@@ -136,7 +171,7 @@
 
                                 <small style="font-size:small;color:forestgreen"><b><i class="fa fa-lock-open text-success"></i>  OPEN</b></small>
                                 <div class="dropdown-divider"></div>
-                                if (item.CreatedOn >= ViewBag.Monday && item.CreatedOn <= ViewBag.Sunday)
+                                if (item.CreatedOn >= ViewBag.StartDate && item.CreatedOn <= ViewBag.EndDate)
                                 {
                                     <small style="font-size: small; color: forestgreen"><b><i class="fa fa-spin fa-circle-notch"></i>  CURRENT WEEK</b></small>
                                 }
@@ -175,7 +210,7 @@
                                         <a href="@Url.Action("Details", "Timesheet", new { id = item.Id })" class="dropdown-item">
                                             <i class="fa fa-plus-circle text-warning"></i> Add Tasks
                                         </a>
-                                        @if (!(item.CreatedOn >= ViewBag.Monday && item.CreatedOn <= ViewBag.Sunday))
+                                        @if (!(item.CreatedOn >= ViewBag.StartDate && item.CreatedOn <= ViewBag.EndDate))
                                         {
                                         <a class="dropdown-item" onclick="if (confirm('Are you sure you want to re-submit this Timesheet  -Note you will no longer be able to edit/Add tasks to the timesheet ')) { window.location.href = '@Url.Action("Re_submit", "Timesheet", new { id = item.Id, })'; }">
                                             <i class="fa fa-paper-plane text-success"></i> Re-Submit Timesheet

@@ -45,6 +45,7 @@
     <Compile Include="Access.cs" />
     <Compile Include="Activities.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Collection.cs" />
     <Compile Include="Configs.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Days_leave.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Interface\IAccess.cs" />
     <Compile Include="Interface\IActivities.cs" />
     <Compile Include="Interface\Iclient.cs" />
+    <Compile Include="Interface\ICollect.cs" />
     <Compile Include="Interface\Idata.cs" />
     <Compile Include="Interface\IDays_leave.cs" />
     <Compile Include="Interface\IDirect.cs" />

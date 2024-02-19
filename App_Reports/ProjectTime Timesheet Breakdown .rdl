@@ -9,17 +9,13 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-14T15:51:37.3738111Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-02-19T07:52:37.5717336Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="Direct_Activities">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=.;Initial Catalog=Planning</ConnectString>
-        <Prompt>Specify a user name and password for data source Direct_Activities:</Prompt>
-      </ConnectionProperties>
+      <DataSourceReference>Live</DataSourceReference>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>d340b869-34aa-4d04-aa0a-4db9a514243c</rd:DataSourceID>
     </DataSource>
@@ -102,8 +98,7 @@
         <CommandText>select 'All' as Staff ,'All' as Fullname 
 union
 select E.Username [Staff],E.Fullname  from Direct_Activities D
-inner join  Employees E on D.[User] =E.Username
-</CommandText>
+inner join  Employees E on D.[User] =E.Username</CommandText>
       </Query>
       <Fields>
         <Field Name="Staff">
@@ -174,7 +169,7 @@ select Project_Name from Direct_Activities</CommandText>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.24306in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -676,6 +671,7 @@ select Project_Name from Direct_Activities</CommandText>
                                   <Value>=Fields!Status.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -773,8 +769,7 @@ select Project_Name from Direct_Activities</CommandText>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>=SWITCH(Fields!Approved.Value="YES" ="Green",
-Fields!Approved.Value ="NO" , "Red")</Color>
+                                    <Color>=IIf(Fields!Approved.Value = "YES", "Green", "Black")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -807,25 +802,13 @@ Fields!Approved.Value ="NO" , "Red")</Color>
                                   <Value>=Fields!Hours.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value xml:space="preserve"> </Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>Hrs</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>DarkGreen</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Hours</rd:DefaultName>
@@ -975,7 +958,7 @@ Fields!Approved.Value ="NO" , "Red")</Color>
             <DataSetName>Data</DataSetName>
             <Top>0.06944in</Top>
             <Left>0.125in</Left>
-            <Height>0.5in</Height>
+            <Height>0.49306in</Height>
             <Width>18.63665in</Width>
             <Style>
               <Border>

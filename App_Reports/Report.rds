@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Report">
-  <ConnectionProperties>
-    <Extension>SQL</Extension>
-    <ConnectString>Data Source=.;Initial Catalog=Planning</ConnectString>
-  </ConnectionProperties>
-  <DataSourceID>d7eea6ff-09a6-4742-b39d-a457bd934c70</DataSourceID>
-</RptDataSource>

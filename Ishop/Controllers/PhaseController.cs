@@ -73,7 +73,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Project_id,Start_Date,End_Date,Name,Budget,Step")] Phase phase)
+        public ActionResult Create([Bind(Include = "Id,Project_id,Start_Date,End_Date,Name,Budget,Step,Collected")] Phase phase)
         {
             if (ModelState.IsValid)
             {

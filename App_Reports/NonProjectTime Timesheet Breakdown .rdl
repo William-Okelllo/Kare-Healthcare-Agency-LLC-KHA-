@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-14T15:39:45.4221255Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-02-19T08:06:39.4287756Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -124,7 +124,7 @@ select Name [Activity] from Indirect_Activities</CommandText>
                   <Width>3.22222in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.78472in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
@@ -463,25 +463,14 @@ select Name [Activity] from Indirect_Activities</CommandText>
                                   <Value>=Fields!Hours.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value xml:space="preserve"> </Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>Hrs</Value>
-                                  <Style>
-                                    <FontFamily>calibri</FontFamily>
-                                    <FontSize>8pt</FontSize>
+                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>DarkGreen</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Hours</rd:DefaultName>
@@ -511,8 +500,7 @@ select Name [Activity] from Indirect_Activities</CommandText>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>=SWITCH(Fields!Approved.Value="YES" ="Green",
-Fields!Approved.Value ="NO" , "Red")</Color>
+                                    <Color>=IIf(Fields!Approved.Value = "YES", "Green", "Black")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -596,7 +584,7 @@ Fields!Approved.Value ="NO" , "Red")</Color>
             <Top>0.06944in</Top>
             <Left>0.125in</Left>
             <Height>0.5in</Height>
-            <Width>11.44915in</Width>
+            <Width>11.23387in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -623,7 +611,7 @@ Fields!Approved.Value ="NO" , "Red")</Color>
               <Source>Embedded</Source>
               <Value>P</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>0.21764in</Top>
+              <Top>0.16681in</Top>
               <Left>0.125in</Left>
               <Height>0.37722in</Height>
               <Width>1.75in</Width>
@@ -674,7 +662,7 @@ Fields!Approved.Value ="NO" , "Red")</Color>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.21764in</Top>
+              <Top>0.16681in</Top>
               <Left>2.10888in</Left>
               <Height>0.33333in</Height>
               <Width>7.38194in</Width>

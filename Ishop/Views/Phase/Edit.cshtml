@@ -37,13 +37,57 @@
                             <div class="form-row">
                                 <div class="form-group col-md-5">
                                     <label><i class="fa fa-suitcase text-primary"></i> @Html.LabelFor(model => model.Name) </label>
-                                    @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control  form-control-sm", @Required = true })
+                                    @Html.DropDownList("Name", ViewBag.Direct as SelectList, "--Select Phase --", new { @class = "form-control  form-control-sm", @Id = "Namee", @Required = true })
                                 </div>
                                 <script type="text/javascript">
                                     $(function () {
 
-                                        $("#Name").chosen();
+                                        $("#Namee").chosen();
 
+                                    });
+                                </script>
+
+
+
+                                <div class="form-group col-md-2" style="display:snone">
+                                    <label><i class=" fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Step)</label>
+                                    @Html.EditorFor(model => model.Step, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Step No",
+                                       @Id = "Step",
+                                       @Readonly = true,
+
+
+                                   }
+                               })
+
+                                </div>
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                <script>
+                                    // Wait for the DOM to be ready
+                                    $(function () {
+                                        // Function to fetch models based on the selected make using AJAX
+                                        $("#Namee").change(function () {
+                                            var Project_Name = $(this).val();
+
+                                            if (Project_Name !== "") {
+                                                $.ajax({
+                                                    url: "/Phase/GetPhaseId",
+                                                    type: "GET",
+                                                    data: { Name: Project_Name },
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        $('#Step').val(data.Step);
+                                                    },
+                                                    error: function () {
+                                                        console.log("Error fetching Plots.");
+                                                    }
+                                                });
+                                            }
+                                        });
                                     });
                                 </script>
                             </div>
@@ -113,21 +157,6 @@
                                         }
                                     });
                                 </script>
-
-                                <div class="form-group col-md-1">
-                                    <label><i class=" fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Step)</label>
-                                    @Html.EditorFor(model => model.Step, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Step",
-                                       @ReadOnly = true,
-
-                                   }
-                               })
-
-                                </div>
 
                                 <div class="form-group col-md-2" id="other">
                                     <label><i class="fa fa-tag text-primary"></i>   @Html.LabelFor(model => model.Project_id)</label>

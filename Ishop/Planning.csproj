@@ -402,6 +402,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -8057,6 +8058,11 @@
     <Content Include="Views\ReportAccesses\Details.cshtml" />
     <Content Include="Views\ReportAccesses\Edit.cshtml" />
     <Content Include="Views\ReportAccesses\Index.cshtml" />
+    <Content Include="Views\Collection\Collect.cshtml" />
+    <Content Include="Views\Collection\Delete.cshtml" />
+    <Content Include="Views\Collection\Details.cshtml" />
+    <Content Include="Views\Collection\Edit.cshtml" />
+    <Content Include="Views\Collection\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
