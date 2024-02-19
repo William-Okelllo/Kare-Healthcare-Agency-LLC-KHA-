@@ -1,57 +1,195 @@
-﻿@model IEnumerable<IShop.Core.leaves_Days_track>
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Employee>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "leaves";
 }
 
-<h2>Index</h2>
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Total_leaves_per_year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Requested_leaves)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remaining_leaves)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th></th>
-    </tr>
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total_leaves_per_year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Requested_leaves)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remaining_leaves)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
 
-</table>
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+</style>
+
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white;  ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-users"></i>
+            Leave Management
+        </h3>
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "leave_Balance", FormMethod.Get))
+            {
+
+                <a style="font-family: Calibri"> Employee Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Employee" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+
+
+            }
+        </div>
+
+
+
+    </div>
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+
+
+
+    <div class="card-body">
+
+
+
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-3 col-12">
+                    <!-- small card -->
+                    <div class="small-box bg-gradient-gray-dark" style="border-radius: 15px;">
+                        <div class="inner">
+
+                            <h5 style="color:white"> <span class="badge badge-warning"><medium> <i class="fa fa-user-circle text"></i>  </medium></span><b> @item.Fullname </b> </h5>
+                            <h7> <span class="badge badge-warning"><medium> <i class="fa fa-envelope text"></i>  </medium></span>  <i>@item.Email</i></h7> <br />
+                            <h7> <span class="badge badge-warning"><medium> <i class="fa fa-university text"></i>  </medium></span>  @item.DprtName</h7>
+                        </div>
+                        <div class="icon"> <i class="fa fa-user-circle"></i></div>
+                        <a href="@Url.Action("Acc_View", "leave_Balance", new { Username = item.Username })" class="small-box-footer" style="background-color: #0C54A0; color: white;border-radius:10px;">
+                            <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-warning"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+
+
+
+
+
+
+
+        @if (Model.Count() == 0)
+        {
+            <div class="col d-flex justify-content-center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="far fa-bed"></i></span>
+
+                        <div class="info-box-content">
+
+                            <span class="progress-description">
+                                <i class="fa fa-spin fa-circle-notch"></i>  No leaves requested
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        }
+
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+

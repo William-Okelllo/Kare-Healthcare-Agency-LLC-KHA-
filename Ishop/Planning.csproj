@@ -8063,6 +8063,7 @@
     <Content Include="Views\Collection\Details.cshtml" />
     <Content Include="Views\Collection\Edit.cshtml" />
     <Content Include="Views\Collection\Index.cshtml" />
+    <Content Include="Views\leave_Balance\Acc_View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

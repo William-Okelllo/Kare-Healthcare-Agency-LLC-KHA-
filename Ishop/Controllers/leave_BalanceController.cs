@@ -8,33 +8,82 @@ using System.Web;
 using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
+using PagedList;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class leave_BalanceController : Controller
     {
         private leaves_Days_trackContext db = new leaves_Days_trackContext();
-
+        private Employee_Context dbb = new Employee_Context();
         // GET: leave_Balance
-        public ActionResult Index()
+        public ActionResult Index(string search, int? page)
         {
-            return View(db.Leaves_Days_Tracks.ToList());
+            if (!(search == null) && (!(search == "")))
+            {
+                return View(dbb.employees.OrderByDescending(p => p.Id).Where(c => c.Username.StartsWith(search) || c.Username == search || c.Fullname.Contains(search)).ToList().ToPagedList(page ?? 1, 15));
+
+            }
+            else if (search == "")
+            {
+                return View(dbb.employees.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+
+
+            }
+            else
+            {
+                return View(dbb.employees.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+            }
         }
 
-        // GET: leave_Balance/Details/5
-        public ActionResult Details(int? id)
+
+
+        public ActionResult Acc_View(string Username )
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            leaves_Days_track leaves_Days_track = db.Leaves_Days_Tracks.Find(id);
-            if (leaves_Days_track == null)
-            {
-                return HttpNotFound();
-            }
-            return View(leaves_Days_track);
+            var Employee = dbb.employees.Where(c => c.Username == Username).FirstOrDefault();
+            ViewBag.Emp= Employee;
+            var Account = db.Leaves_Days_Tracks.Where(c => c.Username == Username).ToList();
+            ViewBag.Account = Account;
+            return View();
         }
+
+        public ActionResult Insert_days(string Username)
+        {
+            leaveTypesContext LVV = new leaveTypesContext();
+            var Account = db.Leaves_Days_Tracks.Where(c => c.Username == Username).ToList();
+            var Parts = LVV.leaves_Types.ToList();
+            Random random = new Random();
+            using (var In_parts = new leaves_Days_trackContext())
+            {
+                foreach (var part in Parts)
+                {
+                    leaves_Days_track inspections_Parts = new leaves_Days_track
+                    {
+                        Id = random.Next(),
+                        Requested_leaves=0,
+                        Remaining_leaves= part.Days,
+                        Username= Username,
+                        Type= part.Type,
+                        Total_leaves_per_year = part.Days
+                    };
+
+                    In_parts.Leaves_Days_Tracks.Add(inspections_Parts);
+                }
+
+                In_parts.SaveChanges();
+            }
+            TempData["msg"] = "Leave Balance fetched  successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
+
+
+
+
+
+
+
 
         // GET: leave_Balance/Create
         public ActionResult Create()
@@ -93,27 +142,12 @@ namespace Ishop.Controllers
         // GET: leave_Balance/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            leaves_Days_track leaves_Days_track = db.Leaves_Days_Tracks.Find(id);
-            if (leaves_Days_track == null)
-            {
-                return HttpNotFound();
-            }
-            return View(leaves_Days_track);
-        }
-
-        // POST: leave_Balance/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
             leaves_Days_track leaves_Days_track = db.Leaves_Days_Tracks.Find(id);
             db.Leaves_Days_Tracks.Remove(leaves_Days_track);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "leave dropped successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

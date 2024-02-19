@@ -10,9 +10,9 @@ namespace IShop.Core
     public class Collection
     {
         public int Id { get; set; }
-
+        [Display(Name = "Phase Id ")]
         public int Phase_Id { get; set; }
-
+        [Display(Name = "Project Id ")]
         public int Project_Id { get; set; }
 
         [Display(Name = "Date ")]

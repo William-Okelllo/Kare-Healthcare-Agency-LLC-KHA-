@@ -81,7 +81,7 @@
                                        <td class="clickable-cell" data-datev="@date?.ToString(" yyyy-MM-dd")">
                                            @if (date.HasValue)
                                            {
-                                               <a href="@Url.Action("DataView", "Timesheet", new { selectedDate = date?.ToString("yyyy-MM-dd"),User=Model.Owner })">
+                                               <a href="@Url.Action("DataView", "Timesheet", new { selectedDate = date?.ToString("yyyy-MM-dd"),User=Model.Owner,Timesheetdetailid=Model.Id })">
                                                    <span><i class="fa fa-calendar-day"></i>  @date.Value.ToString("yyyy-MM-dd")</span>
 
                                                </a>

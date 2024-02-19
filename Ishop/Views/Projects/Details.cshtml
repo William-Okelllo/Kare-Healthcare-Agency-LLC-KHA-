@@ -120,9 +120,13 @@
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <form>
+                    <h4 style="text-align:left"><i class="fa fa-bookmark text-primary"></i> <b style="color: #0656A5">Project</b>:  @Model.Project_Name</h4>
+
+                    <div class="dropdown-divider"></div>
+
                     <div class="card-body" style="background-color: #eeeeee;border-radius: 14px;">
-                        <h3><i class=" fa fa-bookmark text-primary"></i>   @Model.Project_Name</h3>
-                        <hr />
+
+
                         <div class="form-row">
                             <div class="col-lg-4 col-12">
                                 <!-- small card -->
@@ -184,9 +188,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="pills-Performance-tab" data-toggle="pill" href="#pills-Performance" role="tab" aria-controls="pills-Performance" aria-selected="false"><i class="fa fa-chart-line"></i> Performance</a>
                         </li>
-                      
+
                     </ul>
-                    
+
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div style="text-align:right">
@@ -198,7 +202,7 @@
                             <div class="dropdown-divider"></div>
                             <div class="table-responsive">
                                 <div class="table-responsive" style="min-height: 100px">
-                                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+                                    <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
 
 
                                         <thead style="font-family:Calibri">
@@ -283,7 +287,7 @@
                                 <a href="@Url.Action("Add", "teams", new {Project=Model.Project_Name, id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-users text-black"></i> Add Team members</a>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+                                <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
 
 
                                     <thead style="font-family:Calibri">
@@ -346,7 +350,7 @@
                         <div class="tab-pane fade show " id="pills-Performance" role="tabpanel" aria-labelledby="pills-Performance-tab">
                             <div class="dropdown-divider"></div>
                             <div class="table-responsive" style="min-height: 100px">
-                                <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+                                <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
 
 
                                     <thead style="font-family:Calibri">
@@ -367,12 +371,12 @@
                                                 <td style="background-color:white">
                                                     <i class="fa fa-bookmark text-primary"></i> @resultItem.Phase
                                                     <div class="dropdown-divider"></div>
-                                                    
+
                                                     <small>
                                                         <b style="color:dimgray">
-                                                             <i class="fa fa-calendar-day text-gray"></i> @resultItem.StartDate.ToString("dd-MMM-yyyy")
+                                                            <i class="fa fa-calendar-day text-gray"></i> @resultItem.StartDate.ToString("dd-MMM-yyyy")
                                                             --<i class="fa fa-calendar-day text-gray"></i> @resultItem.End_Date.ToString("dd-MMM-yyyy")
-                                                        </b> 
+                                                        </b>
                                                     </small>
 
                                                 </td>
@@ -386,7 +390,7 @@
                                                     <i class="fa fa-suitcase text-primary"></i> @resultItem.logged.ToString("#,##0.00")
                                                     <div class="dropdown-divider"></div>
                                                     <a href="@Url.Action("DrillDown", "Projects", new {projectName=resultItem.Project_Name, Phase = @resultItem.Phase })" class="btn-xs btn btn-warning btn"> <i class="fa fa-chart-bar "></i> <small><b> Drill Down</b></small></a>
-                                                    
+
 
 
 
@@ -409,8 +413,8 @@
 
                         </div>
 
-                       
-</form>
+
+                </form>
                     }
                 </div>
             </div>

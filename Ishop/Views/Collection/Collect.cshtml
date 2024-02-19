@@ -4,8 +4,7 @@
     ViewBag.Title = "Collect";
 }
 <br />
-<br />
-<br />
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -37,30 +36,23 @@
                 <i class="fa fa-chart-line text-white nav-icon"></i> Phase Collection
             </div>
             <div class="card-body">
+
+                <h4 style="text-align:center"><i class="fa fa-bookmark text-warning"></i> <b style="color:orange">Phase</b>:  @ViewBag.Phase.Name</h4>
+                <h5 style="text-align:center">  <span class="badge badge-dark"><medium> <i class="fa fa-bookmark text"></i>  </medium></span>  @ViewBag.Project.Project_Name </h5>
+
+                <div class="dropdown-divider"></div>
                 <div class="row">
-                    <div class="col-lg-6 col-12">
-                        <!-- small card -->
-                        <div class="small-box bg-gradient-navy" style="border-radius: 15px;">
-                            <div class="inner">
 
-                                <h6> <span class="badge badge-warning"><medium> <i class="fa fa-bookmark text"></i>  </medium></span><b style="color: orange"> PROJECT :</b>   @ViewBag.project.Project_Name</h6>
-                                <h6><span class="badge badge-warning"><medium> <i class="fa fa-arrow-circle-down text"></i>  </medium></span><b style="color: orange"> PROJECT PHASE :</b>   @ViewBag.Phase.Name</h6>
-                                <br />
-                            </div>
-                            <div class="icon"> <i class="fa fa-arrow-circle-left"></i></div>
-
-                        </div>
-                    </div>
                     <div class="col-lg-4 col-12">
                         <!-- small card -->
-                        <div class="small-box bg-gray-dark" style="border-radius: 15px;">
+                        <div class="small-box bg-gradient-warning" style="border-radius: 15px;">
                             <div class="inner">
 
-                                <h6> <span class="badge badge-warning"><medium> <i class="fa fa-bookmark text"></i>  </medium></span><b style="color: orange"> ALLOCATED BUDGET :</b>   @ViewBag.Phase.Budget.ToString("#,##0.00")</h6>
-                                <h6><span class="badge badge-warning"><medium> <i class="fa fa-arrow-circle-down text"></i>  </medium></span><b style="color: orange"> COLLECTED  :</b>    @ViewBag.CollectedTotal.ToString("#,##0.00")</h6>
-                                <h6><span class="badge badge-warning"><medium> <i class="fa fa-coins text"></i>  </medium></span><b style="color: orange"> BALANCE  :</b>    @ViewBag.Balance.ToString("#,##0.00")</h6>
+                                <h6> <span class="badge badge-dark"><medium> <i class="fa fa-bookmark text"></i>  </medium></span><b style="color: black"> Allocated Budget :</b>   <b>@ViewBag.Phase.Budget.ToString("#,##0.00")</b></h6>
+                                <h6><span class="badge badge-dark"><medium> <i class="fa fa-arrow-circle-down text"></i>  </medium></span><b style="color: black "> Collected  :</b>    <b>@ViewBag.CollectedTotal.ToString("#,##0.00")</b></h6>
+                                <h6><span class="badge badge-dark"><medium> <i class="fa fa-coins text"></i>  </medium></span><b style="color: black "> Balance  :</b>    <b>@ViewBag.Balance.ToString("#,##0.00")</b></h6>
                             </div>
-                            <div class="icon"> <i class="fa fa-arrow-circle-right"></i></div>
+                            <div class="icon"> <i class="fa fa-wallet"></i></div>
 
                         </div>
                     </div>
@@ -68,7 +60,7 @@
 
 
 
-
+                <span class="badge badge-warning"><medium> <i class="fa fa-plus-circle text"></i>  Provide the Collected amount & Click Add to Capture.  </medium></span>
                 <div class="dropdown-divider"></div>
 
                 @using (Html.BeginForm())
@@ -162,61 +154,63 @@
 
 
                     <div class="dropdown-divider"></div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Add Collection " class="btn btn-warning" />
-                            || @Html.ActionLink("Back to List", "Details", "Projects", new { id = ViewBag.project.Id, }, new { @class = "btn btn-primary btn" })
+                    
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Add Collection " class="btn-sm btn btn-warning" />
+                                || @Html.ActionLink("Back to List", "Details", "Projects", new { id = ViewBag.project.Id, }, new { @class = "btn-sm btn btn-primary btn" })
+                                ||<input type="reset" value="Reset " class="btn-sm btn btn-danger" />
+                            </div>
+                        </div>
+                    
+                        }
+
+                        <div class="dropdown-divider"></div>
+                        <h6> <span class="badge badge-warning"><medium> <i class="fa fa-coins text"></i>  </medium></span> Collected Amounts </h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+                                <thead style="font-family:Calibri">
+                                    <tr style="color:white">
+                                        <th style="background-color: #0656A5; "><i class="fa fa-calendar-day"></i>  Date </th>
+                                        <th style="background-color: #0656A5; "><i class="fa fa-chart-line"></i>  Month </th>
+                                        <th style="background-color: #0656A5; "><i class="fa fa-coins"></i>  Amount </th>
+                                        <th style="background-color: #0656A5; "> Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody style="font-family:Calibri">
+                                    @foreach (var item2 in ViewBag.Collected)
+                                    {
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                            <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.CreatedOn.ToString("dd-MMM-yyyy") </td>
+                                            <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> <b> @item2.CreatedOn.ToString("MMMM")</b> </td>
+                                            <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> <b> @item2.Charge.ToString("#,##0.00")</b> </td>
+                                            <td style="background-color:ghostwhite">
+
+                                                <a class="btn btn-xs btn-danger" onclick="if (confirm('Are you sure you want to revoke access? ')) { window.location.href = '@Url.Action("Delete", "Collection", new { id = item2.Id, })'; }">
+                                                    <i class="fa fa-times-circle "></i> Drop Collection
+                                                </a>
+                                                <script>
+                                                    $(function () {
+                                                        $('#Deny').click(function () {
+                                                            if (confirm('Are you sure?')) {
+                                                                window.location.href = $(this).data('url');
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
-
-                }
-
-                <div class="dropdown-divider"></div>
-                <h6> <span class="badge badge-warning"><medium> <i class="fa fa-coins text"></i>  </medium></span> Collected Amounts </h6>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
-
-
-                        <thead style="font-family:Calibri">
-                            <tr style="color:white">
-                                <th style="background-color: #0656A5; "><i class="fa fa-user-circle"></i>  Date </th>
-                                <th style="background-color: #0656A5; "><i class="fa fa-chart-line"></i>  Month </th>
-                                <th style="background-color: #0656A5; "><i class="fa fa-tags"></i>  Amount </th>
-                                <th style="background-color: #0656A5; "> Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody style="font-family:Calibri">
-                            @foreach (var item2 in ViewBag.Collected)
-                            {
-                                <tr data-widget="expandable-table" aria-expanded="false">
-                                    <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.CreatedOn.ToString("dd-MMM-yyyy") </td>
-                                    <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> <b> @item2.CreatedOn.ToString("MMMM")</b> </td>
-                                    <td style="background-color:white"> <i class="fa fa-bookmark text-primary"></i> <b> @item2.Charge.ToString("#,##0.00")</b> </td>
-                                    <td style="background-color:ghostwhite">
-
-                                        <a class="btn btn-xs btn-danger" onclick="if (confirm('Are you sure you want to revoke access? ')) { window.location.href = '@Url.Action("Delete", "Collection", new { id = item2.Id, })'; }">
-                                            <i class="fa fa-times-circle "></i> Drop Collection
-                                        </a>
-                                        <script>
-                                            $(function () {
-                                                $('#Deny').click(function () {
-                                                    if (confirm('Are you sure?')) {
-                                                        window.location.href = $(this).data('url');
-                                                    }
-                                                });
-                                            });
-                                        </script>
-
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-
-                    </table>
                 </div>
-            </div>
-        </div>
     </div>
 </div>
 </div>

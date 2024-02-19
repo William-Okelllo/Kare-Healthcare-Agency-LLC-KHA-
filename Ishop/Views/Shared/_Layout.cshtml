@@ -74,12 +74,13 @@
                 </li>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Index", "Home")" class="nav-link" style="color: #0C54A0 "> <i class="fa fa-home"></i>  Home</a>
+                    <a href="@Url.Action("Index", "Home")" class="nav-link" style="color: #0C54A0 "> <span class="badge bg-navy"><i class="fa fa-home text-white"></i></span>  Home</a>
                 </li>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Contact", "Home")" class="nav-link" style="color: #0C54A0 "> <i class="fa fa-headphones"></i>  Support</a>
+                    <a href="@Url.Action("Contact", "Home")" class="nav-link" style="color: #0C54A0 "><span class="badge badge-warning"> <i class="fa fa-headphones"></i> </span>  Support</a>
                 </li>
+                
             </ul>
 
 
@@ -161,7 +162,7 @@
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
                 <div style="font-family: 'Montserrat';font-size:13px">
                     <a href="#" style="color: #0C54A0">
-                        <i class="fa fa-user-circle text-primary"></i>  Hello  : @User.Identity.Name
+                        <span class="badge bg-warning"><i class="fa fa-user-circle text-white"></i></span>  Hello  : @User.Identity.Name
                     </a>
 
                 </div>
@@ -321,7 +322,7 @@
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "leave_Balance")" class="nav-link">
 
-                                    <i class="fa fa-landmark text-blue nav-icon"></i>
+                                    <i class="fa fa-address-book text-warning nav-icon"></i>
                                     <p style="color: #060440">
                                         Leave Management  <i class="fas fa-angle-left right"></i>
                                     </p>
