@@ -8043,9 +8043,6 @@
     <Content Include="Views\Reopen\Edit.cshtml" />
     <Content Include="Views\Reopen\Index.cshtml" />
     <Content Include="Views\Reopen\Requests.cshtml" />
-    <Content Include="Views\leave_Balance\Create.cshtml" />
-    <Content Include="Views\leave_Balance\Delete.cshtml" />
-    <Content Include="Views\leave_Balance\Details.cshtml" />
     <Content Include="Views\leave_Balance\Edit.cshtml" />
     <Content Include="Views\leave_Balance\Index.cshtml" />
     <Content Include="Views\Time_cat\Create.cshtml" />

@@ -56,7 +56,7 @@
 
                 <div class="row">
 
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-5 col-12">
                         <!-- small card -->
                         <div class="small-box bg-gradient-gray-dark" style="border-radius: 15px;">
                             <div class="inner">
@@ -84,8 +84,8 @@
 
                         <thead style="font-family:Calibri">
                             <tr style="color:white">
-                                <th style="background-color: #0656A5; "><i class="fa fa-coins"></i>  Leave Type </th>
-                                <th style="background-color: #0656A5; "><i class="fa fa-calendar-day"></i>  Date </th>
+                                <th style="background-color: #0656A5; "><i class="fa fa-bookmark"></i>  Leave Type </th>
+                                <th style="background-color: #0656A5; "><i class="fa fa-calendar-day"></i>  Requested </th>
                                 <th style="background-color: #0656A5; "><i class="fa fa-chart-line"></i>  Balance </th>
                                 <th style="background-color: #0656A5; "><i class="fa fa-chart-line"></i>  Total leaves in Yr </th>
                                 <th style="background-color: #0656A5; "> Action</th>
@@ -97,23 +97,35 @@
                             {
                                 <tr data-widget="expandable-table" aria-expanded="false">
                                     <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.Type </td>
-                                    <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.Requested_leaves </td>
-                                    <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.Remaining_leaves </td>
-                                    <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.Total_leaves_per_year </td>
+                                    <td style="background-color:white"> <i class="fa fa-check-circle text-primary"></i>  @item2.Requested_leaves  <small><b>Days</b></small></td>
+                                    <td style="background-color:white"> <i class="fa fa-circle-notch text-success"></i>  @item2.Remaining_leaves  <small><b>Days</b></small></td>
+                                    <td style="background-color:white"> <i class="fa fa-arrow-alt-circle-up text-warning"></i>  @item2.Total_leaves_per_year  <small><b>Days</b></small></td>
                                     <td style="background-color:ghostwhite">
+                                        <div class="btn-group dropdown">
+                                            <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-hashtag"></i>  . Action
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                                        <a class="btn btn-xs btn-danger" onclick="if (confirm('Are you sure you want to revoke access? ')) { window.location.href = '@Url.Action("Delete", "Collection", new { id = item2.Id, })'; }">
-                                            <i class="fa fa-times-circle "></i> Drop Collection
-                                        </a>
-                                        <script>
-                                            $(function () {
-                                                $('#Deny').click(function () {
-                                                    if (confirm('Are you sure?')) {
-                                                        window.location.href = $(this).data('url');
-                                                    }
-                                                });
-                                            });
-                                        </script>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="@Url.Action("Edit", "leave_Balance", new { id = item2.Id })" class="dropdown-item">
+                                                    <i class="fa fa-pen-nib text-primary"></i> Update/Edit leave Info
+                                                </a>
+
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" onclick="if (confirm('Are you sure you want to drop this leave ? ')) { window.location.href = '@Url.Action("Delete", "leave_Balance", new { id = item2.Id, })'; }">
+                                                    <i class="fa fa-times-circle "></i> Drop leave
+                                                </a>
+                                                <script>
+                                                    $(function () {
+                                                        $('#Deny').click(function () {
+                                                            if (confirm('Are you sure?')) {
+                                                                window.location.href = $(this).data('url');
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                                </div>
 
                                     </td>
                                 </tr>

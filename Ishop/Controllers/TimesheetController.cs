@@ -415,9 +415,9 @@ namespace Ishop
             ViewBag.EndDate = EndDate;
             ViewBag.user = user;
 
-            var data = IA.indirect_Activities.Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
+            var data = IA.indirect_Activities.OrderByDescending(c => c.Day_Date).Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
             ViewBag.IndirectActivities = data;
-            var data2 = DA.direct_Activities.Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
+            var data2 = DA.direct_Activities.OrderByDescending(c=>c.Day_Date).Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
             ViewBag.direct_Activities = data2;
 
             var returnUrl = Url.Action("BreakDown", "Timesheet");
