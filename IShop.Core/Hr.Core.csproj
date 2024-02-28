@@ -73,6 +73,7 @@
     <Compile Include="Interface\Iproject.cs" />
     <Compile Include="Interface\Ireopen.cs" />
     <Compile Include="Interface\IReportAccess.cs" />
+    <Compile Include="Interface\ISheet_comments.cs" />
     <Compile Include="Interface\Isms_config.cs" />
     <Compile Include="Interface\Iteam.cs" />
     <Compile Include="Interface\Itemplate.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="ReportAccess.cs" />
     <Compile Include="ReportGroup.cs" />
     <Compile Include="Reports.cs" />
+    <Compile Include="Sheet_comments.cs" />
     <Compile Include="Sms_configs.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Team.cs" />

@@ -177,7 +177,10 @@
                                 }
                                 else
                                 {
-                                    <small style="font-size: small; color: dimgray"><b><i class="fa fa-check-circle "></i>  PAST WEEK</b></small>
+                                    <small style="font-size: small; color: dimgray">
+                                        <b><i class="fa fa-check-circle "></i>  PAST WEEK</b>  @if (item.Status == 99)
+                                        { <small style="color:red">  | <b><i class="fa fa-spin fa-circle-notch "></i> DECLINED</b></small>}
+                                    </small>
                                 }
                             }
                             else
@@ -186,11 +189,11 @@
                                 <div class="dropdown-divider"></div> <b style="font-size: small"><i class="fa fa-certificate text-green"></i>  APPROVALS :</b>
                                 if (@item.Status == 0)
                                 {
-                                    <b style="color: green; font-size: small"> PENDING  </b>
+                                    <b style="color: gray; font-size: small"> PENDING  </b>
 
                                 }
                                 else
-                                {<b style="color: orange; font-size: small "><i class="fa fa-spin fa-circle-notch"></i> APPROVED </b>
+                                {<b style="color: green; font-size: small "><i class="fa  fa-check-circle"></i> APPROVED </b>
                                 }
                             }
 

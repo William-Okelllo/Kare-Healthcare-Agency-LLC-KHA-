@@ -73,18 +73,9 @@
 
             @using (Html.BeginForm("All", "Timesheet", FormMethod.Get))
             {
-                <button type="button" onclick="clearAndReload()" class="btn btn-sm btn-warning">
-                    <i class="fas fa-filter"></i>
-                </button>
+                
 
-                <script>
-                    function clearAndReload() {
-                        // Reset the dropdown selection
-                        document.getElementById("userName").selectedIndex = 0;
-                    }
-                </script>
-
-                <a style="font-family: Calibri"><i class="fa fa-calendar-day text-white"></i> Duration</a>
+                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span>  Duration</a>
                 <select class="form-rounded2" name="Duration" id="Duration">
                     
                         <option value="">Select Duration</option>
@@ -97,7 +88,7 @@
                 </select>
                 <small> ||</small>
 
-                <a style="font-family: Calibri"><i class="fa fa-user-circle text-white"></i> Staff</a>
+                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i></span>  Staff</a>
                 <select class="form-rounded2" name="option" id="userName">
                     <option value="">Select User</option>
                     @foreach (var userName in ViewBag.Usernames)
@@ -120,7 +111,7 @@
 
     @if (TempData["Msg"] != null)
     {<div class="row">
-            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+            <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 @TempData["Msg"]
             </div>
@@ -168,7 +159,7 @@
                         <td style="background-color: white;">
                             <i class="fa fa-bookmark text-primary"></i>  @item.CreatedOn.ToString("MMMM")
                             <div class="dropdown-divider"></div>
-                            <small style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b>To</b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></small>
+                            <small style="color:navy"> <i class="fa fa-calendar-day text-navy"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b><span class="badge badge-warning"> <i class="fa fa-unsiversity text-black"></i></span> </b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></small>
                         </td>
                         <td style="background-color: white;">
                             <span class="badge badge-primary"><i class="fa fa-user-circle text-white"></i></span>  @item.Owner
@@ -193,21 +184,24 @@
                                 }
                                 else
                                 {
-                                    <small style="font-size: small; color: dimgray"><b><i class="fa fa-check-circle "></i>  PAST WEEK</b></small>
+                                    <small style="font-size: small; color: dimgray">
+                                        <b><i class="fa fa-check-circle "></i>  PAST WEEK</b>  @if (item.Status == 99)
+                                        {<small style="color:red">  | <b><i class="fa fa-spin fa-circle-notch "></i> DECLINED</b></small>}
+                                    </small>
                                 }
 
                             }
                             else
                             {
                                 <small style="font-size:medium;color:dimgray"><b><i class="fa fa-lock text-gray"></i> CLOSED</b></small>
-                                <div class="dropdown-divider"></div> <b style="font-size: small"><i class="fa fa-certificate text-green"></i>  APPROVALS :</b>
+                                <div class="dropdown-divider"></div> <b style="font-size: small"><span class="badge badge-warning"> <i class="fa fa-univsersity text-black"></i></span>  Status :</b>
                                 if (@item.Status == 0)
                                 {
-                                    <b style="color: green; font-size: small"> PENDING  </b>
+                                    <b style="color: gray; font-size: small"><span class="badge badge-secondary"> <i class="fa fa-pause-circle text-white"></i></span> PENDING    </b>
 
                                 }
                                 else
-                                {<b style="color: orange; font-size: small "><i class="fa  fa-check-circle"></i> APPROVED </b>
+                                {<b style="color: darkgreen; font-size: small "><span class="badge badge-success"> <i class="fa fa-check-circle text-white"></i></span> APPROVED </b>
                                 }
 
                             }
@@ -251,8 +245,9 @@
                                         <div class="dropdown-divider"></div>
                                         @if (this.User.IsInRole("Timesheet_Approvals") && item.Status==0)
                                         {
-                                            <a href="@Url.Action("ApproveTimesheet", "Timesheet", new {Id=item.Id, user = item.Owner,From_Date=item.From_Date,End_Date=item.End_Date })" class="dropdown-item" onclick="return confirm('Are you sure you want to approve staff timesheet?')"><i class="fa fa-check-circle text-black"></i> Approve Week Timesheet</a>
-
+                                            <a href="@Url.Action("Approvals", "sheet_comments", new { Timesheetid=item.Id})" class="dropdown-item">
+                                                 <b style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approve</b> | <b style="color:red"><i class="fa fa-times-circle text-danger"></i>  Reject</b> Timesheet
+                                            </a>
                                         }
 
 

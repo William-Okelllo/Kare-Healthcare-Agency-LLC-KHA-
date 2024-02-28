@@ -34,6 +34,7 @@ namespace Ishop
             Database.SetInitializer<Direct_Activities_Context>(null);
             Database.SetInitializer<Indirect_Activities_Context>(null);
             Database.SetInitializer<leaveTypesContext>(null);
+            Database.SetInitializer<Sheet_comments_context>(null);
             Database.SetInitializer<DepartmentContext>(null);
             Database.SetInitializer<Re_open_context>(null);
         }

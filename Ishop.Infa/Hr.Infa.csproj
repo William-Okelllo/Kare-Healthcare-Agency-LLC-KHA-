@@ -95,6 +95,8 @@
     <Compile Include="ReportGroupContext.cs" />
     <Compile Include="Re_open_context.cs" />
     <Compile Include="Re_open_repo.cs" />
+    <Compile Include="Sheet_comments_context.cs" />
+    <Compile Include="Sheet_comments_repo.cs" />
     <Compile Include="Sms_configs_Context.cs" />
     <Compile Include="Sms_config_Repo.cs" />
     <Compile Include="Team_Context.cs" />

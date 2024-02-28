@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planning", "Ishop\Planning.
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "App_Reports", "App_Reports\App_Reports.rptproj", "{B8163A69-8B21-46DC-83E7-1FD6ECC2003F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planning_Backend_Service", "Planning_Backend_Service\Planning_Backend_Service.csproj", "{BEB67F8C-0B39-4C23-AD2E-A6594454B04F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Planning_Backend_Service", "Planning_Backend_Service\Planning_Backend_Service.csproj", "{BEB67F8C-0B39-4C23-AD2E-A6594454B04F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

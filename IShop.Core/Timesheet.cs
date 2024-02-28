@@ -28,7 +28,7 @@ namespace IShop.Core
         public int Status { get; set; }
         
         [Display(Name = "Total Hours")]
-        public int Tt { get; set; }
+        public Decimal Tt { get; set; }
 
         public bool Locked { get; set; }
 

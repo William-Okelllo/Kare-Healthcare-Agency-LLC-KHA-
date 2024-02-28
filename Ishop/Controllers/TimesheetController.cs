@@ -11,6 +11,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
+using System.Deployment.Internal;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -134,7 +135,21 @@ namespace Ishop
         }
 
 
-        public ActionResult Approval(int? id)
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+            public ActionResult Approval(int? id)
         {
 
 
@@ -352,6 +367,7 @@ namespace Ishop
             Timesheet check = db.timesheets.Find(id);
             if (check != null)
             {
+                check.Locked = true;
                 check.Status = 7;
                 db.SaveChanges();
             }
@@ -364,7 +380,7 @@ namespace Ishop
             { daytime = "Good Afternoon"; }
             else
             { daytime = "Good Evenning"; }
-            string Subject = "Timesheet Approved Successfully  Month : " + Times.CreatedOn.ToString("MMMM") + "Duration : " + Times.From_Date.ToString("dd-MMMM-yyyy")  + " To " + Times.End_Date.ToString("dd-MMMM-yyyy");
+            string Subject = "Timesheet Approved Successfully  Month : " + Times.CreatedOn.ToString("MMMM") + "  Duration : " + Times.From_Date.ToString("dd-MMMM-yyyy")  + " To " + Times.End_Date.ToString("dd-MMMM-yyyy");
             string message = daytime + " ," + user
             + "\n" + "Your timesheet  Month: " + Times.CreatedOn.ToString("MMMM") + "Duration: " + Times.From_Date.ToString("dd - MMMM - yyyy")  + " To " + Times.End_Date.ToString("dd - MMMM - yyyy") +  " has been Approved successfully  "
             + "\n" + "thank you "
@@ -372,9 +388,39 @@ namespace Ishop
             var usser = ddb.AspNetUsers.Where(t => t.UserName == user).FirstOrDefault();
             PushEmail(usser.Email, Subject, message, DateTime.Now);
             PushSms(usser.PhoneNumber, message, DateTime.Now);
-            TempData["msg"] = "Timesheet apporved successfully  -Staff  "+ user;
-            string returnUrl = Request.UrlReferrer.ToString();
-            return Redirect(returnUrl);
+
+            return RedirectToAction("All", "Timesheet");
+        }
+        public ActionResult Decline(int id, string user)
+        {
+            
+
+            Timesheet check = db.timesheets.Find(id);
+            if (check != null)
+            {
+                check.Locked = false;
+                check.Status = 99;
+                db.SaveChanges();
+            }
+
+            var Times = db.timesheets.Where(c => c.Id == id).FirstOrDefault();
+            string daytime;
+            if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
+            { daytime = "Good Morning"; }
+            else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+            { daytime = "Good Afternoon"; }
+            else
+            { daytime = "Good Evenning"; }
+            string Subject = "Timesheet Declined   Month : " + Times.CreatedOn.ToString("MMMM") + "Duration : " + Times.From_Date.ToString("dd-MMMM-yyyy") + " To " + Times.End_Date.ToString("dd-MMMM-yyyy");
+            string message = daytime + " ," + user
+            + "\n" + "Your timesheet  Month: " + Times.CreatedOn.ToString("MMMM") + "Duration: " + Times.From_Date.ToString("dd - MMMM - yyyy") + " To " + Times.End_Date.ToString("dd - MMMM - yyyy") + " has been  declined  "
+            + "\n" + "kindly note  your timesheet has been re-openned ,this allows you to make the needed ajustments to your timesheet "
+            + "\n" + "Regards , HR-Team ";
+            var usser = ddb.AspNetUsers.Where(t => t.UserName == user).FirstOrDefault();
+            PushEmail(usser.Email, Subject, message, DateTime.Now);
+            PushSms(usser.PhoneNumber, message, DateTime.Now);
+
+            return RedirectToAction("All", "Timesheet");
         }
 
 
@@ -382,7 +428,6 @@ namespace Ishop
 
 
 
-       
         public ActionResult DataView(DateTime selectedDate,string user)
         {
             ViewBag.SelectedDate = selectedDate;
@@ -402,7 +447,7 @@ namespace Ishop
 
 
 
-        public ActionResult BreakDown(DateTime FromDate, DateTime EndDate, string user)
+        public ActionResult BreakDown(DateTime FromDate, DateTime EndDate, string user,int id)
         {
 
                 
@@ -415,12 +460,16 @@ namespace Ishop
             ViewBag.EndDate = EndDate;
             ViewBag.user = user;
 
-            var data = IA.indirect_Activities.OrderByDescending(c => c.Day_Date).Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
+            var data = IA.indirect_Activities.OrderBy(c => c.Day_Date).Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
             ViewBag.IndirectActivities = data;
-            var data2 = DA.direct_Activities.OrderByDescending(c=>c.Day_Date).Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
+            var data2 = DA.direct_Activities.OrderBy(c=>c.Day_Date).Where(c => c.User == user && c.Day_Date >= FromDate && c.Day_Date < EndDate).ToList();
             ViewBag.direct_Activities = data2;
 
             var returnUrl = Url.Action("BreakDown", "Timesheet");
+
+            Sheet_comments_context sc = new Sheet_comments_context();
+            var approvals =sc.sheet_Comments.Where(c=>c.Timesheeet_Id == id).ToList();
+            ViewBag.approvals = approvals;
 
             return View("BreakDown");
         }
