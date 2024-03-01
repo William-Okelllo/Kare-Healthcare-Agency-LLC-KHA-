@@ -115,13 +115,42 @@
         <div class="card-body" style="background-color: white;border-radius: 24px;">
 
 
+            <h4 style="text-align:center"><span class="badge badge-warning"> <i class="fa fa-usere"></i></span> @ViewBag.Employee.Fullname <span class="badge badge-success"> <i class="fa fa-usere"></i></span> | @ViewBag.Employee.DprtName </h4>
+                <h6 style="text-align:center"><span class="badge badge-warning"> <i class="fa fa-calendar-check"></i></span>   @ViewBag.FromDate.ToString("dd-ddd-MMMM-yyyy")   <b>TO</b>  <span class="badge badge-dark"> <i class="fa fa-calendar-check"></i></span> @ViewBag.EndDate.ToString("dd-ddd-MMMM-yyyy") </h6>
+                <div class="row justify-content-center">
+                    <div class="col-sm-3 border-right">
+                        <div class="description-block">
+                            <h3 class="description-header">@ViewBag.timesheet.InDirect_Hours</h3>
+                            <span class="description-text"><b>Non Project Hours</b></span>
+                        </div>
+                        <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-3 border-right">
+                        <div class="description-block">
+                            <h3 class="description-header">@ViewBag.timesheet.Direct_Hours</h3>
+                            <span class="description-text"><b>Project Hours</b></span>
+                        </div>
+                        <!-- /.description-block -->
+                    </div>
+                    <div class="col-sm-3 border-right">
+                        <div class="description-block">
+                            <h3 class="description-header">@ViewBag.timesheet.Leave</h3>
+                            <span class="description-text"><b>Leave Hours</b></span>
+                        </div>
+                        <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-3">
+                        <div class="description-block">
+                            <h3 class="description-header">@ViewBag.timesheet.Tt</h3>
+                            <span class="description-text"><b>Total Hours</b></span>
+                        </div>
+                        <!-- /.description-block -->
+                    </div>
+                </div>
 
-            <form>
 
-                <h5>
-                    <i class="fa fa-user-circle text-primary"></i> @ViewBag.user
-                </h5>
-                <h6> <i class="fa fa-calendar-check text-primary"></i>   @ViewBag.FromDate.ToString("ddd-dd-MMMM-yyyy")   <b>TO</b>  @ViewBag.EndDate.ToString("ddd-dd-MMMM-yyyy") </h6>
                 <div class="dropdown-divider"></div>
                 <style>
                     .nav-tabs .nav-item.show .nav-link,
@@ -134,21 +163,22 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-book-reader"></i>  Non Project Time </a>
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-book-reader"></i>  <b>Non Project Time</b> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-bookmark"></i>  Project Time </a>
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-bookmark"></i> <b> Project Time</b> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-Leaves-tab" data-toggle="pill" href="#pills-Leaves" role="tab" aria-controls="pills-Leaves" aria-selected="false"><i class="fa fa-umbrella-beach"></i>  Leaves  </a>
+                        <a class="nav-link" id="pills-Leaves-tab" data-toggle="pill" href="#pills-Leaves" role="tab" aria-controls="pills-Leaves" aria-selected="false"><i class="fa fa-umbrella-beach"></i>  <b>Leaves</b>  </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-Aprrovals-tab" data-toggle="pill" href="#pills-Aprrovals" role="tab" aria-controls="pills-Aprrovals" aria-selected="false"><i class="fa fa-check-circle"></i>  Approvals  </a>
+                        <a class="nav-link" id="pills-Aprrovals-tab" data-toggle="pill" href="#pills-Aprrovals" role="tab" aria-controls="pills-Aprrovals" aria-selected="false"><i class="fa fa-check-circle"></i>  <b>Approvals</b>  </a>
                     </li>
 
 
                 </ul>
+            <br />
                 <div class="table-responsive">
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
@@ -159,7 +189,7 @@
                                 <h5 style="text-align:center"> <span class="badge badge-warning"> <i class="fa fa-hands-helping text-black"></i></span> Non Project Time </h5>
 
                                 <div class="table-responsive" style="min-height: 100px">
-                                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+                                    <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
 
 
                                         <thead>
@@ -224,7 +254,7 @@
                                 <h5 style="text-align:center"> <span class="badge badge-warning"> <i class="fa fa-hands-wash text-black"></i></span>  Project Time </h5>
 
                                 <div class="table-responsive" style="min-height: 100px">
-                                    <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+                                    <table class="table table-bordered table-hover  text-nowrap table-condensed table-striped table-hover sortable curved-table">
 
 
                                         <thead style="border-radius: 14px">
@@ -297,7 +327,7 @@
                                 }
 
                                 .date {
-                                    text-align:right;
+                                    text-align: right;
                                     color: white;
                                     font-size: 16px;
                                     margin-top: 5px;
@@ -307,8 +337,8 @@
                             @foreach (var item in ViewBag.approvals)
                             {
                                 <div class="chat-bubble user">
-                                    
-                                    <medium><u><span class="badge badge-warning"> <i class="fa fa-comment-dots text-black"></i></span>  Approver Remarks</u></medium>
+
+                                    <medium><u><span class="badge badge-warning"> <i class="fa fa-comment-dots text-black"></i></span>  <b>Approver Remarks</b></u></medium>
                                     <p>@item.Comments</p>
                                     <small class="date"><b> Approver : </b> @item.Approver  <span class="badge badge-warning"> <i class="fa fa-comment-dosts text-black"></i></span>  <b>Date : </b> @item.CreatedOn.ToString("dd-ddd-MMM-yyyy")</small>
                                 </div>
@@ -318,7 +348,7 @@
 
 
                         </div>
-                            
+
 
 
                     </div>

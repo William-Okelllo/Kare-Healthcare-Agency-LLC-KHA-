@@ -65,7 +65,7 @@
 
 
 
-        <nav class="main-header navbar navbar-expand navbar-light navbar-dark" style="background: linear-gradient(to right, #ffffff, #ffffff); border-radius: 0">
+        <nav class="main-header navbar navbar-expand navbar-light navbar-dark" style="background: linear-gradient(to right, #ffffff, #ffffff); border-radius: 0 ">
 
             <!-- Left navbar links -->
             <ul class="navbar-nav">
@@ -149,10 +149,10 @@
 
 
 
-    <aside class="main-sidebar sidebar-light-primary elevation-4 ">
+    <aside class="main-sidebar sidebar-light-light elevation-4" style="background-color: #0C54A0; border-radius: 1px ">
         <!-- Brand Logo -->
         <a href="@Url.Action("Index", "Home")" class="brand-link" style="text-align:center">
-            <img src="~/Images/P.png" height="40">
+            <img src="~/Images/lwhote.png" height="40">
 
         </a>
 
@@ -161,8 +161,10 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="color:black">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
                 <div style="font-family: 'Montserrat';font-size:13px">
-                    <a href="#" style="color: #0C54A0">
-                        <span class="badge bg-warning"><i class="fa fa-user-circle text-white"></i></span>  Hello  : @User.Identity.Name
+                    <a href="#" style="color: white">
+                        <span class="badge badge-pill badge-warning">   <small style="font-size:small"><i class="fa fa-circle-notch nav-icon"></i>  Acc :  </small>  </span>
+                        <span class="badge badge-pill badge" style="background-color: #0C54A0">   <small style="font-size:small"><i class="fa fa-user-circle text-white nav-icon"></i>  @User.Identity.Name  </small>  </span>
+
                     </a>
 
                 </div>
@@ -191,7 +193,7 @@
                     </li>
                     @if (this.User.IsInRole("Employee"))
                     {
-                        <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-blue nav-icon"></i> <b>Timesheets  Module</b></li>
+                        <li class="nav-header" style="color: #8a8a8a; font-family: Montserrat; font-size: 10px "><i class="fa fa-bookmark text-gray nav-icon"></i> Timesheets  Module</li>
                         <li class="nav-item">
 
 
@@ -273,7 +275,7 @@
 
                             </li>
                         }
-                        <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-blue nav-icon"></i> <b>Leave Module</b></li>
+                        <li class="nav-header" style="color: #8a8a8a; font-family: Montserrat; font-size: 10px "><i class="fa fa-bookmark text-gray nav-icon"></i> Leave Module</li>
 
                         <li class="nav-item">
 
@@ -328,295 +330,317 @@
                                     </p>
                                 </a>
                             </li>
-                            }
-                        }
-
-                        @if (this.User.IsInRole("Reports_Access"))
-                        {
-                            <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-blue nav-icon"></i> <b>Reports  Module</b></li>
-
-
                             <li class="nav-item">
 
 
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-chart-line text-blue"></i>
-                                    <p style="color: #060440; ">
-                                        Reports <i class="fas fa-angle-left right"></i>
-
-
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Reports")" class="nav-link">
-
-                                            <i class="fa fa-chart-line text-blue nav-icon"></i>
-                                            <p style="color: #060440">
-                                                Reports
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
-
-                        }
-
-
-                        @if (this.User.IsInRole("Master_Data"))
-                        {
-
-                            <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-blue nav-icon"></i> <b>Master Data Module</b></li>
-                            <li class="nav-item">
-
-
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-suitcase text-blue"></i>
-                                    <p style="color: #060440;">
-                                        Projects <i class="fas fa-angle-left right"></i>
-
-
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "projects")" class="nav-link">
-
-                                            <i class="fa fa-suitcase text-blue nav-icon"></i>
-                                            <p style="color: #060440 ">
-                                                Project list
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Clients")" class="nav-link">
-
-                                            <i class="fa fa-users text-blue nav-icon"></i>
-                                            <p style="color: #060440 ">
-                                                Clients' list
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Pcategories")" class="nav-link">
-
-                                            <i class="fa fa-folder-open text-blue nav-icon"></i>
-                                            <p style="color: #060440 ">
-                                                Project Categories
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                            </li>
-                            <li class="nav-item">
-
-                                <a href="@Url.Action("Index", "Departments")" class="nav-link">
-
-                                    <i class="fa fa-university text-blue nav-icon"></i>
-                                    <p style="color: #060440 ">
-                                        Departments <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Employees")" class="nav-link">
-
-                                    <i class="fa fa-users text-blue nav-icon"></i>
-                                    <p style="color: #060440 ">
-                                        Employees <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-
-
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-database text-blue"></i>
-                                    <p style="color: #060440; ">
-                                        Master Data <i class="fas fa-angle-left right"></i>
-
-
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-
-
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon fa fa-bookmark text-blue"></i>
-                                            <p style="color: #060440;  ">
-                                                Direct Categories <i class="fas fa-angle-left right"></i>
-
-
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("create", "Directs")" class="nav-link">
-
-                                                    <i class="fa fa-plus-circle text-blue nav-icon"></i>
-                                                    <p style="color: #060440 ">
-                                                        Add Category
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("Index", "Directs")" class="nav-link">
-
-                                                    <i class="fa fa-bookmark text-blue nav-icon"></i>
-                                                    <p style="color: #060440 ">
-                                                        Direct Categories list
-                                                    </p>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </li>
-                                    <li class="nav-item">
-
-
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon fa fa-book-reader text-blue"></i>
-                                            <p style="color: #060440;  ">
-                                                InDirect Categories <i class="fas fa-angle-left right"></i>
-
-
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("create", "InDirects")" class="nav-link">
-
-                                                    <i class="fa fa-plus-circle text-blue nav-icon"></i>
-                                                    <p style="color: #060440 ">
-                                                        Add Category
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("Index", "InDirects")" class="nav-link">
-
-                                                    <i class="fa fa-book-reader text-blue nav-icon"></i>
-                                                    <p style="color: #060440 ">
-                                                        InDirect Categories list
-                                                    </p>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Time_Cat")" class="nav-link">
-
-                                            <i class="fa fa-book-reader text-blue nav-icon"></i>
-                                            <p style="color: #060440 ">
-                                                Time Categories
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-
-
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon fa fa-umbrella text-blue"></i>
-                                            <p style="color: #060440;  ">
-                                                Leave Types <i class="fas fa-angle-left right"></i>
-
-
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("create", "leaves_Types")" class="nav-link">
-
-                                                    <i class="fa fa-plus-circle text-blue nav-icon"></i>
-                                                    <p style="color: #060440 ">
-                                                        Add leave Type
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="@Url.Action("Index", "leaves_Types")" class="nav-link">
-
-                                                    <i class="fa fa-umbrella text-blue nav-icon"></i>
-                                                    <p style="color: #060440 ">
-                                                        Leave Types list
-                                                    </p>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </li>
-
-
-                                </ul>
-                            </li>
-
-                        }
-
-
-
-
-
-                        @if (this.User.IsInRole("Admin"))
-                        {
-                            <li class="nav-header" style="color: #060440; font-family: Montserrat; font-size: 12px "> <i class="fa fa-bookmark text-blue nav-icon"></i> <b>Admin Module</b></li>
-                            <li class="nav-item">
-
-
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-user-cog text-navy"></i>
+                                    <i class="nav-icon fa fa-umbrella text-warning"></i>
                                     <p style="color: #060440;  ">
-                                        Configs <i class="fas fa-angle-left right"></i>
+                                        Leave Types <i class="fas fa-angle-left right"></i>
 
 
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
-
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Configuration")" class="nav-link">
+                                        <a href="@Url.Action("create", "leaves_Types")" class="nav-link">
 
-                                            <i class="fa fa-cogs text-primary nav-icon"></i>
-                                            <p style="color: #0C54A0">
-                                                Configurations
+                                            <i class="fa fa-plus-circle text-blue nav-icon"></i>
+                                            <p style="color: #060440 ">
+                                                Add leave Type
                                             </p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "leaves_Types")" class="nav-link">
 
+                                            <i class="fa fa-umbrella text-blue nav-icon"></i>
+                                            <p style="color: #060440 ">
+                                                Leave Types list
+                                            </p>
+                                        </a>
+                                    </li>
                                 </ul>
 
                             </li>
                         }
+                    }
+                    @if (this.User.IsInRole("Notifications"))
+                    {
+                        <li class="nav-header" style="color: #8a8a8a; font-family: Montserrat; font-size: 10px "><i class="fa fa-bookmark text-gray nav-icon"></i> Notifications  Module </li>
 
 
+                        <li class="nav-item">
 
-                        <div class="dropdown-divider"></div>
-                        <img src="https://timenex.planning-kenya.com/Images/2D.png" height="50" width="80" />
-                        <li class="nav-header" style="color: #0C54A0;font-size:smaller">
-                            <p style="color:darkslategrey">  Version 2.0.10     <br />    Copyright © @DateTime.Now.Year Planning Systems. <br /> All rights reserved  </p>
+
+                            <a href="@Url.Action("Index", "Notifications")" class="nav-link">
+                                <i class="nav-icon fa fa-retweet text-blue"></i>
+                                <p style="color: #060440; ">
+                                    Recurring Emails <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            
                         </li>
 
-                    </ul>
+
+
+                    }
+                    @if (this.User.IsInRole("Reports_Access"))
+                    {
+                        <li class="nav-header" style="color: #8a8a8a; font-family: Montserrat; font-size: 10px "><i class="fa fa-bookmark text-gray nav-icon"></i> Reports  Module</li>
+
+
+                        <li class="nav-item">
+
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-chart-line text-blue"></i>
+                                <p style="color: #060440; ">
+                                    Reports <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Reports")" class="nav-link">
+
+                                        <i class="fa fa-chart-line text-blue nav-icon"></i>
+                                        <p style="color: #060440">
+                                            Reports
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                    }
+
+
+                    @if (this.User.IsInRole("Master_Data"))
+                    {
+
+                        <li class="nav-header" style="color: #8a8a8a; font-family: Montserrat; font-size: 10px "><i class="fa fa-bookmark text-gray nav-icon"></i>  Master Data Module </li>
+                        <li class="nav-item">
+
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-suitcase text-blue"></i>
+                                <p style="color: #060440;">
+                                    Projects <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "projects")" class="nav-link">
+
+                                        <i class="fa fa-suitcase text-blue nav-icon"></i>
+                                        <p style="color: #060440 ">
+                                            Project list
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Clients")" class="nav-link">
+
+                                        <i class="fa fa-users text-blue nav-icon"></i>
+                                        <p style="color: #060440 ">
+                                            Clients' list
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Pcategories")" class="nav-link">
+
+                                        <i class="fa fa-folder-open text-blue nav-icon"></i>
+                                        <p style="color: #060440 ">
+                                            Project Categories
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a href="@Url.Action("Index", "Departments")" class="nav-link">
+
+                                <i class="fa fa-university text-blue nav-icon"></i>
+                                <p style="color: #060440 ">
+                                    Departments <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Employees")" class="nav-link">
+
+                                <i class="fa fa-users text-blue nav-icon"></i>
+                                <p style="color: #060440 ">
+                                    Employees <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-database text-blue"></i>
+                                <p style="color: #060440; ">
+                                    Master Data <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+
+
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa fa-bookmark text-blue"></i>
+                                        <p style="color: #060440;  ">
+                                            Direct Categories <i class="fas fa-angle-left right"></i>
+
+
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("create", "Directs")" class="nav-link">
+
+                                                <i class="fa fa-plus-circle text-blue nav-icon"></i>
+                                                <p style="color: #060440 ">
+                                                    Add Category
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index", "Directs")" class="nav-link">
+
+                                                <i class="fa fa-bookmark text-blue nav-icon"></i>
+                                                <p style="color: #060440 ">
+                                                    Direct Categories list
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="nav-item">
+
+
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa fa-book-reader text-blue"></i>
+                                        <p style="color: #060440;  ">
+                                            InDirect Categories <i class="fas fa-angle-left right"></i>
+
+
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("create", "InDirects")" class="nav-link">
+
+                                                <i class="fa fa-plus-circle text-blue nav-icon"></i>
+                                                <p style="color: #060440 ">
+                                                    Add Category
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index", "InDirects")" class="nav-link">
+
+                                                <i class="fa fa-book-reader text-blue nav-icon"></i>
+                                                <p style="color: #060440 ">
+                                                    InDirect Categories list
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Time_Cat")" class="nav-link">
+
+                                        <i class="fa fa-book-reader text-blue nav-icon"></i>
+                                        <p style="color: #060440 ">
+                                            Time Categories
+                                        </p>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+
+                    }
+
+
+
+
+
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-header" style="color: #8a8a8a; font-family: Montserrat; font-size: 12px "> <i class="fa fa-bookmark text-gray nav-icon"></i>  Admin Module </li>
+                        <li class="nav-item">
+
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-user-cog text-navy"></i>
+                                <p style="color: #060440;  ">
+                                    Configs <i class="fas fa-angle-left right"></i>
+
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Configuration")" class="nav-link">
+
+                                        <i class="fa fa-cogs text-primary nav-icon"></i>
+                                        <p style="color: #0C54A0">
+                                            Configurations
+                                        </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                    }
+
+
+
+                    <div class="dropdown-divider"></div>
+                    <img src="https://timenex.planning-kenya.com/Images/2D.png" height="50" width="80" />
+                    <li class="nav-header" style="color: #0C54A0;font-size:smaller">
+                        <p style="color:darkslategrey">  Version 2.0.10     <br />    Copyright © @DateTime.Now.Year Planning Systems. <br /> All rights reserved  </p>
+                    </li>
+
+                </ul>
 
             </nav>
-            
+
 
         </div>
 
-       
 
 
 
 
-        
 
-       
+
+
+
 
     </aside>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap" rel="stylesheet">

@@ -30,6 +30,8 @@ namespace IShop.Core
         [Display(Name = "Total Hours")]
         public Decimal Tt { get; set; }
 
+        public Decimal Leave { get; set; }
+
         public bool Locked { get; set; }
 
 

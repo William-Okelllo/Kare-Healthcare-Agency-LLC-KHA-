@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using PagedList;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Ishop.Controllers
 {
@@ -88,6 +89,46 @@ namespace Ishop.Controllers
 
 
 
+        public ActionResult Insert_daysAll()
+        {
+            var activeEmployees = dbb.employees.Where(c => c.Active == true).ToList();
+            leaveTypesContext LVV = new leaveTypesContext();
+            var Parts = LVV.leaves_Types.ToList();
+            Random random = new Random();
+
+            using (var In_parts = new leaves_Days_trackContext())
+            {
+                foreach (var employee in activeEmployees)
+                {
+                    var existingRecords = db.Leaves_Days_Tracks.Where(c => c.Username == employee.Username).ToList();
+
+                    foreach (var part in Parts)
+                    {
+                        // Check if a record with the same Username and Type already exists
+                        bool recordExists = existingRecords.Any(r => r.Type == part.Type);
+
+                        if (!recordExists)
+                        {
+                            leaves_Days_track inspections_Parts = new leaves_Days_track
+                            {
+                                Id = random.Next(),
+                                Requested_leaves = 0,
+                                Remaining_leaves = part.Days,
+                                Username = employee.Username,
+                                Type = part.Type,
+                                Total_leaves_per_year = part.Days
+                            };
+
+                            In_parts.Leaves_Days_Tracks.Add(inspections_Parts);
+                        }
+                    }
+                }
+                In_parts.SaveChanges();
+            }
+            TempData["msg"] = "Leave Balance fetched successfully";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
 
 
 

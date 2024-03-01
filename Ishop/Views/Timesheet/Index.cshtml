@@ -271,7 +271,7 @@
         </div>
         <div class="col-md-3 col-sm-6 col-9">
             <div class="info-box" style="border-left: 6px solid #0C54A0; border-radius: 15px ">
-                <span class="info-box-icon bg" style="border-radius: 15px; background-color: #0C54A0"><i class="fa fa-user-clock text-white"></i></span>
+                <span class="info-box-icon bg" style="border-radius: 15px; background-color: #07417e"><i class="fa fa-user-clock text-white"></i></span>
 
                 <div class="info-box-content">
                     <span class="info-box-text"><b style="color: #0C54A0"> TOTAL WEEK TIME</b></span>
@@ -291,11 +291,12 @@
             <!-- /.info-box-content -->
         </div>
         <div class="col-md-3 col-sm-6 col-10">
-            <div class="info-box" style="border-left: 6px solid #0C54A0; border-radius: 15px ">
+            <div class="info-box" style="border-left: 6px solid #F0AB15; border-radius: 15px; background-color: #0C54A0 ">
 
                 <div class="info-box-content"> 
-                    <span class="info-box-number"> . <b><span class="badge badge-warning"> <i class="fa fa-question-circle text-black"></i></span>  How to  fill in past timesheet </span>
-                    <span class="info-box-number">  <a href="#" data-toggle="modal" data-target="#knowledge">learn more</a> </span>
+                    <span class="info-box-number">  <b style="color:white"><span class="badge badge-light"> <i class="fa fa-question-circle text-black"></i></span>  How to  fill in past timesheet </span>
+                    <span class="info-box-number">  <a href="#" data-toggle="modal" data-target="#knowledge" style="color:yellow"> 
+                                                        <i class="fa fa-spin fa-circle-notch"></i>    learn more</a> </span>
                 </div>
             </div>
             <!-- /.info-box-content -->
@@ -305,13 +306,13 @@
         <div class="modal fade" id="knowledge" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content" style="border-radius:15px">
-                    <div class="modal-header" style="border-radius:15px;background-color:whitesmoke">
+                    <div class="modal-header" style="border-radius: 15px; background-color: #0C54A0">
                         <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-clipboard-list text-black"></i></span>   Past Timesheets</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body"style="color:black">
                         
                         <div class="dropdown-divider"></div>
                         <p>Have you missed any crucial timesheet information or need to rectify past entries? </p>
@@ -319,7 +320,7 @@
 
                         <small>Utilize the 'Timesheet Re-open' tab to submit your request through the system. <br />
                         Thank you for your cooperation.</small>
-
+                        <img src="~/Images/sad.gif" height="100px" />
                         <br />
 
                         @Html.ActionLink("Request Re-Open ", "Re_quest", "reopen", null, new { @class = "btn btn-sm btn-primary btn " })

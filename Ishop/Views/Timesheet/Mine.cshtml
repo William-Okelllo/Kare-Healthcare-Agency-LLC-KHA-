@@ -139,6 +139,7 @@
 
                     <th style="background-color: #0C54A0; font-size: medium; ">Non Project Time</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Project Time</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Leave Time</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Total Hours</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Action</th>
@@ -152,7 +153,7 @@
                         <td style="background-color: white;">
                             <i class="fa fa-bookmark text-primary"></i>  @item.CreatedOn.ToString("MMMM")
                             <div class="dropdown-divider"></div>
-                            <small style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b>To</b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></small>
+                            <small style="color:navy"> <i class="fa fa-calendar-day text-navy"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></small> <small> <b><span class="badge badge-warning"> <i class="fa fa-unsiversity text-black"></i></span> </b></small> <small style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></small>
                         </td>
                         <td style="background-color: white;">
                             <span class="badge badge-primary"><i class="fa fa-user-circle text-white"></i></span>  @item.Owner
@@ -162,7 +163,8 @@
 
                         <td style="background-color: white;"> <h4 style="color:navy">  <b>@item.InDirect_Hours</b> <b style="font-size:large">Hrs</b></h4></td>
                         <td style="background-color: white;"> <h4 style="color:green"> <b> @item.Direct_Hours</b> <b style="font-size:large">Hrs</b></h4></td>
-                        <td style="background-color: white;"> <h1><b style="color: #0C54A0">  @item.Tt</b> <b style="font-size: large; color: #0C54A0">Hrs</b></h1></td>
+                        <td style="background-color: white;"> <h4 style="color:green"> <b> @item.Leave</b> <b style="font-size:large">Hrs</b></h4></td>
+                        <td style="background-color: white;"> <h3><b style="color: #0C54A0">  @item.Tt</b> <b style="font-size: large; color: #0C54A0">Hrs</b></h3></td>
 
                         <td style="background-color: white;">
 
@@ -179,7 +181,7 @@
                                 {
                                     <small style="font-size: small; color: dimgray">
                                         <b><i class="fa fa-check-circle "></i>  PAST WEEK</b>  @if (item.Status == 99)
-                                        { <small style="color:red">  | <b><i class="fa fa-spin fa-circle-notch "></i> DECLINED</b></small>}
+                                        {<small style="color:red">  | <b><i class="fa fa-spin fa-circle-notch "></i> DECLINED</b></small>}
                                     </small>
                                 }
                             }
@@ -215,10 +217,10 @@
                                         </a>
                                         @if (!(item.CreatedOn >= ViewBag.StartDate && item.CreatedOn <= ViewBag.EndDate))
                                         {
-                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to re-submit this Timesheet  -Note you will no longer be able to edit/Add tasks to the timesheet ')) { window.location.href = '@Url.Action("Re_submit", "Timesheet", new { id = item.Id, })'; }">
-                                            <i class="fa fa-paper-plane text-success"></i> Re-Submit Timesheet
+                                            <a class="dropdown-item" onclick="if (confirm('Are you sure you want to re-submit this Timesheet  -Note you will no longer be able to edit/Add tasks to the timesheet ')) { window.location.href = '@Url.Action("Re_submit", "Timesheet", new { id = item.Id, })'; }">
+                                                <i class="fa fa-paper-plane text-success"></i> Re-Submit Timesheet
 
-                                        </a>
+                                            </a>
                                         }
                                         <script>
                                             $(function () {
@@ -230,7 +232,7 @@
                                             });
                                         </script>
                                         <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("BreakDown", "Timesheet", new { FromDate = item.From_Date.ToString("yyyy-MM-dd"), EndDate=item.End_Date.ToString("yyyy-MM-dd"),User=item.Owner})" class="dropdown-item">
+                                        <a href="@Url.Action("BreakDown", "Timesheet", new { FromDate = item.From_Date.ToString("yyyy-MM-dd"), EndDate=item.End_Date.ToString("yyyy-MM-dd"),User=item.Owner,id=item.Id})" class="dropdown-item">
                                             <i class="fa fa-book-reader text-primary"></i> View Sheet BreakDown
                                         </a>
 
@@ -246,9 +248,9 @@
                                         <i class="fa fa-hashtag"></i>  . Action
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                        
+
                                         <div class="dropdown-divider"></div>
-                                        <a href="@Url.Action("BreakDown", "Timesheet", new { FromDate = item.From_Date.ToString("yyyy-MM-dd"), EndDate=item.End_Date.ToString("yyyy-MM-dd"),User=item.Owner})" class="dropdown-item">
+                                        <a href="@Url.Action("BreakDown", "Timesheet", new { FromDate = item.From_Date.ToString("yyyy-MM-dd"), EndDate=item.End_Date.ToString("yyyy-MM-dd"),User=item.Owner,id=item.Id})" class="dropdown-item">
                                             <i class="fa fa-book-reader text-primary"></i> View Sheet BreakDown
                                         </a>
 

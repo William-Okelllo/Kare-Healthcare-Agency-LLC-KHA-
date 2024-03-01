@@ -37,6 +37,7 @@ namespace Ishop
             Database.SetInitializer<Sheet_comments_context>(null);
             Database.SetInitializer<DepartmentContext>(null);
             Database.SetInitializer<Re_open_context>(null);
+            Database.SetInitializer<Notification_context>(null);
         }
     }
 }

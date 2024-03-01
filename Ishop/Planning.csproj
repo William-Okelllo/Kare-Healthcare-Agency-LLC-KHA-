@@ -421,6 +421,7 @@
     <Compile Include="Controllers\leaves_TypesController.cs" />
     <Compile Include="Controllers\leave_BalanceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OutgoingEmailsController.cs" />
     <Compile Include="Controllers\OutgoingsmsController.cs" />
     <Compile Include="Controllers\PcategoriesController.cs" />
@@ -6378,6 +6379,7 @@
     <Content Include="Images\homee.png" />
     <Content Include="Images\Infinity.gif" />
     <Content Include="Images\Logg.png" />
+    <Content Include="Images\lwhote.png" />
     <Content Include="Images\mme.png" />
     <Content Include="Images\neww.jpg" />
     <Content Include="Images\P.png" />
@@ -7835,6 +7837,7 @@
     <Content Include="Scripts\i18n\zh-CN.js" />
     <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\Index.js" />
+    <None Include="Properties\PublishProfiles\Planning KE.pubxml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -8068,6 +8071,11 @@
     <Content Include="Views\Sheet_comments\Edit.cshtml" />
     <Content Include="Views\Sheet_comments\Index.cshtml" />
     <Content Include="Views\Timesheet\Actions.cshtml" />
+    <Content Include="Views\Notifications\Add.cshtml" />
+    <Content Include="Views\Notifications\Delete.cshtml" />
+    <Content Include="Views\Notifications\Details.cshtml" />
+    <Content Include="Views\Notifications\Edit.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

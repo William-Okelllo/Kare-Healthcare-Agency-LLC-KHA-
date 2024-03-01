@@ -10,6 +10,9 @@ using IShop.Core;
 using Ishop.Infa;
 using PagedList;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Ishop
 {
@@ -147,15 +150,25 @@ namespace Ishop
 
         public void CaptureRecord(int time, string Staff, DateTime datecheck)
         {
+
+
             Timesheet_Context TT = new Timesheet_Context();
             var Sheet = TT.timesheets.Where(i => i.Owner == Staff && datecheck >= i.From_Date && datecheck <= i.End_Date).FirstOrDefault();
 
+            Indirect_Activities_Context IDC = new Indirect_Activities_Context();
+            Direct_Activities_Context DA = new Direct_Activities_Context();
+            Decimal Indirecttime = IDC.indirect_Activities.Where(i => i.User == Staff && i.Day_Date >= Sheet.From_Date && i.Day_Date <= Sheet.End_Date).Select(i=>i.Hours).DefaultIfEmpty(0).Sum();
+            Decimal Directtime = DA.direct_Activities.Where(i => i.User == Staff && i.Day_Date >= Sheet.From_Date && i.Day_Date <= Sheet.End_Date).Select(i => i.Hours).DefaultIfEmpty(0).Sum();
+            Decimal Totaltime = Indirecttime + Directtime; 
             if (Sheet != null)
             {
-                Sheet.Tt = Sheet.Tt + time;
-                Sheet.InDirect_Hours = Sheet.InDirect_Hours + time;
+                Sheet.Tt = Totaltime;
+                Sheet.Direct_Hours = Directtime;
+                Sheet.InDirect_Hours = Indirecttime;
                 TT.SaveChanges();
             }
+
+            
         }
 
 

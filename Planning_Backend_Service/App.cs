@@ -24,7 +24,7 @@ namespace Planning_Backend_Service
         public App()
         {
 
-            _timer = new Timer(10000) { AutoReset = true };
+            _timer = new Timer(50000) { AutoReset = true };
             _timer.Elapsed += TimeElapsed;
         }
         private string connectionString = "Data Source=.;Initial Catalog=Planning; User ID=sa; Password=1234;Integrated Security=True;";
@@ -526,8 +526,8 @@ namespace Planning_Backend_Service
                         {
                             // Create a new Timesheet record
                             string insertQuery = @"
-                        INSERT INTO Timesheets (CreatedOn, From_Date, End_Date, Department, Owner, Tt, Direct_Hours, InDirect_Hours, Status,Locked)
-                        VALUES (@CreatedOn, @From_Date, @End_Date, @Department, @Owner, @Tt, @Direct_Hours, @InDirect_Hours, @Status,@Locked)";
+                        INSERT INTO Timesheets (CreatedOn, From_Date, End_Date, Department, Owner, Tt, Direct_Hours, InDirect_Hours, Status,Locked,leave)
+                        VALUES (@CreatedOn, @From_Date, @End_Date, @Department, @Owner, @Tt, @Direct_Hours, @InDirect_Hours, @Status,@Locked,@leave)";
 
                             using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection))
                             {
@@ -541,6 +541,7 @@ namespace Planning_Backend_Service
                                 insertCommand.Parameters.AddWithValue("@InDirect_Hours", 0);
                                 insertCommand.Parameters.AddWithValue("@Status", 0);
                                 insertCommand.Parameters.AddWithValue("@Locked", false);
+                                insertCommand.Parameters.AddWithValue("@leave", 0);
                                 // Execute the SQL command to insert the new Timesheet record
                                 insertCommand.ExecuteNonQuery();
 

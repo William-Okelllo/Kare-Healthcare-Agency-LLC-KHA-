@@ -100,6 +100,13 @@ namespace Ishop
 
         public ActionResult Details(int? id)
         {
+            var Times = db.timesheets.Where(c => c.Id == id).FirstOrDefault();
+            ViewBag.timesheet = Times;
+
+            Employee_Context EC = new Employee_Context();
+            var employee = EC.employees.Where(c => c.Username == Times.Owner).FirstOrDefault();
+
+            ViewBag.Employee = employee;
 
 
             Timesheet timesheet = db.timesheets.Find(id);
@@ -449,12 +456,13 @@ namespace Ishop
 
         public ActionResult BreakDown(DateTime FromDate, DateTime EndDate, string user,int id)
         {
+            var Times = db.timesheets.Where(c => c.Id == id).FirstOrDefault();
+            ViewBag.timesheet = Times;
 
-                
-                
+            Employee_Context EC = new Employee_Context();
+            var employee = EC.employees.Where(c => c.Username == Times.Owner).FirstOrDefault();
 
-
-
+            ViewBag.Employee = employee;
 
             ViewBag.FromDate = FromDate;
             ViewBag.EndDate = EndDate;

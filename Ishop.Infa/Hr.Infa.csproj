@@ -80,6 +80,8 @@
     <Compile Include="leaveContext.cs" />
     <Compile Include="leaves_Days_trackContext.cs" />
     <Compile Include="leaveTypesContext.cs" />
+    <Compile Include="Notification_context.cs" />
+    <Compile Include="Notification_repo.cs" />
     <Compile Include="OutgoingEmailsContext.cs" />
     <Compile Include="OutgoingsmsContext.cs" />
     <Compile Include="PCategory_Context.cs" />

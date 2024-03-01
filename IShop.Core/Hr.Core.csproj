@@ -69,6 +69,7 @@
     <Compile Include="Interface\Iindirect.cs" />
     <Compile Include="Interface\ICategory.cs" />
     <Compile Include="Interface\Iindirect_act.cs" />
+    <Compile Include="Interface\INotification.cs" />
     <Compile Include="Interface\IPhase.cs" />
     <Compile Include="Interface\Iproject.cs" />
     <Compile Include="Interface\Ireopen.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="leave.cs" />
     <Compile Include="leaves_Days_track.cs" />
     <Compile Include="leaves_Types.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="OutgoingEmails.cs" />
     <Compile Include="Outgoingsms.cs" />
     <Compile Include="Pcategory.cs" />

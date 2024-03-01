@@ -101,6 +101,13 @@ namespace Ishop
                 roleManager.Create(role);
 
             }
+            if (!roleManager.RoleExists("Notifications"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Notifications";
+                roleManager.Create(role);
+
+            }
         }
 
 

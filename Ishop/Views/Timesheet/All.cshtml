@@ -146,6 +146,7 @@
 
                     <th style="background-color: #0C54A0; font-size: medium; ">Non Project Time</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Project Time</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Leave Time</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Total Hours</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
                     <th style="background-color: #0C54A0; font-size: medium; ">Action</th>
@@ -169,7 +170,8 @@
 
                         <td style="background-color: white;"> <h4 style="color:navy">  @item.InDirect_Hours <b style="font-size:large">Hrs</b></h4></td>
                         <td style="background-color: white;"> <h4 style="color:green">  @item.Direct_Hours <b style="font-size:large">Hrs</b></h4></td>
-                        <td style="background-color: white;"> <h1>  @item.Tt <b style="font-size:large">Hrs</b></h1></td>
+                        <td style="background-color: white;"> <h4 style="color:green">  @item.Leave <b style="font-size:large">Hrs</b></h4></td>
+                        <td style="background-color: white;"> <h2>  @item.Tt <b style="font-size:large">Hrs</b></h2></td>
 
                         <td style="background-color: white;">
 
@@ -224,7 +226,7 @@
                                             <i class="fa fa-book-reader text-primary"></i> View Sheet BreakDown
                                         </a>
 
-                                       
+
 
                                     </div>
                                 </div>
@@ -243,10 +245,10 @@
                                             <i class="fa fa-book-reader text-primary"></i> View Sheet BreakDown
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        @if (this.User.IsInRole("Timesheet_Approvals") && item.Status==0)
+                                        @if (this.User.IsInRole("Timesheet_Approvals") && item.Status == 0)
                                         {
                                             <a href="@Url.Action("Approvals", "sheet_comments", new { Timesheetid=item.Id})" class="dropdown-item">
-                                                 <b style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approve</b> | <b style="color:red"><i class="fa fa-times-circle text-danger"></i>  Reject</b> Timesheet
+                                                <b style="color:forestgreen"><i class="fa fa-check-circle text-success"></i> Approve</b> | <b style="color:red"><i class="fa fa-times-circle text-danger"></i>  Reject</b> Timesheet
                                             </a>
                                         }
 

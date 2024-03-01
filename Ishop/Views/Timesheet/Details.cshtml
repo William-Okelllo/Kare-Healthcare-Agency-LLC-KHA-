@@ -33,114 +33,90 @@
         <div class="card-body" style="background-color: white;border-radius: 24px;">
 
             <h3><i class=" fa fa-bookmark text-primary"></i>  Timesheet Details</h3>
-            <div class="dropdown-divider"></div>
-
-
-
-
-            <div class="col-lg-6 col-12">
-                <!-- small card -->
-                <div class="small-box bg-gradient-navy" style="border-radius: 15px">
-                    <div class="inner">
-
-                        <h3> <i class="fa fa-user-circle"></i><b> @Model.Owner</b></h3>
-                        <h5><i class="fa fa-university"></i>  @Model.Department </h5>
-                        <p style="font-size:large"><b><i class=" fa fa-calendar-check text-primary"></i>  From Date : </b> @Model.From_Date.ToString("dd-MMM-yyyy")     <b style="font-size:larger">TO</b>  <b><i class=" fa fa-calendar-check text-warning"></i>  End Date : </b> @Model.End_Date.ToString("dd-MMM-yyyy") </p>
+           
+            <h4 style="text-align:center"><span class="badge badge-warning"> <i class="fa fa-usere"></i></span> @ViewBag.Employee.Fullname <span class="badge badge-success"> <i class="fa fa-usere"></i></span> | @ViewBag.Employee.DprtName </h4>
+            <h6 style="text-align:center"><span class="badge badge-warning"> <i class="fa fa-calendar-check"></i></span>    @Model.From_Date.ToString("dd-MMM-yyyy")    <b>TO</b>  <span class="badge badge-dark"> <i class="fa fa-calendar-check"></i></span>  @Model.End_Date.ToString("dd-MMM-yyyy") </h6>
+            <div class="row justify-content-center">
+                <div class="col-sm-3 border-right">
+                    <div class="description-block">
+                        <h3 class="description-header">@ViewBag.timesheet.InDirect_Hours</h3>
+                        <span class="description-text"><b>Non Project Hours</b></span>
                     </div>
-                    <div class="icon"> <i class="fa fa-calendar-day"></i></div>
-
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 border-right">
+                    <div class="description-block">
+                        <h3 class="description-header">@ViewBag.timesheet.Direct_Hours</h3>
+                        <span class="description-text"><b>Project Hours</b></span>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <div class="col-sm-3 border-right">
+                    <div class="description-block">
+                        <h3 class="description-header">@ViewBag.timesheet.Leave</h3>
+                        <span class="description-text"><b>Leave Hours</b></span>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3">
+                    <div class="description-block">
+                        <h3 class="description-header">@ViewBag.timesheet.Tt</h3>
+                        <span class="description-text"><b>Total Hours</b></span>
+                    </div>
+                    <!-- /.description-block -->
                 </div>
             </div>
             <div class="dropdown-divider"></div>
 
 
-            
-               <div>
-                   @{
-                       var groupedDates = ViewBag.GroupedDates as Dictionary<DayOfWeek, List<DateTime>>;
-                   }
 
-                   <h3><i class="fa fa-bookmark"></i> Weekdays</h3>
-                   <div class="table-responsive">
-                       <table class="table table-bordered table-hover table-condensed table-striped table-hover sortable curved-table">
-                           <tr style="background-color: #05213e;color:white; font-size:medium;">
-                               @foreach (var weekdayGroup in groupedDates)
-                               {
-                                   <th>@weekdayGroup.Key</th>
-                               }
-                           </tr>
+            <div>
+                @{
+                    var groupedDates = ViewBag.GroupedDates as Dictionary<DayOfWeek, List<DateTime>>;
+                }
 
-                           @for (int i = 0; i < groupedDates.Max(g => g.Value.Count); i++)
-                           {
-                               <tr>
-                                   @foreach (var weekdayGroup in groupedDates)
-                                   {
-                                       var date = i < weekdayGroup.Value.Count ? weekdayGroup.Value[i] : (DateTime?)null;
+                <h3><i class="fa fa-bookmark"></i> Weekdays</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed table-striped table-hover sortable curved-table">
+                        <tr style="background-color: #05213e;color:white; font-size:medium;">
+                            @foreach (var weekdayGroup in groupedDates)
+                            {
+                                <th>@weekdayGroup.Key</th>
+                            }
+                        </tr>
 
-                                       // Wrap the <td> content with an <a> tag
-                                       <td class="clickable-cell" data-datev="@date?.ToString(" yyyy-MM-dd")">
-                                           @if (date.HasValue)
-                                           {
-                                               <a href="@Url.Action("DataView", "Timesheet", new { selectedDate = date?.ToString("yyyy-MM-dd"),User=Model.Owner,Timesheetdetailid=Model.Id })">
-                                                   <span><i class="fa fa-calendar-day"></i>  @date.Value.ToString("yyyy-MM-dd")</span>
+                        @for (int i = 0; i < groupedDates.Max(g => g.Value.Count); i++)
+                        {
+                            <tr>
+                                @foreach (var weekdayGroup in groupedDates)
+                                {
+                                    var date = i < weekdayGroup.Value.Count ? weekdayGroup.Value[i] : (DateTime?)null;
 
-                                               </a>
-                                           }
-                                       </td>
-                                   }
-                               </tr>
-                           }
-                       </table>
-                   </div>
-               </div>
+                                    // Wrap the <td> content with an <a> tag
+                                    <td class="clickable-cell" data-datev="@date?.ToString(" yyyy-MM-dd")">
+                                        @if (date.HasValue)
+                                        {
+                                            <a href="@Url.Action("DataView", "Timesheet", new { selectedDate = date?.ToString("yyyy-MM-dd"),User=Model.Owner,Timesheetdetailid=Model.Id })">
+                                                <span><i class="fa fa-calendar-day"></i>  @date.Value.ToString("yyyy-MM-dd")</span>
 
-                       
-
-
-
-
-
-
-            <div class="dropdown-divider"></div>
-
-            <div class="row">
-                <div class="col-md-3 col-sm-4 col-9">
-                    <div class="info-box" style="border-radius: 14px; background-color: #0C54A0 ">
-                        <span><i class="fa fa-user-clock text-white"></i></span>
-
-                        <div class="info-box-content" style="color: white">
-                            <span class="info-box-text">Total  Hours</span>
-                            <h4><span class="info-box-number">@Model.Tt <small><b>Hours</b></small></span></h4>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <div class="col-md-3 col-sm-4 col-9">
-                    <div class="info-box" style="border-radius: 14px; background-color:#01520d ">
-                        <span><i class="fa fa-user-clock text-white"></i></span>
-
-                        <div class="info-box-content" style="color: white">
-                            <span class="info-box-text">Direct Hours</span>
-                            <h4><span class="info-box-number">@Model.Direct_Hours </span></h4>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <div class="col-md-3 col-sm-4 col-9">
-                    <div class="info-box" style="border-radius: 14px; background-color:#444343 ">
-                        <span><i class="fa fa-user-clock text-white"></i></span>
-
-                        <div class="info-box-content" style="color: white">
-                            <span class="info-box-text">InDirect Hours</span>
-                            <h4><span class="info-box-number">@Model.InDirect_Hours </span></h4>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
+                                            </a>
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </table>
                 </div>
             </div>
+
+
+
+
+
+
+           
             <div class="dropdown-divider"></div>
 
             @if (@Model.Status == 0)
@@ -156,10 +132,10 @@
 
 
             <div style="text-align:center">
-             
-               
 
-                
+
+
+
                 <a href="@Url.Action("Mine", "Timesheet", null)" class="btn btn-primary">Back To my Timesheets</a>
 
 

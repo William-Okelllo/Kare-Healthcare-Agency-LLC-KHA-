@@ -1,0 +1,287 @@
+﻿@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<IShop.Core.Notification>
+
+@{
+    ViewBag.Title = "Requests";
+}
+
+<style>
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 50px;
+        border: 0px solid grey;
+        overflow: visible;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border-radius: 4px;
+            border: 0px solid grey;
+        }
+
+    .curved-table2 {
+        border-collapse: collapse;
+        border-radius: 50px;
+        border: 1px solid #0C54A0;
+        overflow: visible;
+    }
+
+        .curved-table2 th,
+        .curved-table2 td {
+            padding: 10px;
+            border-radius: 4px;
+            border: 0px solid #0C54A0;
+        }
+</style>
+
+
+
+
+
+
+<div class="card " style="background-color:white; border-radius: 14px ">
+
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0C54A0; color: white; border-radius: 14px ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-retweet"></i>
+            Recurring Emails
+        </h3>
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "Notifications", FormMethod.Get))
+            {
+
+
+
+                @Html.ActionLink("Add new ", "Add", "Notifications", null, new { @class = "btn btn-sm btn-default btn" })
+
+            }
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-12">
+                    <!-- small card -->
+                    <div class="small-box bg-gradient-gray-dark" style="border-radius: 15px">
+                        <div class="inner">
+
+                            <h4> <i class="fa fa-unlock"></i><b> @item.Subject</b></h4>
+                            <span class="badge badge-primary"> <i class="fa fa-universsity text-black"></i></span> <a style="color:white">
+                             AddedOn :  @item.Createdon.ToString("dd-MMM-yyyy")
+                            <span class="badge badge-warning"> <i class="fa fa-universsity text-black"></i></span> <a style="color:white"> 
+                            @if(item.Active ==true)
+                            { <medium> <i class="fa fa-wifi text-warning"></i> Online </medium> } else { <medium> <i class="fa fa-power-off text-danger"></i>  Offline </medium>}
+
+
+                            <br /> 
+                            
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+                            <!-- Your script goes here -->
+                            <script>
+                                $(document).ready(function () {
+                                    var objectId; // Variable to store the object ID
+                                    var objectId2;
+                                    // Capture object ID when "Set Reg No" button is clicked
+                                    $('.set-reg-no-btn').click(function () {
+                                        objectId = $(this).data('object-id');
+                                        objectId2 = $(this).data('object-id2');
+                                    });
+
+                                    // Triggered when the modal is about to be shown
+                                    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+                                        // Update the "Account Id" input in the modal with the captured object ID
+                                        $('#AccountId').val(objectId);
+                                        $('#staff').val(objectId2);
+                                    });
+
+                                    // Triggered when the modal is hidden
+                                    $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
+                                        // Clear the objectId when the modal is closed
+                                        objectId = null;
+                                    });
+                                });
+                            </script>
+
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 14px ">
+                                    <div class="modal-content" style="border-radius: 14px ">
+                                        <div class="modal-header" style="background-color: #0C54A0; color: white; border-radius: 14px ">
+                                            <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-bookmark text-warning"></i>   Messsage</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body ">
+
+                                            <h6 style="color:navy"><i class="fa fa-comment-dots text-primary"></i> <b>Messsage</b></h6>
+                                            <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 100%; height: 400px;"></textarea>
+
+
+
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    var objectId; // Variable to store the object ID
+
+                                    // Capture object ID when "Set Reg No" button is clicked
+                                    $('.set-reg-no-btn').click(function () {
+                                        objectId = $(this).data('object-id');
+                                    });
+
+                                    // Triggered when the modal is about to be shown
+                                    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+                                        // Update the "Account Id" input in the modal with the captured object ID
+                                        $('#AccountId').val(objectId);
+                                        // Hide the success message when the modal is shown
+                                        $('#successMessage').css('display', 'none');
+                                    });
+
+                                    // Triggered when the modal is hidden
+                                    $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
+                                        // Clear the objectId when the modal is closed
+                                        objectId = null;
+                                    });
+
+                                    // Triggered when "Save changes" button is clicked
+                                    $('#SaveChanges').click(function () {
+                                        saveChanges();
+                                    });
+
+                                    // Function to handle saving changes
+                                    function saveChanges() {
+                                        // Fetch values from the modal inputs
+                                        var accountId = $('#AccountId').val();
+                                        var regNo = $('#RegNo').val();
+
+                                        // Make an AJAX request to the controller endpoint
+                                        $.ajax({
+                                            url: '/invoices/SaveReg',
+                                            type: 'POST',
+                                            data: { accountId: accountId, regNo: regNo },
+                                            success: function (data) {
+                                                // Handle success (if needed)
+                                                console.log('Changes saved successfully!');
+                                                location.reload();
+
+                                            },
+                                            error: function (xhr, status, error) {
+                                                // Handle error (if needed)
+                                                console.error('Error saving changes:', error);
+                                            }
+                                        });
+                                    }
+                                });
+                            </script>
+
+                            
+                            <div style="text-align:left">
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+                                        <a href="@Url.Action("Edit", "Notifications", new { id=item.Id})" class="dropdown-item">
+                                            <i class="fa fa-book-reader text-primary"></i> Edit/Update
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to drop  this notification   ')) { window.location.href = '@Url.Action("Delete", "Notifications", new { id = item.Id, })'; }">
+                                            <i class="fa fa-times-circle text"></i> Drop data
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+
+
+                                    </div>
+                                </div>
+                               
+                                    <button type="button" class="btn btn-sm btn-outline-light set-reg-no-btn"
+                                            data-toggle="modal" data-target="#exampleModalCenter"
+                                            data-object-id="@item.Message">
+                                        <i class="fa fa-comment-dots text-white"></i> View Message
+                                    </button>
+                                
+                            </div>
+
+
+                        </div>
+                        <div class="icon"> <i class="fa fa-bookmark"></i></div>
+
+
+
+                         <a href="#" class="small-box-footer" style="background-color: #0C54A0; color: white; border-radius: 15px;">
+                                <span class="badge badge-warning"> <i class="fa  fa-times-circlee text-black"></i></span> <b style="color:white">  Last Sent :  @item.Last_sent.ToString("dd-MMM-yyyy")  </b>
+                            </a>
+                        
+
+
+
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @if (Model.Count() == 0)
+        {
+            <div class="col d-flex justify-content-center">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-gradient-black">
+                        <span class="info-box-icon"><i class="fa fa-bookmark"></i></span>
+
+                        <div class="info-box-content">
+
+                            <span class="progress-description">
+                                <i class="fa fa-spin fa-circle-notch"></i>  No Data Found
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        }
+
+
+
+
+    </div>
+</div>
