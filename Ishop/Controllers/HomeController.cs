@@ -17,9 +17,16 @@ namespace Ishop.Controllers
         {
 
 
-           HodContext DD = new HodContext();
-           var Depart = DD.hODs.Where(d => d.Staff == User.Identity.Name).ToList();
-           ViewBag.Departmentt = Depart;
+            HodContext DD = new HodContext();
+            var Depart = DD.hODs.Where(d => d.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
+            ViewBag.Departmentt = Depart;
+
+
+            //Timesheet_Context TC = new Timesheet_Context();
+            //var TimmDetails = TC.timesheets.Where(c => Depart.Contains(c.Department) && c.Status == 0 && c.Locked == true).GroupBy(c => c.Department) .Select(group => new {DepartmentName = group.Key,Count = group.Count()}).ToList();
+
+           // ViewBag.TimmDetails = TimmDetails;
+
 
 
 
@@ -32,6 +39,8 @@ namespace Ishop.Controllers
             ViewBag.InDirectHours = InDirectA;
             ViewBag.TotalHours = DirectA + InDirectA;
 
+
+            
 
             return View();
         }

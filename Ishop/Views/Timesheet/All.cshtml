@@ -73,21 +73,29 @@
 
             @using (Html.BeginForm("All", "Timesheet", FormMethod.Get))
             {
-                
+
 
                 <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span>  Duration</a>
                 <select class="form-rounded2" name="Duration" id="Duration">
-                    
-                        <option value="">Select Duration</option>
-                        <option value="thisWeek">This Week</option>
-                        <option value="lastWeek">Last Week</option>
-                        <option value="thisMonth">This Month</option>
-                        <option value="lastMonth">Last Month</option>
-                 
+
+                    <option value="">Select Duration</option>
+                    <option value="thisWeek">This Week</option>
+                    <option value="lastWeek">Last Week</option>
+                    <option value="thisMonth">This Month</option>
+                    <option value="lastMonth">Last Month</option>
+
 
                 </select>
                 <small> ||</small>
-
+                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span>  Department</a>
+                <select class="form-rounded2" name="Department" id="Department">
+                    <option value="">Select Department</option>
+                    @foreach (var department in ViewBag.department)
+                    {
+                        <option value="@department ">@department </option>
+                    }
+                </select>
+                <small> ||</small>
                 <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i></span>  Staff</a>
                 <select class="form-rounded2" name="option" id="userName">
                     <option value="">Select User</option>

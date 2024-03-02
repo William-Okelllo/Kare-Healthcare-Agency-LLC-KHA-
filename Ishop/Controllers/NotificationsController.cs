@@ -14,12 +14,14 @@ using IShop.Core.Interface;
 namespace Ishop.Controllers
 {
 
-    [Authorize]
+   
     public class NotificationsController : Controller
     {
         private Notification_context db = new Notification_context();
 
         // GET: Notifications
+
+        [Authorize]
         public ActionResult Index(string searchBy, string search, int? page)
         {
 
@@ -65,6 +67,52 @@ namespace Ishop.Controllers
 
 
 
+
+        //THis sents out notifications 
+        public void Recurring()
+        {
+
+            var currentDate = DateTime.Now.Date;
+
+            var Data = db.notifications
+                .Where(c => c.Active == true && DbFunctions.TruncateTime(c.Last_sent) != currentDate) .ToList();
+
+            Random random = new Random();
+            using (var In_parts = new OutgoingEmailsContext())
+            {
+                foreach (var part in Data)
+                {
+                    OutgoingEmails fetcheddata = new OutgoingEmails
+                    {
+                        Id = random.Next(),
+                        Recipient= part.Recepients,
+                        Subject= part.Subject,
+                        Body= part.Message,
+                        Status=false,
+                        CreatedOn=DateTime.Now,
+                        Files=null,
+                        Trials=0,
+                        Response=""
+                    };
+
+                    In_parts.outgoingEmails.Add(fetcheddata);
+
+
+
+                }
+
+                In_parts.SaveChanges();
+            }
+            foreach (var part in Data)
+            {
+                part.Last_sent = DateTime.Now.Date; // Update the Date property to the current date and time
+            }
+
+            // Save the changes to the notifications table
+            db.SaveChanges();
+        }
+
+        [Authorize]
 
 
         // POST: Notifications/Create

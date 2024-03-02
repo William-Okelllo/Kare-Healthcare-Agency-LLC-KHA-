@@ -35,9 +35,11 @@
             {
 
 
-              
-                @Html.ActionLink("Request Leave ", "Create", "leaves", null, new { @class = "btn btn-sm btn-default btn " })
 
+                @Html.ActionLink("Request Leave ", "Create", "leaves", null, new { @class = "btn btn-sm btn-default btn " })
+                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fa fa-umbrella text"></i>    View Leave Balance
+                </button>
             }
 
 
@@ -63,11 +65,7 @@
 
     <div class="card-body">
 
-        <div style="text-align:right">
-            <button type="button" class="btn btnsm btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                <i class="fa fa-umbrella text-white"></i>    View Leave Balance
-            </button>
-        </div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -126,49 +124,33 @@
         <div class="row">
             @foreach (var item in Model)
             {
-
-                <div class="col-lg-4 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-nacvy" style="border-radius: 10px;background-color:#04043b;color:white">
+                <div class="col-lg-4 col-12">
+                    <!-- small card -->
+                    <div class="small-box bg-gradient-gray-dark" style="border-radius: 15px;">
                         <div class="inner">
+
                             <h3>@item.Days <b style="font-size:large">Days</b> </h3>
                             <h5><i class="fa fa-bookmark"></i> @item.Type</h5>
                             @if (item.Status == 66)
                             {<h6> <i class="fa fa-circle-notch"></i> InProgress</h6>}
                             else if (item.Status == 1)
-                            { <h6> <i class="fa fa-spin fa-circle-notch text-gray"></i> Submitted - Awating Approvals</h6>}
+                            { <h6> <i class="fa fa-spin fa-circle-notch text-warning"></i> Submitted - Awating Approvals</h6>}
                             else if (item.Status == 2)
-                            { <h6> <i class="fa  fa-check-circle text-success"></i> APPROVED</h6>}
-                            else if (item.Status ==99)
-                            { <h6> <i class="fa fa-times-circle text-danger"></i> DENIED</h6>}
+                            { <h6> <i class="fa  fa-check-circle text-warning"></i> <b>APPROVED</b></h6> }   
+                        else if (item.Status == 99)
+                        { <h6> <i class="fa fa-times-circle text-danger"></i> <b>DENIED</b></h6>}
 
-                        <small><b><i class="fa fa-calendar-day text-white"></i> Commence On</b> @item.From_Date.ToString("dd-MMM-yyyy") || <i class="fa fa-calendar-day text-white"></i> <b>Ends On</b> -  @item.To_Date.ToString("dd-MMM-yyyy") </small>
+                            <small><b><i class="fa fa-calendar-day text-white"></i> Commence On</b> @item.From_Date.ToString("dd-MMM-yyyy") || <i class="fa fa-calendar-day text-white"></i> <b>Ends On</b> -  @item.To_Date.ToString("dd-MMM-yyyy") </small>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-umbrella"></i>
-                        </div>
-                        <div class="ui-menu-divider"></div>
-
-
-                        @if (item.Status == 66)
-                        {<a href="@Url.Action("Add", "Leaves", new { id = item.Id })" class="btn-xs btn btn-primary">
-                                <i class="fa fa-circle-notch text-white"></i> Edit/Update
-                            </a>}
-
-
-
-                        <a href="@Url.Action("Details", "Leaves", new { id = item.Id })" class="btn-xs btn btn-success">
-                            <i class="fa fa-eye text-white"></i> View leave
+                        <div class="icon"> <i class="fa fa-umbrella-beach"></i></div>
+                        <a href="@Url.Action("Details", "Leaves", new { id = item.Id })" class="small-box-footer" style="background-color: #0C54A0; color: white;border-radius:10px;">
+                            <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-warning"></i>
                         </a>
-                        @if (item.Status ==0)
-                        {
 
-                            <a href="@Url.Action("Delete", "Leaves", new { id = item.Id })" class="btn-xs btn btn-danger">
-                                <i class="fa fa-trash text-white"></i> Drop leave
-                            </a>
-                        }
+
                     </div>
                 </div>
+
 
 
 

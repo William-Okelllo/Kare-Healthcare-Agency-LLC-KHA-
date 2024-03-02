@@ -251,7 +251,7 @@ namespace Ishop
 
         [Authorize]
 
-        public ActionResult All(int? page, string option, string startDate, string endDate, string Duration)
+        public ActionResult All(int? page, string option, string startDate, string endDate, string Duration, string Department)
         {
             DateTime currentDate = DateTime.Now;
 
@@ -302,10 +302,15 @@ namespace Ishop
             var Employ = db.timesheets.Where(c => Depart.Contains(c.Department)).Select(t => t.Owner).Distinct().ToList();
             ViewBag.Usernames = Employ;
 
+            var Depart2 = DD.hODs.Where(D => D.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
+            ViewBag.department = Depart2;
+
+
             return View(db.timesheets
                 .OrderByDescending(p => p.CreatedOn)
                 .Where(c => Depart.Contains(c.Department) &&
-                            (option == null || option == "" || c.Owner == (option)) && // If option is not provided, don't filter by owner
+                            (option == null || option == "" || c.Owner == (option)) &&
+                            (Department == null || Department == "" || c.Department == (Department)) && // If option is not provided, don't filter by owner
                             (Duration == null || Duration == "" || (c.From_Date >= startRange && c.From_Date <= endRange)))
                 .ToList()
                 .ToPagedList(page ?? 1, 11));

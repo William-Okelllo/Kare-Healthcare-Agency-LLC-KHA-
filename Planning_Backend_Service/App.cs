@@ -24,7 +24,7 @@ namespace Planning_Backend_Service
         public App()
         {
 
-            _timer = new Timer(50000) { AutoReset = true };
+            _timer = new Timer(10000) { AutoReset = true };
             _timer.Elapsed += TimeElapsed;
         }
         private string connectionString = "Data Source=.;Initial Catalog=Planning; User ID=sa; Password=1234;Integrated Security=True;";
@@ -556,6 +556,7 @@ namespace Planning_Backend_Service
                         }
                     }
                     Locking();
+                    Notifications_Send();
                 }
             }
             catch (Exception ex)
@@ -607,7 +608,45 @@ namespace Planning_Backend_Service
         }
 
 
+        public void Notifications_Send()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT Business_mail FROM Configs";
+                string baseAddress = connection.QueryFirstOrDefault<string>(query);
 
+                // Assuming you have a base address for the HttpClient
+                using (HttpClient client = new HttpClient())
+                {
+                    if (Uri.TryCreate(baseAddress, UriKind.Absolute, out Uri uri))
+                    {
+                        client.BaseAddress = uri;
+
+                        HttpResponseMessage response = client.GetAsync("Notifications/Recurring").Result;
+
+                        // Check if the request was successful
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Read and handle the response content
+                            string responseBody = response.Content.ReadAsStringAsync().Result;
+                            string logLine = $"Date: {DateTime.Now.ToString()} | - - - - -Recurring Emails sent - - - - - | {responseBody} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                        else
+                        {
+                            Console.WriteLine("Request failed with status: " + response.StatusCode);
+                            string logLine = $"Date: {DateTime.Now.ToString()} |- - - - - Error sending Recurring mails - - - - - - - -| {response} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid URL format: " + baseAddress);
+                    }
+                }
+            }
+        }
 
 
 
@@ -615,10 +654,14 @@ namespace Planning_Backend_Service
         public void Start()
         {
             _timer.Start();
+            string logLine = $"Service started sucessfully :  |  Date  {DateTime.Now.Date} |  ";
+            File.AppendAllLines(logFilePath, new string[] { logLine });
         }
 
         public void Stop()
         {
+            string logLine = $"Service stopped sucessfully :  |  Date  {DateTime.Now.Date} |  ";
+            File.AppendAllLines(logFilePath, new string[] { logLine });
             _timer.Stop();
         }
 

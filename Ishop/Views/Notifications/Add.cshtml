@@ -74,215 +74,215 @@
 
 
 
-            <form>
+        <form>
 
 
-                <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
 
-                    <i class="fa fa-bookmark"></i>  Project Time  
-                </div>
-                <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <i class="fa fa-bell text-warning"></i> New  Notification 
+            </div>
+            <div class="card-body" style="background-color: white;border-radius: 14px;">
 
 
 
-                    <div class="form-row">
+                <div class="form-row">
 
-                        <div class="form-group col-md-3" style="display:none">
-                            <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.Last_sent)</label>
-                            @Html.EditorFor(model => model.Last_sent, new
+                    <div class="form-group col-md-3" style="display:none">
+                        <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.Last_sent)</label>
+                        @Html.EditorFor(model => model.Last_sent, new
+                   {
+                       htmlAttributes = new
                        {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Placeholder = "Record",
-                               @Value = DateTime.Now,
-                               @ReadOnly = true,
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Record",
+                           @Value = DateTime.Now,
+                           @ReadOnly = true,
 
 
-                           }
-                       })
-
-                        </div>
-                        <div class="form-group col-md-3" style="display:nonse">
-                            <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.Createdon)</label>
-                            @Html.EditorFor(model => model.Createdon, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Placeholder = "Record",
-                               @Value = DateTime.Now,
-                               @ReadOnly = true,
-
-
-                           }
-                       })
-
-                        </div>
-                        <div class="form-group col-md-4" style="display:nonse">
-                            <label><i class=" fa fa-bookmark text-primary"></i>   @Html.LabelFor(model => model.Subject)</label>
-                            @Html.EditorFor(model => model.Subject, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Placeholder = "Email Subject",
-                               @Required = true,
-
-
-
-                           }
-                       })
-
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label><i class="fa fa-spinner text-orange"></i> @Html.LabelFor(model => model.GroupName) </label>
-                            @{
-                                List<SelectListItem> m = new List<SelectListItem>();
-                                m.Add(new SelectListItem
-                                {
-                                    Text = "All Staff",
-                                    Value = "1",
-                                });
-                                m.Add(new SelectListItem
-                                {
-                                    Text = "Head Of Departments",
-                                    Value = "2",
-                                });
-
-                            }@Html.DropDownListFor(model => model.GroupName, m, "---Recepients---", new { @class = "form-control form-control-sm", @required = "required", @id = "GroupName" })
-                        </div>
-
-                        <script type="text/javascript">
-                            $(function () {
-
-                                $("#GroupName").chosen();
-
-                            });
-                        </script>
-
-                        <div class="form-group col-md-2">
-                            <label>@Html.LabelFor(model => model.Active)</label>
-                            <h2 class="form-check" style="color:midnightblue;">
-
-                                @Html.EditorFor(model => model.Active, new
-                           {
-                               htmlAttributes = new
-                               { @class = "coupon_question", onclick = "Geeeee()" }
-                           })
-
-
-                            </h2>
-                        </div>
-
-                        <div class="form-group col-md-6" style="display:nonse">
-
-                            @Html.EditorFor(model => model.Recepients, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @class = "form-control form-control-sm",
-                               @Placeholder = "Recepients -Auto Generated",
-                               @ReadOnly = true,
-                               @id = "Recepients"
-
-                           }
-                       })
-
-                        </div>
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script>
-                            $(document).ready(function () {
-                                $("#GroupName").change(function () {
-                                    var GroupName = $(this).val();
-                                    $.ajax({
-                                        url: '/Notifications/GetRecepients',
-                                        method: 'GET',
-                                        data: { GroupName: GroupName },
-                                        success: function (data) {
-                                            if (data) {
-                                                // Assign the comma-separated emails to the input field
-                                                $("#Recepients").val(data);
-                                            } else {
-                                                $("#Recepients").val("Error fetching data");
-                                            }
-                                        },
-                                        error: function () {
-                                            console.log('Error retrieving record data.');
-                                        }
-                                    });
-                                });
-                            });
-                        </script>
+                       }
+                   })
 
                     </div>
-                        <div class="dropdown-divider"></div>
-                        <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Message) </label>
-                        <div class="form-row">
-
-                            @Html.TextAreaFor(model => model.Message, 4, 70, htmlAttributes: new
+                    <div class="form-group col-md-3" style="display:nonse">
+                        <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.Createdon)</label>
+                        @Html.EditorFor(model => model.Createdon, new
+                   {
+                       htmlAttributes = new
                        {
-                           id = "Comments", // Make sure the ID matches the one in getElementById
-                           style = "width: 70%; max-width:70%;",
-                           @placeholder = "Additional information",
-                           @autofocus = "",
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Record",
+                           @Value = DateTime.Now,
+                           @ReadOnly = true,
+
+
+                       }
+                   })
+
+                    </div>
+                    <div class="form-group col-md-4" style="display:nonse">
+                        <label><i class=" fa fa-bookmark text-primary"></i>   @Html.LabelFor(model => model.Subject)</label>
+                        @Html.EditorFor(model => model.Subject, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Email Subject",
                            @Required = true,
-                           @class = "form-control form-rounded2",
-                           @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+
+
+
+                       }
+                   })
+
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-spinner text-orange"></i> @Html.LabelFor(model => model.GroupName) </label>
+                        @{
+                            List<SelectListItem> m = new List<SelectListItem>();
+                            m.Add(new SelectListItem
+                            {
+                                Text = "All Staff",
+                                Value = "1",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Head Of Departments",
+                                Value = "2",
+                            });
+
+                        }@Html.DropDownListFor(model => model.GroupName, m, "---Recepients---", new { @class = "form-control form-control-sm", @required = "required", @id = "GroupName" })
+                    </div>
+
+                    <script type="text/javascript">
+                        $(function () {
+
+                            $("#GroupName").chosen();
+
+                        });
+                    </script>
+
+                    <div class="form-group col-md-2">
+                        <label>@Html.LabelFor(model => model.Active)</label>
+                        <h2 class="form-check" style="color:midnightblue;">
+
+                            @Html.EditorFor(model => model.Active, new
+                       {
+                           htmlAttributes = new
+                           { @class = "coupon_question", onclick = "Geeeee()" }
                        })
-                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
-
-                            <script>
-                                document.getElementById("Message").addEventListener("paste", function (event) {
-                                    // Prevent the default paste behavior
-                                    event.preventDefault();
-
-                                    // Get the pasted content as plain text
-                                    var text = (event.clipboardData || window.clipboardData).getData("text/plain");
-
-                                    // Sanitize the pasted content (you may use a library for this)
-                                    var sanitizedText = sanitizeFunction(text);
-
-                                    // Insert the sanitized plain text into the textarea as HTML
-                                    document.execCommand("insertHTML", false, sanitizedText);
-                                });
-
-                                function sanitizeFunction(input) {
-                                    // Implement your own sanitization logic or use a library
-                                    // to ensure that the pasted content is safe.
-                                    // Example: Implement a function to escape HTML entities.
-                                    return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                                }
-                            </script>
-
-                        </div>
-                    
-                        <div class="dropdown-divider"></div>
-                        <input type="submit" name="action" value="Add Notification" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this ?')" />
 
 
-                        <script>
-                            $(function () {
-                                $('#Create').click(function () {
-                                    if (confirm('Are you sure?')) {
-                                        window.location.href = $(this).data('url');
+                        </h2>
+                    </div>
+
+                    <div class="form-group col-md-6" style="display:nonse">
+
+                        @Html.EditorFor(model => model.Recepients, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Recepients -Auto Generated",
+                           @ReadOnly = true,
+                           @id = "Recepients"
+
+                       }
+                   })
+
+                    </div>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            $("#GroupName").change(function () {
+                                var GroupName = $(this).val();
+                                $.ajax({
+                                    url: '/Notifications/GetRecepients',
+                                    method: 'GET',
+                                    data: { GroupName: GroupName },
+                                    success: function (data) {
+                                        if (data) {
+                                            // Assign the comma-separated emails to the input field
+                                            $("#Recepients").val(data);
+                                        } else {
+                                            $("#Recepients").val("Error fetching data");
+                                        }
+                                    },
+                                    error: function () {
+                                        console.log('Error retrieving record data.');
                                     }
                                 });
                             });
-                        </script>
+                        });
+                    </script>
 
-                        <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
-                        <div class="dropdown-divider"></div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Message) </label>
+                <div class="form-row">
+
+                    @Html.TextAreaFor(model => model.Message, 17, 80, htmlAttributes: new
+               {
+                   id = "Comments", // Make sure the ID matches the one in getElementById
+                   style = "width: 90%; max-width:90%;",
+                   @placeholder = "Additional information",
+                   @autofocus = "",
+                   @Required = true,
+                   @class = "form-control form-rounded2",
+                   @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+               })
+                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+
+                    <script>
+                        document.getElementById("Message").addEventListener("paste", function (event) {
+                            // Prevent the default paste behavior
+                            event.preventDefault();
+
+                            // Get the pasted content as plain text
+                            var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+
+                            // Sanitize the pasted content (you may use a library for this)
+                            var sanitizedText = sanitizeFunction(text);
+
+                            // Insert the sanitized plain text into the textarea as HTML
+                            document.execCommand("insertHTML", false, sanitizedText);
+                        });
+
+                        function sanitizeFunction(input) {
+                            // Implement your own sanitization logic or use a library
+                            // to ensure that the pasted content is safe.
+                            // Example: Implement a function to escape HTML entities.
+                            return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                        }
+                    </script>
+
+                </div>
+
+                <div class="dropdown-divider"></div>
+                <input type="submit" name="action" value="Add Notification" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this ?')" />
 
 
-                    </div>
+                <script>
+                    $(function () {
+                        $('#Create').click(function () {
+                            if (confirm('Are you sure?')) {
+                                window.location.href = $(this).data('url');
+                            }
+                        });
+                    });
+                </script>
+
+                <a href="@Request.UrlReferrer" class="btn btn-primary">Back</a>
+                <div class="dropdown-divider"></div>
+
+
+            </div>
 
 
 
 
 
 
-            </form>
+        </form>
 
 
 
