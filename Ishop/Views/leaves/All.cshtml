@@ -143,9 +143,9 @@
                             <div class="dropdown-divider"></div>
 
                             @if (item.Total_Hours > 0 && item.Status == 2)
-                            {<medium> <span class="badge badge-warning"> <i class="fa fa-calesndar-check"></i></span> <b> C/F</b> :  <b>@item.Total_Hours <small><b>Hrs</b></small></b></medium> }
+                            {<small> <span class="badge badge-warning"> <i class="fa fa-calesndar-check"></i></span> <b> C/F</b> :  <b>@item.Total_Hours <small><b>Hrs</b></small></b></small> }
                         else if (item.Total_Hours == 0 )
-                        { <medium><i class="fa fa-check-circle text-success"></i> <b>Fully Utlized</b> </medium>}
+                        { <small><i class="fa fa-check-circle text-success"></i> <b>Fully Utlized</b> </small>}
                         else
                         
                             { <medium> <b>...</b> </medium>}
@@ -228,7 +228,7 @@
         <div id="container" style="text-align:left">
 
             <div class="pagination" style="text-align:left">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
+                @Html.PagedListPager(Model, page => Url.Action("All", new { page, searchBy = Request.QueryString["SearchBy"], search = Request.QueryString["Search"] })
               , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
             </div>
         </div>
