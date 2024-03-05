@@ -55,7 +55,6 @@ namespace Ishop
         public ActionResult Re_open(int id, int Requestid)
         {
 
-
             var Sheet = ddb.timesheets.Find(id);
 
             Employee_Context EM = new Employee_Context();

@@ -172,7 +172,7 @@ namespace Planning_Backend_Service
                                 String Response = truncatedMessage;
                                 bool Status = false;
                                 UpdateEmailStatusInDatabase(connectionString, Recipient, subject, body, CurrentCount, Response, Status);
-                                string logLine = $"Date: {DateTime.Now.ToString()} | Sending sms To: {Recipient} | Attached File: {(string.IsNullOrEmpty(Files) ? "None" : Path.GetFileName(Files))}| Status: Unsent | Error: {ex.Message}";
+                                string logLine = $"Date: {DateTime.Now.ToString()} | Failed Sending Email To: {Recipient} | Attached File: {(string.IsNullOrEmpty(Files) ? "None" : Path.GetFileName(Files))}| Status: Unsent | Error: {ex.Message}";
                                 File.AppendAllLines(logFilePath, new string[] { logLine });
                             }
                         }
@@ -212,7 +212,7 @@ namespace Planning_Backend_Service
             }
             catch (Exception ex)
             {
-                string logLine = $"Date: {DateTime.Now.ToString()} | |-- Updated email on db {recipient} | Count -- {CurrentCount} | Response  | {Response}";
+                string logLine = $"Date: {DateTime.Now.ToString()} | |-- Failed to update email on db {recipient} | Count -- {CurrentCount} | Response  | {Response}";
                 File.AppendAllLines(logFilePath, new string[] { logLine });
             }
 
@@ -654,13 +654,13 @@ namespace Planning_Backend_Service
         public void Start()
         {
             _timer.Start();
-            string logLine = $"Service started sucessfully :  |  Date  {DateTime.Now.Date} |  ";
+            string logLine = $"Service started sucessfully :  |  Date  {DateTime.Now} |Activated  ";
             File.AppendAllLines(logFilePath, new string[] { logLine });
         }
 
         public void Stop()
         {
-            string logLine = $"Service stopped sucessfully :  |  Date  {DateTime.Now.Date} |  ";
+            string logLine = $"Service stopped sucessfully :  |  Date  {DateTime.Now} | Deactivated ";
             File.AppendAllLines(logFilePath, new string[] { logLine });
             _timer.Stop();
         }
