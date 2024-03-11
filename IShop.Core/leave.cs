@@ -12,7 +12,8 @@ namespace IShop.Core
         [Display(Name = "Request Date ")]
         public DateTime CreatedOn { get; set; }
 
-
+        [Display(Name = "Total Hours")]
+        public Decimal Total_Hours { get; set; }
         public Decimal Days { get; set; }
 
         public string Department { get; set; }

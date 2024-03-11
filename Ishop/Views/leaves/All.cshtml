@@ -139,11 +139,23 @@
                             { <h6 style="color:green"> <i class="fa  fa-check-circle text-success"></i> <b>APPROVED</b></h6>}
                             else if (item.Status == 99)
                             { <h6 style="color:darkred"> <i class="fa  fa-times-circle text-danger"></i> <b>DENIED</b></h6>}
+
+                            <div class="dropdown-divider"></div>
+
+                            @if (item.Total_Hours > 0 && item.Status == 2)
+                            {<medium> <span class="badge badge-warning"> <i class="fa fa-calesndar-check"></i></span> <b> C/F</b> :  <b>@item.Total_Hours <small><b>Hrs</b></small></b></medium> }
+                        else if (item.Total_Hours == 0 )
+                        { <medium><i class="fa fa-check-circle text-success"></i> <b>Fully Utlized</b> </medium>}
+                        else
+                        
+                            { <medium> <b>...</b> </medium>}
+                        
+
                         </td>
                         <td style="background-color: white;">
-                            <h5><b>@item.Days</b> <small>Days</small> </h5>
+                            <h4><b >@item.Days</b> <small><b  style="font-size:small">Days</b></small>     </h4>
                             <div class="dropdown-divider"></div>
-                         <i class="fa fa-bookmark"></i>   @item.Type
+                         <i class="fa fa-bookmark text-primary"></i>   @item.Type
                         </td>
 
 

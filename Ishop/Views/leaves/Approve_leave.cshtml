@@ -249,7 +249,7 @@ ReadOnly = true
 })
                     </div>
                     <div class="form-group col-md-2">
-                        <label><i class="fa fa-user-day text-primary"></i>    @Html.LabelFor(model => model.Type)</label>
+                        <label><i class="fa fa-bookmark text-primary"></i>    @Html.LabelFor(model => model.Type)</label>
                         @Html.EditorFor(model => model.Type, new
 {
 htmlAttributes = new
@@ -317,7 +317,19 @@ ReadOnly = true
 }
 })
                     </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-clock text-primary"></i>    @Html.LabelFor(model => model.Total_Hours)</label>
+                        @Html.EditorFor(model => model.Total_Hours, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
 
+ReadOnly = true
+}
+})
+                    </div>
 
                 </div>
                     <div class="form-row">

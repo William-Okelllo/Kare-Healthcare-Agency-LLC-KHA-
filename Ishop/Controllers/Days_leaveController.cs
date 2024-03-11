@@ -76,6 +76,8 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Leave_Id,Approved,Type,From_Date,To_Date,Days,Time,Return_Date")] Days_leave days_leave)
         {
+            int HoursOnleave;
+            if (days_leave.Time == 1) { HoursOnleave = 8; } else { HoursOnleave = 4; }
             if (ModelState.IsValid)
             {
                 db.days_Leaves.Add(days_leave);
@@ -88,6 +90,7 @@ namespace Ishop.Controllers
                     check.To_Date = days_leave.To_Date;
                     check.Return_Date= days_leave.Return_Date;
                     check.Type= days_leave.Type;
+                    check.Total_Hours = HoursOnleave*check.Days;
                     leaveContext.SaveChanges();
                 }
 
@@ -151,6 +154,7 @@ namespace Ishop.Controllers
                 check.To_Date = DateTime.Now;
                 check.Return_Date = DateTime.Now;
                 check.Type = "---";
+                check.Total_Hours = 0;
                 leaveContext.SaveChanges();
             }
             TempData["msg"] = "✔  Days dropped successfully";

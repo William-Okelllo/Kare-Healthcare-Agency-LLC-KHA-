@@ -180,7 +180,7 @@
 
 
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label><i class="fa fa-envelope text-primary"></i>   @Html.LabelFor(model => model.Emp_Mail)</label>
                             @Html.EditorFor(model => model.Emp_Mail, new
 {
@@ -206,7 +206,7 @@ ReadOnly = true
 }
 })
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label><i class="fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
                             @Html.EditorFor(model => model.Department, new
 {
@@ -316,11 +316,23 @@ ReadOnly = true
 }
 })
                         </div>
+                        <div class="form-group col-md-1">
+                            <label><i class="fa fa-clock text-primary"></i>    @Html.LabelFor(model => model.Total_Hours)</label>
+                            @Html.EditorFor(model => model.Total_Hours, new
+{
+htmlAttributes = new
+{
+@class = "form-control form-control-sm ",
+@placeholder = "Contact Number",
 
+ReadOnly = true
+}
+})
+                        </div>
                         <div class="form-group col-md-3" style="text-align:right">
                             <label><i class="fa fa-bookmark text-primary"></i> Add Leave Days</label>
                             <div class="ui-menu-divider"></div>
-                            <a href="@Url.Action("create", "Days_leave", new { id = Model.Id })" class="btn-sm btn btn-primary btn"><i class="fa fa-plus-circle text-black"></i> Add Leave Days</a>
+                            <a href="@Url.Action("create", "Days_leave", new { id = Model.Id })" class="btn-sm btn btn-warning btn"><i class="fa fa-spin fa-circle-notch text-black"></i> Add Leave Days</a>
                         </div>
 
                     </div>

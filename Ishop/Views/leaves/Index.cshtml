@@ -136,9 +136,19 @@
                             else if (item.Status == 1)
                             { <h6> <i class="fa fa-spin fa-circle-notch text-warning"></i> Submitted - Awating Approvals</h6>}
                             else if (item.Status == 2)
-                            { <h6> <i class="fa  fa-check-circle text-warning"></i> <b>APPROVED</b></h6> }   
-                        else if (item.Status == 99)
-                        { <h6> <i class="fa fa-times-circle text-danger"></i> <b>DENIED</b></h6>}
+                            { <h6>
+    <i class="fa  fa-check-circle text-warning"></i> <b>APPROVED </b>
+    @if (item.Total_Hours > 0)
+    {<medium> <span class="badge badge-warning"> <i class="fa fa-calesndar-check"></i></span> <b> C/F</b> :  <b>@item.Total_Hours <small><b>Hrs</b></small></b></medium> }
+else
+{ <medium><i class="fa fa-check-circle text-success"></i> <b>Fully Utlized</b> </medium>}
+
+
+
+</h6> 
+                            }
+                            else if (item.Status == 99)
+                            { <h6> <i class="fa fa-times-circle text-danger"></i> <b>DENIED</b></h6>}
 
                             <small><b><i class="fa fa-calendar-day text-white"></i> Commence On</b> @item.From_Date.ToString("dd-MMM-yyyy") || <i class="fa fa-calendar-day text-white"></i> <b>Ends On</b> -  @item.To_Date.ToString("dd-MMM-yyyy") </small>
                         </div>

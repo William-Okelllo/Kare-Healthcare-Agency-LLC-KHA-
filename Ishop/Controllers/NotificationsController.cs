@@ -152,7 +152,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Createdon,Last_sent,Active,Message,GroupName,Subject")] Notification notification)
+        public ActionResult Edit([Bind(Include = "Id,Createdon,Last_sent,Active,Message,GroupName,Subject,Recepients")] Notification notification)
         {
             if (ModelState.IsValid)
             {

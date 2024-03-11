@@ -131,6 +131,7 @@ namespace Ishop.Controllers
                 To_Date = DateTime.Now,
                 Return_Date = DateTime.Now,
                 Type = "____",
+                Total_Hours=0,
                 // Set other properties as needed
             };
 
@@ -256,7 +257,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days,From_Date,To_Date,Return_Date,Type")] leave leave,string action)
+        public ActionResult Add([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days,From_Date,To_Date,Return_Date,Type,Total_Hours")] leave leave,string action)
         {
             
             if (ModelState.IsValid)
@@ -334,7 +335,7 @@ namespace Ishop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Approve_Deny([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days,From_Date,To_Date,Return_Date,Type")] leave leave, string action)
+        public ActionResult Approve_Deny([Bind(Include = "Id,CreatedOn,Employee,Status,Department,Message,HR_Email,Emp_Mail,Approver_Remarks,Phone,Designation,Days,From_Date,To_Date,Return_Date,Type,Total_Hours")] leave leave, string action)
         {
             if (ModelState.IsValid)
             {
@@ -363,8 +364,8 @@ namespace Ishop.Controllers
                             var leaveType = lv.leaves_Types.Where(l=>l.Type == Dayss.Type).FirstOrDefault();
 
                             leavesTrack(leaveType.Days, leaveType.Type, leave.Days, leaveType.Days - leave.Days, leave.Employee);
-                            InsertDatesIntoTable(Dayss.From_Date, Dayss.To_Date, Dayss.Time, leave.Employee);
 
+                            Updatetimesheet(Dayss.From_Date, Dayss.To_Date, Dayss.Time, leave.Employee,leave.Id) ;
 
                         }
                         else if (action == "Reject_Request")
@@ -418,51 +419,90 @@ namespace Ishop.Controllers
         }
 
 
-        public void InsertDatesIntoTable(DateTime startDate, DateTime endDate,int Type,string Employee)
+
+
+        public void Updatetimesheet(DateTime startDate, DateTime endDate, int Type, string Employee, int leaveid)
         {
-            Indirect_Activities_Context II = new Indirect_Activities_Context();
-            
-            List<DateTime> datesInRange = GetDatesInRange(startDate, endDate);
+          
+
+            // Adjust GetDatesInRange to exclude weekends
+            List<DateTime> datesInRange = GetDatesInRangeWithoutWeekends(startDate, endDate);
+
             Random random = new Random();
-
             int HoursOnleave;
-            if(Type==1) { HoursOnleave = 8; } else { HoursOnleave = 4; }
 
+            if (Type == 1) { HoursOnleave = 8; } else { HoursOnleave = 4; }
 
-            using (var Indirect_Activities_Context = new Indirect_Activities_Context())
+            Timesheet_Context TT = new Timesheet_Context();
+            foreach (var date in datesInRange)
             {
-
-                foreach (var date in datesInRange)
+                var Sheet = TT.timesheets.Where(i => i.Owner == Employee && date >= i.From_Date && date <= i.End_Date).FirstOrDefault();
+                if (Sheet != null)
                 {
-                    DateTime currentDate = date;
-                    int currentWeekNumber = GetCurrentWeekNumber(currentDate);
-                    int WeekNo = currentWeekNumber;
-                    ViewBag.SelectedDate = currentDate;
-                    var Weekid = WeekNo;
+                    decimal addedHours = Sheet.Leave + HoursOnleave;
 
-                    Indirect_Activities dateEntity = new Indirect_Activities
+                    // Deduct added hours from leavee.Total_Hours
+                    
+
+                    Sheet.Leave = addedHours;
+                    Sheet.Tt = Sheet.Direct_Hours + Sheet.InDirect_Hours + Sheet.Leave;
+                    TT.SaveChanges();
+
+                    var leavee = db.leave.Where(c=>c.Id ==leaveid).FirstOrDefault();
+                    if (leavee != null)
                     {
-                       
-
-
-                        Id = random.Next(),
-                        Hours = HoursOnleave,
-                        CreatedOn = date,
-                        WeekNo=Weekid,
-                        Day_Date = date,
-                        User= Employee,
-                        Comments="SYSTEM ASSIGNED",
-                        Name= "LEAVE"
-                    };
-
-                    Indirect_Activities_Context.indirect_Activities.Add(dateEntity);
-                    Indirect_Activities_Context.SaveChanges();
+                        leavee.Total_Hours = leavee.Total_Hours - HoursOnleave;
+                        db.SaveChanges(); // Save changes for each iteration
+                    }
                 }
-
-                
             }
         }
-    private int GetCurrentWeekNumber(DateTime date)
+
+        // New method to get dates in range excluding weekends
+        private List<DateTime> GetDatesInRangeWithoutWeekends(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> datesInRange = new List<DateTime>();
+
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                // Exclude weekends (Saturday and Sunday)
+                if (date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    datesInRange.Add(date);
+                }
+            }
+
+            return datesInRange;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private int GetCurrentWeekNumber(DateTime date)
     {
         var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
         int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
@@ -630,8 +670,44 @@ namespace Ishop.Controllers
             base.Dispose(disposing);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
         
         
-       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

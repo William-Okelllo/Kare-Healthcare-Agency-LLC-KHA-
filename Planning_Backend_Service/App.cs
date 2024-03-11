@@ -63,26 +63,7 @@ namespace Planning_Backend_Service
                     }
 
                 }
-                foreach (DataRow emailRow in unsentSms.Rows)
-                {
-                    string Recipient = emailRow["RecipientNumber"].ToString();
-                    string MessageText = emailRow["MessageText"].ToString();
-                    string Trials = emailRow["Trials"].ToString();
-                    try
-                    {
-                        // Send the  using Sms.
-                        int.TryParse(Trials, out int trialsValue);
-                        SendSms(Recipient, MessageText, trialsValue);
-
-
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
-
-
-                }
+                
 
                 CheckTimesheetDate();
 
@@ -551,12 +532,13 @@ namespace Planning_Backend_Service
                         }
                         else
                         {
-                            string logLine = $"Timesheet Already Exists :  |  Employee Account  {employee.Username} | Department  {employee.DprtName} ";
+                            string logLine =  $"Date : {DateTime.Now}  Timesheet Already Exists :  |  Employee Account  {employee.Username} | Department  {employee.DprtName} ";
                             File.AppendAllLines(logFilePath, new string[] { logLine });
                         }
                     }
                     Locking();
                     Notifications_Send();
+                    Leavesupdate();
                 }
             }
             catch (Exception ex)
@@ -647,7 +629,45 @@ namespace Planning_Backend_Service
                 }
             }
         }
+        public void Leavesupdate()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT Business_mail FROM Configs";
+                string baseAddress = connection.QueryFirstOrDefault<string>(query);
 
+                // Assuming you have a base address for the HttpClient
+                using (HttpClient client = new HttpClient())
+                {
+                    if (Uri.TryCreate(baseAddress, UriKind.Absolute, out Uri uri))
+                    {
+                        client.BaseAddress = uri;
+
+                        HttpResponseMessage response = client.GetAsync("API/Updatetimesheetservice").Result;
+
+                        // Check if the request was successful
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Read and handle the response content
+                            string responseBody = response.Content.ReadAsStringAsync().Result;
+                            string logLine = $"Date: {DateTime.Now.ToString()} | - - - - -Leaves  Balances updated - - - - - | {responseBody} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                        else
+                        {
+                            Console.WriteLine("Request failed with status: " + response.StatusCode);
+                            string logLine = $"Date: {DateTime.Now.ToString()} |- - - - - Error udating leaves balances  - - - - - - - -| {response} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid URL format: " + baseAddress);
+                    }
+                }
+            }
+        }
 
 
 
