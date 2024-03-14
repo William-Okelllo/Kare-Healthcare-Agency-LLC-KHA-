@@ -28,165 +28,165 @@
 </style>
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-9 col-sm-12 col-12">
+    <div class="col-md-11 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
                 <i class="fa fa-bookmark"></i> Timesheet Approvals
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
 
-                    <div class="col-lg-8 col-12">
-                        <!-- small card -->
-                        <div class="small-box bg-gradient-white" style="border-radius: 15px">
-                            <div class="inner">
+                <div class="col-lg-8 col-12">
+                    <!-- small card -->
+                    <div class="small-box bg-gradient-white" style="border-radius: 15px">
+                        <div class="inner">
 
-                                <h3> <i class="fa fa-user-circle text-warning"></i><b> @ViewBag.Timesheet.Owner</b></h3>
-                                <h5><i class="fa fa-university"></i> <b>Department</b> :  @ViewBag.Timesheet.Department </h5>
-                                <p style="font-size:medium"><b><i class=" fa fa-calendar-check text-primary"></i>  From Date : </b> @ViewBag.Timesheet.From_Date.ToString("dd-MMM-yyyy")     <b style="font-size:larger">TO</b>  <b><i class=" fa fa-calendar-check text-warning"></i>  End Date : </b> @ViewBag.Timesheet.End_Date.ToString("dd-MMM-yyyy") </p>
+                            <h3> <i class="fa fa-user-circle text-warning"></i><b> @ViewBag.Timesheet.Owner</b></h3>
+                            <h5><i class="fa fa-university"></i> <b>Department</b> :  @ViewBag.Timesheet.Department </h5>
+                            <p style="font-size:medium"><b><i class=" fa fa-calendar-check text-primary"></i>  From Date : </b> @ViewBag.Timesheet.From_Date.ToString("dd-MMM-yyyy")     <b style="font-size:larger">TO</b>  <b><i class=" fa fa-calendar-check text-warning"></i>  End Date : </b> @ViewBag.Timesheet.End_Date.ToString("dd-MMM-yyyy") </p>
 
 
-                                <h5>
-                                    <b>Status :</b>  @if (ViewBag.Timesheet.Status == 0)
-                                    {
-                                        <b style="color: gray; font-size: medium">   Pending Approval  </b>
-                                    }
-                                    else
-                                    {
-                                        <b style="color: green; font-size: medium "><i class="fa fa-check-circle "></i> Approved </b>
-                                    }
-                                </h5>
+                            <h5>
+                                <b>Status :</b>  @if (ViewBag.Timesheet.Status == 0)
+                                {
+                                    <b style="color: gray; font-size: medium">   Pending Approval  </b>
+                                }
+                                else
+                                {
+                                    <b style="color: green; font-size: medium "><i class="fa fa-check-circle "></i> Approved </b>
+                                }
+                            </h5>
+                        </div>
+                        <div class="icon"> <i class="fa fa-calendar-day"></i></div>
+
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+
+
+
+
+
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-sm-4 col-9">
+                        <div class="info-box" style="border-radius: 14px; background-color: #0C54A0 ">
+                            <span><i class="fa fa-user-clock text-white"></i></span>
+
+                            <div class="info-box-content" style="color: white">
+                                <span class="info-box-text">Total  Hours</span>
+                                <h4><span class="info-box-number">@ViewBag.Timesheet.Tt <small><b>Hours</b></small></span></h4>
                             </div>
-                            <div class="icon"> <i class="fa fa-calendar-day"></i></div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-9">
+                        <div class="info-box" style="border-radius: 14px; background-color:#01520d ">
+                            <span><i class="fa fa-user-clock text-white"></i></span>
+
+                            <div class="info-box-content" style="color: white">
+                                <span class="info-box-text">Direct Hours</span>
+                                <h4><span class="info-box-number">@ViewBag.Timesheet.Direct_Hours </span></h4>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-9">
+                        <div class="info-box" style="border-radius: 14px; background-color:#444343 ">
+                            <span><i class="fa fa-user-clock text-white"></i></span>
+
+                            <div class="info-box-content" style="color: white">
+                                <span class="info-box-text">InDirect Hours</span>
+                                <h4><span class="info-box-number">@ViewBag.Timesheet.InDirect_Hours </span></h4>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label><span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span>   Date</label>
+                            @Html.EditorFor(model => model.CreatedOn, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Record",
+                               @Value = DateTime.Now.Date,
+                               @ReadOnly = true,
+
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><span class="badge badge-warning"> <i class="fa fa-tags text-black"></i></span>  Sheet Id</label>
+                            @Html.EditorFor(model => model.Timesheeet_Id, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Record",
+                               @Value = ViewBag.Timesheet.Id,
+                               @ReadOnly = true,
+
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><span class="badge badge-warning"> <i class="fa fa-user-check text-black"></i></span> Approver</label>
+                            @Html.EditorFor(model => model.Approver, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Record",
+                               @Value = User.Identity.Name,
+                               @ReadOnly = true,
+
+
+                           }
+                       })
 
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
+                    <label><span class="badge badge-warning"> <i class="fa fa-comment-dots text-black"></i></span> Approver Commments</label>
+                    <div class="form-row">
 
 
-
-
-
-                    <div class="row justify-content-center">
-                        <div class="col-md-3 col-sm-4 col-9">
-                            <div class="info-box" style="border-radius: 14px; background-color: #0C54A0 ">
-                                <span><i class="fa fa-user-clock text-white"></i></span>
-
-                                <div class="info-box-content" style="color: white">
-                                    <span class="info-box-text">Total  Hours</span>
-                                    <h4><span class="info-box-number">@ViewBag.Timesheet.Tt <small><b>Hours</b></small></span></h4>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-9">
-                            <div class="info-box" style="border-radius: 14px; background-color:#01520d ">
-                                <span><i class="fa fa-user-clock text-white"></i></span>
-
-                                <div class="info-box-content" style="color: white">
-                                    <span class="info-box-text">Direct Hours</span>
-                                    <h4><span class="info-box-number">@ViewBag.Timesheet.Direct_Hours </span></h4>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-9">
-                            <div class="info-box" style="border-radius: 14px; background-color:#444343 ">
-                                <span><i class="fa fa-user-clock text-white"></i></span>
-
-                                <div class="info-box-content" style="color: white">
-                                    <span class="info-box-text">InDirect Hours</span>
-                                    <h4><span class="info-box-number">@ViewBag.Timesheet.InDirect_Hours </span></h4>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
+                        @Html.TextAreaFor(model => model.Comments, 4, 70, htmlAttributes: new
+    {
+     style = "width: 70%; max-width:70%;",
+     @placeholder = "Additional information",
+    
+     @class = "form-control form-rounded2",
+     @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+    })
+                        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
                     </div>
 
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
+                    <div class="dropdown-divider"></div>
+                    <h5> Actions</h5>
+                    <div class="form-group">
+                        <input type="submit" name="action" value="Approve_Timesheet" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to approve this timesheet ?')" /> |
+                        <input type="submit" name="action" value="Decline_Timesheet" class="btn btn btn-danger" style="color:white" onclick="return confirm('Note : Timesheet Decline will re-open the timesheet to the staff member allowing timesheet correction?')" />
 
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label><span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span>   Date</label>
-                                @Html.EditorFor(model => model.CreatedOn, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Record",
-                                   @Value = DateTime.Now.Date,
-                                   @ReadOnly = true,
+                        |
+                        @Html.ActionLink("Back to List", "All", "Timesheet", null, new { @class = "btn btn-primary btn" })
 
 
-                               }
-                           })
+                    </div>
 
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label><span class="badge badge-warning"> <i class="fa fa-tags text-black"></i></span>  Sheet Id</label>
-                                @Html.EditorFor(model => model.Timesheeet_Id, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Record",
-                                   @Value = ViewBag.Timesheet.Id,
-                                   @ReadOnly = true,
-
-
-                               }
-                           })
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label><span class="badge badge-warning"> <i class="fa fa-user-check text-black"></i></span> Approver</label>
-                                @Html.EditorFor(model => model.Approver, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Record",
-                                   @Value = User.Identity.Name,
-                                   @ReadOnly = true,
-
-
-                               }
-                           })
-
-                            </div>
-                        </div>
-
-                        <label><span class="badge badge-warning"> <i class="fa fa-comment-dots text-black"></i></span> Approver Commments</label>
-                        <div class="form-row">
-
-
-                            @Html.TextAreaFor(model => model.Comments, 4, 70, htmlAttributes: new
-        {
-         style = "width: 70%; max-width:70%;",
-         @placeholder = "Additional information",
-         @Required = true,
-         @class = "form-control form-rounded2",
-         @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
-        })
-                            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="dropdown-divider"></div>
-                        <h5> Actions</h5>
-                        <div class="form-group">
-                            <input type="submit" name="action" value="Approve_Timesheet" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you want to approve this timesheet ?')" /> |
-                            <input type="submit" name="action" value="Decline_Timesheet" class="btn btn btn-danger" style="color:white" onclick="return confirm('Note : Timesheet Decline will re-open the timesheet to the staff member allowing timesheet correction?')" />
-
-                            |
-                            @Html.ActionLink("Back to List", "All", "Timesheet", null, new { @class = "btn btn-primary btn" })
-                            
-
-                        </div>
-
-                    }
+                }
 
 

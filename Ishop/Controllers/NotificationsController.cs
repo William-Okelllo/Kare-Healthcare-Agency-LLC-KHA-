@@ -74,8 +74,7 @@ namespace Ishop.Controllers
 
             var currentDate = DateTime.Now.Date;
 
-            var Data = db.notifications
-                .Where(c => c.Active == true && DbFunctions.TruncateTime(c.Last_sent) != currentDate) .ToList();
+            var Data = db.notifications.Where(c => c.Active == true && DbFunctions.TruncateTime(c.Last_sent) != currentDate) .ToList();
 
             Random random = new Random();
             using (var In_parts = new OutgoingEmailsContext())

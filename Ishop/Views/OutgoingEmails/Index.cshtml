@@ -46,6 +46,12 @@
         -webkit-line-clamp: 3; /* Number of lines to show */
         -webkit-box-orient: vertical;
     }
+    .limited-lines2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 22; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+    }
 </style>
 
 <div class="card " style="background-color: rgb(255, 255, 255, 0.78);">
@@ -132,7 +138,7 @@
                                 <h7><i class="fa fa-comment-dots text-green"></i>  @item.Subject</h7>
                                 <div class="dropdown-divider"></div>
                                 <span class="badge badge-secondary"> <i class="fa fa-clock text-white"></i>    @item.CreatedOn.ToString("dd-MMMM-yyyy|hh:mm tt")</span>
-                                <span class="badge badge-primary"> <i class="fa fa-envelope-open text-white"></i>  @item.Recipient</span>
+                                <small class="limited-lines2">  <span class="badge badge-primary "> <i class="fa fa-envelope-open text-white"></i> </span>   @item.Recipient</small>
                             </td>
                             <td style="background-color: white">
                                 <p class="limited-lines"><small>@item.Body</small></p>

@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-13T10:57:13.3125191Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-03-10T23:13:54.8724097Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -173,13 +173,19 @@ FROM
     <DataSet Name="Projectlist">
       <Query>
         <DataSourceName>Additional</DataSourceName>
-        <CommandText>select 'All' as Project
-union
+        <CommandText>SELECT 'All' AS Reg, 'All' AS Project
+UNION
 SELECT
-    Project_Name [Project]
-FROM Projects</CommandText>
+  CAST(Project_RegNo AS VARCHAR(MAX)) AS Reg,
+  Project_Name AS Project
+FROM Projects
+ORDER BY Reg DESC;</CommandText>
       </Query>
       <Fields>
+        <Field Name="Reg">
+          <DataField>Reg</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Project">
           <DataField>Project</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1205,7 +1211,6 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -1244,7 +1249,6 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -1283,7 +1287,6 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -1629,7 +1632,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
           <BackgroundColor>White</BackgroundColor>
         </Style>
       </Body>
-      <Width>13.03472in</Width>
+      <Width>14.34722in</Width>
       <Page>
         <PageHeader>
           <Height>0.69667in</Height>

@@ -56,7 +56,7 @@ namespace Ishop.Controllers
 
             ViewBag.Phasedetail = Phaseinfo;
             var data2 = DA.direct_Activities
-                .Where(da => da.Project_Name == projectName && da.Name == Phase).Select(c => c.Charge).DefaultIfEmpty(0).Sum(); ;
+                .Where(da => da.Project_Name == projectName && da.Name == Phase && da.Approved == true).Select(c => c.Charge).DefaultIfEmpty(0).Sum(); ;
 
             ViewBag.Total = data2;
             ViewBag.Balance = (Phaseinfo.Budget - data2);
@@ -68,7 +68,7 @@ namespace Ishop.Controllers
 
 
             var data = DA.direct_Activities
-                .Where(da => da.Project_Name == projectName && da.Name == Phase)
+                .Where(da => da.Project_Name == projectName && da.Name == Phase && da.Approved ==true)
                 .GroupBy(da => new { da.User, da.Name })
                 .Select(group => new Drilldown_Model
                 {

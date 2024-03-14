@@ -223,84 +223,93 @@
     </div>
 
     <div class="dropdown-divider"></div>
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-8">
-            <div class="info-box" style="border-left: 6px solid #F0AB15;border-radius:15px">
-                <span class="info-box-icon bg-warning" style="border-radius:15px"><i class="fa fa-user-clock"></i></span>
 
-                <div class="info-box-content">
-                    <span class="info-box-text"><b style="color: #F0AB15"> NON PROJECT TIME</b></span>
-                    <span class="info-box-number">
-                        @if (ViewBag.Sheet != null)
-                        {
-                            <span class="info-box-number"><b>@ViewBag.Sheet.InDirect_Hours<small> . <b>Hrs</b></small></b></span>
-                        }
-                        else
-                        {
-                            <span class="info-box-number"> . <b>N/A<small> <b>Hrs</b></small></b></span>
-                        }
-                    </span>
-                </div>
-                <!-- /.info-box-content -->
+    <div class="row justify-content-center">
+        <div class="col-sm-2 border-right" style="border-left: 6px solid #F0AB15;border-radius:15px">
+            <div class="description-block">
+                <h3 class="description-header">
+                    <i class="fa  fa-clock text-success"></i>
+                    @if (ViewBag.Sheet != null)
+                    {
+                        <span class="info-box-number"><b>@ViewBag.Sheet.InDirect_Hours<small> . <b>Hrs</b></small></b></span>
+                    }
+                    else
+                    {
+                        <span class="info-box-number"> . <b>N/A<small> <b>Hrs</b></small></b></span>
+                    }
+
+                </h3>
+                <span ><b>Non Project Hours</b></span>
             </div>
-            <!-- /.info-box -->
+            <!-- /.description-block -->
         </div>
-        <div class="col-md-3 col-sm-6 col-8">
-            <div class="info-box" style="border-left: 6px solid #28A745; border-radius: 15px">
-                <span class="info-box-icon bg-success" style="border-radius:15px"><i class="fa fa-user-clock"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"><b style="color: #28A745"> PROJECT TIME</b></span>
-                    <span class="info-box-number">
-                        <span class="info-box-number">
-
-                            @if (ViewBag.Sheet != null)
-                            {
-                                <span class="info-box-number"><b>@ViewBag.Sheet.Direct_Hours<small> . <b>Hrs</b></small></b></span>
-                            }
-                            else
-                            {
-                                <span class="info-box-number"> . <b>N/A <small><b>Hrs</b></small></b></span>
-                            }
-                        </span>
-                    </span>
-                </div>
-                <!-- /.info-box-content -->
+        <!-- /.col -->
+        <div class="col-sm-2 border-right" style="border-left: 6px solid #28A745; border-radius: 15px">
+            <div class="description-block">
+                <h3 class="description-header">
+                    <i class="fa  fa-clock text-warning"></i>
+                    @if (ViewBag.Sheet != null)
+                    {
+                        <span class="info-box-number"><b>@ViewBag.Sheet.Direct_Hours<small> . <b>Hrs</b></small></b></span>
+                    }
+                    else
+                    {
+                        <span class="info-box-number"> . <b>N/A <small><b>Hrs</b></small></b></span>
+                    }
+                </h3>
+                <span ><b>Project Hours</b></span>
             </div>
-            <!-- /.info-box -->
+            <!-- /.description-block -->
         </div>
-        <div class="col-md-3 col-sm-6 col-9">
-            <div class="info-box" style="border-left: 6px solid #0C54A0; border-radius: 15px ">
-                <span class="info-box-icon bg" style="border-radius: 15px; background-color: #07417e"><i class="fa fa-user-clock text-white"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"><b style="color: #0C54A0"> TOTAL WEEK TIME</b></span>
-                    <span class="info-box-number">
-
-                        @if (ViewBag.Sheet != null)
-                        {
-                            <span class="info-box-number"><b>@ViewBag.Sheet.Tt<small> . <b>Hrs</b> </small></b></span>
-                        }
-                        else
-                        {
-                            <span class="info-box-number"> . <b>N/A<small><b>Hrs</b></small></b></span>
-                        }
-                    </span>
-                </div>
+        <div class="col-sm-2 border-right" style="border-left: 6px solid #0C54A0; border-radius: 15px ">
+            <div class="description-block">
+                <h3 class="description-header">
+                    <i class="fa  fa-clock text-success"></i>
+                    @if (ViewBag.Sheet != null)
+                    {
+                        <span class="info-box-number"><b>@ViewBag.Sheet.Leave<small> . <b>Hrs</b> </small></b></span>
+                    }
+                    else
+                    {
+                        <span class="info-box-number"> . <b>N/A<small><b>Hrs</b></small></b></span>
+                    }
+                </h3>
+                <span ><b>Leave Hours</b></span>
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.description-block -->
         </div>
-        <div class="col-md-3 col-sm-6 col-10">
-            <div class="info-box" style="border-left: 6px solid #F0AB15; border-radius: 15px; background-color: #0C54A0 ">
-
-                <div class="info-box-content"> 
-                    <span class="info-box-number">  <b style="color:white"><span class="badge badge-light"> <i class="fa fa-question-circle text-black"></i></span>  How to  fill in past timesheet </span>
-                    <span class="info-box-number">  <a href="#" data-toggle="modal" data-target="#knowledge" style="color:yellow"> 
-                                                        <i class="fa fa-spin fa-circle-notch"></i>    learn more</a> </span>
-                </div>
+        <!-- /.col -->
+        <div class="col-sm-2 border-right" style="border-left: 6px solid #aa0505; border-radius: 15px ">
+            <div class="description-block">
+                <h3 class="description-header">
+                    <i class="fa  fa-user-clock text-primary"></i>
+                    @if (ViewBag.Sheet != null)
+                    {
+                        <span class="info-box-number"><b>@ViewBag.Sheet.Tt<small> . <b>Hrs</b> </small></b></span>
+                    }
+                    else
+                    {
+                        <span class="info-box-number"> . <b>N/A<small><b>Hrs</b></small></b></span>
+                    }
+                </h3>
+                <span><b>Total Hours</b></span>
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.description-block -->
         </div>
+        <div class="col-sm-3 border-right" style="border-left: 6px solid #bbbbbb; border-radius: 15px ">
+            <div class="description-block">
+                <h7><i class="fa  fa-question-circle"></i>  Missed Out timesheets ?</h7>
+                    <a href="#" class="btn btn-sm  btn-primary" data-toggle="modal" data-target="#knowledge" >
+                        <i class="fa  fa-bookmark"></i>    learn more
+                    </a>
+               
+
+            </div>
+            <!-- /.description-block -->
+        </div>
+    </div>
+   
+    
 
 
         <div class="modal fade" id="knowledge" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -312,14 +321,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body"style="color:black">
-                        
+                    <div class="modal-body" style="color:black">
+
                         <div class="dropdown-divider"></div>
                         <p>Have you missed any crucial timesheet information or need to rectify past entries? </p>
                         <small>   If so, please submit a request to your Head of Department (HOD). Your HOD possesses the authority to reopen past timesheets, granting you the opportunity to make necessary amendments or log any missed clock-ins.</small>
 
-                        <small>Utilize the 'Timesheet Re-open' tab to submit your request through the system. <br />
-                        Thank you for your cooperation.</small>
+                        <small>
+                            Utilize the 'Timesheet Re-open' tab to submit your request through the system. <br />
+                            Thank you for your cooperation.
+                        </small>
                         <img src="~/Images/sad.gif" height="100px" />
                         <br />
 
@@ -339,253 +350,252 @@
 
 
 
-    </div>
-    
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
-                <thead>
-                    <tr style="color: white;">
-                        @foreach (var item in ViewBag.Results)
-                        {
-                            <th style="background-color: #757575; font-size: medium; text-align: left ">
-                                <b style="font-size:large;color:orange"><span class="badge badge-primary"> <b>@item.WeekdayName </b> </span> </b>
-                                <b style="font-size:large;color:orange"><span class="badge badge-light"> @item.Total_Hours  <small><b>Hrs</b></small> </span> </b>
-                            </th>
 
-                        }
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+            <thead>
+                <tr style="color: white;">
+                    @foreach (var item in ViewBag.Results)
+                    {
+                        <th style="background-color: #757575; font-size: medium; text-align: left ">
+                            <b style="font-size:large;color:orange"><span class="badge badge-primary"> <b>@item.WeekdayName </b> </span> </b>
+                            <b style="font-size:large;color:orange"><span class="badge badge-light"> @item.Total_Hours  <small><b>Hrs</b></small> </span> </b>
+                        </th>
 
-                    </tr>
-                </thead>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Day Activities View </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="modalContent"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Day Activities View </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="modalContent"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <style>
-                    /* Custom class for wider modal */
-                    .custom-modal-width {
-                        max-width: 90%; /* Adjust the percentage as needed */
                     }
-                </style>
-                <thead>
-                    <tr style="color: white;">
-                        @foreach (var item in ViewBag.Results)
-                        {
-                            <th style="background-color: #192530; font-size: medium; text-align: left ">
+
+                </tr>
+            </thead>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Day Activities View </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modalContent"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fa fa-bookmark text-primary"></i> Day Activities View </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modalContent"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                /* Custom class for wider modal */
+                .custom-modal-width {
+                    max-width: 90%; /* Adjust the percentage as needed */
+                }
+            </style>
+            <thead>
+                <tr style="color: white;">
+                    @foreach (var item in ViewBag.Results)
+                    {
+                        <th style="background-color: #192530; font-size: medium; text-align: left ">
 
 
-                                <button class="btn btn-sm btn-lg btn-light openModalTrigger"
-                                        data-datev="@item.DateValue"
-                                        data-url="@Url.Action("Directtasksview", "direct_Activities")"
-                                        data-target="#exampleModalCenter">
-                                    <small><b><i class="fa fa-clock text-navy"></i> Project Hrs    </b></small>
-                                </button>
+                            <button class="btn btn-sm btn-lg btn-light openModalTrigger"
+                                    data-datev="@item.DateValue"
+                                    data-url="@Url.Action("Directtasksview", "direct_Activities")"
+                                    data-target="#exampleModalCenter">
+                                <small><b><i class="fa fa-clock text-navy"></i> Project Hrs    </b></small>
+                            </button>
 
 
 
-                                <script>
-                                    $(document).ready(function () {
-                                        // Click event for the modal trigger button
-                                        $(document).on("click", ".openModalTrigger", function (e) {
-                                            e.preventDefault(); // Prevent the default link behavior
+                            <script>
+                                $(document).ready(function () {
+                                    // Click event for the modal trigger button
+                                    $(document).on("click", ".openModalTrigger", function (e) {
+                                        e.preventDefault(); // Prevent the default link behavior
 
-                                            // Extract data attributes and check for existence
-                                            var Weekday = $(this).data("datev");
+                                        // Extract data attributes and check for existence
+                                        var Weekday = $(this).data("datev");
 
-                                            var modalId = $(this).data("target");
-                                            var url = $(this).data("url");
+                                        var modalId = $(this).data("target");
+                                        var url = $(this).data("url");
 
-                                            var missingAttributes = [];
-                                            if (!Weekday) missingAttributes.push("data-datev");
+                                        var missingAttributes = [];
+                                        if (!Weekday) missingAttributes.push("data-datev");
 
-                                            if (!modalId) missingAttributes.push("data-target");
-                                            if (!url) missingAttributes.push("data-url");
+                                        if (!modalId) missingAttributes.push("data-target");
+                                        if (!url) missingAttributes.push("data-url");
 
-                                            if (missingAttributes.length > 0) {
-                                                var errorMessage = "One or more data attributes missing: " + missingAttributes.join(", ");
-                                                console.error(errorMessage);
+                                        if (missingAttributes.length > 0) {
+                                            var errorMessage = "One or more data attributes missing: " + missingAttributes.join(", ");
+                                            console.error(errorMessage);
 
-                                                return;
-                                            }
+                                            return;
+                                        }
 
-                                            // Make an AJAX request to your controller action
-                                            $.ajax({
-                                                url: url,
-                                                type: "GET",
-                                                data: { Weekday: Weekday },
-                                                success: function (result) {
-                                                    console.log("Ajax request successful");
-                                                    if (result.trim() === "") {
-                                                        // If no data, display a custom message in the modal
-                                                        $(modalId + " .modal-content #modalContent").html("<p>No data found.</p>");
-                                                    } else {
-                                                        // If there is data, update modal content
-                                                        $(modalId + " .modal-content #modalContent").html(result);
-                                                    }
-                                                    $(modalId).modal("show"); // Open the modal
-                                                },
-                                                error: function () {
-                                                    console.log("Error in Ajax request");
-                                                    // Display a custom message in the modal on error
-                                                    $(modalId + " .modal-content #modalContent").html("<p>Error occurred while fetching data.</p>");
-                                                    // Open the modal
-                                                    $(modalId).modal("show");
+                                        // Make an AJAX request to your controller action
+                                        $.ajax({
+                                            url: url,
+                                            type: "GET",
+                                            data: { Weekday: Weekday },
+                                            success: function (result) {
+                                                console.log("Ajax request successful");
+                                                if (result.trim() === "") {
+                                                    // If no data, display a custom message in the modal
+                                                    $(modalId + " .modal-content #modalContent").html("<p>No data found.</p>");
+                                                } else {
+                                                    // If there is data, update modal content
+                                                    $(modalId + " .modal-content #modalContent").html(result);
                                                 }
-                                            });
-                                        });
-
-                                        // Close the modal when the close button is clicked
-                                        $(".close").on("click", function () {
-                                            $(".modal").modal("hide");
-                                        });
-
-                                        // Close the modal when the modal background is clicked
-                                        $(document).on("click", function (e) {
-                                            if ($(e.target).hasClass("modal")) {
-                                                $(".modal").modal("hide");
+                                                $(modalId).modal("show"); // Open the modal
+                                            },
+                                            error: function () {
+                                                console.log("Error in Ajax request");
+                                                // Display a custom message in the modal on error
+                                                $(modalId + " .modal-content #modalContent").html("<p>Error occurred while fetching data.</p>");
+                                                // Open the modal
+                                                $(modalId).modal("show");
                                             }
                                         });
                                     });
-                                </script>
 
-                                <b>@item.Direct_Hours Hrs </b>
+                                    // Close the modal when the close button is clicked
+                                    $(".close").on("click", function () {
+                                        $(".modal").modal("hide");
+                                    });
 
-
-                            </th>
-
-
-
-
-
-
-                        }
-
-                    </tr>
-                </thead>
-                <thead>
-                    <tr style="color: white;">
-                        @foreach (var item in ViewBag.Results)
-                        {
-                            <th style="background-color: #0C54A0; font-size: medium; text-align: left">
-
-                                <button class="btn btn-sm btn-lg btn-warning openModalTrigger2"
-                                        data-datev="@item.DateValue"
-                                        data-url="@Url.Action("InDirecttasksview", "indirect_Activities")"
-                                        data-target="#exampleModalCenter">
-                                    <small><b><i class="fa fa-clock text-navy"></i> Non-Project Hrs    </b></small>
-                                </button>
-
-
-
-                                <script>
-                                    $(document).ready(function () {
-                                        // Click event for the modal trigger button
-                                        $(document).on("click", ".openModalTrigger2", function (e) {
-                                            e.preventDefault(); // Prevent the default link behavior
-
-                                            // Extract data attributes and check for existence
-                                            var Weekday = $(this).data("datev");
-
-                                            var modalId = $(this).data("target");
-                                            var url = $(this).data("url");
-
-                                            var missingAttributes = [];
-                                            if (!Weekday) missingAttributes.push("data-datev");
-
-                                            if (!modalId) missingAttributes.push("data-target");
-                                            if (!url) missingAttributes.push("data-url");
-
-                                            if (missingAttributes.length > 0) {
-                                                var errorMessage = "One or more data attributes missing: " + missingAttributes.join(", ");
-                                                console.error(errorMessage);
-
-                                                return;
-                                            }
-
-                                            // Make an AJAX request to your controller action
-                                            $.ajax({
-                                                url: url,
-                                                type: "GET",
-                                                data: { Weekday: Weekday },
-                                                success: function (result) {
-                                                    console.log("Ajax request successful");
-                                                    if (result.trim() === "") {
-                                                        // If no data, display a custom message in the modal
-                                                        $(modalId + " .modal-content #modalContent").html("<p>No data found.</p>");
-                                                    } else {
-                                                        // If there is data, update modal content
-                                                        $(modalId + " .modal-content #modalContent").html(result);
-                                                    }
-                                                    $(modalId).modal("show"); // Open the modal
-                                                },
-                                                error: function () {
-                                                    console.log("Error in Ajax request");
-                                                    // Display a custom message in the modal on error
-                                                    $(modalId + " .modal-content #modalContent").html("<p>Error occurred while fetching data.</p>");
-                                                    // Open the modal
-                                                    $(modalId).modal("show");
-                                                }
-                                            });
-                                        });
-
-                                        // Close the modal when the close button is clicked
-                                        $(".close").on("click", function () {
+                                    // Close the modal when the modal background is clicked
+                                    $(document).on("click", function (e) {
+                                        if ($(e.target).hasClass("modal")) {
                                             $(".modal").modal("hide");
-                                        });
+                                        }
+                                    });
+                                });
+                            </script>
 
-                                        // Close the modal when the modal background is clicked
-                                        $(document).on("click", function (e) {
-                                            if ($(e.target).hasClass("modal")) {
-                                                $(".modal").modal("hide");
+                            <b>@item.Direct_Hours Hrs </b>
+
+
+                        </th>
+
+
+
+
+
+
+                    }
+
+                </tr>
+            </thead>
+            <thead>
+                <tr style="color: white;">
+                    @foreach (var item in ViewBag.Results)
+                    {
+                        <th style="background-color: #0C54A0; font-size: medium; text-align: left">
+
+                            <button class="btn btn-sm btn-lg btn-warning openModalTrigger2"
+                                    data-datev="@item.DateValue"
+                                    data-url="@Url.Action("InDirecttasksview", "indirect_Activities")"
+                                    data-target="#exampleModalCenter">
+                                <small><b><i class="fa fa-clock text-navy"></i> Non-Project Hrs    </b></small>
+                            </button>
+
+
+
+                            <script>
+                                $(document).ready(function () {
+                                    // Click event for the modal trigger button
+                                    $(document).on("click", ".openModalTrigger2", function (e) {
+                                        e.preventDefault(); // Prevent the default link behavior
+
+                                        // Extract data attributes and check for existence
+                                        var Weekday = $(this).data("datev");
+
+                                        var modalId = $(this).data("target");
+                                        var url = $(this).data("url");
+
+                                        var missingAttributes = [];
+                                        if (!Weekday) missingAttributes.push("data-datev");
+
+                                        if (!modalId) missingAttributes.push("data-target");
+                                        if (!url) missingAttributes.push("data-url");
+
+                                        if (missingAttributes.length > 0) {
+                                            var errorMessage = "One or more data attributes missing: " + missingAttributes.join(", ");
+                                            console.error(errorMessage);
+
+                                            return;
+                                        }
+
+                                        // Make an AJAX request to your controller action
+                                        $.ajax({
+                                            url: url,
+                                            type: "GET",
+                                            data: { Weekday: Weekday },
+                                            success: function (result) {
+                                                console.log("Ajax request successful");
+                                                if (result.trim() === "") {
+                                                    // If no data, display a custom message in the modal
+                                                    $(modalId + " .modal-content #modalContent").html("<p>No data found.</p>");
+                                                } else {
+                                                    // If there is data, update modal content
+                                                    $(modalId + " .modal-content #modalContent").html(result);
+                                                }
+                                                $(modalId).modal("show"); // Open the modal
+                                            },
+                                            error: function () {
+                                                console.log("Error in Ajax request");
+                                                // Display a custom message in the modal on error
+                                                $(modalId + " .modal-content #modalContent").html("<p>Error occurred while fetching data.</p>");
+                                                // Open the modal
+                                                $(modalId).modal("show");
                                             }
                                         });
                                     });
-                                </script>
-                                <b>@item.InDirect_Hours Hrs</b>
-                            </th>
 
-                            <!-- Include jQuery -->
+                                    // Close the modal when the close button is clicked
+                                    $(".close").on("click", function () {
+                                        $(".modal").modal("hide");
+                                    });
+
+                                    // Close the modal when the modal background is clicked
+                                    $(document).on("click", function (e) {
+                                        if ($(e.target).hasClass("modal")) {
+                                            $(".modal").modal("hide");
+                                        }
+                                    });
+                                });
+                            </script>
+                            <b>@item.InDirect_Hours Hrs</b>
+                        </th>
+
+                        <!-- Include jQuery -->
 
 
 
 
 
-                        }
+                    }
 
 
-                    </tr>
-                </thead>
-            </table>
+                </tr>
+            </thead>
+        </table>
 
-        </div>
+    </div>

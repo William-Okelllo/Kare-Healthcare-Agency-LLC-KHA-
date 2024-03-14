@@ -85,12 +85,12 @@ namespace Ishop
         public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,User,Comments,Name,WeekNo")] Indirect_Activities indirect_Activities)
         {
            
-                db.indirect_Activities.Add(indirect_Activities);
+            db.indirect_Activities.Add(indirect_Activities);
             CaptureRecord(indirect_Activities.Hours, indirect_Activities.User, indirect_Activities.Day_Date);
             db.SaveChanges();
                
-                TempData["msg"] = "Activity added successfully ";
-                return RedirectToAction("Index", "Timesheet");
+            TempData["msg"] = "Activity added successfully ";
+            return RedirectToAction("Index", "Timesheet");
             
 
            
@@ -139,7 +139,7 @@ namespace Ishop
         {
 
             db.indirect_Activities.Add(indirect_Activities);
-            CaptureRecord(indirect_Activities.Hours, indirect_Activities.User, indirect_Activities.Day_Date);
+            CaptureRecord(indirect_Activities.Hours,  indirect_Activities.User, indirect_Activities.Day_Date);
             db.SaveChanges();
 
             TempData["msg"] = "Activity added successfully ";
@@ -148,7 +148,7 @@ namespace Ishop
 
         }
 
-        public void CaptureRecord(int time, string Staff, DateTime datecheck)
+        public void CaptureRecord(Decimal Hours,  string Staff, DateTime datecheck)
         {
 
 
@@ -157,18 +157,17 @@ namespace Ishop
 
             Indirect_Activities_Context IDC = new Indirect_Activities_Context();
             Direct_Activities_Context DA = new Direct_Activities_Context();
-            Decimal Indirecttime = IDC.indirect_Activities.Where(i => i.User == Staff && i.Day_Date >= Sheet.From_Date && i.Day_Date <= Sheet.End_Date).Select(i=>i.Hours).DefaultIfEmpty(0).Sum();
+            Decimal Indirecttime = IDC.indirect_Activities.Where(i => i.User == Staff && i.Day_Date >= Sheet.From_Date && i.Day_Date <= Sheet.End_Date).Select(i => i.Hours).DefaultIfEmpty(0).Sum() + Hours;
             Decimal Directtime = DA.direct_Activities.Where(i => i.User == Staff && i.Day_Date >= Sheet.From_Date && i.Day_Date <= Sheet.End_Date).Select(i => i.Hours).DefaultIfEmpty(0).Sum();
-            Decimal Totaltime = Indirecttime + Directtime; 
+            Decimal LeaveTime = TT.timesheets.Where(c => c.Id == Sheet.Id).Select(i => i.Leave).DefaultIfEmpty(0).Sum();
+            Decimal Totaltime = Indirecttime + Directtime + LeaveTime;
             if (Sheet != null)
             {
-                Sheet.Tt = Totaltime;
+                Sheet.Tt = Totaltime ;
                 Sheet.Direct_Hours = Directtime;
                 Sheet.InDirect_Hours = Indirecttime;
                 TT.SaveChanges();
             }
-
-            
         }
 
 

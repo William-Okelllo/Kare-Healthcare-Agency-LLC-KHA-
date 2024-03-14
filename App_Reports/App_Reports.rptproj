@@ -55,6 +55,7 @@
     <Report Include="Employee Timesheet.rdl" />
     <Report Include="NonProjectTime Timesheet Breakdown .rdl" />
     <Report Include="Projects.rdl" />
+    <Report Include="Projects_status.rdl" />
     <Report Include="ProjectTime Timesheet Breakdown .rdl" />
     <Report Include="ProjectTime Timesheet Breakdown_Acc .rdl" />
     <Report Include="Project_Child.rdl" />
