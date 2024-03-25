@@ -109,81 +109,107 @@
                         @Html.AntiForgeryToken()
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <form>
+                    <form>
 
 
-                            <div class="form-row">
+                        <div class="form-row">
 
-                                <div class="form-group col-md-3">
-                                    <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
-                                    @Html.EditorFor(model => model.CreatedOn, new
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-calendar-check text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                                @Html.EditorFor(model => model.CreatedOn, new
+                           {
+                               htmlAttributes = new
                                {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Record",
-                                       @ReadOnly = true,
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Record",
+                                   @ReadOnly = true,
 
 
-                                   }
-                               })
-
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.User)</label>
-                                    @Html.EditorFor(model => model.User, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Record",
-                                       @Value = User.Identity.Name,
-                                       @ReadOnly = true,
-
-
-                                   }
-                               })
-
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label><i class=" fa fa-folder-open text-primary"></i>   @Html.LabelFor(model => model.Name)</label>
-                                    @Html.EditorFor(model => model.Name, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Category Name",
-                                       @Required = true,
-
-
-                                   }
-                               })
-
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label><i class=" fa fa-circle-notch text-primary"></i>   @Html.LabelFor(model => model.Step)</label>
-                                    @Html.EditorFor(model => model.Step, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Step ",
-                                       @Required = true,
-
-
-                                   }
-                               })
-
-                                </div>
-
-
+                               }
+                           })
 
                             </div>
-                            <div class="dropdown-divider"></div>
-                            <input type="submit" value="Submit" class="btn btn-warning" />
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.User)</label>
+                                @Html.EditorFor(model => model.User, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Record",
+                                   @Value = User.Identity.Name,
+                                   @ReadOnly = true,
 
-                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                        </form>
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><i class=" fa fa-folder-open text-primary"></i>   @Html.LabelFor(model => model.Name)</label>
+                                @Html.EditorFor(model => model.Name, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Category Name",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-circle-notch text-primary"></i>   @Html.LabelFor(model => model.Step)</label>
+                                @Html.EditorFor(model => model.Step, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Step ",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+
+                        <script>
+                            $(document).ready(function () {
+                                $("#Theme_Color").spectrum({
+                                    preferredFormat: "hex",
+                                    showInput: true,
+                                    showPalette: true,
+                                    palette: [
+                                        ["#ff0000", "#00ff00", "#0000ff"]
+                                        // Add more colors to the palette as needed
+                                    ]
+                                });
+                            });
+                        </script>
+                       
+                        <div class="form-group col-md-8">
+                            <p><i class=" fa fa-circle-notch text-primary"></i>  The color selected is used in reports on theme colors</p>
+                            <input type="color" id="Theme_Color" name="Theme_Color">
+
+                        </div>
+
+
+
+                        <div class="dropdown-divider"></div>
+                        <input type="submit" value="Submit" class="btn btn-warning" />
+
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                    </form>
                     }
                 </div>
             </div>

@@ -7080,6 +7080,8 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\CodeMirror\addon\comment\comment.js" />
@@ -8078,6 +8080,7 @@
     <Content Include="Views\Notifications\Edit.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\API\Index.cshtml" />
+    <Content Include="Views\Reports\Visual.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

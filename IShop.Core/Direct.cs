@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace IShop.Core
 {
@@ -13,5 +14,9 @@ namespace IShop.Core
         public string Name { get; set; }
 
         public string User { get; set; }
+
+
+        [Display(Name = "Theme Color")]
+        public string Theme_Color { get; set; }
     }
 }

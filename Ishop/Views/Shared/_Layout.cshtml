@@ -162,7 +162,7 @@
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
                 <div style="font-family: 'Montserrat';font-size:13px">
                     <a href="#" style="color: white">
-                       
+
                         <span class="badge badge-pill badge" style="background-color: #0C54A0">   <small style="font-size:small"><i class="fa fa-user-circle text-white nav-icon"></i>  @User.Identity.Name  </small>  </span>
 
                     </a>
@@ -193,7 +193,7 @@
                     </li>
                     @if (this.User.IsInRole("Employee"))
                     {
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-navy nav-icon"></i> <b>Timesheets  Module</b></li>
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Timesheets  Module</b></li>
                         <li class="nav-item">
 
 
@@ -275,7 +275,7 @@
 
                             </li>
                         }
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-navy nav-icon"></i> <b>Leave Module</b></li>
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Leave Module</b></li>
 
                         <li class="nav-item">
 
@@ -367,7 +367,7 @@
                     }
                     @if (this.User.IsInRole("Notifications"))
                     {
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-navy nav-icon"></i> <b>Notifications  Module</b> </li>
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Notifications  Module</b> </li>
 
 
                         <li class="nav-item">
@@ -381,7 +381,7 @@
 
                                 </p>
                             </a>
-                            
+
                         </li>
 
 
@@ -389,7 +389,7 @@
                     }
                     @if (this.User.IsInRole("Reports_Access"))
                     {
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-navy nav-icon"></i> <b>Reports  Module</b></li>
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Reports  Module</b></li>
 
 
                         <li class="nav-item">
@@ -403,6 +403,17 @@
 
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Visual", "Reports")" class="nav-link">
+
+                                        <i class="fa fa-chart-pie text-warning nav-icon"></i>
+                                        <p style="color: #060440">
+                                            Visual Charts
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Reports")" class="nav-link">
@@ -424,7 +435,7 @@
                     @if (this.User.IsInRole("Master_Data"))
                     {
 
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-navy nav-icon"></i> <b> Master Data Module</b> </li>
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b> Master Data Module</b> </li>
                         <li class="nav-item">
 
 
@@ -589,7 +600,7 @@
 
                     @if (this.User.IsInRole("Admin"))
                     {
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "> <i class="fa fa-bookmark text-navy nav-icon"></i>  <b>Admin Module</b> </li>
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "> <i class="fa fa-bookmark text-gray nav-icon"></i>  <b>Admin Module</b> </li>
                         <li class="nav-item">
 
 
@@ -617,19 +628,20 @@
 
                         </li>
                     }
+                    @if (User.Identity.Name !=null)
+                    {
 
-
-
-                    <div class="dropdown-divider"></div>
-                    <img src="https://timenex.planning-kenya.com/Images/2D.png" height="50" width="80" />
-                    <li class="nav-header" style="color: #0C54A0;font-size:smaller">
-                        <p style="color:darkslategrey">  Version 2.0.10     <br />    Copyright © @DateTime.Now.Year Planning Systems. <br /> All rights reserved  </p>
-                    </li>
+                        <div class="dropdown-divider"></div>
+                        <img src="~/Images/2D.png" height="50" width="80" />
+                        <small style="color:darkslategrey">
+                            Version 2.0.10     <br />
+                            <i class="fa fa-copyright"></i>  Copyright   @DateTime.Now.Year   <br />   Garage Management System
+                        </small>
+                    }
 
                 </ul>
-
+                    
             </nav>
-
 
         </div>
 

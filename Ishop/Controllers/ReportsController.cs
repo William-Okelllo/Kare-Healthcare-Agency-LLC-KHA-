@@ -19,6 +19,13 @@ public class ReportsController : Controller
 {
     private ReportContext db = new ReportContext();
     private ReportGroupContext dbb = new ReportGroupContext();
+
+
+    public ActionResult Visual ()
+    {
+        return View();
+    }
+
     public ActionResult Index(string searchBy, string search, int? page)
     {
 

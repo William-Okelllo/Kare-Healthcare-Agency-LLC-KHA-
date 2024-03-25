@@ -44,7 +44,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white; border-radius: 14px ">
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white; ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-bookmark"></i>
             Direct Categories
@@ -93,7 +93,7 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+            <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
 
 
                 <thead>
@@ -119,9 +119,14 @@
 
 
                             </td>
+                           
                             <td style="background-color: white;">
-                                <span class="badge badge-primary"><medium><i class="fa fa-circle-notch text-white"></i>  </medium></span> - <span class="badge badge-warning"><medium>  @item.Step  </medium></span> </td>
+                                <span class="badge badge-primary"><medium><i class="fa fa-circle-notch text-white"></i>  </medium></span> - <span class="badge badge-warning"><medium>  @item.Step  </medium></span>
+                                |  
+                                <span class="badge bg" style="width: 50px; height: 20px; border-radius:5px;background-color: @item.Theme_Color ;"><small><i class="fa fa-paint-roller text-white"></i> <b style="color: white;">Theme</b>  </small></span>
+                            </td>
 
+                           
 
                             <td style="background-color: white;  ">
                                 <i class="fa fa-user-circle"></i> @item.User

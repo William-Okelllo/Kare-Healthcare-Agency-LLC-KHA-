@@ -1,0 +1,71 @@
+﻿<html>
+<head>
+    <title>Dynamic Chart with Filters</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <select id="durationFilter">
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+        <option value="quarterly">Quarterly</option>
+    </select>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        // Function to fetch chart data based on selected duration
+        function fetchChartData(duration) {
+            // Make AJAX request to fetch data from the server based on selected duration
+            // Replace this with your actual AJAX call
+            switch(duration) {
+                case 'weekly':
+                    return { labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], data: [20, 30, 25, 35, 40] };
+                case 'monthly':
+                    return { labels: ["Week 1", "Week 2", "Week 3", "Week 4"], data: [50, 60, 45, 55] };
+                case 'quarterly':
+                    return { labels: ["January", "February", "March"], data: [100, 120, 90] };
+                default:
+                    return { labels: [], data: [] };
+            }
+        }
+
+        // Function to update chart based on selected duration
+        function updateChart(duration) {
+            var chartData = fetchChartData(duration);
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            if (window.myChart) {
+                window.myChart.destroy(); // Destroy existing chart instance if any
+            }
+            window.myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Data',
+                        data: chartData.data,
+                        backgroundColor: 'blue'
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        // Initial chart render
+        updateChart('weekly');
+
+        // Event listener for filter change
+        document.getElementById('durationFilter').addEventListener('change', function() {
+            var selectedDuration = this.value;
+            updateChart(selectedDuration);
+        });
+    </script>
+</body>
+</html>
