@@ -31,7 +31,7 @@
 
 
 
-<div class="card-header" style="background: linear-gradient(to left, #0C54A0, #0C54A0);  ">
+<div class="card-header" style="background: linear-gradient(to left, #094686, #0C54A0); border-radius:5px ">
     <h3 class="card-title" style="color:white">
         <i class="fa fa-home"></i>
         HomePage
@@ -85,52 +85,84 @@
             <div class="col-xl-1"></div>
             <div class="col-xl-7">
 
+                <div class="row">
+                    <div class="col-sm-3 col-10 border-right" style="border-left: 6px solid #0C54A0; border-radius: 15px; background-color: #0C54A0; color: white">
+                        <div class="description-block">
+                            <h3 class="description-header">
+                                <i class="fa  fa-clock text-white"></i>
+                                @if (ViewBag.InDirectHours != null)
+                                {
+                                    <span class="info-box-number"><b>@ViewBag.InDirectHours<small> . <b>Hrs</b></small></b></span>
+                                }
+                                else
+                                {
+                                    <span class="info-box-number"> . <b>N/A<small> <b>Hrs</b></small></b></span>
+                                }
 
-                <div class="row justify-content-end">
-                    <div class="col-md-4 col-sm-4 col-12">
-                        <div class="info-box" style="border-radius: 14px; background-color:white ">
-                            <span><i class="fa fa-bookmark text-primary"></i></span>
-
-                            <div class="info-box-content" style="color:black">
-                                <span class="info-box-text"><b>Today InDirect Hours</b></span>
-                                <span class="info-box-number"> <b style="font-size:x-large">@ViewBag.InDirectHours </b><small><b>Hours</b></small></span>
-                            </div>
-
+                            </h3>
+                            <span><b>Non Project Hours</b></span>
                         </div>
-
+                        <!-- /.description-block -->
                     </div>
-
-                    <div class="col-md-4 col-sm-4 col-11">
-                        <div class="info-box" style="border-radius: 14px; background-color: #0C54A0 ">
-                            <span><i class="fa fa-user-clock text-white"></i></span>
-
-                            <div class="info-box-content" style="color: white">
-                                <span class="info-box-text">Today Direct Hours</span>
-                                <span class="info-box-number"><b style="font-size:x-large">@ViewBag.DirectHours</b> <small><b>Hours</b></small></span>
-                            </div>
-                            <!-- /.info-box-content -->
+                    <!-- /.col -->
+                    <div class="col-sm-3 col-10 border-right" style="border-left: 6px solid #030230; border-radius: 15px; background-color: #030230; color: white">
+                        <div class="description-block">
+                            <h3 class="description-header">
+                                <i class="fa  fa-clock text-white"></i>
+                                @if (ViewBag.DirectHours != null)
+                                {
+                                    <span class="info-box-number"><b>@ViewBag.DirectHours<small> . <b>Hrs</b></small></b></span>
+                                }
+                                else
+                                {
+                                    <span class="info-box-number"> . <b>N/A <small><b>Hrs</b></small></b></span>
+                                }
+                            </h3>
+                            <span><b>Project Hours</b></span>
                         </div>
-                        <!-- /.info-box -->
+                        <!-- /.description-block -->
                     </div>
-                    <div class="col-md-4 col-sm-4 col-10">
-                        <div class="info-box" style="border-radius: 14px; background-color: #333338 ">
-                            <span><i class="fa fa-user-clock text-white"></i></span>
-
-                            <div class="info-box-content" style="color: white">
-                                <span class="info-box-text">Total  Hours</span>
-                                <span class="info-box-number"><b style="font-size:x-large">@ViewBag.TotalHours</b> <small><b>Hours</b></small></span>
-                            </div>
-                            <!-- /.info-box-content -->
+                    <div class="col-sm-3 col-10 border-right" style="border-left: 6px solid #000000; border-radius: 15px; background-color: #525252;color:white">
+                        <div class="description-block">
+                            <h3 class="description-header">
+                                <i class="fa  fa-clock text-warning"></i>
+                                @if (ViewBag.leave != null)
+                                {
+                                    <span class="info-box-number"><b>@ViewBag.leave<small> . <b>Hrs</b></small></b></span>
+                                }
+                                else
+                                {
+                                    <span class="info-box-number"> . <b>N/A <small><b>Hrs</b></small></b></span>
+                                }
+                            </h3>
+                            <span><b>leave Hours</b></span>
                         </div>
-                        <!-- /.info-box -->
+                        <!-- /.description-block -->
+                    </div>
+                    <div class="col-sm-3 col-10 border-right" style="border-left: 6px solid #0C54A0; border-radius: 15px; background-color: #ffffff; color: black ">
+                        <div class="description-block">
+                            <h3 class="description-header">
+                                <i class="fa  fa-clock text-primary"></i>
+                                @if (ViewBag.Total != null)
+                                {
+                                    <span class="info-box-number"><b>@ViewBag.Total<small> . <b>Hrs</b></small></b></span>
+                                }
+                                else
+                                {
+                                    <span class="info-box-number"> . <b>N/A <small><b>Hrs</b></small></b></span>
+                                }
+                            </h3>
+                            <span><b>Total Hours</b></span>
+                        </div>
+                        <!-- /.description-block -->
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
-                <div class="container">
+                
                     <div class="row justify-content-end">
-                        <div class="col-lg-8 col-12">
+                        <div class="col-lg-6 col-12">
                             <!-- small card -->
-                            <div class="small-box bg-gradient-white" style="border-radius: 15px">
+                            <div class="small-box bg-gray-dark" style="border-radius: 15px">
                                 <div class="inner">
 
                                     <h4> <i class="fa fa-umbrella-beach"></i><b> Leave Request</b></h4>
@@ -145,7 +177,7 @@
                         </div>
 
                     </div>
-                </div>
+                
 
             </div>
 
@@ -162,30 +194,31 @@
                         </h3>
                     </div>
 
-                   
+
                     <div class="card-body text-left" style="border-radius: 14px;background-color:white">
                         <ul class="list-group">
                             @foreach (var department in ViewBag.Departmentt)
                             {
                                 <li class="list-group-item ">
                                     <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> <b> @department</b> <small>Department</small>
-                                   
+
                                 </li>
 
                             }
-                            </ul>
+                        </ul>
 
-                       
+
 
                         <small><i class="fa fa-comments text-primary"></i>  <b>Note</b> you will be able to view and approve timesheets under the respective departments</small>
 
                     </div>
                 </div>
             }
+            
 
 
 
-            </div>
+        </div>
         </div>
 
 

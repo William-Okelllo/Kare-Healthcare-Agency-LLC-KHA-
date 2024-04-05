@@ -73,7 +73,7 @@
 
             @using (Html.BeginForm("All", "Timesheet", FormMethod.Get))
             {
-                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span>  Duration</a>
+                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i> Duration</span>  </a>
                 <select class="form-rounded2" name="Duration" id="Duration">
                     <option value="">Select Duration</option>
                     <option value="thisWeek" @(Request["Duration"] == "thisWeek" ? "selected" : "")>This Week</option>
@@ -82,7 +82,7 @@
                     <option value="lastMonth" @(Request["Duration"] == "lastMonth" ? "selected" : "")>Last Month</option>
                 </select>
                 <small> ||</small>
-                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span>  Department</a>
+                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-university text-black"></i> Department </span>  </a>
                 <select class="form-rounded2" name="Department" id="Department">
                     <option value="">Select Department</option>
                     @foreach (var department in ViewBag.department)
@@ -91,7 +91,7 @@
                     }
                 </select>
                 <small> ||</small>
-                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i></span>  Staff</a>
+                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i>  Staff</span>  </a>
                 <select class="form-rounded2" name="option" id="userName">
                     <option value="">Select User</option>
                     @foreach (var userName in ViewBag.Usernames)

@@ -129,12 +129,12 @@
                     <div class="small-box bg-gradient-gray-dark" style="border-radius: 15px;">
                         <div class="inner">
 
-                            <h3>@item.Days <b style="font-size:large">Days</b> </h3>
-                            <h5><i class="fa fa-bookmark"></i> @item.Type</h5>
+                            <p><b style="font-size:x-large"><i class="fa fa-bookmark"></i> @item.Type   | </b>  <b style="font-size:large">  @item.Days</b> <b style="font-size:large">Days</b>   </p>
+                           
                             @if (item.Status == 66)
                             {<h6> <i class="fa fa-circle-notch"></i> InProgress</h6>}
                             else if (item.Status == 1)
-                            { <h6> <i class="fa  fa-pause-circle text-gray"></i> <b>Awaiting Approvals</b></h6>}
+                            { <h6> <i class="fa  fa-pause-circle text-warning"></i> <b>Awaiting Approvals</b></h6>}
                             else if (item.Status == 2)
                             { <h6>
     <i class="fa  fa-check-circle text-warning"></i> <b>APPROVED </b>

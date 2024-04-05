@@ -49,23 +49,71 @@ namespace Ishop.Controllers
                 }
             
         }
-        public ActionResult All(string searchBy, string search, int? page)
+        public ActionResult All(string searchBy, string search, int? page, string Duration, string Department)
         {
+            var Employ = db.leave.Select(t => t.Employee).Distinct().ToList();
+            ViewBag.Usernames = Employ;
+
+            var Departments = db.leave.Select(t => t.Department).Distinct().ToList();
+            ViewBag.Departments = Departments;
+
+            DateTime currentDate = DateTime.Now;
+
+            // Set Monday to the Monday of the current week
+            DateTime Monday = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday);
+
+            // Set Sunday to the next Sunday from the current day
+            DateTime Sunday = Monday.AddDays(6);
+
+            // Determine date range based on Duration parameter
+            DateTime startRange, endRange;
+
+            switch (Duration)
+            {
+                case "thisWeek":
+                    startRange = Monday;
+                    endRange = Sunday;
+                    break;
+
+                case "lastWeek":
+                    startRange = Monday.AddDays(-7);
+                    endRange = Sunday.AddDays(-7);
+                    break;
+
+                case "thisMonth":
+                    startRange = new DateTime(currentDate.Year, currentDate.Month, 1);
+                    endRange = new DateTime(currentDate.Year, currentDate.Month, DateTime.DaysInMonth(currentDate.Year, currentDate.Month));
+                    break;
+
+                case "lastMonth":
+                    startRange = new DateTime(currentDate.Year, currentDate.Month - 1, 1);
+                    endRange = new DateTime(currentDate.Year, currentDate.Month, 1).AddDays(-1);
+                    break;
+
+                default:
+                    // Use the default date range for other cases
+                    startRange = Monday;
+                    endRange = Sunday;
+                    break;
+            }
+
+
+
 
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Department.StartsWith(search) && c.Status != 0).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Department.StartsWith(search) && c.Status != 0 && Department == null || Department == "" || c.Department == (Department)).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c=>c.Status != 0).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c=>c.Status != 0 && Department == null || Department == "" || c.Department == (Department) ).ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Status != 0).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Status != 0 ).ToList().ToPagedList(page ?? 1, 11));
             }
 
         }

@@ -25,22 +25,28 @@ namespace Ishop.Controllers
             //Timesheet_Context TC = new Timesheet_Context();
             //var TimmDetails = TC.timesheets.Where(c => Depart.Contains(c.Department) && c.Status == 0 && c.Locked == true).GroupBy(c => c.Department) .Select(group => new {DepartmentName = group.Key,Count = group.Count()}).ToList();
 
-           // ViewBag.TimmDetails = TimmDetails;
+            // ViewBag.TimmDetails = TimmDetails;
 
 
 
 
-            Direct_Activities_Context DA = new Direct_Activities_Context();
-            Indirect_Activities_Context IDA = new Indirect_Activities_Context();
-            DateTime currentDate = DateTime.Now.Date;
-            var DirectA = DA.direct_Activities.Where(p => p.Day_Date == currentDate && p.User ==User.Identity.Name).Select(f=>f.Hours).DefaultIfEmpty(0).Sum();
-            var InDirectA = IDA.indirect_Activities.Where(p => p.Day_Date == currentDate && p.User == User.Identity.Name).Select(f => f.Hours).DefaultIfEmpty(0).Sum();
-            ViewBag.DirectHours = DirectA;
-            ViewBag.InDirectHours = InDirectA;
-            ViewBag.TotalHours = DirectA + InDirectA;
+            Timesheet_Context TT = new Timesheet_Context();
+            var Sheet = TT.timesheets.Where(i => i.Owner == User.Identity.Name && DateTime.Now >= i.From_Date && DateTime.Now <= i.End_Date).FirstOrDefault();
+            if(Sheet != null)
+            {
+                ViewBag.DirectHours = Sheet.Direct_Hours;
+                ViewBag.InDirectHours = Sheet.InDirect_Hours;
+                ViewBag.leave = Sheet.Leave;
+                ViewBag.Total = Sheet.Tt;
+            }
+            else
+            {
+                ViewBag.DirectHours = 0;
+                ViewBag.InDirectHours = 0;
+                ViewBag.leave = 0;
+                ViewBag.Total = 0;
+            }
 
-
-            
 
             return View();
         }

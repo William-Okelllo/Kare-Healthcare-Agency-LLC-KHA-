@@ -45,6 +45,17 @@ namespace Ishop
         // GET: Indirect_Activities/Create
         public ActionResult Add(DateTime Id)
         {
+
+            Timesheet_Context TT = new Timesheet_Context();
+            var Sheet = TT.timesheets.Where(i => i.Owner == User.Identity.Name && Id >= i.From_Date && Id <= i.End_Date).FirstOrDefault();
+            if (Sheet == null)
+            {
+                TempData["msg"] = "Opps : Note you have no timesheet generated for the current week ";
+                return RedirectToAction("Index", "Timesheet");
+            }
+
+
+
             ViewBag.Date = Id;
             Direct_Context DC = new Direct_Context();
             var DirectC = DC.directs.ToList();
@@ -325,7 +336,7 @@ namespace Ishop
         }
 
 
-        public void RemoveCaptureRecord(int time, string Staff, DateTime datecheck)
+        public void RemoveCaptureRecord(Decimal time, string Staff, DateTime datecheck)
         {
             Timesheet_Context TT = new Timesheet_Context();
             var Sheet = TT.timesheets.Where(i => i.Owner == Staff && datecheck >= i.From_Date && datecheck <= i.End_Date).FirstOrDefault();

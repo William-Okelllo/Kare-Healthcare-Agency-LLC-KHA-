@@ -12,7 +12,7 @@ namespace IShop.Core
         public int Id { get; set; }
 
         public int WeekNo { get; set; }
-        public int Hours { get; set; }
+        public Decimal Hours { get; set; }
         public DateTime Day_Date { get; set; }
         public DateTime CreatedOn { get; set; }
         

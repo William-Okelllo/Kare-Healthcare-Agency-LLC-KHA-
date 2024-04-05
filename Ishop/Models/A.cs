@@ -9,6 +9,8 @@ namespace Ishop.Models
         public DateTime DateValue { get; set; }
         public string Status { get; set; }
         public string Username { get; set; }
+
+        public string Holiday_Name { get; set; }
         public string WeekdayName { get; set; }
         public int Total_Hours { get; set; }
         public int Direct_Hours { get; set; }

@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-19T07:52:37.5717336Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-04-04T12:03:45.2035731Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -30,6 +30,9 @@
           </QueryParameter>
           <QueryParameter Name="@Project">
             <Value>=Parameters!Project.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Department">
+            <Value>=Parameters!Department.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@startDate">
             <Value>=Parameters!startDate.Value</Value>
@@ -86,6 +89,10 @@
           <DataField>Charge</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Comments">
           <DataField>Comments</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -125,6 +132,25 @@ select Project_Name from Direct_Activities</CommandText>
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="Department">
+      <Query>
+        <DataSourceName>Direct_Activities</DataSourceName>
+        <CommandText>SELECT Department
+FROM (
+    SELECT 'All' AS Department, 0 AS SortOrder
+    UNION
+    SELECT DprtName AS Department, 1 AS SortOrder
+    FROM Departments
+) AS CombinedDepartments
+ORDER BY SortOrder, Department;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -137,7 +163,10 @@ select Project_Name from Direct_Activities</CommandText>
                   <Width>1.09722in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.40749in</Width>
+                  <Width>1.25471in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>3.22222in</Width>
@@ -227,6 +256,41 @@ select Project_Name from Direct_Activities</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#282653</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Department</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -628,6 +692,38 @@ select Project_Name from Direct_Activities</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Department">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Department.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Department</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Project_Name">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -943,6 +1039,7 @@ select Project_Name from Direct_Activities</CommandText>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -959,7 +1056,7 @@ select Project_Name from Direct_Activities</CommandText>
             <Top>0.06944in</Top>
             <Left>0.125in</Left>
             <Height>0.49306in</Height>
-            <Width>18.63665in</Width>
+            <Width>19.48387in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -975,7 +1072,7 @@ select Project_Name from Direct_Activities</CommandText>
           <BackgroundColor>White</BackgroundColor>
         </Style>
       </Body>
-      <Width>18.76165in</Width>
+      <Width>19.60887in</Width>
       <Page>
         <PageHeader>
           <Height>0.8125in</Height>
@@ -1115,6 +1212,23 @@ select Project_Name from Direct_Activities</CommandText>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
+    <ReportParameter Name="Department">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Department</DataSetName>
+          <ValueField>Department</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Department</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Department</DataSetName>
+          <ValueField>Department</ValueField>
+          <LabelField>Department</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
     <ReportParameter Name="Project">
       <DataType>String</DataType>
       <DefaultValue>
@@ -1149,14 +1263,19 @@ select Project_Name from Direct_Activities</CommandText>
           <ParameterName>endDate</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
           <ParameterName>Staff</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>Project</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Department</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

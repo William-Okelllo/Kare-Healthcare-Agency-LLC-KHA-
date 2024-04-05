@@ -277,23 +277,11 @@
      @placeholder = "Additional information",
      @autofocus = "",
      @class = "form-control form-rounded2",
-     @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+      // Custom attribute for conditional validation
  })
                         @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
                     </div>
-                    <script>
-                                document.getElementById("Comments").addEventListener("paste", function (event) {
-                                    // Prevent the default paste behavior
-                                    event.preventDefault();
-
-                                    // Get the pasted content as plain text
-                                    var text = (event.clipboardData || window.clipboardData).getData("text/plain");
-
-                                    // Insert the plain text into the textarea as HTML
-                                    document.execCommand("insertHTML", false, text);
-                                });
-                    </script>
-
+                   
 
 
                     <div class="dropdown-divider"></div>

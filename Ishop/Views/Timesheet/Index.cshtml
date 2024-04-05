@@ -57,7 +57,7 @@
         }, 2000);
     </script>
 
-
+ 
 
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
@@ -139,14 +139,99 @@
                 right: 'month'
             },
             firstDay: 1,
-            events: [
-                {
-                    title: 'Madaraka Day',
-                    start: '2023-06-01',
-                    color: 'red'
-                },
+           events: [
+            {
+                "title": "New Year's Day",
+                "start": "2024-01-01",
+                "color": "GREEN"
+            },
+            {
+                "title": "Ramadan Start",
+                "start": "2024-03-11",
+                "color": "GREEN"
+            },
+            {
+                "title": "Good Friday",
+                "start": "2024-03-29",
+                "color": "GREEN"
+            },
+            {
+                "title": "Easter Sunday",
+                "start": "2024-03-31",
+                "color": "GREEN"
+            },
+            {
+                "title": "Easter Monday",
+                "start": "2024-04-01",
+                "color": "GREEN"
+            },
+            {
+                "title": "Idd ul-Fitr",
+                "start": "2024-04-10",
+                "color": "GREEN"
+            },
+            {
+                "title": "Labour Day/May Day",
+                "start": "2024-05-01",
+                "color": "GREEN"
+            },
+            {
+                "title": "Mother's Day",
+                "start": "2024-05-12",
+                "color": "GREEN"
+            },
+            {
+                "title": "Madaraka Day",
+                "start": "2024-06-01",
+                "color": "GREEN"
+            },
+            {
+                "title": "Eid al-Adha",
+                "start": "2024-06-17",
+                "color": "GREEN"
+            },
+            {
+                "title": "Huduma Day",
+                "start": "2024-10-10",
+                "color": "GREEN"
+            },
+            {
+                "title": "Mashujaa Day",
+                "start": "2024-10-20",
+                "color": "GREEN"
+            },
+            {
+                "title": "Diwali",
+                "start": "2024-11-01",
+                "color": "GREEN"
+            },
+            {
+                "title": "Jamhuri Day",
+                "start": "2024-12-12",
+                "color": "GREEN"
+            },
+            {
+                "title": "Christmas Eve",
+                "start": "2024-12-24",
+                "color": "GREEN"
+            },
+            {
+                "title": "Christmas Day",
+                "start": "2024-12-25",
+                "color": "GREEN"
+            },
+            {
+                "title": "Boxing Day",
+                "start": "2024-12-26",
+                "color": "GREEN"
+            },
+            {
+                "title": "New Year's Eve",
+                "start": "2024-12-31",
+                "color": "GREEN"
+            }
+        ],
 
-            ],
             dayRender: function (date, cell) {
                 var today = moment();
                 var startOfWeek = today.clone().startOf('isoWeek'); // ISO week starts on Monday
@@ -239,7 +324,7 @@
                     }
 
                 </h3>
-                <span ><b>Non Project Hours</b></span>
+                <span><b>Non Project Hours</b></span>
             </div>
             <!-- /.description-block -->
         </div>
@@ -257,7 +342,7 @@
                         <span class="info-box-number"> . <b>N/A <small><b>Hrs</b></small></b></span>
                     }
                 </h3>
-                <span ><b>Project Hours</b></span>
+                <span><b>Project Hours</b></span>
             </div>
             <!-- /.description-block -->
         </div>
@@ -274,7 +359,7 @@
                         <span class="info-box-number"> . <b>N/A<small><b>Hrs</b></small></b></span>
                     }
                 </h3>
-                <span ><b>Leave Hours</b></span>
+                <span><b>Leave Hours</b></span>
             </div>
             <!-- /.description-block -->
         </div>
@@ -299,51 +384,51 @@
         <div class="col-sm-3 border-right" style="border-left: 6px solid #bbbbbb; border-radius: 15px ">
             <div class="description-block">
                 <h7><i class="fa  fa-question-circle"></i>  Missed Out timesheets ?</h7>
-                    <a href="#" class="btn btn-sm  btn-primary" data-toggle="modal" data-target="#knowledge" >
-                        <i class="fa  fa-bookmark"></i>    learn more
-                    </a>
-               
+                <a href="#" class="btn btn-sm  btn-primary" data-toggle="modal" data-target="#knowledge">
+                    <i class="fa  fa-bookmark"></i>    learn more
+                </a>
+
 
             </div>
             <!-- /.description-block -->
         </div>
     </div>
-   
-    
 
 
-        <div class="modal fade" id="knowledge" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="border-radius:15px">
-                    <div class="modal-header" style="border-radius: 15px; background-color: #0C54A0">
-                        <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-clipboard-list text-black"></i></span>   Past Timesheets</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="color:black">
 
-                        <div class="dropdown-divider"></div>
-                        <p>Have you missed any crucial timesheet information or need to rectify past entries? </p>
-                        <small>   If so, please submit a request to your Head of Department (HOD). Your HOD possesses the authority to reopen past timesheets, granting you the opportunity to make necessary amendments or log any missed clock-ins.</small>
 
-                        <small>
-                            Utilize the 'Timesheet Re-open' tab to submit your request through the system. <br />
-                            Thank you for your cooperation.
-                        </small>
-                        <img src="~/Images/sad.gif" height="100px" />
-                        <br />
+    <div class="modal fade" id="knowledge" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border-radius:15px">
+                <div class="modal-header" style="border-radius: 15px; background-color: #0C54A0">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-clipboard-list text-black"></i></span>   Past Timesheets</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="color:black">
 
-                        @Html.ActionLink("Request Re-Open ", "Re_quest", "reopen", null, new { @class = "btn btn-sm btn-primary btn " })
+                    <div class="dropdown-divider"></div>
+                    <p>Have you missed any crucial timesheet information or need to rectify past entries? </p>
+                    <small>   If so, please submit a request to your Head of Department (HOD). Your HOD possesses the authority to reopen past timesheets, granting you the opportunity to make necessary amendments or log any missed clock-ins.</small>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <small>
+                        Utilize the 'Timesheet Re-open' tab to submit your request through the system. <br />
+                        Thank you for your cooperation.
+                    </small>
+                    <img src="~/Images/sad.gif" height="100px" />
+                    <br />
 
-                    </div>
+                    @Html.ActionLink("Request Re-Open ", "Re_quest", "reopen", null, new { @class = "btn btn-sm btn-primary btn " })
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                 </div>
             </div>
         </div>
+    </div>
 
 
 

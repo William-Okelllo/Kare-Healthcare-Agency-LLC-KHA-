@@ -38,6 +38,7 @@ namespace Ishop
             Database.SetInitializer<DepartmentContext>(null);
             Database.SetInitializer<Re_open_context>(null);
             Database.SetInitializer<Notification_context>(null);
+            Database.SetInitializer<Holiday_context>(null);
         }
     }
 }

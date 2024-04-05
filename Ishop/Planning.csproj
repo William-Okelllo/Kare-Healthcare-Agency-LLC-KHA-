@@ -416,6 +416,7 @@
     <Compile Include="Controllers\Direct_ActivitiesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HODsController.cs" />
+    <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InDirectsController.cs" />
     <Compile Include="Controllers\leavesController.cs" />
@@ -7960,7 +7961,6 @@
     <Content Include="Views\Phase\Delete.cshtml" />
     <Content Include="Views\Phase\Details.cshtml" />
     <Content Include="Views\Phase\Edit.cshtml" />
-    <Content Include="Views\Phase\Index.cshtml" />
     <Content Include="Views\Pcategories\Create.cshtml" />
     <Content Include="Views\Pcategories\Delete.cshtml" />
     <Content Include="Views\Pcategories\Details.cshtml" />
@@ -8014,7 +8014,6 @@
     <Content Include="Views\Indirect_Activities\Delete.cshtml" />
     <Content Include="Views\Indirect_Activities\Details.cshtml" />
     <Content Include="Views\Indirect_Activities\Edit.cshtml" />
-    <Content Include="Views\Indirect_Activities\Index.cshtml" />
     <Content Include="Views\leaves\All.cshtml" />
     <Content Include="Views\Timesheet\Directtasks.cshtml" />
     <Content Include="Views\Timesheet\InDirecttasks.cshtml" />
@@ -8081,6 +8080,9 @@
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\API\Index.cshtml" />
     <Content Include="Views\Reports\Visual.cshtml" />
+    <Content Include="Views\Holidays\Create.cshtml" />
+    <Content Include="Views\Holidays\Edit.cshtml" />
+    <Content Include="Views\Holidays\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

@@ -16,16 +16,23 @@ namespace Ishop.Controllers
         private Employee_Context db = new Employee_Context();
 
         // GET: Employees
-        public ActionResult Index(string searchBy, string search, int? page)
+        public ActionResult Index( string search, int? page, string Department)
         {
-            if (!(search == null) && (!(search == "")))
+
+            var Employ = db.employees.Select(t => t.Username).Distinct().ToList();
+            ViewBag.Usernames = Employ;
+
+            var Departments = db.employees.Select(t => t.DprtName).Distinct().ToList();
+            ViewBag.Departments = Departments;
+
+            if ((!(search == "")))
             {
-                return View(db.employees.OrderByDescending(p => p.Id).Where(c => c.Username.StartsWith(search) || c.Username == search || c.Fullname.Contains(search)).ToList().ToPagedList(page ?? 1, 15));
+                return View(db.employees.OrderByDescending(p => p.Id).Where(c => c.Username == (search)  && Department == null || Department == "" || c.DprtName == (Department)).ToList().ToPagedList(page ?? 1, 15));
 
             }
             else if (search == "")
             {
-                return View(db.employees.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.employees.OrderByDescending(p => p.Id).Where( c=> Department == null || Department == "" || c.DprtName == (Department)).ToList().ToPagedList(page ?? 1, 11));
 
 
             }

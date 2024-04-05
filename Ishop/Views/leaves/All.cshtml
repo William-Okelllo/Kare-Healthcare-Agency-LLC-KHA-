@@ -36,8 +36,9 @@
     }
 
     .form-rounded2 {
-        border-radius: 0.5rem;
-        width: 20%;
+        border-radius: 0.3rem;
+        width: 14%;
+        
         border-color: white;
     }
 </style>
@@ -53,10 +54,23 @@
 
         <div style="text-align: right; color: white ">
             @using (Html.BeginForm("All", "Leaves", FormMethod.Get))
-            {
+            {<a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-university text-black"></i> Department </span>  </a>
+                <select class="form-rounded2" name="Department" id="Department">
+                    <option value="">Select Department</option>
+                    @foreach (var department in ViewBag.Departments)
+                    {
+                        <option value="@department" @(Request["Department"] == department ? "selected" : "")>@department</option>
+                    }
+                </select>
 
-                <a style="font-family: Calibri"> Staff Name</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Staff Name" })
+                <a style="font-family: Calibri">  <span class="badge badge-warning"><i class="fas fa-user-circle"></i> Staff </a>
+                <select class="form-rounded2" name="search" id="search">
+                    <option value="">Select User</option>
+                    @foreach (var userName in ViewBag.Usernames)
+                    {
+                        <option value="@userName" @(Request["option"] == userName ? "selected" : "")>@userName</option>
+                    }
+                </select>
                 <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>

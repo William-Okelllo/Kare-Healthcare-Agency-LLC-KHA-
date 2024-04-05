@@ -90,7 +90,16 @@ namespace Ishop.Controllers
         }
         public ActionResult Add(DateTime Id)
         {
-            ViewBag.Date = Id;
+
+            Timesheet_Context TT = new Timesheet_Context();
+            var Sheet = TT.timesheets.Where(i => i.Owner == User.Identity.Name && Id >= i.From_Date && Id <= i.End_Date).FirstOrDefault();
+            if (Sheet == null)
+            {
+                TempData["msg"] = "Opps : Note you have no timesheet generated for the current week ";
+                return RedirectToAction("Index", "Timesheet");
+            }
+
+                ViewBag.Date = Id;
 
             Time_cat_context TC = new Time_cat_context();
             var Timecategory = TC.time_Cats.ToList();
@@ -150,6 +159,10 @@ namespace Ishop.Controllers
 
         public ActionResult Add2(DateTime Id)
         {
+
+
+
+
             ViewBag.Date = Id;
 
             Time_cat_context TC = new Time_cat_context();

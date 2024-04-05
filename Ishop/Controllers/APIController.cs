@@ -1,9 +1,12 @@
 ﻿using Ishop.Infa;
+using IShop.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Ishop.Controllers
 {
@@ -18,7 +21,7 @@ namespace Ishop.Controllers
 
         public void Updatetimesheetservice()
         {
-            var leavewithbalances = db.leave.Where(c => c.Total_Hours > 0 && c.Status ==2).ToList();
+            var leavewithbalances = db.leave.Where(c => c.Total_Hours > 0 && c.Status == 2).ToList();
             foreach (var leavesb in leavewithbalances)
             {
                 IDays_leave_context dv = new IDays_leave_context();
@@ -70,7 +73,7 @@ namespace Ishop.Controllers
 
                 // Adjust GetDatesInRange to exclude weekends
                 List<DateTime> datesInRange = GetDatesInRangeWithoutWeekends(leavesb.From_Date, leavesb.To_Date);
-                
+
                 Random random = new Random();
                 int HoursOnleave;
 
@@ -109,15 +112,6 @@ namespace Ishop.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
         // New method to get dates in range excluding weekends
         private List<DateTime> GetDatesInRangeWithoutWeekends(DateTime startDate, DateTime endDate)
         {
@@ -135,5 +129,66 @@ namespace Ishop.Controllers
             return datesInRange;
         }
 
+
+
+
+
+        public void Holidays()
+        {
+            Holiday_context HH = new Holiday_context();
+            var currentDate = DateTime.Now.Date;
+            var holidaysToday = HH.holidays.Where(c => c.Holiday_date.Date == currentDate).ToList();
+
+           
+
+                Employee_Context EE = new Employee_Context();
+            var Emp = EE.employees.Where(c => c.Active == true).ToList();
+
+            if (holidaysToday.Any())
+            {
+                foreach (var holiday in holidaysToday)
+                {
+                    using (var In_services = new Indirect_Activities_Context())
+                    {
+                        Random random = new Random();
+
+                        foreach (var employee in Emp)
+                        {
+                            Indirect_Activities indirecttasks = new Indirect_Activities
+                            {
+                                Id = random.Next(),
+                                User = employee.Username, // Assuming Id is the primary key of the employee table
+                                Hours = holiday.Hours_Assigned,
+                                Day_Date = holiday.Holiday_date,
+                                CreatedOn = holiday.Holiday_date,
+                                Comments = holiday.Holiday_Name,
+                                Name = "WELLNESS & BREAKS",
+                                WeekNo = GetCurrentWeekNumber(holiday.Holiday_date),
+                                Approved=true
+                            };
+
+                            In_services.indirect_Activities.Add(indirecttasks);
+                            In_services.SaveChanges();
+
+
+
+
+
+                        }
+
+                    }
+                }
+            }
+
+
+
+
+        }
+        private int GetCurrentWeekNumber(DateTime date)
+        {
+            var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
+            int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return week;
+        }
     }
 }

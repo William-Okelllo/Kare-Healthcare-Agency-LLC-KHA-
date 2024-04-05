@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-19T08:06:39.4287756Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-04-04T12:45:42.2105537Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -31,6 +31,9 @@
           <QueryParameter Name="@Activity">
             <Value>=Parameters!Activity.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@Department">
+            <Value>=Parameters!Department.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@startDate">
             <Value>=Parameters!startDate.Value</Value>
           </QueryParameter>
@@ -44,6 +47,10 @@
       <Fields>
         <Field Name="Staff">
           <DataField>Staff</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Day_Date">
@@ -106,6 +113,25 @@ select Name [Activity] from Indirect_Activities</CommandText>
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="Department">
+      <Query>
+        <DataSourceName>Direct_Activities</DataSourceName>
+        <CommandText>SELECT Department
+FROM (
+    SELECT 'All' AS Department, 0 AS SortOrder
+    UNION
+    SELECT DprtName AS Department, 1 AS SortOrder
+    FROM Departments
+) AS CombinedDepartments
+ORDER BY SortOrder, Department;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -118,7 +144,10 @@ select Name [Activity] from Indirect_Activities</CommandText>
                   <Width>1.09722in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.40749in</Width>
+                  <Width>1.08805in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.25694in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>3.22222in</Width>
@@ -193,6 +222,41 @@ select Name [Activity] from Indirect_Activities</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#282653</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Department</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -419,6 +483,38 @@ select Name [Activity] from Indirect_Activities</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Department">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Department.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Department</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="WorkStage1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -568,6 +664,7 @@ select Name [Activity] from Indirect_Activities</CommandText>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -584,7 +681,7 @@ select Name [Activity] from Indirect_Activities</CommandText>
             <Top>0.06944in</Top>
             <Left>0.125in</Left>
             <Height>0.5in</Height>
-            <Width>11.23387in</Width>
+            <Width>12.17137in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -740,6 +837,23 @@ select Name [Activity] from Indirect_Activities</CommandText>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
+    <ReportParameter Name="Department">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Department</DataSetName>
+          <ValueField>Department</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Department</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Department</DataSetName>
+          <ValueField>Department</ValueField>
+          <LabelField>Department</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
     <ReportParameter Name="Activity">
       <DataType>String</DataType>
       <DefaultValue>
@@ -778,9 +892,14 @@ select Name [Activity] from Indirect_Activities</CommandText>
           <ParameterName>Staff</ParameterName>
         </CellDefinition>
         <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Activity</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Activity</ParameterName>
+          <ParameterName>Department</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

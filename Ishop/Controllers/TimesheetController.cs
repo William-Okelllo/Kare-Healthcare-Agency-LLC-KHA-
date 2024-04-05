@@ -97,7 +97,17 @@ namespace Ishop
 
             return View();
         }
+        public ActionResult GetHolidays()
+        {
+            Holiday_context dbb = new Holiday_context();
+            var holidayData = dbb.holidays.Select(h => new {
+                title = h.Holiday_Name,
+                start = h.Holiday_date.ToString("yyyy-MM-dd"), // Make sure Holiday_date is DateTime
+                color = "red"
+            }).ToList();
 
+            return Json(holidayData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Details(int? id)
         {
             var Times = db.timesheets.Where(c => c.Id == id).FirstOrDefault();
