@@ -12,6 +12,7 @@ using PagedList;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class HolidaysController : Controller
     {
         private Holiday_context db = new Holiday_context();
@@ -98,7 +99,9 @@ namespace Ishop.Controllers
             Holiday holiday = db.holidays.Find(id);
             db.holidays.Remove(holiday);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Holiday dropped successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

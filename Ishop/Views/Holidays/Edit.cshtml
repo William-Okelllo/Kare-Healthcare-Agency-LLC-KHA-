@@ -1,63 +1,127 @@
 ﻿@model IShop.Core.Holiday
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+@{
+    ViewBag.Title = "Add Holiday";
+}
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Holiday</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                <i class="fa fa-bookmark"></i> Holiday Add
             </div>
-        </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
+                    @using (Html.BeginForm("Edit", "holidays", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Holiday_date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Holiday_date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Holiday_date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <form>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Hours_Assigned, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Hours_Assigned, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Hours_Assigned, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Activated, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Activated)
-                    @Html.ValidationMessageFor(model => model.Activated, "", new { @class = "text-danger" })
+
+                            <div class="form-row">
+                                <div class="form-group col-md-2" id="other" style="display:none">
+                                    <label><i class="fa fa-tags text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                                    @Html.EditorFor(model => model.CreatedOn, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Amount",
+                                       @Value = DateTime.Now,
+                                       @Readonly = true,
+                                   }
+                               })
+                                </div>
+                                <div class="form-group col-md-4" id="other">
+                                    <label><i class="fa fa-tags text-primary"></i>   @Html.LabelFor(model => model.Holiday_Name)</label>
+                                    @Html.EditorFor(model => model.Holiday_Name, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Holiday_Name",
+                                       @Required = true
+                                   }
+                               })
+                                </div>
+                                <div class="form-group col-md-3" id="other" style="display:nosne">
+                                    <label><i class="fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.Holiday_date)</label>
+                                    @Html.EditorFor(model => model.Holiday_date, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Select Date",
+                                       @id = "datepicker",
+                                       @Required = true
+                                   }
+                               })
+                                </div>
+                                <script type="text/javascript">
+                                $(function () {
+
+                                    $("#Hours_Assigned").chosen();
+
+
+                                });
+                                </script>
+                                <div class="form-group col-md-3" id="other" style="display:nosne">
+                                    <label><i class="fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Hours_Assigned)</label>
+                                    @{
+                                        List<SelectListItem> m = new List<SelectListItem>();
+                                        m.Add(new SelectListItem
+                                        {
+                                            Text = "Full Days -  8 Hrs",
+                                            Value = "8",
+                                        });
+                                        m.Add(new SelectListItem
+                                        {
+                                            Text = "Half Day - 4 Hrs",
+                                            Value = "4",
+                                        });
+
+                                    }@Html.DropDownListFor(model => model.Hours_Assigned, m, "---Select Assigned Hours---", new { @class = "form-control form-control-sm", @required = "required", })
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+
+                            <input type="submit" name="action" value="Update/Save" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this add Holiday?')" />
+
+
+                            <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                            </script>
+
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </form>
+                    }
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

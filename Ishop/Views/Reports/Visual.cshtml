@@ -1,71 +1,89 @@
-﻿<html>
-<head>
-    <title>Dynamic Chart with Filters</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <select id="durationFilter">
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-        <option value="quarterly">Quarterly</option>
-    </select>
-    <canvas id="myChart" width="400" height="400"></canvas>
+﻿
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
 
-    <script>
-        // Function to fetch chart data based on selected duration
-        function fetchChartData(duration) {
-            // Make AJAX request to fetch data from the server based on selected duration
-            // Replace this with your actual AJAX call
-            switch(duration) {
-                case 'weekly':
-                    return { labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], data: [20, 30, 25, 35, 40] };
-                case 'monthly':
-                    return { labels: ["Week 1", "Week 2", "Week 3", "Week 4"], data: [50, 60, 45, 55] };
-                case 'quarterly':
-                    return { labels: ["January", "February", "March"], data: [100, 120, 90] };
-                default:
-                    return { labels: [], data: [] };
-            }
-        }
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
 
-        // Function to update chart based on selected duration
-        function updateChart(duration) {
-            var chartData = fetchChartData(duration);
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 40%;
+        border-color: dodgerblue;
+    }
 
-            var ctx = document.getElementById('myChart').getContext('2d');
-            if (window.myChart) {
-                window.myChart.destroy(); // Destroy existing chart instance if any
-            }
-            window.myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [{
-                        label: 'Data',
-                        data: chartData.data,
-                        backgroundColor: 'blue'
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-        }
+    .bwe {
+        font-family: Quicksand;
+    }
+</style>
 
-        // Initial chart render
-        updateChart('weekly');
 
-        // Event listener for filter change
-        document.getElementById('durationFilter').addEventListener('change', function() {
-            var selectedDuration = this.value;
-            updateChart(selectedDuration);
-        });
-    </script>
-</body>
-</html>
+
+<br />
+<br />
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-7 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                <i class="fa fa-bookmark"></i> Development Ahead
+            </div>
+            <div class="card-body" style="background-color: white; border-radius: 24px;">
+                <div class="card-body">
+
+                    <table>
+                        <thead>
+                            <tr>
+
+                                <td>
+
+                                    <h5 class="text-danger">In Development.</h5>
+                                    <p>
+                                        <i class="fa fa-question-circle text-success"></i> Visual Charts <br />
+
+                                    <p>We are excited to announce that we are currently working on developing an innovative module for visual charts. Stay tuned as we bring you powerful tools to enhance your data visualization experience.</p>
+                                    <b>Thanks for your patience!</b>
+                                    </p>
+
+
+                                    
+                                        </div>
+                                    </div>
+
+
+                                </td>
+                                <td>
+                                    <img src="~/Images/sad.gif" height="150" style="margin-right: 20px;" />
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+
+                    <div class="spinner-border spinner-border-sm text-warning" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <hr />
+                    <div class="divider"></div>
+
+                    <p style="color:darkslategrey;font-size:smaller">     Copyright © @DateTime.Now.Year Planning Systems. <br /> All rights reserved  </p>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    </body>
+    </html>

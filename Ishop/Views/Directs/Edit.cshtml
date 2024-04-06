@@ -180,23 +180,28 @@
 
                         </div>
                         <div class="dropdown-divider"></div>
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+                        
 
                         <script>
-                            $(document).ready(function () {
-                                $("#Theme_Color").spectrum({
-                                    preferredFormat: "hex",
-                                    showInput: true,
-                                    showPalette: true,
-                                    palette: [
-                                        ["#ff0000", "#00ff00", "#0000ff"]
-                                        // Add more colors to the palette as needed
-                                    ]
-                                });
+                            document.addEventListener("DOMContentLoaded", function () {
+                                var colorPicker = document.getElementById("colorPicker");
+                                var selectedColorInput = document.getElementById("selectedColor");
+
+                                function changeColor(event) {
+                                    var color = event.target.value;
+                                    colorPicker.style.backgroundColor = color;
+                                    selectedColorInput.value = color;
+                                }
+
+                                colorPicker.addEventListener("input", changeColor);
+
+                                // Initial color
+                                var initialColor = colorPicker.value;
+                                colorPicker.style.backgroundColor = initialColor;
+                                selectedColorInput.value = initialColor;
                             });
                         </script>
-                       
+
                         <div class="form-group col-md-8">
                             <p><i class=" fa fa-circle-notch text-primary"></i>  The color selected is used in reports on theme colors</p>
                             <input type="color" id="Theme_Color" name="Theme_Color">

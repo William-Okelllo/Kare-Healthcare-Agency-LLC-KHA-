@@ -66,6 +66,7 @@ namespace Planning_Backend_Service
                 
 
                 CheckTimesheetDate();
+                Holidaysfix();
 
             }
             catch (Exception ex)
@@ -669,7 +670,45 @@ namespace Planning_Backend_Service
             }
         }
 
+        public void Holidaysfix()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT Business_mail FROM Configs";
+                string baseAddress = connection.QueryFirstOrDefault<string>(query);
 
+                // Assuming you have a base address for the HttpClient
+                using (HttpClient client = new HttpClient())
+                {
+                    if (Uri.TryCreate(baseAddress, UriKind.Absolute, out Uri uri))
+                    {
+                        client.BaseAddress = uri;
+
+                        HttpResponseMessage response = client.GetAsync("API/Holidays").Result;
+
+                        // Check if the request was successful
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Read and handle the response content
+                            string responseBody = response.Content.ReadAsStringAsync().Result;
+                            string logLine = $"Date: {DateTime.Now.ToString()} | - - - - -Holiday Time Sync updated - - - - - | {responseBody} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                        else
+                        {
+                            Console.WriteLine("Request failed with status: " + response.StatusCode);
+                            string logLine = $"Date: {DateTime.Now.ToString()} |- - - - - Error updating Holiday Time Sync   - - - - - - - -| {response} ";
+                            File.AppendAllLines(logFilePath, new string[] { logLine });
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid URL format: " + baseAddress);
+                    }
+                }
+            }
+        }
 
         public void Start()
         {

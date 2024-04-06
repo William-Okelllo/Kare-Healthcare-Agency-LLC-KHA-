@@ -71,19 +71,11 @@
 
 
 
-            @using (Html.BeginForm("Index", "holidays", FormMethod.Get))
-            {
-                
-                <a style="font-family: Calibri"> <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i>  Staff</span>  </a>
-                <select class="form-rounded2" name="option" id="userName">
-                    <option value="">Select User</option>
-                    
-                </select>
 
-                <button type="submit" value="search" class="btn btn-sm btn-warning">
-                    <i class="fas fa-search"></i>
-                </button>
-            }
+               
+
+                @Html.ActionLink("Add Holiday ", "Create", "holidays", null, new { @class = "btn btn-sm btn-default btn" })
+            
 
 
 
@@ -160,12 +152,12 @@
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                                     <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Edit", "Indirect_Activities", new { id = item.Id })" class="dropdown-item">
+                                    <a href="@Url.Action("Edit", "holidays", new { id = item.Id })" class="dropdown-item">
                                         <i class="fa fa-pen-nib text-primary"></i> Edit/Update 
                                     </a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this holiday ')) { window.location.href = '@Url.Action("Delete", "indirect_Activities", new { id = item.Id, })'; }">
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this holiday ')) { window.location.href = '@Url.Action("Delete", "Holidays", new { id = item.Id, })'; }">
                                         <i class="fa fa-times-circle text-danger"></i> Drop Holiday
                                     </a>
                                     <script>
