@@ -25,14 +25,20 @@ namespace Ishop.Controllers
             var Departments = db.employees.Select(t => t.DprtName).Distinct().ToList();
             ViewBag.Departments = Departments;
 
-            if ((!(search == "")))
+            if (!(search == null) && (!(search == "")))
             {
-                return View(db.employees.OrderByDescending(p => p.Id).Where(c => c.Username == (search)  && Department == null || Department == "" || c.DprtName == (Department)).ToList().ToPagedList(page ?? 1, 15));
+                return View(db.employees.OrderByDescending(p => p.Id).Where(c => c.Username == search && Department == "" || c.DprtName == (Department)).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.employees.OrderByDescending(p => p.Id).Where( c=> Department == null || Department == "" || c.DprtName == (Department)).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.employees.OrderByDescending(p => p.Id).Where(c => c.DprtName == "" || c.DprtName == (Department)).ToList().ToPagedList(page ?? 1, 11));
+
+
+            }
+            else if (Department == "")
+            {
+                return View(db.employees.OrderByDescending(p => p.Id).Where(c => c.Username == "" || c.Username == (search)).ToList().ToPagedList(page ?? 1, 11));
 
 
             }

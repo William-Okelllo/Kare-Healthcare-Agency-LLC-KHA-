@@ -68,7 +68,7 @@
                     <option value="">Select User</option>
                     @foreach (var userName in ViewBag.Usernames)
                     {
-                        <option value="@userName" @(Request["option"] == userName ? "selected" : "")>@userName</option>
+                        <option value="@userName" @(Request["search"] == userName ? "selected" : "")>@userName</option>
                     }
                 </select>
                 <button type="submit" value="search" class="btn btn-sm btn-warning">

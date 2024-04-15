@@ -6,11 +6,7 @@
 
 
 <style>
-    body {
-        background-image: url(../../images/33.jpg);
-        background-size: cover;
-        font-family: Calibri
-    }
+   
 
     .table-hover > tbody > tr:hover {
         background-color: #D2D2D2;
@@ -38,7 +34,7 @@
     </h3>
 </div>
 
-<div class="card" style="background-color:#ffffffc6">
+<div class="card" style="background-color:#ffffffdc">
     <div class="card-body">
         <div class="row">
 
@@ -184,18 +180,11 @@
             <div class="dropdown-divider"></div>
             @if (this.User.IsInRole("Timesheet_Approvals"))
             {
-                <div class="col-xl-4">
-                    <div class="dropdown-divider"></div>
-
-
-                    <div class="card-header col-md-8 col-sm-10 col-10 " style="background-color: #0C54A0; color: white; border-radius: 10px ">
-                        <h3 class="card-title" style="color:white;text-align:center">
-                            <i class="fa fa-university"></i> Departments
-                        </h3>
-                    </div>
-
-
-                    <div class="card-body text-left" style="border-radius: 14px;background-color:white">
+                <div class="col-xl-5">
+                    <div class="card">
+                        <div class="card-header" style="color: navy; border-radius: 0px ">
+                            <h6>   <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> Department</h6>
+                        </div>
                         <ul class="list-group">
                             @foreach (var department in ViewBag.Departmentt)
                             {
@@ -206,19 +195,18 @@
 
                             }
                         </ul>
+                        <div class="card-body">
+                            <small><i class="fa fa-comments text-primary"></i>  <b>Note</b> you will be able to view and approve timesheets under the respective departments</small>
 
-
-
-                        <small><i class="fa fa-comments text-primary"></i>  <b>Note</b> you will be able to view and approve timesheets under the respective departments</small>
-
+                        </div>
                     </div>
+                    </div>
+                    }
+
+
+
+
                 </div>
-            }
-            
-
-
-
-        </div>
         </div>
 
 

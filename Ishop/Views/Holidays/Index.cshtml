@@ -140,37 +140,62 @@
                         </td>
                         <td style="background-color: white;">
                             @if (item.Activated == true)
-                            {<small> <i class="fa fa-check-circle"></i> Hours Assigned</small>}
+                            {<small> <i class="fa fa-check-circle text-success"></i> Hours Assigned</small>}
                             else
                             { <small> <i class="fa fa-pause-circle"></i> Pending Activation</small>}
                         </td>
                         <td style="background-color:ghostwhite">
-                            <div class="btn-group dropdown">
-                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-hashtag"></i>  . Action
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            @if (item.Activated == false)
+                            {
+                                <div class="btn-group dropdown">
 
-                                    <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Edit", "holidays", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-pen-nib text-primary"></i> Edit/Update 
-                                    </a>
-
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this holiday ')) { window.location.href = '@Url.Action("Delete", "Holidays", new { id = item.Id, })'; }">
-                                        <i class="fa fa-times-circle text-danger"></i> Drop Holiday
-                                    </a>
-                                    <script>
-                                        $(function () {
-                                            $('#Deny').click(function () {
-                                                if (confirm('Are you sure?')) {
-                                                    window.location.href = $(this).data('url');
-                                                }
+                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                        <div class="dropdown-divider"></div>
+                                        
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to add  this staff timesheets? ')) { window.location.href = '@Url.Action("Holidays_Pass", "holidays", new { id = item.Id, })'; }">
+                                            <i class="fa fa-exchange-alt text-primary"></i> Execute
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
                                             });
-                                        });
-                                    </script>
+                                        </script>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="@Url.Action("Edit", "holidays", new { id = item.Id })" class="dropdown-item">
+                                            <i class="fa fa-pen-nib text-primary"></i> Edit/Update
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this holiday ')) { window.location.href = '@Url.Action("Delete", "Holidays", new { id = item.Id, })'; }">
+                                            <i class="fa fa-times-circle text-danger"></i> Drop Holiday
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+
+
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
+                            else
+                            {
+                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-hashtag"></i>  . Action
+                        </button>
+                            }
                         </td>
                     </tr>
 

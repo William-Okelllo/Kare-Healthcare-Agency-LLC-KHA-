@@ -112,5 +112,72 @@ namespace Ishop.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Holidays_Pass(int id)
+        {
+            Holiday_context HH = new Holiday_context();
+            var currentDate = DateTime.Now.Date;
+            var holidaysToday = HH.holidays.Where(h => h.Id == id).ToList();
+
+            
+
+
+            Employee_Context EE = new Employee_Context();
+            var Emp = EE.employees.Where(c => c.Active == true).ToList();
+
+
+            foreach (var holiday in holidaysToday)
+            {
+                using (var In_services = new Indirect_Activities_Context())
+                {
+                    Random random = new Random();
+
+                    foreach (var employee in Emp)
+                    {
+                        Indirect_Activities indirecttasks = new Indirect_Activities
+                        {
+                            Id = random.Next(),
+                            User = employee.Username, // Assuming Id is the primary key of the employee table
+                            Hours = holiday.Hours_Assigned,
+                            Day_Date = holiday.Holiday_date,
+                            CreatedOn = holiday.Holiday_date,
+                            Comments = holiday.Holiday_Name,
+                            Name = "WELLNESS & BREAKS",
+                            WeekNo = GetCurrentWeekNumber(holiday.Holiday_date),
+                            Approved = true
+                        };
+
+                        In_services.indirect_Activities.Add(indirecttasks);
+                        In_services.SaveChanges();
+
+                        Timesheet_Context TT = new Timesheet_Context();
+                        var Sheet = TT.timesheets.Where(i => i.Owner == employee.Username && holiday.Holiday_date >= i.From_Date && holiday.Holiday_date <= i.End_Date).FirstOrDefault();
+                        if (Sheet != null)
+                        {
+                            Sheet.Tt += holiday.Hours_Assigned;
+                            Sheet.InDirect_Hours += holiday.Hours_Assigned;
+                            TT.SaveChanges();
+                        }
+                    }
+
+                    // Mark the holiday as processed
+                    holiday.Activated = true;
+                    HH.SaveChanges(); // Save changes to mark the holiday as processed
+                }
+
+            }
+
+            TempData["msg"] = "Holiday assigned successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+
+        }
+
+        private int GetCurrentWeekNumber(DateTime date)
+        {
+            var cal = System.Globalization.CultureInfo.CurrentCulture.Calendar;
+            int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return week;
+        }
     }
 }

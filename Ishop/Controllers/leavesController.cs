@@ -102,12 +102,12 @@ namespace Ishop.Controllers
 
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c => c.Department.StartsWith(search) && c.Status != 0 && Department == null || Department == "" || c.Department == (Department)).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c =>c.Employee ==search && c.Status != 0 &&  Department == "" || c.Department == (Department)).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.leave.OrderByDescending(p => p.Id).Where(c=>c.Status != 0 && Department == null || Department == "" || c.Department == (Department) ).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.leave.OrderByDescending(p => p.Id).Where(c=>c.Status != 0 &&  Department == "" || c.Department == (Department) ).ToList().ToPagedList(page ?? 1, 11));
 
 
             }

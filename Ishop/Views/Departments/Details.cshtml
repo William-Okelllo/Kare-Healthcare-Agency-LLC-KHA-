@@ -117,11 +117,7 @@
                                                             </button>
                                                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                                                                <div class="dropdown-divider"></div>
-                                                                <a href="@Url.Action("Edit", "InDirects", new { id = item2.Id })" class="dropdown-item">
-                                                                    <i class="fa fa-pen-nib text-primary"></i> Update/Edit Phase
-                                                                </a>
-
+                                                                
                                                                 <div class="dropdown-divider"></div>
                                                                 <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this HOD ')) { window.location.href = '@Url.Action("Delete", "Hods", new { id = item2.Id, })'; }">
                                                                     <i class="fa fa-times-circle text-danger"></i> Drop HOD
