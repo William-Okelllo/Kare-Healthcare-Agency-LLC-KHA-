@@ -63,33 +63,7 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
     <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Fetch events from controller
-            $.ajax({
-                url: '/Timesheet/GetHolidays', // Replace ControllerName with your actual controller name
-                type: 'GET',
-                dataType: 'json',
-                success: function (events) {
-                    // Initialize FullCalendar with fetched events
-                    var calendarEl = document.getElementById('calendar');
-                    var calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        events: events,
-                        eventClick: function (info) {
-                            alert('Event: ' + info.event.title);
-                            alert('Start: ' + info.event.start);
-                            alert('Color: ' + info.event.backgroundColor);
-                        }
-                    });
-                    calendar.render();
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error fetching events:", error);
-                }
-            });
-        });
-    </script>
+   
     <div id="calendar">
 
 
@@ -166,7 +140,103 @@
                 right: 'month'
             },
             firstDay: 1,
-
+            events: [
+                {
+                    "title": "New Year's Day",
+                    "start": "2024-01-01",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Ramadan Start",
+                    "start": "2024-03-11",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Good Friday",
+                    "start": "2024-03-29",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Easter Sunday",
+                    "start": "2024-03-31",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Easter Monday",
+                    "start": "2024-04-01",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Idd ul-Fitr",
+                    "start": "2024-04-10",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Labour Day/May Day",
+                    "start": "2024-05-01",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Mother's Day",
+                    "start": "2024-05-12",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Madaraka Day",
+                    "start": "2024-06-01",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Eid al-Adha",
+                    "start": "2024-06-17",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Huduma Day",
+                    "start": "2024-10-10",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Mashujaa Day",
+                    "start": "2024-10-20",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Mashujaa Day observed",
+                    "start": "2024-10-21",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Diwali",
+                    "start": "2024-11-01",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Jamhuri Day",
+                    "start": "2024-12-12",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Christmas Eve",
+                    "start": "2024-12-24",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Christmas Day",
+                    "start": "2024-12-25",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "Boxing Day",
+                    "start": "2024-12-26",
+                    "color": "GREEN"
+                },
+                {
+                    "title": "New Year's Eve",
+                    "start": "2024-12-31",
+                    "color": "GREEN"
+                }
+            ],
 
             dayRender: function (date, cell) {
                 var today = moment();

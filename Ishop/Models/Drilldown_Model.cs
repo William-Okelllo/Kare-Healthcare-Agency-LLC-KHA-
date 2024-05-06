@@ -16,7 +16,7 @@ namespace Ishop.Models
         public string Phase { get; set; }
         public Decimal Logged { get; set; }
 
-        public int Hours { get; set; }
+        public Decimal Hours { get; set; }
 
     }
 }

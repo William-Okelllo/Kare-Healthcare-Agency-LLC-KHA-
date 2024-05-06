@@ -229,7 +229,7 @@
                         <script type="text/javascript">
                             $(function () {
                                 $("#Project_Name").chosen();
-                                $("#Categorylist").chosen();
+                                $("#Category").chosen();
                                 $("#Indixrect").chosen();
                                 $("#d").chosen();
 
@@ -261,33 +261,8 @@
                            }
                        })
                         </div>
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script>
-                            $(document).ready(function () {
-                                $("#Hours").on("input", function () {
-                                    var id = $(this).val();
-                                    $.ajax({
-                                        url: '/Direct_Activities/GetCharge',
-                                        method: 'GET',
-                                        data: { id: id },
-                                        success: function (data) {
-                                            if (data) {
-                                                $("#Charge").val(data);
-                                            } else {
-                                                // Handle the case where data is empty
-                                            }
-                                        },
-                                        error: function () {
-                                            console.log('Error retrieving record data.');
-                                        }
-                                    });
-                                });
-
-                                // Function to format a number with commas for thousands
-
-                            });
-                        </script>
-                        <div class="form-group col-md-2" style="display: none">
+                        
+                        <div class="form-group col-md-2" style="display: ncone">
                             <label><i class="fa fa-cash-register text-primary"></i> @Html.LabelFor(model => model.Charge)</label>
                             @Html.EditorFor(model => model.Charge, new
                        {
@@ -296,7 +271,7 @@
                                @class = "form-control form-control-sm",
                                @Placeholder = " Estimate Charge",
                                @Readonly = true,
-                               id = "Charge",
+                               @Value = 0,
                                // Add an ID to the input field for easy access in JavaScript
                            }
                        })

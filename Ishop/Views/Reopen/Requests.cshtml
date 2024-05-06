@@ -10,7 +10,7 @@
     .curved-table {
         border-collapse: collapse;
         border-radius: 50px;
-        border: 0px solid grey;
+        border: 1px solid #d8d8d8;
         overflow: visible;
     }
 
@@ -18,22 +18,10 @@
         .curved-table td {
             padding: 10px;
             border-radius: 4px;
-            border: 0px solid grey;
+            border: 1px solid #d8d8d8;
         }
 
-    .curved-table2 {
-        border-collapse: collapse;
-        border-radius: 50px;
-        border: 1px solid #0C54A0;
-        overflow: visible;
-    }
-
-        .curved-table2 th,
-        .curved-table2 td {
-            padding: 10px;
-            border-radius: 4px;
-            border: 0px solid #0C54A0;
-        }
+   
 </style>
 
 
@@ -69,27 +57,56 @@
 
     </div>
 
-    <div class="card-body">
 
 
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-lg-4 col-12">
-                    <!-- small card -->
-                    <div class="small-box bg-gradient-gray-dark" style="border-radius: 15px">
 
-                        <div class="inner">
 
-                            <h4> <i class="fa fa-unlock"></i><b> Re-Open Request</b></h4>
-                            <span class="badge badge-warning"> <i class="fa fa-university text-black"></i></span> <a style="color:white"> @item.Department</a> || <span class="badge badge-warning"> <i class="fa fa-user-circle text-black"></i></span> <a style="color:white"> @item.Staff</a>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+            <thead>
+                <tr style="color:white">
+                    <th style="background-color: #0C54A0; font-size: medium; ">Staff</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Department</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Request Date</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
+                    <th style="background-color: #0C54A0; font-size: medium; ">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="background-color: white;">
+                            <small style="font-size:x-large;color:#06186d"> <b>@item.Id |</b></small><i class="fa fa-user-circle text-warning"></i>  <b>@item.Staff</b>
                             <div class="dropdown-divider"></div>
-
-                            <button type="button" class="btn btn-sm btn-outline-light set-reg-no-btn"
-                                    data-toggle="modal" data-target="#exampleModalCenter"
-                                    data-object-id2="@item.Staff" , data-object-id="@item.Reason">
-                                <i class="fa fa-spin fa-circle-notch"></i> View Message
-                            </button>
+                            <small> <b> SHEET ID  :</b> <span class="badge badge-secondary"> <i class="fa fa-tags text-black"></i> <b> @item.Timesheet_id</b></span></small>
+                        </td>
+                        <td style="background-color: white;">
+                            <span class="badge badge-secondary">  <i class="fa fa-university text-white"></i> </span> <b> @item.Department</b>
+                            <div class="dropdown-divider"></div>
+                            <small>  <span class="badge badge-warning"> <i class="fa fa-info-circle text-black"></i> <b></b></span> <b style="color: #0C54A0">RE-OPEN REQUEST</b></small>
+                        </td>
+                        <td style="background-color: white;">
+                            <b> <i class="fa fa-calendar-day text-primary"></i>  @item.CreatedOn.ToString("dd- MMMM -yyyy")</b>
+                            <div class="dropdown-divider"></div>
+                            @if (item.Status == 0)
+                            {
+                                <button type="button" class="btn btn-sm btn-primary set-reg-no-btn"
+                                        data-toggle="modal" data-target="#exampleModalCenter"
+                                        data-object-id2="@item.Staff" , data-object-id="@item.Reason">
+                                    <i class="fa  fa-comment-dots"></i> View Message
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-sm btn-secondary set-reg-no-btn"
+                                        data-toggle="modal" data-target="#exampleModalCenter"
+                                        data-object-id2="@item.Staff" , data-object-id="@item.Reason">
+                                    <i class="fa  fa-comment-dots"></i> View Message
+                                </button>
+                            }
 
                             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -133,11 +150,7 @@
                                             <h6 style="color:navy"><i class="fa fa-comment-dots text-primary"></i> <b>Reason</b></h6>
                                             <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 100%; height: 100px;"></textarea>
 
-                                            <div class="row">
-                                                <div class="form-group col-md-3 text-right">
-                                                    <input id="staff" name="staff" type="text" class="form-control form-control-sm" readonly style="border: none;" />
-                                                </div>
-                                            </div>
+
 
 
                                         </div>
@@ -202,94 +215,65 @@
                                     }
                                 });
                             </script>
-
-                            <br />
-                            <div style="text-align:left">
-                                <span class="badge badge-warning"> <i class="fa fa-tags text-black"></i></span> <a style="color:white">
-                                    Timesheet Id @item.Timesheet_id
-                                </a>
-                                |
-                                <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span> <a style="color:white"> @item.CreatedOn.ToString("dd-MMM-yyyy")</a>
-
-                            </div>
-
-                            <br />
-
-                            @if (this.User.IsInRole("Timesheet_Approvals"))
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
                             {
-                                <div class="ui-menu-divider"></div>
-
-                                if (item.Status == 0)
-                                {<a href="@Url.Action("Re_open", "reopen", new { id = item.Timesheet_id ,Requestid=item.Id})" class="btn-sm btn btn-primary">
-
-                                        <i class="fa fa-check-circle text-white"></i> Approve
-                                    </a>
-                                    <small>|</small>
-                                    <a href="@Url.Action("Deny", "reopen", new { id = item.Timesheet_id ,Requestid=item.Id})" class="btn-sm btn btn-danger">
-
-                                        <i class="fa fa-times-circle text-white"></i> Deny
-                                    </a>
-                                }
+                                <span class="badge badge-warning"> <i class="fa fa-spin fa-spinner text-black"></i></span> <b style="color:black">  PENDING  </b>
                             }
-                        </div>
+                            else if (item.Status == 1)
+                            {
+                                <span class="badge badge-success"> <i class="fa  fa-check-circle text-black"></i></span> <b style="color: green">  APPROVED  </b>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger"> <i class="fa  fa-check-circle text-black"></i></span> <b style="color: black">  DENIED  </b>
+                            }
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Status == 0)
+                            {
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-hashtag"></i>  . Action
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
+                                        <div class="dropdown-divider"></div>
 
-
-                        <div class="icon"> <i class="fa fa-bookmark"></i></div>
-
-
-                        @if (item.Status == 0)
-                        {<a href="#" class="small-box-footer" style="background-color: #0C54A0; color: white;border-radius:15px;">
-                                <span class="badge badge-warning"> <i class="fa fa-spin fa-circle-notch text-black"></i></span> <b style="color:white"> Awaiting Approvals </b>
-                            </a>
-                        }
-                        else if (item.Status == 1)
-                        { <a href="#" class="small-box-footer" style="background-color: #087227; color: white;border-radius:15px;">
-                                <span class="badge badge-warning"> <i class="fa  fa-check-circle text-black"></i></span> <b style="color:white">  Approved  </b>
-                            </a>
-                        }
-                        else
-                        { <a href="#" class="small-box-footer" style="background-color: #850b0b; color: white;border-radius:15px;">
-                                <span class="badge badge-danger"> <i class="fa  fa-times-circle text-black"></i></span> <b style="color:white">  Denied  </b>
-                            </a>
-                        }
-                    </div>
-                </div>
-            }
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to approve this request   ')) { window.location.href = '@Url.Action("Re_open", "reopen", new { id = item.Timesheet_id, Requestid = item.Id })'; }">
+                                            <i class="fa fa-check-circle text-success"></i>  Approve
+                                        </a>
+                                        <script>
+                                            $(function () {
+                                                $('#Deny').click(function () {
+                                                    if (confirm('Are you sure?')) {
+                                                        window.location.href = $(this).data('url');
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" onclick="if (confirm('Are you sure you want to Revoke this request   ')) { window.location.href = '@Url.Action("Deny", "reopen", new { id = item.Timesheet_id ,Requestid=item.Id})'; }">
+                                            <i class="fa fa-times-circle text-danger"></i> Deny
+                                        </a>
+                                       
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                                    <i class="fa fa-hashtag"></i>  . Action
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+                        
         </div>
-
-
-
-
-
-
-
-
-
-        @if (Model.Count() == 0)
-        {
-            <div class="col d-flex justify-content-center">
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="info-box bg-gradient-black">
-                        <span class="info-box-icon"><i class="fa fa-bookmark"></i></span>
-
-                        <div class="info-box-content">
-
-                            <span class="progress-description">
-                                <i class="fa fa-spin fa-circle-notch"></i>  No Re-open Request Found
-                            </span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-            </div>
-        }
-
-
-
-    </div>
-</div>
 
 
 

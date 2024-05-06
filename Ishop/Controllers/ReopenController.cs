@@ -187,7 +187,7 @@ namespace Ishop
         public ActionResult Re_quest()
         {
             Timesheet_Context TC = new Timesheet_Context();
-            var Tiemsheets =TC.timesheets.Where(c=>c.Owner ==User.Identity.Name && c.Locked ==true).ToList();
+            var Tiemsheets =TC.timesheets.OrderByDescending(p => p.CreatedOn).Where(c=>c.Owner ==User.Identity.Name && c.Locked ==true).Take(6).ToList();
             ViewBag.Tiemsheets = Tiemsheets;
             return View();
         }

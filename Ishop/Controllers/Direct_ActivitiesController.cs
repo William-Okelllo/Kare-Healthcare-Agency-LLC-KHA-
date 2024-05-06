@@ -27,14 +27,7 @@ namespace Ishop.Controllers
             return View(db.direct_Activities.ToList());
         }
 
-        // GET: Direct_Activities/Details/5
-
-
-
-
-
-       
-
+        
 
         public ActionResult Directtasksview(DateTime Weekday, int? page)
         {
@@ -128,7 +121,6 @@ namespace Ishop.Controllers
             ViewBag.SelectedDate = currentDate;
             ViewBag.Weekid = WeekNo;
 
-            ViewBag.Weekid = WeekNo;
             return View();
         }
         private int GetCurrentWeekNumber(DateTime date)
@@ -144,15 +136,19 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo,Category")] Direct_Activities direct_Activities)
         {
-            
-                db.direct_Activities.Add(direct_Activities);
-                db.SaveChanges();
-              CaptureRecord(direct_Activities.Hours, direct_Activities.User, direct_Activities.Day_Date);
+            Employee_Context EE = new Employee_Context();
+            var EmployeeRate = EE.employees.Where(e => e.Username == direct_Activities.User).FirstOrDefault();
+            direct_Activities.Charge = direct_Activities.Hours * EmployeeRate.Rate;
+
+
+              db.direct_Activities.Add(direct_Activities);
+              db.SaveChanges();
+              CaptureRecord(direct_Activities.User, direct_Activities.Day_Date);
               TempData["msg"] = "Activity added successfully ";
               return RedirectToAction("Index", "Timesheet");
             
 
-            return View(direct_Activities);
+           
         }
 
 
@@ -208,10 +204,12 @@ namespace Ishop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add2([Bind(Include = "Id,Hours,Day_Date,CreatedOn,Project_Name,User,Comments,Name,Charge,Approved,WeekNo,Category")] Direct_Activities direct_Activities)
         {
-
+            Employee_Context EE = new Employee_Context();
+            var EmployeeRate = EE.employees.Where(e => e.Username == direct_Activities.User).FirstOrDefault();
+            direct_Activities.Charge = direct_Activities.Hours * EmployeeRate.Rate;
             db.direct_Activities.Add(direct_Activities);
             db.SaveChanges();
-            CaptureRecord(direct_Activities.Hours, direct_Activities.User, direct_Activities.Day_Date);
+            CaptureRecord(direct_Activities.User, direct_Activities.Day_Date);
             TempData["msg"] = "Activity added successfully ";
             return RedirectToAction("DataView", "Timesheet", new { selectedDate = direct_Activities.Day_Date.ToString("yyyy-MM-dd") ,User= direct_Activities.User });
 
@@ -228,7 +226,7 @@ namespace Ishop.Controllers
 
 
 
-        public void CaptureRecord(Decimal Hours, string Staff, DateTime datecheck)
+        public void CaptureRecord( string Staff, DateTime datecheck)
         {
 
 
@@ -254,9 +252,9 @@ namespace Ishop.Controllers
 
 
 
-        public ActionResult GetCharge(int id)
+        public ActionResult GetCharge(Decimal id)
         {
-            Employee_Context EE = new Employee_Context();
+           Employee_Context EE = new Employee_Context();
             var EmployeeRate = EE.employees.Where(e => e.Username == User.Identity.Name).FirstOrDefault();
 
             var data = EmployeeRate.Rate * id;
@@ -368,7 +366,7 @@ namespace Ishop.Controllers
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
         }
-        public void RemoveCaptureRecord(int time, string Staff, DateTime datecheck)
+        public void RemoveCaptureRecord(Decimal time, string Staff, DateTime datecheck)
         {
             Timesheet_Context TT = new Timesheet_Context();
             var Sheet = TT.timesheets.Where(i => i.Owner == Staff && datecheck >= i.From_Date && datecheck <= i.End_Date).FirstOrDefault();
