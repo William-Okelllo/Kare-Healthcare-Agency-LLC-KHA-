@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Employee Timesheet.rdl" />
+    <Report Include="LeaveReport.rdl" />
     <Report Include="NonProjectTime Timesheet Breakdown .rdl" />
     <Report Include="Projects.rdl" />
     <Report Include="Projects_status.rdl" />
