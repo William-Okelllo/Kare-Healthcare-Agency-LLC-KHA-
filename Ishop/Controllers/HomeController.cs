@@ -1,4 +1,5 @@
 ﻿using Ishop.Infa;
+using Ishop.Models;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Configuration;
@@ -15,19 +16,18 @@ namespace Ishop.Controllers
 
         public ActionResult Index()
         {
-
+            OutgoingEmailsContext NN = new OutgoingEmailsContext();
+           Userstable EE = new Userstable();
+           var Empmail = EE.AspNetUsers.Where(c => c.UserName == User.Identity.Name).FirstOrDefault();
+            var noti = NN.outgoingEmails.OrderByDescending(c => c.Id).Where(c => c.Recipient == Empmail.Email).ToList();
+            ViewBag.Noti = noti;
 
             HodContext DD = new HodContext();
             var Depart = DD.hODs.Where(d => d.Staff == User.Identity.Name).Select(d => d.DprtName).ToList();
             ViewBag.Departmentt = Depart;
 
-
-            //Timesheet_Context TC = new Timesheet_Context();
-            //var TimmDetails = TC.timesheets.Where(c => Depart.Contains(c.Department) && c.Status == 0 && c.Locked == true).GroupBy(c => c.Department) .Select(group => new {DepartmentName = group.Key,Count = group.Count()}).ToList();
-
-            // ViewBag.TimmDetails = TimmDetails;
-
-
+            ViewBag.Receiver = Empmail.Email;
+           
 
 
             Timesheet_Context TT = new Timesheet_Context();

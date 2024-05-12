@@ -154,35 +154,35 @@
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
-                
-                    <div class="row justify-content-end">
-                        <div class="col-lg-6 col-12">
-                            <!-- small card -->
-                            <div class="small-box bg-gray-dark" style="border-radius: 15px">
-                                <div class="inner">
 
-                                    <h4> <i class="fa fa-umbrella-beach"></i><b> Leave Request</b></h4>
-                                    <h6>View staff members on leave ,requested leaves </h6>
-                                    <small><i class="fa fa-spin fa-circle-notch"></i> Click view  to view the leave module</small>
-                                </div>
-                                <div class="icon"> <i class="fa fa-umbrella-beach"></i></div>
-                                <a href="@Url.Action("All", "Leaves")" class="small-box-footer" style="background-color: #0C54A0; color: white;border-radius:10px;">
-                                    <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
-                                </a>
+                <div class="row justify-content-end">
+                    <div class="col-lg-6 col-12">
+                        <!-- small card -->
+                        <div class="small-box bg-gray-dark" style="border-radius: 15px">
+                            <div class="inner">
+
+                                <h4> <i class="fa fa-umbrella-beach"></i><b> Leave Request</b></h4>
+                                <h6>View staff members on leave ,requested leaves </h6>
+                                <small><i class="fa fa-spin fa-circle-notch"></i> Click view  to view the leave module</small>
                             </div>
+                            <div class="icon"> <i class="fa fa-umbrella-beach"></i></div>
+                            <a href="@Url.Action("All", "Leaves")" class="small-box-footer" style="background-color: #0C54A0; color: white;border-radius:10px;">
+                                <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
+                            </a>
                         </div>
-
                     </div>
-                
+
+                </div>
+
 
             </div>
 
             <div class="dropdown-divider"></div>
             @if (this.User.IsInRole("Timesheet_Approvals"))
             {
-                <div class="col-xl-5">
-                    <div class="card">
-                        <div class="card-header" style="color: navy; border-radius: 0px ">
+                <div class="col-xl-4">
+                    <div class="card" style="border-left: 6px solid #0C54A0; border-radius: 10px; ">
+                        <div class="card-header" style="color: white; border-radius: 10px; background-color: #0C54A0 ">
                             <h6>   <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> Department</h6>
                         </div>
                         <ul class="list-group">
@@ -200,13 +200,152 @@
 
                         </div>
                     </div>
-                    </div>
-                    }
-
-
-
-
                 </div>
+                <div class="col-xl-3"> </div>
+            }
+
+
+
+            <div class="col-xl-5">
+                <div class="card " style="border-left: 6px solid #0C54A0; border-radius: 15px">
+                    <div class="card-body">
+                        <h5 style="text-align:left"> <i class="fas fa-bell text-primary"></i> Notifications  - <small style="color: #0C54A0"><b><i class="fa fa-envelope"></i>  @ViewBag.Receiver</b></small> </h5>
+                        <div class="dropdown-divider"></div>
+                        <style>
+                            .chat-bubble {
+                                background-color: #f1efef;
+                                color: #ffffff;
+                                border-radius: 10px;
+                                padding: 10px;
+                                margin-bottom: 5px;
+                                max-width: 100%; /* Adjust the max-width as needed */
+                            }
+
+                            .limited-lines {
+                                overflow: hidden;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2; /* Number of lines to show */
+                                -webkit-box-orient: vertical;
+                                color: black;
+                            }
+
+                            .user {
+                                align-self: flex-start;
+                            }
+
+
+
+                            .date {
+                                text-align: left;
+                                color: black;
+                                font-size: 16px;
+                                margin-top: 3px;
+                            }
+                        </style>
+                        <style>
+                            /* Styles remain unchanged */
+
+                            /* Add this style for the scrollable container */
+                            .scroll-container {
+                                max-height: 200px; /* Set a suitable max-height */
+                                overflow-y: auto;
+
+                            }
+                        </style>
+                        <div class="scroll-container">
+                            @foreach (var item in ViewBag.Noti)
+                            {
+                                <div class="chat-bubble user">
+                                    <style>
+                                        .date {
+                                            display: flex;
+                                            justify-content: space-between;
+                                        }
+
+                                        .subject {
+                                            flex: 1;
+                                            text-align: left;
+                                        }
+
+                                        .created-on {
+                                            flex: 1;
+                                            text-align: right;
+                                        }
+                                    </style>
+                                   <p class="date">
+                                       <span class="subject"><b><i class="fa fa-book-reader text-primary"></i> @item.Subject</b></span>
+                                       <span class="created-on" style="font-size:smaller"> <i class="fa fa-calendar-day text-primary"></i>  @item.CreatedOn</span>
+                                   </p>
+                                    <small class="limited-lines">@item.Body</small>
+                                    <div class="dropdown-divider"></div>
+                                    <button type="button" class="btn btn-sm btn-primary set-reg-no-btn"
+                                            data-toggle="modal" data-target="#exampleModalCenter"
+                                            data-object-id="@item.Body">
+                                        <i class="fa fa-comment-dots text-white"></i>  View Message
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+                        <!-- Your script goes here -->
+                        <script>
+                            $(document).ready(function () {
+                                var objectId; // Variable to store the object ID
+                                var objectId2;
+                                // Capture object ID when "Set Reg No" button is clicked
+                                $('.set-reg-no-btn').click(function () {
+                                    objectId = $(this).data('object-id');
+                                    objectId2 = $(this).data('date');
+                                });
+
+                                // Triggered when the modal is about to be shown
+                                $('#exampleModalCenter').on('show.bs.modal', function (event) {
+                                    // Update the "Account Id" input in the modal with the captured object ID
+                                    $('#AccountId').val(objectId);
+                                    $('#staff').val(objectId2);
+                                });
+
+                                // Triggered when the modal is hidden
+                                $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
+                                    // Clear the objectId when the modal is closed
+                                    objectId = null;
+                                });
+                            });
+                        </script>
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 14px ">
+                                <div class="modal-content" style="border-radius: 14px ">
+                                    <div class="modal-header" style="background-color: #0C54A0; color: white; border-radius: 14px ">
+                                        <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-bookmark text-warning"></i>   Messsage</h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body ">
+                                        <h6 style="color: #0C54A0"> <i class="fa fa-user-circle"></i> To : <b>  @ViewBag.Receiver</b></h6>
+                                        <span id="staff"></span>
+                                        <h6 style="color: #0C54A0"><i class="fa fa-comment-dots text-primary"></i> <b>Messsage</b></h6>
+
+                                        <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 100%; height: 400px;"></textarea>
+
+
+
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
         </div>
 
 
