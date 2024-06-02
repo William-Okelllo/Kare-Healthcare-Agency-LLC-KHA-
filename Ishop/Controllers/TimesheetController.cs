@@ -570,7 +570,7 @@ namespace Ishop
 
 
 
-
+       
 
 
 
@@ -632,6 +632,33 @@ namespace Ishop
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+
+        public ActionResult Re_Calculate (int TimesheetId)
+        {
+            var Sheet = db.timesheets.Find(TimesheetId);
+
+           
+                Indirect_Activities_Context IDC = new Indirect_Activities_Context();
+                Direct_Activities_Context DA = new Direct_Activities_Context();
+                Decimal Indirecttime = IDC.indirect_Activities.Where(i => i.User == Sheet.Owner && i.Day_Date >= Sheet.From_Date && i.Day_Date <= Sheet.End_Date).Select(i => i.Hours).DefaultIfEmpty(0).Sum();
+                Decimal Directtime = DA.direct_Activities.Where(i => i.User == Sheet.Owner && i.Day_Date >= Sheet.From_Date && i.Day_Date <= Sheet.End_Date).Select(i => i.Hours).DefaultIfEmpty(0).Sum();
+                Decimal LeaveTime = Sheet.Leave;
+                Decimal Totaltime = Indirecttime + Directtime + LeaveTime;
+                if (Sheet != null)
+                {
+                    Sheet.Tt = Totaltime;
+                    Sheet.Direct_Hours = Directtime;
+                    Sheet.InDirect_Hours = Indirecttime;
+                    db.SaveChanges();
+                }
+                TempData["msg22"] = "Re-Calculation completed successfully";
+           
+                
+            
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
     }
 

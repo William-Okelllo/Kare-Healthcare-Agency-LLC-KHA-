@@ -308,9 +308,16 @@
         <div id="container" style="text-align:left">
 
             <div class="pagination" style="text-align:left">
-                @Html.PagedListPager(Model, page => Url.Action("All", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
-              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+                @Html.PagedListPager(Model, page => Url.Action("All", new
+                {
+                    page,
+                    Duration = Request.QueryString["Duration"],
+                    Department = Request.QueryString["Department"],
+                    option = Request.QueryString["option"]
+                }),
+                new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
             </div>
+
         </div>
     </div>
 

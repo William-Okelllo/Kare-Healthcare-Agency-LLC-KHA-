@@ -24,8 +24,7 @@
           content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet" />
+
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="~/FrontEnd2/vendors/styles/core.css" />
     <link rel="stylesheet"
@@ -63,36 +62,20 @@
     <link rel="stylesheet" type="text/css" href="~/FrontEnd2/vendors/styles/style.css" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async
-            src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
-    <script async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
-            crossorigin="anonymous"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
-
-        gtag("config", "G-GBZ3SGGX85");
-    </script>
-    <!-- Google Tag Manager -->
-    <script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != "dataLayer" ? "&l=" + l : "";
-            j.async = true;
-            j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, "script", "dataLayer", "GTM-NXZMQSS");
-    </script>
+ 
     <!-- End Google Tag Manager -->
 </head>
-<body class="login-page" style="background: linear-gradient(to bottom, #f2f8ff, #ffffff) ">
+<style>
+    .login-page {
+        background: linear-gradient(rgb(255, 255, 255, 0.35), rgb(255, 255, 255)), url('../../Images/xxc.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* Ensure the background covers the full height */
+        width: 100%; /* Ensure the background covers the full width */
+    }
+</style>
+<body class="login-page">
 
     <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
         <div class="container">
@@ -107,8 +90,8 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="login-title">
-                           
-                            
+
+
                             <h6 class="text-center"><i class="dw dw-login"></i> Login To Your Account</h6>
                             @if (TempData["Msg"] != null)
                             {<div class="row">
@@ -132,126 +115,129 @@
                         </div>
                         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                         {@Html.AntiForgeryToken()
-                    <form>
+                        <form>
 
-                        <div class="input-group custom">
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
+                            <div class="input-group custom">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @autofocus = "centre" })
 
-                            <div class="input-group-append custom">
-                                <span class="input-group-text">
-                                    <i class="icon-copy dw dw-user1"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="input-group custom">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control password-field", @placeholder = "password", @autofocus = "", @id = "Password" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text">
-                                    <i class="dw dw-padlock1"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="row pb-30">
-
-                            <div class="col-6">
-                                <div class="forgot-password">
-                                    <a href="@Url.Action("ForgotPassword", "Account")"><i class="dw dw-unlock"></i>  Forgot Password</a>
+                                <div class="input-group-append custom">
+                                    <span class="input-group-text">
+                                        <i class="icon-copy dw dw-user1"></i>
+                                    </span>
                                 </div>
                             </div>
-                        </div>
-
-
-
-                        <div class="form-group col-md-6">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="viewPasswords">
-                                <small class="form-check-label" for="viewPasswords">View Passwords</small>
+                            <div class="input-group custom">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control password-field", @placeholder = "password", @autofocus = "", @id = "Password" })
+                                <div class="input-group-append custom">
+                                    <span class="input-group-text">
+                                        <i class="dw dw-padlock1"></i>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                        <script>
-                            $(document).ready(function () {
-                                $('#viewPasswords').change(function () {
-                                    var passwordFields = $('.password-field, .confirm-password-field');
-                                    if (this.checked) {
-                                        passwordFields.attr('type', 'text');
-                                    } else {
-                                        passwordFields.attr('type', 'password');
-                                    }
+
+                            <div class="row pb-30">
+
+                                <div class="col-6">
+                                    <div class="forgot-password">
+                                        <a href="@Url.Action("ForgotPassword", "Account")"><i class="dw dw-unlock"></i>  Forgot Password</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group col-md-6">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="viewPasswords">
+                                    <small class="form-check-label" for="viewPasswords">View Passwords</small>
+                                </div>
+                            </div>
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#viewPasswords').change(function () {
+                                        var passwordFields = $('.password-field, .confirm-password-field');
+                                        if (this.checked) {
+                                            passwordFields.attr('type', 'text');
+                                        } else {
+                                            passwordFields.attr('type', 'password');
+                                        }
+                                    });
                                 });
-                            });
-                        </script>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="input-group mb-0">
-                                    <button class="btn btn btn-primary btn-lg btn-block " type="submit" id="login-btn">
-                                        <i class="glyphicon glyphicon-log-in" style="color:white"></i>
-                                        <i class="fa fa-sign-in"></i> Login
-                                    </button>
-                                    <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled>
-                                        <span class="spinner-border spinner-border-sm" role="status"></span>
-                                        <small> ..Verifing Credentials...</small>
-                                    </button>
-                                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                                    <script>
-                                        $(document).ready(function () {
-                                            // Hide the second button by default
-                                            $('#hidden-button').hide();
+                            </script>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-0">
+                                        <button class="btn btn btn-primary btn-lg btn-block " type="submit" id="login-btn">
+                                            <i class="glyphicon glyphicon-log-in" style="color:white"></i>
+                                            <i class="fa fa-sign-in"></i> Login
+                                        </button>
+                                        <button class="btn btn btn-primary btn-lg btn-block hidden" type="button" id="hidden-button" disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                                            <small> ..Verifing Credentials...</small>
+                                        </button>
+                                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                        <script>
+                                            $(document).ready(function () {
+                                                // Hide the second button by default
+                                                $('#hidden-button').hide();
 
-                                            // Add click event to the first button
-                                            $('#login-btn').click(function () {
-                                                // Hide the first button
-                                                $(this).hide();
-                                                // Show the second button
-                                                $('#hidden-button').show();
+                                                // Add click event to the first button
+                                                $('#login-btn').click(function () {
+                                                    // Hide the first button
+                                                    $(this).hide();
+                                                    // Show the second button
+                                                    $('#hidden-button').show();
+                                                });
                                             });
-                                        });
-                                    </script>
+                                        </script>
+                                    </div>
+
                                 </div>
 
                             </div>
 
-                        </div>
-
-                        <div class="dropdown-divider"></div>
-                        <small style="text-align:center">Copyright © @DateTime.Now.Year Planning Systems. All rights reserved</small>
-                        
+                            <div class="dropdown-divider"></div>
+                            <small style="text-align:center">Copyright © @DateTime.Now.Year Planning Systems. All rights reserved</small>
 
 
-                        <div style="text-align:center">
-                            <small>
-                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            </small>
-                        </div>
-                    </form>
+
+                            <div style="text-align:center">
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })<br />
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </small>
+                            </div>
+                        </form>
                     }
                     </div>
                 </div>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
+                <div class="col-md-6 col-lg-7" style="text-align: right; font-family: Montserrat;font-size:x-small;color:black">
 
-                <div class="col-md-6 col-lg-7">
 
 
 
-                    
-                    <div style="text-align:right">
-                        <img src="~/Images/Logg.png" height="900" width="900" />
+
+
+                    <div class="image-container">
                         <div class="ui-menu-divider"></div>
-                       
-                        <img src="~/Images/2D.png" alt="" height="150" width="150" />
-                        <div class="ui-menu-divider"></div>
-                        <small><i class="fa fa-bookmark"></i> <b>POWERED BY SPECULATE TECHS</b></small>
-                        <div class="ui-menu-divider"></div>
-                        <small style="font-family:Calibri"> VERSION 2.0.20 - RELEASE DATE: 7TH/03/24
-</small>
+                        <img src="~/Images/Logg2.png" width="900" />
 
+                        <div class="ui-menu-divider"></div>
+                        <p> <b>TIMENEX SYSTEM  </b></p>
+                        <p><i class="fa fa-refresh"></i> VERSION 2.0.20</p>
+                        <div class="dropdown-divider"></div>
+                        <p><i class="fa fa-bookmark"></i> <b>POWERED BY SPECULATE TECHS</b></p>
+                        <img src="~/Images/mme.png" width="120" />
+                        <div class="ui-menu-divider"></div>
 
                     </div>
 
+
                 </div>
-                
+
             </div>
         </div>
     </div>

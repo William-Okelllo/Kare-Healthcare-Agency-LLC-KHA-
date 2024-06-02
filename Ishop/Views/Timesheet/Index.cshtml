@@ -5,37 +5,9 @@
 
 
 
-<style>
-
-    .curved-table {
-        border-collapse: collapse;
-        border-radius: 50px;
-        border: 0px solid grey;
-        overflow: visible;
-    }
-
-        .curved-table th,
-        .curved-table td {
-            padding: 10px;
-            border-radius: 4px;
-            border: 0px solid grey;
-        }
-
-    .curved-table2 {
-        border-collapse: collapse;
-        border-radius: 50px;
-        border: 1px solid #0C54A0;
-        overflow: visible;
-    }
-
-        .curved-table2 th,
-        .curved-table2 td {
-            padding: 10px;
-            border-radius: 4px;
-            border: 0px solid #0C54A0;
-        }
-</style>
-
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+<script src="https://apis.google.com/js/api.js"></script>
 <div class="card " style="background-color: rgb(255, 255, 255, 1.00);">
 
 
@@ -59,68 +31,66 @@
 
 
 
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border-radius: 14px">
+                <div class="modal-header" style="background-color: #192530;border-radius: 14px">
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
-    <script src="https://apis.google.com/js/api.js"></script>
-   
+                    <h5 class="modal-title" style="color:white;text-align:left">  <i class="fa fa-bookmark text-white"></i>    Timesheet </h5>
+                </div>
+                <div class="modal-body">
+
+                    <h5 style="text-align:center"><i class="fa fa-spin fa-circle-notch text-primary"></i>  Picked <a id="pDetails7"></a> </h5>
+                    <div class=" dropdown-divider"></div>
+                    <h5>  <i class="fa fa-bookmark text-primary"></i> Activities  Add </h5>
+
+
+
+
+
+
+
+                    <button id="addPhasesButton" class="btn-xs btn btn-primary ">
+                        <i class="fa fa-plus-circle text-black"></i> Add Project Time
+                    </button>
+                    ||
+                    <button id="addPhasesButton2" class="btn-xs btn btn-warning ">
+                        <i class="fa fa-plus-circle text-black"></i> Add Non-Project Time
+                    </button>
+
+
+
+                    <div class=" dropdown-divider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border-radius: 14px">
+                <div class="modal-header" style="background-color: #aa0505;border-radius: 14px">
+
+                    <h5 class="modal-title" style="color:white;text-align:center">  <i class="fa fa-exclamation-circle text-white"></i>    Timesheet </h5>
+                </div>
+                <div class="modal-body">
+
+                    <h5 style="text-align:center"><i class="fa fa-exclamation-circle text-danger"></i> Date Error </h5>
+                    <div class=" dropdown-divider"></div>
+                    <p style="text-align:center"> Sorry you have selected a date that not in the current week ,kindly select a date within the current week.</p>
+
+
+
+                    <div class=" dropdown-divider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div id="calendar">
 
 
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content" style="border-radius: 14px">
-                    <div class="modal-header" style="background-color: #192530;border-radius: 14px">
 
-                        <h5 class="modal-title" style="color:white;text-align:left">  <i class="fa fa-bookmark text-white"></i>    Timesheet </h5>
-                    </div>
-                    <div class="modal-body">
-
-                        <h5 style="text-align:center"><i class="fa fa-spin fa-circle-notch text-primary"></i>  Picked <a id="pDetails7"></a> </h5>
-                        <div class=" dropdown-divider"></div>
-                        <h5>  <i class="fa fa-bookmark text-primary"></i> Activities  Add </h5>
-
-
-
-
-
-
-
-                        <button id="addPhasesButton" class="btn-xs btn btn-primary ">
-                            <i class="fa fa-plus-circle text-black"></i> Add Project Time
-                        </button>
-                        ||
-                        <button id="addPhasesButton2" class="btn-xs btn btn-warning ">
-                            <i class="fa fa-plus-circle text-black"></i> Add Non-Project Time
-                        </button>
-
-
-
-                        <div class=" dropdown-divider"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="myModal2" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content" style="border-radius: 14px">
-                    <div class="modal-header" style="background-color: #aa0505;border-radius: 14px">
-
-                        <h5 class="modal-title" style="color:white;text-align:center">  <i class="fa fa-exclamation-circle text-white"></i>    Timesheet </h5>
-                    </div>
-                    <div class="modal-body">
-
-                        <h5 style="text-align:center"><i class="fa fa-exclamation-circle text-danger"></i> Date Error </h5>
-                        <div class=" dropdown-divider"></div>
-                        <p style="text-align:center"> Sorry you have selected a date that not in the current week ,kindly select a date within the current week.</p>
-
-
-
-                        <div class=" dropdown-divider"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.min.js"></script>
         @section scripts {
@@ -690,3 +660,4 @@
         </table>
 
     </div>
+</div></div>
