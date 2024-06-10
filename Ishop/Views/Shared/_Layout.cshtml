@@ -234,6 +234,14 @@
 
                         </li>
 
+
+
+
+
+
+
+
+
                         if (this.User.IsInRole("Timesheet_Approvals"))
                         {
                             <li class="nav-item">
@@ -324,6 +332,34 @@
                             </ul>
 
                         </li>
+
+
+
+
+
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Notifications  Module</b> </li>
+
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Mine", "OutgoingEmails")" class="nav-link">
+                                <i class="nav-icon fa fa-bell text-warning"></i>
+                                <p style="color: #060440; ">
+                                 Notifications <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                        </li>
+
+
+
+
+
+
+
+
+
+
+
                         if (this.User.IsInRole("Leaves_Management"))
                         {
                             <li class="nav-item">
@@ -441,7 +477,7 @@
                     {
 
                         <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b> Master Data Module</b> </li>
-                        
+
                         <li class="nav-item">
 
 
@@ -581,20 +617,20 @@
                                     </li>
                                 </ul>
 
-</li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Time_Cat")" class="nav-link">
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Time_Cat")" class="nav-link">
 
-                                        <i class="fa fa-book-reader text-blue nav-icon"></i>
-                                        <p style="color: #060440 ">
-                                            Time Categories
-                                        </p>
-                                    </a>
-                                </li>
+                                <i class="fa fa-book-reader text-blue nav-icon"></i>
+                                <p style="color: #060440 ">
+                                    Time Categories
+                                </p>
+                            </a>
+                        </li>
 
 
 
-                            </ul>
+                    </ul>
                         </li>
 
                     }

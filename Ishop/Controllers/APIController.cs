@@ -216,14 +216,12 @@ namespace Ishop.Controllers
             // Determine date range based on Duration parameter
             DateTime startRange, endRange;
 
-            var lastweeksheet = sheet.timesheets
-                .Where(ts => ts.From_Date >= Monday.AddDays(-7) && ts.End_Date <= Sunday.AddDays(-7))
-                .ToList();
+            var lastweeksheet = sheet.timesheets.OrderByDescending(t => t.CreatedOn).Skip(1).FirstOrDefault();
+
 
             foreach (var employee in Employelist)
             {
-                var employeeTimesheets = lastweeksheet
-                    .Where(ts => ts.Owner == employee.Username)
+                var employeeTimesheets = sheet.timesheets.OrderByDescending(t => t.CreatedOn).Where(c=>c.Owner ==employee.Username).Skip(1)
                     .Select(ts => new
                     {
                         ts.Direct_Hours,
@@ -234,23 +232,31 @@ namespace Ishop.Controllers
                         ts.End_Date
                     }).ToList();
 
-                decimal totalDirectHours = employeeTimesheets.Sum(ts => ts.Direct_Hours);
-                decimal totalIndirectHours = employeeTimesheets.Sum(ts => ts.InDirect_Hours);
-                decimal totalTT = employeeTimesheets.Sum(ts => ts.Tt);
-                decimal leavetime = employeeTimesheets.Sum(ts => ts.Leave);
 
-                var To = employee.Email;
-                var Subject = "Previous Week Progress";
-                var TextBody = "Hello, " + employee.Fullname
-                    + "\n\nHere is your performance summary for the previous week:\n"
-                    + "\nProject Time: " + totalDirectHours
-                    + "\nNon-Project Time: " + totalIndirectHours
-                    + "\nLeave Hours: " + leavetime
-                    + "\nTotal Week Time: " + totalTT
-                    + "\nWeek Start: " + Monday.AddDays(-7).ToShortDateString()
-                    + "\n\nAutomated mail - no reply required";
+                var timesheetEntry = employeeTimesheets.FirstOrDefault();
+                if (timesheetEntry != null)
+                {
+                    var directHours = timesheetEntry.Direct_Hours;
+                    var indirectHours = timesheetEntry.InDirect_Hours;
+                    var tt = timesheetEntry.Tt;
+                    var leave = timesheetEntry.Leave;
+                    var fromDate = timesheetEntry.From_Date;
+                    var endDate = timesheetEntry.End_Date;
 
-                PushEmail(To, Subject, TextBody);
+                    var To = employee.Email;
+                    var Subject = "Previous Week Progress";
+                    var TextBody = "Hello, " + employee.Fullname
+                     + "\n\nHere is your performance summary for the previous week:\n"
+                     + "\nProject Time: " + directHours
+                     + "\nNon-Project Time: " + indirectHours
+                     + "\nLeave Hours: " + leave
+                     + "\nTotal Week Time: " + tt
+                     + "\n From Date: " + fromDate.ToShortDateString() + " To  Date: " + endDate.ToShortDateString()
+                     
+                     + "\n\nAutomated mail - no reply required";
+
+                    PushEmail(To, Subject, TextBody);
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Ishop.Infa;
+using Ishop.Models;
 using IShop.Core;
 using PagedList;
 using System.Data;
@@ -30,6 +31,15 @@ namespace Ishop.Controllers
             {
                 return View(db.outgoingEmails.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
             }
+
+        }
+
+        public ActionResult Mine (string searchBy, string search, int? page)
+        {
+            Userstable users = new Userstable();
+            var currentmail =users.AspNetUsers.Where(c=>c.UserName ==User.Identity.Name).FirstOrDefault();
+            return View(db.outgoingEmails.OrderByDescending(p => p.Id).Where(c=>c.Recipient== currentmail.Email).ToList().ToPagedList(page ?? 1, 11));
+            
 
         }
 

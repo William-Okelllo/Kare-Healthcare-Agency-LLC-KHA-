@@ -8083,6 +8083,7 @@
     <Content Include="Views\Holidays\Create.cshtml" />
     <Content Include="Views\Holidays\Edit.cshtml" />
     <Content Include="Views\Holidays\Index.cshtml" />
+    <Content Include="Views\OutgoingEmails\Mine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

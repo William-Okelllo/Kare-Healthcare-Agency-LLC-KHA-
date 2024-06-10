@@ -323,7 +323,10 @@
                                         </button>
                                     </div>
                                     <div class="modal-body ">
-                                        <h6 style="color: #0C54A0"> <i class="fa fa-user-circle"></i> To : <b>  @ViewBag.Receiver</b></h6>
+                                        <h8 style="color:black">
+                                            <span class="subject"><i class="fa fa-angle-double-left text-primary"></i> <b>From</b> @System.Configuration.ConfigurationManager.AppSettings["Email"]</span><br />
+                                              <span class="subject" style="color:green"><i class="fa fa-angle-double-right text-success"></i> <b>To</b> @ViewBag.Receiver</span>
+                                        </h8>
                                         <span id="staff"></span>
                                         <h6 style="color: #0C54A0"><i class="fa fa-comment-dots text-primary"></i> <b>Messsage</b></h6>
 
