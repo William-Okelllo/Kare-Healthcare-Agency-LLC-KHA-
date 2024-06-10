@@ -16,8 +16,8 @@ class program
             x.RunAsLocalSystem();
 
             x.SetServiceName("Timenex_BackEnd_Service");
-            x.SetDisplayName("Timenex Backend Service version 12.0.12 ");
-            x.SetDescription("Timenex Backend Service version 12.0.12");
+            x.SetDisplayName("Timenex Backend Service version 14.0.14 ");
+            x.SetDescription("Timenex Backend Service version 14.0.14");
         });
 
         int exitcodevalue = (int)Convert.ChangeType(exitcode, exitcode.GetTypeCode());

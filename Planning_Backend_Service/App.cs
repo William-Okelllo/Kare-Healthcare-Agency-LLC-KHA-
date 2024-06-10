@@ -24,7 +24,7 @@ namespace Planning_Backend_Service
         public App()
         {
 
-            _timer = new Timer(10000) { AutoReset = true };
+            _timer = new Timer(30000) { AutoReset = true };
             _timer.Elapsed += TimeElapsed;
         }
         private string connectionString = "Data Source=.;Initial Catalog=Planning; User ID=sa; Password=1234;Integrated Security=True;";
@@ -67,7 +67,7 @@ namespace Planning_Backend_Service
 
                 CheckTimesheetDate();
                 Holidaysfix();
-
+               
             }
             catch (Exception ex)
             {
@@ -628,8 +628,14 @@ namespace Planning_Backend_Service
                         Console.WriteLine("Invalid URL format: " + baseAddress);
                     }
                 }
+
             }
         }
+       
+        
+
+
+
         public void Leavesupdate()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -709,6 +715,23 @@ namespace Planning_Backend_Service
                 }
             }
         }
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
 
         public void Start()
         {

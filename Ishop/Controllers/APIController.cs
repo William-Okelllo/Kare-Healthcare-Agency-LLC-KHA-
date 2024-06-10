@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
@@ -198,5 +199,84 @@ namespace Ishop.Controllers
             int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
             return week;
         }
+
+
+
+
+        public void Performance()
+        {
+            Employee_Context Emp = new Employee_Context();
+            var Employelist = Emp.employees.Where(c => c.Active == true).ToList();
+
+            Timesheet_Context sheet = new Timesheet_Context();
+            DateTime currentDate = DateTime.Now;
+            DateTime Monday = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday);
+            DateTime Sunday = Monday.AddDays(6);
+
+            // Determine date range based on Duration parameter
+            DateTime startRange, endRange;
+
+            var lastweeksheet = sheet.timesheets
+                .Where(ts => ts.From_Date >= Monday.AddDays(-7) && ts.End_Date <= Sunday.AddDays(-7))
+                .ToList();
+
+            foreach (var employee in Employelist)
+            {
+                var employeeTimesheets = lastweeksheet
+                    .Where(ts => ts.Owner == employee.Username)
+                    .Select(ts => new
+                    {
+                        ts.Direct_Hours,
+                        ts.InDirect_Hours,
+                        ts.Tt,
+                        ts.Leave,
+                        ts.From_Date,
+                        ts.End_Date
+                    }).ToList();
+
+                decimal totalDirectHours = employeeTimesheets.Sum(ts => ts.Direct_Hours);
+                decimal totalIndirectHours = employeeTimesheets.Sum(ts => ts.InDirect_Hours);
+                decimal totalTT = employeeTimesheets.Sum(ts => ts.Tt);
+                decimal leavetime = employeeTimesheets.Sum(ts => ts.Leave);
+
+                var To = employee.Email;
+                var Subject = "Previous Week Progress";
+                var TextBody = "Hello, " + employee.Fullname
+                    + "\n\nHere is your performance summary for the previous week:\n"
+                    + "\nProject Time: " + totalDirectHours
+                    + "\nNon-Project Time: " + totalIndirectHours
+                    + "\nLeave Hours: " + leavetime
+                    + "\nTotal Week Time: " + totalTT
+                    + "\nWeek Start: " + Monday.AddDays(-7).ToShortDateString()
+                    + "\n\nAutomated mail - no reply required";
+
+                PushEmail(To, Subject, TextBody);
+            }
+        }
+
+        public void PushEmail(string Recipient, string Subject, string Body)
+        {
+            using (var In_services = new OutgoingEmailsContext())
+            {
+                Random random = new Random();
+
+                OutgoingEmails outgoingEmail = new OutgoingEmails
+                {
+                    Id = random.Next(),
+                    Recipient = Recipient,
+                    Subject = Subject,
+                    Body = Body,
+                    CreatedOn = DateTime.Now,
+                    Trials = 0,
+                    Response = "--waiting--"
+                };
+
+                In_services.outgoingEmails.Add(outgoingEmail);
+                In_services.SaveChanges();
+            }
+        }
+
+
+
     }
 }
