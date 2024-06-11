@@ -1,0 +1,113 @@
+﻿
+
+
+<style>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+
+    .wrap-text {
+        white-space: normal !important; /* Use !important to override other styles if needed */
+    }
+</style>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+            
+            <div class="card-body">
+
+
+                <h5>  <span class="badge badge-warning"><medium> <i class="fa fa-clcipboard-list text"></i>  </medium></span> Account Management</h5>
+                <div class="dropdown-divider"></div>
+                @if (TempData["Msg"] != null)
+                {<div class="row">
+                        <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            @TempData["Msg"]
+                        </div>
+                    </div>
+                }
+
+                <script>
+     window.setTimeout(function () {
+         $(".alert").fadeTo(500, 0).slideUp(500, function () {
+             $(this).remove();
+         });
+     }, 2000);
+                </script>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-cogs"></i>  My Account info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-unlock"></i> Security</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-mail-tab" data-toggle="pill" href="#pills-mail" role="tab" aria-controls="pills-mail" aria-selected="false"><i class="fa fa-bell"></i> Email Preferences</a>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <br />
+
+                        <small><span class="badge badge-warning"><medium> <i class="fa fa-clcipboard-list text"></i>  </medium></span>  Account Information</small>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group col-md-4 " style="display:nosne">
+                                <small><i class="fa fa-user-circle text-orange"></i>  Username</small>
+                                <input id="FormId" name="FormId" type="text" value="@ViewBag.Userinfoc.UserName" class="form-control  form-control-sm  " readonly />
+
+                            </div>
+                            <div class="form-group col-md-5 " style="display:nosne">
+                                <small><i class="fa fa-envelope text-orange"></i>  Email Address</small>
+                                <input id="FormId" name="FormId" type="text" value="@ViewBag.Userinfoc.Email" class="form-control  form-control-sm  " readonly />
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane fade show " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <br />
+
+                        <small><span class="badge badge-warning"><medium> <i class="fa fa-clcipboard-list text"></i>  </medium></span>  Password & Security</small>
+
+                        <ul>
+                            <li> Password update</li>
+                        </ul>
+                        <a href="@Url.Action("ChangePassword", "Manage")" class="btn btn-success">
+                            <i class="fa fa-user-lock text-white nav-icon"></i>  Change Password
+                        </a>
+
+
+                    </div>
+                    <div class="tab-pane fade show " id="pills-mail" role="tabpanel" aria-labelledby="pills-mail-tab">
+                        <br />
+
+                        <small><span class="badge badge-warning"><medium> <i class="fa fa-clcipboard-list text"></i>  </medium></span>  Email Preferences</small>
+
+
+
+
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+                    <small><i class="fa fa-user-tag text-orange"></i>  Acc Id</small>
+                    <small>@ViewBag.Userinfoc.Id</small>
+                </div>
+            </div>
+</div>

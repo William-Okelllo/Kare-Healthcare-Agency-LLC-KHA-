@@ -104,9 +104,9 @@
 
                         <div class="dropdown-divider"></div>
 
-                        <a href="@Url.Action("ChangePassword", "Manage")" class="dropdown-item">
+                        <a href="@Url.Action("MyAccount", "Account")" class="dropdown-item">
 
-                            <span class="badge badge-primary"><medium> <i class="fa fa-user-lock text-white nav-icon"></i> </medium></span> Change Password
+                            <span class="badge badge-warning"><medium> <i class="fa fa-user-lock text-white nav-icon"></i> </medium></span> Manage Account
                         </a>
                         <div class="dropdown-divider"></div>
 
@@ -114,7 +114,7 @@
                         {@Html.AntiForgeryToken()
                         <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">
 
-                            <span class="badge badge-primary"><medium> <i class="fa fa-sign-in-alt  text-white"></i>  </medium></span>
+                            <span class="badge badge-warning"><medium> <i class="fa fa-sign-in-alt  text-white"></i>  </medium></span>
                             Logout
                         </a>}
 
@@ -334,32 +334,6 @@
                         </li>
 
 
-
-
-
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Notifications  Module</b> </li>
-
-
-                        <li class="nav-item">
-                            <a href="@Url.Action("Mine", "OutgoingEmails")" class="nav-link">
-                                <i class="nav-icon fa fa-bell text-warning"></i>
-                                <p style="color: #060440; ">
-                                 Notifications <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-
-                        </li>
-
-
-
-
-
-
-
-
-
-
-
                         if (this.User.IsInRole("Leaves_Management"))
                         {
                             <li class="nav-item">
@@ -405,10 +379,36 @@
 
                             </li>
                         }
+
+
+
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Notifications  Module</b> </li>
+
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Mine", "OutgoingEmails")" class="nav-link">
+                                <i class="nav-icon fa fa-bell text-warning"></i>
+                                <p style="color: #060440; ">
+                                    Notifications <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                        </li>
+
+
+
+
+
+
+
+
+
+
+
                     }
                     @if (this.User.IsInRole("Notifications"))
                     {
-                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Notifications  Module</b> </li>
+                        <li class="nav-header" style="color: navy; font-family: Montserrat; font-size: 12px "><i class="fa fa-bookmark text-gray nav-icon"></i> <b>Email Alerts  Module</b> </li>
 
 
                         <li class="nav-item">

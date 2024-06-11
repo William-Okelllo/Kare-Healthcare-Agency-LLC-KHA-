@@ -8084,6 +8084,8 @@
     <Content Include="Views\Holidays\Edit.cshtml" />
     <Content Include="Views\Holidays\Index.cshtml" />
     <Content Include="Views\OutgoingEmails\Mine.cshtml" />
+    <Content Include="Views\Account\MyAccount.cshtml" />
+    <Content Include="Views\Reopen\_PagedTimesheets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

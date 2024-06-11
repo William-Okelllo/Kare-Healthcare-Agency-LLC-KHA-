@@ -2,6 +2,7 @@
 using IShop.Core;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -203,19 +204,62 @@ namespace Ishop.Controllers
 
 
 
+
+
+        public void Dailly_Performance()
+        {
+            Employee_Context Emp = new Employee_Context();
+            var Employelist = Emp.employees.Where(c => c.Active == true).ToList();
+
+            Direct_Activities_Context DA = new Direct_Activities_Context();
+            var Project_time = DA.direct_Activities.Where(c=> DbFunctions.TruncateTime(c.Day_Date) == DbFunctions.TruncateTime(DateTime.Now)).Select(c=>c.Hours).DefaultIfEmpty(0).Sum();
+
+            Indirect_Activities_Context IDA = new Indirect_Activities_Context();
+            var NonProject_time = IDA.indirect_Activities.Where(c => DbFunctions.TruncateTime(c.Day_Date) == DbFunctions.TruncateTime(DateTime.Now)).Select(c => c.Hours).DefaultIfEmpty(0).Sum();
+
+            var Total = Project_time + NonProject_time;
+
+            foreach (var employee in Employelist)
+            {
+               
+                
+                    var To = employee.Email;
+                    var Subject = DateTime.Now.ToString("dddd ,dd MMMM") +" Work Progress";
+                    var TextBody = "Hello, " + employee.Fullname
+                     + "\n\nHere is your todays timesheet performance :\n"
+                     + "\nProject Time: " + Project_time
+                     + "\nNon-Project Time: " + NonProject_time
+                     + "\nTotal  Time: " + Total
+                     + "\n  Date: " +  DateTime.Now.ToString("dd-dddd-MMMM-yyyy")
+
+                     + "\n\nAutomated mail - no reply required";
+
+                    PushEmail(To, Subject, TextBody);
+                
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void Performance()
         {
             Employee_Context Emp = new Employee_Context();
             var Employelist = Emp.employees.Where(c => c.Active == true).ToList();
 
             Timesheet_Context sheet = new Timesheet_Context();
-            DateTime currentDate = DateTime.Now;
-            DateTime Monday = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday);
-            DateTime Sunday = Monday.AddDays(6);
-
-            // Determine date range based on Duration parameter
-            DateTime startRange, endRange;
-
             var lastweeksheet = sheet.timesheets.OrderByDescending(t => t.CreatedOn).Skip(1).FirstOrDefault();
 
 

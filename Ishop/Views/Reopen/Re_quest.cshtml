@@ -32,6 +32,7 @@
     .form-control:focus {
         border-color: #0faa09;
     }
+
     .curved-table2 {
         border-collapse: collapse;
         border-radius: 50px;
@@ -114,7 +115,7 @@
     <div class="col-md-9 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
             <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
-                <i class="fa fa-bookmark"></i> Timesheet re-open request  
+                <i class="fa fa-bookmark"></i> Timesheet re-open request
             </div>
             <div class="card-body" style="background-color: white;border-radius: 24px;">
                 <div class="card-body" style="background-color: #ffffffc1;border-radius: 24px;">
@@ -123,341 +124,390 @@
                         @Html.AntiForgeryToken()
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <form>
+                        <form>
 
 
-                        <div class="form-row">
-                            <div class="form-group col-md-3" style="display:none">
-                                <label><i class=" fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.Status)</label>
-                                @Html.EditorFor(model => model.Status, new
-                           {
-                               htmlAttributes = new
+                            <div class="form-row">
+                                <div class="form-group col-md-3" style="display:none">
+                                    <label><i class=" fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.Status)</label>
+                                    @Html.EditorFor(model => model.Status, new
                                {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Timesheet_id",
-                                   @Readonly = true,
-                                   @Value = 0,
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Timesheet_id",
+                                       @Readonly = true,
+                                       @Value = 0,
 
-                               }
-                           })
+                                   }
+                               })
 
-                            </div>
+                                </div>
 
-                            <div class="form-group col-md-3">
-                                <label><i class=" fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
-                                @Html.EditorFor(model => model.CreatedOn, new
-                           {
-                               htmlAttributes = new
+                                <div class="form-group col-md-3">
+                                    <label><i class=" fa fa-calendar-day text-primary"></i>   @Html.LabelFor(model => model.CreatedOn)</label>
+                                    @Html.EditorFor(model => model.CreatedOn, new
                                {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Timesheet_id",
-                                   @Readonly = true,
-                                   @Value = DateTime.Now,
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Timesheet_id",
+                                       @Readonly = true,
+                                       @Value = DateTime.Now,
 
-                               }
-                           })
+                                   }
+                               })
 
-                            </div>
+                                </div>
 
-                            <div class="form-group col-md-2">
-                                <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Timesheet_id)</label>
-                                @Html.EditorFor(model => model.Timesheet_id, new
-                                {
-                                    htmlAttributes = new
+                                <div class="form-group col-md-2">
+                                    <label><i class="fa fa-user-circle text-primary"></i> @Html.LabelFor(model => model.Timesheet_id)</label>
+                                    @Html.EditorFor(model => model.Timesheet_id, new
                                     {
-                                        @class = "form-control form-control-sm",
-                                        @placeholder = "Timesheet_id",
-                                        @id = "Timesheet_id",
-                                        @readonly = "readonly", // Corrected attribute name
-                                    }
-                                })
-                            </div>
+                                        htmlAttributes = new
+                                        {
+                                            @class = "form-control form-control-sm",
+                                            @placeholder = "Timesheet_id",
+                                            @id = "Timesheet_id",
+                                            @readonly = "readonly", // Corrected attribute name
+                                        }
+                                    })
+                                </div>
 
 
-                            <div class="form-group col-md-3">
-                                <label><i class=" fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
-                                @Html.EditorFor(model => model.Department, new
-                           {
-                               htmlAttributes = new
+                                <div class="form-group col-md-3">
+                                    <label><i class=" fa fa-university text-primary"></i>   @Html.LabelFor(model => model.Department)</label>
+                                    @Html.EditorFor(model => model.Department, new
                                {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Department",
-                                   @Required = true,
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Department",
+                                       @Required = true,
+                                       @readonly = "readonly",
 
 
+                                   }
+                               })
 
-                               }
-                           })
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Staff)</label>
-                                @Html.EditorFor(model => model.Staff, new
-                           {
-                               htmlAttributes = new
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label><i class=" fa fa-user-circle text-primary"></i>   @Html.LabelFor(model => model.Staff)</label>
+                                    @Html.EditorFor(model => model.Staff, new
                                {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "Department",
-                                   @Value = User.Identity.Name,
-                                   @Readonly = true,
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control form-control-sm",
+                                       @Placeholder = "Department",
+                                       @Value = User.Identity.Name,
+                                       @Readonly = true,
 
 
 
-                               }
-                           })
+                                   }
+                               })
 
-                            </div>
-                        </div>
-
-                        <a href="#" class="btn btn-xs  btn-warning " data-toggle="modal" data-target="#exampleModalCenter"> <i class="fa fa-spin fa-circle-notch text-black"></i> <b>Select Timesheet</b></a>
-                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<a id="Properties" style="display:none;text-align:right"> <medium style="color:darkgreen"><i class=" fa fa-check-circle text-success"></i> <b>Success</b> - successfully selected timesheet</medium></a>
-                        <div class="dropdown-divider"></div>
-                        <span id="Duration" style="font-size: small;color:darkgreen; font-weight: bold"> </span>
-                        <span id="NonProject" style="font-size: small; color: darkgreen; font-weight: bold"> </span>
-                        <span id="Project" style="font-size: small; color: darkgreen; font-weight: bold"> </span>
-                        &nbsp;&nbsp;
-                        <span id="Tt" style="font-size: medium; color: brown; font-weight: bold"> </span>
-                        <style>
-                            /* Custom class for wider modal */
-                            .custom-modal-width {
-                                max-width: 90%; /* Adjust the percentage as needed */
-                            }
-                        </style>
-                        <div class="modal fade custom-modal-width" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
-                                <div class="modal-content" style="border-radius:15px">
-                                    <div class="modal-header" style="border-radius:15px;background-color:whitesmoke">
-                                        <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-clipboard-list text-black"></i></span>   Select Timesheet</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-
-
-
-                                    <div class="modal-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
-
-
-                                                <thead>
-                                                    <tr style="color:white">
-
-                                                        <th style="background-color: #0C54A0; font-size: medium; "> Month</th>
-
-                                                        <th style="background-color: #0C54A0; font-size: medium; ">Dates</th>
-
-
-                                                        <th style="background-color: #0C54A0; font-size: medium; ">InDirect Hrs</th>
-                                                        <th style="background-color: #0C54A0; font-size: medium; ">Direct Hrs</th>
-                                                        <th style="background-color: #0C54A0; font-size: medium; ">Total Hours</th>
-                                                        <th style="background-color: #0C54A0; font-size: medium; ">Status</th>
-                                                        <th style="background-color: #0C54A0; font-size: medium; ">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach (var item in ViewBag.Tiemsheets)
-                                                    {
-                                                        <tr>
-
-                                                            <td style="background-color: white;">
-                                                                <i class="fa fa-bookmark text-primary"></i> <b style="font-size:larger"> @item.CreatedOn.ToString("MMMM")</b>
-
-                                                            </td>
-                                                            <td style="background-color: white;">
-                                                                <medium style="color:orange"> <i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMM-yyyy")</b></medium> <medium> <b>To</b></medium> <medium style="color:green"> <i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></medium>
-
-                                                            </td>
-
-
-                                                            <td style="background-color: white;"> <h4 style="color:navy">  @item.InDirect_Hours <b style="font-size: small">Hrs</b></h4></td>
-                                                            <td style="background-color: white;"> <h4 style="color:green">  @item.Direct_Hours <b style="font-size: small">Hrs</b></h4></td>
-                                                            <td style="background-color: white;"> <h4>  @item.Tt <b style="font-size: small">Hrs</b></h4></td>
-
-                                                            <td style="background-color: white;">
-
-                                                                @if (item.Locked == false)
-                                                                {
-
-                                                                    <small style="font-size:small;color:forestgreen"><b><i class="fa fa-lock-open text-success"></i>  OPEN</b></small>
-
-                                                                }
-                                                                else
-                                                                {
-                                                                    <small style="font-size:medium;color:dimgray"><b><i class="fa fa-lock text-gray"></i> CLOSED</b></small>
-
-                                                                }
-
-                                                            </td>
-
-                                                            <td style="background-color: white;">
-                                                                <a href="#" class="btn btn-sm btn-warning select-timesheet" data-timesheet-id="@item.Id" data-timesheet-Department="@item.Department">
-                                                                    <i class="fa fa-book-reader text-bg-dark"></i> <b>Select</b>
-                                                                </a>
-                                                            </td>
-
-
-
-
-
-
-                                                        </tr>
-
-                                                    }
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script>
-                            $(document).ready(function () {
-                                $(".select-timesheet").click(function (e) {
-                                    e.preventDefault(); // Prevent the default behavior of the anchor tag
-
-                                    var recordId = $(this).data('timesheet-id');
+                            <a href="#" class="btn btn-xs  btn-warning " data-toggle="modal" data-target=".bd-example-modal-lg"> <i class="fa fa-spin fa-circle-notch text-black"></i> <b>Select Timesheet</b></a>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<a id="Properties" style="display:none;text-align:right"> <medium style="color:darkgreen"><i class=" fa fa-check-circle text-success"></i> <b>Success</b> - successfully selected timesheet</medium></a>
 
 
-                                    $.ajax({
-                                        url: '/reopen/Setid',
-                                        method: 'GET',
-                                        data: { TimesheetId: recordId },
-                                        success: function (data) {
-                                            if (data) {
-                                                $('#Timesheet_id').val(data.Id);
-                                                $('#Department').val(data.Department);
-                                                console.log('Clicked.');
-                                                $('#exampleModalCenter').modal('hide');
+                            <div class="dropdown-divider"></div>
+                            <span id="Duration" style="font-size: medium;color:darkgreen; font-weight: bold"> </span>
+                            <span id="NonProject" style="font-size: medium; color: darkgreen; font-weight: bold"> </span>
+                            <span id="Project" style="font-size: medium; color: darkgreen; font-weight: bold"> </span>
+                            &nbsp;&nbsp;
+                            <span id="Tt" style="font-size: medium; color: brown; font-weight: bold"> </span>
 
 
 
 
-                                            } else {
-                                                // Handle the case when no data is returned
-                                            }
-                                        },
-                                        error: function () {
-                                            console.log('Error retrieving record data.');
-                                        }
+
+
+
+
+
+                            <div class="dropdown-divider"></div>
+                            <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Reason) </label>
+                            <div class="form-row">
+
+                                @Html.TextAreaFor(model => model.Reason, 4, 70, htmlAttributes: new
+                           {
+                               id = "Reason", // Make sure the ID matches the one in getElementById
+                               style = "width: 70%; max-width:70%;",
+                               @placeholder = "Additional information",
+                               @autofocus = "",
+                               @Required = true,
+                               @class = "form-control form-rounded2",
+                               @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+                           })
+                                @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+
+                                <script>
+                                    document.getElementById("Comments").addEventListener("paste", function (event) {
+                                        // Prevent the default paste behavior
+                                        event.preventDefault();
+
+                                        // Get the pasted content as plain text
+                                        var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+
+                                        // Sanitize the pasted content (you may use a library for this)
+                                        var sanitizedText = sanitizeFunction(text);
+
+                                        // Insert the sanitized plain text into the textarea as HTML
+                                        document.execCommand("insertHTML", false, sanitizedText);
                                     });
-                                    $.ajax({
-                                        url: '/reopen/GetTimesheet',
-                                        method: 'GET',
-                                        data: { Part: recordId },
-                                        success: function (data) {
-                                            if (data) {
-                                                $("#Duration").text("From Date: " + formatDate(data.From_Date) + " To Date: " + formatDate(data.End_Date));
 
-                                                function formatDate(dateString) {
-                                                    // Extract the timestamp from the "/Date(1707080400000)/" format
-                                                    var timestamp = parseInt(dateString.replace(/\/Date\((\d+)\)\//, '$1'));
+                                    function sanitizeFunction(input) {
+                                        // Implement your own sanitization logic or use a library
+                                        // to ensure that the pasted content is safe.
+                                        // Example: Implement a function to escape HTML entities.
+                                        return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    }
+                                </script>
 
-                                                    // Convert the timestamp to a Date object
-                                                    var date = new Date(timestamp);
-
-                                                    // Format the date as "dd-mm-yyyy"
-                                                    var day = date.getDate();
-                                                    var month = date.getMonth() + 1; // Months are zero-based
-                                                    var year = date.getFullYear();
-
-                                                    // Pad single-digit day or month with a leading zero
-                                                    if (day < 10) {
-                                                        day = '0' + day;
-                                                    }
-                                                    if (month < 10) {
-                                                        month = '0' + month;
-                                                    }
-
-                                                    return day + '-' + month + '-' + year;
-                                                }
-
-
-                                                $("#NonProject").text("Non Project Time: " + data.InDirect_Hours);
-                                                $("#Project").text("Project Time: " + data.Direct_Hours);
-                                                $("#Tt").text("Total Time: " + data.Tt);
-                                                $('#Properties').slideDown(300); // Show the properties
-                                            } else {
-                                                $('#div').slideDown(300);
-                                            }
-                                        },
-                                        error: function () {
-                                            console.log('Error retrieving record data.');
-                                        }
-                                    });
-                                });
-                            });
-
-                        </script>
+                            </div>
 
 
 
 
 
+                            <div class="dropdown-divider"></div>
+                            <input type="submit" value="Submit" class="btn btn-warning" />
 
-
-
-
-                        <div class="dropdown-divider"></div>
-                        <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Reason) </label>
-                        <div class="form-row">
-
-                            @Html.TextAreaFor(model => model.Reason, 4, 70, htmlAttributes: new
-                       {
-                           id = "Reason", // Make sure the ID matches the one in getElementById
-                           style = "width: 70%; max-width:70%;",
-                           @placeholder = "Additional information",
-                           @autofocus = "",
-                           @Required = true,
-                           @class = "form-control form-rounded2",
-                           @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
-                       })
-                            @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
-
-                            <script>
-                                document.getElementById("Comments").addEventListener("paste", function (event) {
-                                    // Prevent the default paste behavior
-                                    event.preventDefault();
-
-                                    // Get the pasted content as plain text
-                                    var text = (event.clipboardData || window.clipboardData).getData("text/plain");
-
-                                    // Sanitize the pasted content (you may use a library for this)
-                                    var sanitizedText = sanitizeFunction(text);
-
-                                    // Insert the sanitized plain text into the textarea as HTML
-                                    document.execCommand("insertHTML", false, sanitizedText);
-                                });
-
-                                function sanitizeFunction(input) {
-                                    // Implement your own sanitization logic or use a library
-                                    // to ensure that the pasted content is safe.
-                                    // Example: Implement a function to escape HTML entities.
-                                    return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                                }
-                            </script>
-
-                        </div>
-
-
-
-
-
-                        <div class="dropdown-divider"></div>
-                        <input type="submit" value="Submit" class="btn btn-warning" />
-
-                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                    </form>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </form>
                     }
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .custom-modal-width {
+        max-width: 70%;
+    }
+
+    /* Ensure the modal is full width on small screens */
+    @@media (max-width: 767px) {
+        .custom-modal-width {
+            max-width: 100%;
+        }
+    }
+</style>
+
+
+<div class="modal fade bd-example-modal-lg" id="myLargeModalLabel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-width">
+        <div class="modal-content" style="border-radius:15px">
+            <div class="modal-header" style="border-radius:15px;background-color:whitesmoke">
+                <h5 class="modal-title" id="exampleModalLongTitle"><span class="badge badge-warning"> <i class="fa fa-clipboard-list text-black"></i></span>   Select Timesheet for Re-openning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // Get the current month name
+                    var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"
+                    ];
+                    var currentMonthIndex = new Date().getMonth();
+                    var currentMonthName = monthNames[currentMonthIndex];
+
+                    // Set the current month as the selected option in the dropdown
+                    $('#monthDropdown').val(currentMonthName);
+
+                    // Hide months in the dropdown that are beyond the current month
+                    $('#monthDropdown option').each(function (index, option) {
+                        if (index > currentMonthIndex) {
+                            $(option).hide();
+                        }
+                    });
+
+                    // Filter table rows based on selected month
+                    function filterTableByMonth(month) {
+                        $('#timesheetTableBody tr').each(function () {
+                            var rowMonth = $(this).data('month');
+                            if (rowMonth === month) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+                    }
+
+                    // Handle dropdown change event
+                    $('#monthDropdown').on('change', function () {
+                        var selectedMonth = $(this).val();
+                        filterTableByMonth(selectedMonth);
+                    });
+
+                    // Initially filter table rows by the current month
+                    filterTableByMonth(currentMonthName);
+                });
+            </script>
+
+
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="monthDropdown"><i class="fa fa-filter text-warning"></i>  Select Month:</label>
+                    <select id="monthDropdown" class="form-control">
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-nowrap table-condensed table-striped table-hover sortable curved-table">
+                        <thead style="border-radius:10px">
+                            <tr style="color:white">
+                                <th style="background-color: #0C54A0; font-size: medium;">Month</th>
+                                <th style="background-color: #0C54A0; font-size: medium;">Dates</th>
+                                <th style="background-color: #0C54A0; font-size: medium;">InDirect Hrs</th>
+                                <th style="background-color: #0C54A0; font-size: medium;">Direct Hrs</th>
+                                <th style="background-color: #0C54A0; font-size: medium;">Leave Hrs</th>
+                                <th style="background-color: #0C54A0; font-size: medium;">Total Hours</th>
+                                <th style="background-color: #0C54A0; font-size: medium;">Status</th>
+                                <th style="background-color: #0C54A0; font-size: medium;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timesheetTableBody">
+                            @foreach (var item in ViewBag.Tiemsheets)
+                            {
+                                <tr data-month="@item.CreatedOn.ToString("MMMM")">
+                                    <td style="background-color: white;"><i class="fa fa-bookmark text-warning"></i> <b style="font-size:medium">@item.CreatedOn.ToString("MMMM")</b></td>
+                                    <td style="background-color: white;">
+                                        <small style="color:navy"><i class="fa fa-calendar-day text-warning"></i> <b>@item.From_Date.ToString("dd-MMMM-yyyy")</b></small>
+                                        <medium><b style="font-size:larger">|</b></medium>
+                                        <small style="color:green"><i class="fa fa-calendar-day text-primary"></i> <b>@item.End_Date.ToString("dd-MMM-yyyy")</b></small>
+                                    </td>
+                                    <td style="background-color: white;"><h4 style="color:navy">@item.InDirect_Hours <b style="font-size: small">Hrs</b></h4></td>
+                                    <td style="background-color: white;"><h4 style="color:green">@item.Direct_Hours <b style="font-size: small">Hrs</b></h4></td>
+                                    <td style="background-color: white;"><h4 style="color:orange">@item.Leave <b style="font-size: small">Hrs</b></h4></td>
+                                    <td style="background-color: white;"><h4>@item.Tt <b style="font-size: small">Hrs</b></h4></td>
+                                    <td style="background-color: white;">
+                                        @if (item.Locked == false)
+                                        {
+                                            <small style="font-size:small;color:forestgreen"><b><i class="fa fa-lock-open text-success"></i> OPEN</b></small>
+                                        }
+                                        else
+                                        {
+                                            <small style="font-size:medium;color:dimgray"><b><i class="fa fa-lock text-gray"></i> CLOSED</b></small>
+                                        }
+                                    </td>
+                                    <td style="background-color: white;">
+                                        <a href="#" class="btn btn-sm btn-warning select-timesheet" data-timesheet-id="@item.Id" data-timesheet-Department="@item.Department">
+                                            <i class="fa fa-book-reader text-bg-dark"></i> <b>Select</b>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".select-timesheet").click(function (e) {
+            e.preventDefault(); // Prevent the default behavior of the anchor tag
+
+            var recordId = $(this).data('timesheet-id');
+
+
+            $.ajax({
+                url: '/reopen/Setid',
+                method: 'GET',
+                data: { TimesheetId: recordId },
+                success: function (data) {
+                    if (data) {
+                        $('#Timesheet_id').val(data.Id);
+                        $('#Department').val(data.Department);
+                        console.log('Clicked.');
+                        $('#myLargeModalLabel').modal('hide');
+
+
+
+
+                    } else {
+                        // Handle the case when no data is returned
+                    }
+                },
+                error: function () {
+                    console.log('Error retrieving record data.');
+                }
+            });
+            $.ajax({
+                url: '/reopen/GetTimesheet',
+                method: 'GET',
+                data: { Part: recordId },
+                success: function (data) {
+                    if (data) {
+                        $("#Duration").text("From Date: " + formatDate(data.From_Date) + " To Date: " + formatDate(data.End_Date));
+
+                        function formatDate(dateString) {
+                            // Extract the timestamp from the "/Date(1707080400000)/" format
+                            var timestamp = parseInt(dateString.replace(/\/Date\((\d+)\)\//, '$1'));
+
+                            // Convert the timestamp to a Date object
+                            var date = new Date(timestamp);
+
+                            // Format the date as "dd-mm-yyyy"
+                            var day = date.getDate();
+                            var month = date.getMonth() + 1; // Months are zero-based
+                            var year = date.getFullYear();
+
+                            // Pad single-digit day or month with a leading zero
+                            if (day < 10) {
+                                day = '0' + day;
+                            }
+                            if (month < 10) {
+                                month = '0' + month;
+                            }
+
+                            return day + '-' + month + '-' + year;
+                        }
+
+
+                        $("#NonProject").text("Non Project Time: " + data.InDirect_Hours);
+                        $("#Project").text("Project Time: " + data.Direct_Hours);
+                        $("#Tt").text("Total Time: " + data.Tt);
+                        $('#Properties').slideDown(300); // Show the properties
+                    } else {
+                        $('#div').slideDown(300);
+                    }
+                },
+                error: function () {
+                    console.log('Error retrieving record data.');
+                }
+            });
+        });
+    });
+
+</script>

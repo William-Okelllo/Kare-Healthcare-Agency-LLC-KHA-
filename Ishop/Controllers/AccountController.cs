@@ -44,6 +44,15 @@ namespace Ishop.Controllers
             }
         }
 
+
+        public ActionResult MyAccount(string username)
+        {
+            Userstable dd = new Userstable();
+            var Userinfo = dd.AspNetUsers.Find(User.Identity.GetUserId());
+            ViewBag.Userinfoc = Userinfo;
+            return View();
+        }
+
         public ApplicationUserManager UserManager
         {
             get
