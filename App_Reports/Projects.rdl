@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-03-10T23:13:54.8724097Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-07-18T11:11:46.6371359Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -45,8 +45,7 @@ FROM (
     SELECT Status, 1 AS SortOrder
     FROM Projects
 ) AS Subquery
-ORDER BY SortOrder, Status;
-</CommandText>
+ORDER BY SortOrder, Status;</CommandText>
       </Query>
       <Fields>
         <Field Name="Status">
@@ -106,6 +105,10 @@ ORDER BY SortOrder, Status;
           <DataField>PROFIT</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="Collected">
+          <DataField>Collected</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
     <DataSet Name="ProjectAdditional">
@@ -145,6 +148,10 @@ ORDER BY SortOrder, Status;
         </Field>
         <Field Name="FEE_LOGGED">
           <DataField>FEE LOGGED</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="COLLECTED">
+          <DataField>COLLECTED</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="PROFIT">
@@ -219,6 +226,9 @@ ORDER BY Reg DESC;</CommandText>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.75471in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.72917in</Width>
@@ -341,6 +351,42 @@ ORDER BY Reg DESC;</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>COLLECTED</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>Tomato</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#100f40</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox9">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -348,7 +394,7 @@ ORDER BY Reg DESC;</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>FEE LOGGED</Value>
+                                  <Value>COST VALUE</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
@@ -540,6 +586,41 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="FEE_PLANNED6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Collected.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
+                                    <Color>Tomato</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>FEE_PLANNED</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="FEE_PLANNED2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -586,6 +667,8 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <Format>''#,0.00;('Ksh'#,0.00)</Format>
+                                    <Color>=SWITCH(Fields!PROFIT.Value &gt;1, "Green",
+Fields!PROFIT.Value &lt;=0 , "Red")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -713,6 +796,41 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox27">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!Collected.Value)</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>''#,0.00;('Ksh'#,0.00)</Format>
+                                    <Color>Tomato</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox24</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox25">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -790,6 +908,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -809,7 +928,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
             <Top>5.45834in</Top>
             <Left>0.12028in</Left>
             <Height>0.80556in</Height>
-            <Width>12.36583in</Width>
+            <Width>13.36583in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -825,6 +944,9 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.88194in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.97917in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.90972in</Width>
@@ -850,7 +972,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
-                                    <FontWeight>Normal</FontWeight>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -885,7 +1007,42 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
-                                    <FontWeight>Normal</FontWeight>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox44</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#ebeaec</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox45">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>COLLECTED</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -916,11 +1073,11 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>FEE LOGGED</Value>
+                                  <Value>COST VALUE</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
-                                    <FontWeight>Normal</FontWeight>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -955,7 +1112,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>12pt</FontSize>
-                                    <FontWeight>Normal</FontWeight>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1033,7 +1190,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="FEE_PLANNED1">
+                        <Textbox Name="FEE_PLANNED7">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1041,6 +1198,40 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!FEE_PLANNED.Value</Value>
+                                  <Style>
+                                    <FontFamily>CAlibri</FontFamily>
+                                    <FontSize>14pt</FontSize>
+                                    <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>FEE_PLANNED1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FEE_PLANNED8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!COLLECTED.Value</Value>
                                   <Style>
                                     <FontFamily>CAlibri</FontFamily>
                                     <FontSize>14pt</FontSize>
@@ -1143,6 +1334,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1159,7 +1351,7 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
             <Top>0.18055in</Top>
             <Left>0.12028in</Left>
             <Height>0.625in</Height>
-            <Width>7.57639in</Width>
+            <Width>9.55556in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1185,6 +1377,9 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                 </ChartMember>
                 <ChartMember>
                   <Label>PROFIT</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>Collected</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartSeriesHierarchy>
@@ -1277,6 +1472,41 @@ Fields!Status.Value ="Cancelled", "Red")</Color>
                           <FontWeight>Bold</FontWeight>
                           <Format>'Ksh' #,0.00;('Ksh'#,0.00)</Format>
                         </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="Collected">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!Collected.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
                         <UseValueAsLabel>true</UseValueAsLabel>
                         <Visible>true</Visible>
                       </ChartDataLabel>

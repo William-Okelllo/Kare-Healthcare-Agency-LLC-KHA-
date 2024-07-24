@@ -119,7 +119,7 @@
                     <th style="background-color: #0656A5; font-size: medium; ">Email Address</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Contact</th>
                     <th style="background-color: #0656A5; font-size: medium; ">Department</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Hourly Rate</th>
+                    <th style="background-color: #0656A5; font-size: medium; ">Rates</th>
                     <th style="background-color: #0656A5; font-size: medium; "> Access</th>
                     <th style="background-color: #0656A5; font-size: medium;">Action</th>
                 </tr>
@@ -151,7 +151,12 @@
 
 
                         </td>
-                        <td style="background-color: white;"> KSH  @item.Rate.ToString("#,##0.00")</td>
+                        <td style="background-color: white;">
+                            <span class="badge badge-warning"><medium> <b>Charge Out Rate </b>  </medium> </span>    @item.Rate.ToString("#,##0.00")  <small><b>/=</b></small>
+                            <div class="dropdown-divider"></div>
+                            <span class="badge badge-success"><medium> <b>Time Cost Rate</b>   </medium> </span>    @item.Time_Rate.ToString("#,##0.00")  <small><b>/=</b></small>
+
+                        </td>
                         <td style="background-color:ghostwhite">
                             <a href="@Url.Action("Grant_Role", "Accesses", new { UserId = item.Userid })">
                                 <i class="fa fa-user-shield"></i> Manage Roles

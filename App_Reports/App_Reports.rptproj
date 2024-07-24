@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <DataSource Include="Live.rds" />
+    <DataSource Include="Local.rds" />
   </ItemGroup>
   <ItemGroup>
     <Report Include="Employee Timesheet.rdl" />

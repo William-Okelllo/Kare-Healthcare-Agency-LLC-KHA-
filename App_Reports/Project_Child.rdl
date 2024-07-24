@@ -9,13 +9,13 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.8.34525.116</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-02-14T20:49:27.5747607Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-07-17T14:20:57.0650843Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="Additional">
-      <DataSourceReference>Report</DataSourceReference>
+      <DataSourceReference>Live</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>adfff857-7eba-4238-889c-bed21b5d10cf</rd:DataSourceID>
     </DataSource>
@@ -577,7 +577,6 @@ FROM Projects</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace IShop.Core
 {
@@ -17,7 +18,12 @@ namespace IShop.Core
         public String Userid { get; set; }
         public bool Active { get; set; }
 
+
+        [Display(Name = "Charge-Out Rate")]
         public decimal Rate { get; set; }
+
+        [Display(Name = "Time-Cost Rate")]
+        public decimal Time_Rate { get; set; }
 
     }
 }

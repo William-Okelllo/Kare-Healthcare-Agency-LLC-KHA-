@@ -2,7 +2,7 @@
 <RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Live">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=108.181.156.63,3690;Initial Catalog=Planning</ConnectString>
+    <ConnectString>Data Source=108.181.201.219,3690;Initial Catalog=Planning</ConnectString>
   </ConnectionProperties>
   <DataSourceID>e766b08d-fa4f-45b1-adb7-af72cc3f0045</DataSourceID>
 </RptDataSource>
