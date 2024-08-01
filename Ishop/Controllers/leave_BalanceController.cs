@@ -54,12 +54,22 @@ namespace Ishop.Controllers
             leaveTypesContext LVV = new leaveTypesContext();
             var existingRecords = db.Leaves_Days_Tracks.Where(c => c.Username == Username).ToList();
             var Parts = LVV.leaves_Types.ToList();
+
+            leaveContext LLL = new leaveContext();
+
             Random random = new Random();
 
             using (var In_parts = new leaves_Days_trackContext())
             {
                 foreach (var part in Parts)
                 {
+                    // Calculate the sum of RequestedDays for the specific type of leave
+                    var RequestedDays = LLL.leave
+                        .Where(x => x.Employee == Username && x.Status == 2 && x.Type == part.Type)
+                        .Select(c => c.Days)
+                        .DefaultIfEmpty(0)
+                        .Sum();
+
                     // Check if a record with the same Username and Type already exists
                     bool recordExists = existingRecords.Any(r => r.Type == part.Type);
 
@@ -68,8 +78,8 @@ namespace Ishop.Controllers
                         leaves_Days_track inspections_Parts = new leaves_Days_track
                         {
                             Id = random.Next(),
-                            Requested_leaves = 0,
-                            Remaining_leaves = part.Days,
+                            Requested_leaves = RequestedDays, // Set Requested_leaves for this specific leave type
+                            Remaining_leaves = part.Days - RequestedDays,
                             Username = Username,
                             Type = part.Type,
                             Total_leaves_per_year = part.Days
@@ -89,7 +99,49 @@ namespace Ishop.Controllers
 
 
 
-        public ActionResult Insert_daysAll()
+        public ActionResult Purge(string Username)
+        {
+            leaveTypesContext LVV = new leaveTypesContext();
+            var existingRecords = db.Leaves_Days_Tracks.Where(c => c.Username == Username).ToList();
+            var Parts = LVV.leaves_Types.ToList();
+
+
+            using (var In_parts = new leaves_Days_trackContext())
+            {
+
+
+                foreach (var part in Parts)
+                {
+
+                    // Find records with the specified Type and Username (if applicable) that should be deleted
+                    var recordsToDelete = In_parts.Leaves_Days_Tracks
+                        .Where(r => r.Type == part.Type && r.Username == Username)
+                        .ToList();
+
+                    // Remove each record from the context
+                    foreach (var record in recordsToDelete)
+                    {
+                        In_parts.Leaves_Days_Tracks.Remove(record);
+                    }
+
+
+                    // Save changes to the database
+                    In_parts.SaveChanges();
+
+                }
+
+                TempData["msg"] = "Leave Tracker Cleanup completed";
+                string returnUrl = Request.UrlReferrer.ToString();
+                return Redirect(returnUrl);
+            }
+        }
+
+
+
+
+
+
+            public ActionResult Insert_daysAll()
         {
             var activeEmployees = dbb.employees.Where(c => c.Active == true).ToList();
             leaveTypesContext LVV = new leaveTypesContext();

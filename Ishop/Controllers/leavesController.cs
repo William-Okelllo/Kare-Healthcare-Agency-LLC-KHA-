@@ -447,24 +447,65 @@ namespace Ishop.Controllers
 
 
 
+       
+
+
         public void leavesTrack(Decimal Total_leaves_per_year, String Type, decimal Requested_leaves, decimal Remaining_leaves, string Username)
         {
-            string query = "INSERT INTO leaves_Days_track (Total_leaves_per_year,Type,Requested_leaves,Remaining_leaves,Username) VALUES " +
-            "                                             (@Total_leaves_per_year,@Type,@Requested_leaves,@Remaining_leaves,@Username)";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+
+
+            leaves_Days_trackContext LLL = new leaves_Days_trackContext();
+            bool Exisits = LLL.Leaves_Days_Tracks.Any(c => c.Username == Username && c.Type == Type);
+
+
+
+            //creates new record on the table
+
+            if (!Exisits)
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (var Outsms = new leaves_Days_trackContext())
                 {
-                    command.Parameters.AddWithValue("@Total_leaves_per_year", Total_leaves_per_year);
-                    command.Parameters.AddWithValue("@Type", Type);
-                    command.Parameters.AddWithValue("@Requested_leaves", Requested_leaves);
-                    command.Parameters.AddWithValue("@Remaining_leaves", Remaining_leaves);
-                    command.Parameters.AddWithValue("@Username", Username);
-                    command.ExecuteNonQuery();
+                    Random random = new Random();
+
+                    leaves_Days_track outgoingsms = new leaves_Days_track
+                    {
+                        Id = random.Next(),
+                        Total_leaves_per_year = Total_leaves_per_year,
+                        Type = Type,
+                        Requested_leaves = Requested_leaves,
+                        Remaining_leaves = Remaining_leaves,
+                        Username = Username
+                    };
+
+                    Outsms.Leaves_Days_Tracks.Add(outgoingsms);
+                    Outsms.SaveChanges();
                 }
             }
+
+            //updates exisiting record
+
+            var ExistingReco = LLL.Leaves_Days_Tracks.Where(c => c.Username == Username && c.Type == Type).FirstOrDefault();
+            if(ExistingReco !=null)
+            {
+                ExistingReco.Requested_leaves = +Requested_leaves;
+                ExistingReco.Remaining_leaves = ExistingReco.Total_leaves_per_year - ExistingReco.Requested_leaves;
+                LLL.SaveChanges();
+            }
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

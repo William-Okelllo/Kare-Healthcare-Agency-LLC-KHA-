@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Collect";
 }
-<br />
+
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -74,7 +74,9 @@
 
 
                 <div style="text-align:right">
-                    <a href="@Url.Action("Insert_days", "leave_Balance", new { Username = ViewBag.Emp.Username })" class="btn-sm btn btn-warning btn"><i class="fa fa-arrow-circle-up text-black"></i> Fetch New Leaves</a>
+                    <a class="btn-sm btn btn-warning btn" onclick="if (confirm('Are you sure you want to re-call the  leaves tracker? ')) { window.location.href = '@Url.Action("Insert_days", "leave_Balance", new { Username = ViewBag.Emp.Username })'; }" ><i class="fa fa-arrow-circle-up "></i> Pull New Data</a>
+                    <b>|</b>
+                    <a class="btn-sm btn btn-outline-danger btn" onclick="if (confirm('Are you sure you want to clean out the  leaves tracker? ')) { window.location.href = '@Url.Action("Purge", "leave_Balance", new { Username = ViewBag.Emp.Username })'; }"><i class="fa fa-circle-notch "></i> Clean Up Tracker</a>
                 </div>
                 <div class="dropdown-divider"></div>
 
@@ -88,7 +90,6 @@
                                 <th style="background-color: #0656A5; "><i class="fa fa-calendar-day"></i>  Requested </th>
                                 <th style="background-color: #0656A5; "><i class="fa fa-chart-line"></i>  Balance </th>
                                 <th style="background-color: #0656A5; "><i class="fa fa-chart-line"></i>  Total leaves in Yr </th>
-                                <th style="background-color: #0656A5; "> Action</th>
                             </tr>
                         </thead>
 
@@ -96,38 +97,11 @@
                             @foreach (var item2 in ViewBag.Account)
                             {
                                 <tr data-widget="expandable-table" aria-expanded="false">
-                                    <td style="background-color:white"> <i class="fa fa-calendar-check text-primary"></i>  @item2.Type </td>
+                                    <td style="background-color:white"> <span class="badge bg-warning"> <i class="fa fa-usere"></i></span> <b> @item2.Type</b> </td>
                                     <td style="background-color:white"> <i class="fa fa-check-circle text-primary"></i>  @item2.Requested_leaves  <small><b>Days</b></small></td>
                                     <td style="background-color:white"> <i class="fa fa-circle-notch text-success"></i>  @item2.Remaining_leaves  <small><b>Days</b></small></td>
                                     <td style="background-color:white"> <i class="fa fa-arrow-alt-circle-up text-warning"></i>  @item2.Total_leaves_per_year  <small><b>Days</b></small></td>
-                                    <td style="background-color:ghostwhite">
-                                        <div class="btn-group dropdown">
-                                            <button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-hashtag"></i>  . Action
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-
-                                                <div class="dropdown-divider"></div>
-                                                <a href="@Url.Action("Edit", "leave_Balance", new { id = item2.Id })" class="dropdown-item">
-                                                    <i class="fa fa-pen-nib text-primary"></i> Update/Edit leave Info
-                                                </a>
-
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" onclick="if (confirm('Are you sure you want to drop this leave ? ')) { window.location.href = '@Url.Action("Delete", "leave_Balance", new { id = item2.Id, })'; }">
-                                                    <i class="fa fa-times-circle "></i> Drop leave
-                                                </a>
-                                                <script>
-                                                    $(function () {
-                                                        $('#Deny').click(function () {
-                                                            if (confirm('Are you sure?')) {
-                                                                window.location.href = $(this).data('url');
-                                                            }
-                                                        });
-                                                    });
-                                                </script>
-                                                </div>
-
-                                    </td>
+                                    
                                 </tr>
                             }
                         </tbody>
