@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 
 namespace Ishop.Controllers
 {
@@ -386,11 +387,21 @@ namespace Ishop.Controllers
                     return View("ForgotPassword");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
+                
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                var Subject = "Account Password Reset";
+                var EmailBody = "Hello there 👋,"
+                + "\n" + "Kindly use the link below to reset you account password."
+                + "\n" + " "
+                + "\n" + callbackUrl
+                + "\n" + " "
+                + "\n" + "__ "
+                + "\n" + "Click the link to reset your password.";
+
+                PushEmail(model.Email, Subject,EmailBody,DateTime.Now);
+
                 TempData["msg"] = "Password reset sent to provided mail ";
                 return RedirectToAction("ForgotPassword", "Account");
             }
@@ -410,8 +421,11 @@ namespace Ishop.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string userId, string code)
         {
+            Userstable dbc = new Userstable();
+            var Useremail = dbc.AspNetUsers.Where(c => c.Id == userId).Select(c => c.Email).FirstOrDefault();
+            ViewBag.Useremail = Useremail;
             return code == null ? View("Error") : View();
         }
 
@@ -435,6 +449,16 @@ namespace Ishop.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                var Subject = "Account Password Update";
+                var EmailBody = "Hello there 👋,"
+                + "\n" + "Kindly note your account password has been updated."
+                + "\n" + " "
+                + "\n" + "New password : = " + model.Password
+                + "\n" + "__ "
+                + "\n" + "Automated notifications no reply needed";
+
+                PushEmail(model.Email, Subject, EmailBody, DateTime.Now);
+
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);

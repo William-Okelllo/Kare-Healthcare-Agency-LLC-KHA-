@@ -6378,7 +6378,7 @@
     <Content Include="Images\ddd.svg" />
     <Content Include="Images\homee.png" />
     <Content Include="Images\Infinity.gif" />
-    <Content Include="Images\Logg2.png" />
+    <Content Include="Images\kare_login.png" />
     <Content Include="Images\lwhote.png" />
     <Content Include="Images\mme.png" />
     <Content Include="Images\neww.jpg" />
@@ -6388,6 +6388,7 @@
     <Content Include="Images\spec_flat.png" />
     <Content Include="Images\ss.jpg" />
     <Content Include="Images\uu.ico" />
+    <Content Include="Images\Kare.jpg" />
     <Content Include="Images\whatsapp.ico" />
     <Content Include="Images\xc.png" />
     <Content Include="Images\xxc.png" />

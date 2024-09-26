@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IShop.Core\Hr.Core.csproj" />
     <ProjectReference Include="..\Ishop.Infa\Hr.Infa.csproj" />
-    <ProjectReference Include="..\Ishop\Planning.csproj" />
+    <ProjectReference Include="..\Ishop\Kare.csproj" />
   </ItemGroup>
 
 </Project>

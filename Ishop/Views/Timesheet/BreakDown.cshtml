@@ -63,12 +63,34 @@
         overflow: hidden;
     }
 
+
         .curved-table th,
         .curved-table td {
             padding: 10px;
             border: 1px solid #d3d3d3;
         }
+
+    .chat-bubble {
+        background-color: #f1efef;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 5px;
+        max-width: 100%; /* Allow width to adjust based on content */
+        text-align: left; /* Ensure text is aligned left */
+    }
 </style>
+
+<style>
+    .chat-bubble {
+        background-color: #f1efef;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 5px;
+        max-width: 100%; /* Allow width to adjust based on content */
+        text-align: left; /* Ensure text is aligned left */
+    }
+</style>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -236,7 +258,7 @@
                             <h5 style="text-align:center"> <span class="badge badge-warning"> <i class="fa fa-hands-helping text-black"></i></span> Non Project Time </h5>
 
                             <div class="table-responsive" style="min-height: 100px">
-                                <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+                                <table class="table table-bordered table-hover  table-condensed table-striped table-hover sortable curved-table">
 
 
                                     <thead>
@@ -244,9 +266,9 @@
 
                                             <th style="background-color: #0C54A0; color: white "> <i class="fa fa-calendar-check text-white"></i> Week Day</th>
                                             <th style="background-color: #0C54A0; color: white "> <i class="fa fa-suitcase text-white"></i>  Activity</th>
+                                            <th style="background-color: #0C54A0; color: white "> <i class="fa fa-suitcase text-white"></i>  Comments</th>
+                                            <th style="background-color: #0C54A0; color: white "> <i class="fa fa-suitcase text-white"></i>  Status</th>
 
-
-                                            <th style="background-color: #0C54A0; color: white "> <i class="fa fa-comment text-white"></i> Comments</th>
                                         </tr>
                                     </thead>
 
@@ -257,28 +279,51 @@
 
                                             <tr data-widget="expandable-table" aria-expanded="false">
 
-                                                <td style="background-color:white;" width="20%">
+                                                <td style="background-color:white;">
                                                     <span class="badge badge-primary"><medium><i class="fa fa-calendar-check text-white"></i> </medium></span>  <b>@item.Day_Date.ToString("dd-ddd-MMM-yyyy")</b>
                                                     <div class="dropdown-divider"></div>
                                                     <h3 style="color:green"> <b> @item.Hours <small>Hrs</small></b>  </h3>
                                                 </td>
-                                                <td style="background-color:white;" width="30%">
-                                                    <b style="font-size:large"> @item.Name</b>
-                                                    <div class="dropdown-divider"></div>
+                                                <td style="background-color:white;">
+                                                    <b style="font-size:medium"> @item.Name</b>
+
+
+
+                                                </td>
+                                                <td class="chat-bubble user" style="background-color: #f1efef; border-radius: 10px; padding: 10px; margin-bottom: 5px;color:black; max-width: 100%; /* Allow width to adjust based on content */ text-align: left;font-size:small;font-family:Calibri;font-style:italic">
+                                                    @{
+                                                        string message = item.Comments.Replace("\n", "<br>");
+                                                        string pattern = @"(https?://[^\s]+)";
+                                                        string replacedMessage = System.Text.RegularExpressions.Regex.Replace(message, pattern, "<a href=\"$1\" target=\"_blank\">$1</a>");
+                                                    }
+
+                                                    <p>@Html.Raw(replacedMessage)</p>
+
+
+
+
 
 
                                                 </td>
 
 
+                                                <td style="background-color: white;">
 
-                                                <td style="background-color: white;" width="50%">
-                                                    <p>@item.Comments</p>
-
-                                                    <div class="dropdown-divider"></div>
                                                     @if (@item.Approved == true)
-                                                    {<p style="color:green;text-align:right"><span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |  <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |     <i class="fa fa-check-circle"></i>  <b>APPROVED</b>  </p>}
-                                                else
-                                                {<p style="color: orange; text-align: right"> <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User  |   <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo  |  <i class="fa fa-spin fa-circle-notch"></i>  <b>PENDING</b> </p>}
+                                                    {<div >
+                                                            <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User
+                                                            <span class="badge badge-secondary"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  <b>@item.WeekNo</b>
+                                                            <div class="dropdown-divider"></div>
+                                                            <span class="badge badge-secondary"><medium><i class="fa fa-circle-notch text-white"></i> Status</medium></span> <span class="badge badge-success"><medium><i class="fa fa-circle-notch text-white"></i> <b>APPROVED</b></medium></span>
+                                                        </div>}
+
+                                                    else
+                                                    {<div >
+                                                            <span class="badge badge-primary"><medium><i class="fa fa-user-circle text-white"></i></medium></span>  @item.User
+                                                            <span class="badge badge-dark"><medium><i class="fa fa-calendar text-white"></i> WeekNo</medium></span>  @item.WeekNo
+                                                            <div class="dropdown-divider"></div>
+                                                            <span class="badge badge-secondary"><medium><i class="fa fa-circle-notch text-white"></i> Status</medium></span> <span class="badge badge-secondary"><medium><i class="fa fa-circle-notch text-white"></i> <b>PENDING</b></medium></span>
+                                                        </div>}
                                                 </td>
 
                                             </tr>
@@ -409,7 +454,7 @@
 
                         <h5> <span class="badge badge-warning"> <i class="fa  fa-spinner text-black"></i></span>  <b>Timesheet Re-Calculate</b> </h5>
 
-                        <div >
+                        <div>
                             <h6>This section allows auto correction on miscalculated hours both on Project , non-project and leaves time.</h6>
                             <br />
                             <a class="btn btn-success" href="@Url.Action("Re_Calculate", "Timesheet", new { TimesheetId = ViewBag.timesheet.Id })">
