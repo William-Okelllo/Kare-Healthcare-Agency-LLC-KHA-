@@ -403,7 +403,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\APIController.cs" />
-    <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -427,8 +426,7 @@
     <Compile Include="Controllers\OutgoingEmailsController.cs" />
     <Compile Include="Controllers\OutgoingsmsController.cs" />
     <Compile Include="Controllers\PcategoriesController.cs" />
-    <Compile Include="Controllers\PhaseController.cs" />
-    <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\ReportAccessesController.cs" />
     <Compile Include="Controllers\ReportGroupController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -437,8 +435,8 @@
     <Compile Include="Controllers\Sheet_commentsController.cs" />
     <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
-    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\Time_catController.cs" />
+    <Compile Include="Controllers\WorkplanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -7881,7 +7879,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -7937,11 +7934,6 @@
     <Content Include="Views\InDirects\Details.cshtml" />
     <Content Include="Views\InDirects\Edit.cshtml" />
     <Content Include="Views\InDirects\Index.cshtml" />
-    <Content Include="Views\Projects\Create.cshtml" />
-    <Content Include="Views\Projects\Delete.cshtml" />
-    <Content Include="Views\Projects\Details.cshtml" />
-    <Content Include="Views\Projects\Edit.cshtml" />
-    <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Timesheet\Details.cshtml" />
     <Content Include="Views\Timesheet\Index.cshtml" />
     <Content Include="Views\Departments\Create.cshtml" />
@@ -7958,20 +7950,11 @@
     <Content Include="Views\leaves_Types\Details.cshtml" />
     <Content Include="Views\leaves_Types\Edit.cshtml" />
     <Content Include="Views\leaves_Types\Index.cshtml" />
-    <Content Include="Views\Phase\Create.cshtml" />
-    <Content Include="Views\Phase\Delete.cshtml" />
-    <Content Include="Views\Phase\Details.cshtml" />
-    <Content Include="Views\Phase\Edit.cshtml" />
     <Content Include="Views\Pcategories\Create.cshtml" />
     <Content Include="Views\Pcategories\Delete.cshtml" />
     <Content Include="Views\Pcategories\Details.cshtml" />
     <Content Include="Views\Pcategories\Edit.cshtml" />
     <Content Include="Views\Pcategories\Index.cshtml" />
-    <Content Include="Views\Teams\Add.cshtml" />
-    <Content Include="Views\Teams\Delete.cshtml" />
-    <Content Include="Views\Teams\Details.cshtml" />
-    <Content Include="Views\Teams\Edit.cshtml" />
-    <Content Include="Views\Teams\Index.cshtml" />
     <Content Include="Views\ReportGroup\Create.cshtml" />
     <Content Include="Views\ReportGroup\Delete.cshtml" />
     <Content Include="Views\ReportGroup\Details.cshtml" />
@@ -8036,7 +8019,6 @@
     <Content Include="Views\HODs\Details.cshtml" />
     <Content Include="Views\HODs\Edit.cshtml" />
     <Content Include="Views\HODs\Index.cshtml" />
-    <Content Include="Views\Projects\DrillDown.cshtml" />
     <Content Include="Views\Timesheet\DataView.cshtml" />
     <Content Include="Views\Direct_Activities\Add2.cshtml" />
     <Content Include="Views\Indirect_Activities\Add2.cshtml" />
@@ -8062,11 +8044,6 @@
     <Content Include="Views\ReportAccesses\Details.cshtml" />
     <Content Include="Views\ReportAccesses\Edit.cshtml" />
     <Content Include="Views\ReportAccesses\Index.cshtml" />
-    <Content Include="Views\Collection\Collect.cshtml" />
-    <Content Include="Views\Collection\Delete.cshtml" />
-    <Content Include="Views\Collection\Details.cshtml" />
-    <Content Include="Views\Collection\Edit.cshtml" />
-    <Content Include="Views\Collection\Index.cshtml" />
     <Content Include="Views\leave_Balance\Acc_View.cshtml" />
     <Content Include="Views\Sheet_comments\Approvals.cshtml" />
     <Content Include="Views\Sheet_comments\Delete.cshtml" />
@@ -8087,6 +8064,16 @@
     <Content Include="Views\OutgoingEmails\Mine.cshtml" />
     <Content Include="Views\Account\MyAccount.cshtml" />
     <Content Include="Views\Reopen\_PagedTimesheets.cshtml" />
+    <Content Include="Views\Workplan\Create.cshtml" />
+    <Content Include="Views\Workplan\Delete.cshtml" />
+    <Content Include="Views\Workplan\Details.cshtml" />
+    <Content Include="Views\Workplan\Edit.cshtml" />
+    <Content Include="Views\Workplan\Index.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
+    <Content Include="Views\Question\Delete.cshtml" />
+    <Content Include="Views\Question\Details.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Question\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

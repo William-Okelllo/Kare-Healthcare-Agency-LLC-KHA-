@@ -50,13 +50,7 @@ namespace Ishop.Controllers
         }
 
 
-        public JsonResult GetAssignedNames(string projectName)
-        {
-            Team_Context P = new Team_Context();
-            var assignedNames = P.teams.Where(c => c.Project_Name == projectName && c.Username ==User.Identity.Name).Select(c => c.Name).ToList();
-
-            return Json(assignedNames, JsonRequestBehavior.AllowGet);
-        }
+       
 
 
         public ActionResult Details(int? id)
@@ -98,16 +92,10 @@ namespace Ishop.Controllers
             var Timecategory = TC.time_Cats.ToList();
             ViewBag.Timec = new SelectList(Timecategory, "Name", "Name");
 
-            Team_Context P = new Team_Context();
+         
 
-            var projects = P.teams
-                .Where(c => c.Username == User.Identity.Name)
-                .GroupBy(c => c.Project_Name)
-                .Select(group => group.FirstOrDefault())
-                .ToList();
 
-            ViewBag.Project = new SelectList(projects, "Project_Name", "Project_Name");
-
+          
 
 
             DateTime currentDate = Id;
@@ -165,15 +153,6 @@ namespace Ishop.Controllers
             var Timecategory = TC.time_Cats.ToList();
             ViewBag.Timec = new SelectList(Timecategory, "Name", "Name");
 
-            Team_Context P = new Team_Context();
-
-            var projects = P.teams
-                .Where(c => c.Username == User.Identity.Name)
-                .GroupBy(c => c.Project_Name)
-                .Select(group => group.FirstOrDefault())
-                .ToList();
-
-            ViewBag.Project = new SelectList(projects, "Project_Name", "Project_Name");
 
 
 
@@ -277,9 +256,8 @@ namespace Ishop.Controllers
             var InDirect = ID.InDirects.ToList();
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
 
-            Team_Context P = new Team_Context();
-            var Project = P.teams.Where(c => c.Username == User.Identity.Name).ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
+           
+           
 
             if (id == null)
             {
@@ -322,9 +300,6 @@ namespace Ishop.Controllers
             var InDirect = ID.InDirects.ToList();
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
 
-            Team_Context P = new Team_Context();
-            var Project = P.teams.Where(c => c.Username == User.Identity.Name).ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
 
             if (id == null)
             {

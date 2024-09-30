@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Ishop.Infa
 {
-    public class Collection_context : DbContext
+    public class Question_context : DbContext
     {
-        public Collection_context()
-           : base("Planning")
+        public Question_context()
+           : base("Kare")
         {
         }
-        public DbSet<Collection> collections { get; set; }
+        public DbSet<Question> questions { get; set; }
     }
 }

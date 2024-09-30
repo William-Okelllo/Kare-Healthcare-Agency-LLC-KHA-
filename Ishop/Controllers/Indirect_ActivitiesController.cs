@@ -66,9 +66,7 @@ namespace Ishop
             var InDirect = ID.InDirects.ToList();
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
 
-            Project_Context P = new Project_Context();
-            var Project = P.projects.ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
+          
 
             DateTime currentDate = Id;
             int currentWeekNumber = GetCurrentWeekNumber(currentDate); // Make sure to provide the correct date here
@@ -119,9 +117,7 @@ namespace Ishop
             var InDirect = ID.InDirects.ToList();
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
 
-            Project_Context P = new Project_Context();
-            var Project = P.projects.ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
+            
 
             DateTime currentDate = Id;
             int currentWeekNumber = GetCurrentWeekNumber2(currentDate); // Make sure to provide the correct date here
@@ -199,11 +195,7 @@ namespace Ishop
             var InDirect = ID.InDirects.ToList();
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
 
-            Project_Context P = new Project_Context();
-            var Project = P.projects.ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
-
-            
+           
 
 
 
@@ -249,11 +241,6 @@ namespace Ishop
             InDirect_Context ID = new InDirect_Context();
             var InDirect = ID.InDirects.ToList();
             ViewBag.InDirect = new SelectList(InDirect, "Name", "Name");
-
-            Project_Context P = new Project_Context();
-            var Project = P.projects.ToList();
-            ViewBag.Project = new SelectList(Project, "Project_Name", "Project_Name");
-
 
 
 

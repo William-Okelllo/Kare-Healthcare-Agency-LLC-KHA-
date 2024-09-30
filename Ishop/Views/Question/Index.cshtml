@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IShop.Core.Collection>
+﻿@model IEnumerable<IShop.Core.Question>
 
 @{
     ViewBag.Title = "Index";
@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Phase_Id)
+            @Html.DisplayNameFor(model => model.WorkPlan_Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project_Id)
+            @Html.DisplayNameFor(model => model.Activity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
+            @Html.DisplayNameFor(model => model.Goal)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Charge)
+            @Html.DisplayNameFor(model => model.Quiz)
         </th>
         <th></th>
     </tr>
@@ -29,16 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Phase_Id)
+            @Html.DisplayFor(modelItem => item.WorkPlan_Id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Project_Id)
+            @Html.DisplayFor(modelItem => item.Activity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
+            @Html.DisplayFor(modelItem => item.Goal)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Charge)
+            @Html.DisplayFor(modelItem => item.Quiz)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

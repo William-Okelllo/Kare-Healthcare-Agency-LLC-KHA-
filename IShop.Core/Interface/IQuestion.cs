@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace IShop.Core.Interface
 {
-    public interface ICollect
+    public interface IQuestion
     {
-        void Add(Collection collection);
-        void Edit(Collection collection);
+        void Add(Question question);
+        void Edit(Question question);
         void Remove(int Id);
-        IEnumerable GetCollection(); Collection FindById(int Id);
+        IEnumerable GetQuestion(); Question FindById(int Id);
     }
 }
