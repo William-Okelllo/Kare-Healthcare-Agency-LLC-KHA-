@@ -6,7 +6,7 @@ namespace Ishop.Infa
     public class DataContext : DbContext
     {
         public DataContext()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<Data> D { get; set; }

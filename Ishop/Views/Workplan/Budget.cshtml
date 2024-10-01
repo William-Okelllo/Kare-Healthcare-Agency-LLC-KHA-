@@ -1,0 +1,37 @@
+﻿
+
+@{
+    ViewBag.Title = "Budget";
+}
+
+
+<div class="card">
+
+    <div class="card-body" style="background-color: white;border-radius: 24px;">
+        <h4 style="color:purple"><i class="fa fa-bookmark"></i> Select Track</h4>
+        <div class="dropdown-divider"></div>
+
+
+        @foreach (var item in ViewBag.Workplans)
+        {
+            <div class="row">
+
+
+                <div class="col-lg-3 col-6" style="border-radius: 20px">
+                    <!-- small box -->
+                    <div class="small-box bg-warning" style="border-radius: 20px">
+                        <div class="inner">
+                            <h4>@item.Track</h4>
+
+                            <p>Click below to view Budget</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-table"></i>
+                        </div>
+                        <a href="@Url.Action("Budget_view", "Workplan", new { Track = item.Track })" class="small-box-footer" style="border-radius: 20px;background-color:#545353;color:white"><b style="color: white">View Budget</b> <i class="fas fa-arrow-circle-right text-white"></i></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

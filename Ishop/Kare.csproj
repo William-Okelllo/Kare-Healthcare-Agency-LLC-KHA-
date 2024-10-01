@@ -413,6 +413,7 @@
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DirectsController.cs" />
     <Compile Include="Controllers\Direct_ActivitiesController.cs" />
+    <Compile Include="Controllers\Direct_costController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HODsController.cs" />
     <Compile Include="Controllers\HolidaysController.cs" />
@@ -7059,6 +7060,7 @@
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Images\loading.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\Events.pubxml" />
@@ -8070,10 +8072,14 @@
     <Content Include="Views\Workplan\Edit.cshtml" />
     <Content Include="Views\Workplan\Index.cshtml" />
     <Content Include="Views\Question\Create.cshtml" />
-    <Content Include="Views\Question\Delete.cshtml" />
-    <Content Include="Views\Question\Details.cshtml" />
     <Content Include="Views\Question\Edit.cshtml" />
-    <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\Direct_cost\Create.cshtml" />
+    <Content Include="Views\Direct_cost\Delete.cshtml" />
+    <Content Include="Views\Direct_cost\Details.cshtml" />
+    <Content Include="Views\Direct_cost\Edit.cshtml" />
+    <Content Include="Views\Direct_cost\Index.cshtml" />
+    <Content Include="Views\Workplan\Budget.cshtml" />
+    <Content Include="Views\Workplan\Budget_view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

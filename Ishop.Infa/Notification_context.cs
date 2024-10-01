@@ -11,7 +11,7 @@ namespace Ishop.Infa
     public class Notification_context : DbContext
     {
         public Notification_context()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<Notification> notifications { get; set; }

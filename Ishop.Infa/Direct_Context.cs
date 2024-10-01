@@ -6,7 +6,7 @@ namespace Ishop.Infa
     public class Direct_Context : DbContext
     {
         public Direct_Context()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<Direct> directs { get; set; }

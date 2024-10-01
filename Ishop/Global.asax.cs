@@ -25,7 +25,7 @@ namespace Ishop
             Database.SetInitializer<AccessContext>(null);
             Database.SetInitializer<Timesheet_Context>(null);
             Database.SetInitializer<Activities_Context>(null);
-     
+            Database.SetInitializer<Workplan_context>(null);
             Database.SetInitializer<ConfigsContext>(null);
             Database.SetInitializer<IDays_leave_context>(null);
             Database.SetInitializer<Direct_Activities_Context>(null);

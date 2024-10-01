@@ -37,8 +37,27 @@ namespace Ishop.Controllers
         }
 
         // GET: Question/Create
-        public ActionResult Create()
+        public ActionResult Create(int WorkPlan_Id,string Activity)
         {
+
+            ViewBag.WorkPlan_Id = WorkPlan_Id;
+            ViewBag.Activity = Activity;
+
+
+            Workplan_context WP = new Workplan_context();
+            var WorkplanD = WP.workplans.Find(WorkPlan_Id);
+            ViewBag.WorkplanD = WorkplanD;
+
+
+           
+            var Questions = db.questions.Where(c=>c.WorkPlan_Id==WorkPlan_Id).ToList();
+            ViewBag.Questions = Questions;
+
+
+
+
+
+
             return View();
         }
 
@@ -47,13 +66,15 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,WorkPlan_Id,Activity,Goal,Quiz")] Question question)
+        public ActionResult Create([Bind(Include = "Id,WorkPlan_Id,Activity,Type,Quiz")] Question question)
         {
             if (ModelState.IsValid)
             {
                 db.questions.Add(question);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["msg"] = "Question added successfully ";
+                string returnUrl = Request.UrlReferrer.ToString();
+                return Redirect(returnUrl);
             }
 
             return View(question);
@@ -79,7 +100,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,WorkPlan_Id,Activity,Goal,Quiz")] Question question)
+        public ActionResult Edit([Bind(Include = "Id,WorkPlan_Id,Activity,Type,Quiz")] Question question)
         {
             if (ModelState.IsValid)
             {

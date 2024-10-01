@@ -6,7 +6,7 @@ namespace Ishop.Infa
     public class Activities_Context : DbContext
     {
         public Activities_Context()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<Activities> activities { get; set; }

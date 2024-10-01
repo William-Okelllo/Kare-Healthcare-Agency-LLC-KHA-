@@ -51,6 +51,7 @@
     <Compile Include="Department.cs" />
     <Compile Include="Direct.cs" />
     <Compile Include="Direct_Activities.cs" />
+    <Compile Include="Direct_cost.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HOD.cs" />
     <Compile Include="Holiday.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Interface\IDays_leave.cs" />
     <Compile Include="Interface\IDirect.cs" />
     <Compile Include="Interface\Idirect_act.cs" />
+    <Compile Include="Interface\IDirect_cost.cs" />
     <Compile Include="Interface\IEmployee.cs" />
     <Compile Include="Interface\Ihod.cs" />
     <Compile Include="Interface\IHolida.cs" />

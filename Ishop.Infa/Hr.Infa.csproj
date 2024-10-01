@@ -64,6 +64,8 @@
     <Compile Include="Direct_Activities_Context.cs" />
     <Compile Include="Direct_Activities_Repo.cs" />
     <Compile Include="Direct_Context.cs" />
+    <Compile Include="Direct_cost_context.cs" />
+    <Compile Include="Direct_cost_repo.cs" />
     <Compile Include="Direct_Repo.cs" />
     <Compile Include="Employee_Context.cs" />
     <Compile Include="Employee_Repo.cs" />

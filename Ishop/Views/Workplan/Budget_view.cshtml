@@ -1,0 +1,286 @@
+﻿
+<style>
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+        border-radius: 4px
+    }
+
+    .form-rounded {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
+
+<div class="card">
+
+    <div class="col d-flex justify-content-center">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-cogs"></i>  Direct Costs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fa fa-users"></i> InDirect Costs</a>
+            </li>
+
+
+        </ul>
+        </div>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+
+
+
+
+
+
+
+                <div class="card-body" style="background-color: white;border-radius: 24px;">
+                    <h4 style="color:purple"><i class="fa fa-bookmark"></i> Direct Costs : @ViewBag.WorkPlan.Track</h4>
+
+                    <b>Total : @ViewBag.DirectCostsum.ToString("#,##0.00")</b>
+                    <div style="text-align: right ">
+                        @using (Html.BeginForm("Index", "Facilities", FormMethod.Get))
+                        {
+
+
+
+                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#createModal" id="createButton">
+                                <i class="fa fa-plus-circle"></i> Add Direct Cost
+                            </button>
+
+                        }
+                    </div>
+                    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg custom-modal-width" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createModalLabel"> <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> Add Direct Cost</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Content will be loaded here from "Create" action -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .custom-modal-width {
+                            max-width: 80%; /* Set the desired width, can be any percentage or pixel value */
+                        }
+                    </style>
+
+                    <script>
+$(document).ready(function () {
+    // Create Button Click Event
+    $('#createButton').click(function () {
+        var Track = '@ViewBag.WorkPlan.Track';
+
+        $.ajax({
+            url: '@Url.Action("Create", "Direct_cost")',
+            type: 'GET',
+            data: { Track: Track },
+            success: function (data) {
+                $('#createModal .modal-body').html(data);
+                $('#createModal').modal('show');
+            },
+            error: function () {
+                console.log('Failed to load the create form.');
+            }
+        });
+    });
+
+    // Handle AJAX form submission
+    $(document).on('submit', '#createForm', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+
+    });
+
+
+});
+                    </script>
+                    <div class="dropdown-divider"></div>
+
+
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover  table-condensed table-striped table-hover sortable curved-table" id="ordersTable">
+                            <thead>
+                                <tr style="color:white">
+
+                                    <th style="background-color: #a7a7a7; font-size: medium; "> Description</th>
+                                    <th style="background-color: #a7a7a7; font-size: medium; ">Quantity</th>
+                                    <th style="background-color: #a7a7a7; font-size: medium; ">Unit</th>
+                                    <th style="background-color: #a7a7a7; font-size: medium; ">Total</th>
+                                    <th style="background-color: #a7a7a7; font-size: medium; ">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var item in ViewBag.DirectCost)
+                                {
+                                    <tr>
+
+
+                                        <td style="background-color: white; width: 70%">
+                                            @{
+                                                string message2 = item.Description.Replace("\n", "<br>");
+                                                string pattern2 = @"(https?://[^\s]+)";
+                                                string replacedMessage2 = System.Text.RegularExpressions.Regex.Replace(message2, pattern2, "<a href=\"$1\" target=\"_blank\">$1</a>");
+                                            }
+
+                                            <p>@Html.Raw(replacedMessage2)</p>
+                                        </td>
+
+                                        <td style="background-color: white; width: 10%">
+                                            <b>@item.Quantity</b>
+                                        </td>
+
+                                        <td style="background-color: white; width: 10%">
+                                            <b>@item.Unit.ToString("#,##0.00")</b>
+                                        </td>
+
+
+                                        <td style="background-color: white; width: 10%">
+                                            <b>@item.Total.ToString("#,##0.00")</b>
+                                        </td>
+
+                                        <td style="background-color: white;">
+
+
+                                            <div class="btn-group dropdown">
+                                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-hashtag"></i>  . Action
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="@Url.Action("Edit", "WorkPlan", new { id = item.Id })" class="dropdown-item">
+                                                        <i class="fa fa-plus-circle text-warning"></i> Update/Edit
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="@Url.Action("Delete", "direct_cost", new { Id = item.Id})" class="dropdown-item">
+                                                        <i class="fa fa-question-circle text-success"></i> Drop Cost
+                                                    </a>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+
+                                }
+                                <tr>
+                                    <td style="background-color: white; "></td>
+                                    <td style="background-color: white; "></td>
+                                    <td style="background-color: #a7a7a7; "><b>Total</b></td>
+                                    <td style="background-color: #a7a7a7; ">
+                                        <b>@ViewBag.DirectCostsum.ToString("#,##0.00")</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="tab-pane fade show " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="card-body" style="background-color: white;border-radius: 24px;">
+                    <h4 style="color:purple"><i class="fa fa-bookmark"></i> InDirect Costs : @ViewBag.WorkPlan.Track</h4>
+
+                    <b>Total : </b>
+                    <div style="text-align: right ">
+                        @using (Html.BeginForm("Index", "Facilities", FormMethod.Get))
+                        {
+
+
+
+                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#createModal" id="createButton">
+                                <i class="fa fa-plus-circle"></i> Add InDirect Cost
+                            </button>
+
+                        }
+                    </div>
+                    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg custom-modal-width" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createModalLabel"> <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> Add Direct Cost</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Content will be loaded here from "Create" action -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .custom-modal-width {
+                            max-width: 80%; /* Set the desired width, can be any percentage or pixel value */
+                        }
+                    </style>
+
+                    <script>
+$(document).ready(function () {
+    // Create Button Click Event
+    $('#createButton').click(function () {
+        var Track = '@ViewBag.WorkPlan.Track';
+
+        $.ajax({
+            url: '@Url.Action("Create", "Direct_cost")',
+            type: 'GET',
+            data: { Track: Track },
+            success: function (data) {
+                $('#createModal .modal-body').html(data);
+                $('#createModal').modal('show');
+            },
+            error: function () {
+                console.log('Failed to load the create form.');
+            }
+        });
+    });
+
+    // Handle AJAX form submission
+    $(document).on('submit', '#createForm', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+
+    });
+
+
+});
+                    </script>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </div>
+        </div>
+
+</div>

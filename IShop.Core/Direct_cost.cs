@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IShop.Core
 {
-    public class Question
+    public class Direct_cost
     {
         public int Id { get; set; }
 
@@ -15,11 +15,14 @@ namespace IShop.Core
         [Display(Name = "Plan No")]
         public int WorkPlan_Id { get; set; }
 
-        public string Activity { get; set; }
+        public string Description { get; set; }
 
-        public string Type { get; set; }
 
-        [Display(Name = "Question")]
-        public string Quiz { get; set; }
+        public int Quantity { get; set; }
+
+        [Display(Name = "Unit Cost")]
+        public decimal Unit { get; set; }
+
+        public decimal Total { get; set; }
     }
 }

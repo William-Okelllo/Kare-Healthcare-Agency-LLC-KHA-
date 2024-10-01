@@ -18,6 +18,8 @@ namespace IShop.Core
 
         public string Activities { get; set; }
 
-        
+        public string Guide { get; set; }
+
+        public string Respondent { get; set; }
     }
 }

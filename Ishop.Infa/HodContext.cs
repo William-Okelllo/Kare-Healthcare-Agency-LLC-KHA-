@@ -11,7 +11,7 @@ namespace Ishop.Infa
     public class HodContext : DbContext
     {
         public HodContext()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<HOD> hODs { get; set; }

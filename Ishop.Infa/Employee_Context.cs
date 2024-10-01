@@ -6,7 +6,7 @@ namespace Ishop.Infa
     public class Employee_Context : DbContext
     {
         public Employee_Context()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<Employee> employees { get; set; }

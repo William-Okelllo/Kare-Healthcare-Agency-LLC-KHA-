@@ -11,7 +11,7 @@ namespace Ishop.Infa
     public class Time_cat_context : DbContext
     {
         public Time_cat_context()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<Time_cat> time_Cats { get; set; }

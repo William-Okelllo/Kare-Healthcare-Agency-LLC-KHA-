@@ -191,7 +191,7 @@ namespace Ishop.Controllers
 
 
 
-        private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["Kare"].ConnectionString;
         public void EmpAcc(DateTime CreatedOn, string Username, string Contact, string Userid, string Email,string Fullname ,string DprtName,string Designation)
         {
             string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Email,Rate,Active,Time_Rate) VALUES " +
@@ -290,7 +290,7 @@ namespace Ishop.Controllers
 
                 var usernamename = user.UserName;
                 var Passworduser = model.Password;
-                var SubjectTopic = "Welcome to Timenex";
+                var SubjectTopic = "Welcome to Kare";
                 var TextBody = "Hello there 👋,"
                 + "\n" + "The following are your login credentials to Timenex timesheet management system"
                 + "\n" + "__ "

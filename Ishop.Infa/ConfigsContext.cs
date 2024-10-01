@@ -6,7 +6,7 @@ namespace Ishop.Infa
     public class ConfigsContext : DbContext
     {
         public ConfigsContext()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<Configs> configs { get; set; }
