@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 <style>
-   
+
     .table-hover > tbody > tr:hover {
         background-color: #D2D2D2;
     }
@@ -47,22 +47,70 @@
 
 
 
-                @using (Html.BeginForm("create", "Direct_cost", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
+@using (Html.BeginForm("create", "Direct_cost", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover text-nowrap table-condensed table-striped table-hover sortable curved-table" id="ordersTable">
-                            <tbody>
-
-                                <tr>
-
-                                    <td style="background-color: white;">
-                                        @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+<div class="form-row">
+   
+    <div class="form-group col-md-2">
+        <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Quantity)</label>
+        @Html.EditorFor(model => model.Quantity, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control form-control-sm",
+                @Placeholder = "Quantity",
+                @Required = true,
+                @id = "quantity" // Add id for JavaScript reference
+            }
+        })
+    </div>
+    <div class="form-group col-md-2">
+        <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Unit)</label>
+        @Html.EditorFor(model => model.Unit, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control form-control-sm",
+                @Placeholder = "Unit",
+                @Required = true,
+                @id = "unit" // Add id for JavaScript reference
+            }
+        })
+    </div>
+    <div class="form-group col-md-2">
+        <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Total)</label>
+        @Html.EditorFor(model => model.Total, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control form-control-sm",
+                @Placeholder = "Total",
+                @Readonly = true,
+                @id = "total" // Add id for JavaScript reference
+            }
+        })
+    </div>
+    <div class="form-group col-md-2">
+        <label><i class="fa fa-table text-primary"></i> @Html.LabelFor(model => model.WorkPlan_Id)</label>
+        @Html.EditorFor(model => model.WorkPlan_Id, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control form-control-sm",
+                @Value = ViewBag.WorkPlan,
+                @Readonly = true,
+            }
+        })
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-12">
+        @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
 {
 id = "Comments", // Make sure the ID matches the one in getElementById
 style = "width: 100%; max-width:100%;",
@@ -72,80 +120,23 @@ style = "width: 100%; max-width:100%;",
 @class = "form-control form-rounded2",
 @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
 })
-                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                                    </td>
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
 
-                                    <td style="background-color: white;">
-                                        <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Quantity)</label>
-                                        @Html.EditorFor(model => model.Quantity, new
-                                        {
-                                            htmlAttributes = new
-                                            {
-                                                @class = "form-control form-control-sm",
-                                                @Placeholder = "Quantity",
-                                                @Required = true,
-                                                @id = "quantity" // Add id for JavaScript reference
-                                            }
-                                        })
-                                    </td>
+    </div>
+</div>
+    <!-- JavaScript to calculate the total -->
+    <script>
+        document.getElementById('quantity').addEventListener('input', calculateTotal);
+        document.getElementById('unit').addEventListener('input', calculateTotal);
 
-                                    <td style="background-color: white;">
-                                        <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Unit)</label>
-                                        @Html.EditorFor(model => model.Unit, new
-                                        {
-                                            htmlAttributes = new
-                                            {
-                                                @class = "form-control form-control-sm",
-                                                @Placeholder = "Unit",
-                                                @Required = true,
-                                                @id = "unit" // Add id for JavaScript reference
-                                            }
-                                        })
-                                    </td>
+        function calculateTotal() {
+            var quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            var unit = parseFloat(document.getElementById('unit').value) || 0;
+            var total = quantity * unit;
 
-                                    <td style="background-color: white;">
-                                        <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Total)</label>
-                                        @Html.EditorFor(model => model.Total, new
-                                        {
-                                            htmlAttributes = new
-                                            {
-                                                @class = "form-control form-control-sm",
-                                                @Placeholder = "Total",
-                                                @Readonly = true,
-                                                @id = "total" // Add id for JavaScript reference
-                                            }
-                                        })
-                                    </td>
-                                    <td style="background-color: white;">
-                                        <label><i class="fa fa-table text-primary"></i> @Html.LabelFor(model => model.WorkPlan_Id)</label>
-                                        @Html.EditorFor(model => model.WorkPlan_Id, new
-                                        {
-                                            htmlAttributes = new
-                                            {
-                                                @class = "form-control form-control-sm",
-                                                @Value = ViewBag.WorkPlan,
-                                                @Readonly = true,
-                                            }
-                                        })
-                                    </td>
-
-                                    <!-- JavaScript to calculate the total -->
-                                    <script>
-                                        document.getElementById('quantity').addEventListener('input', calculateTotal);
-                                        document.getElementById('unit').addEventListener('input', calculateTotal);
-
-                                        function calculateTotal() {
-                                            var quantity = parseFloat(document.getElementById('quantity').value) || 0;
-                                            var unit = parseFloat(document.getElementById('unit').value) || 0;
-                                            var total = quantity * unit;
-
-                                            document.getElementById('total').value = total.toFixed(2); // Update the Total field
-                                        }
-                                    </script>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            document.getElementById('total').value = total.toFixed(2); // Update the Total field
+        }
+    </script>
 
 
 
@@ -157,22 +148,23 @@ style = "width: 100%; max-width:100%;",
 
 
 
-                    <input type="submit" name="action" value="Submit" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this add WorkPlan?')" />
+
+    <input type="submit" name="action" value="Submit" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this add WorkPlan?')" />
 
 
-                    <script>
-                        $(function () {
-                            $('#Create').click(function () {
-                                if (confirm('Are you sure?')) {
-                                    window.location.href = $(this).data('url');
-                                }
-                            });
-                        });
-                    </script>
-
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-
+    <script>
+        $(function () {
+            $('#Create').click(function () {
+                if (confirm('Are you sure?')) {
+                    window.location.href = $(this).data('url');
                 }
+            });
+        });
+    </script>
+
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+
+    }
 
 
 
@@ -181,9 +173,9 @@ style = "width: 100%; max-width:100%;",
 
 
 
-               
 
-            </div>
+
+</div>
                 </div>
     </div>
 </div>

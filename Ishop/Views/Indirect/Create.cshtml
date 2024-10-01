@@ -1,0 +1,170 @@
+﻿@model IShop.Core.Indirect
+
+@{
+    ViewBag.Title = "Indirect";
+}
+<style>
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+        border-radius: 4px
+    }
+
+    .form-rounded {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@using (Html.BeginForm("create", "Indirect", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-row">
+
+        
+        <div class="form-group col-md-2">
+            <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Rate)</label>
+            @Html.EditorFor(model => model.Rate, new
+            {
+                htmlAttributes = new
+                {
+                    @class = "form-control form-control-sm",
+                    @Placeholder = "Unit",
+                    @Required = true,
+                    @id = "unit" // Add id for JavaScript reference
+                }
+            })
+        </div>
+        <div class="form-group col-md-2">
+            <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Amount)</label>
+            @Html.EditorFor(model => model.Amount, new
+            {
+                htmlAttributes = new
+                {
+                    @class = "form-control form-control-sm",
+                    @Placeholder = "Amount",
+                    @Required = true,
+                    @id = "total" // Add id for JavaScript reference
+                }
+            })
+        </div>
+        <div class="form-group col-md-2">
+            <label><i class="fa fa-table text-primary"></i> @Html.LabelFor(model => model.WorkPlan_Id)</label>
+            @Html.EditorFor(model => model.WorkPlan_Id, new
+            {
+                htmlAttributes = new
+                {
+                    @class = "form-control form-control-sm",
+                    @Value = ViewBag.WorkPlan,
+                    @Readonly = true,
+                }
+            })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+    {
+    id = "Comments", // Make sure the ID matches the one in getElementById
+    style = "width: 100%; max-width:100%;",
+    @placeholder = "Additional information",
+    @autofocus = "",
+    @Required = true,
+    @class = "form-control form-rounded2",
+    @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+    })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <!-- JavaScript to calculate the total -->
+    <script>
+        document.getElementById('quantity').addEventListener('input', calculateTotal);
+        document.getElementById('unit').addEventListener('input', calculateTotal);
+
+        function calculateTotal() {
+            var quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            var unit = parseFloat(document.getElementById('unit').value) || 0;
+            var total = quantity * unit;
+
+            document.getElementById('total').value = total.toFixed(2); // Update the Total field
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <input type="submit" name="action" value="Submit" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this add WorkPlan?')" />
+
+
+    <script>
+        $(function () {
+            $('#Create').click(function () {
+                if (confirm('Are you sure?')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+
+}
+
+
+
+
+
+
+
+
+
+
+</div>
+                </div>
+    </div>
+</div>
+</div>

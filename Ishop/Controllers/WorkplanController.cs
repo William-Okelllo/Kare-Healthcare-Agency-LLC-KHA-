@@ -57,7 +57,15 @@ namespace Ishop.Controllers
             Direct_cost_context DC =new Direct_cost_context();
             var DirectCost =DC.direct_Costs.Where(c=>c.WorkPlan_Id == WorkPlan.Id).ToList();
             ViewBag.DirectCost = DirectCost;
-            ViewBag.DirectCostsum = DC.direct_Costs.Where(c => c.WorkPlan_Id == WorkPlan.Id).Select(c => c.Total).Sum();
+            ViewBag.DirectCostsum = DC.direct_Costs.Where(c => c.WorkPlan_Id == WorkPlan.Id).Select(c => c.Total).DefaultIfEmpty(0).Sum();
+
+            Indirect_context ID = new Indirect_context();
+            var Indirectt = ID.indirects.Where(c => c.WorkPlan_Id == WorkPlan.Id).ToList();
+            ViewBag.Indirectt = Indirectt;
+            ViewBag.IndirectCostsum = ID.indirects.Where(c => c.WorkPlan_Id == WorkPlan.Id).Select(c => c.Amount).DefaultIfEmpty(0).Sum();
+
+            ViewBag.Allcost = (DC.direct_Costs.Where(c => c.WorkPlan_Id == WorkPlan.Id).Select(c => c.Total).DefaultIfEmpty(0).Sum()) + (ID.indirects.Where(c => c.WorkPlan_Id == WorkPlan.Id).Select(c => c.Amount).DefaultIfEmpty(0).Sum());
+
             return View();
         }
 

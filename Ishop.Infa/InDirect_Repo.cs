@@ -1,40 +1,45 @@
-﻿using IShop.Core;
-using IShop.Core.Interface;
+﻿using IShop.Core.Interface;
+using IShop.Core;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Security.Principal;
 
 namespace Ishop.Infa
 {
-    public class InDirect_Repo : Iindirect
+    public class Indirect_repo : IIndirect
     {
-        InDirect_Context context = new InDirect_Context();
+        Indirect_context context = new Indirect_context();
 
-        public void Add(InDirect inDirect)
+        public void Add(Indirect indirect)
         {
-            context.InDirects.Add(inDirect);
+            context.indirects.Add(indirect);
             context.SaveChanges();
         }
 
-        public void Edit(InDirect inDirect)
+        public void Edit(Indirect indirect)
         {
-            context.Entry(inDirect).State = System.Data.Entity.EntityState.Modified;
+            context.Entry(indirect).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public InDirect FindById(int Id)
+        public Indirect FindById(int Id)
         {
-            var result = (from r in context.InDirects where r.Id == Id select r).FirstOrDefault();
+            var result = (from r in context.indirects where r.Id == Id select r).FirstOrDefault();
             return result;
         }
 
-        public IEnumerable GetinDirect()
+        public IEnumerable GetIndirect()
 
-        { return context.InDirects; }
+        { return context.indirects; }
 
         public void Remove(int Id)
 
         {
-            InDirect d = context.InDirects.Find(Id);
-            context.InDirects.Remove(d); context.SaveChanges();
+            Indirect d = context.indirects.Find(Id);
+            context.indirects.Remove(d); context.SaveChanges();
 
         }
     }

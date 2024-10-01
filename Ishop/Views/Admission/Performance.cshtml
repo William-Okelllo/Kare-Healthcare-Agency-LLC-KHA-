@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Performance";
+}
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded3 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 14%;
+        border-color: white;
+    }
+</style>
+<div class="card " style="background-color: white;">
+
+    <script src="~/Scripts/chart.js"></script>
+
+
+    <div style="width: 80%; margin: auto;">
+        <canvas id="performanceChart"></canvas>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('performanceChart').getContext('2d');
+        var grades = @Html.Raw(ViewBag.Grades);
+        var datasetsRaw = @Html.Raw(ViewBag.Datasets);
+
+        var datasets = datasetsRaw.map(function(dataset, index) {
+            var colors = [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)'
+            ];
+            return {
+                label: dataset.subject,
+                data: dataset.data,
+                backgroundColor: colors[index % colors.length],
+                borderColor: colors[index % colors.length].replace('0.8', '1'),
+                borderWidth: 1
+            };
+        });
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: grades,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Grades'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Percentage'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Student Performance',
+                        font: {
+                            size: 18
+                        }
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
+
+    <h5>Performance Details</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px;">Subject</th>
+                <th style="padding: 10px;">Grade</th>
+                <th style="padding: 10px;">Percentage</th>
+            </tr>
+            @foreach (var item in ViewBag.Perfom)
+            {
+                <tr>
+                    <td style="padding: 10px;">@item.Subjects</td>
+                    <td style="padding: 10px;">@item.Grade</td>
+                    <td style="padding: 10px;">@item.Percentage%</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div> </div> </div>

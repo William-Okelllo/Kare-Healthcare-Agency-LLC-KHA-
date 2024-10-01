@@ -6,7 +6,7 @@ namespace Ishop.Infa
     public class ReportGroupContext : DbContext
     {
         public ReportGroupContext()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<ReportGroup> ReportGroups { get; set; }

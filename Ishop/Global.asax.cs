@@ -19,23 +19,13 @@ namespace Ishop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<InDirect_Context>(null);
-            Database.SetInitializer<Direct_Context>(null);
             Database.SetInitializer<DataContext>(null);
             Database.SetInitializer<AccessContext>(null);
-            Database.SetInitializer<Timesheet_Context>(null);
             Database.SetInitializer<Activities_Context>(null);
             Database.SetInitializer<Workplan_context>(null);
             Database.SetInitializer<ConfigsContext>(null);
-            Database.SetInitializer<IDays_leave_context>(null);
-            Database.SetInitializer<Direct_Activities_Context>(null);
-            Database.SetInitializer<Indirect_Activities_Context>(null);
-            Database.SetInitializer<leaveTypesContext>(null);
-            Database.SetInitializer<Sheet_comments_context>(null);
             Database.SetInitializer<DepartmentContext>(null);
-            Database.SetInitializer<Re_open_context>(null);
-            Database.SetInitializer<Notification_context>(null);
-            Database.SetInitializer<Holiday_context>(null);
+            Database.SetInitializer<Perform_context>(null);
         }
     }
 }

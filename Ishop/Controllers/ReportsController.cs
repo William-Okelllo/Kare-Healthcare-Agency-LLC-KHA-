@@ -29,11 +29,9 @@ public class ReportsController : Controller
     public ActionResult Index(string searchBy, string search, int? page)
     {
 
-            ReportAccess_context DD = new ReportAccess_context();
-            var userDepartments = DD.reportAccesses.Where(D => D.Staff == User.Identity.Name).Select(d => d.GroupId).ToList();
+           
 
-
-        return View(dbb.ReportGroups.OrderByDescending(p => p.Menu_order).Where(c => userDepartments.Contains(c.id)).ToList().ToPagedList(page ?? 1, 20));
+        return View(dbb.ReportGroups.OrderByDescending(p => p.Menu_order).ToList().ToPagedList(page ?? 1, 20));
     }
     public ActionResult Create(int id)
     {

@@ -88,7 +88,7 @@
                     </div>
                     <style>
                         .custom-modal-width {
-                            max-width: 80%; /* Set the desired width, can be any percentage or pixel value */
+                            max-width: 60%; /* Set the desired width, can be any percentage or pixel value */
                         }
                     </style>
 
@@ -212,26 +212,26 @@ $(document).ready(function () {
             </div>
             <div class="tab-pane fade show " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div class="card-body" style="background-color: white;border-radius: 24px;">
-                    <h4 style="color:purple"><i class="fa fa-bookmark"></i> InDirect Costs : @ViewBag.WorkPlan.Track</h4>
+                    <h4 style="color:purple"><i class="fa fa-bookmark"></i> InDirect Costs : @ViewBag.IndirectCostsum</h4>
 
                     <b>Total : </b>
                     <div style="text-align: right ">
-                        @using (Html.BeginForm("Index", "Facilities", FormMethod.Get))
+                        @using (Html.BeginForm("Index", "Indirect", FormMethod.Get))
                         {
 
 
 
-                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#createModal" id="createButton">
+                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#createModal2" id="createButton2">
                                 <i class="fa fa-plus-circle"></i> Add InDirect Cost
                             </button>
 
                         }
                     </div>
-                    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="createModal2" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg custom-modal-width" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="createModalLabel"> <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> Add Direct Cost</h5>
+                                    <h5 class="modal-title" id="createModalLabel"> <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> Add InDirect Cost</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -244,23 +244,23 @@ $(document).ready(function () {
                     </div>
                     <style>
                         .custom-modal-width {
-                            max-width: 80%; /* Set the desired width, can be any percentage or pixel value */
+                            max-width: 60%; /* Set the desired width, can be any percentage or pixel value */
                         }
                     </style>
 
                     <script>
 $(document).ready(function () {
     // Create Button Click Event
-    $('#createButton').click(function () {
+    $('#createButton2').click(function () {
         var Track = '@ViewBag.WorkPlan.Track';
 
         $.ajax({
-            url: '@Url.Action("Create", "Direct_cost")',
+            url: '@Url.Action("Create", "Indirect")',
             type: 'GET',
             data: { Track: Track },
             success: function (data) {
-                $('#createModal .modal-body').html(data);
-                $('#createModal').modal('show');
+                $('#createModal2 .modal-body').html(data);
+                $('#createModal2').modal('show');
             },
             error: function () {
                 console.log('Failed to load the create form.');
@@ -279,6 +279,83 @@ $(document).ready(function () {
 });
                     </script>
                     <div class="dropdown-divider"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover  table-condensed table-striped table-hover sortable curved-table" id="ordersTable">
+                            <thead>
+                                <tr style="color:white">
+
+                                    <th style="background-color: #a7a7a7; font-size: medium; "> Description</th>
+                                    <th style="background-color: #a7a7a7; font-size: medium; ">Unit</th>
+                                    <th style="background-color: #a7a7a7; font-size: medium; ">Total</th>
+                                    <th style="background-color: #a7a7a7; font-size: medium; ">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var item in ViewBag.Indirectt)
+                                {
+                                    <tr>
+
+
+                                        <td style="background-color: white; width: 70%">
+                                            @{
+                                                string message2 = item.Description.Replace("\n", "<br>");
+                                                string pattern2 = @"(https?://[^\s]+)";
+                                                string replacedMessage2 = System.Text.RegularExpressions.Regex.Replace(message2, pattern2, "<a href=\"$1\" target=\"_blank\">$1</a>");
+                                            }
+
+                                            <p>@Html.Raw(replacedMessage2)</p>
+                                        </td>
+
+                                        
+
+                                        <td style="background-color: white; width: 10%">
+                                            <b>@item.Rate.ToString("#,##0.00")</b>
+                                        </td>
+
+
+                                        <td style="background-color: white; width: 10%">
+                                            <b>@item.Amount.ToString("#,##0.00")</b>
+                                        </td>
+
+                                        <td style="background-color: white;">
+
+
+                                            <div class="btn-group dropdown">
+                                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-hashtag"></i>  . Action
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="@Url.Action("Edit", "WorkPlan", new { id = item.Id })" class="dropdown-item">
+                                                        <i class="fa fa-plus-circle text-warning"></i> Update/Edit
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="@Url.Action("Delete", "Indirect", new { Id = item.Id})" class="dropdown-item">
+                                                        <i class="fa fa-question-circle text-success"></i> Drop Cost
+                                                    </a>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+
+                                }
+                                <tr>
+                                    <td style="background-color: white; "></td>
+                                    <td style="background-color: white; "></td>
+                                    <td style="background-color: #a7a7a7; "><b>Total</b></td>
+                                    <td style="background-color: #a7a7a7; ">
+                                        <b>@ViewBag.IndirectCostsum.ToString("#,##0.00")</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

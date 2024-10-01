@@ -1,0 +1,149 @@
+﻿@model IShop.Core.Exam
+
+@{
+    ViewBag.Title = "Exam";
+}
+
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i>  Exam Report </h4>
+                <div class="dropdown-divider"></div>
+                @using (Html.BeginForm("Create", "Exams", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <form>
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Date)</label>
+                        @Html.EditorFor(model => model.Date, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm ",
+                           @placeholder = "Exam Date",
+                           id = "datepicker",
+
+                           @required = "required",
+                       }
+                   })
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label><i class=" fa fa-user-graduate text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
+                        @Html.EditorFor(model => model.Name, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Name",
+                           @Required = true,
+
+
+                       }
+                   })
+
+                    </div>
+                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label><i class=" fa fa-envelope text-purple"></i>   @Html.LabelFor(model => model.Attendees)</label>
+                            @Html.EditorFor(model => model.Attendees, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "Attendees",
+                               @Required = true,
+
+
+                           }
+                       })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class=" fa fa-envelope text-purple"></i>   @Html.LabelFor(model => model.defaulters)</label>
+                            @Html.EditorFor(model => model.defaulters, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm",
+                               @Placeholder = "defaulters",
+                               @Required = true,
+
+
+                           }
+                       })
+
+                        </div>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+                    <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Observations) </label>
+                    <div class="form-row">
+
+
+                        @Html.TextAreaFor(model => model.Observations, 4, 70, htmlAttributes: new
+    {
+     style = "width: 70%; max-width:70%;",
+     @placeholder = "Additional information",
+     @autofocus = "",
+     @class = "form-control form-rounded2",
+      // Custom attribute for conditional validation
+    })
+                        @Html.ValidationMessageFor(model => model.Observations, "", new { @class = "text-danger" })
+                    </div>
+
+                    
+
+
+                        <div class="dropdown-divider"></div>
+
+                        <div class="col d-flex justify-content-center">
+                            <input type="submit" name="action" value="Submit Report" class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed Admit student?')" />
+                            <b>|</b>
+
+                            <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                            </script>
+
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</div>

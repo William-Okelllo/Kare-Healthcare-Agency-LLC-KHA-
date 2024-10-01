@@ -1,0 +1,234 @@
+﻿@model PagedList.IPagedList<IShop.Core.Admission>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Admissions";
+}
+
+
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded3 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 14%;
+        border-color: white;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #53085B; color: white; ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-user-graduate"></i>
+            Students list
+        </h3>
+
+        <div style="text-align: right; color: white ">
+            @using (Html.BeginForm("Index", "Admission", FormMethod.Get))
+            {
+
+                <a style="font-family: Calibri">  <span class="badge badge-warning"><medium><i class="fa fa-certificate  "></i>   </medium> </span> Student Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "Name" })
+                <button type="submit" value="search" class="btn btn-sm btn-warning">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                @Html.ActionLink("New Admission ", "Add", "Admission", null, new { @class = "btn btn-sm btn-default btn" })
+
+            }
+        </div>
+
+
+
+    </div>
+   
+       
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+            <thead>
+                <tr style="color:white">
+
+                    <th style="background-color: #53085B; font-size: medium; "> Admission No</th>
+                    <th style="background-color: #53085B; font-size: medium; "> Date</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Name</th>
+                    <th style="background-color: #53085B; font-size: medium; ">email</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Contact</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Gender</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+
+                        <td style="background-color: white;">
+                            <b style="font-size:large"><i class="fa fa-user-tag text-warning"></i>  @item.Admin_No</b>
+                        </td>
+                        <td style="background-color: white;">
+                            <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span>  @item.Date.ToString("dd-MMM-yyyy")
+                        </td>
+                        <td style="background-color: white;"><i class="fa fa-user-circle text-orange"></i> <b> @item.Name</b></td>
+                        <td style="background-color: white;"><i class="fa fa-envelope text-orange"></i>   <small style="color:blue">@item.Email</small></td>
+                        <td style="background-color: white;">@item.Contacts</td>
+                        <td style="background-color: white;">
+                            @if( item.Gender== "Female")
+                {
+                    <medium> <i class="fa fa-female text-warning"></i> <b> @item.Gender</b> </medium>
+                            }
+                            else
+                            {<medium> <i class="fa fa-male text-warning"></i>  <b>@item.Gender</b> </medium> }
+
+                        </td>
+                        <td style="background-color: white;">
+
+
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-hashtag"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                    
+                                    <a href="@Url.Action("Performance", "Admission", new { id = item.Name })" class="dropdown-item">
+                                        <i class="fa fa-chart-line text-warning"></i> View Performance
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Delete", "Admission", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-plus-circle text-warning"></i> Drop Student
+                                    </a>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </td>
+
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <!-- Modal to display the result -->
+
+
+
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Mine", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+

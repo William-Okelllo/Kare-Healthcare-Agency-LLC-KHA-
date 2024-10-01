@@ -2,7 +2,7 @@
 <RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Local">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=.;Initial Catalog=Planning</ConnectString>
+    <ConnectString>Data Source=.;Initial Catalog=Kare</ConnectString>
   </ConnectionProperties>
-  <DataSourceID>2e620f35-8c2e-43f9-8ab1-58ec47a90b24</DataSourceID>
+  <DataSourceID>5ca6e49d-c560-47bf-8153-7a19a149b248</DataSourceID>
 </RptDataSource>

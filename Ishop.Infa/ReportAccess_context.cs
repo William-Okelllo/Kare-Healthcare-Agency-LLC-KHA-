@@ -11,7 +11,7 @@ namespace Ishop.Infa
     public class ReportAccess_context : DbContext
     {
         public ReportAccess_context()
-           : base("Planning")
+           : base("Kare")
         {
         }
         public DbSet<ReportAccess> reportAccesses { get; set; }

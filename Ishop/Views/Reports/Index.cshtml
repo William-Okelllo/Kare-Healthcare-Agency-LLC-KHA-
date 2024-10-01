@@ -31,23 +31,16 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header" style="background-color: #0656A5">
-        <h3 class="card-title" style="color:white">
-            <i class="fa fa-university"></i>
-            Reports
-        </h3>
-
-
-
-
-
-    </div>
+    
     <div class="card-body">
 
 
+        <h6>
+            <i class="fa fa-university"></i>
+            <b>Reports</b>
+        </h6>
 
-
-
+        <div class="dropdown-divider"></div>
         @if (TempData["Msg"] != null)
         {<div class="row">
                 <div class="alert alert-success col-md-6 col-md-offset-4" align="center">
@@ -71,15 +64,15 @@
 
         <div class="card-body">
             <div class="row">
-                
-                    @foreach (var item in Model)
-                    {
+
+                @foreach (var item in Model)
+                {
 
 
 
-
+                    <div class="col-xl-4">
                         <div class="card" style="width:25rem; border-radius: 14px;">
-                            <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px; "><i class="fa fa-chart-line"></i> @item.Description   <span class="badge badge-warning"><medium><i class="fa fa-server"></i> @item.Menu_order</medium></span></div>
+                            <div class="card-header" style="background-color: #53085B; color: white; border-radius: 14px; "><i class="fa fa-chart-line"></i> @item.Description   <span class="badge badge-warning"><medium><i class="fa fa-server"></i> @item.Menu_order</medium></span></div>
 
                             <div class="card-body">
                                 <a><span class="badge badge-secondary"><medium><i class="fa fa-chart-line text-white"></i></medium></span> Group Type : @item.Type  </a>
@@ -89,8 +82,10 @@
                             </div>
 
                         </div>
+                    </div>
+
                         <div class="dropdown-divider"></div>
-                    }
+                        }
                     </div>
                 </div>
-            
+
