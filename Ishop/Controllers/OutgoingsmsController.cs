@@ -32,15 +32,7 @@ namespace Ishop.Web.Controllers
             }
 
         }
-        public ActionResult GetDataName(string Code)
-        {
-            Template_Context TT = new Template_Context();
-
-
-            var data = TT.templates.FirstOrDefault(d => d.Code == Code);
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+       
         public ActionResult Send_sms(int? id)
         {
 
@@ -70,18 +62,7 @@ namespace Ishop.Web.Controllers
 
             return View(outgoingsms);
         }
-        public ActionResult Group()
-        {
-
-
-            Template_Context dbbb = new Template_Context();
-            var Temp = dbbb.templates.ToList();
-            ViewBag.Temp = new SelectList(Temp, "Code", "Code");
-
-
-
-            return View();
-        }
+        
 
         // POST: landloards/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

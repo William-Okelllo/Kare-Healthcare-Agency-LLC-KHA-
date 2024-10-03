@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace IShop.Core.Interface
 {
-    public interface Itime_cat
+    public interface IBenef
     {
-        void Add(Time_cat time_Cat);
-        void Edit(Time_cat time_Cat);
+        void Add(Benef benef);
+        void Edit(Benef benef);
         void Remove(int Id);
-        IEnumerable GetTime_cat(); Time_cat FindById(int Id);
+        IEnumerable GetBenef(); Benef FindById(int Id);
+
+
     }
 }
-

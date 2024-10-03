@@ -1,0 +1,160 @@
+﻿@model IShop.Core.Benitem
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm())
+{@Html.AntiForgeryToken()
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+ <div class="form-group col-md-2" style="display:none">
+    <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Beneficiary_Id)</label>
+    @Html.EditorFor(model => model.Beneficiary_Id, new
+{
+   htmlAttributes = new
+   {
+       @class = "form-control form-control-sm ",
+
+
+       @Value = ViewBag.Tag,
+   }
+})
+</div>
+<div class="row">
+    <div class="form-group col-md-6">
+        <label><i class=" fa fa-gifts text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
+        @Html.DropDownList("Name", ViewBag.Admm as SelectList, "--Select Phase --", new { @class = "form-control  form-control-sm", @Id = "Namee", @Required = true })
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#Gender").chosen();
+            $("#Nsamee").chosen();
+
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Wait for the DOM to be ready
+        $(function () {
+            // Function to fetch models based on the selected make using AJAX
+            $("#Namee").change(function () {
+                var Name = $(this).val();
+
+                if (Name !== "") {
+                    $.ajax({
+                        url: "/B_items/GetPhaseId",
+                        type: "GET",
+                        data: { Name: Name },
+                        dataType: "json",
+                        success: function (data) {
+                            $('#Each').val(data.Amount);
+                        },
+                        error: function () {
+                            console.log("Error fetching Plots.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <div class="form-group col-md-4">
+        <label><i class="fa fa-layer-group text-purple"></i> @Html.LabelFor(model => model.Quantity)</label>
+        @Html.EditorFor(model => model.Quantity, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control form-control-sm",
+                @Placeholder = "Quantity",
+                @Required = true,
+                @Id = "Quantity" // Add ID for Quantity
+            }
+        })
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <label><i class="fa fa-hashtag text-purple"></i> @Html.LabelFor(model => model.Each)</label>
+        @Html.EditorFor(model => model.Each, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control form-control-sm",
+                @Placeholder = "Price Per Unit",
+                @Readonly = true,
+                @Id = "Each" // Add ID for Each
+            }
+        })
+    </div>
+
+    <div class="form-group col-md-4">
+        <label><i class="fa fa-dollar text-purple"></i> @Html.LabelFor(model => model.Total)</label>
+        @Html.EditorFor(model => model.Total, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control form-control-sm",
+                @Placeholder = "Total Amount",
+                @Readonly = true,
+                @Id = "Total" // Add ID for Total
+            }
+        })
+    </div>
+</div>
+
+<script>
+    // Listen for changes on Quantity field
+    document.getElementById("Quantity").addEventListener("input", calculateTotal);
+
+    // Function to calculate the total
+    function calculateTotal() {
+        var quantity = document.getElementById("Quantity").value;
+        var each = document.getElementById("Each").value;
+
+        // Check if Each (Price per Unit) is selected
+        if (each == "" || each == null) {
+            alert("Please select or enter the price for each item.");
+            return;
+        }
+
+        // Calculate total
+        if (quantity && each) {
+            var total = quantity * each;
+            document.getElementById("Total").value = total.toFixed(2); // Update total with two decimal places
+        }
+    }
+
+    // Optionally, listen for changes in the Each field and recalculate the total
+    document.getElementById("Each").addEventListener("input", calculateTotal);
+</script>
+
+
+
+
+<div class="dropdown-divider"></div>
+
+<div class="col d-flex justify-content-center">
+    <input type="submit" name="action" value="Add Item" class="btn btn btn-success" style="color:white" )" />
+    <b>|</b>
+
+    <script>
+        $(function () {
+            $('#Create').click(function () {
+                if (confirm('Are you sure?')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+
+
+</div>
+
+}

@@ -17,9 +17,14 @@ namespace Ishop.Controllers
         public ActionResult Index()
         {
            
+            Immigrant_context II = new Immigrant_context();
+            var Imm = II.immigrants.Count();
+            ViewBag.Imm = Imm;
 
 
-
+            Admission_context AA = new Admission_context();
+            var Admin = AA.admissions.Count();
+            ViewBag.Admin = Admin;
 
             return View();
         }

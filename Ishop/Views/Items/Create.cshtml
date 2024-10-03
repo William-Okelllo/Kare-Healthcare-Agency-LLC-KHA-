@@ -1,0 +1,90 @@
+﻿@model IShop.Core.Items
+
+@{
+    ViewBag.Title = "Items Add";
+}
+
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+
+
+                @using (Html.BeginForm("Create", "items", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                   
+                
+<div class="form-row justify-content-center">
+    <div class="form-group col-md-6">
+        <label><i class=" fa fa-mobile text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
+        @Html.EditorFor(model => model.Name, new
+   {
+       htmlAttributes = new
+       {
+           @class = "form-control ",
+           @Placeholder = "Beneficiaries  items",
+           @Required = true,
+
+
+       }
+   })
+
+    </div>
+
+    <div class="form-group col-md-4">
+        <label><i class=" fa fa-coins text-purple"></i>   @Html.LabelFor(model => model.Amount)</label>
+        @Html.EditorFor(model => model.Amount, new
+   {
+       htmlAttributes = new
+       {
+           @class = "form-control ",
+           @Placeholder = "items Amount",
+           @Required = true,
+
+
+       }
+   })
+
+    </div>
+</div>
+                <div class="dropdown-divider"></div>
+
+                <div class="col d-flex justify-content-center">
+                    <input type="submit" name="action" value="Submit " class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed Beneficiaries  item?')" />
+                    <b>|</b>
+
+                    <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                    </script>
+
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                </div>
+           
+        }
+            </div>
+        </div>
+    </div>
+</div>
+</div>

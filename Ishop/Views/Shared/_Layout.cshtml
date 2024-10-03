@@ -113,11 +113,7 @@
 
                         <div class="dropdown-divider"></div>
 
-                        <a href="@Url.Action("MyAccount", "Account")" class="dropdown-item">
-
-                            <span class="badge badge-warning"><medium> <i class="fa fa-user-lock text-white nav-icon"></i> </medium></span> Manage Account
-                        </a>
-                        <div class="dropdown-divider"></div>
+                        
 
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {@Html.AntiForgeryToken()
@@ -252,15 +248,7 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "Exams")" class="nav-link">
 
-                                    <i class="fa fa-certificate text-warning nav-icon"></i>
-                                    <p style="color: #060440">
-                                        Exams
-                                    </p>
-                                </a>
-                            </li>
 
 
                         </ul>
@@ -268,9 +256,75 @@
                     </li>
 
 
+                    <li class="nav-header" style="color: #53085B; font-family: Montserrat; font-size: 10px "><i class="fa fa-bookmark text-gray nav-icon"></i> Immigrants </li>
+
+                    <li class="nav-item">
+
+
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-map text-purple"></i>
+                            <p style="color: #060440">
+                                Immigrants <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Immigrants")" class="nav-link">
+
+                                    <i class="fa fa-users text-dark nav-icon"></i>
+                                    <p style="color: #060440">
+                                        Immigrants list
+                                    </p>
+                                </a>
+                            </li>
 
 
 
+                        </ul>
+
+                    </li>
+
+                    <li class="nav-header" style="color: #53085B; font-family: Montserrat; font-size: 10px "><i class="fa fa-bookmark text-gray nav-icon"></i> Beneficiaries </li>
+
+                    <li class="nav-item">
+
+
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-praying-hands text-purple"></i>
+                            <p style="color: #060440">
+                                Beneficiaries <i class="fas fa-angle-left right"></i>
+
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Beneficiaries")" class="nav-link">
+
+                                    <i class="fa fa-clipboard-list text-purple nav-icon"></i>
+                                    <p style="color: #060440">
+                                        Beneficiaries list
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "items")" class="nav-link">
+
+                                    <i class="fa fa-shopping-bag text-purple nav-icon"></i>
+                                    <p style="color: #060440">
+                                        Beneficiaries Items
+                                    </p>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
 
 
 
@@ -342,7 +396,6 @@
 
 
 
-                   
 
 
 
@@ -350,42 +403,43 @@
 
 
 
-                   
-                        <li class="nav-header" style="color: #53085B; font-family: Montserrat; font-size: 10px "> <i class="fa fa-bookmark text-dark nav-icon"></i>  Configurations </li>
-                        <li class="nav-item">
 
 
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user-cog text-dark"></i>
-                                <p style="color: #060440;  ">
-                                    Configs <i class="fas fa-angle-left right"></i>
+                    <li class="nav-header" style="color: #53085B; font-family: Montserrat; font-size: 10px "> <i class="fa fa-bookmark text-dark nav-icon"></i>  Configurations </li>
+                    <li class="nav-item">
 
 
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-user-cog text-dark"></i>
+                            <p style="color: #060440;  ">
+                                Configs <i class="fas fa-angle-left right"></i>
 
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Configuration")" class="nav-link">
 
-                                        <i class="fa fa-cogs text-dark nav-icon"></i>
-                                        <p style="color: #0C54A0">
-                                            Configurations
-                                        </p>
-                                    </a>
-                                </li>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
 
-                            </ul>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Configuration")" class="nav-link">
 
-                        </li>
-                   
+                                    <i class="fa fa-cogs text-dark nav-icon"></i>
+                                    <p style="color: #0C54A0">
+                                        Configurations
+                                    </p>
+                                </a>
+                            </li>
 
-                        <div class="dropdown-divider"></div>
-                        <small style="color:darkslategrey">
-                            Version 2.0.20     <br />
-                            <i class="fa fa-copyright"></i>  Copyright   @DateTime.Now.Year   <br />   Kare CRM
-                        </small>
-                    
+                        </ul>
+
+                    </li>
+
+
+                    <div class="dropdown-divider"></div>
+                    <small style="color:darkslategrey">
+                        Version 2.0.20     <br />
+                        <i class="fa fa-copyright"></i>  Copyright   @DateTime.Now.Year   <br />   Kare CRM
+                    </small>
+
 
                 </ul>
                     

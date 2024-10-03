@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Ishop.Infa
 {
-    public class Time_cat_context : DbContext
+    public class benitem_context : DbContext
     {
-        public Time_cat_context()
+        public benitem_context()
            : base("Kare")
         {
         }
-        public DbSet<Time_cat> time_Cats { get; set; }
+        public DbSet<Benitem> benitems { get; set; }
     }
 }

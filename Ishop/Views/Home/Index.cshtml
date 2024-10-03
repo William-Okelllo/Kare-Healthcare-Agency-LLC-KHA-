@@ -27,7 +27,7 @@
 
 
 
-<div class="card-header" style="background: linear-gradient(to left, #AAAC26, #AAAC26); border-radius: 5px ">
+<div class="card-header" style="background: linear-gradient(to left, #AAAC26, #53085B); border-radius: 5px ">
     <h3 class="card-title" style="color:white">
         <i class="fa fa-home"></i>
         HomePage
@@ -78,154 +78,78 @@
                 </div>
 
             </div>
-            <div class="col-xl-3"></div>
+            <div class="col-xl-2"></div>
+            <div class="col-xl-6">
+                <div class="row justify-content-center">
 
-               
-                    
-
-
-
-            <div class="col-xl-5">
-                <div class="card " style="border-left: 6px solid #53085B; border-radius: 15px">
-                    <div class="card-body">
-                        <h5 style="text-align:left"> <i class="fas fa-bell text-purple"></i> Notifications  - <small style="color: #53085B"><b><i class="fa fa-envelope"></i>  @ViewBag.Receiver</b></small> </h5>
-                        <div class="dropdown-divider"></div>
-                        <style>
-                            .chat-bubble {
-                                background-color: #f1efef;
-                                color: #ffffff;
-                                border-radius: 10px;
-                                padding: 10px;
-                                margin-bottom: 5px;
-                                max-width: 100%; /* Adjust the max-width as needed */
-                            }
-
-                            .limited-lines {
-                                overflow: hidden;
-                                display: -webkit-box;
-                                -webkit-line-clamp: 2; /* Number of lines to show */
-                                -webkit-box-orient: vertical;
-                                color: black;
-                            }
-
-                            .user {
-                                align-self: flex-start;
-                            }
-
-
-
-                            .date {
-                                text-align: left;
-                                color: black;
-                                font-size: 16px;
-                                margin-top: 3px;
-                            }
-                        </style>
-                        <style>
-                            /* Styles remain unchanged */
-
-                            /* Add this style for the scrollable container */
-                            .scroll-container {
-                                max-height: 200px; /* Set a suitable max-height */
-                                overflow-y: auto;
-
-                            }
-                        </style>
-                        <div class="scroll-container">
-                            
-                                <div class="chat-bubble user">
-                                    <style>
-                                        .date {
-                                            display: flex;
-                                            justify-content: space-between;
-                                        }
-
-                                        .subject {
-                                            flex: 1;
-                                            text-align: left;
-                                        }
-
-                                        .created-on {
-                                            flex: 1;
-                                            text-align: right;
-                                        }
-                                    </style>
-                                   <p class="date">
-                                       <span class="subject"><b><i class="fa fa-book-reader text-primary"></i> Subject</b></span>
-                                       <span class="created-on" style="font-size:smaller"> <i class="fa fa-calendar-day text-primary"></i>  CreatedOn</span>
-                                   </p>
-                                    <small class="limited-lines">Body</small>
-                                    <div class="dropdown-divider"></div>
-                                    <button type="button" class="btn btn-sm btn-warning set-reg-no-btn"
-                                            data-toggle="modal" data-target="#exampleModalCenter"
-                                            data-object-id="Body">
-                                        <i class="fa fa-comment-dots text-white"></i>  View Message
-                                    </button>
-                                </div>
-                            
+                    <div class="col-sm-4 col-6 border-right" style="border-radius: 15px; background-color: white; border-left: 6px solid #53085B">
+                        <div class="description-block">
+                            <h3 class="description-header"><span class="badge badge-warning"><i class="fa fa-calendard-day"></i></span>  @ViewBag.Admin</h3>
+                            <div class="dropdown-divider"></div>
+                            <span><b>Total Admissions</b></span>
                         </div>
-                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <!-- /.description-block -->
+                    </div>
 
-                        <!-- Your script goes here -->
-                        <script>
-                            $(document).ready(function () {
-                                var objectId; // Variable to store the object ID
-                                var objectId2;
-                                // Capture object ID when "Set Reg No" button is clicked
-                                $('.set-reg-no-btn').click(function () {
-                                    objectId = $(this).data('object-id');
-                                    objectId2 = $(this).data('date');
-                                });
-
-                                // Triggered when the modal is about to be shown
-                                $('#exampleModalCenter').on('show.bs.modal', function (event) {
-                                    // Update the "Account Id" input in the modal with the captured object ID
-                                    $('#AccountId').val(objectId);
-                                    $('#staff').val(objectId2);
-                                });
-
-                                // Triggered when the modal is hidden
-                                $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
-                                    // Clear the objectId when the modal is closed
-                                    objectId = null;
-                                });
-                            });
-                        </script>
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 14px ">
-                                <div class="modal-content" style="border-radius: 14px ">
-                                    <div class="modal-header" style="background-color: #0C54A0; color: white; border-radius: 14px ">
-                                        <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-bookmark text-warning"></i>   Messsage</h6>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body ">
-                                        <h8 style="color:black">
-                                            <span class="subject"><i class="fa fa-angle-double-left text-primary"></i> <b>From</b> @System.Configuration.ConfigurationManager.AppSettings["Email"]</span><br />
-                                              <span class="subject" style="color:green"><i class="fa fa-angle-double-right text-success"></i> <b>To</b> @ViewBag.Receiver</span>
-                                        </h8>
-                                        <span id="staff"></span>
-                                        <h6 style="color: #0C54A0"><i class="fa fa-comment-dots text-primary"></i> <b>Messsage</b></h6>
-
-                                        <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 100%; height: 400px;"></textarea>
-
-
-
-
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-sm-4 col-6  border-right" style="border-radius: 15px; background-color: white; border-left: 6px solid #A4A71C">
+                        <div class="description-block">
+                            <h3 class="description-header"><span class="badge badge-success"><i class="fa fa-calendard-day"></i></span>  @ViewBag.Imm</h3>
+                            <div class="dropdown-divider"></div>
+                            <span><b>Total Immigrants</b></span>
                         </div>
-                        <div class="dropdown-divider"></div>
+                        <!-- /.description-block -->
+                    </div>
+
+                    <!-- /.col -->
+
+                </div>
+                <small><i class="fa fa-chart-line"></i>  Data summary</small>
+                <div class="dropdown-divider"></div>
+            </div>
+
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+
+
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="list-group" style="border-radius: 14px; border-left: 5px solid #93bb09 ">
+                        <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
+                            <i class="fa fa-book-reader"></i>   <b>Admissions</b>
+
+                        </a>
+                        <a href="@Url.Action("Add", "Admission")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-plus-circle"></i></span> New Admission</a>
+                        <a href="@Url.Action("Index", "Admission")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-clipboard-list"></i></span> Admission list</a>
+                    </div>
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="list-group" style="border-radius: 14px; border-left: 5px solid #93bb09 ">
+                        <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
+                            <i class="fa fa-map"></i>   <b>Immigrants</b>
+
+                        </a>
+                        <a href="@Url.Action("Add", "Immigrants")" class="list-group-item list-group-item-action"><span class="badge badge-success badge-pill"><i class="fa fa-hands-wash"></i></span> Add</a>
+                        <a href="@Url.Action("Index", "Immigrants")" class="list-group-item list-group-item-action"><span class="badge badge-success badge-pill"><i class="fa fa-handshake"></i></span> Immigrants list</a>
+                    </div>
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="list-group" style="border-radius: 14px; border-left: 5px solid #53085B ">
+                        <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
+                            <i class="fa fa-users"></i>   <b>Beneficiaries</b>
+
+                        </a>
+
+                        <a href="@Url.Action("Index", "Beneficiaries")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-clipboard-list"></i></span> Beneficiaries list</a>
+                        <a href="@Url.Action("Index", "items")" class="list-group-item list-group-item-action">
+                            <span class="badge badge-success badge-pill"><i class="fa fa-hands-wash"></i></span> Beneficiaries items
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         </div>
 

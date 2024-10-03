@@ -57,6 +57,9 @@
     <Compile Include="Activities_Repo.cs" />
     <Compile Include="Admission_context.cs" />
     <Compile Include="Admission_repo.cs" />
+    <Compile Include="Benef_context.cs" />
+    <Compile Include="Benef_repo.cs" />
+    <Compile Include="benitem_context.cs" />
     <Compile Include="ConfigsContext.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Datarepo.cs" />
@@ -69,8 +72,12 @@
     <Compile Include="Exams_repo.cs" />
     <Compile Include="HodContext.cs" />
     <Compile Include="HOD_Repo.cs" />
+    <Compile Include="Immigrant_context.cs" />
+    <Compile Include="Immigration_repo.cs" />
     <Compile Include="Indirect_context.cs" />
     <Compile Include="Indirect_repo.cs" />
+    <Compile Include="Item_context.cs" />
+    <Compile Include="Item_repo.cs" />
     <Compile Include="OutgoingEmailsContext.cs" />
     <Compile Include="OutgoingsmsContext.cs" />
     <Compile Include="Perform_context.cs" />
@@ -84,10 +91,6 @@
     <Compile Include="ReportGroupContext.cs" />
     <Compile Include="Sms_configs_Context.cs" />
     <Compile Include="Sms_config_Repo.cs" />
-    <Compile Include="Template_Context.cs" />
-    <Compile Include="Template_Repo.cs" />
-    <Compile Include="Time_cat_context.cs" />
-    <Compile Include="Time_cat_repo.cs" />
     <Compile Include="Workplan_context.cs" />
     <Compile Include="WorkPlan_Repo.cs" />
   </ItemGroup>
@@ -99,6 +102,9 @@
       <Project>{95C9CE70-B7B2-4E1B-B25A-57D176B6D2B4}</Project>
       <Name>Hr.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Benitem_repo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

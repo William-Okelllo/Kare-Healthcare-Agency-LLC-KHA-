@@ -1,10 +1,9 @@
-﻿@model PagedList.IPagedList<IShop.Core.Workplan>
+﻿@model PagedList.IPagedList<IShop.Core.Benef>
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Beneficiaries";
 }
-
 
 
 
@@ -53,46 +52,21 @@
     <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #53085B; color: white; ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-table"></i>
-            Workplan
+            Beneficiaries
         </h3>
         <div style="text-align: right; color: white ">
-
-
-
-
-            @using (Html.BeginForm("Index", "Workplan", FormMethod.Get))
+            @using (Html.BeginForm("Index", "Beneficiaries", FormMethod.Get))
             {
 
-                <a style="font-family: Calibri"><i class="fa fa-calendar-day text-white"></i> Duration</a>
-                <select class="form-rounded2" name="Duration" id="Duration">
-
-                    <option value="">Select Duration</option>
-                    <option value="thisWeek">This Week</option>
-                    <option value="lastWeek">Last Week</option>
-                    <option value="thisMonth">This Month</option>
-                    <option value="lastMonth">Last Month</option>
-
-
-                </select>
-
-
+                <a style="font-family: Calibri">  <span class="badge badge-warning"><medium><i class="fa fa-users text-white "></i>   </medium> </span>  Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "provide the name" })
                 <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
 
-                <small>|</small>
+                @Html.ActionLink(" Add Beneficiaries", "Add", "Beneficiaries", null, new { @class = "btn btn-sm btn-default btn" })
 
-
-                @Html.ActionLink("Add WorkPlan Tasks ", "Create", "WorkPlan", null, new { @class = "btn btn-sm btn-warning btn " })
             }
-
-
-
-
-
-
-
-
         </div>
     </div>
 
@@ -124,10 +98,12 @@
             <thead>
                 <tr style="color:white">
 
-                    <th style="background-color: #53085B; font-size: medium; "> Track</th>
+                    <th style="background-color: #53085B; font-size: medium; "> Name</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Contact</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Email</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Country</th>
+                    <th style="background-color: #53085B; font-size: medium; "> Items</th>
 
-                    <th style="background-color: #53085B; font-size: medium; ">Activity</th>
-                    <th style="background-color: #53085B; font-size: medium; ">Guide</th>
                     <th style="background-color: #53085B; font-size: medium; ">Action</th>
                 </tr>
             </thead>
@@ -138,41 +114,59 @@
 
 
                         <td style="background-color: white;">
-                            <span class="badge badge-primary"><i class="fa fa-table text-white"></i></span>  <b>@item.Track</b>
-                            <div class="dropdown-divider"></div>
-                            <span class="badge badge-warning"> <i class="fa fa-chess text-black"></i></span>  @item.Goal
-                        </td>
-                        <td style="background-color: white;">
-                            <span class="badge badge-primary"><i class="fa fa-table text-white"></i></span>  <b>@item.Activities</b>
-                            <div class="dropdown-divider"></div>
-                            <span class="badge badge-warning"><i class="fa fa-users text-black"></i> Respondent</span> <small>        <b> @item.Respondent</b></small>
+                            <i class="fa fa-user-circle text-light-purple"></i>  <b>@item.Name</b>
+
                         </td>
 
+                        
                         <td style="background-color: white;">
-                            
+                            <i class="fa fa-mobile text-gray"></i> @item.Contacts
                         </td>
                         <td style="background-color: white;">
+                            <i class="fa fa-envelope text-secondary"></i> @item.Email
+                        </td>
+                        <td style="background-color: white;">
+                            <i class="fa fa-map-signs text-warning"></i>  <b>@item.Country</b>
+                        </td>
+                        
+                        <td style="background-color: white;">
+                            @if (item.Total <= 0)
+                            {
+                                <p style="color:gray"><i class="fa fa-spin fa-circle-notch text-gray"></i> No Beneficiaries added</p>
 
-
+                            }
+                            else
+                            {
+                                <b>@item.Total.ToString("#,##0.00") /=</b>
+}
+                        </td>
+                        <td style="background-color: white;">
                             <div class="btn-group dropdown">
                                 <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-hashtag"></i>  . Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                    <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Edit", "WorkPlan", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-plus-circle text-warning"></i> Update Task
+                                    <a href="@Url.Action("Details", "Beneficiaries", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-chart-line text-warning"></i> View Beneficiaries 
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Create", "Question", new { WorkPlan_Id = item.Id ,Activity=item.Activities})" class="dropdown-item">
-                                        <i class="fa fa-question-circle text-success"></i> Add Questions
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this ?')) { window.location.href = '@Url.Action("Delete", "Beneficiaries", new { id = item.Id })'; }">
+                                        <i class="fas fa-times text-danger"></i> Delete Data
                                     </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Delete_User').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
+
 
 
                                 </div>
                             </div>
-
-
                         </td>
 
 

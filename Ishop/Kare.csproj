@@ -405,6 +405,8 @@
     <Compile Include="Controllers\AccessesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdmissionController.cs" />
+    <Compile Include="Controllers\BeneficiariesController.cs" />
+    <Compile Include="Controllers\B_ItemsController.cs" />
     <Compile Include="Controllers\ConfigsController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DataController.cs" />
@@ -414,7 +416,9 @@
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\HODsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImmigrantsController.cs" />
     <Compile Include="Controllers\IndirectController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OutgoingEmailsController.cs" />
     <Compile Include="Controllers\OutgoingsmsController.cs" />
@@ -427,7 +431,6 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
-    <Compile Include="Controllers\Time_catController.cs" />
     <Compile Include="Controllers\WorkplanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -7056,6 +7059,7 @@
     <None Include="Properties\PublishProfiles\HR-Bellmount.pubxml" />
     <None Include="Properties\PublishProfiles\iis packs.pubxml" />
     <None Include="Properties\PublishProfiles\Jobs_Villa.pubxml" />
+    <None Include="Properties\PublishProfiles\Kare Healthcare Agency LLC.pubxml" />
     <None Include="Properties\PublishProfiles\Packs.pubxml" />
     <Content Include="MvcReportViewer.aspx" />
     <Content Include="MvcReportViewerErrorPage.html" />
@@ -7915,11 +7919,6 @@
     <Content Include="Views\Templates\Details.cshtml" />
     <Content Include="Views\Templates\Edit.cshtml" />
     <Content Include="Views\Templates\Index.cshtml" />
-    <Content Include="Views\Directs\Create.cshtml" />
-    <Content Include="Views\Directs\Delete.cshtml" />
-    <Content Include="Views\Directs\Details.cshtml" />
-    <Content Include="Views\Directs\Edit.cshtml" />
-    <Content Include="Views\Directs\Index.cshtml" />
     <Content Include="Views\InDirects\Create.cshtml" />
     <Content Include="Views\InDirects\Delete.cshtml" />
     <Content Include="Views\InDirects\Details.cshtml" />
@@ -7934,11 +7933,6 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Pcategories\Create.cshtml" />
-    <Content Include="Views\Pcategories\Delete.cshtml" />
-    <Content Include="Views\Pcategories\Details.cshtml" />
-    <Content Include="Views\Pcategories\Edit.cshtml" />
-    <Content Include="Views\Pcategories\Index.cshtml" />
     <Content Include="Views\ReportGroup\Create.cshtml" />
     <Content Include="Views\ReportGroup\Delete.cshtml" />
     <Content Include="Views\ReportGroup\Details.cshtml" />
@@ -8015,7 +8009,6 @@
     <Content Include="Views\Performs\Delete.cshtml" />
     <Content Include="Views\Performs\Details.cshtml" />
     <Content Include="Views\Performs\Edit.cshtml" />
-    <Content Include="Views\Performs\Index.cshtml" />
     <Content Include="Views\Performs\Option.cshtml" />
     <Content Include="Views\Admission\Performance.cshtml" />
     <Content Include="Views\Exams\Create.cshtml" />
@@ -8028,6 +8021,17 @@
     <Content Include="Views\Indirect\Details.cshtml" />
     <Content Include="Views\Indirect\Edit.cshtml" />
     <Content Include="Views\Indirect\Index.cshtml" />
+    <Content Include="Views\Immigrants\Add.cshtml" />
+    <Content Include="Views\Immigrants\Details.cshtml" />
+    <Content Include="Views\Immigrants\Edit.cshtml" />
+    <Content Include="Views\Immigrants\Index.cshtml" />
+    <Content Include="Views\Beneficiaries\Add.cshtml" />
+    <Content Include="Views\Beneficiaries\Details.cshtml" />
+    <Content Include="Views\Beneficiaries\Edit.cshtml" />
+    <Content Include="Views\Beneficiaries\Index.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\B_Items\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

@@ -1,12 +1,21 @@
-﻿@model PagedList.IPagedList<IShop.Core.Workplan>
+﻿@model PagedList.IPagedList<IShop.Core.Immigrant>
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Immigrants";
 }
 
 
-
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
 
 <style>
     body {
@@ -53,46 +62,21 @@
     <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #53085B; color: white; ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-table"></i>
-            Workplan
+            Immigrants
         </h3>
         <div style="text-align: right; color: white ">
-
-
-
-
-            @using (Html.BeginForm("Index", "Workplan", FormMethod.Get))
+            @using (Html.BeginForm("Index", "Immigrants", FormMethod.Get))
             {
 
-                <a style="font-family: Calibri"><i class="fa fa-calendar-day text-white"></i> Duration</a>
-                <select class="form-rounded2" name="Duration" id="Duration">
-
-                    <option value="">Select Duration</option>
-                    <option value="thisWeek">This Week</option>
-                    <option value="lastWeek">Last Week</option>
-                    <option value="thisMonth">This Month</option>
-                    <option value="lastMonth">Last Month</option>
-
-
-                </select>
-
-
+                <a style="font-family: Calibri">  <span class="badge badge-warning"><medium><i class="fa fa-users text-white "></i>   </medium> </span>  Name</a>
+                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "provide the name" })
                 <button type="submit" value="search" class="btn btn-sm btn-warning">
                     <i class="fas fa-search"></i>
                 </button>
 
-                <small>|</small>
+                @Html.ActionLink("Immigrant Add ", "Add", "Immigrants", null, new { @class = "btn btn-sm btn-default btn" })
 
-
-                @Html.ActionLink("Add WorkPlan Tasks ", "Create", "WorkPlan", null, new { @class = "btn btn-sm btn-warning btn " })
             }
-
-
-
-
-
-
-
-
         </div>
     </div>
 
@@ -124,10 +108,13 @@
             <thead>
                 <tr style="color:white">
 
-                    <th style="background-color: #53085B; font-size: medium; "> Track</th>
-
-                    <th style="background-color: #53085B; font-size: medium; ">Activity</th>
-                    <th style="background-color: #53085B; font-size: medium; ">Guide</th>
+                    <th style="background-color: #53085B; font-size: medium; "> Name</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Gender</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Contact</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Email</th>
+                    <th style="background-color: #53085B; font-size: medium; ">From Country</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Social security</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Work Permit</th>
                     <th style="background-color: #53085B; font-size: medium; ">Action</th>
                 </tr>
             </thead>
@@ -138,41 +125,58 @@
 
 
                         <td style="background-color: white;">
-                            <span class="badge badge-primary"><i class="fa fa-table text-white"></i></span>  <b>@item.Track</b>
-                            <div class="dropdown-divider"></div>
-                            <span class="badge badge-warning"> <i class="fa fa-chess text-black"></i></span>  @item.Goal
-                        </td>
-                        <td style="background-color: white;">
-                            <span class="badge badge-primary"><i class="fa fa-table text-white"></i></span>  <b>@item.Activities</b>
-                            <div class="dropdown-divider"></div>
-                            <span class="badge badge-warning"><i class="fa fa-users text-black"></i> Respondent</span> <small>        <b> @item.Respondent</b></small>
+                           <i class="fa fa-user-circle text-light-purple"></i>  <b>@item.Name</b>
+
                         </td>
 
                         <td style="background-color: white;">
-                            
+                            <i class="fa fa-genderless text-warning"></i> @item.Gender
                         </td>
                         <td style="background-color: white;">
+                            <i class="fa fa-mobile text-gray"></i> @item.Contacts
+                        </td>
+                        <td style="background-color: white;">
+                            <i class="fa fa-envelope text-secondary"></i> @item.Email
+                        </td>
+                        <td style="background-color: white;">
+                            <i class="fa fa-map-signs text-warning"></i>  <b>@item.Country</b>
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Social_security == true)
+                            {
+                                <span class="badge badge-success"> <i class="fa fa-check-circle"></i> <b> Granted</b></span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger"> <i class="fa fa-times-circle"></i> <b> Not Granted</b></span>
+                            }
+                        </td>
+                        <td style="background-color: white;">
+                            @if (item.Work_Permit == true)
+                            {
+                                <span class="badge badge-success"> <i class="fa fa-user-shield"></i> <b> Granted</b></span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger"> <i class="fa fa-user-shield"></i> <b> Not Granted</b></span>
+                            }
 
-
+                        </td>
+                        <td style="background-color: white;">
                             <div class="btn-group dropdown">
                                 <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-hashtag"></i>  . Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                     <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Edit", "WorkPlan", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-plus-circle text-warning"></i> Update Task
+                                    <a href="@Url.Action("Delete", "Immigrants", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-plus-circle text-warning"></i> Drop Account
                                     </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="@Url.Action("Create", "Question", new { WorkPlan_Id = item.Id ,Activity=item.Activities})" class="dropdown-item">
-                                        <i class="fa fa-question-circle text-success"></i> Add Questions
-                                    </a>
+
 
 
                                 </div>
                             </div>
-
-
                         </td>
 
 

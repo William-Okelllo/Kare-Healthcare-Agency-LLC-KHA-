@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 
 namespace Ishop.Controllers
 {
+    [Authorize]
     public class AdmissionController : Controller
     {
         private Admission_context db = new Admission_context();
@@ -145,29 +146,15 @@ namespace Ishop.Controllers
         }
 
         // GET: Admission/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Admission admission = await db.admissions.FindAsync(id);
-            if (admission == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admission);
-        }
-
-        // POST: Admission/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Admission admission = await db.admissions.FindAsync(id);
+           
+            Admission admission =  db.admissions.Find(id);
             db.admissions.Remove(admission);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+             db.SaveChanges();
+            TempData["msg"] = "Student deleted successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

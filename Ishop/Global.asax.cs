@@ -26,6 +26,9 @@ namespace Ishop
             Database.SetInitializer<ConfigsContext>(null);
             Database.SetInitializer<DepartmentContext>(null);
             Database.SetInitializer<Perform_context>(null);
+            Database.SetInitializer<Item_context>(null);
+            Database.SetInitializer<Benef_context>(null);
+            Database.SetInitializer<benitem_context>(null);
         }
     }
 }

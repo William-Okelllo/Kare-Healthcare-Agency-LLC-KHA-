@@ -1,0 +1,200 @@
+﻿@model IShop.Core.Benef
+
+@{
+    ViewBag.Title = "Beneficiaries";
+}
+<style>
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+        border-radius: 4px
+    }
+
+    .form-rounded {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-6 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> New Beneficiary </h4>
+                <div class="dropdown-divider"></div>
+                @using (Html.BeginForm("Add", "Beneficiaries", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+
+                    <div class="form-group col-md-6">
+                        <label><i class=" fa fa-user-graduate text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
+                        @Html.EditorFor(model => model.Name, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control ",
+                           @Placeholder = "Name",
+                           @Required = true,
+
+
+                       }
+                   })
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label><span class="fa fa-envelope text-orange"></span>   @Html.LabelFor(model => model.Email)</label>
+                            @Html.EditorFor(model => model.Email, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control ",
+                               @PlaceHolder = "Email Address",
+                               @required = "required",
+                               id = "Email"
+                           }
+                       })  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <span id="emailValidationResult"></span>
+                    <div id="errorMessage" style="display:none;color:red">
+                        <a href="#" style="color:red">
+                            <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+
+                        </a>
+                    </div>
+
+
+                    <small style="color:dimgrey"> <i class="fa fa-info-circle"></i>  E.g user@user.com</small>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+$(document).ready(function () {
+    $("#Email").on("input", function () {
+        var email = $(this).val();
+
+        $.ajax({
+            url: '@Url.Action("ValidateEmail", "Account")',
+            type: 'POST',
+            data: { email: email },
+            success: function (result) {
+                if (result.isValid)
+                { $("#emailValidationResult").text("").css("color", "Green"); }
+
+                 else {
+                    $("#emailValidationResult").text("Invalid email address.").css("color", "red");
+                }
+            }
+        });
+    });
+});
+                    </script>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label><i class=" fa fa-mobile text-purple"></i>   @Html.LabelFor(model => model.Contacts)</label>
+                    @Html.EditorFor(model => model.Contacts, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Contacts",
+                       @Required = true,
+
+
+                   }
+               })
+
+                </div>
+
+            </div>
+
+            <div class="form-group col-md-9">
+                <label><i class=" fa fa-map text-purple"></i>   @Html.LabelFor(model => model.Country)</label>
+                @Html.DropDownList("Country", ViewBag.CountriesList as SelectList, "Select a country", new { @class = "form-control" })
+
+
+
+
+                <script type="text/javascript">
+                    $(function () {
+
+                        $("#Country").chosen();
+                        $("#Activities").chosen();
+                        $("#StudentStudent").chosen();
+
+                    });
+                </script>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <div class="col d-flex justify-content-center">
+                <input type="submit" name="action" value="Submit " class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed to add Beneficiary?')" />
+                <b>|</b>
+
+                <script>
+                    $(function () {
+                        $('#Create').click(function () {
+                            if (confirm('Are you sure?')) {
+                                window.location.href = $(this).data('url');
+                            }
+                        });
+                    });
+                </script>
+
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+            </div>
+
+        }
+
+
+
+
+
+            </div>
+</div>
+</div>
