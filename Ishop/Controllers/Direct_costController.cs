@@ -96,7 +96,11 @@ namespace Ishop.Controllers
             {
                 db.Entry(direct_cost).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["msg"] = "Cost updated successfully ";
+
+                Workplan_context WW = new Workplan_context();
+                var Wp = WW.workplans.Find(direct_cost.WorkPlan_Id);
+                return RedirectToAction("Budget_view", "Workplan", new { Track = Wp.Track });
             }
             return View(direct_cost);
         }

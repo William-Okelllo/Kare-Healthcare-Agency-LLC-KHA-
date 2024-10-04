@@ -1,0 +1,103 @@
+﻿@model IShop.Core.Grant
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+   <div class="form-group col-md-8">
+            <label><i class=" fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
+            @Html.EditorFor(model => model.Name, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Placeholder = "Name",
+               @Required = true,
+
+
+           }
+       })
+
+        </div>
+
+
+   <div class="form-row">
+       <div class="form-group col-md-6">
+           <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.From_Date)</label>
+           @Html.EditorFor(model => model.From_Date, new
+      {
+          htmlAttributes = new
+          {
+              @class = "form-control form-control-sm ",
+              @placeholder = "From_Date",
+              id = "datepicker",
+              @required = "required",
+          }
+      })
+       </div>
+       <div class="form-group col-md-6">
+           <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.To_Date)</label>
+           @Html.EditorFor(model => model.To_Date, new
+      {
+          htmlAttributes = new
+          {
+              @class = "form-control form-control-sm ",
+              @placeholder = "To_Date ",
+              id = "datepicker2",
+              @required = "required",
+          }
+      })
+       </div>
+
+   </div>
+
+
+
+
+
+
+
+   <small> Actions</small>
+   <div class="dropdown-divider"></div>
+            <div class="form-group">
+                <div class="col d-flex justify-content-center">
+                    <input type="submit" name="action" value="Add Budget  " class="btn  btn-block btn-outline-success" onclick="return confirm('Proceed to add Budget?')" />
+
+                    <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                    </script>
+
+
+                </div>
+            </div>
+        
+        }
+
+       

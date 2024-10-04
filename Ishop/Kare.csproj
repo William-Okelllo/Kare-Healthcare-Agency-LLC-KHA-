@@ -414,6 +414,8 @@
     <Compile Include="Controllers\Direct_costController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
+    <Compile Include="Controllers\ExpsController.cs" />
+    <Compile Include="Controllers\GrantsController.cs" />
     <Compile Include="Controllers\HODsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImmigrantsController.cs" />
@@ -8032,6 +8034,15 @@
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\B_Items\Create.cshtml" />
+    <Content Include="Views\Grants\Create.cshtml" />
+    <Content Include="Views\Grants\Details.cshtml" />
+    <Content Include="Views\Grants\Edit.cshtml" />
+    <Content Include="Views\Grants\Index.cshtml" />
+    <Content Include="Views\Exps\Create.cshtml" />
+    <Content Include="Views\Exps\Delete.cshtml" />
+    <Content Include="Views\Exps\Details.cshtml" />
+    <Content Include="Views\Exps\Edit.cshtml" />
+    <Content Include="Views\Exps\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

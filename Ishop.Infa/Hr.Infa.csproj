@@ -70,6 +70,10 @@
     <Compile Include="Employee_Repo.cs" />
     <Compile Include="Exams_context.cs" />
     <Compile Include="Exams_repo.cs" />
+    <Compile Include="Exp_context.cs" />
+    <Compile Include="Exp_repo.cs" />
+    <Compile Include="Grant_context.cs" />
+    <Compile Include="Grant_repo.cs" />
     <Compile Include="HodContext.cs" />
     <Compile Include="HOD_Repo.cs" />
     <Compile Include="Immigrant_context.cs" />

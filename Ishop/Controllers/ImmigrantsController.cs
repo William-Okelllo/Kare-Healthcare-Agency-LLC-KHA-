@@ -146,6 +146,54 @@ namespace Ishop.Controllers
         // GET: Immigrants/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            string apiUrl = "https://restcountries.com/v3.1/all";
+            List<string> countryNames = new List<string>();
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    JArray countries = JArray.Parse(responseData);
+
+                    // Extract country names
+                    foreach (var country in countries)
+                    {
+                        var countryName = country["name"]["common"].ToString();
+                        countryNames.Add(countryName);
+                    }
+
+                    // Sort the list of country names alphabetically
+                    countryNames.Sort();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during API call
+                Console.WriteLine("Error fetching countries: " + ex.Message);
+            }
+
+            // Passing the list of countries to the ViewBag
+            ViewBag.CountriesList = new SelectList(countryNames);
+
+
+
+
+
+
+            List<int> years = new List<int>();
+            int startYear = 2000;
+            int currentYear = DateTime.Now.Year;
+
+            for (int i = startYear; i <= currentYear; i++)
+            {
+                years.Add(i);
+            }
+
+            // Passing the list of years to the ViewBag
+            ViewBag.YearsList = new SelectList(years);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

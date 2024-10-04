@@ -101,8 +101,8 @@
                             });
                             b.Add(new SelectListItem
                             {
-                                Text = "Final exams",
-                                Value = "Final exams",
+                                Text = "State exams",
+                                Value = "State exams",
                             });
 
 
@@ -157,7 +157,11 @@
                                 Text = "Basic Restorative Services",
                                 Value = "Basic Restorative Services",
                             });
-
+                            v.Add(new SelectListItem
+                            {
+                                Text = "CNA -Full Course",
+                                Value = "CNA -Full Course",
+                            });
                         }@Html.DropDownListFor(model => model.Subjects, v, "---Select Subjects---", new { @class = "form-control form-control-sm", @required = "required", })
                     </div>
                     <script type="text/javascript">

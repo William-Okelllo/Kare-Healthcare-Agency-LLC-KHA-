@@ -1,61 +1,204 @@
 ﻿@model IShop.Core.Direct_cost
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
+<style>
 
-<h2>Edit</h2>
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Direct_cost</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+        border-radius: 4px
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkPlan_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkPlan_Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.WorkPlan_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .form-rounded {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-10 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> Cost update  </h4>
+                <div class="dropdown-divider"></div>
+
+
+
+
+
+
+
+
+
+
+
+                @using (Html.BeginForm("Edit", "Direct_cost", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Quantity)</label>
+                            @Html.EditorFor(model => model.Quantity, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @Placeholder = "Quantity",
+                                    @Required = true,
+                                    @id = "quantity" // Add id for JavaScript reference
+                                }
+                            })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Unit)</label>
+                            @Html.EditorFor(model => model.Unit, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @Placeholder = "Unit",
+                                    @Required = true,
+                                    @id = "unit" // Add id for JavaScript reference
+                                }
+                            })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-tags text-primary"></i> @Html.LabelFor(model => model.Total)</label>
+                            @Html.EditorFor(model => model.Total, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @Placeholder = "Total",
+                                    @Readonly = true,
+                                    @id = "total" // Add id for JavaScript reference
+                                }
+                            })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><i class="fa fa-table text-primary"></i> @Html.LabelFor(model => model.WorkPlan_Id)</label>
+                            @Html.EditorFor(model => model.WorkPlan_Id, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @Readonly = true,
+                                }
+                            })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+                    {
+                    id = "Comments", // Make sure the ID matches the one in getElementById
+                    style = "width: 100%; max-width:100%;",
+                    @placeholder = "Additional information",
+                    @autofocus = "",
+                    @Required = true,
+                    @class = "form-control form-rounded2",
+                    @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+                    })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <!-- JavaScript to calculate the total -->
+                    <script>
+                        document.getElementById('quantity').addEventListener('input', calculateTotal);
+                        document.getElementById('unit').addEventListener('input', calculateTotal);
+
+                        function calculateTotal() {
+                            var quantity = parseFloat(document.getElementById('quantity').value) || 0;
+                            var unit = parseFloat(document.getElementById('unit').value) || 0;
+                            var total = quantity * unit;
+
+                            document.getElementById('total').value = total.toFixed(2); // Update the Total field
+                        }
+                    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <input type="submit" name="action" value="Submit" class="btn btn btn-success" style="color:white" onclick="return confirm('Are you sure you save this add WorkPlan?')" />
+
+
+                    <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                    </script>
+
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+
+                }
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+</div>
 </div>

@@ -74,7 +74,7 @@
                     <i class="fas fa-search"></i>
                 </button>
 
-                @Html.ActionLink("Immigrant Add ", "Add", "Immigrants", null, new { @class = "btn btn-sm btn-default btn" })
+                @Html.ActionLink("New American Add ", "Add", "Immigrants", null, new { @class = "btn btn-sm btn-default btn" })
 
             }
         </div>
@@ -168,9 +168,14 @@
                                     <i class="fa fa-hashtag"></i>  . Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                                    <div class="dropdown-divider"></div>
+                                     <a href="@Url.Action("Edit", "Immigrants", new { id = item.Id })" class="dropdown-item">
+                                    <i class="fa fa-pen-nib text-warning"></i> Edit/Update
+                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a href="@Url.Action("Delete", "Immigrants", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-plus-circle text-warning"></i> Drop Account
+                                        <i class="fa fa-times-circle text-danger"></i> Drop Account
                                     </a>
 
 

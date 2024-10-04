@@ -1,0 +1,236 @@
+﻿@model IShop.Core.Grant
+<style type="text/css">
+    .loading {
+        font-size: 10pt;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+</style>
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: gray;
+    }
+</style>
+<style>
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+        border-radius: 4px
+    }
+
+    .form-rounded {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
+<div class="col d-flex justify-content-center">
+    <div class="col-md-10 col-sm-12 col-12">
+        <div class="card " style="background-color: white;">
+
+
+            <div class="card-body">
+
+                <h5 style="color:black;text-align:center">
+                    <span class="badge badge-warning"> <i class="fa fa-usere"></i></span> <b>Budgets Details </b>
+                </h5>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card mb- mb-xl-0" style="border-radius: 14px;">
+
+                            <div class="card-body text-left">
+                                <h4><i class="fa fa-briefcase text-warning"></i>  @Model.Name</h4>
+                                <div class="dropdown-divider"></div>
+                                <div class="form-row">
+                                    <div class="col-md-7 mb-7">
+                                        <h7>
+                                            <b><span class="badge  badge-secondary"><i class="fa fa-calendar-day "></i> From </span> @Model.From_Date.ToString("dd-MMM-yyyy")</b>
+                                            <b><span class="badge  badge-success"><i class="fa fa-calendar-day "></i> To </span> @Model.To_Date.ToString("dd-MMM-yyyy")</b>
+                                        </h7>
+                                        <div class="dropdown-divider"></div>
+                                        <h5> <span class="badge  badge-warning"><small><i class="fa fa-usfers "></i></small> </span> Total Budget :<b>  @Model.Total.ToString("#,##0.00")</b> <small> /=</small></h5>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <h5 style="color:black;text-align:center">
+                    <i class="fa fa-gifts text-warning"></i>
+                    Budgets Items
+                </h5>
+
+                <div class="dropdown-divider"></div>
+                <div style="text-align:right">
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#createModal" id="createButton">
+                        <i class="fa fa-plus-circle"></i> Add  Items
+                    </button>
+                </div>
+
+                <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                    <div class="modal-dialog  modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createModalLabel"> <span class="badge badge-warning"> <i class="fa fa-usere"></i></span>  Budget items</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Content will be loaded here from "Create" action -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+$(document).ready(function () {
+    // Create Button Click Event
+    $('#createButton').click(function () {
+        var Tag = parseInt('@Model.Id');
+
+        $.ajax({
+            url: '@Url.Action("Create", "exps")',
+            type: 'GET',
+            data: { Tag: Tag },
+            success: function (data) {
+                $('#createModal .modal-body').html(data);
+                $('#createModal').modal('show');
+            },
+            error: function () {
+                console.log('Failed to load the create form.');
+            }
+        });
+    });
+
+    // Handle AJAX form submission
+    $(document).on('submit', '#createForm', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+
+    });
+
+
+});
+                </script>
+
+
+
+                @if (TempData["Msg"] != null)
+                {<div class="row">
+                        <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            @TempData["Msg"]
+                        </div>
+                    </div>
+                }
+
+                <script>
+                    window.setTimeout(function () {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                            $(this).remove();
+                        });
+                    }, 2000);
+                </script>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+                        <thead>
+                            <tr style="color:white">
+
+                                <th style="background-color: #8d8d8dde; font-size: medium; "> Type</th>
+                                <th style="background-color: #8d8d8dde; font-size: medium; "> Budget</th>
+                                <th style="background-color: #8d8d8dde; font-size: medium; "> Expenditure</th>
+                                <th style="background-color: #8d8d8dde; font-size: medium; "> Available</th>
+                                <th style="background-color: #8d8d8dde; font-size: medium; "> Shared Budget?</th>
+                                <th style="background-color: #8d8d8dde; font-size: medium; ">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Exps)
+                            {
+                                <tr>
+
+
+                                    <td style="background-color: white;">
+                                        <i class="fa fa-gifts text-warning"></i>  <b>@item.Type</b>
+                                    </td>
+                                    <td style="background-color: white;">
+                                        <span class="badge badge-warning"> <i class="fa fa-chdess text-black"></i></span>  <b>@item.Budget.ToString("#,##0.00") /=</b>
+                                    </td>
+                                    <td style="background-color: white;color:red">
+                                        <span class="badge badge-danger"> <i class="fa fa-chdess text-black"></i></span>  <b>@item.Expenditures.ToString("#,##0.00") /=</b>
+                                    </td>
+                                    <td style="background-color: white;">
+                                        <span class="badge badge-warning"> <i class="fa fa-chdess text-black"></i></span>  <b>@item.Available.ToString("#,##0.00") /=</b>
+                                    </td>
+                                    <td style="background-color: white;">
+                                        <span class="badge badge-warning"> <i class="fa fa-chdess text-black"></i></span>  <b>@item.Shared </b>
+                                    </td>
+                                    <td style="background-color: white;">
+                                        <a href="@Url.Action("Delete", "Exps", new { Id = item.Id })" class="btn btn-sm btn-outline-danger">
+                                            <i class="fa fa-question-circle "></i> Drop item
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="dropdown-divider"></div>
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+            </div>
+        </div>
+
+    </div>
+        </div>
+    </div>
+</div>

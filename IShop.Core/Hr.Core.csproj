@@ -53,6 +53,7 @@
     <Compile Include="Direct_cost.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Exam.cs" />
+    <Compile Include="Grant.cs" />
     <Compile Include="HOD.cs" />
     <Compile Include="Immigrant.cs" />
     <Compile Include="Indirect.cs" />
@@ -65,6 +66,8 @@
     <Compile Include="Interface\IDirect_cost.cs" />
     <Compile Include="Interface\IEmployee.cs" />
     <Compile Include="Interface\Iexam.cs" />
+    <Compile Include="Interface\IExp.cs" />
+    <Compile Include="Interface\IGrant.cs" />
     <Compile Include="Interface\Ihod.cs" />
     <Compile Include="Interface\IIndirect.cs" />
     <Compile Include="Interface\Iitem.cs" />
@@ -91,6 +94,9 @@
     <Compile Include="Template.cs" />
     <Compile Include="Time_cat.cs" />
     <Compile Include="Workplan.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exp.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

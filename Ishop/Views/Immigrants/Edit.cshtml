@@ -1,89 +1,232 @@
 ﻿@model IShop.Core.Immigrant
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Immigrant";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Immigrant</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-10 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Contacts, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Contacts, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Contacts, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> New American (Data Edit/Update) </h4>
+                <div class="dropdown-divider"></div>
+                @using (Html.BeginForm("Edit", "Immigrants", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Social_security, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Social_security)
-                    @Html.ValidationMessageFor(model => model.Social_security, "", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Date)</label>
+                                @Html.EditorFor(model => model.Date, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm ",
+                                   @placeholder = "Admission Date",
+                                   @Value = DateTime.Now,
+                                   @Readonly = true,
+                               }
+                           })
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label><i class=" fa fa-user-graduate text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
+                                @Html.EditorFor(model => model.Name, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Name",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><span class="fa fa-envelope text-orange"></span>   Email Address</label>
+                                @Html.EditorFor(model => model.Email, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @PlaceHolder = "Email Address",
+                                   @required = "required",
+                                   id = "Email"
+                               }
+                           })  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        <span id="emailValidationResult"></span>
+                        <div id="errorMessage" style="display:none;color:red">
+                            <a href="#" style="color:red">
+                                <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+
+                            </a>
+                        </div>
+
+
+                        <small style="color:dimgrey"> <i class="fa fa-info-circle"></i>  E.g user@user.com</small>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+$(document).ready(function () {
+    $("#Email").on("input", function () {
+        var email = $(this).val();
+
+        $.ajax({
+            url: '@Url.Action("ValidateEmail", "Account")',
+            type: 'POST',
+            data: { email: email },
+            success: function (result) {
+                if (result.isValid)
+                { $("#emailValidationResult").text("").css("color", "Green"); }
+
+                 else {
+                    $("#emailValidationResult").text("Invalid email address.").css("color", "red");
+                }
+            }
+        });
+    });
+});
+                        </script>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label><i class=" fa fa-mobile text-purple"></i>   @Html.LabelFor(model => model.Contacts)</label>
+                        @Html.EditorFor(model => model.Contacts, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Contacts",
+                           @Required = true,
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Work_Permit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Work_Permit)
-                    @Html.ValidationMessageFor(model => model.Work_Permit, "", new { @class = "text-danger" })
+
+                       }
+                   })
+
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class=" fa fa-map text-purple"></i>   @Html.LabelFor(model => model.Country)</label>
+                        @Html.DropDownList("Country", ViewBag.CountriesList as SelectList, "Select a country", new { @class = "form-control" })
+
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class=" fa fa-user-tag text-purple"></i>   @Html.LabelFor(model => model.Year)</label>
+                        @Html.DropDownList("Year", ViewBag.YearsList as SelectList, "Select a year", new { @class = "form-control" })
+
+
+                    </div>
+                    <div class="form-group col-md-2" id="other" style="display:nosne">
+                        <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Gender)</label>
+                        @{
+                            List<SelectListItem> b = new List<SelectListItem>();
+                            b.Add(new SelectListItem
+                            {
+                                Text = "Male",
+                                Value = "Male",
+                            });
+                            b.Add(new SelectListItem
+                            {
+                                Text = "Female",
+                                Value = "Female",
+                            });
+
+
+                        }@Html.DropDownListFor(model => model.Gender, b, "---Select Gender---", new { @class = "form-control form-control-sm", @required = "required", })
+                    </div>
+
+                    <script type="text/javascript">
+                        $(function () {
+
+                            $("#Gender").chosen();
+                            $("#Year").chosen();
+                            $("#Activities").chosen();
+                            $("#Country").chosen();
+
+                        });
+                    </script>
                 </div>
-            </div>
-        </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <h6 class="form-check" style="color:midnightblue;">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                            @Html.EditorFor(model => model.Social_security, new
+                       {
+                           htmlAttributes = new
+                           { @class = "coupon_question", onclick = "Geeeee()" }
+                       })
+                            <label>@Html.LabelFor(model => model.Social_security)</label>
+
+
+
+                        </h6>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <h6 class="form-check" style="color:midnightblue;">
+
+                            @Html.EditorFor(model => model.Work_Permit, new
+                       {
+                           htmlAttributes = new
+                           { @class = "coupon_question", onclick = "Geeeee()" }
+                       })
+                            <label>@Html.LabelFor(model => model.Work_Permit)</label>
+
+
+
+                        </h6>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+
+                <div class="col d-flex justify-content-center">
+                    <input type="submit" name="action" value="Edit/Update " class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed top update data?')" />
+                    <b>|</b>
+
+                    <script>
+                        $(function () {
+                            $('#Create').click(function () {
+                                if (confirm('Are you sure?')) {
+                                    window.location.href = $(this).data('url');
+                                }
+                            });
+                        });
+                    </script>
+
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                </div>
+            </form>
+        }
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+</div>
 </div>

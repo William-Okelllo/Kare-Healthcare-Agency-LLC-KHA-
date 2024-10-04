@@ -68,7 +68,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Report([Bind(Include = "Id,Stage,Student,Date,Remarks,Percentage,Subjects,Grade")] Perform perform)
+        public async Task<ActionResult> Report([Bind(Include = "Id,Stage,Student,Date,Remarks,Percentage,Subjects,Pass")] Perform perform)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Stage,Student,Date,Remarks,Percentage,Subjects,Grade")] Perform perform)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Stage,Student,Date,Remarks,Percentage,Subjects,Pass")] Perform perform)
         {
             if (ModelState.IsValid)
             {

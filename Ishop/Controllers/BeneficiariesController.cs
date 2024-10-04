@@ -148,7 +148,7 @@ namespace Ishop.Controllers
             {
                 db.benefs.Add(benef);
                 db.SaveChanges();
-                TempData["msg"] = "Data deleted successfully ";
+                TempData["msg"] = "Data added successfully ";
                 return RedirectToAction("Index");
             }
 
@@ -156,8 +156,45 @@ namespace Ishop.Controllers
         }
 
         // GET: Beneficiaries/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task <ActionResult> Edit(int? id)
         {
+
+            Item_context AA = new Item_context();
+            var Admm = AA.items.ToList();
+            ViewBag.Admm = new SelectList(Admm, "Name", "Name");
+
+            string apiUrl = "https://restcountries.com/v3.1/all";
+            List<string> countryNames = new List<string>();
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    JArray countries = JArray.Parse(responseData);
+
+                    // Extract country names
+                    foreach (var country in countries)
+                    {
+                        var countryName = country["name"]["common"].ToString();
+                        countryNames.Add(countryName);
+                    }
+
+                    // Sort the list of country names alphabetically
+                    countryNames.Sort();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during API call
+                Console.WriteLine("Error fetching countries: " + ex.Message);
+            }
+
+            // Passing the list of countries to the ViewBag
+            ViewBag.CountriesList = new SelectList(countryNames);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -175,7 +212,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Contacts,Country,Email")] Benef benef)
+        public ActionResult Edit([Bind(Include = "Id,Name,Contacts,Country,Email,Total")] Benef benef)
         {
             if (ModelState.IsValid)
             {
@@ -183,6 +220,7 @@ namespace Ishop.Controllers
                 db.SaveChanges();
                 
             }
+            TempData["msg"] = "Data updated successfully ";
             return View(benef);
         }
 

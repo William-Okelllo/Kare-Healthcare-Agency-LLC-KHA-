@@ -15,7 +15,7 @@ namespace IShop.Core
         public string Subjects { get; set; }
         public string Student { get; set; }
 
-        public string Grade { get; set; }
+        public bool Pass { get; set; }
         public Decimal Percentage { get; set; }
         public DateTime Date { get; set; }
         public string Remarks { get; set; }

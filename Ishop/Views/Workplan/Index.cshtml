@@ -161,13 +161,16 @@
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                     <div class="dropdown-divider"></div>
                                     <a href="@Url.Action("Edit", "WorkPlan", new { id = item.Id })" class="dropdown-item">
-                                        <i class="fa fa-plus-circle text-warning"></i> Update Task
+                                        <i class="fa fa-plus-circle text-warning"></i> Update/Edit
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a href="@Url.Action("Create", "Question", new { WorkPlan_Id = item.Id ,Activity=item.Activities})" class="dropdown-item">
                                         <i class="fa fa-question-circle text-success"></i> Add Questions
                                     </a>
-
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Delete", "WorkPlan", new { id = item.Id})" class="dropdown-item">
+                                        <i class="fa fa-times-circle text-danger"></i> Drop Workplan
+                                    </a>
 
                                 </div>
                             </div>

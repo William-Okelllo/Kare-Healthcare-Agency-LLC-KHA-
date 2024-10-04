@@ -135,6 +135,7 @@ namespace Ishop.Controllers
             {
                 db.Entry(workplan).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["msg"] = "Data updated  successfully ";
                 return RedirectToAction("Index");
             }
             return View(workplan);
@@ -143,26 +144,11 @@ namespace Ishop.Controllers
         // GET: Workplan/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Workplan workplan = db.workplans.Find(id);
-            if (workplan == null)
-            {
-                return HttpNotFound();
-            }
-            return View(workplan);
-        }
-
-        // POST: Workplan/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
+            
             Workplan workplan = db.workplans.Find(id);
             db.workplans.Remove(workplan);
             db.SaveChanges();
+            TempData["msg"] = "Data delete successfully ";
             return RedirectToAction("Index");
         }
 

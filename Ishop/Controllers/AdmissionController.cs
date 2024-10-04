@@ -87,13 +87,14 @@ namespace Ishop.Controllers
 
             // Get unique subjects and grades
             var subjects = Perfom.Select(p => p.Subjects).Distinct().ToList();
-            var grades = Perfom.Select(p => p.Grade).Distinct().ToList();
+            var grades = Perfom.Select(p => p.Pass).Distinct().ToList();
+
 
             // Prepare data for the chart
             var datasets = subjects.Select(subject => new {
                 subject = subject,
                 data = grades.Select(grade => {
-                    var performance = Perfom.FirstOrDefault(p => p.Subjects == subject && p.Grade == grade);
+                    var performance = Perfom.FirstOrDefault(p => p.Subjects == subject && p.Pass == grade);
                     return performance?.Percentage ?? 0;
                 }).ToList()
             }).ToList();
