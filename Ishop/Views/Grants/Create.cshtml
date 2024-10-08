@@ -24,8 +24,24 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label><i class=" fa fa-calendar-day text-purple"></i>   @Html.LabelFor(model => model.AddedOn)</label>
+            @Html.EditorFor(model => model.AddedOn, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Placeholder = "AddedOn",
+               @Value = DateTime.Now,
+               @Readonly = true,
 
-   <div class="form-group col-md-8">
+
+           }
+       })
+
+        </div>
+        <div class="form-group col-md-6">
             <label><i class=" fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
             @Html.EditorFor(model => model.Name, new
        {
@@ -40,64 +56,161 @@
        })
 
         </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.From_Date)</label>
+            @Html.EditorFor(model => model.From_Date, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm ",
+               @placeholder = "From_Date",
+               id = "datepicker",
+               @required = "required",
+           }
+       })
+        </div>
+        <div class="form-group col-md-6">
+            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.To_Date)</label>
+            @Html.EditorFor(model => model.To_Date, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm ",
+               @placeholder = "To_Date ",
+               id = "datepicker2",
+               @required = "required",
+           }
+       })
+        </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="form-row">
+
+        <div class="form-group col-md-4">
+            <label><i class="fa fa-bookmark text-purple"></i> @Html.LabelFor(model => model.Type)</label>
+            @{
+                List<SelectListItem> x = new List<SelectListItem>();
+                x.Add(new SelectListItem
+                {
+                    Text = "Full Budget",
+                    Value = "Full Budget",
+                });
+                x.Add(new SelectListItem
+                {
+                    Text = "Tracks Budget",
+                    Value = "Tracks Budget",
+                });
+            }
+            @Html.DropDownListFor(model => model.Type, x, "---Select Type---", new { @class = "form-control form-control-sm", @required = "required", id = "budgetType" })
+        </div>
+
+        <!-- Track dropdown, initially hidden -->
+        <div class="form-group col-md-4" id="trackDropdown" style="display:none;">
+            <label><i class="fa fa-spinner text-purple"></i> @Html.LabelFor(model => model.Track)</label>
+            @{
+                List<SelectListItem> w = new List<SelectListItem>();
+                w.Add(new SelectListItem
+                {
+                    Text = "Track 1",
+                    Value = "Track 1",
+                });
+                w.Add(new SelectListItem
+                {
+                    Text = "Track 2",
+                    Value = "Track 2",
+                });
+                w.Add(new SelectListItem
+                {
+                    Text = "Track 3",
+                    Value = "Track 3",
+                });
+                w.Add(new SelectListItem
+                {
+                    Text = "Track 4",
+                    Value = "Track 4",
+                });
+            }
+            @Html.DropDownListFor(model => model.Track, w, "---Select Track---", new { @class = "form-control form-control-sm" })
+        </div>
+
+        <!-- Script to show/hide the track dropdown -->
+        <script>
+            $(document).ready(function () {
+                // When the budget type dropdown changes
+                $('#budgetType').change(function () {
+                    var selectedValue = $(this).val();
+
+                    // If "Tracks Budget" is selected, show the track dropdown
+                    if (selectedValue === "Tracks Budget") {
+                        $('#trackDropdown').show();
+                    } else {
+                        // Otherwise, hide it
+                        $('#trackDropdown').hide();
+                    }
+                });
+            });
+        </script>
 
 
-   <div class="form-row">
-       <div class="form-group col-md-6">
-           <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.From_Date)</label>
-           @Html.EditorFor(model => model.From_Date, new
-      {
-          htmlAttributes = new
-          {
-              @class = "form-control form-control-sm ",
-              @placeholder = "From_Date",
-              id = "datepicker",
-              @required = "required",
-          }
-      })
-       </div>
-       <div class="form-group col-md-6">
-           <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.To_Date)</label>
-           @Html.EditorFor(model => model.To_Date, new
-      {
-          htmlAttributes = new
-          {
-              @class = "form-control form-control-sm ",
-              @placeholder = "To_Date ",
-              id = "datepicker2",
-              @required = "required",
-          }
-      })
-       </div>
-
-   </div>
 
 
 
 
 
+        <div class="form-group col-md-4">
+            <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Status)</label>
+            @{
+                List<SelectListItem> b = new List<SelectListItem>();
+                b.Add(new SelectListItem
+                {
+                    Text = "Approved",
+                    Value = "Approved",
+                });
+                b.Add(new SelectListItem
+                {
+                    Text = "Pending",
+                    Value = "Pending",
+                });
 
 
-   <small> Actions</small>
-   <div class="dropdown-divider"></div>
-            <div class="form-group">
-                <div class="col d-flex justify-content-center">
-                    <input type="submit" name="action" value="Add Budget  " class="btn  btn-block btn-outline-success" onclick="return confirm('Proceed to add Budget?')" />
+            }@Html.DropDownListFor(model => model.Status, b, "---Select Status---", new { @class = "form-control form-control-sm", @required = "required", })
+        </div>
+        <div class="form-group col-md-4">
+            <label><i class="fa fa-users text-purple"></i>   @Html.LabelFor(model => model.Submitted_by)</label>
+            @Html.DropDownList("Submitted_by", ViewBag.Admm as SelectList, "--Select Submitted By --", new { @class = "form-control form-control-sm", id = "StudentStudent" })
+        </div>
 
-                    <script>
-                        $(function () {
-                            $('#Create').click(function () {
-                                if (confirm('Are you sure?')) {
-                                    window.location.href = $(this).data('url');
-                                }
-                            });
-                        });
-                    </script>
+    </div>
 
 
-                </div>
-            </div>
-        
-        }
 
-       
+
+
+
+
+    <small> Actions</small>
+    <div class="dropdown-divider"></div>
+    <div class="form-group">
+        <div class="col d-flex justify-content-center">
+            <input type="submit" name="action" value="Add Budget  " class="btn  btn-block btn-outline-success" onclick="return confirm('Proceed to add Budget?')" />
+
+            <script>
+                $(function () {
+                    $('#Create').click(function () {
+                        if (confirm('Are you sure?')) {
+                            window.location.href = $(this).data('url');
+                        }
+                    });
+                });
+            </script>
+
+
+        </div>
+    </div>
+
+}
+
+

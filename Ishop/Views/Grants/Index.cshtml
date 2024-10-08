@@ -89,10 +89,14 @@
 
 
         <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
-            <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createModalLabel"> <span class="badge badge-warning"> <i class="fa fa-usere"></i></span>   Add Budget</h5>
+                        <h5 class="modal-title" id="createModalLabel">
+                            <span class="badge badge-warning">
+                                <i class="fa fa-user"></i>
+                            </span> Add Budget
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -103,6 +107,11 @@
                 </div>
             </div>
         </div>
+
+        <!-- Ensure the document is ready before initializing the modal -->
+        
+
+
 
 
         <script>
@@ -148,15 +157,25 @@ $(document).ready(function () {
                     <div class="small-box bg-dark" style="border-radius: 15px;color:white">
                         <div class="inner">
 
-                            <small><i class="fa fa-gifts "></i>  Budget Tag   (No.@item.Id)</small>
+                            <small><span class="badge  badge-light"><small><i class="fa fa-usfers "></i></small> </span> Budget Type :  <b>@item.Type</b></small>
                             <div class="dropdown-divider"></div>
                             <h5> <span class="badge  badge-warning"><small><i class="fa fa-usfers "></i></small> </span> Budget :  <b> @item.Name</b> </h5>
                             <h6>
                                 <span class="badge  badge-light"><small><i class="fa fa-usfers "></i></small> </span> Duration :  <b><span class="badge  badge-light"><i class="fa fa-calendar-day "></i> From </span> @item.From_Date.ToString("dd-MMM-yyyy")</b>
                                 <b><span class="badge  badge-success"><i class="fa fa-calendar-day "></i> To </span> @item.To_Date.ToString("dd-MMM-yyyy")</b>
                             </h6>
+                            <h6>
+                                <span class="badge  badge-light"><i class="fa fa-usfers "></i> Budget Type  </span> <span class="badge  badge-light"><i class="fa fa-usfers "></i> <b>@item.Type @item.Track</b></span>
+                                <b><span class="badge  badge-success"><i class="fa fa-calendar-day "></i> Status </span>  <span class="badge badge-light"><medium><i class="fa fa-usfers "></i></medium> @item.Status</span></b>
+                            </h6>
+                            <h6>
+                                
+                                <b><span class="badge  badge-success"><i class="fa fa-calendar-day "></i> Added On </span> @item.AddedOn.ToString("dd-MMM-yyyy")</b>
+                            </h6>
+                            <h5>
+                                <span class="badge  badge-light"><i class="fa fa-users "></i> Submitted By   </span> <span class="badge  badge-light"><i class="fa fa-usfers "></i> <b>@item.Submitted_by</b></span>
+                            </h5>
                             <h5> <span class="badge  badge-warning"><small><i class="fa fa-usfers "></i></small> </span> Total Budget :<b>  @item.Total.ToString("#,##0.00")</b> <small> /=</small></h5>
-
                         </div>
                         <div class="icon">
 
@@ -176,7 +195,7 @@ $(document).ready(function () {
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#createModal" id="editButton-@item.Id" data-id="@item.Id">
-                                    <i class="fa fa-chart-line text-warning"></i> Edit Budget
+                                    <i class="fa fa-pen-nib text-secondary"></i> Edit Budget
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete the item')) { window.location.href = '@Url.Action("Delete", "grants", new { id = item.Id })'; }">
@@ -215,7 +234,7 @@ $(document).ready(function () {
 
         // Make an AJAX GET request to load the Edit view
         $.ajax({
-            url: '@Url.Action("Edit", "grants")',  // URL of the Edit action
+            url: '@Url.Action("Edit", "Grants")',  // URL of the Edit action
             type: 'GET',
             data: { id: id },  // Pass the unique item ID
             success: function (data) {

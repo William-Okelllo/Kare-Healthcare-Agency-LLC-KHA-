@@ -58,7 +58,7 @@ namespace Ishop.Controllers
                 db.exps.Add(exp);
                 db.SaveChanges();
 
-                Update(exp.Budget_Id,exp.Budget);
+                Update(exp.Budget_Id);
 
 
                 TempData["msg"] = "Budget item added successfully ";
@@ -72,28 +72,21 @@ namespace Ishop.Controllers
 
 
 
-        public void Update(int Beneficiary_Id, decimal Total)
+        public void Update(int Id)
         {
             Grant_context BCC = new Grant_context();
-            var Benn = BCC.grants.Find(Beneficiary_Id);
+            var Benn = BCC.grants.Find(Id);
+
+            var Itemsum=db.exps.Where(c=>c.Budget_Id==Id).Select(c=>c.Budget).DefaultIfEmpty(0).Sum();
+
             if (Benn != null)
             {
-                Benn.Total = Benn.Total + Total;
+                Benn.Total = Itemsum;
             }
             BCC.SaveChanges();
 
         }
-        public void Delete_cash(int Beneficiary_Id, decimal Total)
-        {
-            Grant_context BCC = new Grant_context();
-            var Benn = BCC.grants.Find(Beneficiary_Id);
-            if (Benn != null)
-            {
-                Benn.Total = Benn.Total - Total;
-            }
-            BCC.SaveChanges();
-
-        }
+        
 
 
 
@@ -114,7 +107,8 @@ namespace Ishop.Controllers
             {
                 return HttpNotFound();
             }
-            return View(exp);
+            return PartialView(exp);
+
         }
 
         // POST: Exps/Edit/5
@@ -122,15 +116,17 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,Budget,Expenditures,Shared,Available")] Exp exp)
+        public ActionResult Edit([Bind(Include = "Id,Type,Budget,Expenditures,Shared,Available,Budget_Id")] Exp exp)
         {
-            if (ModelState.IsValid)
-            {
+           
                 db.Entry(exp).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(exp);
+                Update(exp.Budget_Id);
+                
+            
+            TempData["msg"] = "Budget item update successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         // GET: Exps/Delete/5
@@ -140,7 +136,7 @@ namespace Ishop.Controllers
             Exp exp = db.exps.Find(id);
             db.exps.Remove(exp);
             db.SaveChanges();
-            Delete_cash(exp.Budget_Id, exp.Budget);
+            Update(exp.Budget_Id);
             TempData["msg"] = "Budget item deleted successfully ";
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);

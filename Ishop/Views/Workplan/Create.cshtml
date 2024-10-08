@@ -40,38 +40,78 @@
 
                 <div class="form-row">
 
-                    <div class="form-group col-md-3" id="other">
-                        <label><i class="fa fa-book-reader text-primary"></i>   @Html.LabelFor(model => model.Track)</label>
-                        @Html.EditorFor(model => model.Track, new
-                   {
-                       htmlAttributes = new
-                       {
-                           @class = "form-control form-control-sm",
-                           @Placeholder = "Track",
-                           @Required = true
-                       }
-                   })
+                    <div class="form-group col-md-3" id="other" style="display:nosne">
+                        <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Track)</label>
+                        @{
+                            List<SelectListItem> b = new List<SelectListItem>();
+                            b.Add(new SelectListItem
+                            {
+                                Text = "Track 1",
+                                Value = "Track 1",
+                            });
+                            b.Add(new SelectListItem
+                            {
+                                Text = "Track 2",
+                                Value = "Track 2",
+                            });
+                            b.Add(new SelectListItem
+                            {
+                                Text = "Track 3",
+                                Value = "Track 3",
+                            });
+                            b.Add(new SelectListItem
+                            {
+                                Text = "Track 4",
+                                Value = "Track 4",
+                            });
+
+
+                        }@Html.DropDownListFor(model => model.Track, b, "---Select Track---", new { @class = "form-control form-control-sm", @required = "required", })
                     </div>
 
                     <script type="text/javascript">
                         $(function () {
 
-                            $("#").chosen();
+                            $("#Track").chosen();
                             $("#Activities").chosen();
 
                         });
                     </script>
                     <div class="form-group col-md-4" id="other" style="display:nosne">
                         <label><i class="fa fa-clock text-primary"></i>   @Html.LabelFor(model => model.Activities)</label>
-                        @Html.EditorFor(model => model.Activities, new
-{
-htmlAttributes = new
-{
-   @class = "form-control form-control-sm",
-   @Placeholder = "Activities Name",
-   @Required = true
-}
-})
+                        @{
+                            List<SelectListItem> m = new List<SelectListItem>();
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Activity 1",
+                                Value = "Activity 1",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Activity 2",
+                                Value = "Activity 2",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Activity 3",
+                                Value = "Activity 3",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Activity 4",
+                                Value = "Activity 4",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Activity 5",
+                                Value = "Activity 5",
+                            });
+                            m.Add(new SelectListItem
+                            {
+                                Text = "Activity 6",
+                                Value = "Activity 6",
+                            });
+                        }@Html.DropDownListFor(model => model.Activities, m, "---Select Activity---", new { @class = "form-control form-control-sm", @required = "required", })
                     </div>
 
                     <div class="form-group col-md-5" id="other">

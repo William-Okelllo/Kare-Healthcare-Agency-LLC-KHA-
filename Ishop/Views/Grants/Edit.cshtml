@@ -25,7 +25,39 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-group col-md-8">
+<div class="row">
+    <div class="form-group col-md-4">
+        <label><i class=" fa fa-calendar-day text-purple"></i>   @Html.LabelFor(model => model.AddedOn)</label>
+        @Html.EditorFor(model => model.AddedOn, new
+   {
+       htmlAttributes = new
+       {
+           @class = "form-control form-control-sm",
+           @Placeholder = "AddedOn",
+           @Value = DateTime.Now,
+           @Readonly = true,
+
+
+       }
+   })
+
+    </div>
+    <div class="form-group col-md-4" style="display:none">
+        <label><i class=" fa fa-calendar-day text-purple"></i>   @Html.LabelFor(model => model.Total)</label>
+        @Html.EditorFor(model => model.Total, new
+   {
+       htmlAttributes = new
+       {
+           @class = "form-control form-control-sm",
+           @Placeholder = "AddedOn",
+           @Readonly = true,
+
+
+       }
+   })
+
+    </div>
+    <div class="form-group col-md-6">
         <label><i class=" fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
         @Html.EditorFor(model => model.Name, new
    {
@@ -41,7 +73,7 @@
 
     </div>
 
-
+</div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.From_Date)</label>
@@ -72,6 +104,92 @@
 
     </div>
 
+    <div class="dropdown-divider"></div>
+    <div class="form-row">
+
+        <div class="form-group col-md-4">
+            <label><i class="fa fa-bookmark text-purple"></i> @Html.LabelFor(model => model.Type)</label>
+            @{
+                List<SelectListItem> x = new List<SelectListItem>();
+                x.Add(new SelectListItem
+                {
+                    Text = "Full Budget",
+                    Value = "Full Budget",
+                });
+                x.Add(new SelectListItem
+                {
+                    Text = "Tracks Budget",
+                    Value = "Tracks Budget",
+                });
+            }
+            @Html.DropDownListFor(model => model.Type, x, "---Select Type---", new { @class = "form-control form-control-sm", @required = "required", id = "budgetType" })
+        </div>
+
+        <!-- Track dropdown, initially hidden -->
+        <!-- Script to show/hide the track dropdown -->
+        @if (Model.Track != null)
+        {
+            <div class="form-group col-md-4" id="trackDropdown">
+                <label><i class="fa fa-spinner text-purple"></i> @Html.LabelFor(model => model.Track)</label>
+                @{
+                    List<SelectListItem> w = new List<SelectListItem>();
+                    w.Add(new SelectListItem
+                    {
+                        Text = "Track 1",
+                        Value = "Track 1",
+                    });
+                    w.Add(new SelectListItem
+                    {
+                        Text = "Track 2",
+                        Value = "Track 2",
+                    });
+                    w.Add(new SelectListItem
+                    {
+                        Text = "Track 3",
+                        Value = "Track 3",
+                    });
+                    w.Add(new SelectListItem
+                    {
+                        Text = "Track 4",
+                        Value = "Track 4",
+                    });
+                }
+                @Html.DropDownListFor(model => model.Track, w, "---Select Track---", new { @class = "form-control form-control-sm" })
+            </div>
+        }
+
+
+
+
+
+
+        <div class="form-group col-md-4">
+            <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Status)</label>
+            @{
+                List<SelectListItem> b = new List<SelectListItem>();
+                b.Add(new SelectListItem
+                {
+                    Text = "Approved",
+                    Value = "Approved",
+                });
+                b.Add(new SelectListItem
+                {
+                    Text = "Pending",
+                    Value = "Pending",
+                });
+
+
+            }@Html.DropDownListFor(model => model.Status, b, "---Select Status---", new { @class = "form-control form-control-sm", @required = "required", })
+        </div>
+        <div class="form-group col-md-4">
+            <label><i class="fa fa-users text-purple"></i>   @Html.LabelFor(model => model.Submitted_by)</label>
+            @Html.DropDownList("Submitted_by", ViewBag.Admm as SelectList, "--Select Submitted By --", new { @class = "form-control form-control-sm", id = "StudentStudent" })
+        </div>
+
+    </div>
+
+
+
 
 
 
@@ -85,13 +203,13 @@
             <input type="submit" name="action" value="Update/Edit Budget  " class="btn  btn-block btn-outline-success" onclick="return confirm('Proceed to update/Edit Budget?')" />
 
             <script>
-                        $(function () {
-                            $('#Create').click(function () {
-                                if (confirm('Are you sure?')) {
-                                    window.location.href = $(this).data('url');
-                                }
-                            });
-                        });
+                $(function () {
+                    $('#Create').click(function () {
+                        if (confirm('Are you sure?')) {
+                            window.location.href = $(this).data('url');
+                        }
+                    });
+                });
             </script>
 
 
@@ -99,5 +217,3 @@
     </div>
 
 }
-
-

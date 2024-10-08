@@ -68,7 +68,7 @@
                                 <th style="background-color: #cccccc; "> Date </th>
                                 <th style="background-color: #cccccc; "> Student/Overall </th>
                                 <th style="background-color: #cccccc; "> Stage </th>
-                                <th style="background-color: #cccccc; "> Grade </th>
+                                <th style="background-color: #cccccc; "> Status </th>
                                 <th style="background-color: #cccccc; "> Subject </th>
                             </tr>
                         </thead>
@@ -91,8 +91,14 @@
 
                                     </td>
                                     <td style="background-color:white;">
-                                        <span class="badge badge-warning"><medium>    </medium></span> <b style="font-size:x-large"> @item.Grade</b>
-
+                                        @if (item.Pass == true)
+                                        {
+                                            <b style="color:forestgreen"><i class="fa fa-check-circle"></i> PASS    :  <b style="font-size:x-large">|</b> @item.Percentage <i class="fa fa-percentage"></i> </b>
+                                        }
+                                        else
+                                        {
+                                    <b style="color:red"><i class="fa fa-times-circle"></i> FAIL  :  <b style="font-size:x-large">|</b> @item.Percentage <i class="fa fa-percentage"></i></b>
+                                        }
                                     </td>
                                     <td style="background-color:white;">
                                         <span class="badge badge-warning"><medium>    </medium></span> <b > @item.Subjects</b>

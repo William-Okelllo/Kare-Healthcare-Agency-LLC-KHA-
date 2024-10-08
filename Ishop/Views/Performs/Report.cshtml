@@ -162,6 +162,16 @@
                                 Text = "CNA -Full Course",
                                 Value = "CNA -Full Course",
                             });
+                            v.Add(new SelectListItem
+                            {
+                                Text = "LPN -Full Course",
+                                Value = "LPN -Full Course",
+                            });
+                            v.Add(new SelectListItem
+                            {
+                                Text = "TMA -Full Course",
+                                Value = "TMA -Full Course",
+                            });
                         }@Html.DropDownListFor(model => model.Subjects, v, "---Select Subjects---", new { @class = "form-control form-control-sm", @required = "required", })
                     </div>
                     <script type="text/javascript">
@@ -190,50 +200,24 @@
                     </div>
 
                     <div class="form-group col-md-2" id="other">
-                        <label><i class="fa fa-hashtag text-purple"></i> Grade</label>
-                        @Html.EditorFor(model => model.Grade, new
-                        {
-                            htmlAttributes = new
+                        <label><i class="fa fa-hashtag text-purple"></i> Passed?</label>
+                        @Html.DropDownListFor(model => model.Pass,
+                            new List<SelectListItem>
                             {
+                                new SelectListItem { Text = "Yes", Value = "true" },
+                                new SelectListItem { Text = "No", Value = "false" }
+                            },
+                            new
+                                {
                                 @class = "form-control form-control-sm",
-                                @placeholder = "GRADE",
-                                @Readonly = true,
-                                @id = "grade"
+                                @placeholder = "Pass",
+                                @Required = true // This will disable the dropdown if you want it read-only
                             }
-                        })
+                        )
                     </div>
 
-                    <script>
-                        document.getElementById("percentage").addEventListener("input", function () {
-                            var percentage = parseFloat(this.value);
 
-                            // Ensure percentage is between 0 and 100
-                            if (percentage > 100) {
-                                percentage = 100;
-                                this.value = 100;
-                            } else if (percentage < 0) {
-                                percentage = 0;
-                                this.value = 0;
-                            }
 
-                            // Determine grade based on percentage
-                            var grade = "";
-                            if (percentage >= 90 && percentage <= 100) {
-                                grade = "A";
-                            } else if (percentage >= 80 && percentage < 90) {
-                                grade = "B";
-                            } else if (percentage >= 70 && percentage < 80) {
-                                grade = "C";
-                            } else if (percentage >= 60 && percentage < 70) {
-                                grade = "D";
-                            } else if (percentage >= 0 && percentage < 60) {
-                                grade = "E";
-                            }
-
-                            // Set the grade in the grade input field
-                            document.getElementById("grade").value = grade;
-                        });
-                    </script>
 
                 </div>
                     <div class="dropdown-divider"></div>

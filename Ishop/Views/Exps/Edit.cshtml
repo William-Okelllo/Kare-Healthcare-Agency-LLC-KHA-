@@ -1,71 +1,173 @@
 ﻿@model IShop.Core.Exp
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Exps", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Exp</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+    <div class="row">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-            </div>
+        <script type="text/javascript">
+            $(function () {
+
+                $("#dType").chosen();
+
+
+            });
+        </script>
+
+
+        <div class="form-group col-md-8">
+            <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Type)</label>
+            @{
+                List<SelectListItem> b = new List<SelectListItem>();
+                b.Add(new SelectListItem
+                {
+                    Text = "Salary",
+                    Value = "Salary",
+                });
+                b.Add(new SelectListItem
+                {
+                    Text = "Technology Software & Training",
+                    Value = "Technology Software & Training",
+                });
+                b.Add(new SelectListItem
+                {
+                    Text = "Admin/Indirect costs",
+                    Value = "Admin/Indirect costs",
+                });
+                b.Add(new SelectListItem
+                {
+                    Text = "Travel",
+                    Value = "Travel",
+                });
+                b.Add(new SelectListItem
+                {
+                    Text = "Other",
+                    Value = "Other",
+                });
+                b.Add(new SelectListItem
+                {
+                    Text = "Contracted services",
+                    Value = "Contracted services",
+                });
+            }@Html.DropDownListFor(model => model.Type, b, "---Select Type---", new { @class = "form-control form-control-sm", @required = "required", })
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Expenditures, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Expenditures, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Expenditures, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Shared, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Shared)
-                    @Html.ValidationMessageFor(model => model.Shared, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Available, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Available, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Available, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="form-group col-md-4">
+            <label><i class="fa fa-book-reader text-purple"></i>   @Html.LabelFor(model => model.Budget)</label>
+            @Html.EditorFor(model => model.Budget, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Placeholder = "Budget",
+               @Required = true
+           }
+       })
         </div>
     </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label><i class="fa fa-book-reader text-purple"></i>   @Html.LabelFor(model => model.Expenditures)</label>
+            @Html.EditorFor(model => model.Expenditures, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Placeholder = "Expenditures",
+               @Required = true
+           }
+       })
+        </div>
+        <div class="form-group col-md-6">
+            <label><i class="fa fa-book-reader text-purple"></i>   @Html.LabelFor(model => model.Available)</label>
+            @Html.EditorFor(model => model.Available, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Placeholder = "Available",
+               @Readonly = true
+           }
+       })
+        </div>
+        <div class="form-group col-md-6" style="display: none">
+            <label><i class="fa fa-book-reader text-purple"></i>   @Html.LabelFor(model => model.Budget_Id)</label>
+            @Html.EditorFor(model => model.Budget_Id, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Readonly = true
+           }
+       })
+        </div>
+        <div class="form-group col-md-2" style="display:none">
+            <label><i class="fa fa-book-reader text-purple"></i>   @Html.LabelFor(model => model.Id)</label>
+            @Html.EditorFor(model => model.Id, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Readonly = true
+           }
+       })
+        </div>
+        <div class="form-group col-md-4" style="display:nodne">
+            <label><i class="fa fa-book-reader text-purple"></i>   @Html.LabelFor(model => model.Shared)</label>
+            @Html.EditorFor(model => model.Shared, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control form-control-sm",
+               @Readonly = true
+           }
+       })
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function updateAvailable() {
+                var budget = parseFloat($('#Budget').val()) || 0;
+                var expenditures = parseFloat($('#Expenditures').val()) || 0;
+
+                if (expenditures > budget) {
+                    alert('Expenditures cannot be greater than the budget.');
+                    $('#Expenditures').val('');  // Clear the expenditures field
+                }
+
+                var available = budget - expenditures;
+                $('#Available').val(available >= 0 ? available : 0);
+            }
+
+            $('#Budget, #Expenditures').on('input', function () {
+                updateAvailable();
+            });
+        });
+    </script>
+
+    <div class="dropdown-divider"></div>
+    <div class="form-group">
+        <div class="col d-flex justify-content-center">
+            <input type="submit" name="action" value="Update Budget Item " class="btn  btn-block btn-outline-success" onclick="return confirm('Proceed to update?')" />
+
+            <script>
+                $(function () {
+                    $('#Create').click(function () {
+                        if (confirm('Are you sure?')) {
+                            window.location.href = $(this).data('url');
+                        }
+                    });
+                });
+            </script>
+
+
+        </div>
+    </div>
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

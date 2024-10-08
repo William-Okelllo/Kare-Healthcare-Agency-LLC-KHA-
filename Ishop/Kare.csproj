@@ -6366,14 +6366,10 @@
     <Content Include="FrontEnd\plugins\uplot\uPlot.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\2D.png" />
     <Content Include="Images\co.gif" />
     <Content Include="Images\ddd.svg" />
     <Content Include="Images\homee.png" />
-    <Content Include="Images\Infinity.gif" />
     <Content Include="Images\kare_login.png" />
-    <Content Include="Images\lwhote.png" />
-    <Content Include="Images\mme.png" />
     <Content Include="Images\neww.jpg" />
     <Content Include="Images\P.png" />
     <Content Include="Images\ppp.gif" />
@@ -7054,7 +7050,6 @@
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
     <Content Include="App_Browsers\qt.browser" />
-    <Content Include="Images\loading.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\CashMate.pubxml" />
     <None Include="Properties\PublishProfiles\Events.pubxml" />
@@ -8013,11 +8008,6 @@
     <Content Include="Views\Performs\Edit.cshtml" />
     <Content Include="Views\Performs\Option.cshtml" />
     <Content Include="Views\Admission\Performance.cshtml" />
-    <Content Include="Views\Exams\Create.cshtml" />
-    <Content Include="Views\Exams\Delete.cshtml" />
-    <Content Include="Views\Exams\Details.cshtml" />
-    <Content Include="Views\Exams\Edit.cshtml" />
-    <Content Include="Views\Exams\Index.cshtml" />
     <Content Include="Views\Indirect\Create.cshtml" />
     <Content Include="Views\Indirect\Delete.cshtml" />
     <Content Include="Views\Indirect\Details.cshtml" />
@@ -8039,10 +8029,8 @@
     <Content Include="Views\Grants\Edit.cshtml" />
     <Content Include="Views\Grants\Index.cshtml" />
     <Content Include="Views\Exps\Create.cshtml" />
-    <Content Include="Views\Exps\Delete.cshtml" />
     <Content Include="Views\Exps\Details.cshtml" />
     <Content Include="Views\Exps\Edit.cshtml" />
-    <Content Include="Views\Exps\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

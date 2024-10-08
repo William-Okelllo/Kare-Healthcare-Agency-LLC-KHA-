@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using PagedList;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
@@ -64,6 +65,11 @@ namespace Ishop.Controllers
         // GET: Grants/Create
         public ActionResult Create()
         {
+            Userstable AA = new Userstable();
+            var Admm = AA.AspNetUsers.ToList();
+            ViewBag.Admm = new SelectList(Admm, "username", "username");
+
+
             return PartialView("Create");
         }
 
@@ -72,7 +78,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,From_Date,To_Date,Purpose,Total,Name,Budget_Id")] Grant grant)
+        public ActionResult Create([Bind(Include = "Id,From_Date,To_Date,Total,Name,Type,Track,Status,AddedOn,Submitted_by")] Grant grant)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +94,10 @@ namespace Ishop.Controllers
         // GET: Grants/Edit/5
         public ActionResult Edit(int? id)
         {
+            Userstable AA = new Userstable();
+            var Admm = AA.AspNetUsers.ToList();
+            ViewBag.Admm = new SelectList(Admm, "username", "username");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,7 +115,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,From_Date,To_Date,Purpose,Total,Name,Budget_Id")] Grant grant)
+        public ActionResult Edit([Bind(Include = "Id,From_Date,To_Date,Total,Name,Type,Track,Status,AddedOn,Submitted_by")] Grant grant)
         {
             if (ModelState.IsValid)
             {

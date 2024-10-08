@@ -211,12 +211,80 @@ $(document).ready(function () {
                                         <span class="badge badge-warning"> <i class="fa fa-chdess text-black"></i></span>  <b>@item.Available.ToString("#,##0.00") /=</b>
                                     </td>
                                     <td style="background-color: white;">
-                                        <span class="badge badge-warning"> <i class="fa fa-chdess text-black"></i></span>  <b>@item.Shared </b>
+                                        @if(@item.Shared ==true)
+                                        { <b style="color:darkgreen"><i class="fa fa-check-circle"></i> YES</b> }
+                                        else
+                                        { <b style="color:red"><i class="fa fa-times-circle "></i> NO</b>}
+                                        
                                     </td>
                                     <td style="background-color: white;">
-                                        <a href="@Url.Action("Delete", "Exps", new { Id = item.Id })" class="btn btn-sm btn-outline-danger">
-                                            <i class="fa fa-question-circle "></i> Drop item
-                                        </a>
+                                        <div class="btn-group dropdown">
+                                            <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-hashtag"></i>  . Action
+                                            </button>
+                                            
+                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#createModal" id="editButton-@item.Id" data-id="@item.Id">
+                                                    <i class="fa fa-pen-nib text-warning"></i> Update item
+                                                </a>
+
+                                                <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="createModalLabel"> <span class="badge badge-warning"> <i class="fa fa-user"></i></span> Edit Budget</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Content will be loaded here via AJAX -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <script>
+$(document).ready(function () {
+    // Handle the Edit button click event for any item
+    $('a[id^="editButton-"]').click(function (e) {
+        e.preventDefault(); // Prevent the default link behavior
+
+        // Get the unique item ID from the data-id attribute
+        var id = $(this).data('id');
+
+        // Make an AJAX GET request to load the Edit view
+        $.ajax({
+            url: '@Url.Action("Edit", "Exps")',  // URL of the Edit action
+            type: 'GET',
+            data: { id: id },  // Pass the unique item ID
+            success: function (data) {
+                // Load the returned data into the modal body
+                $('#createModal .modal-body').html(data);
+                // Show the modal
+                $('#createModal').modal('show');
+            },
+            error: function () {
+                console.log('Failed to load the Edit form.');
+            }
+        });
+    });
+
+    // Handle the form submission (if needed)
+    $(document).on('submit', '#editForm', function (event) {
+        event.preventDefault();  // Prevent default form submission
+
+        // You can add AJAX form submission logic here, if required.
+    });
+});
+                                                </script>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="@Url.Action("Delete", "Exps", new { Id = item.Id })" class="dropdown-item">
+                                                    <i class="fa fa-question-circle "></i> Drop item
+                                                </a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             }
