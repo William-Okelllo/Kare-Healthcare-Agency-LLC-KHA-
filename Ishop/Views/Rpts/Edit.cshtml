@@ -1,0 +1,222 @@
+﻿@model IShop.Core.Rpt
+
+@{
+    ViewBag.Title = "Report Submission Edit";
+}
+
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-10 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> Report Update/Edit </h4>
+                <div class="dropdown-divider"></div>
+                @using (Html.BeginForm("Edit", "Rpts", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <form>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.AddedOn)</label>
+                        @Html.EditorFor(model => model.AddedOn, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm ",
+                           @Value = DateTime.Now,
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label style="color:black"><i class="fa fa-users text-purple"></i> @Html.LabelFor(model => model.Staff)</label>
+                        @Html.EditorFor(model => model.Staff, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm ",
+                           @Value = User.Identity.Name,
+                           @Readonly = true
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label style="color:black"><i class="fa fa-chart-line text-purple"></i> Activity Details</label>
+                        <button type="button" class="btn btn- btn-success set-reg-no-btn"
+                                data-toggle="modal" data-target="#exampleModalCenter"
+                                data-object-id="@ViewBag.WorkP.Guide">
+                            <i class="fa fa-chart-line "></i> View Activity
+                        </button>
+                    </div>
+                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label style="color:black"><i class="fa fa-bookmark text-purple"></i> @Html.LabelFor(model => model.Track)</label>
+                            @Html.EditorFor(model => model.Track, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2" style="display:none">
+                            <label style="color:black"><i class="fa fa-bookmark text-purple"></i> @Html.LabelFor(model => model.Plan_Id)</label>
+                            @Html.EditorFor(model => model.Plan_Id, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label style="color:black"><i class="fa fa-book-reader text-purple"></i> @Html.LabelFor(model => model.Activity)</label>
+                            @Html.EditorFor(model => model.Activity, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label style="color:black"><i class="fa fa-bullseye text-purple"></i> @Html.LabelFor(model => model.Goal)</label>
+                            @Html.EditorFor(model => model.Goal, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+
+                               @Readonly = true
+                           }
+                       })
+                        </div>
+                    </div>
+
+
+
+
+                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+                    <!-- Your script goes here -->
+                    <script>
+                        $(document).ready(function () {
+                            var objectId; // Variable to store the object ID
+                            var objectId2;
+                            // Capture object ID when "Set Reg No" button is clicked
+                            $('.set-reg-no-btn').click(function () {
+                                objectId = $(this).data('object-id');
+                                objectId2 = $(this).data('object-id2');
+                            });
+
+                            // Triggered when the modal is about to be shown
+                            $('#exampleModalCenter').on('show.bs.modal', function (event) {
+                                // Update the "Account Id" input in the modal with the captured object ID
+                                $('#AccountId').val(objectId);
+                                $('#staff').val(objectId2);
+                            });
+
+                            // Triggered when the modal is hidden
+                            $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
+                                // Clear the objectId when the modal is closed
+                                objectId = null;
+                            });
+                        });
+                    </script>
+
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 14px ">
+                            <div class="modal-content" style="border-radius: 14px ">
+
+                                <div class="modal-body ">
+
+                                    <h6 style="color:navy"><i class="fa fa-comment-dots text-primary"></i> <b>Activity </b></h6>
+                                    <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 100%; height: 400px;"></textarea>
+
+
+
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="dropdown-divider"></div>
+                    <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Report) </label>
+                    <div class="form-row">
+
+
+                        @Html.TextAreaFor(model => model.Report, 6, 70, htmlAttributes: new
+    {
+     style = "width: 100%; max-width:100%;",
+     @placeholder = "Report details",
+     @autofocus = "",
+     @class = "form-control form-rounded2",
+      // Custom attribute for conditional validation
+    })
+                        @Html.ValidationMessageFor(model => model.Report, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
+
+                    <div class="col d-flex justify-content-center">
+                        <input type="submit" name="action" value="Update/Edit Report" class="btn btn btn-success" style="color:white" onclick="return confirm('Update/Edit report?')" />
+                        <b>|</b>
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                        </script>
+
+
+                        <a href="@Url.Action("WorkPlan_Reports", "Workplan", new { Id =ViewBag.WorkP.Id })" class="btn btn btn-warning">
+                            <i class="fa fa-backward "></i> Back to @ViewBag.WorkP.Track Reports
+                        </a>
+                    </div>
+</form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</div>

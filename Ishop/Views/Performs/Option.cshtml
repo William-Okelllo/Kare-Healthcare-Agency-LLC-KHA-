@@ -70,6 +70,7 @@
                                 <th style="background-color: #cccccc; "> Stage </th>
                                 <th style="background-color: #cccccc; "> Status </th>
                                 <th style="background-color: #cccccc; "> Subject </th>
+                                <th style="background-color: #cccccc; "> Actions </th>
                             </tr>
                         </thead>
 
@@ -97,14 +98,35 @@
                                         }
                                         else
                                         {
-                                    <b style="color:red"><i class="fa fa-times-circle"></i> FAIL  :  <b style="font-size:x-large">|</b> @item.Percentage <i class="fa fa-percentage"></i></b>
+                                            <b style="color:red"><i class="fa fa-times-circle"></i> FAIL  :  <b style="font-size:x-large">|</b> @item.Percentage <i class="fa fa-percentage"></i></b>
                                         }
                                     </td>
                                     <td style="background-color:white;">
-                                        <span class="badge badge-warning"><medium>    </medium></span> <b > @item.Subjects</b>
+                                        <span class="badge badge-warning"><medium>    </medium></span> <b> @item.Subjects</b>
 
                                     </td>
+                                    <td style="background-color: white;">
 
+
+                                        <div class="btn-group dropdown">
+                                            <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-hashtag"></i>  . Action
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                               
+                                                <a href="@Url.Action("Edit", "Performs", new { id = item.Id})" class="dropdown-item">
+                                                    <i class="fa fa-pen-nib text-warning"></i> Edit Report
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="@Url.Action("Delete", "Performs", new { id = item.Id})" class="dropdown-item">
+                                                    <i class="fa fa-times-circle text-danger"></i> Delete Report
+                                                </a>
+
+                                            </div>
+                                        </div>
+
+
+                                    </td>
                                 </tr>
                             }
                         </tbody>

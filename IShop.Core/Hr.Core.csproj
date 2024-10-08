@@ -74,6 +74,7 @@
     <Compile Include="Interface\Imm.cs" />
     <Compile Include="Interface\Iperfom.cs" />
     <Compile Include="Interface\IQuestion.cs" />
+    <Compile Include="Interface\Irpt.cs" />
     <Compile Include="Interface\IWorkplan.cs" />
     <Compile Include="Interface\IReportAccess.cs" />
     <Compile Include="Interface\ISheet_comments.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="ReportAccess.cs" />
     <Compile Include="ReportGroup.cs" />
     <Compile Include="Reports.cs" />
+    <Compile Include="Rpt.cs" />
     <Compile Include="Sheet_comments.cs" />
     <Compile Include="Sms_configs.cs" />
     <Compile Include="Staff.cs" />

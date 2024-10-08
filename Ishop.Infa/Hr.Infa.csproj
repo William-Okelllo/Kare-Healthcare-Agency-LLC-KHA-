@@ -93,6 +93,8 @@
     <Compile Include="ReportAccess_repo.cs" />
     <Compile Include="ReportContext.cs" />
     <Compile Include="ReportGroupContext.cs" />
+    <Compile Include="Rpt_context.cs" />
+    <Compile Include="Rpt_repo.cs" />
     <Compile Include="Sms_configs_Context.cs" />
     <Compile Include="Sms_config_Repo.cs" />
     <Compile Include="Workplan_context.cs" />

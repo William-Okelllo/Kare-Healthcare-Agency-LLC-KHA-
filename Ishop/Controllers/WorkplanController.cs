@@ -22,17 +22,15 @@ namespace Ishop.Controllers
         {
 
 
-            if (!(search == null))
-            {
-                return View(db.workplans.OrderByDescending(p => p.Id).Where(c => c.Track == search).ToList().ToPagedList(page ?? 1, 6));
+            // Grouping by Track and projecting distinct Workplans
+            var Workplans = db.workplans
+                .GroupBy(c => c.Track)
+                .Select(g => g.FirstOrDefault()) // Get the first workplan from each group
+                .ToList()
+                .ToPagedList(page ?? 1, 6); // Paginate the results
 
-            }
-            else
-            {
-                return View(db.workplans.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 6));
-
-
-            }
+            ViewBag.Workplans = Workplans;
+            return View();
         }
 
         public ActionResult Budget(int? page)
@@ -48,7 +46,42 @@ namespace Ishop.Controllers
             return View();
         }
 
-        public ActionResult Budget_view(string Track)
+
+        public ActionResult WorkPlan_Reports(int Id, int? page)
+        {
+            var WorkP = db.workplans.Find(Id);
+            ViewBag.WorkP = WorkP;
+            Rpt_context RRR = new Rpt_context();
+            var Repos =RRR.rpts.Where(c=>c.Plan_Id==Id).ToList().ToPagedList(page ?? 1, 6);
+            ViewBag.Repos = Repos;
+            return View();
+
+        }
+
+
+
+
+
+        public ActionResult Work_plan_Details(string Track, int? page)
+        {
+            ViewBag.Track= Track;
+            return View(db.workplans.Where(c=>c.Track ==Track).ToList().ToPagedList(page ?? 1, 6));
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+            public ActionResult Budget_view(string Track)
         {
             var WorkPlan = db.workplans.Where(c => c.Track == Track).FirstOrDefault();
 
@@ -103,10 +136,12 @@ namespace Ishop.Controllers
             {
                 db.workplans.Add(workplan);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                TempData["msg"] = "Track data added  successfully ";
+                
             }
 
-            return View(workplan);
+            return RedirectToAction("Work_plan_Details", "Workplan", new { Track = workplan.Track });
         }
 
         // GET: Workplan/Edit/5
@@ -135,10 +170,12 @@ namespace Ishop.Controllers
             {
                 db.Entry(workplan).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["msg"] = "Data updated  successfully ";
-                return RedirectToAction("Index");
+                
+                TempData["msg"] = "Track updated  successfully ";
+
             }
-            return View(workplan);
+
+            return RedirectToAction("Work_plan_Details", "Workplan", new { Track = workplan.Track });
         }
 
         // GET: Workplan/Delete/5

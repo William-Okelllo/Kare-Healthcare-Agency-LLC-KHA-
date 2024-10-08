@@ -31,6 +31,9 @@ namespace Ishop
             Database.SetInitializer<benitem_context>(null);
             Database.SetInitializer<Grant_context>(null);
             Database.SetInitializer<Exp_context>(null);
+            Database.SetInitializer<Rpt_context>(null);
+
+            
         }
     }
 }

@@ -430,6 +430,7 @@
     <Compile Include="Controllers\ReportGroupController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\RptsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
@@ -8031,6 +8032,13 @@
     <Content Include="Views\Exps\Create.cshtml" />
     <Content Include="Views\Exps\Details.cshtml" />
     <Content Include="Views\Exps\Edit.cshtml" />
+    <Content Include="Views\Workplan\Work_plan_Details.cshtml" />
+    <Content Include="Views\Rpts\Create.cshtml" />
+    <Content Include="Views\Rpts\Delete.cshtml" />
+    <Content Include="Views\Rpts\Details.cshtml" />
+    <Content Include="Views\Rpts\Edit.cshtml" />
+    <Content Include="Views\Rpts\Index.cshtml" />
+    <Content Include="Views\Workplan\WorkPlan_Reports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

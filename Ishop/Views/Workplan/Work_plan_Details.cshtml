@@ -1,0 +1,275 @@
+﻿﻿@model PagedList.IPagedList<IShop.Core.Workplan>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+    }
+
+    .form-rounded3 {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .form-rounded2 {
+        border-radius: 0.5rem;
+        width: 14%;
+        border-color: white;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
+
+
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #53085B; color: white; ">
+        <h3 class="card-title" style="color:white;text-align:center">
+            <i class="fa fa-table"></i>
+            @ViewBag.Track
+        </h3>
+        <div style="text-align: right; color: white ">
+
+
+
+
+            @using (Html.BeginForm("Index", "Workplan", FormMethod.Get))
+            {
+
+                
+
+
+                @Html.ActionLink("Add WorkPlan Tasks ", "Create", "WorkPlan", null, new { @class = "btn btn-sm btn-warning btn " })
+            }
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    @if (TempData["Msg"] != null)
+    {<div class="row">
+            <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @TempData["Msg"]
+            </div>
+        </div>
+    }
+
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+
+
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+            <thead>
+                <tr style="color:white">
+
+                    <th style="background-color: #53085B; font-size: medium; "> Track</th>
+
+                    <th style="background-color: #53085B; font-size: medium; ">Activity</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Report</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+
+                        <td style="background-color: white;">
+                            <span class="badge badge-primary"><i class="fa fa-table text-white"></i></span>  <b>@item.Track</b>
+                            <div class="dropdown-divider"></div>
+                            <span class="badge badge-warning">  <b>GOAL</b> </span>  @item.Goal
+                        </td>
+                        <td style="background-color: white;">
+                            <span class="badge badge-primary"><i class="fa fa-table"></i></span>  <b>@item.Activities</b>
+                            <button type="button" class="btn btn-xs btn-outline-warning set-reg-no-btn"
+                                    data-toggle="modal" data-target="#exampleModalCenter"
+                                    data-object-id="@item.Guide">
+                                <i class="fa fa-comment-dots "></i> View Activity
+                            </button>
+
+
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+                            <!-- Your script goes here -->
+                            <script>
+                                $(document).ready(function () {
+                                    var objectId; // Variable to store the object ID
+                                    var objectId2;
+                                    // Capture object ID when "Set Reg No" button is clicked
+                                    $('.set-reg-no-btn').click(function () {
+                                        objectId = $(this).data('object-id');
+                                        objectId2 = $(this).data('object-id2');
+                                    });
+
+                                    // Triggered when the modal is about to be shown
+                                    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+                                        // Update the "Account Id" input in the modal with the captured object ID
+                                        $('#AccountId').val(objectId);
+                                        $('#staff').val(objectId2);
+                                    });
+
+                                    // Triggered when the modal is hidden
+                                    $('#exampleModalCenter').on('hidden.bs.modal', function (event) {
+                                        // Clear the objectId when the modal is closed
+                                        objectId = null;
+                                    });
+                                });
+                            </script>
+
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius: 14px ">
+                                    <div class="modal-content" style="border-radius: 14px ">
+                                        <div class="modal-header" style="background-color: #5d5d5d; color: white; border-radius: 14px ">
+                                            <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-bookmark text-warning"></i>   Activity Details</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body ">
+
+                                            <h6 style="color:navy"><i class="fa fa-comment-dots text-primary"></i> <b>Activity </b></h6>
+                                            <textarea class="form-control form-control-sm mx-auto" id="AccountId" placeholder="Account No" readonly style="width: 100%; height: 400px;"></textarea>
+
+
+
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dropdown-divider"></div>
+                            <span class="badge badge-warning"><i class="fa fa-users text-black"></i> Respondent</span> <small>        <b> @item.Respondent</b></small>
+                        </td>
+                        <td style="background-color: white;">
+                          <small>Report Add</small>
+                            <div class="dropdown-divider"></div>
+                            <a href="@Url.Action("Create", "rpts", new { id = item.Id })" class="btn btn-sm btn-success">
+                                <i class="fa fa-chart-line"></i> Post Report
+                            </a>
+                        </td>
+
+                        <td style="background-color: white;">
+
+
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-hashtag"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Edit", "WorkPlan", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-plus-circle text-warning"></i> Update/Edit
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("WorkPlan_Reports", "WorkPlan", new { Id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-chart-line text-success"></i> View Report
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Delete", "WorkPlan", new { id = item.Id})" class="dropdown-item">
+                                        <i class="fa fa-times-circle text-danger"></i> Drop Workplan
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                        </td>
+
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <!-- Modal to display the result -->
+
+
+
+
+        <style>
+            .ul.pagination {
+                display: inline-block;
+                padding: 1;
+                margin: 1;
+                border-radius: 0.5rem;
+            }
+
+            ul.pagination li {
+                display: inline;
+            }
+
+                ul.pagination li a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    transition: background-color;
+                    background-color: #ddd;
+                    border-color: white;
+                    border-radius: 0.5rem;
+                }
+
+                    ul.pagination li a.active {
+                        background-color: dodgerblue;
+                        color: white;
+                    }
+
+                    ul.pagination li a:hover:not(.active) {
+                        background-color: dodgerblue;
+                        border-radius: 0.5rem;
+                    }
+        </style>
+        <div id="container" style="text-align:left">
+
+            <div class="pagination" style="text-align:left">
+                @Html.PagedListPager(Model, page => Url.Action("Work_plan_Details", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
+              , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>

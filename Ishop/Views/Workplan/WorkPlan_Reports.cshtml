@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "WorkPlan_Reports";
+}
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.84);">
+
+
+
+
+    <div class="card-body">
+
+
+
+
+
+        <div style="text-align:center">
+
+            <h3 style="color:black">
+                <i class="fa fa-chart-line text-success"></i>
+                WorkPlan Reports
+            </h3>
+            <h5>
+                <span class="badge badge-warning"><b>Track</b></span> : @ViewBag.WorkP.Track   <b style="font-size:x-large">|</b>
+                <span class="badge badge-warning"><b>Activity</b></span> : @ViewBag.WorkP.Activities <b style="font-size:x-large">|</b>
+                <span class="badge badge-warning"><b>Goal</b></span> : @ViewBag.WorkP.Goal
+            </h5>
+
+
+        </div>
+        <a href="@Url.Action("Work_plan_Details", "Workplan", new { Track =ViewBag.WorkP.Track })" class="btn btn btn-warning">
+            <i class="fa fa-backward "></i> Back to @ViewBag.WorkP.Track
+        </a>
+        <b></b>
+        <a href="@Url.Action("Create", "Rpts", new { id =ViewBag.WorkP.Id })" class="btn btn btn-success">
+            <i class="fa fa-pen-nib"></i> Add Report
+        </a>
+        <div class="dropdown-divider"></div>
+        <div class="row">
+            @foreach (var item in ViewBag.Repos)
+            {
+
+
+
+                <div class="col-lg-4 col-12" style="border-radius: 20px">
+                    <!-- small box -->
+                    <div class="small-box bg-dark" style="border-radius: 20px">
+                        <div class="inner">
+                            <h5><i class="fa fa-file-invoice"></i>  Report</h5>
+                            <h7>
+                                <span class="badge badge-warning"><b>AddedOn</b></span> @item.AddedOn.ToString("dd-MMM-yyyy")
+                                <span class="badge badge-warning"><b>Staff</b></span>  @item.Staff
+                            </h7>
+                            <div class="dropdown-divider"></div>
+
+                            @{
+                                string message2 = item.Report.Replace("\n", "<br>");
+                                string pattern2 = @"(https?://[^\s]+)";
+                                string replacedMessage2 = System.Text.RegularExpressions.Regex.Replace(message2, pattern2, "<a href=\"$1\" target=\"_blank\">$1</a>");
+                            }
+
+                            <p class="limited-lines">@Html.Raw(replacedMessage2)</p>
+
+                            <style>
+                                .limited-lines {
+                                    display: -webkit-box;
+                                    -webkit-line-clamp: 5; /* Limit to 5 lines */
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    max-height: calc(1.2em * 5); /* Approximate line height multiplied by 5 */
+                                }
+                            </style>
+
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-chart-line"></i>
+                        </div>
+                        <div class="dropdown btn-block">
+                            <button class="btn btn-warning btn-lg btn-sm btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:10px">
+                                <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+
+                                <a href="@Url.Action("Edit", "Rpts", new { id = item.Id })" class="dropdown-item">
+                                    <i class="fa fa-pen-nib text-warning"></i> Update/Edit Report
+                                </a>
+                                <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete the item')) { window.location.href = '@Url.Action("Delete", "Rpts", new { id = item.Id })'; }">
+                                    <i class="fa fa-times-circle text-danger"></i> Delete Report
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

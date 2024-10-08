@@ -107,35 +107,22 @@ namespace Ishop.Controllers
             {
                 db.Entry(perform).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                TempData["msg"] = "Data updated successfully ";
+                return RedirectToAction("Option");
             }
             return View(perform);
         }
 
         // GET: Performs/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public  ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Perform perform = await db.performs.FindAsync(id);
-            if (perform == null)
-            {
-                return HttpNotFound();
-            }
-            return View(perform);
-        }
-
-        // POST: Performs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Perform perform = await db.performs.FindAsync(id);
+            
+            Perform perform = db.performs.Find(id);
             db.performs.Remove(perform);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+             db.SaveChanges();
+            TempData["msg"] = "Data deleted successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)
