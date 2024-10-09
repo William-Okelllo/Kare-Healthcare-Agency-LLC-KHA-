@@ -107,28 +107,15 @@ namespace Ishop.Controllers
         // GET: Rpts/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Rpt rpt = db.rpts.Find(id);
-            if (rpt == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rpt);
-        }
-
-        // POST: Rpts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
+            
             Rpt rpt = db.rpts.Find(id);
             db.rpts.Remove(rpt);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["msg"] = "Data deleted successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
         }
+
 
         protected override void Dispose(bool disposing)
         {
