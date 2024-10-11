@@ -26,5 +26,34 @@ namespace IShop.Core
 
         [Display(Name = "Admission No")]
         public string Admin_No { get; set; }
+
+
+
+        [Display(Name = "Arrival Year")]
+        public int Year { get; set; }
+
+
+        [Display(Name = "From Which Country")]
+        public string Country { get; set; }
+
+
+        [Display(Name = "Social security?")]
+        public bool Social_security { get; set; }
+
+
+        [Display(Name = "Work Permit?")]
+        public bool Work_Permit { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

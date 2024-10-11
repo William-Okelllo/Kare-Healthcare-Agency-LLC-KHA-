@@ -32,8 +32,10 @@ namespace Ishop
             Database.SetInitializer<Grant_context>(null);
             Database.SetInitializer<Exp_context>(null);
             Database.SetInitializer<Rpt_context>(null);
+            Database.SetInitializer<Admission_context>(null);
 
-            
+
+
         }
     }
 }

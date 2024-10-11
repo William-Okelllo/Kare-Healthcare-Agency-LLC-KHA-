@@ -1,9 +1,10 @@
-﻿@model PagedList.IPagedList<IShop.Core.Benef>
+﻿@model PagedList.IPagedList<IShop.Core.Admission>
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Beneficiaries";
+    ViewBag.Title = " Beneficiaries list";
 }
+
 
 
 
@@ -48,27 +49,19 @@
 </script>
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
-
     <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #53085B; color: white; ">
         <h3 class="card-title" style="color:white;text-align:center">
-            <i class="fa fa-table"></i>
-            Beneficiaries
+            <i class="fa fa-users"></i>
+            Beneficiaries list
         </h3>
-        <div style="text-align: right; color: white ">
-            @using (Html.BeginForm("Index", "Beneficiaries", FormMethod.Get))
-            {
 
-                <a style="font-family: Calibri">  <span class="badge badge-warning"><medium><i class="fa fa-users text-white "></i>   </medium> </span>  Name</a>
-                @Html.TextBox("search", null, new { @class = "form-rounded2", @PlaceHolder = "provide the name" })
-                <button type="submit" value="search" class="btn btn-sm btn-warning">
-                    <i class="fas fa-search"></i>
-                </button>
+        
 
-                @Html.ActionLink(" Add Beneficiaries", "Add", "Beneficiaries", null, new { @class = "btn btn-sm btn-default btn" })
 
-            }
-        </div>
+
     </div>
+
+
 
     @if (TempData["Msg"] != null)
     {<div class="row">
@@ -98,12 +91,12 @@
             <thead>
                 <tr style="color:white">
 
-                    <th style="background-color: #53085B; font-size: medium; "> Name</th>
+                    <th style="background-color: #53085B; font-size: medium; "> Admission No</th>
+                    <th style="background-color: #53085B; font-size: medium; "> Date</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Name</th>
+                    <th style="background-color: #53085B; font-size: medium; ">email</th>
                     <th style="background-color: #53085B; font-size: medium; ">Contact</th>
-                    <th style="background-color: #53085B; font-size: medium; ">Email</th>
-                    <th style="background-color: #53085B; font-size: medium; ">Country</th>
-                    <th style="background-color: #53085B; font-size: medium; "> Items</th>
-
+                    <th style="background-color: #53085B; font-size: medium; ">Gender</th>
                     <th style="background-color: #53085B; font-size: medium; ">Action</th>
                 </tr>
             </thead>
@@ -114,46 +107,36 @@
 
 
                         <td style="background-color: white;">
-                            <i class="fa fa-user-circle text-light-purple"></i>  <b>@item.Name</b>
-
-                        </td>
-
-                        
-                        <td style="background-color: white;">
-                            <i class="fa fa-mobile text-gray"></i> @item.Contacts
+                            <b style="font-size:large"><i class="fa fa-user-tag text-warning"></i>  @item.Admin_No</b>
                         </td>
                         <td style="background-color: white;">
-                            <i class="fa fa-envelope text-secondary"></i> @item.Email
+                            <span class="badge badge-warning"> <i class="fa fa-calendar-day text-black"></i></span>  @item.Date.ToString("dd-MMM-yyyy")
                         </td>
+                        <td style="background-color: white;"><i class="fa fa-user-circle text-orange"></i> <b> @item.Name</b></td>
+                        <td style="background-color: white;"><i class="fa fa-envelope text-orange"></i>   <small style="color:blue">@item.Email</small></td>
+                        <td style="background-color: white;"><i class="fa fa-mobile text-orange"></i>    @item.Contacts</td>
                         <td style="background-color: white;">
-                            <i class="fa fa-map-signs text-warning"></i>  <b>@item.Country</b>
-                        </td>
-                        
-                        <td style="background-color: white;">
-                            @if (item.Total <= 0)
+                            @if (item.Gender == "Female")
                             {
-                                <p style="color:gray"><i class="fa fa-spin fa-circle-notch text-gray"></i> No Beneficiaries added</p>
-
+                                <medium> <i class="fa fa-female text-warning"></i> <b> @item.Gender</b> </medium>
                             }
                             else
-                            {
-                                <b>@item.Total.ToString("#,##0.00") /=</b>
-}
+                            {<medium> <i class="fa fa-male text-warning"></i>  <b>@item.Gender</b> </medium>}
+
                         </td>
                         <td style="background-color: white;">
+
+
                             <div class="btn-group dropdown">
                                 <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-hashtag"></i>  . Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
                                     <a href="@Url.Action("Details", "Beneficiaries", new { id = item.Id })" class="dropdown-item">
                                         <i class="fa fa-chart-line text-warning"></i> View Beneficiaries
                                     </a>
-                                   
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this ?')) { window.location.href = '@Url.Action("Delete", "Beneficiaries", new { id = item.Id })'; }">
-                                        <i class="fas fa-times text-danger"></i> Delete Data
-                                    </a>
+
                                     <script>
                                         $(function () {
                                             $('#Delete_User').click(function () {
@@ -168,6 +151,8 @@
 
                                 </div>
                             </div>
+
+
                         </td>
 
 
@@ -217,7 +202,7 @@
         <div id="container" style="text-align:left">
 
             <div class="pagination" style="text-align:left">
-                @Html.PagedListPager(Model, page => Url.Action("Mine", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
               , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
             </div>
         </div>

@@ -88,6 +88,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
         <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
             <div class="modal-dialog  modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -168,7 +177,60 @@ $(document).ready(function () {
                                 <b style="color:white">View</b> <i class="fas fa-arrow-circle-right text-white"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                               
+
+
+
+
+
+
+
+
+
+
+                                <script>
+$(document).ready(function () {
+    // Handle the Edit button click event for any item
+    $('a[id^="editButton-"]').click(function (e) {
+        e.preventDefault(); // Prevent the default link behavior
+
+        // Get the unique item ID from the data-id attribute
+        var id = $(this).data('id');
+
+        // Make an AJAX GET request to load the Edit view
+        $.ajax({
+            url: '@Url.Action("Edit", "Items")',  // URL of the Edit action
+            type: 'GET',
+            data: { id: id },  // Pass the unique item ID
+            success: function (data) {
+                // Load the returned data into the modal body
+                $('#createModal .modal-body').html(data);
+                // Show the modal
+                $('#createModal').modal('show');
+            },
+            error: function () {
+                console.log('Failed to load the Edit form.');
+            }
+        });
+    });
+
+    // Handle the form submission (if needed)
+    $(document).on('submit', '#editForm', function (event) {
+        event.preventDefault();  // Prevent default form submission
+
+        // You can add AJAX form submission logic here, if required.
+    });
+});
+                                </script>
+
+
+
+
+
+
+                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#createModal" id="editButton-@item.Id" data-id="@item.Id">
+                                    <i class="fa fa-pen-nib text-secondary"></i> Edit Item
+                                </a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete the item')) { window.location.href = '@Url.Action("Delete", "items", new { id = item.Id })'; }">
                                     <i class="fa fa-times-circle text-danger"></i> Delete item
                                 </a>

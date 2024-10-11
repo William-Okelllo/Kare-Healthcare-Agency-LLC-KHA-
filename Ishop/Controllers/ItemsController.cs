@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using PagedList;
+using Ishop.Models;
 
 namespace Ishop.Controllers
 {
@@ -76,12 +77,55 @@ namespace Ishop.Controllers
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
         }
-    
 
-        // GET: Items/Edit/5
-      
 
-        // GET: Items/Delete/5
+
+
+        public ActionResult Edit(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Items items = db.items.Find(id);
+            if (items == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(items);
+        }
+
+        // POST: Grants/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Amount")] Items items)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(items).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+            TempData["msg"] = "Item updated successfully ";
+            string returnUrl = Request.UrlReferrer.ToString();
+            return Redirect(returnUrl);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         public ActionResult Delete(int? id)
         {
            

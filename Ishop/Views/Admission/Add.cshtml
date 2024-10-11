@@ -102,7 +102,7 @@
                    })
 
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label><i class=" fa fa-user-tag text-purple"></i>   @Html.LabelFor(model => model.Admin_No)</label>
                         @Html.EditorFor(model => model.Admin_No, new
                    {
@@ -135,17 +135,58 @@
 
                         }@Html.DropDownListFor(model => model.Gender, b, "---Select Gender---", new { @class = "form-control form-control-sm", @required = "required", })
                     </div>
+                    <div class="form-group col-md-3">
+                        <label><i class=" fa fa-map text-purple"></i>   @Html.LabelFor(model => model.Country)</label>
+                        @Html.DropDownList("Country", ViewBag.CountriesList as SelectList, "Select a country", new { @class = "form-control" })
 
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class=" fa fa-user-tag text-purple"></i>   @Html.LabelFor(model => model.Year)</label>
+                        @Html.DropDownList("Year", ViewBag.YearsList as SelectList, "Select a year", new { @class = "form-control" })
+
+
+                    </div>
                     <script type="text/javascript">
                         $(function () {
-
+                            $("#Year").chosen();
                             $("#Gender").chosen();
+                            $("#Country").chosen();
                             $("#Activities").chosen();
 
                         });
                     </script>
                 </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <h6 class="form-check" style="color:midnightblue;">
 
+                            @Html.EditorFor(model => model.Social_security, new
+                       {
+                           htmlAttributes = new
+                           { @class = "coupon_question", onclick = "Geeeee()" }
+                       })
+                            <label>@Html.LabelFor(model => model.Social_security)</label>
+
+
+
+                        </h6>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <h6 class="form-check" style="color:midnightblue;">
+
+                            @Html.EditorFor(model => model.Work_Permit, new
+                       {
+                           htmlAttributes = new
+                           { @class = "coupon_question", onclick = "Geeeee()" }
+                       })
+                            <label>@Html.LabelFor(model => model.Work_Permit)</label>
+
+
+
+                        </h6>
+                    </div>
+                </div>
 
                 <div class="dropdown-divider"></div>
 

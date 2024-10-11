@@ -8014,7 +8014,6 @@
     <Content Include="Views\Indirect\Details.cshtml" />
     <Content Include="Views\Indirect\Edit.cshtml" />
     <Content Include="Views\Indirect\Index.cshtml" />
-    <Content Include="Views\Immigrants\Add.cshtml" />
     <Content Include="Views\Immigrants\Details.cshtml" />
     <Content Include="Views\Immigrants\Edit.cshtml" />
     <Content Include="Views\Immigrants\Index.cshtml" />
@@ -8039,6 +8038,7 @@
     <Content Include="Views\Rpts\Edit.cshtml" />
     <Content Include="Views\Rpts\Index.cshtml" />
     <Content Include="Views\Workplan\WorkPlan_Reports.cshtml" />
+    <Content Include="Views\Items\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

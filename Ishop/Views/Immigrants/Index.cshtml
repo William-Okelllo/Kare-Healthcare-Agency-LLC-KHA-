@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<IShop.Core.Immigrant>
+﻿@model PagedList.IPagedList<IShop.Core.Admission>
 @using PagedList.Mvc;
 
 @{
@@ -74,7 +74,6 @@
                     <i class="fas fa-search"></i>
                 </button>
 
-                @Html.ActionLink("New American Add ", "Add", "Immigrants", null, new { @class = "btn btn-sm btn-default btn" })
 
             }
         </div>
@@ -170,7 +169,7 @@
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
                                     <div class="dropdown-divider"></div>
-                                     <a href="@Url.Action("Edit", "Immigrants", new { id = item.Id })" class="dropdown-item">
+                                     <a href="@Url.Action("Edit", "Admission", new { id = item.Id })" class="dropdown-item">
                                     <i class="fa fa-pen-nib text-warning"></i> Edit/Update
                                      </a>
                                     <div class="dropdown-divider"></div>

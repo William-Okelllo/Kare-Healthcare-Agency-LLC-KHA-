@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Admissions.rdl" />
+    <Report Include="Direct_cost.rdl" />
     <Report Include="Performance.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

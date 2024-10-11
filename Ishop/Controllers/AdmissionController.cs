@@ -11,6 +11,8 @@ using IShop.Core;
 using Ishop.Infa;
 using PagedList;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 namespace Ishop.Controllers
 {
@@ -18,7 +20,7 @@ namespace Ishop.Controllers
     public class AdmissionController : Controller
     {
         private Admission_context db = new Admission_context();
-
+        private static readonly HttpClient client = new HttpClient();
         // GET: Admission
         public ActionResult Index(string searchBy, string search, int? page)
         {
@@ -55,8 +57,56 @@ namespace Ishop.Controllers
         }
 
         // GET: Admission/Create
-        public ActionResult Add()
+        public async Task<ActionResult> Add()
         {
+            string apiUrl = "https://restcountries.com/v3.1/all";
+            List<string> countryNames = new List<string>();
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    JArray countries = JArray.Parse(responseData);
+
+                    // Extract country names
+                    foreach (var country in countries)
+                    {
+                        var countryName = country["name"]["common"].ToString();
+                        countryNames.Add(countryName);
+                    }
+
+                    // Sort the list of country names alphabetically
+                    countryNames.Sort();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during API call
+                Console.WriteLine("Error fetching countries: " + ex.Message);
+            }
+
+            // Passing the list of countries to the ViewBag
+            ViewBag.CountriesList = new SelectList(countryNames);
+
+
+
+
+
+
+            List<int> years = new List<int>();
+            int startYear = 2000;
+            int currentYear = DateTime.Now.Year;
+
+            for (int i = startYear; i <= currentYear; i++)
+            {
+                years.Add(i);
+            }
+
+            // Passing the list of years to the ViewBag
+            ViewBag.YearsList = new SelectList(years);
             return View();
         }
 
@@ -65,8 +115,14 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No")] Admission admission)
+        public async Task<ActionResult> Add([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Country,Social_security,Work_Permit,Date,Year")] Admission admission)
         {
+
+
+
+
+
+
             if (ModelState.IsValid)
             {
                 db.admissions.Add(admission);
@@ -118,6 +174,54 @@ namespace Ishop.Controllers
         // GET: Admission/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            string apiUrl = "https://restcountries.com/v3.1/all";
+            List<string> countryNames = new List<string>();
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    JArray countries = JArray.Parse(responseData);
+
+                    // Extract country names
+                    foreach (var country in countries)
+                    {
+                        var countryName = country["name"]["common"].ToString();
+                        countryNames.Add(countryName);
+                    }
+
+                    // Sort the list of country names alphabetically
+                    countryNames.Sort();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during API call
+                Console.WriteLine("Error fetching countries: " + ex.Message);
+            }
+
+            // Passing the list of countries to the ViewBag
+            ViewBag.CountriesList = new SelectList(countryNames);
+
+
+
+
+
+
+            List<int> years = new List<int>();
+            int startYear = 2000;
+            int currentYear = DateTime.Now.Year;
+
+            for (int i = startYear; i <= currentYear; i++)
+            {
+                years.Add(i);
+            }
+
+            // Passing the list of years to the ViewBag
+            ViewBag.YearsList = new SelectList(years);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -135,12 +239,13 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No")] Admission admission)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Country,Social_security,Work_Permit,Date,Year")] Admission admission)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(admission).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                TempData["msg"] = "Admission updated successfully ";
                 return RedirectToAction("Index");
             }
             return View(admission);
@@ -153,7 +258,7 @@ namespace Ishop.Controllers
             Admission admission =  db.admissions.Find(id);
             db.admissions.Remove(admission);
              db.SaveChanges();
-            TempData["msg"] = "Student deleted successfully ";
+            TempData["msg"] = "Admission deleted successfully ";
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);
         }

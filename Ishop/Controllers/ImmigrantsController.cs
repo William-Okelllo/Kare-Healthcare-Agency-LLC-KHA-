@@ -19,6 +19,7 @@ namespace Ishop.Controllers
     public class ImmigrantsController : Controller
     {
         private Immigrant_context db = new Immigrant_context();
+        private Admission_context dbb = new Admission_context();
         private static readonly HttpClient client = new HttpClient();
         // GET: Immigrants
         public ActionResult Index(string searchBy, string search, int? page)
@@ -27,12 +28,12 @@ namespace Ishop.Controllers
 
             if (!(search == null))
             {
-                return View(db.immigrants.OrderByDescending(p => p.Id).Where(c => c.Name == search).ToList().ToPagedList(page ?? 1, 6));
+                return View(dbb.admissions.OrderByDescending(p => p.Id).Where(c => c.Name == search).ToList().ToPagedList(page ?? 1, 6));
 
             }
             else
             {
-                return View(db.immigrants.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 6));
+                return View(dbb.admissions.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 6));
 
 
             }
