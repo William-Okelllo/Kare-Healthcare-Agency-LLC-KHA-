@@ -22,8 +22,7 @@ namespace IShop.Core
         [Display(Name = "Charge-Out Rate")]
         public decimal Rate { get; set; }
 
-        [Display(Name = "Time-Cost Rate")]
-        public decimal Time_Rate { get; set; }
+        
 
     }
 }

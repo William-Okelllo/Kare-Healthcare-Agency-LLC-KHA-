@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "GetTimesheetData";
+}
+<style>
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+
+    table {
+        border-collapse: collapse;
+        overflow: visible;
+        border-radius: 4px
+    }
+
+    .form-rounded {
+        border-radius: 0.5rem;
+        width: 20%;
+        border-color: white;
+    }
+
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+</style>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover text-nowrap  table-condensed table-striped table-hover sortable curved-table">
+
+
+        <thead>
+            <tr style="color:black">
+
+                <th><i class="fa fa-clock text-warning"></i> Hours Worked</th>
+                <th><i class="fa fa-exchange-alt text-secondary"></i>   Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var timesheetData in Model)
+            {
+                <tr>
+                    <td><b>@timesheetData.Hours <small>Hrs</small></b></td>
+                    <td style="background-color: white;">
+
+
+                        <div class="btn-group dropdown">
+                            <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-hashtag"></i>  . Action
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <div class="dropdown-divider"></div>
+                                <a href="@Url.Action("Edit", "Sheet", new { id = timesheetData.Id })" class="dropdown-item">
+                                    <i class="fa fa-plus-circle text-warning"></i> Update Timesheet
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="@Url.Action("Delete", "Sheet", new { Id = timesheetData.Id})" class="dropdown-item">
+                                    <i class="fa fa-question-circle text-success"></i> Drop Timesheet
+                                </a>
+
+
+                            </div>
+                        </div>
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+

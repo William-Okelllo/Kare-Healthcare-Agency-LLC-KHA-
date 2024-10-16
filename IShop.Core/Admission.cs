@@ -28,26 +28,33 @@ namespace IShop.Core
         public string Admin_No { get; set; }
 
 
-
-        [Display(Name = "Arrival Year")]
-        public int Year { get; set; }
-
-
-        [Display(Name = "From Which Country")]
-        public string Country { get; set; }
+        [Display(Name = "Address (street address, city, zip code)")]
+        public string Address { get; set; }
 
 
-        [Display(Name = "Social security?")]
-        public bool Social_security { get; set; }
+        [Display(Name = "Highest Education level")]
+        public string Level_Education { get; set; }
 
-
-        [Display(Name = "Work Permit?")]
-        public bool Work_Permit { get; set; }
+        [Display(Name = "Employment Status ")]
+        public string Employement_Status { get; set; }
 
 
 
+        [Display(Name = "Name ")]
+        public string Em_Name { get; set; }
+
+        [Display(Name = "Phone ")]
+        public string Em_Phone { get; set; }
+
+        [Display(Name = "Mail ")]
+        public string Em_Mail { get; set; }
+
+        [Display(Name = "Can We text? ")]
+        public bool Text { get; set; }
 
 
+        [Display(Name = "Comments about Student ")]
+        public string Comments { get; set; }
 
 
 

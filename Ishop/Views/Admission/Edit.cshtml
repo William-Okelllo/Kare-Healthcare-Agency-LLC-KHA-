@@ -23,7 +23,7 @@
 </script>
 <br />
 <div class="col d-flex justify-content-center">
-    <div class="col-md-10 col-sm-12 col-12">
+    <div class="col-md-11 col-sm-12 col-12">
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
 
             <div class="card-body" style="background-color: white;border-radius: 24px;">
@@ -34,189 +34,297 @@
                     @Html.AntiForgeryToken()
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <form>
+                    <form>
 
 
 
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Date)</label>
-                        @Html.EditorFor(model => model.Date, new
-                   {
-                       htmlAttributes = new
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Date)</label>
+                                @Html.EditorFor(model => model.Date, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm ",
+                                   @placeholder = "Admission Date",
+                                   id = "datepicker",
+
+                                   @required = "required",
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-user-tag text-purple"></i>   @Html.LabelFor(model => model.Admin_No)</label>
+                                @Html.EditorFor(model => model.Admin_No, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Admin_No",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-user-graduate text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
+                                @Html.EditorFor(model => model.Name, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Name",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-envelope text-purple"></i>   @Html.LabelFor(model => model.Email)</label>
+                                @Html.EditorFor(model => model.Email, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Email",
+
+
+                               }
+                           })
+
+                            </div>
+
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-mobile text-purple"></i>   @Html.LabelFor(model => model.Contacts)</label>
+                                @Html.EditorFor(model => model.Contacts, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Contacts",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+
+                            <div class="form-group col-md-2" id="other" style="display:nosne">
+                                <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Gender)</label>
+                                @{
+                                    List<SelectListItem> b = new List<SelectListItem>();
+                                    b.Add(new SelectListItem
+                                    {
+                                        Text = "Male",
+                                        Value = "Male",
+                                    });
+                                    b.Add(new SelectListItem
+                                    {
+                                        Text = "Female",
+                                        Value = "Female",
+                                    });
+
+
+                                }@Html.DropDownListFor(model => model.Gender, b, "---Select Gender---", new { @class = "form-control form-control-sm", @required = "required", })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-graduation-cap text-purple"></i>   @Html.LabelFor(model => model.Level_Education)</label>
+                                @Html.EditorFor(model => model.Level_Education, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "High level of Education",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3" id="other" style="display:nosne">
+                                <label><i class="fa fa-book-reader text-purple"></i>   @Html.LabelFor(model => model.Employement_Status)</label>
+                                @{
+                                    List<SelectListItem> v = new List<SelectListItem>();
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "FT 32+",
+                                        Value = "FT 32+",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "PT 20-31",
+                                        Value = "PT 20-31",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "PT <20",
+                                        Value = "PT <20",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "Self Employed",
+                                        Value = "Self Employed",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "Unemployed",
+                                        Value = "Unemployed",
+                                    });
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "Student",
+                                        Value = "Student",
+                                    });
+
+
+
+                                }@Html.DropDownListFor(model => model.Employement_Status, v, "---Employement status---", new { @class = "form-control form-control-sm", @required = "required", })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-sms text-purple"></i>   @Html.LabelFor(model => model.Text)</label>
+                                @Html.EditorFor(model => model.Text, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Text",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><i class=" fa fa-map-marker text-purple"></i>   @Html.LabelFor(model => model.Address)</label>
+                                @Html.EditorFor(model => model.Address, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Address",
+                                   @Required = true,
+
+
+                               }
+                           })
+
+                            </div>
+                        </div>
+                        <h6>Emergency Contacts</h6>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-user-tag text-purple"></i>   @Html.LabelFor(model => model.Em_Name)</label>
+                                @Html.EditorFor(model => model.Em_Name, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Name",
+                                   @Required = true,
+
+
+                               }
+                           })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-mobile text-purple"></i>   @Html.LabelFor(model => model.Em_Phone)</label>
+                                @Html.EditorFor(model => model.Em_Phone, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Phone No",
+                                   @Required = true,
+
+
+                               }
+                           })
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-envelope text-purple"></i>   @Html.LabelFor(model => model.Em_Mail)</label>
+                                @Html.EditorFor(model => model.Em_Mail, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Email Address",
+                                   @Required = true,
+
+
+                               }
+                           })
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Comments) </label>
+                        <div class="form-row">
+
+                            @Html.TextAreaFor(model => model.Comments, 4, 70, htmlAttributes: new
                        {
-                           @class = "form-control form-control-sm ",
-                           @placeholder = "Admission Date",
-                           id = "datepicker",
-
-                           @required = "required",
-                       }
-                   })
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label><i class=" fa fa-user-graduate text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
-                        @Html.EditorFor(model => model.Name, new
-                   {
-                       htmlAttributes = new
-                       {
-                           @class = "form-control form-control-sm",
-                           @Placeholder = "Name",
+                           id = "Comments", // Make sure the ID matches the one in getElementById
+                           style = "width: 100%; max-width:100%;",
+                           @placeholder = "Comments about the students",
+                           @autofocus = "",
                            @Required = true,
-
-
-                       }
-                   })
-
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label><i class=" fa fa-envelope text-purple"></i>   @Html.LabelFor(model => model.Email)</label>
-                        @Html.EditorFor(model => model.Email, new
-                   {
-                       htmlAttributes = new
-                       {
-                           @class = "form-control form-control-sm",
-                           @Placeholder = "Email",
-
-
-                       }
-                   })
-
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label><i class=" fa fa-mobile text-purple"></i>   @Html.LabelFor(model => model.Contacts)</label>
-                        @Html.EditorFor(model => model.Contacts, new
-                   {
-                       htmlAttributes = new
-                       {
-                           @class = "form-control form-control-sm",
-                           @Placeholder = "Contacts",
-                           @Required = true,
-
-
-                       }
-                   })
-
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label><i class=" fa fa-user-tag text-purple"></i>   @Html.LabelFor(model => model.Admin_No)</label>
-                        @Html.EditorFor(model => model.Admin_No, new
-                   {
-                       htmlAttributes = new
-                       {
-                           @class = "form-control form-control-sm",
-                           @Placeholder = "Admin_No",
-                           @Required = true,
-
-
-                       }
-                   })
-
-                    </div>
-                    <div class="form-group col-md-2" id="other" style="display:nosne">
-                        <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Gender)</label>
-                        @{
-                            List<SelectListItem> b = new List<SelectListItem>();
-                            b.Add(new SelectListItem
-                            {
-                                Text = "Male",
-                                Value = "Male",
-                            });
-                            b.Add(new SelectListItem
-                            {
-                                Text = "Female",
-                                Value = "Female",
-                            });
-
-
-                        }@Html.DropDownListFor(model => model.Gender, b, "---Select Gender---", new { @class = "form-control form-control-sm", @required = "required", })
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label><i class=" fa fa-map text-purple"></i>   @Html.LabelFor(model => model.Country)</label>
-                        @Html.DropDownList("Country", ViewBag.CountriesList as SelectList, "Select a country", new { @class = "form-control" })
-
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label><i class=" fa fa-user-tag text-purple"></i>   @Html.LabelFor(model => model.Year)</label>
-                        @Html.DropDownList("Year", ViewBag.YearsList as SelectList, "Select a year", new { @class = "form-control" })
-
-
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $("#Year").chosen();
-                            $("#Gender").chosen();
-                            $("#Country").chosen();
-                            $("#Activities").chosen();
-
-                        });
-                    </script>
-                </div>
-
-                <script type="text/javascript">
-                    $(function () {
-
-                        $("#Gender").chosen();
-                        $("#Activities").chosen();
-
-                    });
-                </script>
-                <div class="dropdown-divider"></div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <h6 class="form-check" style="color:midnightblue;">
-
-                            @Html.EditorFor(model => model.Social_security, new
-                       {
-                           htmlAttributes = new
-                           { @class = "coupon_question", onclick = "Geeeee()" }
+                           @class = "form-control form-rounded2",
+                           @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
                        })
-                            <label>@Html.LabelFor(model => model.Social_security)</label>
+                            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
 
+                            <script>
+                                document.getElementById("Comments").addEventListener("paste", function (event) {
+                                    // Prevent the default paste behavior
+                                    event.preventDefault();
 
+                                    // Get the pasted content as plain text
+                                    var text = (event.clipboardData || window.clipboardData).getData("text/plain");
 
-                        </h6>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <h6 class="form-check" style="color:midnightblue;">
+                                    // Sanitize the pasted content (you may use a library for this)
+                                    var sanitizedText = sanitizeFunction(text);
 
-                            @Html.EditorFor(model => model.Work_Permit, new
-                       {
-                           htmlAttributes = new
-                           { @class = "coupon_question", onclick = "Geeeee()" }
-                       })
-                            <label>@Html.LabelFor(model => model.Work_Permit)</label>
+                                    // Insert the sanitized plain text into the textarea as HTML
+                                    document.execCommand("insertHTML", false, sanitizedText);
+                                });
 
-
-
-                        </h6>
-                    </div>
-                </div>
-
-
-                <div class="dropdown-divider"></div>
-
-                <div class="col d-flex justify-content-center">
-                    <input type="submit" name="action" value="Update/Edit Admission" class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed Update/edit student?')" />
-                    <b>|</b>
-
-                    <script>
-                        $(function () {
-                            $('#Create').click(function () {
-                                if (confirm('Are you sure?')) {
-                                    window.location.href = $(this).data('url');
+                                function sanitizeFunction(input) {
+                                    // Implement your own sanitization logic or use a library
+                                    // to ensure that the pasted content is safe.
+                                    // Example: Implement a function to escape HTML entities.
+                                    return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
                                 }
-                            });
-                        });
-                    </script>
+                            </script>
 
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
-                </div>
-            </form>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="col d-flex justify-content-center">
+                            <input type="submit" name="action" value="update/Edit Admission" class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed Update/Edit student details?')" />
+                            <b>|</b>
+
+                            <script>
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
+                            </script>
+
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn" })
+                        </div>
+                    </form>
                 }
             </div>
         </div>

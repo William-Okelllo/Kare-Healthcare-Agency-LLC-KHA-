@@ -13,8 +13,16 @@ namespace Ishop.Models
         public string Holiday_Name { get; set; }
         public string WeekdayName { get; set; }
         public int Total_Hours { get; set; }
-        public int Direct_Hours { get; set; }
-        public int InDirect_Hours { get; set; }
+        public int TotalHours { get; set; }
+        public string DayOfWeek { get; set; }
         public string Role { get; set; }
+
+        public decimal Monday { get; set; }
+        public decimal Tuesday { get; set; }
+        public decimal Wednesday { get; set; }
+        public decimal Thursday { get; set; }
+        public decimal Friday { get; set; }
+        public decimal Saturday { get; set; }
+        public decimal Sunday { get; set; }
     }
 }

@@ -29,7 +29,10 @@ namespace Ishop.Controllers
             return View();
         }
 
-
+        public ActionResult MasterData() 
+        {
+            return View();
+        }
 
 
 

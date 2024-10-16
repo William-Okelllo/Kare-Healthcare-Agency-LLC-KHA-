@@ -1,0 +1,414 @@
+﻿@model IShop.Core.Admission
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .curved-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .curved-table th,
+        .curved-table td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+        }
+
+    .wrap-text {
+        white-space: normal !important; /* Use !important to override other styles if needed */
+    }
+</style>
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+
+<div class="col d-flex justify-content-center">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> Student Profile </h4>
+                <div class="dropdown-divider"></div>
+                @if (TempData["Msg"] != null)
+                {<div class="row">
+                        <div class="alert alert-warning col-md-6 col-md-offset-4" align="center">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            @TempData["Msg"]
+                        </div>
+                    </div>
+                }
+
+                <script>
+                    window.setTimeout(function () {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                            $(this).remove();
+                        });
+                    }, 2000);
+                </script>
+                <div class="form-row justify-content-center">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-user-circle"></i>  Student Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Waitlist-tab" data-toggle="pill" href="#pills-Waitlist" role="tab" aria-controls="pills-Waitlist" aria-selected="false"><i class="fa fa-cogs"></i>  Waitlist</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Training-tab" data-toggle="pill" href="#pills-Training" role="tab" aria-controls="pills-Training" aria-selected="false"><i class="fa fa-hands-wash"></i> Training Outcomes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Employment-tab" data-toggle="pill" href="#pills-Employment" role="tab" aria-controls="pills-Employment" aria-selected="false"><i class="fa fa-exchange-alt"></i> Employment Outcomes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-Ass-tab" data-toggle="pill" href="#pills-Ass" role="tab" aria-controls="pills-Ass" aria-selected="false"><i class="fa fa-hands-helping"></i> Asstaince Request</a>
+                        </li>
+                    </ul>
+                    </div>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <small style="color:gray"> <i class="fa fa-book-open"></i> Student Profile</small>
+                        <div class="form-row justify-content-center">
+
+
+
+                            <div class="col-lg-6 col-12">
+                                <div class="small-box bg-dark" style="border-radius: 15px;color:white">
+                                    <div class="inner">
+
+                                        <h4 style="text-align:center"><i class="fa fa-user-circle text-warning"></i> @Model.Name</h4>
+                                        <div class="dropdown-divider"></div>
+                                        <div class="list-group" style="border-radius: 14px; border-left: 5px solid #53085B ">
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-user-tag"></i>   <b>Admission No </b> @Model.Admin_No
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-mobile"></i>   <b>Contacts </b> @Model.Contacts
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-envelope"></i>   <b>Email Address </b> @Model.Email
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-map-marker"></i>   <b> Address </b> @Model.Email
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-map-marker"></i>   <b> Employement Status </b> @Model.Employement_Status
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-graduation-cap"></i>   <b> Education Level </b> @Model.Level_Education
+                                            </a>
+
+                                        </div>
+
+
+                                    </div>
+                                    <div class="icon">
+
+
+                                        <i class="fa  fa-user-circle"></i>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <div class="small-box bg-dark" style="border-radius: 15px;color:white">
+                                    <div class="inner">
+
+
+                                        <div class="list-group">
+
+                                            <small>Emergency Contacts</small>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-user-circle"></i>   <b> Name </b> @Model.Em_Name
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-mobile"></i>   <b> Contacts </b> @Model.Em_Phone
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action ">
+                                                <i class="fa fa-envelope"></i>   <b> Address </b> @Model.Em_Mail
+                                            </a>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="icon">
+
+
+                                        <i class="fa  fa-user-circle"></i>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show " id="pills-Waitlist" role="tabpanel" aria-labelledby="pills-Waitlist-tab">
+                        <small style="color:gray"> <i class="fa fa-book-open"></i> Waitlist</small>
+
+                        <div style="text-align:right">
+                            <a href="@Url.Action("Add", "Waitlist", new { Id = Model.Id })"
+                               class=" btn btn-sm btn-warning" role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i>  Add Waitlist </a>
+                        </div>
+
+
+                        <div class="table-responsive" style="min-height: 100px">
+                            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                <thead>
+                                    <tr style="color:black">
+                                        <th style="background-color: #cccccc; "> Application Date </th>
+                                        <th style="background-color: #cccccc; "> Course of Interest  </th>
+                                        <th style="background-color: #cccccc; "> Waitlist Status  </th>
+                                        <th style="background-color: #cccccc; "> Comments </th>
+                                        <th style="background-color: #cccccc; "> Actions </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in ViewBag.Waitlistdata)
+                                    {
+                                        <tr data-widget="expandable-table" aria-expanded="false" style="font-size:medium">
+
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-secondary"><medium>   <i class="fa fa-calendar-day"></i>   </medium></span>  @item.Application_Date.ToString("dd-MMM-yyyy")
+
+                                            </td>
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-secondary"><medium>   <i class="fa fa-users"></i>   </medium></span>  @item.Course
+
+                                            </td>
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-secondary"><medium>   <i class="fa fa-users"></i>   </medium></span>  @item.Status
+
+                                            </td>
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layer-group"></i>   </medium></span> <b> @item.Comments</b>
+
+                                            </td>
+
+                                            <td style="background-color: white;">
+
+
+                                                <div class="btn-group dropdown">
+                                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-hashtag"></i>  . Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                        <a href="@Url.Action("Edit", "Waitlist", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-pen-nib text-success"></i> Edit Waitlist
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="@Url.Action("Delete", "Waitlist", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-times-circle text-danger"></i> Delete Waitlist
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show " id="pills-Training" role="tabpanel" aria-labelledby="pills-Training-tab">
+                        <small style="color:gray"> <i class="fa fa-book-open"></i> Training</small>
+
+                        <div style="text-align:right">
+                            <a href="@Url.Action("Create", "training", new { Id = Model.Id })"
+                               class=" btn btn-sm btn-warning" role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i>  Add Training Outcomes </a>
+                        </div>
+                        <div class="table-responsive" style="min-height: 100px">
+                            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                <thead>
+                                    <tr style="color:black">
+                                        <th style="background-color: #cccccc; "> Duration  </th>
+                                        <th style="background-color: #cccccc; "> School   </th>
+                                        <th style="background-color: #cccccc; "> Status  </th>
+                                        <th style="background-color: #cccccc; "> Tuition Paid   </th>
+                                        <th style="background-color: #cccccc; "> Payment Date & Amt  </th>
+                                        <th style="background-color: #cccccc; "> Cert/License Status & Test Result   </th>
+                                        <th style="background-color: #cccccc; "> Actions </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in ViewBag.Trains)
+                                    {
+                                        <tr data-widget="expandable-table" aria-expanded="false" style="font-size:medium">
+
+                                            <td style="background-color:white;font-size:small">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-calendar-day"></i>  Start Date  </medium></span> <b> @item.Start_Date.ToString("dd-MMM-yyyy")</b>
+                                                <div class="dropdown-divider"></div>
+                                                <span class="badge badge-secondary"><medium>   <i class="fa fa-calendar-day"></i>  End Date  </medium></span> <b> @item.End_Date.ToString("dd-MMM-yyyy")</b>
+                                            </td>
+
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-secondary"><medium>   <i class="fa fa-university"></i>   </medium></span>  <b>@item.School</b>
+
+                                            </td>
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layer-group"></i>   </medium></span> <b> @item.Status</b>
+
+                                            </td>
+                                            <td style="background-color:white;">
+                                                <b>
+                                                    @if (item.Paid == true)
+                                                    {
+                                                        <medium> <i class="fa fa-check-circle text-warning"></i> <b>YES</b> </medium>
+                                                    }
+                                                    else
+                                                    {<medium> <i class="fa fa-times-circle text-warning"></i>  <b>NO</b> </medium>}
+                                                </b>
+
+                                            </td>
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layer-group"></i> Payment Date  </medium></span> <b> @item.Tuition_Pay_Date.ToString("dd-MMM-yyyy")</b>
+                                                <div class="dropdown-divider"></div>
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layer-group"></i> Paid Amount  </medium></span> <b> $ @item.Amount.ToString("#,##0.00")</b>
+                                            </td>
+
+                                            <td style="background-color:white;">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layer-group"></i> Certification Status  </medium></span> <b> @item.Certification_Status</b>
+                                                <div class="dropdown-divider"></div>
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layer-group"></i> Certification Test Result  </medium></span> <b> @item.Certification_Test_Result</b>
+                                            </td>
+
+                                            <td style="background-color: white;">
+
+
+                                                <div class="btn-group dropdown">
+                                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-hashtag"></i>  . Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                        <a href="@Url.Action("Edit", "training", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-pen-nib text-success"></i> Edit Training
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="@Url.Action("Delete", "training", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-times-circle text-danger"></i> Delete Training
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show " id="pills-Employment" role="tabpanel" aria-labelledby="pills-Employment-tab">
+                        <small style="color:gray"> <i class="fa fa-book-open"></i> Employment</small>
+                        <div style="text-align:right">
+                            <a href="@Url.Action("Create", "Emp", new { Id = Model.Id })"
+                               class=" btn btn-sm btn-warning" role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i>  Add Education Outcome </a>
+                        </div>
+
+
+                        <div class="table-responsive" style="min-height: 100px">
+                            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                <thead>
+                                    <tr style="color:black">
+                                        <th style="background-color: #cccccc; "> Duration </th>
+                                        <th style="background-color: #cccccc; "> Employer Name  </th>
+                                        <th style="background-color: #cccccc; "> Address & Contact  </th>
+                                        <th style="background-color: #cccccc; "> Type  & Status  </th>
+                                        <th style="background-color: #cccccc; "> Actions </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in ViewBag.Empp)
+                                    {
+                                        <tr data-widget="expandable-table" aria-expanded="false" style="font-size:medium">
+
+                                            <td style="background-color:white;font-size:small">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-calendar-day"></i>  Start Date  </medium></span> <b> @item.Start_Date.ToString("dd-MMM-yyyy")</b>
+                                                <div class="dropdown-divider"></div>
+                                                <span class="badge badge-secondary"><medium>   <i class="fa fa-calendar-day"></i>  End Date  </medium></span> <b> @item.End_Date.ToString("dd-MMM-yyyy")</b>
+                                            </td>
+                                            <td style="background-color:white">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-bookmark"></i>   </medium></span> <b> @item.Name</b>
+                                                <div class="dropdown-divider"></div>
+                                                <span class="badge badge-success"><medium>   <i class="fa fa-bookmark"></i> Reported  </medium></span> <b> @item.Report_Date.ToString("dd-MMM-yyyy")</b>
+                                            </td>
+                                            <td style="background-color:white">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-bookmark"></i>   </medium></span> <b> @item.Address</b>
+                                                <div class="dropdown-divider"></div>
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-mobile"></i>   </medium></span> <b> @item.Contact</b>
+                                            </td>
+                                            <td style="background-color:white">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layers"></i>   </medium></span> <b> @item.Type</b>
+                                                <div class="dropdown-divider"></div>
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layers"></i>   </medium></span> <b> @item.Status</b>
+                                            </td>
+
+                                            <td style="background-color: white;">
+
+
+                                                <div class="btn-group dropdown">
+                                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-hashtag"></i>  . Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                        <a href="@Url.Action("Edit", "Emp", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-pen-nib text-success"></i> Edit Employment
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="@Url.Action("Delete", "Emp", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-times-circle text-danger"></i> Delete Employment
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show " id="pills-Ass" role="tabpanel" aria-labelledby="pills-Ass-tab">
+                        <small style="color:gray"> <i class="fa fa-book-open"></i> Assitance Request</small>
+                    </div>
+                </div>
+            </div>

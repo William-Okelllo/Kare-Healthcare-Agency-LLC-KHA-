@@ -412,6 +412,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\Direct_costController.cs" />
+    <Compile Include="Controllers\EmpController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\ExpsController.cs" />
@@ -432,8 +433,11 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RptsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\SheetController.cs" />
     <Compile Include="Controllers\Sms_configsController.cs" />
     <Compile Include="Controllers\successController.cs" />
+    <Compile Include="Controllers\TrainingController.cs" />
+    <Compile Include="Controllers\WaitlistController.cs" />
     <Compile Include="Controllers\WorkplanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -6372,6 +6376,7 @@
     <Content Include="Images\homee.png" />
     <Content Include="Images\kare_login.png" />
     <Content Include="Images\neww.jpg" />
+    <Content Include="Images\NN.png" />
     <Content Include="Images\P.png" />
     <Content Include="Images\ppp.gif" />
     <Content Include="Images\sad.gif" />
@@ -7912,16 +7917,6 @@
     <Content Include="Views\sms_configs\Details.cshtml" />
     <Content Include="Views\sms_configs\Edit.cshtml" />
     <Content Include="Views\sms_configs\Index.cshtml" />
-    <Content Include="Views\Templates\Create.cshtml" />
-    <Content Include="Views\Templates\Delete.cshtml" />
-    <Content Include="Views\Templates\Details.cshtml" />
-    <Content Include="Views\Templates\Edit.cshtml" />
-    <Content Include="Views\Templates\Index.cshtml" />
-    <Content Include="Views\InDirects\Create.cshtml" />
-    <Content Include="Views\InDirects\Delete.cshtml" />
-    <Content Include="Views\InDirects\Details.cshtml" />
-    <Content Include="Views\InDirects\Edit.cshtml" />
-    <Content Include="Views\InDirects\Index.cshtml" />
     <Content Include="Views\Departments\Create.cshtml" />
     <Content Include="Views\Departments\Delete.cshtml" />
     <Content Include="Views\Departments\Details.cshtml" />
@@ -7972,11 +7967,6 @@
     <Content Include="Views\ReportAccesses\Details.cshtml" />
     <Content Include="Views\ReportAccesses\Edit.cshtml" />
     <Content Include="Views\ReportAccesses\Index.cshtml" />
-    <Content Include="Views\Sheet_comments\Approvals.cshtml" />
-    <Content Include="Views\Sheet_comments\Delete.cshtml" />
-    <Content Include="Views\Sheet_comments\Details.cshtml" />
-    <Content Include="Views\Sheet_comments\Edit.cshtml" />
-    <Content Include="Views\Sheet_comments\Index.cshtml" />
     <Content Include="Views\Notifications\Add.cshtml" />
     <Content Include="Views\Notifications\Delete.cshtml" />
     <Content Include="Views\Notifications\Details.cshtml" />
@@ -7990,8 +7980,6 @@
     <Content Include="Views\Workplan\Details.cshtml" />
     <Content Include="Views\Workplan\Edit.cshtml" />
     <Content Include="Views\Workplan\Index.cshtml" />
-    <Content Include="Views\Question\Create.cshtml" />
-    <Content Include="Views\Question\Edit.cshtml" />
     <Content Include="Views\Direct_cost\Create.cshtml" />
     <Content Include="Views\Direct_cost\Delete.cshtml" />
     <Content Include="Views\Direct_cost\Details.cshtml" />
@@ -8000,7 +7988,7 @@
     <Content Include="Views\Workplan\Budget.cshtml" />
     <Content Include="Views\Workplan\Budget_view.cshtml" />
     <Content Include="Views\Admission\Add.cshtml" />
-    <Content Include="Views\Admission\Details.cshtml" />
+    <Content Include="Views\Admission\Profile.cshtml" />
     <Content Include="Views\Admission\Edit.cshtml" />
     <Content Include="Views\Admission\Index.cshtml" />
     <Content Include="Views\Performs\Report.cshtml" />
@@ -8014,15 +8002,10 @@
     <Content Include="Views\Indirect\Details.cshtml" />
     <Content Include="Views\Indirect\Edit.cshtml" />
     <Content Include="Views\Indirect\Index.cshtml" />
-    <Content Include="Views\Immigrants\Details.cshtml" />
-    <Content Include="Views\Immigrants\Edit.cshtml" />
-    <Content Include="Views\Immigrants\Index.cshtml" />
     <Content Include="Views\Beneficiaries\Add.cshtml" />
     <Content Include="Views\Beneficiaries\Details.cshtml" />
     <Content Include="Views\Beneficiaries\Edit.cshtml" />
     <Content Include="Views\Beneficiaries\Index.cshtml" />
-    <Content Include="Views\Items\Create.cshtml" />
-    <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\B_Items\Create.cshtml" />
     <Content Include="Views\Grants\Create.cshtml" />
     <Content Include="Views\Grants\Details.cshtml" />
@@ -8038,7 +8021,18 @@
     <Content Include="Views\Rpts\Edit.cshtml" />
     <Content Include="Views\Rpts\Index.cshtml" />
     <Content Include="Views\Workplan\WorkPlan_Reports.cshtml" />
-    <Content Include="Views\Items\Edit.cshtml" />
+    <Content Include="Views\Home\MasterData.cshtml" />
+    <Content Include="Views\Sheet\Post.cshtml" />
+    <Content Include="Views\Sheet\Edit.cshtml" />
+    <Content Include="Views\Sheet\Calendar.cshtml" />
+    <Content Include="Views\Sheet\GetTimesheetData.cshtml" />
+    <Content Include="Views\Sheet\_NoTimesheetData.cshtml" />
+    <Content Include="Views\Waitlist\Add.cshtml" />
+    <Content Include="Views\Waitlist\Edit.cshtml" />
+    <Content Include="Views\Training\Create.cshtml" />
+    <Content Include="Views\Training\Edit.cshtml" />
+    <Content Include="Views\Emp\Create.cshtml" />
+    <Content Include="Views\Emp\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

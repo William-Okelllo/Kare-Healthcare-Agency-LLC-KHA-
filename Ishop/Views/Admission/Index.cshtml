@@ -127,18 +127,25 @@
                                 <i class="fa fa-calendar-day "></i> Admitted On
                             </span> <small> <b>@item.Date.ToString("dd-MMM-yyyy")</b></small>
                             <div class="dropdown-divider"></div>
-                            <span class="badge badge-secondary"> <i class="fa fa-calendar-check"></i> Arrival Year</span> <b>@item.Year</b>
+                            <span class="badge badge-secondary"> <i class="fa fa-calendar-check"></i> Arrival Year</span> <b></b>
                         </td>
                         <td style="background-color: white;">
                             <i class="fa fa-user-circle text-orange"></i> <b> @item.Name</b>
                             <div class="dropdown-divider"></div>
-                            <span class="badge badge-warning"> <i class="fa fa-map"></i> Country</span> @item.Country
+                            <span class="badge badge-success"> <i class="fa fa-book-reader"></i> Employment</span>
                         </td>
                         <td style="background-color: white;">
-                            <i class="fa fa-mobile text-orange"></i>    @item.Contacts
-
+                            <span class="badge badge-warning"> <i class="fa fa-mobile"></i> Contact</span> <b><small>@item.Contacts</small></b>
+                            <b>|</b>
+                            <span class="badge badge-warning"> <i class="fa fa-sms"></i> Can Text</span>
+                            @if (item.Text == true)
+                            {
+                                <medium> <i class="fa fa-check-circle text-warning"></i> <b>YES</b> </medium>
+                            }
+                            else
+                            {<medium> <i class="fa fa-times-circle text-warning"></i>  <b>NO</b> </medium>}
                             <div class="dropdown-divider"></div>
-                            <i class="fa fa-envelope text-orange"></i>   <small style="color:blue">@item.Email</small>
+                            <span class="badge badge-warning"> <i class="fa fa-envelope"></i> Email</span> <b><small>@item.Email</small></b>
                         </td>
 
                         <td style="background-color: white;">
@@ -152,25 +159,9 @@
                         </td>
                         <td style="background-color: white;">
 
-
-                            <span class="badge badge-warning"> <i class="fa fa-hands-wash"></i> Work Permit?</span>  @if (item.Work_Permit == true)
-                            {
-                                <span class="badge badge-success"> <i class="fa fa-user-shield"></i> <b> Granted</b></span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-danger"> <i class="fa fa-user-shield"></i> <b> Not Granted</b></span>
-                            }
+                            <span class="badge badge-success"> <i class="fa fa-book-reader"></i> Employment</span> : <b>@item.Employement_Status</b>
                             <div class="dropdown-divider"></div>
-                            <span class="badge badge-warning"> <i class="fa fa-tags"></i> Social security no?</span>
-                            @if (item.Social_security == true)
-                            {
-                                <span class="badge badge-success"> <i class="fa fa-check-circle"></i> <b> Granted</b></span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-danger"> <i class="fa fa-times-circle"></i> <b> Not Granted</b></span>
-                            }
+                            <span class="badge badge-success"> <i class="fa fa-graduation-cap"></i> Education Level</span> : <b>@item.Level_Education</b>
                         </td>
 
 
@@ -182,7 +173,10 @@
                     <i class="fa fa-hashtag"></i>  . Action
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-
+                    <a href="@Url.Action("Profile", "Admission", new { id = item.Id })" class="dropdown-item">
+                        <i class="fa fa-user-circle text-success"></i> Student Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
                     <a href="@Url.Action("Edit", "Admission", new { id = item.Id })" class="dropdown-item">
                         <i class="fa fa-pen-nib text-warning"></i> Update/Edit
                     </a>

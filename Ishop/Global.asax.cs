@@ -33,8 +33,8 @@ namespace Ishop
             Database.SetInitializer<Exp_context>(null);
             Database.SetInitializer<Rpt_context>(null);
             Database.SetInitializer<Admission_context>(null);
-
-
+            Database.SetInitializer<Sheet_context>(null);
+            Database.SetInitializer<Emp_context>(null);
 
         }
     }

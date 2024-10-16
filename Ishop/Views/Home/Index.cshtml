@@ -114,41 +114,38 @@
 
 
             <div class="row">
-                <div class="col-xl-4">
-                    <div class="list-group" style="border-radius: 14px; border-left: 5px solid #93bb09 ">
-                        <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
-                            <i class="fa fa-book-reader"></i>   <b>Admissions</b>
+                @if (this.User.IsInRole("Admisions"))
+                {
+                    <div class="col-xl-4">
+                        <div class="list-group" style="border-radius: 14px; border-left: 5px solid #93bb09 ">
+                            <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
+                                <i class="fa fa-book-reader"></i>   <b>Admissions</b>
 
-                        </a>
-                        <a href="@Url.Action("Add", "Admission")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-plus-circle"></i></span> New Admission</a>
-                        <a href="@Url.Action("Index", "Admission")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-clipboard-list"></i></span> Admission list</a>
+                            </a>
+                            <a href="@Url.Action("Add", "Admission")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-plus-circle"></i></span> New Admission</a>
+                            <a href="@Url.Action("Index", "Admission")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-clipboard-list"></i></span> Admission list</a>
+                        </div>
                     </div>
+                }
+
+
+
+                    
+
+                    @if (this.User.IsInRole("MasterData"))
+                    {
+                        <div class="col-xl-4">
+                            <div class="list-group" style="border-radius: 14px; border-left: 5px solid #93bb09 ">
+                                <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
+                                    <i class="fa fa-map"></i>   <b>Management</b>
+
+                                </a>
+                                <a href="@Url.Action("Index", "Employees")" class="list-group-item list-group-item-action"><span class="badge badge-success badge-pill"><i class="fa fa-handshake"></i></span> Employees list</a>
+                                <a href="@Url.Action("Index", "Departments")" class="list-group-item list-group-item-action"><span class="badge badge-success badge-pill"><i class="fa fa-handshake"></i></span> Departments list</a>
+                            </div>
+                        </div>
+                    }
                 </div>
-
-                <div class="col-xl-4">
-                    <div class="list-group" style="border-radius: 14px; border-left: 5px solid #93bb09 ">
-                        <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
-                            <i class="fa fa-map"></i>   <b>New Americans</b>
-
-                        </a>
-                        <a href="@Url.Action("Index", "Immigrants")" class="list-group-item list-group-item-action"><span class="badge badge-success badge-pill"><i class="fa fa-handshake"></i></span> New Americans list</a>
-                    </div>
-                </div>
-
-                <div class="col-xl-4">
-                    <div class="list-group" style="border-radius: 14px; border-left: 5px solid #53085B ">
-                        <a href="#" class="list-group-item list-group-item-action " style="background: linear-gradient(to right, #ffffff,#d5d5d5 ); color: black ">
-                            <i class="fa fa-users"></i>   <b>Beneficiaries</b>
-
-                        </a>
-
-                        <a href="@Url.Action("Index", "Beneficiaries")" class="list-group-item list-group-item-action"><span class="badge badge-warning badge-pill"><i class="fa fa-clipboard-list"></i></span> Beneficiaries list</a>
-                        <a href="@Url.Action("Index", "items")" class="list-group-item list-group-item-action">
-                            <span class="badge badge-success badge-pill"><i class="fa fa-hands-wash"></i></span> Beneficiaries items
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
         </div>
 

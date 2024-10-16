@@ -44,7 +44,7 @@
 <div class="card " style="background-color: rgb(255, 255, 255, 0.61);">
 
 
-    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #0656A5; color: white;  ">
+    <div class="card-header col-md-12 col-sm-12 col-12 " style="background-color: #53085B; color: white; ">
         <h3 class="card-title" style="color:white;text-align:center">
             <i class="fa fa-users"></i>
             Employees list
@@ -114,14 +114,14 @@
             <thead>
                 <tr style="color:white">
 
-                    <th style="background-color: #0656A5; font-size: medium; ">Added On </th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Full Name</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Email Address</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Contact</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Department</th>
-                    <th style="background-color: #0656A5; font-size: medium; ">Rates</th>
-                    <th style="background-color: #0656A5; font-size: medium; "> Access</th>
-                    <th style="background-color: #0656A5; font-size: medium;">Action</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Added On </th>
+                    <th style="background-color: #53085B; font-size: medium; ">Full Name</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Email Address</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Contact</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Department</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Rates</th>
+                    <th style="background-color: #53085B; font-size: medium; "> Access</th>
+                    <th style="background-color: #53085B; font-size: medium;">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -153,9 +153,7 @@
                         </td>
                         <td style="background-color: white;">
                             <span class="badge badge-warning"><medium> <b>Charge Out Rate </b>  </medium> </span>    @item.Rate.ToString("#,##0.00")  <small><b>/=</b></small>
-                            <div class="dropdown-divider"></div>
-                            <span class="badge badge-success"><medium> <b>Time Cost Rate</b>   </medium> </span>    @item.Time_Rate.ToString("#,##0.00")  <small><b>/=</b></small>
-
+                          
                         </td>
                         <td style="background-color:ghostwhite">
                             <a href="@Url.Action("Grant_Role", "Accesses", new { UserId = item.Userid })">

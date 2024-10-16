@@ -68,6 +68,8 @@
     <Compile Include="Direct_cost_repo.cs" />
     <Compile Include="Employee_Context.cs" />
     <Compile Include="Employee_Repo.cs" />
+    <Compile Include="Emp_context.cs" />
+    <Compile Include="Emp_Repo.cs" />
     <Compile Include="Exams_context.cs" />
     <Compile Include="Exams_repo.cs" />
     <Compile Include="Exp_context.cs" />
@@ -95,8 +97,14 @@
     <Compile Include="ReportGroupContext.cs" />
     <Compile Include="Rpt_context.cs" />
     <Compile Include="Rpt_repo.cs" />
+    <Compile Include="Sheet_context.cs" />
+    <Compile Include="Sheet_repo.cs" />
     <Compile Include="Sms_configs_Context.cs" />
     <Compile Include="Sms_config_Repo.cs" />
+    <Compile Include="Training_context.cs" />
+    <Compile Include="Training_Repo.cs" />
+    <Compile Include="Waitlist_context.cs" />
+    <Compile Include="Waitlist_repo.cs" />
     <Compile Include="Workplan_context.cs" />
     <Compile Include="WorkPlan_Repo.cs" />
   </ItemGroup>

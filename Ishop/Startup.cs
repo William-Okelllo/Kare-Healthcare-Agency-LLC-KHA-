@@ -59,52 +59,70 @@ namespace Ishop
 
                 }
             }
-            if (!roleManager.RoleExists("Employee"))
+            if (!roleManager.RoleExists("Admisions"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employee";
+                role.Name = "Admisions";
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Reports_Access"))
+            if (!roleManager.RoleExists("Education"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Reports_Access";
+                role.Name = "Education";
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Master_Data"))
+            if (!roleManager.RoleExists("New_Americans"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Master_Data";
+                role.Name = "New_Americans";
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Leaves_Management"))
+
+            if (!roleManager.RoleExists("Timesheets"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Leaves_Management";
+                role.Name = "Timesheets";
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Timesheet_Approvals"))
+
+            
+            if (!roleManager.RoleExists("Beneficiaries"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Timesheet_Approvals";
+                role.Name = "Beneficiaries";
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("leave_Approvals"))
+            if (!roleManager.RoleExists("Workplan"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "leave_Approvals";
+                role.Name = "Workplan";
                 roleManager.Create(role);
 
             }
-            if (!roleManager.RoleExists("Notifications"))
+
+            if (!roleManager.RoleExists("Budget"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Notifications";
+                role.Name = "Budget";
+                roleManager.Create(role);
+
+            }
+            if (!roleManager.RoleExists("Reports"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Reports";
+                roleManager.Create(role);
+
+            }
+            if (!roleManager.RoleExists("MasterData"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "MasterData";
                 roleManager.Create(role);
 
             }

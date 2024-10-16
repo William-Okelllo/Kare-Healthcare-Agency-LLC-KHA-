@@ -123,92 +123,93 @@ $(document).ready(function () {
 });
                     </script>
                     <div class="dropdown-divider"></div>
+                   
 
 
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover  table-condensed table-striped table-hover sortable curved-table" id="ordersTable">
-                            <thead>
-                                <tr style="color:white">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover  table-condensed table-striped table-hover sortable curved-table" id="ordersTable">
+                                <thead>
+                                    <tr style="color:white">
 
-                                    <th style="background-color: #a7a7a7; font-size: medium; "> Description</th>
-                                    <th style="background-color: #a7a7a7; font-size: medium; ">Quantity</th>
-                                    <th style="background-color: #a7a7a7; font-size: medium; ">Unit</th>
-                                    <th style="background-color: #a7a7a7; font-size: medium; ">Total</th>
-                                    <th style="background-color: #a7a7a7; font-size: medium; ">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-
-                                @foreach (var item in ViewBag.DirectCost)
-                                {
-                                    <tr>
+                                        <th style="background-color: #a7a7a7; font-size: medium; "> Description</th>
+                                        <th style="background-color: #a7a7a7; font-size: medium; ">Quantity</th>
+                                        <th style="background-color: #a7a7a7; font-size: medium; ">Unit</th>
+                                        <th style="background-color: #a7a7a7; font-size: medium; ">Total</th>
+                                        <th style="background-color: #a7a7a7; font-size: medium; ">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
 
-                                        <td style="background-color: white; width: 70%">
-                                            @{
-                                                string message2 = item.Description.Replace("\n", "<br>");
-                                                string pattern2 = @"(https?://[^\s]+)";
-                                                string replacedMessage2 = System.Text.RegularExpressions.Regex.Replace(message2, pattern2, "<a href=\"$1\" target=\"_blank\">$1</a>");
-                                            }
-
-                                            <p>@Html.Raw(replacedMessage2)</p>
-                                        </td>
-
-                                        <td style="background-color: white; width: 10%">
-                                            <b>@item.Quantity</b>
-                                        </td>
-
-                                        <td style="background-color: white; width: 10%">
-                                            <b>@item.Unit.ToString("#,##0.00")</b>
-                                        </td>
+                                    @foreach (var item in ViewBag.DirectCost)
+                                    {
+                                        <tr>
 
 
-                                        <td style="background-color: white; width: 10%">
-                                            <b>@item.Total.ToString("#,##0.00")</b>
-                                        </td>
+                                            <td style="background-color: white; width: 70%">
+                                                @{
+                                                    string message2 = item.Description.Replace("\n", "<br>");
+                                                    string pattern2 = @"(https?://[^\s]+)";
+                                                    string replacedMessage2 = System.Text.RegularExpressions.Regex.Replace(message2, pattern2, "<a href=\"$1\" target=\"_blank\">$1</a>");
+                                                }
 
-                                        <td style="background-color: white;">
+                                                <p>@Html.Raw(replacedMessage2)</p>
+                                            </td>
 
+                                            <td style="background-color: white; width: 10%">
+                                                <b>@item.Quantity</b>
+                                            </td>
 
-                                            <div class="btn-group dropdown">
-                                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-hashtag"></i>  . Action
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                                    <div class="dropdown-divider"></div>
-                                                    <a href="@Url.Action("Edit", "direct_cost", new { id = item.Id })" class="dropdown-item">
-                                                        <i class="fa fa-plus-circle text-warning"></i> Update Cost
-                                                    </a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a href="@Url.Action("Delete", "direct_cost", new { Id = item.Id})" class="dropdown-item">
-                                                        <i class="fa fa-question-circle text-success"></i> Drop Cost
-                                                    </a>
+                                            <td style="background-color: white; width: 10%">
+                                                <b>@item.Unit.ToString("#,##0.00")</b>
+                                            </td>
 
 
+                                            <td style="background-color: white; width: 10%">
+                                                <b>@item.Total.ToString("#,##0.00")</b>
+                                            </td>
+
+                                            <td style="background-color: white;">
+
+
+                                                <div class="btn-group dropdown">
+                                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-hashtag"></i>  . Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="@Url.Action("Edit", "direct_cost", new { id = item.Id })" class="dropdown-item">
+                                                            <i class="fa fa-plus-circle text-warning"></i> Update Cost
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="@Url.Action("Delete", "direct_cost", new { Id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-question-circle text-success"></i> Drop Cost
+                                                        </a>
+
+
+                                                    </div>
                                                 </div>
-                                            </div>
 
 
+                                            </td>
+                                        </tr>
+
+                                    }
+                                    <tr>
+                                        <td style="background-color: white; "></td>
+                                        <td style="background-color: white; "></td>
+                                        <td style="background-color: #a7a7a7; "><b>Total</b></td>
+                                        <td style="background-color: #a7a7a7; ">
+                                            <b>@ViewBag.DirectCostsum.ToString("#,##0.00")</b>
                                         </td>
                                     </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                                }
-                                <tr>
-                                    <td style="background-color: white; "></td>
-                                    <td style="background-color: white; "></td>
-                                    <td style="background-color: #a7a7a7; "><b>Total</b></td>
-                                    <td style="background-color: #a7a7a7; ">
-                                        <b>@ViewBag.DirectCostsum.ToString("#,##0.00")</b>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
                     </div>
-
-
-                </div>
             </div>
             <div class="tab-pane fade show " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div class="card-body" style="background-color: white;border-radius: 24px;">
@@ -279,6 +280,10 @@ $(document).ready(function () {
 });
                     </script>
                     <div class="dropdown-divider"></div>
+
+
+
+
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover  table-condensed table-striped table-hover sortable curved-table" id="ordersTable">
                             <thead>
@@ -328,8 +333,8 @@ $(document).ready(function () {
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                                     <div class="dropdown-divider"></div>
-                                                    <a href="@Url.Action("Edit", "WorkPlan", new { id = item.Id })" class="dropdown-item">
-                                                        <i class="fa fa-plus-circle text-warning"></i> Update/Edit
+                                                    <a href="@Url.Action("Edit", "Indirect", new { id = item.Id })" class="dropdown-item">
+                                                        <i class="fa fa-plus-circle text-warning"></i> Update Cost
                                                     </a>
                                                     <div class="dropdown-divider"></div>
                                                     <a href="@Url.Action("Delete", "Indirect", new { Id = item.Id})" class="dropdown-item">

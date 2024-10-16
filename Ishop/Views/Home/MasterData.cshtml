@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "MasterData";
+}
+
+<style>
+    body {
+        background-image: url(../../images/33.jpg);
+        background-size: cover;
+        font-family: Calibri
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #D2D2D2;
+    }
+</style>
+
+<div class="card " style="background-color: rgb(255, 255, 255, 0.84);">
+
+
+
+
+    <div class="card-body">
+
+        <div style="color:black;text-align:center;font-size:large">
+            <i class="fa fa-home"></i>
+            MasterData
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card mb- mb-xl-0" style="border-radius: 10px;">
+
+                    <div class="card-body text-left">
+                        <h5><i class="fa fa-users"></i> Employees & Staff</h5>
+                        <div class="dropdown-divider"></div>
+                       <li>
+                          
+                               <a href="@Url.Action("Index", "Employees") ">
+                                   <i class="fa fa-users text-purple"></i>  Employees list
+                               </a>
+
+                       </li>
+                       <li>
+                           <a href="@Url.Action("Index", "Departments") ">
+                               <i class="fa fa-university text-purple"></i>  Departments
+                           </a>
+                       </li>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card mb- mb-xl-0" style="border-radius: 10px;">
+
+                    <div class="card-body text-left">
+                        <h5><i class="fa fa-chart-line"></i> Reports Module setups</h5>
+                        <div class="dropdown-divider"></div>
+                        <a href="@Url.Action("Index", "ReportGroup") ">
+                            <i class="fa fa-chart-line text-warning"></i>  Report Module
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

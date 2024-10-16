@@ -45,12 +45,14 @@
     <Compile Include="Access.cs" />
     <Compile Include="Activities.cs" />
     <Compile Include="Admission.cs" />
+    <Compile Include="Ass.cs" />
     <Compile Include="Benef.cs" />
     <Compile Include="Benitem.cs" />
     <Compile Include="Configs.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Direct_cost.cs" />
+    <Compile Include="Emp.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Exam.cs" />
     <Compile Include="Grant.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Interface\IBenitem.cs" />
     <Compile Include="Interface\Idata.cs" />
     <Compile Include="Interface\IDirect_cost.cs" />
+    <Compile Include="Interface\IEmp.cs" />
     <Compile Include="Interface\IEmployee.cs" />
     <Compile Include="Interface\Iexam.cs" />
     <Compile Include="Interface\IExp.cs" />
@@ -75,6 +78,9 @@
     <Compile Include="Interface\Iperfom.cs" />
     <Compile Include="Interface\IQuestion.cs" />
     <Compile Include="Interface\Irpt.cs" />
+    <Compile Include="Interface\Isheet.cs" />
+    <Compile Include="Interface\ITraining.cs" />
+    <Compile Include="Interface\IWaitlist.cs" />
     <Compile Include="Interface\IWorkplan.cs" />
     <Compile Include="Interface\IReportAccess.cs" />
     <Compile Include="Interface\ISheet_comments.cs" />
@@ -90,11 +96,13 @@
     <Compile Include="ReportGroup.cs" />
     <Compile Include="Reports.cs" />
     <Compile Include="Rpt.cs" />
+    <Compile Include="Sheet.cs" />
     <Compile Include="Sheet_comments.cs" />
     <Compile Include="Sms_configs.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Template.cs" />
-    <Compile Include="Time_cat.cs" />
+    <Compile Include="Training.cs" />
+    <Compile Include="Waitlist.cs" />
     <Compile Include="Workplan.cs" />
   </ItemGroup>
   <ItemGroup>

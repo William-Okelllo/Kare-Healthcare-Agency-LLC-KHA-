@@ -209,22 +209,7 @@
                            })
 
                             </div>
-                            <div class="form-group col-md-2">
-                                <label><i class=" fa fa-coins text-orange"></i>   @Html.LabelFor(model => model.Time_Rate)</label>
-                                @Html.EditorFor(model => model.Time_Rate, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control form-control-sm",
-                                   @Placeholder = "0.0",
-                                   onchange = "addCommas(this)",
-                                   @Required = true,
-
-
-                               }
-                           })
-
-                            </div>
+                            
                             <div class="form-group col-md-2">
                                 <label><i class=" fa fa-suitcase text-primary"></i>   @Html.LabelFor(model => model.Rate)</label>
                                 @Html.EditorFor(model => model.Rate, new

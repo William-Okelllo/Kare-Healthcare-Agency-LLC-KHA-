@@ -194,8 +194,8 @@ namespace Ishop.Controllers
         private string connectionString = ConfigurationManager.ConnectionStrings["Kare"].ConnectionString;
         public void EmpAcc(DateTime CreatedOn, string Username, string Contact, string Userid, string Email,string Fullname ,string DprtName,string Designation)
         {
-            string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Email,Rate,Active,Time_Rate) VALUES " +
-            "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid,@Email,@Rate,@Active,@Time_Rate)";
+            string query = "INSERT INTO Employees (CreatedOn,Username,Fullname,Contact,DprtName,Designation,Userid,Email,Rate,Active) VALUES " +
+            "                                          (@CreatedOn,@Username,@Fullname,@Contact,@DprtName,@Designation,@Userid,@Email,@Rate,@Active)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -211,7 +211,6 @@ namespace Ishop.Controllers
                     command.Parameters.AddWithValue("@Email", Email);
                     command.Parameters.AddWithValue("@Rate", 0);
                     command.Parameters.AddWithValue("@Active", true);
-                    command.Parameters.AddWithValue("@Time_Rate", 0);
                     command.ExecuteNonQuery();
                 }
             }
@@ -280,62 +279,55 @@ namespace Ishop.Controllers
 
         [ValidateAntiForgeryToken]
         // [Authorize(Roles = "System")]
-        public async Task<ActionResult> Rspec007(RegisterViewModel model)
+        public async Task<ActionResult> Rspec007(RegisterViewModel model, string[] UserRoles)
         {
+            string concatenatedPlots = string.Join(",", UserRoles);
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber  };
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
+                    
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 var usernamename = user.UserName;
                 var Passworduser = model.Password;
                 var SubjectTopic = "Welcome to Kare";
                 var TextBody = "Hello there 👋,"
-                + "\n" + "The following are your login credentials to Timenex timesheet management system"
-                + "\n" + "__ "
-                + "\n" + " "
-                + "\n" + "Username : " + model.UserName
-                + "\n" + "Password : " + model.Password
-                + "\n" + " "
-                + "\n" + "__ "
-                + "\n" + "The provided password is a default password that you can be able to change once you access the system."
-                + "\n" + "System link : " + System.Configuration.ConfigurationManager.AppSettings["Businesssmail"].ToString() + "\n" + "";
+                    + "\n" + "The following are your login credentials to the system"
+                    + "\n" + "__ "
+                    + "\n" + " "
+                    + "\n" + "Username : " + model.UserName
+                    + "\n" + "Password : " + model.Password
+                    + "\n" + " "
+                    + "\n" + "__ "
+                    + "\n" + "The provided password is a default password that you can be able to change once you access the system."
+                    + "\n" + "System link : " + System.Configuration.ConfigurationManager.AppSettings["Businesssmail"].ToString() + "\n" + "";
+
                 PushEmail(model.Email, SubjectTopic, TextBody, DateTime.Now);
+
                 if (result.Succeeded)
                 {
-                    
+                    // Add multiple roles to the user
+                    foreach (var role in UserRoles)
+                    {
+                        await UserManager.AddToRoleAsync(user.Id, role);
+                    }
+                    user.EmailConfirmed = true;
+                    await UserManager.UpdateAsync(user);
+                    // Check if one of the roles is "Employee"
 
-                    // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id, model.Email, model.Fullname, model.DprtName, model.Designation);
+                    TempData["msg"] = "✔ Account Created successfully, Confirmation sent to user's email";
 
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    //Ends Here     
-
-
-
-
-                    if (model.UserRoles == "Employee")
-
-                    { EmpAcc(DateTime.Now, model.UserName, model.PhoneNumber, user.Id, model.Email,model.Fullname,model.DprtName,model.Designation); ;}
-
-                    TempData["msg"] = "✔ Account Created successfully ,Confirmation sent to user account mail";
-
-
-
-
-
-                    
                     return RedirectToAction("Index", "Employees");
                 }
-                
-
-
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                          .ToList(), "Name", "Name");
 
                 AddErrors(result);
-
-
             }
 
             // If we got this far, something failed, redisplay form    

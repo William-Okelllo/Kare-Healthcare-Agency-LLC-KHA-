@@ -34,8 +34,7 @@ namespace Ishop.Controllers
             return View(access);
         }
 
-        // GET: Accesses/Create
-        [Authorize(Roles = "Admin")]
+        
         public ActionResult Grant_Role(string UserId)
         {
 
@@ -53,7 +52,7 @@ namespace Ishop.Controllers
 
             ViewBag.Userinfo = Userinfo;
 
-            string strcon = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+            string strcon = ConfigurationManager.ConnectionStrings["Kare"].ConnectionString;
             using (SqlConnection sqlCon = new SqlConnection(strcon))
             {
                 using (SqlCommand cmd = new SqlCommand("Assigned_user_roles", sqlCon))
@@ -139,7 +138,7 @@ namespace Ishop.Controllers
         }
         // GET: Accesses/Edit/5
 
-        private string connectionString = ConfigurationManager.ConnectionStrings["Planning"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["Kare"].ConnectionString;
         public void Set_Role(Guid UserId, string RoleId)
         {
             string query = "Insert into AspNetUserRoles" +

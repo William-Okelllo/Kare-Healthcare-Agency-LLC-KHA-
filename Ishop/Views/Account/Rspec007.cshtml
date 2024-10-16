@@ -76,14 +76,14 @@
         
                 <div class="col-md-11 col-sm-12 col-12">
                     <div class="card mb- mb-xl-0" style="border-radius: 24px;">
-                        <div class="card-header" style="background-color: #0656A5; color: white; border-radius: 14px ">
+                        <div class="card-header" style="background-color: #53085B; color: white; border-radius: 14px ">
                             <i class="fa fa-bookmark"></i> New Account.
                         </div>
                         <div class="card-outline  card-body text-left" style="border-radius: 14px;">
 
                             <form>
 
-                                @using (Ajax.BeginForm("Create", "T", new AjaxOptions { HttpMethod = "POST", OnSuccess = "submitSuccess" }))
+                                @using (Ajax.BeginForm("Rspec007", "Account", new AjaxOptions { HttpMethod = "POST", OnSuccess = "submitSuccess" }))
                                 {
 
 
@@ -104,7 +104,7 @@
 
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label style="color:darkblue"><i class="fa fa-user-tag"></i>   Username</label>
+                                            <label style="color:darkblue"><i class="fa fa-user-tag"></i>   Login Username  <small></small></label>
                                             @Html.EditorFor(model => model.UserName, new
                                        {
                                            htmlAttributes = new
@@ -239,7 +239,7 @@ $(document).ready(function () {
 
 
                             <div class="form-row">
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label style="color:darkblue">Password </label>
                                     @Html.EditorFor(model => model.Password, new
                                {
@@ -252,7 +252,7 @@ $(document).ready(function () {
                                    }
                                })  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label style="color:darkblue">Confirm Password </label>
                                 @Html.EditorFor(model => model.ConfirmPassword, new
                            {
@@ -294,28 +294,18 @@ $(document).ready(function () {
                                     $(function () {
 
                                         $("#DprtName").chosen();
-                                        $("#UsesrRoles").chosen();
+                                        $("#UserRoles").chosen();
+                                        $("#Name").chosen();
 
                                     });
                                 </script>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-6">
 
-                                    <label style="color:darkblue"><i class="fa fa-tags"></i>   Account </label>
-                                    @Html.EditorFor(model => model.UserRoles, new
-                               {
-                                   htmlAttributes = new
-                                   {
-                                       @class = "form-control form-control-sm",
-                                       @Placeholder = "Designation",
-                                       @Value = "Employee",
-                                       @Readonly = true,
-
-
-                                   }
-                               })
+                                    <label style="color:darkblue"><i class="fa fa-tags"></i>   Account Roles </label>
+                                    @Html.DropDownList("UserRoles", ViewBag.Name as SelectList, "--Select Account Roles--", new { @class = "form-control form-control-sm", @Required = true, multiple = "multiple" }) 
 
                                 </div>
-
+                               
 
                                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
 

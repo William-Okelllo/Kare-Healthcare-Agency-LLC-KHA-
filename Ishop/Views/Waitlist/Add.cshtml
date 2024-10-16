@@ -1,0 +1,199 @@
+﻿@model IShop.Core.Waitlist
+
+@{
+    ViewBag.Title = "Waitlist Add";
+}
+
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-9 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> New Waitlist </h4>
+                <div class="dropdown-divider"></div>
+
+                @using (Html.BeginForm("Add", "Waitlist", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Application_Date)</label>
+                    @Html.EditorFor(model => model.Application_Date, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm ",
+                       @placeholder = "Application_Date",
+                       id = "datepicker",
+
+                       @required = "required",
+                   }
+               })
+                </div>
+
+                <div class="form-group col-md-3" id="other" style="display:nosne">
+                    <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Course)</label>
+                    @{
+                        List<SelectListItem> b = new List<SelectListItem>();
+                        b.Add(new SelectListItem
+                        {
+                            Text = "CNA",
+                            Value = "CNA",
+                        });
+                        b.Add(new SelectListItem
+                        {
+                            Text = "TMA",
+                            Value = "TMA",
+                        });
+                        b.Add(new SelectListItem
+                        {
+                            Text = "LPN",
+                            Value = "LPN",
+                        });
+
+                    }@Html.DropDownListFor(model => model.Course, b, "---Select Course---", new { @class = "form-control form-control-sm", @required = "required", })
+                </div>
+                <div class="form-group col-md-3" id="statusDiv">
+                    <label><i class="fa fa-bookmark text-purple"></i> @Html.LabelFor(model => model.Status)</label>
+                    @{
+                        List<SelectListItem> g = new List<SelectListItem>();
+                        g.Add(new SelectListItem { Text = "Admitted", Value = "Admitted" });
+                        g.Add(new SelectListItem { Text = "Waiting", Value = "Waiting" });
+                        g.Add(new SelectListItem { Text = "Denied", Value = "Denied" });
+                    }
+                    @Html.DropDownListFor(model => model.Status, g, "---Select Status---", new { @class = "form-control form-control-sm", @required = "required", id = "statusSelect" })
+                </div>
+
+                <div class="form-group col-md-3" id="applicationDateDiv" style="display:none">
+                    <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Addmision_Date)</label>
+                    @Html.EditorFor(model => model.Addmision_Date, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control form-control-sm",
+                            @placeholder = "Application_Date",
+                            id = "datepicker2",
+                            @required = "required",
+                        }
+                    })
+                </div>
+                <div class="form-group col-md-3"  style="display:none">
+                    <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Student_Id)</label>
+                    @Html.EditorFor(model => model.Student_Id, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control form-control-sm",
+                            @placeholder = "Application_Date",
+                            @Value = ViewBag.Id,
+                        }
+                    })
+                </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        // On change of status dropdown
+                        $('#statusSelect').change(function () {
+                            var selectedStatus = $(this).val();
+
+                            // Check if the status is 'Admitted'
+                            if (selectedStatus === 'Admitted') {
+                                // Show the Application Date field
+                                $('#applicationDateDiv').show();
+                            } else {
+                                // Hide the Application Date field
+                                $('#applicationDateDiv').hide();
+                            }
+                        });
+                    });
+                </script>
+
+            </div>
+                    <div class="dropdown-divider"></div>
+                    <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Comments) </label>
+                    <div class="form-row">
+
+                        @Html.TextAreaFor(model => model.Comments, 4, 70, htmlAttributes: new
+                   {
+                       id = "Comments", // Make sure the ID matches the one in getElementById
+                       style = "width: 100%; max-width:100%;",
+                       @placeholder = "Comments about the students",
+                       @autofocus = "",
+                       @Required = true,
+                       @class = "form-control form-rounded2",
+                       @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+                   })
+                        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+
+                        <script>
+                            document.getElementById("Comments").addEventListener("paste", function (event) {
+                                // Prevent the default paste behavior
+                                event.preventDefault();
+
+                                // Get the pasted content as plain text
+                                var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+
+                                // Sanitize the pasted content (you may use a library for this)
+                                var sanitizedText = sanitizeFunction(text);
+
+                                // Insert the sanitized plain text into the textarea as HTML
+                                document.execCommand("insertHTML", false, sanitizedText);
+                            });
+
+                            function sanitizeFunction(input) {
+                                // Implement your own sanitization logic or use a library
+                                // to ensure that the pasted content is safe.
+                                // Example: Implement a function to escape HTML entities.
+                                return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                            }
+                        </script>
+
+                    </div>
+                    <div class="dropdown-divider"></div>
+
+                    <div class="col d-flex justify-content-center">
+                        <input type="submit" name="action" value="Submit " class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed to add Waitlist ?')" />
+                        <b>|</b>
+
+                        <script>
+                            $(function () {
+                                $('#Create').click(function () {
+                                    if (confirm('Are you sure?')) {
+                                        window.location.href = $(this).data('url');
+                                    }
+                                });
+                            });
+                        </script>
+
+                        <a href="@Request.UrlReferrer" class="btn btn-primary">Back to Profile</a>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</div>

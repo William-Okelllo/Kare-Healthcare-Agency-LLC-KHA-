@@ -1,0 +1,239 @@
+﻿@model IShop.Core.Training
+
+@{
+    ViewBag.Title = "Training Add";
+}
+
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+        $("#datepicker3").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-11 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> New Training Outcome </h4>
+                <div class="dropdown-divider"></div>
+
+                @using (Html.BeginForm("Create", "Training", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Start_Date)</label>
+                            @Html.EditorFor(model => model.Start_Date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Start_Date",
+                               id = "datepicker",
+
+                               @required = "required",
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.End_Date)</label>
+                            @Html.EditorFor(model => model.End_Date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "End_Date",
+                               id = "datepicker2",
+
+                               @required = "required",
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.School)</label>
+                            @Html.EditorFor(model => model.School, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "School",
+                               @required = "required",
+                           }
+                       })
+                        </div>
+
+                        <div class="form-group col-md-2" id="other" style="display:nosne">
+                            <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Status)</label>
+                            @{
+                                List<SelectListItem> b = new List<SelectListItem>();
+                                b.Add(new SelectListItem
+                                {
+                                    Text = "Completed",
+                                    Value = "Completed",
+                                });
+                                b.Add(new SelectListItem
+                                {
+                                    Text = "Incomplete",
+                                    Value = "Incomplete",
+                                });
+                                b.Add(new SelectListItem
+                                {
+                                    Text = "Dropped Out",
+                                    Value = "Dropped Out",
+                                });
+
+                            }@Html.DropDownListFor(model => model.Status, b, "---Select Status---", new { @class = "form-control form-control-sm", @required = "required", })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3" style="display:none">
+                            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Student_Id)</label>
+                            @Html.EditorFor(model => model.Student_Id, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @placeholder = "Application_Date",
+                                    @Value = ViewBag.Id,
+                                }
+                            })
+                        </div>
+                        <div class="form-group col-md-2" id="other">
+                            <label style="color:black"><i class="fa fa-check-circle text-purple"></i> @Html.LabelFor(model => model.Paid)</label>
+                            @Html.DropDownListFor(model => model.Paid,
+                                new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Yes", Value = "true" },
+                                    new SelectListItem { Text = "No", Value = "false" }
+                                },
+                                new
+                                    {
+                                    @class = "form-control form-control-sm",
+                                    @placeholder = "Pass",
+                                    @Required = true // This will disable the dropdown if you want it read-only
+                                }
+                            )
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Tuition_Pay_Date)</label>
+                            @Html.EditorFor(model => model.Tuition_Pay_Date, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Tuition_Pay_Date",
+                               id = "datepicker3",
+                               @required = "required",
+                           }
+                       })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Amount)</label>
+                            @Html.EditorFor(model => model.Amount, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control form-control-sm ",
+                               @placeholder = "Amount",
+                               @required = "required",
+                           }
+                       })
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" id="other" style="display:nosne">
+                                <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Certification_Status)</label>
+                                @{
+                                    List<SelectListItem> n = new List<SelectListItem>();
+                                    n.Add(new SelectListItem
+                                    {
+                                        Text = "Certified",
+                                        Value = "Certified",
+                                    });
+                                    n.Add(new SelectListItem
+                                    {
+                                        Text = "Licensed",
+                                        Value = "Licensed",
+                                    });
+                                    n.Add(new SelectListItem
+                                    {
+                                        Text = "Not Yet",
+                                        Value = "Not Yet",
+                                    });
+
+                                }@Html.DropDownListFor(model => model.Certification_Status, n, "---Select Certification_Status---", new { @class = "form-control form-control-sm", @required = "required", })
+                            </div>
+
+                            <div class="form-group col-md-3" id="other" style="display:nosne">
+                                <label><i class="fa fa-bookmark text-purple"></i>   @Html.LabelFor(model => model.Certification_Test_Result)</label>
+                                @{
+                                    List<SelectListItem> p = new List<SelectListItem>();
+                                    p.Add(new SelectListItem
+                                    {
+                                        Text = "Pass",
+                                        Value = "Pass",
+                                    });
+                                    p.Add(new SelectListItem
+                                    {
+                                        Text = "Partial Pass",
+                                        Value = "Partial Pass",
+                                    });
+
+                                    p.Add(new SelectListItem
+                                    {
+                                        Text = "Retake",
+                                        Value = "Retake",
+                                    });
+                                    p.Add(new SelectListItem
+                                    {
+                                        Text = "Not Yet",
+                                        Value = "Not Yet",
+                                    });
+
+                                }@Html.DropDownListFor(model => model.Certification_Test_Result, p, "---Select Certification_Test_Result---", new { @class = "form-control form-control-sm", @required = "required", })
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+
+                        <div class="col d-flex justify-content-center">
+                            <input type="submit" name="action" value="Submit " class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed to add Training ?')" />
+                            <b>|</b>
+
+                            <script>
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
+                            </script>
+
+                            <a href="@Request.UrlReferrer" class="btn btn-primary">Back to Profile</a>
+                        </div>
+
+                        }
+                    </div>
+                </div>
+    </div>
+</div>
+</div>

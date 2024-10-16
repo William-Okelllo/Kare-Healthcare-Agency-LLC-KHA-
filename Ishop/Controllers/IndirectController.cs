@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using IShop.Core;
 using Ishop.Infa;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+using IShop.Core.Interface;
 
 namespace Ishop.Controllers
 {
@@ -96,9 +97,12 @@ namespace Ishop.Controllers
             {
                 db.Entry(indirect).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+               
             }
-            return View(indirect);
+            TempData["msg"] = "Cost updated successfully ";
+            Workplan_context WW = new Workplan_context();
+            var Wp = WW.workplans.Find(indirect.WorkPlan_Id);
+            return RedirectToAction("Budget_view", "Workplan", new { Track = Wp.Track });
         }
 
         // GET: Indirect/Delete/5

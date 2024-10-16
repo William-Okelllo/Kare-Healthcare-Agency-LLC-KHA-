@@ -1,0 +1,240 @@
+﻿@model IShop.Core.Sheet
+
+@{
+    ViewBag.Title = "Post Sheet";
+}
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-10 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h5 style="color:purple"><i class="fa fa-bookmark"></i> Timesheet Add </h5>
+                <small> <b><i class="fa fa-calendar-day"></i>  Date :</b> @ViewBag.selectedDate.ToString("dd-dddd-MMMM-yyyy")</small>
+                <div class="dropdown-divider"></div>
+                @using (Html.BeginForm("Post", "Sheet", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <form>
+                <div class="row" style="display:nsone">
+                    <div class="form-group col-md-2" id="other">
+                        <label><i class="fa fa-user-circle text-warning"></i> @Html.LabelFor(model => model.Employee) </label>
+                        @Html.EditorFor(model => model.Employee, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Value = ViewBag.Emm.Fullname,
+                           @Readonly = true,
+
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2" id="other">
+                        <label><i class="fa fa-tags text-secondary"></i> @Html.LabelFor(model => model.Position) </label>
+                        @Html.EditorFor(model => model.Position, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Value = ViewBag.Emm.Designation,
+                           @Readonly = true,
+
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2" style="display:none">
+                        <label><i class="fa fa-tags text-secondary"></i> @Html.LabelFor(model => model.Added) </label>
+                        @Html.EditorFor(model => model.Added, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Value = ViewBag.selectedDate,
+                           @Readonly = true,
+
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2" style="display:none">
+                        <label><i class="fa fa-tags text-secondary"></i> @Html.LabelFor(model => model.Staff) </label>
+                        @Html.EditorFor(model => model.Staff, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Value = User.Identity.Name,
+                           @Readonly = true,
+
+                       }
+                   })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-clock text-success"></i> @Html.LabelFor(model => model.Start_time) </label>
+                        @Html.EditorFor(model => model.Start_time, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control form-control-sm",
+                                @Placeholder = "Start_time",
+                                id = "Start_time",
+                                @required = "required",
+                            }
+                        })
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label><i class="fa fa-clock text-danger"></i> @Html.LabelFor(model => model.End_time) </label>
+                        @Html.EditorFor(model => model.End_time, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control form-control-sm",
+                                @Placeholder = "End_time",
+                                id = "End_time",
+                                @required = "required",
+                            }
+                        })
+                    </div>
+
+                    <div class="form-group col-md-1">
+                        <label><i class="fa fa-user-clock text-warning"></i> @Html.LabelFor(model => model.Hours) </label>
+                        @Html.EditorFor(model => model.Hours, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control form-control-sm",
+                                @Placeholder = "Hours",
+                                @Readonly = true,
+                                id = "Hours"
+                            }
+                        })
+                    </div>
+
+                    <div id="timeDifference" style="color:red;"></div>
+
+                    <script>
+                        function calculateTimeDifference() {
+                            const startTimeStr = document.getElementById('Start_time').value;
+                            const endTimeStr = document.getElementById('End_time').value;
+
+                            // Check if both time fields are filled
+                            if (!startTimeStr || !endTimeStr) {
+                                document.getElementById('timeDifference').innerText = '';
+                                document.getElementById('Hours').value = '';
+                                return;
+                            }
+
+                            const startTime = new Date(`1970-01-01T${startTimeStr}:00`);
+                            const endTime = new Date(`1970-01-01T${endTimeStr}:00`);
+
+                            // Clear previous error message
+                            document.getElementById('timeDifference').innerText = '';
+
+                            // Check if start time is earlier than end time
+                            if (startTime >= endTime) {
+                                document.getElementById('timeDifference').innerText = 'Start time must be earlier than end time.';
+                                document.getElementById('Hours').value = '';
+                                return;
+                            }
+
+                            // Calculate time difference in milliseconds
+                            const diffMs = endTime - startTime;
+
+                            // Calculate difference in hours (including fractions for minutes)
+                            const diffHrs = diffMs / (1000 * 60 * 60); // convert milliseconds to hours
+
+                            // Set the calculated hours
+                            document.getElementById('Hours').value = diffHrs.toFixed(2);
+                        }
+
+                        window.onload = function () {
+                            document.getElementById('End_time').addEventListener('input', calculateTimeDifference);
+                        };
+                    </script>
+
+                </div>
+                <ul style="display:none" id="Properties">
+                    <li><i class="fa fa-spin fa-circle-notch text-primary"></i>  <span id="Description"></span></li>
+
+                </ul>
+                <div class="dropdown-divider"></div>
+                <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Description) </label>
+                <div class="form-row">
+
+                    @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+               {
+                   id = "Comments", // Make sure the ID matches the one in getElementById
+                   style = "width: 70%; max-width:70%;",
+                   @placeholder = "Additional information",
+                   @autofocus = "",
+                   @Required = true,
+                   @class = "form-control form-rounded2",
+                   @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+               })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                    <script>
+                        document.getElementById("Description").addEventListener("paste", function (event) {
+                            // Prevent the default paste behavior
+                            event.preventDefault();
+
+                            // Get the pasted content as plain text
+                            var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+
+                            // Sanitize the pasted content (you may use a library for this)
+                            var sanitizedText = sanitizeFunction(text);
+
+                            // Insert the sanitized plain text into the textarea as HTML
+                            document.execCommand("insertHTML", false, sanitizedText);
+                        });
+
+                        function sanitizeFunction(input) {
+                            // Implement your own sanitization logic or use a library
+                            // to ensure that the pasted content is safe.
+                            // Example: Implement a function to escape HTML entities.
+                            return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                        }
+                    </script>
+
+                </div>
+
+                <div class="dropdown-divider"></div>
+                <div style="text-align:center">
+                    <small><i class="fa fa-clock text-purple"></i> Actions</small>
+                </div>
+                <div class=" dropdown-divider"></div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Post Timesheet  " class="btn btn btn-warning" onclick="return confirm('Are you sure you want to post this Timesheet?');" />
+                        || <input type="reset" value="Reset  " class="btn btn btn-danger" />
+                        ||
+                        @Html.ActionLink("Back to List", "Calendar", "Sheet", null, new { @class = "btn btn-primary btn" })
+                    </div>
+                </div>
+            </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>

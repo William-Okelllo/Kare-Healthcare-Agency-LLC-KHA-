@@ -42,13 +42,27 @@ namespace Ishop.Controllers
 
         }
         // GET: Admission/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Profile(int? id)
         {
+            Waitlist_context WC = new Waitlist_context();
+            var Waitlistdata =WC.waitlists.Where(c => c.Student_Id == id);
+            ViewBag.Waitlistdata = Waitlistdata;
+
+
+            Training_context TC = new Training_context();
+            var Trains = TC.training.Where(c => c.Student_Id == id);
+            ViewBag.Trains = Trains;
+
+
+            Emp_context EEM = new Emp_context();
+            var Empp =EEM.emps.Where(c => c.Student_Id == id);
+            ViewBag.Empp = Empp;    
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Admission admission = await db.admissions.FindAsync(id);
+            Admission admission =  db.admissions.Find(id);
             if (admission == null)
             {
                 return HttpNotFound();
@@ -59,54 +73,7 @@ namespace Ishop.Controllers
         // GET: Admission/Create
         public async Task<ActionResult> Add()
         {
-            string apiUrl = "https://restcountries.com/v3.1/all";
-            List<string> countryNames = new List<string>();
-
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseData = await response.Content.ReadAsStringAsync();
-                    JArray countries = JArray.Parse(responseData);
-
-                    // Extract country names
-                    foreach (var country in countries)
-                    {
-                        var countryName = country["name"]["common"].ToString();
-                        countryNames.Add(countryName);
-                    }
-
-                    // Sort the list of country names alphabetically
-                    countryNames.Sort();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any errors that occur during API call
-                Console.WriteLine("Error fetching countries: " + ex.Message);
-            }
-
-            // Passing the list of countries to the ViewBag
-            ViewBag.CountriesList = new SelectList(countryNames);
-
-
-
-
-
-
-            List<int> years = new List<int>();
-            int startYear = 2000;
-            int currentYear = DateTime.Now.Year;
-
-            for (int i = startYear; i <= currentYear; i++)
-            {
-                years.Add(i);
-            }
-
-            // Passing the list of years to the ViewBag
-            ViewBag.YearsList = new SelectList(years);
+           
             return View();
         }
 
@@ -115,7 +82,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Country,Social_security,Work_Permit,Date,Year")] Admission admission)
+        public async Task<ActionResult> Add([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Address,Level_Education,Employement_Status,Em_Name,Em_Phone,Em_Mail,Comments,Text")] Admission admission)
         {
 
 
@@ -136,31 +103,6 @@ namespace Ishop.Controllers
 
 
 
-        public ActionResult Performance(string Id)
-        {
-            Perform_context PP = new Perform_context();
-            var Perfom = PP.performs.Where(c => c.Student == Id).ToList();
-
-            // Get unique subjects and grades
-            var subjects = Perfom.Select(p => p.Subjects).Distinct().ToList();
-            var grades = Perfom.Select(p => p.Pass).Distinct().ToList();
-
-
-            // Prepare data for the chart
-            var datasets = subjects.Select(subject => new {
-                subject = subject,
-                data = grades.Select(grade => {
-                    var performance = Perfom.FirstOrDefault(p => p.Subjects == subject && p.Pass == grade);
-                    return performance?.Percentage ?? 0;
-                }).ToList()
-            }).ToList();
-
-            ViewBag.Grades = JsonConvert.SerializeObject(grades);
-            ViewBag.Datasets = JsonConvert.SerializeObject(datasets);
-            ViewBag.Perfom = Perfom;
-
-            return View();
-        }
 
 
 
@@ -174,54 +116,7 @@ namespace Ishop.Controllers
         // GET: Admission/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            string apiUrl = "https://restcountries.com/v3.1/all";
-            List<string> countryNames = new List<string>();
-
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseData = await response.Content.ReadAsStringAsync();
-                    JArray countries = JArray.Parse(responseData);
-
-                    // Extract country names
-                    foreach (var country in countries)
-                    {
-                        var countryName = country["name"]["common"].ToString();
-                        countryNames.Add(countryName);
-                    }
-
-                    // Sort the list of country names alphabetically
-                    countryNames.Sort();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any errors that occur during API call
-                Console.WriteLine("Error fetching countries: " + ex.Message);
-            }
-
-            // Passing the list of countries to the ViewBag
-            ViewBag.CountriesList = new SelectList(countryNames);
-
-
-
-
-
-
-            List<int> years = new List<int>();
-            int startYear = 2000;
-            int currentYear = DateTime.Now.Year;
-
-            for (int i = startYear; i <= currentYear; i++)
-            {
-                years.Add(i);
-            }
-
-            // Passing the list of years to the ViewBag
-            ViewBag.YearsList = new SelectList(years);
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -239,7 +134,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Country,Social_security,Work_Permit,Date,Year")] Admission admission)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Address,Level_Education,Employement_Status,Em_Name,Em_Phone,Em_Mail,Comments,Text")] Admission admission)
         {
             if (ModelState.IsValid)
             {
