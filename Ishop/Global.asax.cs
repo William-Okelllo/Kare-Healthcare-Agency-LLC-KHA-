@@ -35,7 +35,7 @@ namespace Ishop
             Database.SetInitializer<Admission_context>(null);
             Database.SetInitializer<Sheet_context>(null);
             Database.SetInitializer<Emp_context>(null);
-
+            Database.SetInitializer<Expense_context>(null);
         }
     }
 }

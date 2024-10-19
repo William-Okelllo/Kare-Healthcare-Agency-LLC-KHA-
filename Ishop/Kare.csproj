@@ -415,6 +415,7 @@
     <Compile Include="Controllers\EmpController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\ExpsController.cs" />
     <Compile Include="Controllers\GrantsController.cs" />
     <Compile Include="Controllers\HODsController.cs" />
@@ -8033,6 +8034,9 @@
     <Content Include="Views\Training\Edit.cshtml" />
     <Content Include="Views\Emp\Create.cshtml" />
     <Content Include="Views\Emp\Edit.cshtml" />
+    <Content Include="Views\Expenses\Add.cshtml" />
+    <Content Include="Views\Expenses\Edit.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

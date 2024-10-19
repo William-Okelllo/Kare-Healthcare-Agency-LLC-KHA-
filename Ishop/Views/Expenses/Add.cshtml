@@ -1,0 +1,193 @@
+﻿@model IShop.Core.Expense
+
+@{
+    ViewBag.Title = "Expense";
+}
+
+<style>
+    .form-rounded2 {
+        border-radius: 1rem;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+    });
+
+</script>
+<br />
+<div class="col d-flex justify-content-center">
+    <div class="col-md-8 col-sm-12 col-12">
+        <div class="card mb- mb-xl-0" style="border-radius: 24px;">
+
+            <div class="card-body" style="background-color: white;border-radius: 24px;">
+                <h4 style="color:red"><i class="fa fa-funnel-dollar"></i> Expense Add </h4>
+                <div class="dropdown-divider"></div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+            <div class="row">
+
+                <script type="text/javascript">
+                    $(function () {
+
+                        $("#Track").chosen();
+
+
+                    });
+                </script>
+                <div class="form-group col-md-3" style="display:none">
+                    <label style="color:black"><i class="fa fa-calendar-day text-danger"></i> @Html.LabelFor(model => model.AddedOn)</label>
+                    @Html.EditorFor(model => model.AddedOn, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm ",
+                       @placeholder = "Admission Date",
+                       @Value = DateTime.Now,
+                            @Readonly = true
+
+                   }
+               })
+                </div>
+                <div class="form-group col-md-3" id="trackDropdown" style="display:s;">
+                    <label><i class="fa fa-spinner text-purple"></i> @Html.LabelFor(model => model.Track)</label>
+                    @{
+                        List<SelectListItem> w = new List<SelectListItem>();
+                        w.Add(new SelectListItem
+                        {
+                            Text = "Track 1",
+                            Value = "Track 1",
+                        });
+
+                        w.Add(new SelectListItem
+                        {
+                            Text = "Track 3",
+                            Value = "Track 3",
+                        });
+
+                    }
+                    @Html.DropDownListFor(model => model.Track, w, "---Select Track---", new { @class = "form-control form-control-sm" })
+                </div>
+                <div class="form-group col-md-4">
+                    <label><i class=" fa fa-book-reader text-danger"></i>   @Html.LabelFor(model => model.Title)</label>
+                    @Html.EditorFor(model => model.Title, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Expense Name",
+                       @Required = true,
+
+
+                   }
+               })
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label><i class=" fa fa-dollar-sign text-danger"></i>   @Html.LabelFor(model => model.Amount)</label>
+                    @Html.EditorFor(model => model.Amount, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control form-control-sm",
+                       @Placeholder = "Amount",
+                       @Required = true,
+                       onchange = "addCommas(this)",
+
+                   }
+               })
+
+
+                </div>
+                <script>
+                    function addCommas(element) {
+                        var value = parseFloat(element.value.replace(/,/g, ''));
+                        element.value = value.toLocaleString('en-US');
+                    }
+                    $(function () {
+                        $('form').submit(function () {
+                            var amountString = $('#Amount').val();
+                            var amountWithoutCommas = amountString.replace(/,/g, '');
+                            $('#Amount').val(amountWithoutCommas);
+
+                        });
+
+                    });
+                </script>
+            </div>
+                    <ul style="display:none" id="Properties">
+                        <li><i class="fa fa-spin fa-circle-notch text-primary"></i>  <span id="Description"></span></li>
+
+                    </ul>
+                    <div class="dropdown-divider"></div>
+                    <label><i class="fa fa-comment-dots text-primary"></i> @Html.LabelFor(model => model.Description) </label>
+                    <div class="form-row">
+
+                        @Html.TextAreaFor(model => model.Description, 4, 70, htmlAttributes: new
+                   {
+                       id = "Comments", // Make sure the ID matches the one in getElementById
+                       style = "width: 70%; max-width:70%;",
+                       @placeholder = "Additional information",
+                       @autofocus = "",
+                       @Required = true,
+                       @class = "form-control form-rounded2",
+                       @data_required_if = "#Project_Name"  // Custom attribute for conditional validation
+                   })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                        <script>
+                            document.getElementById("Description").addEventListener("paste", function (event) {
+                                // Prevent the default paste behavior
+                                event.preventDefault();
+
+                                // Get the pasted content as plain text
+                                var text = (event.clipboardData || window.clipboardData).getData("text/plain");
+
+                                // Sanitize the pasted content (you may use a library for this)
+                                var sanitizedText = sanitizeFunction(text);
+
+                                // Insert the sanitized plain text into the textarea as HTML
+                                document.execCommand("insertHTML", false, sanitizedText);
+                            });
+
+                            function sanitizeFunction(input) {
+                                // Implement your own sanitization logic or use a library
+                                // to ensure that the pasted content is safe.
+                                // Example: Implement a function to escape HTML entities.
+                                return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                            }
+                        </script>
+
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div>
+                        <div class="col d-flex justify-content-center">
+                            <input type="submit" name="action" value="Add Expense " class="btn  btn btn-outline-success" onclick="return confirm('Proceed to add?')" />
+
+                            <script>
+                                $(function () {
+                                    $('#Create').click(function () {
+                                        if (confirm('Are you sure?')) {
+                                            window.location.href = $(this).data('url');
+                                        }
+                                    });
+                                });
+                            </script>
+                            <b>|</b>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary btn" })
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

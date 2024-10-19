@@ -72,6 +72,8 @@
     <Compile Include="Emp_Repo.cs" />
     <Compile Include="Exams_context.cs" />
     <Compile Include="Exams_repo.cs" />
+    <Compile Include="Expense_context.cs" />
+    <Compile Include="Expense_Repo.cs" />
     <Compile Include="Exp_context.cs" />
     <Compile Include="Exp_repo.cs" />
     <Compile Include="Grant_context.cs" />

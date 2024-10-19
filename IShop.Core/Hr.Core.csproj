@@ -55,6 +55,7 @@
     <Compile Include="Emp.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Exam.cs" />
+    <Compile Include="Expense.cs" />
     <Compile Include="Grant.cs" />
     <Compile Include="HOD.cs" />
     <Compile Include="Immigrant.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Interface\IEmployee.cs" />
     <Compile Include="Interface\Iexam.cs" />
     <Compile Include="Interface\IExp.cs" />
+    <Compile Include="Interface\Iexpense.cs" />
     <Compile Include="Interface\IGrant.cs" />
     <Compile Include="Interface\Ihod.cs" />
     <Compile Include="Interface\IIndirect.cs" />
