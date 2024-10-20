@@ -54,6 +54,7 @@
   <ItemGroup>
     <Report Include="Admissions.rdl" />
     <Report Include="Direct_cost.rdl" />
+    <Report Include="Expenses.rdl" />
     <Report Include="Performance.rdl" />
     <Report Include="Sheets.rdl" />
   </ItemGroup>
