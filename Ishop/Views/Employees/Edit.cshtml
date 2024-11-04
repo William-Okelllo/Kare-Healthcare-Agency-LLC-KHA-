@@ -209,7 +209,7 @@
                            })
 
                             </div>
-                            
+
                             <div class="form-group col-md-2">
                                 <label><i class=" fa fa-suitcase text-primary"></i>   @Html.LabelFor(model => model.Rate)</label>
                                 @Html.EditorFor(model => model.Rate, new
@@ -268,6 +268,8 @@
                            })
 
                             </div>
+
+
                             <div class="form-group col-md-2">
                                 <h6 class="form-check" style="color:midnightblue;">
 
@@ -282,7 +284,85 @@
 
                                 </h6>
                             </div>
+
+
+
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-envelope text-primary"></i>   @Html.LabelFor(model => model.Employement_Status)</label>
+                                @Html.EditorFor(model => model.Employement_Status, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Employement_Status",
+
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label><i class=" fa fa-language text-primary"></i>   @Html.LabelFor(model => model.Language)</label>
+                                @Html.EditorFor(model => model.Language, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Language",
+
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class=" fa fa-code-branch text-primary"></i>   @Html.LabelFor(model => model.Zip)</label>
+                                @Html.EditorFor(model => model.Zip, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @Placeholder = "Zip",
+
+
+
+                               }
+                           })
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label><i class="fa fa-map text-primary"></i> @Html.LabelFor(model => model.City)</label>
+                                @Html.EditorFor(model => model.City, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control form-control-sm",
+                                        @id = "City", // Set ID to bind Autocomplete
+                                        @Placeholder = "City"
+                                    }
+                                })
+                                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-YqZINvC4zTP1wVxbTeEgmIsb5z0cQrQ&libraries=places"></script>
+                                <script type="text/javascript">
+                                    google.maps.event.addDomListener(window, 'load', function () {
+                                        var options = {
+                                            types: ['(cities)'] // Restrict to cities
+                                        };
+                                        var places = new google.maps.places.Autocomplete(document.getElementById('City'), options);
+                                        google.maps.event.addListener(places, 'place_changed', function () {
+                                            var place = places.getPlace();
+                                            document.getElementById('Latitude').value = place.geometry.location.lat();
+                                            document.getElementById('Longitude').value = place.geometry.location.lng();
+                                        });
+                                    });
+                                </script>
+                            </div>
+
+                        </div>
+
                             <div class="dropdown-divider"></div>
                             <input type="submit" value="Update/Save" class="btn btn-warning" />
 

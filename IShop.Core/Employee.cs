@@ -8,6 +8,17 @@ namespace IShop.Core
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
 
+        public string Employement_Status { get; set; }
+        public string Education { get; set; }
+        public string Ethinicity { get; set; }
+        public string Language { get; set; }
+        public string City { get; set; }
+
+        public string Zip { get; set; }
+
+
+
+
         public string Username { get; set; }
         public string Fullname { get; set; }
 

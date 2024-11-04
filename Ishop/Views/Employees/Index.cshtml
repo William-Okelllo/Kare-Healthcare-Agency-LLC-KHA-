@@ -117,10 +117,11 @@
                     <th style="background-color: #53085B; font-size: medium; ">Added On </th>
                     <th style="background-color: #53085B; font-size: medium; ">Full Name</th>
                     <th style="background-color: #53085B; font-size: medium; ">Email Address</th>
-                    <th style="background-color: #53085B; font-size: medium; ">Contact</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Zip & State</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Employement Status</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Language</th>
                     <th style="background-color: #53085B; font-size: medium; ">Department</th>
                     <th style="background-color: #53085B; font-size: medium; ">Rates</th>
-                    <th style="background-color: #53085B; font-size: medium; "> Access</th>
                     <th style="background-color: #53085B; font-size: medium;">Action</th>
                 </tr>
             </thead>
@@ -131,35 +132,45 @@
                         <td style="background-color: white;">
                             <i class="fa fa-calendar-check text-primary"></i>  @item.CreatedOn.ToString("dd-MMM-yyyy")
                             <div class="dropdown-divider"></div>
-                            <B style="color:navy;font-size:small">  <span class="badge badge-warning"><medium><i class="fa fa-circle-notch text-white"></i>   </medium> </span> Status :</B> 
-                            @if(@item.Active == true) { <b style="color: forestgreen; font-size: small">Active</b>} else { <b style="color: red; font-size: small">Inactive</b>}
+                            <B style="color:navy;font-size:small">  <span class="badge badge-warning"><medium><i class="fa fa-circle-notch text-white"></i>   </medium> </span> Status :</B>
+                            @if (@item.Active == true)
+                            {<b style="color: forestgreen; font-size: small">Active</b>}
+                            else
+                            { <b style="color: red; font-size: small">Inactive</b>}
                         </td>
 
                         <td style="background-color: white;">
                             <i class="fa fa-user-circle text-primary"></i> @item.Fullname
                             <div class="dropdown-divider"></div>
-                             <B style="color: navy; font-size: medium; font-size: small"> <span class="badge badge-secondary"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> User Name :</B> :@item.Username
+                            <B style="color: navy; font-size: medium; font-size: small"> <span class="badge badge-secondary"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span> User Name :</B> :@item.Username
                         </td>
-                       
-                        <td style="background-color: white;font-size:small;color:dodgerblue"> <i class="fa fa-envelope text-primary"></i> @item.Email</td>
-                        <td style="background-color: white;"> <i class="fa fa-mobile text-primary"></i> @item.Contact</td>
+
+                        <td style="background-color: white;font-size:small;color:dodgerblue">
+                            <i class="fa fa-envelope text-warning"></i> @item.Email
+                            <div class="dropdown-divider"></div>
+                            <i class="fa fa-mobile text-warning"></i> @item.Contact
+                        </td>
+                        <td style="background-color: white;">
+                            <i class="fa fa-code-branch text-warning"></i> @item.Zip
+                            <div class="dropdown-divider"></div>
+                            <i class="fa fa-map text-warning"></i> @item.City
+
+                        </td>
+                        <td style="background-color: white;"> <i class="fa fa-book-reader text-warning"></i>  @item.Employement_Status</td>
+                        <td style="background-color: white;"> <i class="fa fa-language text-warning"></i>  @item.Language</td>
                         <td style="background-color: white;">
                             <i class="fa fa-university text-primary"></i> @item.DprtName
                             <div class="dropdown-divider"></div>
 
-                            <B style="color: dimgray; font-size: small"><span class="badge badge-warning"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span>  Designation : @item.Designation </B> 
+                            <B style="color: dimgray; font-size: small"><span class="badge badge-warning"><medium><i class="fa fa-bookmark text-white"></i>   </medium> </span>  Designation : @item.Designation </B>
 
 
                         </td>
                         <td style="background-color: white;">
                             <span class="badge badge-warning"><medium> <b>Charge Out Rate </b>  </medium> </span>    @item.Rate.ToString("#,##0.00")  <small><b>/=</b></small>
-                          
+
                         </td>
-                        <td style="background-color:ghostwhite">
-                            <a href="@Url.Action("Grant_Role", "Accesses", new { UserId = item.Userid })">
-                                <i class="fa fa-user-shield"></i> Manage Roles
-                            </a>
-                        </td>
+                        
                         <td style="background-color:ghostwhite">
 
                             <div class="btn-group dropdown">
@@ -172,7 +183,10 @@
                                     <a href="@Url.Action("Edit", "Employees", new { id = item.Id })" class="dropdown-item">
                                         <i class="fa fa-pen-nib text-primary"></i> Update Employe Info
                                     </a>
-
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Grant_Role", "Accesses", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-user-shield"></i> Manage Roles
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this Employee Account ')) { window.location.href = '@Url.Action("Delete", "Employees", new { id = item.Id, })'; }">
                                         <i class="fa fa-times-circle text-danger"></i> Drop Employee Account

@@ -57,6 +57,10 @@ namespace IShop.Core
         public string Comments { get; set; }
 
 
+        public string Ethinicity { get; set; }
+        public string Language { get; set; }
+   
+
 
 
 

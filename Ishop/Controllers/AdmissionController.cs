@@ -82,7 +82,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Address,Level_Education,Employement_Status,Em_Name,Em_Phone,Em_Mail,Comments,Text")] Admission admission)
+        public async Task<ActionResult> Add([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Address,Level_Education,Employement_Status,Em_Name,Em_Phone,Em_Mail,Comments,Text,Ethinicity,Language")] Admission admission)
         {
 
 
@@ -134,7 +134,7 @@ namespace Ishop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Address,Level_Education,Employement_Status,Em_Name,Em_Phone,Em_Mail,Comments,Text")] Admission admission)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Contacts,Email,Gender,Date,Admin_No,Address,Level_Education,Employement_Status,Em_Name,Em_Phone,Em_Mail,Comments,Text,Ethinicity,Language")] Admission admission)
         {
             if (ModelState.IsValid)
             {

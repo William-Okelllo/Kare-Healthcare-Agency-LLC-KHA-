@@ -219,6 +219,36 @@
                    })
 
                     </div>
+                    <div class="form-group col-md-2">
+                        <label><i class=" fa fa-street-view text-primary"></i>   @Html.LabelFor(model => model.Ethinicity)</label>
+                        @Html.EditorFor(model => model.Ethinicity, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Ethinicity",
+
+
+
+                       }
+                   })
+
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class=" fa fa-language text-primary"></i>   @Html.LabelFor(model => model.Language)</label>
+                        @Html.EditorFor(model => model.Language, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-sm",
+                           @Placeholder = "Language",
+
+
+
+                       }
+                   })
+
+                    </div>
                 </div>
                 <h6>Emergency Contacts</h6>
                 <div class="dropdown-divider"></div>

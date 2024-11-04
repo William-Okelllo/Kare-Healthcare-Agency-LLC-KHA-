@@ -110,6 +110,7 @@
                     <th style="background-color: #53085B; font-size: medium; ">Contact</th>
                     <th style="background-color: #53085B; font-size: medium; ">Gender</th>
                     <th style="background-color: #53085B; font-size: medium; ">Social & Work</th>
+                    <th style="background-color: #53085B; font-size: medium; ">Language & Ethinicity</th>
                     <th style="background-color: #53085B; font-size: medium; ">Action</th>
                 </tr>
             </thead>
@@ -164,47 +165,52 @@
                             <span class="badge badge-success"> <i class="fa fa-graduation-cap"></i> Education Level</span> : <b>@item.Level_Education</b>
                         </td>
 
+                        <td style="background-color: white;">
 
-        <td style="background-color: white;">
-
-
-            <div class="btn-group dropdown">
-                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-hashtag"></i>  . Action
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="@Url.Action("Profile", "Admission", new { id = item.Id })" class="dropdown-item">
-                        <i class="fa fa-user-circle text-success"></i> Student Profile
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="@Url.Action("Edit", "Admission", new { id = item.Id })" class="dropdown-item">
-                        <i class="fa fa-pen-nib text-warning"></i> Update/Edit
-                    </a>
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this ?')) { window.location.href = '@Url.Action("Delete", "Admission", new { id = item.Id })'; }">
-                        <i class="fas fa-times text-danger"></i> Delete Data
-                    </a>
-                    <script>
-                        $(function () {
-                            $('#Delete_User').click(function () {
-                                if (confirm('Are you sure?')) {
-                                    window.location.href = $(this).data('url');
-                                }
-                            });
-                        });
-                    </script>
+                            <span class="badge badge-secondary"> <i class="fa fa-language"></i> language</span> : <b>@item.Language</b>
+                            <div class="dropdown-divider"></div>
+                            <span class="badge badge-secondary"> <i class="fa fa-street-view"></i> Ethinicity </span> : <b>@item.Ethinicity</b>
+                        </td>
+                        <td style="background-color: white;">
 
 
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-hashtag"></i>  . Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                    <a href="@Url.Action("Profile", "Admission", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-user-circle text-success"></i> Student Profile
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@Url.Action("Edit", "Admission", new { id = item.Id })" class="dropdown-item">
+                                        <i class="fa fa-pen-nib text-warning"></i> Update/Edit
+                                    </a>
+                                    <div class="dropdown-divider"></div>
 
-                </div>
-            </div>
+                                    <a class="dropdown-item" onclick="if (confirm('Are you sure you want to delete this ?')) { window.location.href = '@Url.Action("Delete", "Admission", new { id = item.Id })'; }">
+                                        <i class="fas fa-times text-danger"></i> Delete Data
+                                    </a>
+                                    <script>
+                                        $(function () {
+                                            $('#Delete_User').click(function () {
+                                                if (confirm('Are you sure?')) {
+                                                    window.location.href = $(this).data('url');
+                                                }
+                                            });
+                                        });
+                                    </script>
 
 
-        </td>
+
+                                </div>
+                            </div>
 
 
-        </tr>
+                        </td>
+
+
+                    </tr>
 
     }
                 </tbody>
@@ -250,7 +256,7 @@
                 <div id="container" style="text-align:left">
 
                     <div class="pagination" style="text-align:left">
-                        @Html.PagedListPager(Model, page => Url.Action("Mine", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, userName = ViewBag.UserName, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })
                       , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayLinkToIndividualPages = true })
                     </div>
                 </div>
@@ -259,7 +265,6 @@
 
 </div>
 
-</div>
 
 
 
