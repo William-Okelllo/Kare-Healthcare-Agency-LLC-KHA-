@@ -62,12 +62,42 @@
                            @class = "form-control form-control-sm",
                            @Placeholder = "Admin_No",
                            @Required = true,
-
+                           Id= "Admin_No",
 
                        }
                    })
 
+                        <div id="errorMessage" style="display:none;color:red">
+                            <small style="color:red"> <i class="fa fa-exclamation-triangle"></i> <b>Admission already exists   </b></small>
+                        </div>
+
                     </div>
+
+
+
+                    <script>
+$(document).ready(function () {
+    $("#Admin_No").keyup(function () {
+        var Admin_No = $(this).val();
+        $.ajax({
+            url: "@Url.Action("CheckValueExists", "Admission")",
+            data: { Admin_No: Admin_No },
+            success: function (data) {
+                if (data) {
+                    $("#errorMessage").show();
+                    $("#myButton").hide();
+
+                } else {
+                    $("#errorMessage").hide();
+
+                    $("#myButton").show();
+                }
+            }
+        });
+    });
+});
+                    </script>
+
                     <div class="form-group col-md-3">
                         <label><i class=" fa fa-user-graduate text-purple"></i>   @Html.LabelFor(model => model.Name)</label>
                         @Html.EditorFor(model => model.Name, new

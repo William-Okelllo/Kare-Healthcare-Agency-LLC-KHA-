@@ -26,18 +26,18 @@ namespace Ishop.Controllers
         {
             if (!(search == null) && (!(search == "")))
             {
-                return View(db.admissions.OrderByDescending(p => p.Id).Where(c => c.Admin_No.StartsWith(search) || c.Name == search || c.Name.Contains(search)).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.admissions.Where(c => c.Admin_No.StartsWith(search) || c.Name == search || c.Name.Contains(search)).ToList().ToPagedList(page ?? 1, 11));
 
             }
             else if (search == "")
             {
-                return View(db.admissions.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.admissions.ToList().ToPagedList(page ?? 1, 11));
 
 
             }
             else
             {
-                return View(db.admissions.OrderByDescending(p => p.Id).ToList().ToPagedList(page ?? 1, 11));
+                return View(db.admissions.ToList().ToPagedList(page ?? 1, 11));
             }
 
         }
@@ -69,6 +69,24 @@ namespace Ishop.Controllers
             }
             return View(admission);
         }
+
+
+        public ActionResult CheckValueExists(string Admin_No)
+        {
+            bool exists = db.admissions.Any(c => c.Admin_No == Admin_No);
+            return Json(exists, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: Admission/Create
         public async Task<ActionResult> Add()
