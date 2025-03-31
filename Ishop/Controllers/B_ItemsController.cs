@@ -53,7 +53,7 @@ namespace Ishop.Controllers
             ViewBag.Tag = Tag;
             var Admm = AA.items.ToList();
             ViewBag.Admm = new SelectList(Admm, "Name", "Name");
-            return PartialView("Create");
+            return View();
         }
 
         // POST: B_Items/Create
@@ -65,39 +65,45 @@ namespace Ishop.Controllers
             {
                 db.benitems.Add(benitem);
                 db.SaveChanges();
-                Update(benitem.Beneficiary_Id, benitem.Total);
             }
           
             TempData["msg"] = "Item added successfully ";
-            string returnUrl = Request.UrlReferrer.ToString();
-            return Redirect(returnUrl);
+            return RedirectToAction("Profile", "Admission", new { Id = benitem.Beneficiary_Id });
         }
 
-
-
-
-        public void Update(int Beneficiary_Id,decimal Total)
+        public ActionResult Edit(int? id)
         {
-            Benef_context BCC = new Benef_context();
-            var Benn = BCC.benefs.Find(Beneficiary_Id);
-            if(Benn !=null)
+            var Admm = AA.items.ToList();
+            ViewBag.Admm = new SelectList(Admm, "Name", "Name");
+            if (id == null)
             {
-                Benn.Total = Benn.Total + Total;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BCC.SaveChanges();
-
+            Benitem benitem = db.benitems.Find(id);
+            if (benitem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(benitem);
         }
-        public void Delete_cash(int Beneficiary_Id, decimal Total)
+
+        // POST: Waitlist/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Beneficiary_Id,Name,Quantity,Total,Each")] Benitem benitem)
         {
-            Benef_context BCC = new Benef_context();
-            var Benn = BCC.benefs.Find(Beneficiary_Id);
-            if (Benn != null)
+            if (ModelState.IsValid)
             {
-                Benn.Total = Benn.Total - Total;
+                db.Entry(benitem).State = EntityState.Modified;
+                db.SaveChanges();
+                TempData["msg"] = "Waitlist updated successfully ";
             }
-            BCC.SaveChanges();
-
+            return RedirectToAction("Profile", "Admission", new { Id = benitem.Beneficiary_Id });
         }
+
+
 
         // GET: B_Items/Edit/5
 
@@ -108,7 +114,6 @@ namespace Ishop.Controllers
             Benitem benitem = db.benitems.Find(id);
             db.benitems.Remove(benitem);
             db.SaveChanges();
-            Delete_cash(benitem.Beneficiary_Id, benitem.Total);
             TempData["msg"] = "Item Deleted successfully ";
             string returnUrl = Request.UrlReferrer.ToString();
             return Redirect(returnUrl);

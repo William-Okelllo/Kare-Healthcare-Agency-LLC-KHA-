@@ -56,7 +56,15 @@ namespace Ishop.Controllers
 
             Emp_context EEM = new Emp_context();
             var Empp =EEM.emps.Where(c => c.Student_Id == id);
-            ViewBag.Empp = Empp;    
+            ViewBag.Empp = Empp;
+
+
+            benitem_context BC = new benitem_context();
+            var Benefit = BC.benitems.Where(c => c.Beneficiary_Id == id).ToList();
+
+            ViewBag.Benefitotal = BC.benitems.Where(c => c.Beneficiary_Id == id).Select(c => c.Total).DefaultIfEmpty(0).Sum();
+            ViewBag.Benefit = Benefit;
+
 
             if (id == null)
             {

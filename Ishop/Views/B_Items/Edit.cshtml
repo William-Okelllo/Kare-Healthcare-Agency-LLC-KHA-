@@ -34,9 +34,9 @@
         <div class="card mb- mb-xl-0" style="border-radius: 24px;">
 
             <div class="card-body" style="background-color: white;border-radius: 24px;">
-                <h4 style="color:purple"><i class="fa fa-bookmark"></i> Beneficiary Items </h4>
+                <h4 style="color:purple"><i class="fa fa-bookmark"></i> Beneficiary Items (Edit) </h4>
                 <div class="dropdown-divider"></div>
-                
+
                 <div class="row">
                     <div class="form-group col-md-2" style="display:s">
                         <label style="color:black"><i class="fa fa-calendar-day text-purple"></i> @Html.LabelFor(model => model.Beneficiary_Id)</label>
@@ -47,7 +47,6 @@
                            @class = "form-control form-control-sm ",
                            @Readonly = true,
 
-                           @Value = ViewBag.Tag,
                        }
                    })
                     </div>
@@ -90,18 +89,7 @@
                             });
                         });
                     </script>
-                    <div class="form-group col-md-3">
-                        <label><i class="fa fa-hashtag text-purple"></i> @Html.LabelFor(model => model.Each)</label>
-                        @Html.EditorFor(model => model.Each, new
-                        {
-                            htmlAttributes = new
-                            {
-                                @class = "form-control form-control-sm",
-                                @Placeholder = "Price Per Unit",
-                                @Id = "Each" // Add ID for Each
-                            }
-                        })
-                    </div>
+
                     <div class="form-group col-md-3">
                         <label><i class="fa fa-layer-group text-purple"></i> @Html.LabelFor(model => model.Quantity)</label>
                         @Html.EditorFor(model => model.Quantity, new
@@ -112,6 +100,18 @@
                                 @Placeholder = "Quantity",
                                 @Required = true,
                                 @Id = "Quantity" // Add ID for Quantity
+                            }
+                        })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="fa fa-hashtag text-purple"></i> @Html.LabelFor(model => model.Each)</label>
+                        @Html.EditorFor(model => model.Each, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control form-control-sm",
+                                @Placeholder = "Price Per Unit",
+                                @Id = "Each" // Add ID for Each
                             }
                         })
                     </div>
@@ -167,7 +167,7 @@
                 <div class="dropdown-divider"></div>
 
                 <div class="col d-flex justify-content-center">
-                    <input type="submit" name="action" value="Add Item" class="btn btn btn-success" style="color:white" )" />
+                    <input type="submit" name="action" value="Save Changes" class="btn btn btn-success" style="color:white" )" />
                     <b>|</b>
                     <a href="@Request.UrlReferrer" class="btn btn-primary">Back to Profile</a>
                     <script>
@@ -186,4 +186,4 @@
         </div>
     </div>
 </div>
-                }
+}

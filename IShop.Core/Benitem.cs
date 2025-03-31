@@ -20,6 +20,8 @@ namespace IShop.Core
 
         public int Quantity { get; set; }
 
+
+        [Display(Name = "Rate")]
         public Decimal Each { get; set; }
         public Decimal Total { get; set; }
     }

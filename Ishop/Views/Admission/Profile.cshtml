@@ -83,88 +83,95 @@
                     </div>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <small style="color:gray"> <i class="fa fa-book-open"></i> Student Profile</small>
-                        <div class="form-row justify-content-center">
+
+                        <div class="form-row">
 
 
 
                             <div class="col-lg-6 col-12">
-                                <div class="small-box bg-dark" style="border-radius: 15px;color:white">
+                                <div class="small-box bg-light" style="border-radius: 15px;color:white">
                                     <div class="inner">
 
+                                        <h6 style="color:gray"> <i class="fa fa-book-open"></i> Student Profile</h6>
                                         <h4 style="text-align:center"><i class="fa fa-user-circle text-warning"></i> @Model.Name</h4>
-                                        <div class="dropdown-divider"></div>
-                                        <div class="list-group" style="border-radius: 14px; border-left: 5px solid #53085B ">
+                                        <div class="list-group" style="border-radius: 14px; border-left: 3px solid #d5d5d5 ">
                                             <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-user-tag"></i>   <b>Admission No </b> @Model.Admin_No
+                                                <span class="badge badge-warning"> <i class="fa fa-user-tag"></i> </span>  <b>Admission No </b> @Model.Admin_No
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-mobile"></i>   <b>Contacts </b> @Model.Contacts
+                                                <span class="badge badge-warning">  <i class="fa fa-mobile"></i></span>   <b>Contacts </b> @Model.Contacts
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-envelope"></i>   <b>Email Address </b> @Model.Email
+                                                <span class="badge badge-warning">  <i class="fa fa-envelope"></i> </span>  <b>Email Address </b> @Model.Email
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-map-marker"></i>   <b> Address </b> @Model.Email
+                                                <span class="badge badge-warning"> <i class="fa fa-map-marker"></i> </span>  <b> Address </b> @Model.Email
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-map-marker"></i>   <b> Employement Status </b> @Model.Employement_Status
+                                                <span class="badge badge-warning">   <i class="fa fa-map-marker"></i> </span>  <b> Employement Status </b> @Model.Employement_Status
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-graduation-cap"></i>   <b> Education Level </b> @Model.Level_Education
+                                                <span class="badge badge-warning">  <i class="fa fa-graduation-cap"></i> </span>  <b> Education Level </b> @Model.Level_Education
                                             </a>
 
                                         </div>
 
 
                                     </div>
-                                    <div class="icon">
 
-
-                                        <i class="fa  fa-user-circle"></i>
-
-                                    </div>
 
 
 
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-12">
-                                <div class="small-box bg-dark" style="border-radius: 15px;color:white">
-                                    <div class="inner">
+                            <div class="col-lg-1 col-3"></div>
+
+                            <div class="col-lg-5 col-9">
+                                <div class="small-box bg-light" style="border-radius: 15px;color:white">
+
+                                    <div class="card-body">
+                                        <h6 style="color:gray"> <i class="fa fa-book-open"></i> Emergency Contact</h6>
+                                        <div class="inner">
+
+                                            <div class="list-group" style="border-radius: 14px; border-left: 3px solid #d5d5d5 ">
+
+                                                <a href="#" class="list-group-item list-group-item-action ">
+                                                    <span class="badge badge-warning"> <i class="fa fa-user-circle"></i></span>   <b> Name </b> @Model.Em_Name
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action ">
+                                                    <span class="badge badge-warning"> <i class="fa fa-mobile"></i></span>   <b> Contacts </b> @Model.Em_Phone
+                                                </a>
+                                                <a href="#" class="list-group-item list-group-item-action ">
+                                                    <span class="badge badge-warning">  <i class="fa fa-envelope"></i></span>   <b> Address </b> @Model.Em_Mail
+                                                </a>
+                                            </div>
 
 
-                                        <div class="list-group">
-
-                                            <small>Emergency Contacts</small>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-user-circle"></i>   <b> Name </b> @Model.Em_Name
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-mobile"></i>   <b> Contacts </b> @Model.Em_Phone
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action ">
-                                                <i class="fa fa-envelope"></i>   <b> Address </b> @Model.Em_Mail
-                                            </a>
                                         </div>
 
-
                                     </div>
-                                    <div class="icon">
-
-
-                                        <i class="fa  fa-user-circle"></i>
-
-                                    </div>
-
-
-
                                 </div>
+                                <div class="col-md-8 col-sm-6 col-12">
+                                    <div class="info-box">
+                                        <span class="info-box-icon bg-success"><i class="fa fa-hands-wash"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Total Beneficiary Value</span>
+                                            <medium class="info-box-number">$ @ViewBag.Benefitotal.ToString("#,##0.00")  <b>/=</b></medium>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                </div>
+
+
+
                             </div>
                         </div>
+
+
                     </div>
+
                     <div class="tab-pane fade show " id="pills-Waitlist" role="tabpanel" aria-labelledby="pills-Waitlist-tab">
                         <small style="color:gray"> <i class="fa fa-book-open"></i> Waitlist</small>
 
@@ -408,7 +415,74 @@
                         </div>
                     </div>
                     <div class="tab-pane fade show " id="pills-Ass" role="tabpanel" aria-labelledby="pills-Ass-tab">
-                        <small style="color:gray"> <i class="fa fa-book-open"></i> Assitance Request</small>
+                        <small style="color:gray"> <i class="fa fa-book-open"></i> Assitance Request  </small>
+                        <div style="text-align:right">
+                            <a href="@Url.Action("Create", "B_Items", new { Tag = Model.Id })"
+                               class=" btn btn-sm btn-warning" role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i>  Add Beneficiary Item </a>
+                        </div>
+
+
+                        <div class="table-responsive" style="min-height: 100px">
+                            <table class="table table-bordered table-hover   table-condensed table-striped table-hover sortable curved-table">
+
+
+                                <thead>
+                                    <tr style="color:black">
+                                        <th style="background-color: #cccccc; "> Item Name  </th>
+                                        <th style="background-color: #cccccc; "> Quantity  </th>
+                                        <th style="background-color: #cccccc; "> Rate  </th>
+                                        <th style="background-color: #cccccc; "> Total  </th>
+                                        <th style="background-color: #cccccc; "> Actions </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in ViewBag.Benefit)
+                                    {
+                                        <tr data-widget="expandable-table" aria-expanded="false" style="font-size:medium">
+
+
+                                            <td style="background-color:white">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-layers"></i>   </medium></span> <b> @item.Name</b>
+                                            </td>
+                                            <td style="background-color:white">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-bar"></i>   </medium></span> <b> @item.Quantity.ToString("#,##0.0")  </b>
+                                            </td>
+                                            <td style="background-color:white">
+                                                <span class="badge badge-success"><medium>   <i class="fa fa-bookmark"></i>   </medium></span> <b>$ @item.Each.ToString("#,##0.00")  <b>/=</b></b>
+                                            </td>
+                                            <td style="background-color:white">
+                                                <span class="badge badge-warning"><medium>   <i class="fa fa-list"></i>   </medium></span> <b> $ @item.Total.ToString("#,##0.00")  <b>/=</b></b>
+                                            </td>
+                                            <td style="background-color: white;">
+
+
+                                                <div class="btn-group dropdown">
+                                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-hashtag"></i>  . Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                        <a href="@Url.Action("Edit", "B_Items", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-pen-nib text-success"></i> Edit Item
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="@Url.Action("Delete", "B_Items", new { id = item.Id})" class="dropdown-item">
+                                                            <i class="fa fa-times-circle text-danger"></i> Delete Item
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <h4 style="text-align:left" class="info-box-number"><b>Total Amount : </b> $ @ViewBag.Benefitotal.ToString("#,##0.00")  <b>/=</b></></h4>
                     </div>
                 </div>
             </div>

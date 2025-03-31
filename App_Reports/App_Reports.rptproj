@@ -53,10 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Admissions.rdl" />
+    <Report Include="Beneficiary_child_report.rdl" />
+    <Report Include="Beneficiary_report.rdl" />
     <Report Include="Direct_cost.rdl" />
     <Report Include="Expenses.rdl" />
     <Report Include="Performance.rdl" />
     <Report Include="Sheets.rdl" />
+    <Report Include="Training_Outcome.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

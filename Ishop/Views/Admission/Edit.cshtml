@@ -184,7 +184,11 @@
                                         Text = "Student",
                                         Value = "Student",
                                     });
-
+                                    v.Add(new SelectListItem
+                                    {
+                                        Text = "Employed",
+                                        Value = "Employed",
+                                    });
 
 
                                 }@Html.DropDownListFor(model => model.Employement_Status, v, "---Employement status---", new { @class = "form-control form-control-sm", @required = "required", })
@@ -339,8 +343,8 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="col d-flex justify-content-center">
-                            <input type="submit" name="action" value="update/Edit Admission" class="btn btn btn-success" style="color:white" onclick="return confirm('Proceed Update/Edit student details?')" />
-                            <b>|</b>
+                            <input type="submit" name="action" value="Save Changes" class="btn btn btn-warning" style="color:white" onclick="return confirm('Proceed Update/Edit student details?')" />
+                            <b style="font-size:x-large">|</b>
 
                             <script>
                                 $(function () {

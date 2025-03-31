@@ -8037,6 +8037,7 @@
     <Content Include="Views\Expenses\Add.cshtml" />
     <Content Include="Views\Expenses\Edit.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\B_Items\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

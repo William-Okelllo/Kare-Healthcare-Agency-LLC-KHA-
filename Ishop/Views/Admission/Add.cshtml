@@ -199,6 +199,7 @@ $(document).ready(function () {
                                 Text = "PT <20",
                                 Value = "PT <20",
                             });
+
                             v.Add(new SelectListItem
                             {
                                 Text = "Self Employed",
@@ -214,7 +215,11 @@ $(document).ready(function () {
                                 Text = "Student",
                                 Value = "Student",
                             });
-
+                            v.Add(new SelectListItem
+                            {
+                                Text = "Employed",
+                                Value = "Employed",
+                            });
 
 
                         }@Html.DropDownListFor(model => model.Employement_Status, v, "---Employement status---", new { @class = "form-control form-control-sm", @required = "required", })
